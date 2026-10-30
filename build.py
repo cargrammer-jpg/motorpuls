@@ -19,6 +19,9 @@
 #          Filen kopieras till img/articles/<slug>/ och får WebP-versioner (1600 och 800 px bred, bara
 #          storleksändring, aldrig beskärning). Finns WebP-filen redan byggs den inte om (källan behövs inte).
 #          Första bilden är huvudbild (og:image), fler bilder blir ett bildspel.
+#          Valfritt för fria licenser (t.ex. Creative Commons): credit_url (länk på krediten, t.ex. filsidan
+#          på Wikimedia Commons), license_name och license_url (licensens namn som länk efter krediten,
+#          t.ex. "CC BY-SA 3.0"). Utan dem ser bildtexten ut som förut.
 # image:   äldre fält (en URL). Laddas ned till img/articles/<slug>.webp om filen saknas, kredit i image_credit.
 import datetime as dt, glob, html, json, math, os, re, shutil, urllib.request
 import markdown, yaml
@@ -155,7 +158,9 @@ def ensure_images(a):
             v = read_variants(out_base)
             res.append(dict(src=v[0][0], w=v[0][1], h=v[0][2], srcset=", ".join(f"{u} {w}w" for u, w, _ in reversed(v)),
                             alt=str(im["alt"]).strip(), credit=str(im["credit"]).strip(),
-                            caption=str(im.get("caption") or "").strip(), license=str(im.get("license") or "").strip()))
+                            caption=str(im.get("caption") or "").strip(), license=str(im.get("license") or "").strip(),
+                            credit_url=str(im.get("credit_url") or "").strip(), license_name=str(im.get("license_name") or "").strip(),
+                            license_url=str(im.get("license_url") or "").strip()))
         return res
     if not a.get("image"): return []
     # äldre fält: en bild-URL
@@ -359,8 +364,13 @@ def index(arts):
 # ---------- article ----------
 HERO_SIZES = "(min-width: 66rem) 62rem, calc(100vw - 2.5rem)"
 
+def link(text, url, rel="noopener"):
+    return f'<a href="{esc(url)}" rel="{rel}" target="_blank">{esc(text)}</a>' if url else esc(text)
+
 def caption(im):
-    parts = [esc(x) for x in (im["caption"], im["credit"]) if x]
+    parts = [esc(x) for x in (im["caption"],) if x]
+    if im["credit"]: parts.append(link(im["credit"], im.get("credit_url")))
+    if im.get("license_name") or im.get("license_url"): parts.append(link(im.get("license_name") or "Licens", im.get("license_url"), "noopener license"))
     return f'<figcaption><span>{" <span aria-hidden=\"true\">·</span> ".join(parts)}</span></figcaption>' if parts else ""
 
 def gallery(imgs, flag_html=""):
@@ -413,7 +423,7 @@ def article(a):
     if imgs:
         ld["image"] = [{k: v for k, v in {"@type": "ImageObject", "url": DOMAIN + im["src"], "width": im["w"], "height": im["h"],
                                           "caption": im["alt"], "creditText": im["credit"].removeprefix("Foto: ") or None,
-                                          "copyrightNotice": im["license"] or None}.items() if v} for im in imgs]
+                                          "copyrightNotice": im["license"] or None, "license": im.get("license_url") or None}.items() if v} for im in imgs]
     if a.get("sources"): ld["citation"] = [u for _, u in a["sources"]]
     jsonld = '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace("</", "<\\/") + "</script>\n"
     h = head(f'{a["title"]} · {SITE}', a["excerpt"], a["url"], og_type="article", image=img, og_title=a["title"],
