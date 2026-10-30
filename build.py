@@ -473,6 +473,42 @@ def notfound():
 '''
     return page(h, body)
 
+# Integritetssidan /integritet/ (länkas från nyhetsbrevsrutan). Byggs från PRIVACY nedan.
+# KONTAKT är en platshållare tills ALX har bestämt kontaktadress.
+KONTAKT = "[kontaktadress läggs till]"
+PRIVACY_UPDATED = dt.date(2026, 10, 30)
+
+def privacy():
+    h = head(f"Integritet · {SITE}", "Vilka uppgifter Motorpuls sparar när du anmäler dig till nyhetsbrevet, och hur du får dem raderade.", "/integritet/")
+    body = f'''
+<main id="innehall" class="article">
+  <div class="wrap">
+    <article>
+      <header class="article__head article__col">
+        <nav class="crumbs" aria-label="Brödsmulor"><a href="/">Start</a> / <span>Integritet</span></nav>
+        <h1 class="article__title">Integritet</h1>
+        <p class="article__dek">Kort om vilka uppgifter Motorpuls sparar och varför.</p>
+      </header>
+      <div class="article__layout article__col">
+        <div class="prose">
+<h2>Nyhetsbrevet</h2>
+<p>När du anmäler dig till nyhetsbrevet sparar vi tre saker: din e-postadress, när du anmälde dig och vilken sida på Motorpuls du anmälde dig från.</p>
+<p>Vi använder uppgifterna bara för att skicka Motorpuls nyhetsbrev. Vi säljer dem inte och lämnar inte ut dem till någon annan för marknadsföring. Rättslig grund är ditt samtycke, som du kan ta tillbaka när du vill.</p>
+<h2>Var uppgifterna finns</h2>
+<p>Adresserna lagras hos Supabase, i ett datacenter i Stockholm inom EU. När utskicken startar skickas de med e-posttjänsten Resend. Vi sparar adressen tills du avslutar prenumerationen.</p>
+<h2>Avsluta och radera</h2>
+<p>Varje utskick kommer att ha en länk för att avsluta. Vill du att vi raderar din adress direkt, eller vill du veta vilka uppgifter vi har om dig, kontakta oss på {esc(KONTAKT)}.</p>
+<h2>Besöksstatistik</h2>
+<p>Vi mäter besök med Cloudflare Web Analytics. Den använder inga kakor (cookies) och sparar inget i din webbläsare.</p>
+<p>Senast uppdaterad {sv_date(PRIVACY_UPDATED)}.</p>
+        </div>
+      </div>
+    </article>
+  </div>
+</main>
+'''
+    return page(h, body)
+
 def write(rel, text):
     p = os.path.join(ROOT, rel); os.makedirs(os.path.dirname(p), exist_ok=True)
     open(p, "w", encoding="utf-8").write(text)
@@ -489,6 +525,7 @@ def main():
     write("index.html", index(arts))
     for a in arts: write(f"artikel/{a['slug']}/index.html", article(a))
     write("404.html", notfound())
+    write("integritet/index.html", privacy())  # inte i sitemap.xml (sidan är noindex som resten)
     urls = [("/", arts[0]["date"])] + [(a["url"], a["date"]) for a in arts]
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
           + "".join(f"  <url><loc>{DOMAIN}{u}</loc><lastmod>{d.isoformat()}</lastmod></url>\n" for u, d in urls) + "</urlset>\n")
