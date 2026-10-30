@@ -25,6 +25,7 @@
 <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png">
 <link rel="manifest" href="/favicon/site.webmanifest">
 <link rel="preload" href="/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" href="/img/articles/aston-martin-valhalla-spider.webp" fetchpriority="high">
 <link rel="stylesheet" href="/css/site.css">
 <script src="/js/site.js" defer></script>
 </head>
@@ -36,26 +37,61 @@
   </div>
 </header>
 
-<main id="innehall" class="front front--single">
+<main id="innehall" class="front">
   <div class="wrap">
     <h1 class="visually-hidden">Motorpuls, senaste bilnyheterna</h1>
     <div class="hero-grid">
-    <article class="lead lead--text">
-      <a href="/artikel/hvo100-reduktionsplikten-utredning-2031/">
-        
+    <article class="lead lead--img">
+      <a href="/artikel/aston-martin-valhalla-spider/">
+        <figure class="lead__media"><img src="/img/articles/aston-martin-valhalla-spider.webp" width="1600" height="1067" alt="Aston Martin Valhalla Spider: 1 079 hk och samma toppfart utan tak" fetchpriority="high" decoding="async"><figcaption>Foto: Aston Martin</figcaption></figure>
         <div class="lead__body">
           <span class="hero__label"><span class="pulse-dot" aria-hidden="true"></span>Senaste nytt</span>
-          <span class="meta"><span class="tag">Bränsle</span><time datetime="2026-10-30">30 oktober 2026</time></span>
-          <h2 class="lead__title">Utredning vill föra in HVO100 i reduktionsplikten senast 2031</h2>
-          <p class="lead__dek">Styrmedelsutredningen föreslår 21, 23 och 25 procents reduktionsplikt 2028 till 2030 och att HVO100 förs in i plikten och beskattas fullt senast 2031.</p>
+          <span class="meta"><span class="tag">Sportbil</span><time datetime="2026-10-30">30 oktober 2026</time></span>
+          <h2 class="lead__title">Aston Martin Valhalla Spider: 1 079 hk och samma toppfart utan tak</h2>
+          <p class="lead__dek">Aston Martin visar Valhalla Spider, en öppen laddhybrid med 1 079 hk, över 600 kilo downforce och leveranser från tredje kvartalet 2027.</p>
           <span class="lead__more">Läs artikeln <span aria-hidden="true">→</span></span>
         </div>
       </a>
     </article>
-      
+      <aside class="latest" aria-labelledby="latest-h" style="--n:1"><h2 id="latest-h"><span class="pulse-dot" aria-hidden="true"></span>Senaste</h2><ol><li><a href="/artikel/hvo100-reduktionsplikten-utredning-2031/"><span class="meta"><span class="tag">Bränsle</span><time datetime="2026-10-30">30 oktober 2026</time></span><h3>Utredning vill föra in HVO100 i reduktionsplikten senast 2031</h3></a></li></ol></aside>
     </div>
   </div>
 
+  <section class="feed-section" id="flodet" aria-labelledby="feed-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="feed-h">Alla artiklar</h2>
+        <nav aria-label="Kategorier"><ul class="chips"><li><button class="chip" type="button" data-filter="alla" aria-pressed="true">Alla</button></li><li><button class="chip" type="button" data-filter="sportbil" aria-pressed="false">Sportbil</button></li><li><button class="chip" type="button" data-filter="bransle" aria-pressed="false">Bränsle</button></li></ul></nav>
+      </div>
+      <p id="filter-status" class="visually-hidden" role="status" aria-live="polite"></p>
+      
+      <section class="day" aria-labelledby="d-2026-10-30">
+        <h3 class="day__label" id="d-2026-10-30"><time datetime="2026-10-30">Fredag 30 oktober</time></h3>
+        <ol class="feed">
+          <li class="item" data-cat="sportbil">
+            <a href="/artikel/aston-martin-valhalla-spider/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Sportbil</span></span>
+                <h3>Aston Martin Valhalla Spider: 1 079 hk och samma toppfart utan tak</h3>
+                <p>Aston Martin visar Valhalla Spider, en öppen laddhybrid med 1 079 hk, över 600 kilo downforce och leveranser från tredje kvartalet 2027.</p>
+              </div>
+              <div class="item__img"><img src="/img/articles/aston-martin-valhalla-spider.webp" width="1600" height="1067" alt="" loading="lazy" decoding="async"></div>
+            </a>
+          </li>
+          <li class="item item--noimg" data-cat="bransle">
+            <a href="/artikel/hvo100-reduktionsplikten-utredning-2031/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Bränsle</span></span>
+                <h3>Utredning vill föra in HVO100 i reduktionsplikten senast 2031</h3>
+                <p>Styrmedelsutredningen föreslår 21, 23 och 25 procents reduktionsplikt 2028 till 2030 och att HVO100 förs in i plikten och beskattas fullt senast 2031.</p>
+              </div>
+              
+            </a>
+          </li>
+        </ol>
+      </section>
+    </div>
+  </section>
 </main>
 
 <footer class="site-footer">
