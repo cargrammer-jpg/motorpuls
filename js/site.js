@@ -1,4 +1,4 @@
-// Motorpuls prototyp: kategorifilter + nyhetsbrevsruta. Ingen data skickas.
+// Motorpuls: kategorifilter, nyhetsbrevsruta och bildspel. Ingen data skickas.
 (() => {
   // Category filter (front page)
   const chips = document.querySelectorAll('.chip[data-filter]');
@@ -35,4 +35,47 @@
     if (max > 0 && scrollY / max > 0.55) { removeEventListener('scroll', onScroll); open(); }
   };
   addEventListener('scroll', onScroll, { passive: true });
+})();
+
+// Bildspel i artiklar (progressiv förbättring): utan JS en rad att svepa i med scroll-snap.
+// Med JS: knappar, räknare, piltangenter när bildspelet har fokus. Smidig scroll bara utan prefers-reduced-motion (CSS).
+(() => {
+  document.querySelectorAll('[data-gallery]').forEach(g => {
+    const track = g.querySelector('.gallery__track');
+    const slides = [...track.children];
+    const nav = g.querySelector('.gallery__nav');
+    const cur = g.querySelector('[data-current]');
+    const [prev, next] = nav.querySelectorAll('button');
+    let i = 0, pending = null, timer = 0;
+    g.classList.add('is-ready');
+    nav.hidden = false;
+    const render = () => {
+      if (cur.textContent !== String(i + 1)) cur.textContent = String(i + 1);
+      prev.disabled = i === 0;
+      next.disabled = i === slides.length - 1;
+    };
+    const update = () => {
+      const n = Math.min(slides.length - 1, Math.max(0, Math.round(track.scrollLeft / Math.max(1, track.clientWidth))));
+      if (pending !== null) { if (n !== pending) return; pending = null; }
+      i = n; render();
+    };
+    const settle = () => { pending = null; update(); };
+    const go = to => {
+      i = pending = Math.min(slides.length - 1, Math.max(0, to));
+      render();
+      track.scrollTo({ left: slides[i].offsetLeft - track.offsetLeft });
+      clearTimeout(timer); timer = setTimeout(settle, 1200);  // fallback if the scroll is interrupted
+    };
+    nav.addEventListener('click', e => { const b = e.target.closest('button'); if (b) go(i + Number(b.dataset.dir)); });
+    track.addEventListener('keydown', e => {
+      const d = { ArrowLeft: -1, ArrowRight: 1 }[e.key];
+      if (d) { e.preventDefault(); go(i + d); }
+      else if (e.key === 'Home' || e.key === 'End') { e.preventDefault(); go(e.key === 'Home' ? 0 : slides.length); }
+    });
+    let raf = 0;
+    track.addEventListener('scroll', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(update); }, { passive: true });
+    track.addEventListener('scrollend', settle);
+    addEventListener('resize', settle, { passive: true });
+    update();
+  });
 })();

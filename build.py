@@ -6,12 +6,20 @@
 #   404.html, sitemap.xml, robots.txt
 #
 # Artiklar: markdown med YAML-front matter (title, date, slug, tags, sources, excerpt, category, author,
-# valfritt image, image_credit). Brödtexten renderas oförändrad. Rubriken (#) i texten blir sidans h1,
-# avsnittet "## Källor" renderas i källistan. Ordning: datum, sedan filnamn (nyast först).
-# Bild: om front matter har image och img/articles/<slug>.webp saknas laddas den ned och konverteras
-# till WebP (bara format och storlek, ingen beskärning, max 1600 px bred).
+# valfritt summary, images, äldre image/image_credit). Brödtexten renderas oförändrad. Rubriken (#) i texten
+# blir sidans h1, avsnittet "## Källor" renderas i källistan. Ordning: datum, sedan filnamn (nyast först).
+#
+# summary: lista med 2 till 4 korta punkter (vanlig text), visas i rutan "Kort om nyheten".
+# images:  lista med {src, alt, credit, license, valfritt caption}. src är en lokal fil: ett filnamn som
+#          letas upp i drafts/img/<slug>/, en sökväg relativ till projektroten eller en absolut sökväg.
+#          Filen kopieras till img/articles/<slug>/ och får WebP-versioner (1600 och 800 px bred, bara
+#          storleksändring, aldrig beskärning). Finns WebP-filen redan byggs den inte om (källan behövs inte).
+#          Första bilden är huvudbild (og:image), fler bilder blir ett bildspel.
+# image:   äldre fält (en URL). Laddas ned till img/articles/<slug>.webp om filen saknas, kredit i image_credit.
 import datetime as dt, glob, html, json, math, os, re, shutil, urllib.request
 import markdown, yaml
+
+DRAFTS_IMG = os.environ.get("MOTORPULS_DRAFTS_IMG")  # valfri extra källmapp, standard: <root>/drafts/img
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DOMAIN = "https://motorpuls.se"
@@ -25,6 +33,11 @@ def sv_date(d): return f"{d.day} {MONTHS[d.month-1]} {d.year}"
 def sv_day(d): return f"{DAYS[d.weekday()].capitalize()} {d.day} {MONTHS[d.month-1]}"
 def host(u): return re.sub(r"^www\.", "", u.split("/")[2])
 def esc(s): return html.escape(str(s), quote=True)
+NUM_GAP = re.compile(r"(?<=\d) (?=\d{3}(?!\d))")
+def nbnum(s):
+    """Tusentalsavgränsare blir hårt mellanslag så att 1 079 aldrig bryts över två rader."""
+    return NUM_GAP.sub("\u00a0", s)
+def nbnum_html(h): return re.sub(r">[^<]+<", lambda m: nbnum(m.group(0)), ">" + h + "<")[1:-1]
 def slugify(s): return re.sub(r"[^a-z0-9]+", "-", s.lower().replace("å","a").replace("ä","a").replace("ö","o")).strip("-")
 
 ANALYTICS = """<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "bace28864ae04c6fa5e9f4a98ca70f94"}'></script><!-- End Cloudflare Web Analytics -->
@@ -40,6 +53,7 @@ def load_articles():
         fm, body = yaml.safe_load(m.group(1)), m.group(2)
         for k in ("title","date","slug","excerpt","category","author"):
             if not fm.get(k): raise SystemExit(f"{path}: saknar {k}")
+        check_summary_images(fm, path)
         d = fm["date"] if isinstance(fm["date"], dt.date) else dt.date.fromisoformat(str(fm["date"]))
         # h1 in the body is the page headline; "## Källor" becomes the source list
         h1 = re.search(r"^# (.+)$", body, re.M)
@@ -61,10 +75,83 @@ def load_articles():
     if len({a["slug"] for a in arts}) != len(arts): raise SystemExit("dubbla slugs")
     return arts
 
-def ensure_image(a):
-    """Lokal WebP för artikelbild. Returnerar dict(src,w,h) eller None."""
-    if not a.get("image"): return None
-    rel = f"img/articles/{a['slug']}.webp"
+def check_summary_images(fm, path):
+    sm = fm.get("summary")
+    if sm is not None:
+        if isinstance(sm, str) or not isinstance(sm, list) or not 2 <= len(sm) <= 4 or not all(isinstance(x, str) and x.strip() for x in sm):
+            raise SystemExit(f"{path}: summary ska vara en lista med 2 till 4 punkter (text)")
+    ims = fm.get("images")
+    if ims is not None:
+        if not isinstance(ims, list) or not ims: raise SystemExit(f"{path}: images ska vara en lista")
+        for i, im in enumerate(ims, 1):
+            if not isinstance(im, dict): raise SystemExit(f"{path}: images[{i}] ska ha src, alt, credit, license")
+            for k in ("src", "alt", "credit"):
+                if not str(im.get(k) or "").strip(): raise SystemExit(f"{path}: images[{i}] saknar {k}")
+            if not str(im.get("license") or "").strip(): print(f"varning: {path}: images[{i}] saknar license")
+
+def webp_variants(src_path, out_base):
+    """Skriver <out_base>.webp (max 1600 px) och <out_base>-800.webp (om bilden är bredare än 800 px).
+    Samma bildformat: bara storleksändring, aldrig beskärning."""
+    from PIL import Image
+    im = Image.open(src_path); im.load()
+    if im.mode not in ("RGB", "RGBA"): im = im.convert("RGBA" if "A" in im.getbands() else "RGB")
+    for w, suffix in ((MAX_W, ""), (800, "-800")):
+        if suffix and im.width <= 800: break
+        tw = min(w, im.width)
+        if tw == im.width and src_path.lower().endswith(".webp"):  # redan WebP i rätt storlek: kopiera, koda inte om
+            shutil.copyfile(src_path, os.path.join(ROOT, f"{out_base}{suffix}.webp")); continue
+        r = im if tw == im.width else im.resize((tw, round(im.height * tw / im.width)), Image.LANCZOS)
+        r.save(os.path.join(ROOT, f"{out_base}{suffix}.webp"), "WEBP", quality=86, method=6)
+
+def read_variants(out_base):
+    from PIL import Image
+    res = []
+    for suffix in ("", "-800"):
+        rel = f"{out_base}{suffix}.webp"
+        p = os.path.join(ROOT, rel)
+        if os.path.exists(p):
+            with Image.open(p) as im: res.append(("/" + rel, im.width, im.height))
+    return res
+
+def find_source(src, slug):
+    if os.path.isabs(src): cands = [src]
+    else:
+        cands = [os.path.join(ROOT, src)] if "/" in src else []
+        name = os.path.basename(src)
+        for base in [DRAFTS_IMG, os.path.join(ROOT, "drafts/img")]:
+            if base: cands.append(os.path.join(base, slug, name))
+    return next((c for c in cands if os.path.isfile(c)), None), cands
+
+def ensure_images(a):
+    """Bilder för en artikel: lista med dict(src, w, h, srcset, alt, credit, caption, license). Tom lista om inga."""
+    slug = a["slug"]
+    if a.get("images"):
+        res, seen = [], set()
+        os.makedirs(os.path.join(ROOT, f"img/articles/{slug}"), exist_ok=True)
+        for i, im in enumerate(a["images"], 1):
+            src = str(im["src"]).strip()
+            stem = slugify(os.path.splitext(os.path.basename(src))[0]) or f"bild-{i}"
+            if stem in seen: stem = f"{stem}-{i}"
+            seen.add(stem)
+            out_base = f"img/articles/{slug}/{stem}"
+            found, cands = find_source(src, slug)
+            have = os.path.exists(os.path.join(ROOT, out_base + ".webp"))
+            if found:
+                ext = os.path.splitext(found)[1].lower() or ".bin"
+                orig = os.path.join(ROOT, f"{out_base}-original{ext}")
+                if not have or os.path.getmtime(found) > os.path.getmtime(os.path.join(ROOT, out_base + ".webp")):
+                    if os.path.abspath(found) != os.path.abspath(orig): shutil.copyfile(found, orig)
+                    webp_variants(orig, out_base)
+            elif not have:
+                raise SystemExit(f"{a['file']}: hittar inte bilden {src!r} (letade i: {', '.join(cands)})")
+            v = read_variants(out_base)
+            res.append(dict(src=v[0][0], w=v[0][1], h=v[0][2], srcset=", ".join(f"{u} {w}w" for u, w, _ in reversed(v)),
+                            alt=str(im["alt"]).strip(), credit=str(im["credit"]).strip(),
+                            caption=str(im.get("caption") or "").strip(), license=str(im.get("license") or "").strip()))
+        return res
+    if not a.get("image"): return []
+    # äldre fält: en bild-URL
+    rel = f"img/articles/{slug}.webp"
     out = os.path.join(ROOT, rel)
     if not os.path.exists(out):
         from PIL import Image
@@ -73,7 +160,7 @@ def ensure_image(a):
         with urllib.request.urlopen(req, timeout=60) as r:
             data, ctype = r.read(), r.headers.get("Content-Type", "")
         ext = {"image/webp":"webp","image/png":"png","image/jpeg":"jpg"}.get(ctype.split(";")[0], "bin")
-        orig = os.path.join(ROOT, f"img/articles/{a['slug']}-original.{ext}")
+        orig = os.path.join(ROOT, f"img/articles/{slug}-original.{ext}")
         open(orig, "wb").write(data)
         im = Image.open(orig); im.load()
         if im.width > MAX_W:  # same aspect ratio, resize only
@@ -81,10 +168,11 @@ def ensure_image(a):
         im.convert("RGB").save(out, "WEBP", quality=86, method=6)
     from PIL import Image
     with Image.open(out) as im: w, h = im.size
-    return dict(src="/" + rel, w=w, h=h)
+    return [dict(src="/" + rel, w=w, h=h, srcset="", alt=a["headline"], credit=str(a.get("image_credit") or "").strip(),
+                 caption="", license=str(a.get("image_license") or "").strip())]
 
 # ---------- shared html ----------
-def head(title, desc, path, og_type="website", image=None, extra="", preload_img=None, og_title=None):
+def head(title, desc, path, og_type="website", image=None, extra="", preload_img=None, og_title=None, preload_sizes="100vw"):
     canon = DOMAIN + path if path else None
     og_title = og_title or title
     og_img = ""
@@ -92,7 +180,11 @@ def head(title, desc, path, og_type="website", image=None, extra="", preload_img
         og_img = (f'<meta property="og:image" content="{DOMAIN}{image["src"]}">\n'
                   f'<meta property="og:image:width" content="{image["w"]}">\n<meta property="og:image:height" content="{image["h"]}">\n'
                   f'<meta name="twitter:image" content="{DOMAIN}{image["src"]}">\n')
-    pre = f'<link rel="preload" as="image" href="{preload_img}" fetchpriority="high">\n' if preload_img else ""
+    pre = ""
+    if preload_img:
+        ss = f' imagesrcset="{preload_img["srcset"]}" imagesizes="{preload_sizes}"' if preload_img.get("srcset") else ""
+        pre = f'<link rel="preload" as="image" href="{preload_img["src"]}"{ss} fetchpriority="high">\n'
+
     return f'''<!doctype html>
 <html lang="sv">
 <head>
@@ -152,13 +244,15 @@ def meta_line(a, with_date=True):
 
 def img_tag(img, alt, eager=False, sizes="100vw"):
     load = 'fetchpriority="high" decoding="async"' if eager else 'loading="lazy" decoding="async"'
-    return f'<img src="{img["src"]}" width="{img["w"]}" height="{img["h"]}" alt="{esc(alt)}" {load}>'
+    ss = f' srcset="{img["srcset"]}" sizes="{sizes}"' if img.get("srcset") else ""
+    return f'<img src="{img["src"]}"{ss} width="{img["w"]}" height="{img["h"]}" alt="{esc(alt)}" {load}>'
 
 # ---------- front page ----------
+LEAD_SIZES = "(min-width: 60rem) 38rem, 100vw"
 def lead(a):
     img = a["img"]
-    media = (f'<figure class="lead__media">{img_tag(img, a["headline"], eager=True, sizes="(min-width: 60rem) 38rem, 100vw")}'
-             f'<figcaption>{esc(a.get("image_credit") or "")}</figcaption></figure>') if img else ""
+    media = (f'<figure class="lead__media">{img_tag(img, img["alt"], eager=True, sizes=LEAD_SIZES)}'
+             f'<figcaption>{esc(img["credit"])}</figcaption></figure>') if img else ""
     return f'''
     <article class="lead{" lead--img" if img else " lead--text"}">
       <a href="{a["url"]}">
@@ -166,8 +260,8 @@ def lead(a):
         <div class="lead__body">
           <span class="hero__label"><span class="pulse-dot" aria-hidden="true"></span>Senaste nytt</span>
           {meta_line(a)}
-          <h2 class="lead__title">{esc(a["title"])}</h2>
-          <p class="lead__dek">{esc(a["excerpt"])}</p>
+          <h2 class="lead__title">{nbnum(esc(a["title"]))}</h2>
+          <p class="lead__dek">{nbnum(esc(a["excerpt"]))}</p>
           <span class="lead__more">Läs artikeln <span aria-hidden="true">→</span></span>
         </div>
       </a>
@@ -190,7 +284,7 @@ def feed_item(a):
 def index(arts):
     first, rest = arts[0], arts[1:]
     h = head(f"{SITE}: korta bilnyheter med källor", SITE_DESC, "/",
-             preload_img=first["img"]["src"] if first["img"] else None)
+             preload_img=first["img"], preload_sizes=LEAD_SIZES)
     if rest:
         side = f'<aside class="latest" aria-labelledby="latest-h" style="--n:{min(len(rest),5)}"><h2 id="latest-h"><span class="pulse-dot" aria-hidden="true"></span>Senaste</h2><ol>' + "".join(
             f'<li><a href="{a["url"]}">{meta_line(a)}<h3>{esc(a["title"])}</h3></a></li>' for a in rest[:5]) + "</ol></aside>"
@@ -240,8 +334,52 @@ def index(arts):
     return page(h, body)
 
 # ---------- article ----------
+HERO_SIZES = "(min-width: 66rem) 62rem, calc(100vw - 2.5rem)"
+
+def caption(im):
+    parts = [esc(x) for x in (im["caption"], im["credit"]) if x]
+    return f'<figcaption><span>{" <span aria-hidden=\"true\">·</span> ".join(parts)}</span></figcaption>' if parts else ""
+
+def gallery(imgs):
+    """En bild: figur i bildens eget format. Flera: bildspel (scroll-snap, utan JS en rad att svepa i).
+    Bild 1 laddas direkt med hög prioritet, övriga lazy. Ingen beskärning: object-fit contain på svart scen."""
+    if not imgs: return ""
+    if len(imgs) == 1:
+        im = imgs[0]
+        return f'''
+      <figure class="article__figure article__figure--natural">
+        <div class="frame">{img_tag(im, im["alt"], eager=True, sizes=HERO_SIZES)}</div>
+        {caption(im)}
+      </figure>'''
+    n = len(imgs)
+    slides = "".join(f'''
+          <figure class="gallery__slide" role="group" aria-roledescription="bild" aria-label="{i} av {n}">
+            <div class="gallery__stage">{img_tag(im, im["alt"], eager=(i == 1), sizes=HERO_SIZES)}</div>
+            {caption(im)}
+          </figure>''' for i, im in enumerate(imgs, 1))
+    return f'''
+      <section class="gallery" aria-roledescription="bildspel" aria-label="Bildspel, {n} bilder" data-gallery>
+        <div class="gallery__track" tabindex="0" role="group" aria-label="Bilder. Bläddra med piltangenterna eller svep.">{slides}
+        </div>
+        <div class="gallery__nav" hidden>
+          <button class="gallery__btn" type="button" data-dir="-1" aria-label="Föregående bild"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M11 3.5 5.5 9l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <span class="gallery__count" aria-live="polite" aria-atomic="true"><span class="visually-hidden">Bild </span><b data-current>1</b><span aria-hidden="true"> / </span><span class="visually-hidden"> av </span>{n}</span>
+          <button class="gallery__btn" type="button" data-dir="1" aria-label="Nästa bild"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M7 3.5 12.5 9 7 14.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </section>'''
+
+def summary_box(a):
+    if not a.get("summary"): return ""
+    lis = "".join(f"\n            <li>{nbnum(esc(x.strip()))}</li>" for x in a["summary"])
+    return f'''
+      <section class="summary article__col" aria-labelledby="summary-h">
+        <h2 id="summary-h">Kort om nyheten</h2>
+        <ul>{lis}
+        </ul>
+      </section>'''
+
 def article(a):
-    img = a["img"]
+    img, imgs = a["img"], a["images_out"]
     ld = {"@context": "https://schema.org", "@type": "NewsArticle", "headline": a["title"], "description": a["excerpt"],
           "datePublished": a["date"].isoformat(), "dateModified": a["date"].isoformat(), "inLanguage": "sv-SE",
           "articleSection": a["category"], "keywords": a.get("tags") or [],
@@ -249,21 +387,17 @@ def article(a):
           "author": {"@type": "Person", "name": a["author"]},
           "publisher": {"@type": "Organization", "name": SITE, "url": DOMAIN + "/",
                         "logo": {"@type": "ImageObject", "url": DOMAIN + "/favicon/android-chrome-512.png", "width": 512, "height": 512}}}
-    if img: ld["image"] = [DOMAIN + img["src"]]
+    if imgs:
+        ld["image"] = [{k: v for k, v in {"@type": "ImageObject", "url": DOMAIN + im["src"], "width": im["w"], "height": im["h"],
+                                          "caption": im["alt"], "creditText": im["credit"].removeprefix("Foto: ") or None,
+                                          "copyrightNotice": im["license"] or None}.items() if v} for im in imgs]
     if a.get("sources"): ld["citation"] = [u for _, u in a["sources"]]
     jsonld = '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace("</", "<\\/") + "</script>\n"
     h = head(f'{a["title"]} · {SITE}', a["excerpt"], a["url"], og_type="article", image=img, og_title=a["title"],
              extra=f'<meta property="article:published_time" content="{a["date"].isoformat()}">\n'
                    f'<meta property="article:section" content="{esc(a["category"])}">\n'
                    + "".join(f'<meta property="article:tag" content="{esc(t)}">\n' for t in a.get("tags") or []) + jsonld,
-             preload_img=img["src"] if img else None)
-    figure = ""
-    if img:
-        figure = f'''
-      <figure class="article__figure article__figure--natural">
-        <div class="frame">{img_tag(img, a["headline"], eager=True, sizes="(min-width: 80rem) 76rem, 100vw")}</div>
-        <figcaption>{esc(a.get("image_credit") or "")}</figcaption>
-      </figure>'''
+             preload_img=img, preload_sizes=HERO_SIZES)
     sources = ""
     if a["sources"]:
         lis = "".join(f'''
@@ -279,16 +413,16 @@ def article(a):
 <main id="innehall" class="article">
   <div class="wrap">
     <article>
-      <header class="article__head">
+      <header class="article__head article__col">
         <nav class="crumbs" aria-label="Brödsmulor"><a href="/">Start</a> / <span>{esc(a["category"])}</span></nav>
         <span class="meta"><span class="tag">{esc(a["category"])}</span></span>
-        <h1 class="article__title">{esc(a["headline"])}</h1>
-        <p class="article__dek">{esc(a["excerpt"])}</p>
+        <h1 class="article__title">{nbnum(esc(a["headline"]))}</h1>
+        <p class="article__dek">{nbnum(esc(a["excerpt"]))}</p>
         <p class="byline"><span>Publicerad <b><time datetime="{a["date"].isoformat()}">{sv_date(a["date"])}</time></b></span><span>Läsetid <b>{a["minutes"]} min</b></span><span>Av <b>{esc(a["author"])}</b></span></p>
-      </header>{figure}
-      <div class="article__layout">
+      </header>{summary_box(a)}{gallery(imgs)}
+      <div class="article__layout article__col">
         <div class="prose">
-{a["body_html"]}
+{nbnum_html(a["body_html"])}
         </div>
 {sources}
         <aside class="ai-note" aria-label="Om texten">
@@ -326,7 +460,9 @@ def write(rel, text):
 def main():
     arts = load_articles()
     if not arts: raise SystemExit("inga artiklar i content/articles/")
-    for a in arts: a["img"] = ensure_image(a)
+    for a in arts:
+        a["images_out"] = ensure_images(a)
+        a["img"] = a["images_out"][0] if a["images_out"] else None
     # clean old article output so removed articles disappear
     shutil.rmtree(os.path.join(ROOT, "artikel"), ignore_errors=True)
     if os.path.exists(os.path.join(ROOT, "artikel.html")): os.remove(os.path.join(ROOT, "artikel.html"))
