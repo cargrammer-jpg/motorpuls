@@ -1,5 +1,5 @@
 ---
-title: "Tesla FSD i Sverige: Italien ger stöd, men svenska ägare får vänta"
+title: "Tio EU-länder har sagt ja till Teslas FSD. Därför får Sverige vänta till tidigast 2027"
 date: 2026-10-31
 slug: tesla-fsd-sverige-eu-omrostning-december
 tags:
@@ -35,7 +35,7 @@ images:
     source_url: "https://digitalassets.tesla.com/tesla-contents/raw/upload/tesla-gallery-model-y-standard.zip"
 ---
 
-# Tesla FSD i Sverige: Italien ger stöd, men svenska ägare får vänta
+# Tio EU-länder har sagt ja till Teslas FSD. Därför får Sverige vänta till tidigast 2027
 
 Teslas förarstöd FSD (Supervised), som i Europa nu heter Tesla Assisted Driving, har fått två nya framgångar på en vecka. För svenska Teslaägare ändrar det ingenting ännu.
 
