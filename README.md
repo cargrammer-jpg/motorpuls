@@ -40,4 +40,11 @@ Bilderna kopieras till `img/articles/<slug>/` och får WebP-versioner (1600 och 
 Den första blir huvudbild och og:image, fler bilder blir ett bildspel. Checka in `img/articles/<slug>/` tillsammans med artikeln.
 Det äldre fältet `image` (en URL, med `image_credit`) laddas ned till `img/articles/<slug>.webp` som förut.
 
+## Nyhetsbrev
+
+Den orange nyhetsbrevsrutan läggs in av `js/site.js` (efter artikeltexten och som band på startsidan) och sparar adresser i Supabase-projektet `motorpuls`
+(tabell `public.newsletter_subscribers`, bara INSERT för den publika nyckeln). Läs adresserna i Supabase (Table Editor eller SQL), inte via sajten.
+Integritetssidan byggs av `build.py` till `integritet/index.html`. Kontaktadressen (`KONTAKT` i `build.py`) är en platshållare tills den är bestämd.
+Se `DESIGN.md`, Nyhetsbrev.
+
 Sidorna har tills vidare `<meta name="robots" content="noindex">`.

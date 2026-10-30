@@ -41,9 +41,29 @@ Prototypen (historik):
 Inga pressbilder. Lokalt genererade abstrakta "långexponering"-platshållare (tools_placeholders.py),
 mörk studio + färgad horisont per kategori. Ersätts senare av licensierade/egna foton i samma format (16:10).
 
-## Nyhetsbrev
-Liten icke-modal `<aside popover="manual">`-ruta (toast-mönster, ingen modal) nere till höger (bottom sheet på mobil), visas en gång
-efter ~55 % scroll, stängs med knapp eller Esc, minns valet i localStorage. Stjäl inte fokus.
+## Nyhetsbrev (orange ruta, v2)
+Den gamla popupen smälte in och sparade inga adresser, så den är borttagen. Ersatt av en orange ruta som syns.
+
+**Utseende.** Kort med orange gradient, `pulse` `#FF5B1F` till `#FF7A3D`, 8px rundning och en mjuk orange skugga.
+All text är mörk `#0B0D10`: 6,3:1 mot `#FF5B1F` och 7,5:1 mot `#FF7A3D` (WCAG AA). Vit text på orange ger bara 3,1:1 och används inte.
+Etikett "Nyhetsbrev" i DM Mono versaler, rubrik "Få Motorpuls i inkorgen" i Archivo 820, en rad i Newsreader.
+Fält med ljus bakgrund `#FFF7F2` och 2px mörk kant (18:1), mörk knapp "Prenumerera" med vit text (19:1).
+Fokus: 3px mörk ring med 2px avstånd. Felmeddelanden står i en ruta med mörk vänsterkant, aldrig röd text på orange.
+
+**Placering.** Ingen popup och ingen sticky-list.
+- Artikel: efter text, källor och AI-notisen, före "Fler nyheter". Läsaren har läst klart och källorna hör ihop med texten.
+- Startsida: som band i flödet "Alla artiklar", efter dagen med den tredje artikeln. Bara en artikel: efter huvudkortet.
+
+**Funktion** (`js/site.js`). Rutan läggs in med JS, eftersom anmälan kräver JS. Utan JS visas ingen ruta. Därför behöver sidorna inte byggas om för att rutan ska synas.
+Anmälan är en vanlig `fetch` POST till Supabase REST (`/rest/v1/newsletter_subscribers`, `Prefer: return=minimal`) med projektets publika nyckel (publishable). Inget supabase-js.
+Adressen trimmas och görs om till gemener. Honungsfälla (dolt fält `webbplats`): ifyllt ger ett "tack" men inget sparas.
+Statusrad med `role="status"` och `aria-live="polite"`. Klar: formuläret ersätts av "Tack! Du är anmäld." som får fokus.
+En adress som redan finns (HTTP 409) visas som lyckad anmälan, så att ingen kan ta reda på vilka adresser som är anmälda.
+Rörelse: bara en kort intoning av tackmeddelandet, och bara utan `prefers-reduced-motion: reduce`.
+
+**Data.** Supabase-projektet `motorpuls` (Stockholm, eu-north-1). Tabellen `public.newsletter_subscribers`: `id`, `email` (unik, gemener, kontrollerat format, max 254 tecken), `created_at`, `source` (sidans sökväg), `consent`.
+RLS är på. Rollen anon får bara INSERT av `email`, `source` och `consent`, med kravet `consent = true`. Ingen SELECT, UPDATE eller DELETE för anon. Service-role-nyckeln används aldrig på sajten.
+Utskick görs senare med Resend. Sidan `/integritet/` beskriver vad som sparas.
 
 ## Artikelmall v2 (lättare läsning)
 Mål: mindre brödtext, kortare stycken, en lugn läsrad och en tydlig sammanfattning överst.
