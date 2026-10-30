@@ -17,35 +17,68 @@ sources:
   - https://drivkraftsverige.se/nyheter/press-drivkraft-sverige-valkomnar-styrmedelsutredningens-forslag-nu-dags-for-politisk-kraftsamling/
   - https://2030-sekretariatet.se/reduktionsplikt/
 excerpt: "Styrmedelsutredningen föreslår 21, 23 och 25 procents reduktionsplikt 2028 till 2030 och att HVO100 förs in i plikten och beskattas fullt senast 2031."
+summary:
+  - "Reduktionsplikten föreslås höjas till 25 procent 2030."
+  - "HVO100 förs in i plikten och beskattas fullt senast 2031."
+  - "Remisstiden går ut 30 oktober. Inget är beslutat."
 category: Bränsle
 author: Lukas
+images:
+  - src: "img/hvo100-reduktionsplikten-utredning-2031/hvo100-pris-tankstelle-leu.jpg"
+    alt: "Prisskylt vid en tankstation i Tyskland där Diesel HVO100 anges bredvid vanlig diesel och bensin."
+    credit: "Foto: PantheraLeo1359531 / Wikimedia Commons (CC BY-SA 4.0)"
+    license: "CC BY-SA 4.0, fri användning med namngivning och samma licens. Villkor: https://creativecommons.org/licenses/by-sa/4.0/"
+    source_url: "https://commons.wikimedia.org/wiki/File:2024-07-02_Spritpreise_bei_LEU_20240702_175520.jpg"
+  - src: "img/hvo100-reduktionsplikten-utredning-2031/hvo-tank-visby.jpg"
+    alt: "Cisterntank märkt HVO på en asfalterad plan i Visby."
+    credit: "Foto: Bene Riobó / Wikimedia Commons (CC BY-SA 4.0)"
+    license: "CC BY-SA 4.0, fri användning med namngivning och samma licens. Villkor: https://creativecommons.org/licenses/by-sa/4.0/"
+    source_url: "https://commons.wikimedia.org/wiki/File:Dep%C3%B3sito_de_HVO_en_Visby.jpg"
 ---
 
-# HVO100 föreslås in i reduktionsplikten senast 2031
+# Utredning vill föra in HVO100 i reduktionsplikten senast 2031
 
-Styrmedelsutredningen vill höja reduktionsplikten till 25 procent 2030 och ta bort HVO100:s särställning. I dag, 30 oktober, går remisstiden ut. Drivkraft Sverige och Konkurrensverket stödjer centrala delar av förslaget.
+Styrmedelsutredningen vill höja reduktionsplikten till 25 procent 2030. Den vill också ta bort HVO100:s särställning.
+
+I dag, 30 oktober, går remisstiden ut. Drivkraft Sverige och Konkurrensverket stödjer centrala delar av förslaget.
 
 ## Förslaget
 
-Betänkandet Vägen mot utfasning (SOU 2026:33) publicerades 27 maj. Utredningen föreslår att reduktionsplikten höjs till 21 procent 2028, 23 procent 2029 och 25 procent 2030, med ett gemensamt krav för bensin och diesel. I dag är kravet 10 procent för båda, en nivå som gällt sedan 1 juli 2025 enligt 2030-sekretariatet.
+Betänkandet Vägen mot utfasning (SOU 2026:33) publicerades 27 maj. Utredningen föreslår att reduktionsplikten höjs till 21 procent 2028, 23 procent 2029 och 25 procent 2030.
 
-Rena och höginblandade förnybara drivmedel, som HVO100, ska bli reduktionspliktiga när Sverige inte längre har statsstödsgodkännande för skattebefrielsen, dock senast 1 januari 2031. Då blir de också fullt beskattade. Utredningen ser inga starka skäl till att samma drivmedel ska ha olika krav beroende på hur högt det är inblandat.
+Kravet ska vara gemensamt för bensin och diesel. I dag är kravet 10 procent för båda, en nivå som gällt sedan 1 juli 2025 enligt 2030-sekretariatet.
 
-Paketet innehåller också höjd energiskatt med 1,80 kronor per liter bensin och 1 800 kronor per kubikmeter diesel från 1 januari 2028, och sänkt elskatt som kompensation.
+Rena och höginblandade förnybara drivmedel, som HVO100, ska bli reduktionspliktiga när Sverige inte längre har statsstödsgodkännande för skattebefrielsen. Det ska ske senast 1 januari 2031. Då blir de också fullt beskattade.
+
+Utredningen ser inga starka skäl till att samma drivmedel ska ha olika krav beroende på hur högt det är inblandat.
+
+Paketet innehåller också höjd energiskatt från 1 januari 2028. Det gäller 1,80 kronor per liter bensin och 1 800 kronor per kubikmeter diesel. Elskatten sänks som kompensation.
 
 ## Remissvaren
 
-Drivkraft Sverige stödjer den höjda plikten och kallar en höjning nödvändig om Sverige ska ha möjlighet att klara sitt åtagande enligt EU:s ansvarsfördelningsförordning (ESR). Organisationen vill också slopa pumplagen. "Det är vår förhoppning att utredningens förslag, bland annat om en höjd reduktionsplikt, nu omsätts till verklighet", säger vd Anna Törner i ett pressmeddelande.
+Drivkraft Sverige stödjer den höjda plikten. Organisationen kallar en höjning nödvändig om Sverige ska ha möjlighet att klara sitt åtagande enligt EU:s ansvarsfördelningsförordning (ESR). Den vill också slopa pumplagen.
 
-Konkurrensverket tillstyrker i sitt yttrande att rena och höginblandade drivmedel förs in i plikten medan skattenedsättningen fasas ut. Verket menar att dagens ordning splittrar marknaden och skapar återkommande osäkerhet, eftersom skattebefrielsen vilar på tidsbegränsade förlängningar. Samtidigt avstyrker verket bland annat det föreslagna prisgolvet och, i nuvarande form, pristaket på 7 kronor per kilo koldioxidekvivalenter.
+"Det är vår förhoppning att utredningens förslag, bland annat om en höjd reduktionsplikt, nu omsätts till verklighet", säger vd Anna Törner i ett pressmeddelande.
+
+Konkurrensverket tillstyrker i sitt yttrande att rena och höginblandade drivmedel förs in i plikten medan skattenedsättningen fasas ut. Verket menar att dagens ordning splittrar marknaden och skapar återkommande osäkerhet. Skälet är att skattebefrielsen vilar på tidsbegränsade förlängningar.
+
+Samtidigt avstyrker verket bland annat det föreslagna prisgolvet. Det avstyrker också, i nuvarande form, pristaket på 7 kronor per kilo koldioxidekvivalenter.
 
 ## Vad det kan betyda vid pumpen
 
-För dieselförare pekar förslagen uppåt. Biodrivmedel är dyrare att framställa än fossil diesel, och enligt 2030-sekretariatet räknar utredaren med ett pumppris omkring 3 kronor högre per liter. Hur känsligt priset är syntes 2024, när plikten sänktes till 6 procent och dieseln blev drygt 4 kronor billigare per liter. Samtidigt föreslår utredningen att bränslefaktorn och bränsletillägget i fordonsskatten för dieselbilar tas bort, vilket sänker fordonsskatten för dieselägare.
+För dieselförare pekar förslagen uppåt. Biodrivmedel är dyrare att framställa än fossil diesel. Enligt 2030-sekretariatet räknar utredaren med ett pumppris omkring 3 kronor högre per liter.
 
-För HVO100 är bilden mindre tydlig. I dag säljs det utanför plikten och är befriat från energi- och koldioxidskatt, och EU har förlängt godkännandet till utgången av 2032 enligt 2030-sekretariatet. Förslaget skulle alltså ta bort skattefördelen tidigare än så. Utredningens sammanfattning anger ingen prisprognos för HVO100.
+Hur känsligt priset är syntes 2024. Då sänktes plikten till 6 procent och dieseln blev drygt 4 kronor billigare per liter.
 
-Ett samband är ändå känt. När plikten sänktes 2024 föll även HVO100-priset kraftigt, eftersom mer råvara blev tillgänglig för den fria marknaden. Logiken talar för att det omvända gäller när plikten höjs: inblandning i vanlig diesel och HVO100 konkurrerar om samma råvara.
+Samtidigt föreslår utredningen att bränslefaktorn och bränsletillägget i fordonsskatten för dieselbilar tas bort. Det sänker fordonsskatten för dieselägare.
+
+För HVO100 är bilden mindre tydlig. I dag säljs det utanför plikten och är befriat från energi- och koldioxidskatt.
+
+EU har förlängt godkännandet till utgången av 2032 enligt 2030-sekretariatet. Förslaget skulle alltså ta bort skattefördelen tidigare än så. Utredningens sammanfattning anger ingen prisprognos för HVO100.
+
+Ett samband är ändå känt. När plikten sänktes 2024 föll även HVO100-priset kraftigt, eftersom mer råvara blev tillgänglig för den fria marknaden.
+
+Logiken talar för att det omvända gäller när plikten höjs. Inblandning i vanlig diesel och HVO100 konkurrerar om samma råvara.
 
 Inget är beslutat. Enligt 2030-sekretariatet har Sverigedemokraterna kallat förslaget en röd linje och Liberalerna avvisat det.
 
