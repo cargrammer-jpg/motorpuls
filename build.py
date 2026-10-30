@@ -7,9 +7,10 @@
 #   img/og/<slug>.jpg             delningsbild 1200x630 (JPEG) ur huvudbilden; startsidan använder img/og/motorpuls.jpg
 #                                 (ritad från brand/og/startsida.html)
 #
-# Artiklar: markdown med YAML-front matter (title, date, slug, tags, sources, excerpt, category, author,
-# valfritt summary, images, äldre image/image_credit). Brödtexten renderas oförändrad. Rubriken (#) i texten
-# blir sidans h1, avsnittet "## Källor" renderas i källistan. Ordning: datum, sedan filnamn (nyast först).
+# Artiklar: markdown med YAML-front matter (title, date, slug, tags, excerpt, category, author,
+# valfritt summary, images, sources, äldre image/image_credit). Brödtexten renderas oförändrad. Rubriken (#) i texten
+# blir sidans h1, avsnittet "## Källor" renderas i källistan. Fältet sources är valfritt, men finns det måste
+# länkarna vara desamma som under "## Källor" (annars avbryts bygget). Ordning: datum, sedan filnamn (nyast först).
 #
 # date:    publiceringsdag (2026-10-30) eller tidpunkt med zon (2026-10-30T03:25:00+01:00). Tid utan zon räknas
 #          som Europe/Stockholm. Bygget stoppas om datumet ligger i framtiden (svensk tid; ett datum utan tid
@@ -116,6 +117,7 @@ def load_articles():
                 if lm: sources.append((lm.group(1), lm.group(2)))
                 elif line.strip(): raise SystemExit(f"{path}: oväntad rad i Källor: {line!r}")
             body = body[:ks.start()]
+        check_sources(fm, sources, path)
         words = len(re.findall(r"\w+", body))
         arts.append(dict(fm, date=d, published=iso(d, t), modified=iso(ud, ut), mod_date=ud, headline=headline, body_html=markdown.markdown(body.strip()),
                          sources=sources, file=os.path.basename(path), minutes=max(1, math.ceil(words/200)),
@@ -123,6 +125,18 @@ def load_articles():
     arts.sort(key=lambda a: (a["date"], a["file"]), reverse=True)
     if len({a["slug"] for a in arts}) != len(arts): raise SystemExit("dubbla slugs")
     return arts
+
+def check_sources(fm, sources, path):
+    """Front matter-fältet sources är valfritt. Finns det ska det vara samma länkar som under "## Källor"
+    (det är Källor-listan som visas på sidan och hamnar i JSON-LD)."""
+    fs = fm.get("sources")
+    if fs is None: return
+    if not isinstance(fs, list) or not all(isinstance(u, str) for u in fs):
+        raise SystemExit(f"{path}: sources ska vara en lista med länkar")
+    shown = [u for _, u in sources]
+    if set(fs) != set(shown):
+        raise SystemExit(f"{path}: sources i front matter stämmer inte med ## Källor "
+                         f"(saknas i Källor: {sorted(set(fs) - set(shown))}, saknas i sources: {sorted(set(shown) - set(fs))})")
 
 def check_summary_images(fm, path):
     sm = fm.get("summary")
@@ -365,13 +379,9 @@ def head(title, desc, path, og_type="website", image=None, extra="", preload_img
 FOOTER = f'''
 <footer class="site-footer">
   <div class="wrap">
-    <div class="footer-grid">
-      <div>
-        <a class="wordmark" href="/"><img class="logo logo--footer" src="/img/logo.svg" alt="Motorpuls" width="872" height="88" loading="lazy"></a>
-        <p style="margin-top:1rem">{SITE_DESC}</p>
-      </div>
-    </div>
-    <p class="fine">© 2026 Motorpuls</p>
+    <a class="wordmark" href="/"><img class="logo logo--footer" src="/img/logo.svg" alt="Motorpuls" width="872" height="88" loading="lazy"></a>
+    <p class="site-footer__desc">{SITE_DESC}</p>
+    <p class="fine">© {dt.date.today().year} Motorpuls</p>
   </div>
 </footer>
 '''
@@ -429,7 +439,7 @@ def feed_item(a):
             <a href="{a["url"]}">
               <div class="item__text">
                 {meta_line(a, with_date=False, flag_html=meta_flag(a, a["img"]))}
-                <h3>{esc(a["title"])}</h3>
+                <h4>{esc(a["title"])}</h4>
                 <p>{esc(a["excerpt"])}</p>
               </div>
               {thumb}
@@ -441,7 +451,7 @@ def index(arts):
     h = head(f"{SITE}: korta bilnyheter med källor", SITE_DESC, "/", image=DEFAULT_OG,
              preload_img=first["img"], preload_sizes=LEAD_SIZES)
     if rest:
-        side = f'<aside class="latest" aria-labelledby="latest-h" style="--n:{min(len(rest),5)}"><h2 id="latest-h"><span class="pulse-dot" aria-hidden="true"></span>Senaste</h2><ol>' + "".join(
+        side = f'<aside class="latest" aria-labelledby="latest-h"><h2 id="latest-h"><span class="pulse-dot" aria-hidden="true"></span>Senaste</h2><ol>' + "".join(
             f'<li><a href="{a["url"]}">{meta_line(a, flag_html=flag(a, "inline"))}<h3>{esc(a["title"])}</h3></a></li>' for a in rest[:5]) + "</ol></aside>"
     else:
         side = ""  # one article: the lead card stands alone
@@ -508,10 +518,10 @@ def gallery(imgs, flag_html=""):
       </figure>'''
     n = len(imgs)
     slides = "".join(f'''
-          <figure class="gallery__slide" role="group" aria-roledescription="bild" aria-label="{i} av {n}">
+          <div class="gallery__slide" role="group" aria-roledescription="bild" aria-label="{i} av {n}"><figure>
             <div class="gallery__stage">{img_tag(im, im["alt"], eager=(i == 1), sizes=HERO_SIZES)}</div>
             {caption(im)}
-          </figure>''' for i, im in enumerate(imgs, 1))
+          </figure></div>''' for i, im in enumerate(imgs, 1))
     return f'''
       <section class="gallery" aria-roledescription="bildspel" aria-label="Bildspel, {n} bilder" data-gallery>{flag_html}
         <div class="gallery__track" tabindex="0" role="group" aria-label="Bilder. Bläddra med piltangenterna eller svep.">{slides}
@@ -569,8 +579,7 @@ def article(a):
   <div class="wrap">
     <article>
       <header class="article__head article__col">
-        <nav class="crumbs" aria-label="Brödsmulor"><a href="/">Start</a> / <span>{esc(a["category"])}</span></nav>
-        <span class="meta"><span class="tag">{esc(a["category"])}</span>{meta_flag(a, imgs)}</span>
+        <nav class="crumbs" aria-label="Brödsmulor"><a href="/">Start</a><span aria-hidden="true">/</span><span class="tag">{esc(a["category"])}</span>{meta_flag(a, imgs)}</nav>
         <h1 class="article__title">{nbnum(esc(a["headline"]))}</h1>
         <p class="article__dek">{nbnum(esc(a["excerpt"]))}</p>
         <p class="byline"><span>Publicerad <b><time datetime="{a["published"]}">{sv_date(a["date"])}</time></b></span><span>Läsetid <b>{a["minutes"]} min</b></span><span>Av <b>{esc(a["author"])}</b></span></p>
@@ -585,7 +594,7 @@ def article(a):
           <p>Texten är skriven med hjälp av AI och faktagranskad mot källorna ovan.</p>
         </aside>
 
-        <p class="more"><a class="btn" href="/" style="text-decoration:none;display:inline-block">Fler nyheter på startsidan</a></p>
+        <p class="more"><a class="btn" href="/">Fler nyheter på startsidan</a></p>
       </div>
     </article>
   </div>
@@ -601,7 +610,7 @@ def notfound():
     <header class="article__head">
       <h1 class="article__title">Sidan finns inte</h1>
       <p class="article__dek">Länken kan vara fel eller sidan flyttad.</p>
-      <p class="more"><a class="btn" href="/" style="text-decoration:none;display:inline-block">Till startsidan</a></p>
+      <p class="more"><a class="btn" href="/">Till startsidan</a></p>
     </header>
   </div>
 </main>
