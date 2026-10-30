@@ -3,7 +3,9 @@
 # Utdata:
 #   index.html                    startsida, riktiga artiklar, nyast först
 #   artikel/<slug>/index.html     en sida per artikel (rena URL:er: /artikel/<slug>/)
-#   404.html, sitemap.xml, robots.txt
+#   404.html, sitemap.xml, robots.txt, feed.xml (RSS, samma artiklar som sitemap)
+#   img/og/<slug>.jpg             delningsbild 1200x630 (JPEG) ur huvudbilden; startsidan använder img/og/motorpuls.jpg
+#                                 (ritad från brand/og/startsida.html)
 #
 # Artiklar: markdown med YAML-front matter (title, date, slug, tags, sources, excerpt, category, author,
 # valfritt summary, images, äldre image/image_credit). Brödtexten renderas oförändrad. Rubriken (#) i texten
@@ -248,6 +250,60 @@ def ensure_images(a):
     return [dict(src="/" + rel, w=w, h=h, srcset="", alt=a["headline"], credit=str(a.get("image_credit") or "").strip(),
                  caption="", license=str(a.get("image_license") or "").strip())]
 
+OG_W, OG_H = 1200, 630
+DEFAULT_OG = dict(src="/img/og/motorpuls.jpg", w=OG_W, h=OG_H)
+
+def og_image(a):
+    """Delningsbild: huvudbilden beskuren till 1200x630 som JPEG (bara för og:image/twitter:image, sajtens bilder
+    beskärs aldrig). Skrivs om den saknas. Används bara om filen är incheckad, annars WebP-huvudbilden som förut."""
+    img = a["img"]
+    if not img: return None
+    rel = f"img/og/{a['slug']}.jpg"
+    p = os.path.join(ROOT, rel)
+    if not os.path.exists(p):
+        from PIL import Image, ImageOps
+        os.makedirs(os.path.dirname(p), exist_ok=True)
+        with Image.open(os.path.join(ROOT, img["src"].lstrip("/"))) as im:
+            ImageOps.fit(im.convert("RGB"), (OG_W, OG_H), Image.LANCZOS).save(p, "JPEG", quality=85, optimize=True, progressive=True)
+    return dict(src="/" + rel, w=OG_W, h=OG_H) if committed(rel) else img
+
+def short_title(t, limit=60):
+    """<title>: artikelrubriken kortas så att hela titeln med " · Motorpuls" blir högst ~60 tecken. Helst vid
+    ": " eller ". " (utan …), annars vid ett ordslut med …. og:title och twitter:title behåller hela rubriken."""
+    suffix = f" · {SITE}"
+    room = limit - len(suffix)
+    if len(t) <= room: return t + suffix
+    head_part = re.split(r"[:.] ", t, maxsplit=1)[0]
+    if head_part != t and room // 2 <= len(head_part) <= room: return head_part + suffix
+    return t[:room - 1].rsplit(" ", 1)[0].rstrip(" ,.:;–-") + "…" + suffix
+
+def rss(arts):
+    from email.utils import format_datetime
+    def rfc822(iso_s):
+        t = dt.datetime.fromisoformat(iso_s)
+        return format_datetime(t.replace(tzinfo=TZ) if t.tzinfo is None else t)
+    items = "".join(f"""  <item>
+    <title>{esc(a["title"])}</title>
+    <link>{DOMAIN}{a["url"]}</link>
+    <guid isPermaLink="true">{DOMAIN}{a["url"]}</guid>
+    <pubDate>{rfc822(a["published"])}</pubDate>
+    <category>{esc(a["category"])}</category>
+    <description>{esc(a["excerpt"])}</description>
+  </item>
+""" for a in arts)
+    return f"""<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>{SITE}</title>
+  <link>{DOMAIN}/</link>
+  <description>{esc(SITE_DESC)}</description>
+  <language>sv-SE</language>
+  <lastBuildDate>{rfc822(lastmod("/", arts))}</lastBuildDate>
+  <atom:link href="{DOMAIN}/feed.xml" rel="self" type="application/rss+xml"/>
+{items}</channel>
+</rss>
+"""
+
 # ---------- shared html ----------
 def asset(rel):
     """URL med ?v=<kort innehållshash> så att webbläsare (Safari) alltid hämtar aktuell css/js efter en ändring."""
@@ -293,6 +349,7 @@ def head(title, desc, path, og_type="website", image=None, extra="", preload_img
 <link rel="icon" href="/favicon/favicon-16.png" sizes="16x16" type="image/png">
 <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png">
 <link rel="manifest" href="/favicon/site.webmanifest">
+<link rel="alternate" type="application/rss+xml" title="{SITE}" href="/feed.xml">
 <link rel="preload" href="/fonts/newsreader-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
 {pre}{extra}</head>
@@ -381,7 +438,7 @@ def feed_item(a):
 
 def index(arts):
     first, rest = arts[0], arts[1:]
-    h = head(f"{SITE}: korta bilnyheter med källor", SITE_DESC, "/",
+    h = head(f"{SITE}: korta bilnyheter med källor", SITE_DESC, "/", image=DEFAULT_OG,
              preload_img=first["img"], preload_sizes=LEAD_SIZES)
     if rest:
         side = f'<aside class="latest" aria-labelledby="latest-h" style="--n:{min(len(rest),5)}"><h2 id="latest-h"><span class="pulse-dot" aria-hidden="true"></span>Senaste</h2><ol>' + "".join(
@@ -491,7 +548,7 @@ def article(a):
                                           "copyrightNotice": im["license"] or None}.items() if v} for im in imgs]
     if a.get("sources"): ld["citation"] = [u for _, u in a["sources"]]
     jsonld = '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace("</", "<\\/") + "</script>\n"
-    h = head(f'{a["title"]} · {SITE}', a["excerpt"], a["url"], og_type="article", image=img, og_title=a["title"],
+    h = head(short_title(a["title"]), a["excerpt"], a["url"], og_type="article", image=og_image(a), og_title=a["title"],
              extra=f'<meta property="article:published_time" content="{a["published"]}">\n'
                    f'<meta property="article:section" content="{esc(a["category"])}">\n'
                    + "".join(f'<meta property="article:tag" content="{esc(t)}">\n' for t in a.get("tags") or []) + jsonld,
@@ -571,6 +628,7 @@ def main():
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
           + "".join(f"  <url><loc>{DOMAIN}{u}</loc><lastmod>{lastmod(u, arts)}</lastmod></url>\n" for u, d in urls) + "</urlset>\n")
     write("robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {DOMAIN}/sitemap.xml\n")
+    write("feed.xml", rss(arts))
     print(f"built {len(arts)} artiklar: " + ", ".join(a["slug"] for a in arts))
 
 if __name__ == "__main__":
