@@ -43,4 +43,4 @@ Bilderna kopieras till `img/articles/<slug>/` och får WebP-versioner (1600, 800
 Den första blir huvudbild (och beskärs till delningsbilden `img/og/<slug>.jpg`), fler bilder blir ett bildspel. Checka in `img/articles/<slug>/` tillsammans med artikeln.
 Det äldre fältet `image` (en URL, med `image_credit`) laddas ned till `img/articles/<slug>.webp` som förut.
 
-Sidorna indexeras av sökmotorer. Bara `404.html` har `<meta name="robots" content="noindex">`.
+Sidorna har tills vidare `<meta name="robots" content="noindex">`.
