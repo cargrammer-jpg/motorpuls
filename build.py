@@ -20,7 +20,7 @@
 #          storleksändring, aldrig beskärning). Finns WebP-filen redan byggs den inte om (källan behövs inte).
 #          Första bilden är huvudbild (og:image), fler bilder blir ett bildspel.
 # image:   äldre fält (en URL). Laddas ned till img/articles/<slug>.webp om filen saknas, kredit i image_credit.
-import datetime as dt, glob, html, json, math, os, re, shutil, urllib.request
+import datetime as dt, glob, hashlib, html, json, math, os, re, shutil, urllib.request
 import markdown, yaml
 
 DRAFTS_IMG = os.environ.get("MOTORPULS_DRAFTS_IMG")  # valfri extra källmapp, standard: <root>/drafts/img
@@ -180,6 +180,12 @@ def ensure_images(a):
                  caption="", license=str(a.get("image_license") or "").strip())]
 
 # ---------- shared html ----------
+def asset(rel):
+    """URL med ?v=<kort innehållshash> så att webbläsare (Safari) alltid hämtar aktuell css/js efter en ändring."""
+    with open(os.path.join(ROOT, rel.lstrip("/")), "rb") as f:
+        return f"{rel}?v={hashlib.sha256(f.read()).hexdigest()[:10]}"
+
+
 def head(title, desc, path, og_type="website", image=None, extra="", preload_img=None, og_title=None, preload_sizes="100vw"):
     canon = DOMAIN + path if path else None
     og_title = og_title or title
@@ -211,6 +217,8 @@ def head(title, desc, path, og_type="website", image=None, extra="", preload_img
 <meta name="twitter:description" content="{esc(desc)}">
 <meta name="theme-color" content="#0B0D10">
 <meta name="color-scheme" content="dark">
+<link rel="stylesheet" href="{asset("/css/site.css")}">
+<script src="{asset("/js/site.js")}" defer></script>
 <link rel="icon" href="/favicon/favicon.ico" sizes="48x48">
 <link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon/favicon-32.png" sizes="32x32" type="image/png">
@@ -218,9 +226,7 @@ def head(title, desc, path, og_type="website", image=None, extra="", preload_img
 <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png">
 <link rel="manifest" href="/favicon/site.webmanifest">
 <link rel="preload" href="/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
-{pre}<link rel="stylesheet" href="/css/site.css">
-<script src="/js/site.js" defer></script>
-{extra}</head>
+{pre}{extra}</head>
 <body>
 <a class="skip" href="#innehall">Hoppa till innehållet</a>
 <header class="masthead">
