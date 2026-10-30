@@ -10,7 +10,8 @@
 # Artiklar: markdown med YAML-front matter (title, date, slug, tags, excerpt, category, author,
 # valfritt summary, images, sources, äldre image/image_credit). Brödtexten renderas oförändrad. Rubriken (#) i texten
 # blir sidans h1, avsnittet "## Källor" renderas i källistan. Fältet sources är valfritt, men finns det måste
-# länkarna vara desamma som under "## Källor" (annars avbryts bygget). Ordning: datum, sedan filnamn (nyast först).
+# länkarna vara desamma som under "## Källor" (annars avbryts bygget). Ordning: publiceringstidpunkt (date med tid, ett datum utan tid räknas som
+# dagens början), sedan filnamn, nyast först. Samma ordning gäller startsidan, feed.xml och sitemap.xml.
 #
 # date:    publiceringsdag (2026-10-30) eller tidpunkt med zon (2026-10-30T03:25:00+01:00). Tid utan zon räknas
 #          som Europe/Stockholm. Bygget stoppas om datumet ligger i framtiden (svensk tid; ett datum utan tid
@@ -71,9 +72,6 @@ ANALYTICS = """<!-- Cloudflare Web Analytics --><script defer src='https://stati
 
 # ---------- content ----------
 TZ = ZoneInfo("Europe/Stockholm")
-# Tillfällig rättelse tills artikelgrenarna #12-14 (som bär en egen kopia av Tesla-filen) är mergade:
-# Tesla-artikeln gick live 30/10 ~03:25 men filen säger 2026-10-31. Flytta in värdet i filen och ta bort raden sedan.
-DATE_FIXES = {"tesla-model-y-strukturellt-batteri-betyg-d-volvo-ex60": "2026-10-30T03:25:00+01:00"}
 
 def parse_when(v, path, field):
     """date/updated -> (lokalt datum, tidpunkt med zon eller None)"""
@@ -90,9 +88,13 @@ def parse_when(v, path, field):
 
 def iso(d, t): return t.isoformat(timespec="seconds") if t else d.isoformat()
 
+def instant(d, t):
+    """jämförbar tidpunkt: tiden om den finns, annars dagens början i svensk tid"""
+    return t if t else dt.datetime.combine(d, dt.time.min, TZ)
+
 def lastmod(url, arts):
     """sitemap: artikelns updated/date, startsidan får den senaste av dem"""
-    hit = [a for a in arts if a["url"] == url] or [max(arts, key=lambda a: (a["mod_date"], a["modified"]))]
+    hit = [a for a in arts if a["url"] == url] or [max(arts, key=lambda a: a["mod_when"])]
     return hit[0]["modified"]
 
 def now():
@@ -111,7 +113,7 @@ def load_articles():
             if not fm.get(k): raise SystemExit(f"{path}: saknar {k}")
         check_summary_images(fm, path)
         if "sweden" in fm and not isinstance(fm["sweden"], bool): raise SystemExit(f"{path}: sweden ska vara true eller false")
-        d, t = parse_when(DATE_FIXES.get(fm["slug"], fm["date"]), path, "date")
+        d, t = parse_when(fm["date"], path, "date")
         n = now()
         if (t and t > n) or d > n.astimezone(TZ).date():
             raise SystemExit(f"{path}: date {iso(d, t)} ligger i framtiden (nu {n.astimezone(TZ):%Y-%m-%d %H:%M} svensk tid)")
@@ -130,10 +132,10 @@ def load_articles():
             body = body[:ks.start()]
         check_sources(fm, sources, path)
         words = len(re.findall(r"\w+", body))
-        arts.append(dict(fm, date=d, published=iso(d, t), modified=iso(ud, ut), mod_date=ud, headline=headline, body_html=markdown.markdown(body.strip()),
+        arts.append(dict(fm, date=d, published=iso(d, t), modified=iso(ud, ut), mod_date=ud, when=instant(d, t), mod_when=instant(ud, ut), headline=headline, body_html=markdown.markdown(body.strip()),
                          sources=sources, file=os.path.basename(path), minutes=max(1, math.ceil(words/200)),
                          url=f"/artikel/{fm['slug']}/", cat=slugify(fm["category"])))
-    arts.sort(key=lambda a: (a["date"], a["file"]), reverse=True)
+    arts.sort(key=lambda a: (a["when"], a["file"]), reverse=True)
     if len({a["slug"] for a in arts}) != len(arts): raise SystemExit("dubbla slugs")
     return arts
 
