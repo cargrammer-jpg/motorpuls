@@ -10,7 +10,10 @@ Artiklar ligger som markdown med YAML-front matter i `content/articles/`. `build
 
 - `index.html` (startsidan, nyast först)
 - `artikel/<slug>/index.html` (en sida per artikel, URL `/artikel/<slug>/`)
-- `404.html`, `sitemap.xml`, `robots.txt`
+- `404.html`, `sitemap.xml`, `robots.txt`, `feed.xml` (RSS)
+- `img/og/<slug>.jpg` (delningsbild 1200×630, checka in den tillsammans med artikeln)
+
+Kräver Python 3.12 eller senare (build.py använder bland annat nästlade citattecken i f-strängar).
 
 ```
 python3 -m venv .venv && .venv/bin/pip install markdown pyyaml pillow
@@ -36,8 +39,8 @@ sweden: true                           # valfritt: nyheten gäller Sverige, visa
 och på artikelns kort på startsidan. Saknar artikeln bild hamnar flaggan vid kategorin. Flaggan är ett eget element ovanpå
 bilden, bildfilerna ändras aldrig. Utelämnat eller `false` betyder ingen flagga.
 
-Bilderna kopieras till `img/articles/<slug>/` och får WebP-versioner (1600 och 800 px bred, ingen beskärning).
-Den första blir huvudbild och og:image, fler bilder blir ett bildspel. Checka in `img/articles/<slug>/` tillsammans med artikeln.
+Bilderna kopieras till `img/articles/<slug>/` och får WebP-versioner (1600, 800 och 400 px bred, ingen beskärning).
+Den första blir huvudbild (och beskärs till delningsbilden `img/og/<slug>.jpg`), fler bilder blir ett bildspel. Checka in `img/articles/<slug>/` tillsammans med artikeln.
 Det äldre fältet `image` (en URL, med `image_credit`) laddas ned till `img/articles/<slug>.webp` som förut.
 
 Sidorna har tills vidare `<meta name="robots" content="noindex">`.
