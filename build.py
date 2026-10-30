@@ -1,235 +1,343 @@
-# Bygger index.html och artikel.html från delade bitar. Kör: python3 build.py
-DOMAIN = "https://motorpuls.example"  # exempeldomän tills motorpuls.se är köpt
+# Bygger Motorpuls från content/articles/*.md. Kör: .venv/bin/python build.py (kräver markdown och pyyaml).
+#
+# Utdata:
+#   index.html                    startsida, riktiga artiklar, nyast först
+#   artikel/<slug>/index.html     en sida per artikel (rena URL:er: /artikel/<slug>/)
+#   404.html, sitemap.xml, robots.txt
+#
+# Artiklar: markdown med YAML-front matter (title, date, slug, tags, sources, excerpt, category, author,
+# valfritt image, image_credit). Brödtexten renderas oförändrad. Rubriken (#) i texten blir sidans h1,
+# avsnittet "## Källor" renderas i källistan. Ordning: datum, sedan filnamn (nyast först).
+# Bild: om front matter har image och img/articles/<slug>.webp saknas laddas den ned och konverteras
+# till WebP (bara format och storlek, ingen beskärning, max 1600 px bred).
+import datetime as dt, glob, html, json, math, os, re, shutil, urllib.request
+import markdown, yaml
 
-def head(title, desc, path, preload):
+ROOT = os.path.dirname(os.path.abspath(__file__))
+DOMAIN = "https://motorpuls.se"
+SITE = "Motorpuls"
+SITE_DESC = "Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor."
+MAX_W = 1600
+
+MONTHS = ["januari","februari","mars","april","maj","juni","juli","augusti","september","oktober","november","december"]
+DAYS = ["måndag","tisdag","onsdag","torsdag","fredag","lördag","söndag"]
+def sv_date(d): return f"{d.day} {MONTHS[d.month-1]} {d.year}"
+def sv_day(d): return f"{DAYS[d.weekday()].capitalize()} {d.day} {MONTHS[d.month-1]}"
+def host(u): return re.sub(r"^www\.", "", u.split("/")[2])
+def esc(s): return html.escape(str(s), quote=True)
+def slugify(s): return re.sub(r"[^a-z0-9]+", "-", s.lower().replace("å","a").replace("ä","a").replace("ö","o")).strip("-")
+
+ANALYTICS = """<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "bace28864ae04c6fa5e9f4a98ca70f94"}'></script><!-- End Cloudflare Web Analytics -->
+"""
+
+# ---------- content ----------
+def load_articles():
+    arts = []
+    for path in sorted(glob.glob(os.path.join(ROOT, "content/articles/*.md"))):
+        raw = open(path, encoding="utf-8").read()
+        m = re.match(r"^---\n(.*?)\n---\n(.*)$", raw, re.S)
+        if not m: raise SystemExit(f"saknar front matter: {path}")
+        fm, body = yaml.safe_load(m.group(1)), m.group(2)
+        for k in ("title","date","slug","excerpt","category","author"):
+            if not fm.get(k): raise SystemExit(f"{path}: saknar {k}")
+        d = fm["date"] if isinstance(fm["date"], dt.date) else dt.date.fromisoformat(str(fm["date"]))
+        # h1 in the body is the page headline; "## Källor" becomes the source list
+        h1 = re.search(r"^# (.+)$", body, re.M)
+        headline = h1.group(1).strip() if h1 else fm["title"]
+        if h1: body = body[:h1.start()] + body[h1.end():]
+        sources = []
+        ks = re.search(r"^## Källor\s*$", body, re.M)
+        if ks:
+            for line in body[ks.end():].splitlines():
+                lm = re.match(r"^\s*[-*]\s+\[(.+?)\]\((\S+?)\)\s*$", line)
+                if lm: sources.append((lm.group(1), lm.group(2)))
+                elif line.strip(): raise SystemExit(f"{path}: oväntad rad i Källor: {line!r}")
+            body = body[:ks.start()]
+        words = len(re.findall(r"\w+", body))
+        arts.append(dict(fm, date=d, headline=headline, body_html=markdown.markdown(body.strip()),
+                         sources=sources, file=os.path.basename(path), minutes=max(1, math.ceil(words/200)),
+                         url=f"/artikel/{fm['slug']}/", cat=slugify(fm["category"])))
+    arts.sort(key=lambda a: (a["date"], a["file"]), reverse=True)
+    if len({a["slug"] for a in arts}) != len(arts): raise SystemExit("dubbla slugs")
+    return arts
+
+def ensure_image(a):
+    """Lokal WebP för artikelbild. Returnerar dict(src,w,h) eller None."""
+    if not a.get("image"): return None
+    rel = f"img/articles/{a['slug']}.webp"
+    out = os.path.join(ROOT, rel)
+    if not os.path.exists(out):
+        from PIL import Image
+        os.makedirs(os.path.dirname(out), exist_ok=True)
+        req = urllib.request.Request(a["image"], headers={"User-Agent": "Mozilla/5.0 (Motorpuls build)"})
+        with urllib.request.urlopen(req, timeout=60) as r:
+            data, ctype = r.read(), r.headers.get("Content-Type", "")
+        ext = {"image/webp":"webp","image/png":"png","image/jpeg":"jpg"}.get(ctype.split(";")[0], "bin")
+        orig = os.path.join(ROOT, f"img/articles/{a['slug']}-original.{ext}")
+        open(orig, "wb").write(data)
+        im = Image.open(orig); im.load()
+        if im.width > MAX_W:  # same aspect ratio, resize only
+            im = im.resize((MAX_W, round(im.height * MAX_W / im.width)), Image.LANCZOS)
+        im.convert("RGB").save(out, "WEBP", quality=86, method=6)
+    from PIL import Image
+    with Image.open(out) as im: w, h = im.size
+    return dict(src="/" + rel, w=w, h=h)
+
+# ---------- shared html ----------
+def head(title, desc, path, og_type="website", image=None, extra="", preload_img=None, og_title=None):
+    canon = DOMAIN + path if path else None
+    og_title = og_title or title
+    og_img = ""
+    if image:
+        og_img = (f'<meta property="og:image" content="{DOMAIN}{image["src"]}">\n'
+                  f'<meta property="og:image:width" content="{image["w"]}">\n<meta property="og:image:height" content="{image["h"]}">\n'
+                  f'<meta name="twitter:image" content="{DOMAIN}{image["src"]}">\n')
+    pre = f'<link rel="preload" as="image" href="{preload_img}" fetchpriority="high">\n' if preload_img else ""
     return f'''<!doctype html>
 <html lang="sv">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{title}</title>
-<meta name="description" content="{desc}">
+<title>{esc(title)}</title>
+<meta name="description" content="{esc(desc)}">
 <meta name="robots" content="noindex">
-<link rel="canonical" href="{DOMAIN}{path}">
+{f'<link rel="canonical" href="{canon}">' + chr(10) if canon else ""}<meta property="og:site_name" content="{SITE}">
+<meta property="og:locale" content="sv_SE">
+<meta property="og:type" content="{og_type}">
+<meta property="og:title" content="{esc(og_title)}">
+<meta property="og:description" content="{esc(desc)}">
+{f'<meta property="og:url" content="{canon}">' + chr(10) if canon else ""}{og_img}<meta name="twitter:card" content="{"summary_large_image" if image else "summary"}">
+<meta name="twitter:title" content="{esc(og_title)}">
+<meta name="twitter:description" content="{esc(desc)}">
 <meta name="theme-color" content="#0B0D10">
 <meta name="color-scheme" content="dark">
-<link rel="icon" href="favicon/favicon.ico" sizes="48x48">
-<link rel="icon" href="favicon/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="favicon/favicon-32.png" sizes="32x32" type="image/png">
-<link rel="icon" href="favicon/favicon-16.png" sizes="16x16" type="image/png">
-<link rel="apple-touch-icon" href="favicon/apple-touch-icon.png">
-<link rel="manifest" href="favicon/site.webmanifest">
-<link rel="preload" href="fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" as="image" href="{preload}-1600.webp" imagesrcset="{preload}-800.webp 800w, {preload}-1600.webp 1600w" imagesizes="(min-width: 80rem) 76rem, 100vw" fetchpriority="high">
-<link rel="stylesheet" href="css/site.css">
-<script src="js/site.js" defer></script>
-</head>
+<link rel="icon" href="/favicon/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/favicon/favicon-16.png" sizes="16x16" type="image/png">
+<link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png">
+<link rel="manifest" href="/favicon/site.webmanifest">
+<link rel="preload" href="/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
+{pre}<link rel="stylesheet" href="/css/site.css">
+<script src="/js/site.js" defer></script>
+{extra}</head>
 <body>
 <a class="skip" href="#innehall">Hoppa till innehållet</a>
-<div class="example-bar" role="note"><strong>EXEMPEL</strong> · Prototyp med påhittat innehåll. Inga riktiga nyheter.</div>
 <header class="masthead">
   <div class="wrap masthead__row">
-    <a class="wordmark" href="index.html"><img class="logo" src="img/logo.svg" alt="Motorpuls" width="872" height="88"></a>
-    <nav class="mainnav" aria-label="Huvudmeny">
-      <ul>
-        <li><a href="index.html#flodet">Elbil</a></li>
-        <li><a href="index.html#flodet">Sportbil</a></li>
-        <li><a href="index.html#flodet">Tesla</a></li>
-        <li><a href="index.html#flodet">Laddning</a></li>
-        <li><a href="index.html#flodet">Bränsle</a></li>
-      </ul>
-    </nav>
-    <span class="masthead__date"><time datetime="2026-10-29">tors 29 okt</time></span>
+    <a class="wordmark" href="/"><img class="logo" src="/img/logo.svg" alt="Motorpuls" width="872" height="88"></a>
   </div>
 </header>
 '''
 
-ANALYTICS = """<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "bace28864ae04c6fa5e9f4a98ca70f94"}'></script><!-- End Cloudflare Web Analytics -->
-"""
-
-NEWSLETTER = '''
-<aside id="nyhetsbrev" class="nl" popover="manual" aria-labelledby="nl-title">
-  <button type="button" class="nl__close" aria-label="Stäng">
-    <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M3 3l12 12M15 3L3 15" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
-  </button>
-  <p class="nl__kicker"><span class="pulse-dot" aria-hidden="true"></span>Nyhetsbrev · fredagar</p>
-  <h2 id="nl-title">Veckans viktigaste, på tre minuter</h2>
-  <p id="nl-desc">Fem korta nyheter med källor. Ingen spam, avsluta när du vill.</p>
-  <form action="#" novalidate>
-    <label for="nl-email">E-postadress</label>
-    <input id="nl-email" type="email" name="email" autocomplete="email" placeholder="din@e-post.se" required>
-    <button class="btn" type="submit">Prenumerera</button>
-  </form>
-  <p class="nl__status" role="status" aria-live="polite"></p>
-  <p class="nl__fine">Exempel: formuläret skickar inget ännu.</p>
-</aside>
-'''
-
-FOOTER = '''
+FOOTER = f'''
 <footer class="site-footer">
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <a class="wordmark" href="index.html"><img class="logo logo--footer" src="img/logo.svg" alt="Motorpuls" width="872" height="88" loading="lazy"></a>
-        <p style="margin-top:1rem">Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</p>
+        <a class="wordmark" href="/"><img class="logo logo--footer" src="/img/logo.svg" alt="Motorpuls" width="872" height="88" loading="lazy"></a>
+        <p style="margin-top:1rem">{SITE_DESC}</p>
       </div>
-      <nav aria-label="Om Motorpuls"><ul>
-        <li><a href="#">Så arbetar vi</a></li><li><a href="#">AI och faktagranskning</a></li><li><a href="#">Rättelser</a></li>
-      </ul></nav>
-      <nav aria-label="Följ"><ul>
-        <li><a href="#" onclick="document.getElementById('nyhetsbrev')?.showPopover?.();return false">Nyhetsbrev</a></li><li><a href="#">RSS</a></li><li><a href="#">Kontakt</a></li>
-      </ul></nav>
     </div>
-    <p class="fine">© 2026 Motorpuls (prototyp) · Exempeldomän motorpuls.example · Bilder är abstrakta platshållare.</p>
+    <p class="fine">© 2026 Motorpuls</p>
   </div>
 </footer>
 '''
 
-def pic(name, alt, sizes, eager=False, w=1600, h=1000):
-    load = 'fetchpriority="high"' if eager else 'loading="lazy" decoding="async"'
-    return (f'<img src="img/{name}-1600.webp" srcset="img/{name}-800.webp 800w, img/{name}-1600.webp 1600w" '
-            f'sizes="{sizes}" width="{w}" height="{h}" alt="{alt}" {load}>')
+def page(h, body): return h + body + FOOTER + ANALYTICS + "</body>\n</html>\n"
 
-CATS = {"elbil":"Elbil","sportbil":"Sportbil","tesla":"Tesla","laddning":"Laddning","bransle":"Bränsle"}
+def meta_line(a, with_date=True):
+    t = f'<time datetime="{a["date"].isoformat()}">{sv_date(a["date"])}</time>' if with_date else ""
+    return f'<span class="meta"><span class="tag">{esc(a["category"])}</span>{t}</span>'
 
-FEED = [
- ("Idag · torsdag 29 oktober", "2026-10-29", [
-  ("07:15","tesla","Tesla, pressmeddelande (exempel)","Exempel: Tesla uppdaterar mjukvara med ny förvärmning inför vintern","Batteriet kan nu förvärmas automatiskt när en laddare väljs i navigationen."),
- ]),
- ("Igår · onsdag 28 oktober", "2026-10-28", [
-  ("16:05","sportbil","Tillverkaren (exempel)","Exempel: Lätt elektrisk roadster visas, 1&nbsp;350&nbsp;kg och 420&nbsp;km räckvidd","Bilen väntas i produktion 2028. Pris är ännu inte satt."),
-  ("11:30","bransle","Energimyndigheten (exempel)","HVO-andelen i svensk diesel ökade under tredje kvartalet","Förnybar diesel stod för en större del av försäljningen än året innan, enligt exempeldata."),
-  ("09:10","elbil","Mobility Sweden (exempel)","Elbilar 41&nbsp;procent av nyregistreringarna i oktober, enligt exempelsiffror","Laddhybriderna minskade samtidigt för tredje månaden i rad."),
- ]),
- ("Måndag 26 oktober", "2026-10-26", [
-  ("14:20","laddning","Laddoperatören (exempel)","Exempel: <span class='nobr'>Supercharger-station</span> med 24&nbsp;platser öppnar vid Exempelby handelsområde","Stationen är öppen för alla elbilsmärken via app."),
-  ("10:00","elbil","Tillverkaren (exempel)","Exempel: Kompakt elbil får större batteri utan prishöjning","Räckvidden ökar till 480&nbsp;km enligt WLTP i exemplet."),
- ]),
-]
+def img_tag(img, alt, eager=False, sizes="100vw"):
+    load = 'fetchpriority="high" decoding="async"' if eager else 'loading="lazy" decoding="async"'
+    return f'<img src="{img["src"]}" width="{img["w"]}" height="{img["h"]}" alt="{esc(alt)}" {load}>'
 
-def index():
-    h = head("Motorpuls: korta bilnyheter med källor (exempel)", "Exempelprototyp: korta, sakliga nyheter om elbil, sportbil, Tesla, laddning och bränsle.", "/", "img/hero")
-    # build latest list (first 4 items)
-    flat = [(d,t,c,s,title,dek) for (_,d,its) in FEED for (t,c,s,title,dek) in its]
-    latest = "".join(f'''
-          <li><a href="artikel.html"><span class="meta"><time datetime="{d}T{t}">{t}</time><span class="tag">{CATS[c]}</span></span><h3>{title}</h3></a></li>''' for (d,t,c,s,title,dek) in flat[:5])
-    days = ""
-    for (label, d, its) in FEED:
-        lis = "".join(f'''
-          <li class="item" data-cat="{c}">
-            <a href="artikel.html">
-              <time class="item__time" datetime="{d}T{t}">{t}</time>
+# ---------- front page ----------
+def lead(a):
+    img = a["img"]
+    media = (f'<figure class="lead__media">{img_tag(img, a["headline"], eager=True, sizes="(min-width: 60rem) 38rem, 100vw")}'
+             f'<figcaption>{esc(a.get("image_credit") or "")}</figcaption></figure>') if img else ""
+    return f'''
+    <article class="lead{" lead--img" if img else " lead--text"}">
+      <a href="{a["url"]}">
+        {media}
+        <div class="lead__body">
+          <span class="hero__label"><span class="pulse-dot" aria-hidden="true"></span>Senaste nytt</span>
+          {meta_line(a)}
+          <h2 class="lead__title">{esc(a["title"])}</h2>
+          <p class="lead__dek">{esc(a["excerpt"])}</p>
+          <span class="lead__more">Läs artikeln <span aria-hidden="true">→</span></span>
+        </div>
+      </a>
+    </article>'''
+
+def feed_item(a):
+    thumb = f'<div class="item__img">{img_tag(a["img"], "", sizes="(min-width: 48rem) 15rem, 6.5rem")}</div>' if a["img"] else ""
+    return f'''
+          <li class="item{"" if a["img"] else " item--noimg"}" data-cat="{a["cat"]}">
+            <a href="{a["url"]}">
               <div class="item__text">
-                <span class="meta"><time class="t-mobile" datetime="{d}T{t}">{t}</time><span class="tag">{CATS[c]}</span><span class="source">{s}</span></span>
-                <h3>{title}</h3>
-                <p>{dek}</p>
+                {meta_line(a, with_date=False)}
+                <h3>{esc(a["title"])}</h3>
+                <p>{esc(a["excerpt"])}</p>
               </div>
-              <div class="item__img">{pic(c, "", "(min-width: 48rem) 15rem, 6.5rem")}</div>
+              {thumb}
             </a>
-          </li>''' for (t,c,s,title,dek) in its)
-        days += f'''
-      <section class="day" aria-labelledby="d-{d}">
-        <h3 class="day__label" id="d-{d}"><time datetime="{d}">{label}</time></h3>
-        <ol class="feed">{lis}
-        </ol>
-      </section>'''
-    chips = '<li><button class="chip" type="button" data-filter="alla" aria-pressed="true">Alla</button></li>' + "".join(
-        f'<li><button class="chip" type="button" data-filter="{k}" aria-pressed="false">{v}</button></li>' for k,v in CATS.items())
-    body = f'''
-<main id="innehall" class="front">
-  <div class="wrap">
-    <h1 class="visually-hidden">Motorpuls, senaste bilnyheterna</h1>
-    <div class="hero-grid">
-      <article class="hero">
-        <a href="artikel.html">
-          <div class="hero__media">{pic("hero", "Abstrakt platshållarbild: ljusstrimmor mot en orange horisont.", "(min-width: 80rem) 76rem, 100vw", eager=True)}<span class="badge-example" aria-hidden="true">Platshållare</span></div>
-          <div class="hero__body">
-            <span class="hero__label"><span class="pulse-dot" aria-hidden="true"></span>Toppnyhet</span>
-            <span class="meta"><span class="tag">Laddning</span><span class="source">Trafikverket (exempel)</span><time datetime="2026-10-29T08:40">idag 08:40</time></span>
-            <h2 class="hero__title">Ny laddkorridor längs E4 klar: 14&nbsp;stationer mellan Exempelby och Norrstad</h2>
-            <p class="hero__dek">Den sista stationen öppnade i morse. Alla har minst 150&nbsp;kW och tar betalkort direkt, utan app. (Påhittad exempelnyhet.)</p>
-          </div>
-        </a>
-      </article>
-      <aside class="latest" aria-labelledby="latest-h">
-        <h2 id="latest-h"><span class="pulse-dot" aria-hidden="true"></span>Senaste</h2>
-        <ol>{latest}
-        </ol>
-      </aside>
-    </div>
-  </div>
+          </li>'''
 
+def index(arts):
+    first, rest = arts[0], arts[1:]
+    h = head(f"{SITE}: korta bilnyheter med källor", SITE_DESC, "/",
+             preload_img=first["img"]["src"] if first["img"] else None)
+    if rest:
+        side = f'<aside class="latest" aria-labelledby="latest-h" style="--n:{min(len(rest),5)}"><h2 id="latest-h"><span class="pulse-dot" aria-hidden="true"></span>Senaste</h2><ol>' + "".join(
+            f'<li><a href="{a["url"]}">{meta_line(a)}<h3>{esc(a["title"])}</h3></a></li>' for a in rest[:5]) + "</ol></aside>"
+    else:
+        side = ""  # one article: the lead card stands alone
+    feed = ""
+    if len(arts) > 1:
+        days, order = {}, []
+        for a in arts:
+            if a["date"] not in days: days[a["date"]] = []; order.append(a["date"])
+            days[a["date"]].append(a)
+        cats = []
+        for a in arts:
+            if (a["cat"], a["category"]) not in cats: cats.append((a["cat"], a["category"]))
+        chips = ""
+        if len(cats) > 1:
+            chips = ('<nav aria-label="Kategorier"><ul class="chips"><li><button class="chip" type="button" data-filter="alla" aria-pressed="true">Alla</button></li>'
+                     + "".join(f'<li><button class="chip" type="button" data-filter="{k}" aria-pressed="false">{esc(v)}</button></li>' for k, v in cats) + "</ul></nav>")
+        sections = "".join(f'''
+      <section class="day" aria-labelledby="d-{d.isoformat()}">
+        <h3 class="day__label" id="d-{d.isoformat()}"><time datetime="{d.isoformat()}">{sv_day(d)}</time></h3>
+        <ol class="feed">{"".join(feed_item(a) for a in days[d])}
+        </ol>
+      </section>''' for d in order)
+        feed = f'''
   <section class="feed-section" id="flodet" aria-labelledby="feed-h">
     <div class="wrap">
       <div class="section-head">
-        <h2 id="feed-h">Flödet</h2>
-        <nav aria-label="Kategorier"><ul class="chips">{chips}</ul></nav>
+        <h2 id="feed-h">Alla artiklar</h2>
+        {chips}
       </div>
       <p id="filter-status" class="visually-hidden" role="status" aria-live="polite"></p>
-      {days}
+      {sections}
     </div>
-  </section>
+  </section>'''
+    body = f'''
+<main id="innehall" class="front{" front--single" if not rest else ""}">
+  <div class="wrap">
+    <h1 class="visually-hidden">Motorpuls, senaste bilnyheterna</h1>
+    <div class="hero-grid">{lead(first)}
+      {side}
+    </div>
+  </div>
+{feed}
 </main>
 '''
-    return h + body + FOOTER + NEWSLETTER + ANALYTICS + "</body>\n</html>\n"
+    return page(h, body)
 
-def artikel():
-    h = head("Ny laddkorridor längs E4 klar (exempel) · Motorpuls", "Exempelartikel: 14 snabbladdare längs E4.", "/laddning/laddkorridor-e4", "img/hero")
+# ---------- article ----------
+def article(a):
+    img = a["img"]
+    ld = {"@context": "https://schema.org", "@type": "NewsArticle", "headline": a["title"], "description": a["excerpt"],
+          "datePublished": a["date"].isoformat(), "dateModified": a["date"].isoformat(), "inLanguage": "sv-SE",
+          "articleSection": a["category"], "keywords": a.get("tags") or [],
+          "mainEntityOfPage": {"@type": "WebPage", "@id": DOMAIN + a["url"]}, "url": DOMAIN + a["url"],
+          "author": {"@type": "Person", "name": a["author"]},
+          "publisher": {"@type": "Organization", "name": SITE, "url": DOMAIN + "/",
+                        "logo": {"@type": "ImageObject", "url": DOMAIN + "/favicon/android-chrome-512.png", "width": 512, "height": 512}}}
+    if img: ld["image"] = [DOMAIN + img["src"]]
+    if a.get("sources"): ld["citation"] = [u for _, u in a["sources"]]
+    jsonld = '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace("</", "<\\/") + "</script>\n"
+    h = head(f'{a["title"]} · {SITE}', a["excerpt"], a["url"], og_type="article", image=img, og_title=a["title"],
+             extra=f'<meta property="article:published_time" content="{a["date"].isoformat()}">\n'
+                   f'<meta property="article:section" content="{esc(a["category"])}">\n'
+                   + "".join(f'<meta property="article:tag" content="{esc(t)}">\n' for t in a.get("tags") or []) + jsonld,
+             preload_img=img["src"] if img else None)
+    figure = ""
+    if img:
+        figure = f'''
+      <figure class="article__figure article__figure--natural">
+        <div class="frame">{img_tag(img, a["headline"], eager=True, sizes="(min-width: 80rem) 76rem, 100vw")}</div>
+        <figcaption>{esc(a.get("image_credit") or "")}</figcaption>
+      </figure>'''
+    sources = ""
+    if a["sources"]:
+        lis = "".join(f'''
+            <li><div><a href="{esc(u)}" rel="noopener" target="_blank">{esc(t)}<span class="visually-hidden"> (öppnas i ny flik)</span></a>
+              <div class="meta"><span>{esc(host(u))}</span></div></div></li>''' for t, u in a["sources"])
+        sources = f'''
+        <section class="sources" aria-labelledby="kallor-h">
+          <h2 id="kallor-h">Källor</h2>
+          <ol>{lis}
+          </ol>
+        </section>'''
     body = f'''
 <main id="innehall" class="article">
   <div class="wrap">
     <article>
       <header class="article__head">
-        <nav class="crumbs" aria-label="Brödsmulor"><a href="index.html">Start</a> / <a href="index.html#flodet">Laddning</a></nav>
-        <span class="meta"><span class="tag">Laddning</span><span class="source">Trafikverket (exempel)</span></span>
-        <h1 class="article__title">Ny laddkorridor längs E4 klar: 14&nbsp;stationer mellan Exempelby och Norrstad</h1>
-        <p class="article__dek">Den sista stationen öppnade i morse. Alla har minst 150&nbsp;kW och tar betalkort direkt, utan app.</p>
-        <p class="byline"><span>Publicerad <b><time datetime="2026-10-29T08:40">29 okt 2026, 08:40</time></b></span><span>Läsetid <b>2 min</b></span><span>Redaktion: <b>Motorpuls</b></span></p>
-      </header>
-      <figure class="article__figure">
-        <div class="frame">{pic("hero", "Abstrakt platshållarbild: ljusstrimmor mot en orange horisont.", "(min-width: 80rem) 76rem, 100vw", eager=True)}</div>
-        <figcaption>Platshållarbild (abstrakt). Ersätts av licensierat foto.</figcaption>
-      </figure>
+        <nav class="crumbs" aria-label="Brödsmulor"><a href="/">Start</a> / <span>{esc(a["category"])}</span></nav>
+        <span class="meta"><span class="tag">{esc(a["category"])}</span></span>
+        <h1 class="article__title">{esc(a["headline"])}</h1>
+        <p class="article__dek">{esc(a["excerpt"])}</p>
+        <p class="byline"><span>Publicerad <b><time datetime="{a["date"].isoformat()}">{sv_date(a["date"])}</time></b></span><span>Läsetid <b>{a["minutes"]} min</b></span><span>Av <b>{esc(a["author"])}</b></span></p>
+      </header>{figure}
       <div class="article__layout">
-        <section class="brief" aria-labelledby="brief-h">
-          <h2 id="brief-h">I korthet</h2>
-          <ul>
-            <li>14 snabbladdare på cirka 60 mils sträcka (exempel).</li>
-            <li>Minst 150&nbsp;kW per plats, fyra platser per station.</li>
-            <li>Betalning med kort i laddaren, utan medlemskap.</li>
-          </ul>
-        </section>
         <div class="prose">
-          <p><strong>EXEMPELTEXT.</strong> Den nya korridoren betyder att det som längst är 55 kilometer mellan två snabbladdare på sträckan, enligt Trafikverkets exempeluppgifter.<sup><a href="#kalla-1" aria-label="Källa 1">1</a></sup></p>
-          <p>Utbyggnaden har fått stöd ur ett påhittat statligt program. Operatören uppger att alla platser är anpassade för bilar med släp, något som tidigare saknats på flera ställen längs vägen.<sup><a href="#kalla-2" aria-label="Källa 2">2</a></sup></p>
-          <h2>Vad det kostar</h2>
-          <p>Priset är i exemplet 5,90 kronor per kWh, med lägre pris nattetid. Det motsvarar ungefär vad andra snabbladdare i regionen tar.<sup><a href="#kalla-2" aria-label="Källa 2">2</a></sup></p>
-          <p>Nästa etapp, längs en annan europaväg, är planerad till 2027.<sup><a href="#kalla-1" aria-label="Källa 1">1</a></sup></p>
+{a["body_html"]}
         </div>
-
-        <section class="sources" aria-labelledby="kallor-h">
-          <h2 id="kallor-h">Källor</h2>
-          <ol>
-            <li id="kalla-1"><div><a href="https://example.com/trafikverket-laddkorridor" rel="noopener" target="_blank">Laddkorridor längs E4 färdigställd (exempel)<span class="visually-hidden"> (öppnas i ny flik)</span></a>
-              <div class="meta"><span>Trafikverket</span><span>example.com</span><time datetime="2026-10-29">29 okt 2026</time></div></div></li>
-            <li id="kalla-2"><div><a href="https://example.org/operator-pressmeddelande" rel="noopener" target="_blank">Pressmeddelande: 14&nbsp;stationer i drift (exempel)<span class="visually-hidden"> (öppnas i ny flik)</span></a>
-              <div class="meta"><span>Laddoperatören</span><span>example.org</span><time datetime="2026-10-28">28 okt 2026</time></div></div></li>
-          </ol>
-        </section>
-
+{sources}
         <aside class="ai-note" aria-label="Om texten">
           <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M8 7v4.5M8 4.6v.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-          <p>Texten är skriven med hjälp av AI och faktagranskad mot källorna ovan. Hittar du ett fel? <a href="#">Rapportera en rättelse</a>.</p>
+          <p>Texten är skriven med hjälp av AI och faktagranskad mot källorna ovan.</p>
         </aside>
 
-        <p class="more"><a class="btn" href="index.html#flodet" style="text-decoration:none;display:inline-block">Fler nyheter i flödet</a></p>
+        <p class="more"><a class="btn" href="/" style="text-decoration:none;display:inline-block">Fler nyheter på startsidan</a></p>
       </div>
     </article>
   </div>
 </main>
 '''
-    return h + body + FOOTER + NEWSLETTER + ANALYTICS + "</body>\n</html>\n"
+    return page(h, body)
 
-open("index.html","w").write(index())
-open("artikel.html","w").write(artikel())
-print("built")
+def notfound():
+    h = head(f"Sidan finns inte · {SITE}", SITE_DESC, None)
+    body = '''
+<main id="innehall" class="article">
+  <div class="wrap">
+    <header class="article__head">
+      <h1 class="article__title">Sidan finns inte</h1>
+      <p class="article__dek">Länken kan vara fel eller sidan flyttad.</p>
+      <p class="more"><a class="btn" href="/" style="text-decoration:none;display:inline-block">Till startsidan</a></p>
+    </header>
+  </div>
+</main>
+'''
+    return page(h, body)
+
+def write(rel, text):
+    p = os.path.join(ROOT, rel); os.makedirs(os.path.dirname(p), exist_ok=True)
+    open(p, "w", encoding="utf-8").write(text)
+
+def main():
+    arts = load_articles()
+    if not arts: raise SystemExit("inga artiklar i content/articles/")
+    for a in arts: a["img"] = ensure_image(a)
+    # clean old article output so removed articles disappear
+    shutil.rmtree(os.path.join(ROOT, "artikel"), ignore_errors=True)
+    if os.path.exists(os.path.join(ROOT, "artikel.html")): os.remove(os.path.join(ROOT, "artikel.html"))
+    write("index.html", index(arts))
+    for a in arts: write(f"artikel/{a['slug']}/index.html", article(a))
+    write("404.html", notfound())
+    urls = [("/", arts[0]["date"])] + [(a["url"], a["date"]) for a in arts]
+    write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+          + "".join(f"  <url><loc>{DOMAIN}{u}</loc><lastmod>{d.isoformat()}</lastmod></url>\n" for u, d in urls) + "</urlset>\n")
+    write("robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {DOMAIN}/sitemap.xml\n")
+    print(f"built {len(arts)} artiklar: " + ", ".join(a["slug"] for a in arts))
+
+if __name__ == "__main__":
+    main()

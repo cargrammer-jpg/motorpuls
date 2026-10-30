@@ -35,6 +35,9 @@ Sparsam: långsam puls på prick i loggan, 180 ms hover/fokus, popup glider upp 
 cross-document view transition. Allt av under `prefers-reduced-motion: reduce`.
 
 ## Bilder
+Artikelbilder (t.ex. pressbilder) visas alltid i sitt eget format: ingen beskärning, ingen text eller toning ovanpå, fotokredit i bildtexten. Artiklar utan bild visas utan bildruta.
+
+Prototypen (historik):
 Inga pressbilder. Lokalt genererade abstrakta "långexponering"-platshållare (tools_placeholders.py),
 mörk studio + färgad horisont per kategori. Ersätts senare av licensierade/egna foton i samma format (16:10).
 
