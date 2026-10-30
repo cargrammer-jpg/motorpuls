@@ -186,7 +186,7 @@ def asset(rel):
         return f"{rel}?v={hashlib.sha256(f.read()).hexdigest()[:10]}"
 
 
-def head(title, desc, path, og_type="website", image=None, extra="", preload_img=None, og_title=None, preload_sizes="100vw"):
+def head(title, desc, path, og_type="website", image=None, extra="", preload_img=None, og_title=None, preload_sizes="100vw", noindex=False):
     canon = DOMAIN + path if path else None
     og_title = og_title or title
     og_img = ""
@@ -206,8 +206,7 @@ def head(title, desc, path, og_type="website", image=None, extra="", preload_img
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
-<meta name="robots" content="noindex">
-{f'<link rel="canonical" href="{canon}">' + chr(10) if canon else ""}<meta property="og:site_name" content="{SITE}">
+{'<meta name="robots" content="noindex">' + chr(10) if noindex else ""}{f'<link rel="canonical" href="{canon}">' + chr(10) if canon else ""}<meta property="og:site_name" content="{SITE}">
 <meta property="og:locale" content="sv_SE">
 <meta property="og:type" content="{og_type}">
 <meta property="og:title" content="{esc(og_title)}">
@@ -468,7 +467,7 @@ def article(a):
     return page(h, body)
 
 def notfound():
-    h = head(f"Sidan finns inte · {SITE}", SITE_DESC, None)
+    h = head(f"Sidan finns inte · {SITE}", SITE_DESC, None, noindex=True)
     body = '''
 <main id="innehall" class="article">
   <div class="wrap">
