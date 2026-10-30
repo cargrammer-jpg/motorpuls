@@ -1,8 +1,17 @@
 /* Motorpuls v1 (mörk), artikelmall v2 */
 @font-face{font-family:"Archivo";src:url(../fonts/archivo-var.woff2) format("woff2");font-weight:100 900;font-stretch:62% 125%;font-display:swap}
-@font-face{font-family:"Newsreader";src:url(../fonts/newsreader-var.woff2) format("woff2");font-weight:200 800;font-display:swap}
-@font-face{font-family:"DM Mono";src:url(../fonts/dmmono-400.woff2) format("woff2");font-weight:400;font-display:swap}
-@font-face{font-family:"DM Mono";src:url(../fonts/dmmono-500.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Newsreader";src:url(../fonts/newsreader-var.woff2) format("woff2");font-weight:200 800;font-display:swap;size-adjust:123.474178%}
+@font-face{font-family:"DM Mono";src:url(../fonts/dmmono-400.woff2) format("woff2");font-weight:400;font-display:swap;size-adjust:106.048387%}
+@font-face{font-family:"DM Mono";src:url(../fonts/dmmono-500.woff2) format("woff2");font-weight:500;font-display:swap;size-adjust:106.048387%}
+/* Metrikmatchade reservtypsnitt (fontTools + uppmätt bredd mot våra woff2) så att texten inte flyttar sig när webbtypsnitten laddas.
+   size-adjust på Newsreader/DM Mono ersätter font-size-adjust:from-font (x-höjd 0,526 från Archivo) med samma slutresultat; from-font tog annars ut size-adjust på reservtypsnitten. */
+@font-face{font-family:"Archivo Fallback";src:local("Arial"),local("ArialMT"),local("Liberation Sans"),local("LiberationSans"),local("Arimo");font-weight:100 600;font-stretch:50% 200%;size-adjust:99.09%;ascent-override:88.61%;descent-override:21.19%;line-gap-override:0%;unicode-range:U+20-7E,U+A0-FF,U+131,U+152-153,U+2C6,U+2DA,U+2DC,U+2009,U+2010-2011,U+2013-2015,U+2017-201A,U+201C-201E,U+2020-2022,U+2026,U+2030,U+2032-2033,U+2039-203A,U+203E,U+2044,U+2052,U+2074,U+20AC,U+2122,U+2190-2193,U+2212,U+2215}
+@font-face{font-family:"Archivo Fallback";src:local("Arial Bold"),local("Arial-BoldMT"),local("Liberation Sans Bold"),local("LiberationSans-Bold"),local("Arimo Bold");font-weight:601 900;font-stretch:50% 104%;size-adjust:99.17%;ascent-override:88.53%;descent-override:21.18%;line-gap-override:0%;unicode-range:U+20-7E,U+A0-FF,U+131,U+152-153,U+2C6,U+2DA,U+2DC,U+2009,U+2010-2011,U+2013-2015,U+2017-201A,U+201C-201E,U+2020-2022,U+2026,U+2030,U+2032-2033,U+2039-203A,U+203E,U+2044,U+2052,U+2074,U+20AC,U+2122,U+2190-2193,U+2212,U+2215}
+@font-face{font-family:"Archivo Fallback";src:local("Arial Bold"),local("Arial-BoldMT"),local("Liberation Sans Bold"),local("LiberationSans-Bold"),local("Arimo Bold");font-weight:601 900;font-stretch:105% 110%;size-adjust:110.6%;ascent-override:79.39%;descent-override:18.99%;line-gap-override:0%;unicode-range:U+20-7E,U+A0-FF,U+131,U+152-153,U+2C6,U+2DA,U+2DC,U+2009,U+2010-2011,U+2013-2015,U+2017-201A,U+201C-201E,U+2020-2022,U+2026,U+2030,U+2032-2033,U+2039-203A,U+203E,U+2044,U+2052,U+2074,U+20AC,U+2122,U+2190-2193,U+2212,U+2215}
+@font-face{font-family:"Archivo Fallback";src:local("Arial Bold"),local("Arial-BoldMT"),local("Liberation Sans Bold"),local("LiberationSans-Bold"),local("Arimo Bold");font-weight:601 900;font-stretch:111% 200%;size-adjust:120.82%;ascent-override:72.67%;descent-override:17.38%;line-gap-override:0%;unicode-range:U+20-7E,U+A0-FF,U+131,U+152-153,U+2C6,U+2DA,U+2DC,U+2009,U+2010-2011,U+2013-2015,U+2017-201A,U+201C-201E,U+2020-2022,U+2026,U+2030,U+2032-2033,U+2039-203A,U+203E,U+2044,U+2052,U+2074,U+20AC,U+2122,U+2190-2193,U+2212,U+2215}
+@font-face{font-family:"Newsreader Fallback";src:local("Times New Roman"),local("TimesNewRomanPSMT"),local("Liberation Serif"),local("LiberationSerif"),local("Tinos");font-weight:100 600;size-adjust:124.38%;ascent-override:72.96%;descent-override:26.31%;line-gap-override:0%;unicode-range:U+20-7E,U+A0-FF,U+131,U+152-153,U+2C6,U+2DA,U+2DC,U+2010,U+2013-2014,U+2018-201A,U+201C-201E,U+2020-2022,U+2026,U+2030,U+2032-2033,U+2039-203A,U+2044,U+2052,U+2074,U+20AC,U+2122,U+2212,U+2215}
+@font-face{font-family:"Newsreader Fallback";src:local("Times New Roman Bold"),local("TimesNewRomanPS-BoldMT"),local("Liberation Serif Bold"),local("LiberationSerif-Bold"),local("Tinos Bold");font-weight:601 900;size-adjust:125.02%;ascent-override:72.60%;descent-override:26.18%;line-gap-override:0%;unicode-range:U+20-7E,U+A0-FF,U+131,U+152-153,U+2C6,U+2DA,U+2DC,U+2010,U+2013-2014,U+2018-201A,U+201C-201E,U+2020-2022,U+2026,U+2030,U+2032-2033,U+2039-203A,U+2044,U+2052,U+2074,U+20AC,U+2122,U+2212,U+2215}
+@font-face{font-family:"DM Mono Fallback";src:local("Courier New"),local("CourierNewPSMT"),local("Liberation Mono"),local("LiberationMono"),local("Cousine");font-weight:100 900;size-adjust:106.03%;ascent-override:99.22%;descent-override:31.01%;line-gap-override:0%;unicode-range:U+20-7E,U+A0-FF,U+131,U+152-153,U+2C6,U+2DA,U+2DC,U+2013-2014,U+2018-201A,U+201C-201E,U+2020-2022,U+2026,U+2030,U+2039-203A,U+2044,U+2074,U+20AC,U+2122,U+2212,U+2215}
 
 :root{
   color-scheme:dark;
@@ -10,15 +19,15 @@
   --line:#252C35; --line-strong:#3A434E;
   --text:#EEF1F4; --text-2:#C3CAD1; --muted:#929CA7;
   --pulse:#FF5B1F; --pulse-text:#FF8A5C; --glow:rgb(255 91 31 / .16);
-  --sans:"Archivo",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
-  --serif:"Newsreader",ui-serif,Georgia,"Times New Roman",serif;
-  --mono:"DM Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  --sans:"Archivo","Archivo Fallback",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --serif:"Newsreader","Newsreader Fallback",ui-serif,Georgia,"Times New Roman",serif;
+  --mono:"DM Mono","DM Mono Fallback",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
   --gutter:clamp(1.25rem,4vw,2.5rem); --max:80rem; --radius:4px;
   --ease:cubic-bezier(.2,.7,.2,1);
 }
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%;background:var(--bg)}
-body{margin:0;color:var(--text);font-family:var(--sans);font-size:1rem;line-height:1.5;font-size-adjust:from-font;
+body{margin:0;color:var(--text);font-family:var(--sans);font-size:1rem;line-height:1.5;
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
   background:
     radial-gradient(60rem 28rem at 30% -6rem, var(--glow), transparent 70%),
