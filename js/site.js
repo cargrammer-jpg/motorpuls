@@ -37,6 +37,25 @@
   addEventListener('scroll', onScroll, { passive: true });
 })();
 
+// Sidhuvud: döljs när man skrollar nedåt så att det inte täcker bilder, visas igen direkt när man skrollar uppåt
+// eller när fokus hamnar i det. Bara en klass som styr transform i CSS.
+(() => {
+  const m = document.querySelector('.masthead');
+  if (!m) return;
+  const STEP = 6;  // px, ignorerar små ryck
+  let last = Math.max(0, scrollY), ticking = false;
+  const update = () => {
+    ticking = false;
+    const y = Math.max(0, scrollY), d = y - last;
+    if (y <= m.offsetHeight) { m.classList.remove('is-hidden'); last = y; return; }
+    if (Math.abs(d) < STEP) return;
+    m.classList.toggle('is-hidden', d > 0);
+    last = y;
+  };
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  m.addEventListener('focusin', () => m.classList.remove('is-hidden'));
+})();
+
 // Bildspel i artiklar (progressiv förbättring): utan JS en rad att svepa i med scroll-snap.
 // Med JS: knappar, räknare, piltangenter när bildspelet har fokus. Smidig scroll bara utan prefers-reduced-motion (CSS).
 (() => {

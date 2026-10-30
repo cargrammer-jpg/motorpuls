@@ -41,6 +41,12 @@ p{margin:0}
 /* Masthead */
 .masthead{position:sticky;top:0;z-index:20;border-bottom:1px solid var(--line);
   background:rgb(11 13 16 / .82);backdrop-filter:saturate(140%) blur(14px);-webkit-backdrop-filter:saturate(140%) blur(14px)}
+/* Döljs när man skrollar nedåt och kommer tillbaka uppåt (js/site.js). Bara transform: ingen layoutförskjutning.
+   Med prefers-reduced-motion: reduce växlar den utan animation (regeln längst ned nollar transition). */
+.masthead{transition:transform .28s var(--ease),box-shadow .28s var(--ease);will-change:transform}
+.masthead.is-hidden{transform:translateY(calc(-100% - 2px));box-shadow:none}
+.masthead:focus-within{transform:none}
+html{scroll-padding-top:4.75rem}
 .masthead__row{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:4rem}
 .wordmark{display:inline-flex;align-items:center;text-decoration:none;flex:none}
 /* Logo: Heartline wordmark (img/logo.svg, viewBox 872x88.3, spike dips ~19% below baseline).
