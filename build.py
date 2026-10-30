@@ -11,7 +11,8 @@
 #
 # summary: lista med 2 till 4 korta punkter (vanlig text), visas i rutan "Kort om nyheten".
 # images:  lista med {src, alt, credit, license, valfritt caption}. src är en lokal fil: ett filnamn som
-#          letas upp i drafts/img/<slug>/, en sökväg relativ till projektroten eller en absolut sökväg.
+#          letas upp i drafts/img/<slug>/, utkastens form img/<slug>/fil (relativ till drafts/), en sökväg
+#          relativ till projektroten eller en absolut sökväg. Okända fält (t.ex. source_url) ignoreras.
 #          Filen kopieras till img/articles/<slug>/ och får WebP-versioner (1600 och 800 px bred, bara
 #          storleksändring, aldrig beskärning). Finns WebP-filen redan byggs den inte om (källan behövs inte).
 #          Första bilden är huvudbild (og:image), fler bilder blir ett bildspel.
@@ -92,8 +93,10 @@ def check_summary_images(fm, path):
 def webp_variants(src_path, out_base):
     """Skriver <out_base>.webp (max 1600 px) och <out_base>-800.webp (om bilden är bredare än 800 px).
     Samma bildformat: bara storleksändring, aldrig beskärning."""
-    from PIL import Image
+    from PIL import Image, ImageOps
+    Image.MAX_IMAGE_PIXELS = None  # pressbilder kan vara över 100 megapixel, källorna är våra egna filer
     im = Image.open(src_path); im.load()
+    im = ImageOps.exif_transpose(im)  # följ EXIF-orienteringen (vrider bara, beskär aldrig)
     if im.mode not in ("RGB", "RGBA"): im = im.convert("RGBA" if "A" in im.getbands() else "RGB")
     for w, suffix in ((MAX_W, ""), (800, "-800")):
         if suffix and im.width <= 800: break
@@ -117,6 +120,9 @@ def find_source(src, slug):
     if os.path.isabs(src): cands = [src]
     else:
         cands = [os.path.join(ROOT, src)] if "/" in src else []
+        if src.startswith("img/"):  # utkastens form: img/<slug>/fil, relativ till drafts/
+            for base in [DRAFTS_IMG, os.path.join(ROOT, "drafts/img")]:
+                if base: cands.append(os.path.join(base, src[len("img/"):]))
         name = os.path.basename(src)
         for base in [DRAFTS_IMG, os.path.join(ROOT, "drafts/img")]:
             if base: cands.append(os.path.join(base, slug, name))
@@ -136,12 +142,9 @@ def ensure_images(a):
             out_base = f"img/articles/{slug}/{stem}"
             found, cands = find_source(src, slug)
             have = os.path.exists(os.path.join(ROOT, out_base + ".webp"))
-            if found:
-                ext = os.path.splitext(found)[1].lower() or ".bin"
-                orig = os.path.join(ROOT, f"{out_base}-original{ext}")
+            if found:  # originalet kopieras inte in i sajten, bara WebP-versionerna skrivs
                 if not have or os.path.getmtime(found) > os.path.getmtime(os.path.join(ROOT, out_base + ".webp")):
-                    if os.path.abspath(found) != os.path.abspath(orig): shutil.copyfile(found, orig)
-                    webp_variants(orig, out_base)
+                    webp_variants(found, out_base)
             elif not have:
                 raise SystemExit(f"{a['file']}: hittar inte bilden {src!r} (letade i: {', '.join(cands)})")
             v = read_variants(out_base)
