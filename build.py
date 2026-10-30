@@ -29,7 +29,14 @@
 #          storleksändring, aldrig beskärning). Finns WebP-filen redan byggs den inte om (källan behövs inte).
 #          Första bilden är huvudbild (og:image), fler bilder blir ett bildspel.
 # image:   äldre fält (en URL). Laddas ned till img/articles/<slug>.webp om filen saknas, kredit i image_credit.
-import datetime as dt, glob, hashlib, html, json, math, os, re, shutil, urllib.request
+#
+# Publicering: GitHub Actions (.github/workflows/pages.yml) kör `python build.py --out _site`. Då byggs allt som vanligt
+# i projektroten och sedan kopieras bara den publika delen till _site (genererade sidor, css, js, fonts, img, favicon,
+# CNAME). Källor som build.py, content/, DESIGN.md, brand/ och drafts/ publiceras alltså inte. I --out-läget används
+# även genererade bilder som inte är incheckade (WebP-varianter, img/og/<slug>.jpg), eftersom de följer med till _site.
+# Till sist kontrolleras att varje lokal länk i sidorna, css:en och manifestet finns i _site (annars avbryts bygget).
+# Utan --out fungerar allt som förut (resultatet skrivs i projektroten och checkas in).
+import datetime as dt, glob, hashlib, html, json, math, os, re, shutil, sys, urllib.parse, urllib.request
 import markdown, yaml
 from zoneinfo import ZoneInfo
 
@@ -183,10 +190,16 @@ def small_variants(out_base):
                 im.resize((w, round(im.height * w / im.width)), Image.LANCZOS).save(p, "WEBP", quality=86, method=6, **({"icc_profile": icc} if icc else {}))
 
 _tracked = None
+OUT = None          # utkatalog (--out), sätts i main()
+WRITTEN = []        # sidor och filer som bygget skrivit (relativa sökvägar), publiceras med --out
+PUBLIC_DIRS = ("css", "js", "fonts", "img", "favicon")
+PUBLIC_FILES = ("favicon.ico", "CNAME")
+
 def committed(rel):
     """Sant om filen finns i git (eller om vi inte bygger i ett git-repo). En ny variant som inte är incheckad
     hamnar inte i srcset, så sajten pekar aldrig på en fil som saknas på GitHub Pages."""
     global _tracked
+    if OUT: return os.path.exists(os.path.join(ROOT, rel))  # --out: allt som finns följer med till _site
     if _tracked is None:
         try:
             import subprocess
@@ -618,6 +631,7 @@ def notfound():
     return page(h, body)
 
 def write(rel, text):
+    WRITTEN.append(rel)
     p = os.path.join(ROOT, rel); os.makedirs(os.path.dirname(p), exist_ok=True)
     open(p, "w", encoding="utf-8").write(text)
 
@@ -640,5 +654,64 @@ def main():
     write("feed.xml", rss(arts))
     print(f"built {len(arts)} artiklar: " + ", ".join(a["slug"] for a in arts))
 
-if __name__ == "__main__":
+def out_dir(o):
+    out = os.path.abspath(o)
+    top = os.path.relpath(out, ROOT).split(os.sep)[0]
+    if out == ROOT or ROOT.startswith(out + os.sep) or top in PUBLIC_DIRS + ("artikel", "content", "drafts", "brand", ".git"):
+        raise SystemExit(f"--out {out}: välj en egen katalog som rensas vid varje bygge (t.ex. _site)")
+    return out
+
+def publish(out):
+    """Kopiera den publika delen av sajten till out (tom katalog först)."""
+    shutil.rmtree(out, ignore_errors=True); os.makedirs(out)
+    skip = shutil.ignore_patterns("__pycache__", ".DS_Store", "*-original.*")
+    for d in PUBLIC_DIRS:
+        if os.path.isdir(os.path.join(ROOT, d)): shutil.copytree(os.path.join(ROOT, d), os.path.join(out, d), ignore=skip)
+    for rel in [f for f in PUBLIC_FILES if os.path.exists(os.path.join(ROOT, f))] + sorted(set(WRITTEN)):
+        os.makedirs(os.path.dirname(os.path.join(out, rel)), exist_ok=True)
+        shutil.copyfile(os.path.join(ROOT, rel), os.path.join(out, rel))
+    return out
+
+def check_links(out):
+    """Varje lokal URL i html (href, src, srcset, og:image m.fl.), css (url()) och webbmanifest ska finnas i out."""
+    refs = []  # (fil, url)
+    for dirpath, _, files in os.walk(out):
+        for fn in files:
+            p = os.path.join(dirpath, fn); rel = os.path.relpath(p, out)
+            if fn.endswith((".html", ".xml")):
+                t = open(p, encoding="utf-8").read()
+                for attr, v in re.findall(r'(href|src|srcset|content)="([^"]*)"', t):
+                    if attr == "srcset": refs += [(rel, x.split()[0]) for x in v.split(",") if x.strip()]
+                    elif attr == "content" and not v.startswith((DOMAIN + "/", "/")): continue
+                    else: refs.append((rel, v))
+                if fn.endswith(".xml"): refs += [(rel, u) for u in re.findall(r"<(?:loc|link)>([^<]+)</", t)]
+            elif fn.endswith(".css"):
+                refs += [(rel, u.strip("'\"")) for u in re.findall(r"url\(([^)]+)\)", open(p, encoding="utf-8").read())]
+            elif fn.endswith(".webmanifest"):
+                refs += [(rel, i["src"]) for i in json.load(open(p, encoding="utf-8")).get("icons", [])]
+    missing = []
+    for rel, u in refs:
+        if u.startswith(DOMAIN): u = u[len(DOMAIN):] or "/"
+        if not u or u.startswith(("#", "data:", "mailto:", "tel:", "javascript:")) or re.match(r"^[a-z]+:", u): continue
+        path = urllib.parse.urlsplit(u).path
+        target = os.path.normpath(os.path.join(out, path.lstrip("/")) if path.startswith("/")
+                                  else os.path.join(out, os.path.dirname(rel), path))
+        if path.endswith("/") or os.path.isdir(target): target = os.path.join(target, "index.html")
+        if not os.path.isfile(target): missing.append(f"{rel}: {u}")
+    if missing: raise SystemExit("saknade filer i utdata:\n  " + "\n  ".join(sorted(set(missing))))
+    return len(refs)
+
+def cli():
+    global OUT
+    args = sys.argv[1:]
+    if args[:1] == ["--out"] and len(args) == 2: OUT = out_dir(args[1])
+    elif args: raise SystemExit("användning: build.py [--out _site]")
     main()
+    if OUT:
+        out = publish(OUT)
+        n = check_links(out)
+        files = sum(len(f) for _, _, f in os.walk(out))
+        print(f"publicerat till {out}: {files} filer, {n} lokala länkar kontrollerade")
+
+if __name__ == "__main__":
+    cli()
