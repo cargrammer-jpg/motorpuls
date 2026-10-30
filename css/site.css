@@ -1,8 +1,17 @@
 /* Motorpuls v1 (mörk), artikelmall v2 */
-@font-face{font-family:"Archivo";src:url(../fonts/archivo-var.woff2) format("woff2");font-weight:100 900;font-stretch:62% 125%;font-display:swap}
-@font-face{font-family:"Newsreader";src:url(../fonts/newsreader-var.woff2) format("woff2");font-weight:200 800;font-display:swap}
-@font-face{font-family:"DM Mono";src:url(../fonts/dmmono-400.woff2) format("woff2");font-weight:400;font-display:swap}
-@font-face{font-family:"DM Mono";src:url(../fonts/dmmono-500.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Archivo";src:url(../fonts/archivo-var.woff2) format("woff2");font-weight:400 820;font-stretch:100% 115%;font-display:swap}
+@font-face{font-family:"Newsreader";src:url(../fonts/newsreader-var.woff2) format("woff2");font-weight:400 700;font-display:swap;size-adjust:123.474178%}
+@font-face{font-family:"DM Mono";src:url(../fonts/dmmono-400.woff2) format("woff2");font-weight:400;font-display:swap;size-adjust:106.048387%}
+@font-face{font-family:"DM Mono";src:url(../fonts/dmmono-500.woff2) format("woff2");font-weight:500;font-display:swap;size-adjust:106.048387%}
+/* Metrikmatchade reservtypsnitt (fontTools + uppmätt bredd mot våra woff2) så att texten inte flyttar sig när webbtypsnitten laddas.
+   size-adjust på Newsreader/DM Mono ersätter font-size-adjust:from-font (x-höjd 0,526 från Archivo) med samma slutresultat; from-font tog annars ut size-adjust på reservtypsnitten. */
+@font-face{font-family:"Archivo Fallback";src:local("Arial"),local("ArialMT"),local("Liberation Sans"),local("LiberationSans"),local("Arimo");font-weight:100 600;font-stretch:50% 200%;size-adjust:99.09%;ascent-override:88.61%;descent-override:21.19%;line-gap-override:0%;unicode-range:U+20-7E,U+A0-FF,U+131,U+152-153,U+2C6,U+2DA,U+2DC,U+2009,U+2010-2011,U+2013-2015,U+2017-201A,U+201C-201E,U+2020-2022,U+2026,U+2030,U+2032-2033,U+2039-203A,U+203E,U+2044,U+2052,U+2074,U+20AC,U+2122,U+2190-2193,U+2212,U+2215}
+@font-face{font-family:"Archivo Fallback";src:local("Arial Bold"),local("Arial-BoldMT"),local("Liberation Sans Bold"),local("LiberationSans-Bold"),local("Arimo Bold");font-weight:601 900;font-stretch:50% 104%;size-adjust:99.89%;ascent-override:87.90%;descent-override:21.02%;line-gap-override:0%;unicode-range:U+20-7E,U+A0-FF,U+131,U+152-153,U+2C6,U+2DA,U+2DC,U+2009,U+2010-2011,U+2013-2015,U+2017-201A,U+201C-201E,U+2020-2022,U+2026,U+2030,U+2032-2033,U+2039-203A,U+203E,U+2044,U+2052,U+2074,U+20AC,U+2122,U+2190-2193,U+2212,U+2215}
+@font-face{font-family:"Archivo Fallback";src:local("Arial Bold"),local("Arial-BoldMT"),local("Liberation Sans Bold"),local("LiberationSans-Bold"),local("Arimo Bold");font-weight:601 900;font-stretch:105% 110%;size-adjust:107.86%;ascent-override:81.40%;descent-override:19.47%;line-gap-override:0%;unicode-range:U+20-7E,U+A0-FF,U+131,U+152-153,U+2C6,U+2DA,U+2DC,U+2009,U+2010-2011,U+2013-2015,U+2017-201A,U+201C-201E,U+2020-2022,U+2026,U+2030,U+2032-2033,U+2039-203A,U+203E,U+2044,U+2052,U+2074,U+20AC,U+2122,U+2190-2193,U+2212,U+2215}
+@font-face{font-family:"Archivo Fallback";src:local("Arial Bold"),local("Arial-BoldMT"),local("Liberation Sans Bold"),local("LiberationSans-Bold"),local("Arimo Bold");font-weight:601 900;font-stretch:111% 200%;size-adjust:120.82%;ascent-override:72.67%;descent-override:17.38%;line-gap-override:0%;unicode-range:U+20-7E,U+A0-FF,U+131,U+152-153,U+2C6,U+2DA,U+2DC,U+2009,U+2010-2011,U+2013-2015,U+2017-201A,U+201C-201E,U+2020-2022,U+2026,U+2030,U+2032-2033,U+2039-203A,U+203E,U+2044,U+2052,U+2074,U+20AC,U+2122,U+2190-2193,U+2212,U+2215}
+@font-face{font-family:"Newsreader Fallback";src:local("Times New Roman"),local("TimesNewRomanPSMT"),local("Liberation Serif"),local("LiberationSerif"),local("Tinos");font-weight:100 600;size-adjust:124.38%;ascent-override:72.96%;descent-override:26.31%;line-gap-override:0%;unicode-range:U+20-7E,U+A0-FF,U+131,U+152-153,U+2C6,U+2DA,U+2DC,U+2010,U+2013-2014,U+2018-201A,U+201C-201E,U+2020-2022,U+2026,U+2030,U+2032-2033,U+2039-203A,U+2044,U+2052,U+2074,U+20AC,U+2122,U+2212,U+2215}
+@font-face{font-family:"Newsreader Fallback";src:local("Times New Roman Bold"),local("TimesNewRomanPS-BoldMT"),local("Liberation Serif Bold"),local("LiberationSerif-Bold"),local("Tinos Bold");font-weight:601 900;size-adjust:125.02%;ascent-override:72.60%;descent-override:26.18%;line-gap-override:0%;unicode-range:U+20-7E,U+A0-FF,U+131,U+152-153,U+2C6,U+2DA,U+2DC,U+2010,U+2013-2014,U+2018-201A,U+201C-201E,U+2020-2022,U+2026,U+2030,U+2032-2033,U+2039-203A,U+2044,U+2052,U+2074,U+20AC,U+2122,U+2212,U+2215}
+@font-face{font-family:"DM Mono Fallback";src:local("Courier New"),local("CourierNewPSMT"),local("Liberation Mono"),local("LiberationMono"),local("Cousine");font-weight:100 900;size-adjust:106.03%;ascent-override:99.22%;descent-override:31.01%;line-gap-override:0%;unicode-range:U+20-7E,U+A0-FF,U+131,U+152-153,U+2C6,U+2DA,U+2DC,U+2013-2014,U+2018-201A,U+201C-201E,U+2020-2022,U+2026,U+2030,U+2039-203A,U+2044,U+2074,U+20AC,U+2122,U+2212,U+2215}
 
 :root{
   color-scheme:dark;
@@ -10,15 +19,15 @@
   --line:#252C35; --line-strong:#3A434E;
   --text:#EEF1F4; --text-2:#C3CAD1; --muted:#929CA7;
   --pulse:#FF5B1F; --pulse-text:#FF8A5C; --glow:rgb(255 91 31 / .16);
-  --sans:"Archivo",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
-  --serif:"Newsreader",ui-serif,Georgia,"Times New Roman",serif;
-  --mono:"DM Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  --sans:"Archivo","Archivo Fallback",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --serif:"Newsreader","Newsreader Fallback",ui-serif,Georgia,"Times New Roman",serif;
+  --mono:"DM Mono","DM Mono Fallback",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
   --gutter:clamp(1.25rem,4vw,2.5rem); --max:80rem; --radius:4px;
   --ease:cubic-bezier(.2,.7,.2,1);
 }
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%;background:var(--bg)}
-body{margin:0;color:var(--text);font-family:var(--sans);font-size:1rem;line-height:1.5;font-size-adjust:from-font;
+body{margin:0;color:var(--text);font-family:var(--sans);font-size:1rem;line-height:1.5;
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
   background:
     radial-gradient(60rem 28rem at 30% -6rem, var(--glow), transparent 70%),
@@ -29,7 +38,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;opa
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 img{display:block;max-width:100%;height:auto}
 a{color:inherit}
-h1,h2,h3{margin:0;text-wrap:balance}
+h1,h2,h3,h4{margin:0;text-wrap:balance}
 p{margin:0}
 :focus-visible{outline:2px solid var(--text);outline-offset:3px;box-shadow:0 0 0 5px rgb(255 91 31 / .55);border-radius:2px}
 .visually-hidden{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
@@ -39,26 +48,37 @@ p{margin:0}
 .pulse-dot{display:inline-block;width:.5rem;height:.5rem;border-radius:50%;background:var(--pulse);flex:none;position:relative}
 
 /* Masthead */
-.masthead{position:sticky;top:0;z-index:20;border-bottom:1px solid var(--line);
-  background:rgb(11 13 16 / .82);backdrop-filter:saturate(140%) blur(14px);-webkit-backdrop-filter:saturate(140%) blur(14px)}
-.masthead__row{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:4rem}
+.masthead{position:sticky;top:0;z-index:20;height:65px;margin-bottom:0;--mh-dx:0px;--mh-scale:.72;
+  background:#0B0D10;border-bottom:1px solid var(--line);overflow:clip;
+  transition:height .22s var(--ease),margin-bottom .22s var(--ease),transform .25s var(--ease),opacity .25s var(--ease)}
+/* Helt ogenomskinlig bakgrund direkt på det klistrade elementet. Safari 26 färgar statusfältet och adressfältets zon
+   från ett sticky-element med solid bakgrund vid överkanten, så inget av sidan lyser igenom där (ingen backdrop-filter,
+   ingen genomskinlighet). Krympt läge (js/site.js sätter .is-small när man skrollat förbi toppen): baren blir 34px och
+   margin-bottom växer lika mycket (31px), så höjd plus marginal är alltid 65px och innehållet hoppar inte (CLS 0).
+   Raden inuti är alltid 64px och loggan flyttas bara med transform (ingen layoutförskjutning). Loggan skalas ned och glider till vänsterkanten med transform. Längre ned när man läser (.is-hidden) glider den smala
+   baren helt ut uppåt och kommer tillbaka (smal) så fort man skrollar uppåt. Utan JS: hel bar. prefers-reduced-motion: växlar direkt. */
+.masthead .wordmark{transform-origin:0 50%;transition:transform .22s var(--ease)}
+.masthead.is-small{height:34px;margin-bottom:31px}
+.masthead.is-small .wordmark{transform:translate(var(--mh-dx),-15.5px) scale(var(--mh-scale))}
+/* Helt dold: glider upp OCH tonas ut. I Safari 26 ritas sidan även under statusfältet och adressfältets glas, så en bar
+   som bara flyttas upp syns kvar där bakom glaset. opacity (inte visibility) så att loggan fortfarande nås med Tab. */
+.masthead.is-hidden{transform:translateY(calc(-100% - 2px));opacity:0}
+/* Tangentbordsfokus i sidhuvudet: full storlek så att fokusringen syns ordentligt */
+.masthead:has(:focus-visible){height:65px;margin-bottom:0;transform:none;opacity:1}
+.masthead:has(:focus-visible) .wordmark{transform:none}
+html{scroll-padding-top:4.75rem}
+html.mh-js{scroll-padding-top:3rem}
+.masthead__row{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:64px}
 .wordmark{display:inline-flex;align-items:center;text-decoration:none;flex:none}
 /* Logo: Heartline wordmark (img/logo.svg, viewBox 872x88.3, spike dips ~19% below baseline).
    translateY nudges the cap line to optical centre in the row. */
 .logo{height:clamp(1.15rem,1.6vw + .55rem,1.45rem);width:auto;max-width:100%;transform:translateY(8%)}
 .logo--footer{height:1.35rem;transform:none}
-.nobr{white-space:nowrap}
-.masthead__date{font-family:var(--mono);font-size:.75rem;color:var(--muted)}
-.mainnav{display:none}
-.mainnav ul{display:flex;gap:1.75rem;list-style:none;margin:0;padding:0}
-.mainnav a{font-size:.9rem;font-weight:560;color:var(--text-2);text-decoration:none;padding:.4rem 0;border-bottom:2px solid transparent;transition:color .18s,border-color .18s}
-.mainnav a:hover{color:var(--text);border-bottom-color:var(--pulse)}
-@media (min-width:60rem){.mainnav{display:block}}
 
 /* Chips */
 .chips{display:flex;gap:.5rem;overflow-x:auto;scrollbar-width:none;padding-block:1rem;margin:0;list-style:none;padding-inline:0}
 .chips::-webkit-scrollbar{display:none}
-.chip{appearance:none;font:inherit;font-size:.875rem;font-weight:560;white-space:nowrap;background:var(--surface);color:var(--text-2);
+.chip{appearance:none;font:inherit;font-size:.875rem;font-weight:620;white-space:nowrap;background:var(--surface);color:var(--text-2);
   border:1px solid var(--line);border-radius:999px;padding:.5rem 1rem;min-height:2.75rem;cursor:pointer;display:inline-flex;align-items:center;gap:.45rem;
   transition:background-color .18s var(--ease),border-color .18s var(--ease),color .18s var(--ease)}
 .chip:hover{border-color:var(--line-strong);color:var(--text)}
@@ -67,31 +87,15 @@ p{margin:0}
 
 /* Meta */
 .meta{display:flex;flex-wrap:wrap;align-items:center;gap:.35rem .75rem;font-family:var(--mono);font-size:.75rem;color:var(--muted);letter-spacing:.01em}
-.tag{font-family:var(--sans);font-weight:680;font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:var(--pulse-text)}
-.source{color:var(--text-2)}
-.source::before{content:"Källa ";color:var(--muted)}
+.tag{font-family:var(--sans);font-weight:700;font-size:.75rem;letter-spacing:.07em;text-transform:uppercase;color:var(--pulse-text)}
 
-/* Hero: image-led, headline on the image */
+/* Front page: lead story plus the "Senaste" strip */
 .front{padding-block:clamp(1rem,2.5vw,2rem) 0}
 .hero-grid{display:grid;gap:clamp(2rem,4vw,3rem)}
 .latest ol{display:grid}
-@media (min-width:60rem){.latest ol{grid-template-columns:repeat(var(--n,5),minmax(0,1fr));column-gap:1.75rem}.latest li{border-bottom:0}}
-.hero a{text-decoration:none;display:grid;border-radius:var(--radius);overflow:hidden;background:#000;isolation:isolate;
-  box-shadow:0 0 0 1px var(--line),0 40px 80px -40px rgb(255 91 31 / .25)}
-.hero__media{position:relative;aspect-ratio:4/3}
-@media (min-width:48rem){.hero a>*{grid-area:1/1}.hero__media{aspect-ratio:auto;min-height:clamp(30rem,52vw,40rem)}}
-.hero__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;transition:transform .8s var(--ease)}
-.hero__media::after{content:"";position:absolute;inset:0;background:
-  linear-gradient(180deg,rgb(0 0 0 / 0) 45%,rgb(0 0 0 / .85) 88%,#000 100%)}
-@media (min-width:48rem){.hero__media::after{background:linear-gradient(90deg,rgb(0 0 0 / .78) 0,rgb(0 0 0 / .35) 55%,rgb(0 0 0 / 0) 80%),linear-gradient(180deg,rgb(0 0 0 / 0) 40%,rgb(0 0 0 / .8) 100%)}}
-.hero a:hover .hero__media img{transform:scale(1.02)}
-.hero__body{align-self:end;position:relative;z-index:1;padding:0 1.25rem 1.5rem;margin-top:-4.5rem;display:grid;gap:.9rem}
-@media (min-width:48rem){.hero__body{margin-top:0;padding:clamp(2rem,4vw,3.5rem);max-width:62rem}}
+/* en kolumn per artikel (högst 5), lika breda */
+@media (min-width:60rem){.latest ol{grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);column-gap:1.75rem}.latest li{border-bottom:0}}
 .hero__label{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--text)}
-.hero__title{font-size:clamp(2.1rem,5.8vw,4.6rem);line-height:.96;font-weight:820;font-stretch:115%;letter-spacing:-.04em;color:#fff;max-width:19ch}
-.hero a:hover .hero__title{text-decoration:underline;text-decoration-thickness:.05em;text-underline-offset:.12em;text-decoration-color:var(--pulse)}
-.hero__dek{font-family:var(--serif);font-size:clamp(1.12rem,1.5vw,1.3rem);line-height:1.45;color:var(--text-2);max-width:38rem;text-wrap:pretty}
-.hero .meta{color:var(--text-2)}
 
 /* Lead story (real articles). Images keep their natural aspect ratio: never cropped or overlaid. */
 .lead a{text-decoration:none;display:grid;border-radius:var(--radius);overflow:hidden;background:var(--surface);isolation:isolate;
@@ -110,9 +114,6 @@ p{margin:0}
 .lead__dek{font-family:var(--serif);font-size:clamp(1.12rem,1.5vw,1.35rem);line-height:1.45;color:var(--text-2);max-width:40rem;text-wrap:pretty}
 .lead__more{font-family:var(--mono);font-size:.8rem;color:var(--pulse-text);letter-spacing:.02em}
 .lead .meta{color:var(--text-2)}
-.about{border-top:1px solid var(--line-strong);padding-top:1.1rem;display:grid;gap:.6rem;max-width:44rem;margin-bottom:clamp(3rem,7vw,6rem)}
-.about h2{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text)}
-.about p{font-family:var(--serif);font-size:1.1rem;line-height:1.5;color:var(--text-2)}
 .front--single{padding-bottom:clamp(3rem,7vw,6rem)}
 
 /* Latest */
@@ -121,49 +122,37 @@ p{margin:0}
 .latest li{border-bottom:1px solid var(--line);padding:1.05rem 0}
 .latest a{text-decoration:none;display:grid;gap:.4rem}
 .latest a:hover h3{color:#fff;text-decoration:underline;text-decoration-color:var(--pulse);text-underline-offset:.15em}
-.latest h3{font-size:1.05rem;line-height:1.25;font-weight:660;letter-spacing:-.01em;color:var(--text)}
+.latest h3{font-size:1.05rem;line-height:1.25;font-weight:620;letter-spacing:-.01em;color:var(--text)}
 
 /* Feed */
 .feed-section{padding-block:clamp(3rem,7vw,6rem)}
 .section-head{display:flex;flex-direction:column;gap:.25rem;border-top:1px solid var(--line-strong);padding-top:1.1rem}
 @media (min-width:48rem){.section-head{flex-direction:row;align-items:center;justify-content:space-between}}
-.section-head h2{font-size:clamp(1.6rem,3vw,2.2rem);letter-spacing:-.03em;text-transform:none;font-weight:800;font-stretch:115%}
+.section-head h2{font-size:clamp(1.6rem,3vw,2.2rem);letter-spacing:-.03em;text-transform:none;font-weight:820;font-stretch:115%}
 .day{margin-top:2.25rem}
 .day__label{font-family:var(--mono);font-weight:500;font-size:.78rem;color:var(--muted);letter-spacing:.03em;padding-bottom:.6rem;border-bottom:1px solid var(--line);margin:0;text-transform:uppercase}
 .feed{list-style:none;margin:0;padding:0}
 .item{border-bottom:1px solid var(--line)}
+/* Miniatyrerna behåller bildens eget format (ingen beskärning) */
 .item a{display:grid;grid-template-columns:minmax(0,1fr) 6.5rem;gap:1rem 1.25rem;padding:1.25rem 0;text-decoration:none}
+.item--noimg a{grid-template-columns:minmax(0,1fr)}
 .item__text{display:grid;gap:.5rem;align-content:start}
-.item h3{font-size:clamp(1.12rem,2.1vw,1.5rem);line-height:1.18;font-weight:720;font-stretch:108%;letter-spacing:-.02em;color:var(--text)}
-.item a:hover h3{color:#fff;text-decoration:underline;text-decoration-thickness:.06em;text-underline-offset:.14em;text-decoration-color:var(--pulse)}
+.item h4{font-size:clamp(1.12rem,2.1vw,1.5rem);line-height:1.18;font-weight:700;font-stretch:108%;letter-spacing:-.02em;color:var(--text)}
+.item a:hover h4{color:#fff;text-decoration:underline;text-decoration-thickness:.06em;text-underline-offset:.14em;text-decoration-color:var(--pulse)}
 .item p{font-family:var(--serif);font-size:1.04rem;line-height:1.45;color:var(--text-2);display:none;text-wrap:pretty}
-.item__img{aspect-ratio:1;overflow:hidden;border-radius:var(--radius);background:#000;box-shadow:0 0 0 1px var(--line)}
-.item__img img{width:100%;height:100%;object-fit:cover;object-position:50% 58%;transition:transform .5s var(--ease)}
-.item a:hover .item__img img{transform:scale(1.04)}
-.item .source{flex-basis:100%}
-.item__time{display:none;font-family:var(--mono);font-size:.85rem;color:var(--text);padding-top:.15rem}
+.item__img{margin:0;align-self:start;overflow:hidden;border-radius:var(--radius);background:#000;box-shadow:0 0 0 1px var(--line)}
+.item__img img{width:100%;height:auto}
 @media (min-width:48rem){
-  .item a{grid-template-columns:7rem minmax(0,1fr) 15rem;gap:1.75rem;padding:1.75rem 0}
-  .item__time{display:block}
+  .item a{grid-template-columns:minmax(0,1fr) 15rem;gap:1.75rem;padding:1.75rem 0}
+  .item--noimg a{grid-template-columns:minmax(0,1fr)}
   .item p{display:block;max-width:38rem}
-  .item__img{aspect-ratio:16/10}
-  .item .meta .t-mobile{display:none}
-  .item .source{flex-basis:auto}
 }
 .item[hidden],.day[hidden]{display:none}
-/* real feed: no time column; thumbnails keep natural aspect (no crop) */
-.item a{grid-template-columns:minmax(0,1fr) 6.5rem}
-.item--noimg a{grid-template-columns:minmax(0,1fr)}
-.item__img{aspect-ratio:auto;align-self:start}
-.item__img img{height:auto;object-fit:contain}
-.item a:hover .item__img img{transform:none}
-@media (min-width:48rem){.item a{grid-template-columns:minmax(0,1fr) 15rem}.item--noimg a{grid-template-columns:minmax(0,1fr)}.item__img{aspect-ratio:auto}}
 
 /* Footer */
 .site-footer{background:#07080A;border-top:1px solid var(--line);color:var(--muted);padding-block:3rem;font-size:.9rem}
-.footer-grid{display:grid;gap:1.5rem}
-@media (min-width:48rem){.footer-grid{grid-template-columns:1.2fr 1fr 1fr}}
 .site-footer p{max-width:32rem;line-height:1.55;color:var(--text-2)}
+.site-footer__desc{margin-top:1rem}
 .site-footer a{color:var(--text)}
 .site-footer ul{list-style:none;margin:0;padding:0;display:grid;gap:.4rem}
 .site-footer .fine{font-family:var(--mono);font-size:.72rem;color:var(--muted);margin-top:2.5rem;border-top:1px solid var(--line);padding-top:1rem}
@@ -172,7 +161,7 @@ p{margin:0}
 .article{padding-block:clamp(1.5rem,4vw,3.5rem) clamp(3rem,7vw,6rem)}
 .article__col{max-width:40rem;margin-inline:auto}
 .article__head{display:grid;gap:1rem}
-.crumbs{font-size:.85rem}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;font-size:.85rem;color:var(--muted)}
 .crumbs a{color:var(--muted);text-decoration:none}
 .crumbs a:hover{color:var(--text);text-decoration:underline}
 .article__title{font-size:clamp(2rem,4.8vw,3.4rem);line-height:1;font-weight:820;font-stretch:115%;letter-spacing:-.035em;color:#fff}
@@ -185,7 +174,7 @@ p{margin:0}
   background:linear-gradient(90deg,rgb(255 91 31 / .13),rgb(255 91 31 / .05));box-shadow:inset 0 0 0 1px rgb(255 91 31 / .16)}
 .summary h2{font-family:var(--mono);font-size:.74rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--pulse-text);margin-bottom:.7rem}
 .summary ul{list-style:none;margin:0;padding:0;display:grid;gap:.6rem}
-.summary li{position:relative;padding-left:1.15rem;font-size:1rem;line-height:1.5;font-weight:450;color:var(--text);text-wrap:pretty}
+.summary li{position:relative;padding-left:1.15rem;font-size:1rem;line-height:1.5;font-weight:500;color:var(--text);text-wrap:pretty}
 .summary li::before{content:"";position:absolute;left:0;top:.6em;width:.4rem;height:.4rem;border-radius:50%;background:var(--pulse)}
 
 /* Images: never cropped. One image keeps its own proportions; several share a 3:2 stage with black letterbox. */
@@ -195,7 +184,8 @@ p{margin:0}
 .article__figure figcaption,.gallery figcaption{font-family:var(--mono);font-size:.72rem;line-height:1.45;color:var(--muted);margin-top:.6rem}
 .gallery{position:relative;max-width:62rem;margin:2rem auto 0}
 .gallery__track{display:flex;gap:.75rem;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-color:var(--line-strong) transparent;border-radius:var(--radius);padding-bottom:.5rem}
-.gallery__slide{flex:0 0 88%;margin:0;scroll-snap-align:start;scroll-snap-stop:always;min-width:0}
+.gallery__slide{flex:0 0 88%;scroll-snap-align:start;scroll-snap-stop:always;min-width:0}
+.gallery__slide figure{margin:0}
 .gallery__stage{aspect-ratio:3/2;background:#000;border-radius:var(--radius);overflow:hidden;box-shadow:inset 0 0 0 1px var(--line)}
 .gallery__stage img{width:100%;height:100%;object-fit:contain}
 .gallery.is-ready .gallery__track{gap:0;padding-bottom:0;scrollbar-width:none}
@@ -218,9 +208,9 @@ p{margin:0}
 .prose>*+*{margin-top:1.3em}
 .prose strong{color:#fff}
 .prose h2,.prose h3{font-family:var(--sans);color:#fff;text-wrap:balance}
-.prose h2{font-size:clamp(1.2rem,1.05rem + .5vw,1.35rem);line-height:1.25;font-weight:760;font-stretch:108%;letter-spacing:-.015em}
+.prose h2{font-size:clamp(1.2rem,1.05rem + .5vw,1.35rem);line-height:1.25;font-weight:700;font-stretch:108%;letter-spacing:-.015em}
 .prose h2::before{content:"";display:inline-block;width:.45rem;height:.45rem;border-radius:50%;background:var(--pulse);margin-right:.6rem;vertical-align:.18em}
-.prose h3{font-size:1.08rem;line-height:1.3;font-weight:720}
+.prose h3{font-size:1.08rem;line-height:1.3;font-weight:700}
 .prose>*+h2{margin-top:2.4em}
 .prose>*+h3{margin-top:1.8em}
 .prose>h2+*,.prose>h3+*{margin-top:.6em}
@@ -246,7 +236,7 @@ p{margin:0}
 .more{margin-top:1rem}
 
 /* Buttons */
-.btn{font:inherit;font-weight:680;font-size:.95rem;background:var(--text);color:var(--bg);border:0;border-radius:var(--radius);padding:.7rem 1.1rem;min-height:2.875rem;cursor:pointer;transition:background-color .18s}
+.btn{display:inline-block;text-decoration:none;font:inherit;font-weight:700;font-size:.95rem;background:var(--text);color:var(--bg);border:0;border-radius:var(--radius);padding:.7rem 1.1rem;min-height:2.875rem;cursor:pointer;transition:background-color .18s}
 .btn:hover{background:#fff}
 
 /* Newsletter (non-modal popover, toast pattern) */
@@ -279,8 +269,7 @@ p{margin:0}
   @keyframes rise{from{transform:translateY(12px);opacity:0}}
 }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:0s!important;animation:none!important}}
-.item__img{margin:0}
-.item__credit{font-family:var(--mono);font-size:.6rem;line-height:1.3;color:var(--muted);padding:.3rem .4rem;background:var(--bg-2)}
+.item__credit{font-family:var(--mono);font-size:.7rem;line-height:1.3;color:var(--muted);padding:.3rem .4rem;background:var(--bg-2)}
 .item__credit:empty{display:none}
 /* Svensk flagga (sweden: true): eget element ovanpå bildens övre vänstra hörn, bildfilen ändras aldrig.
    Hörnet är fritt: krediten ligger under bilden och bildspelets knappar nere till höger. */
