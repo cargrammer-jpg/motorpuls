@@ -20,6 +20,15 @@ python3 -m venv .venv && .venv/bin/pip install markdown pyyaml pillow
 .venv/bin/python build.py
 ```
 
+### Publicering
+
+GitHub Pages byggs av GitHub Actions (`.github/workflows/pages.yml`). Vid varje push till `main` körs
+`python build.py --out _site`, och bara den publika delen publiceras: genererade sidor, `css/`, `js/`, `fonts/`, `img/`, `favicon/` och `CNAME`.
+`build.py`, `content/`, `DESIGN.md`, `brand/` och `drafts/` hamnar inte på sajten. Bygget skapar också bilder som saknas
+(WebP-varianter, `img/og/<slug>.jpg`) och kontrollerar att alla lokala länkar finns. Pull requests byggs och kontrolleras men publiceras inte.
+Det genererade resultatet i roten checkas fortfarande in som förut (`.venv/bin/python build.py`), så det går att granska i diffar.
+Beroenden med fasta versioner finns i `requirements.txt`.
+
 Valfria fält i front matter (se kommentaren överst i `build.py` och `DESIGN.md`, Artikelmall v2):
 
 ```yaml
