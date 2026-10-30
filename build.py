@@ -30,6 +30,10 @@
 #          Första bilden är huvudbild (og:image), fler bilder blir ett bildspel.
 # image:   äldre fält (en URL). Laddas ned till img/articles/<slug>.webp om filen saknas, kredit i image_credit.
 #
+# Populärt: startsidans "Populärt just nu" tar artiklarna i data/popular.json i tur och ordning (skrivs av
+# tools/update_popular.py från Cloudflare Web Analytics; okända slugs hoppas över). Saknas filen eller räcker den
+# inte fylls det på med de senaste artiklarna som inte redan syns högst upp. Rutan visas när det finns minst 2.
+#
 # Publicering: GitHub Actions (.github/workflows/pages.yml) kör `python build.py --out _site`. Då byggs allt som vanligt
 # i projektroten och sedan kopieras bara den publika delen till _site (genererade sidor, css, js, fonts, img, favicon,
 # CNAME). Källor som build.py, content/, DESIGN.md, brand/ och drafts/ publiceras alltså inte. I --out-läget används
@@ -427,15 +431,15 @@ def meta_flag(a, has_img):
 LEAD_SIZES = "(min-width: 60rem) 38rem, 100vw"
 def lead(a):
     img = a["img"]
-    media = (f'<figure class="lead__media">{flag(a, "lead")}{img_tag(img, img["alt"], eager=True, sizes=LEAD_SIZES)}'
+    media = (f'<figure class="lead__media"><div class="lead__frame">{flag(a, "lead")}{img_tag(img, img["alt"], eager=True, sizes=LEAD_SIZES)}</div>'
              f'<figcaption>{esc(img["credit"])}</figcaption></figure>') if img else ""
     return f'''
     <article class="lead{" lead--img" if img else " lead--text"}">
       <a href="{a["url"]}">
         {media}
         <div class="lead__body">
-          <span class="hero__label"><span class="pulse-dot" aria-hidden="true"></span>Senaste nytt</span>
-          {meta_line(a, flag_html=meta_flag(a, img))}
+          <div class="lead__kicker"><span class="hero__label"><span class="pulse-dot" aria-hidden="true"></span>Senaste nytt</span>
+          {meta_line(a, flag_html=meta_flag(a, img))}</div>
           <h2 class="lead__title">{nbnum(esc(a["title"]))}</h2>
           <p class="lead__dek">{nbnum(esc(a["excerpt"]))}</p>
           <span class="lead__more">Läs artikeln <span aria-hidden="true">→</span></span>
@@ -458,6 +462,50 @@ def feed_item(a):
               {thumb}
             </a>
           </li>'''
+
+POPULAR_MAX = 4
+POP_SIZES = "(min-width: 60rem) 17rem, (min-width: 40rem) 30vw, 46vw"
+
+def popular_slugs():
+    p = os.path.join(ROOT, "data/popular.json")
+    if not os.path.exists(p): return []
+    try: d = json.load(open(p, encoding="utf-8"))
+    except ValueError as e: raise SystemExit(f"data/popular.json: {e}")
+    items = d.get("articles", d) if isinstance(d, dict) else d
+    return [x["slug"] if isinstance(x, dict) else x for x in items]
+
+def pick_popular(arts, shown):
+    """Populära först (i filens ordning), sedan de senaste som inte redan syns, sist de som syns i Senaste-listan."""
+    by_slug = {a["slug"]: a for a in arts}
+    picked = [by_slug[s] for s in dict.fromkeys(popular_slugs()) if s in by_slug]
+    picked += [a for a in arts if a not in picked and a["slug"] not in shown]
+    picked += [a for a in arts[1:] if a not in picked]
+    return picked[:POPULAR_MAX]
+
+def popular_card(a, rank):
+    img = a["img"]
+    media = (f'<figure class="pop__media"><div class="pop__frame">{flag(a, "thumb")}{img_tag(img, "", sizes=POP_SIZES)}</div>'
+             f'<figcaption class="item__credit">{esc(img["credit"])}</figcaption></figure>') if img else ""
+    return f'''
+        <li class="pop__card{"" if img else " pop__card--noimg"}">
+          <a href="{a["url"]}">
+            {media}
+            <div class="pop__body">
+              <span class="meta"><span class="pop__rank" aria-hidden="true">{rank:02d}</span><span class="tag">{esc(a["category"])}</span>{meta_flag(a, img)}</span>
+              <h3>{esc(a["title"])}</h3>
+            </div>
+          </a>
+        </li>'''
+
+def popular_section(arts, shown):
+    pop = pick_popular(arts, shown)
+    if len(pop) < 2: return ""
+    return f'''
+    <section class="pop" aria-labelledby="pop-h">
+      <h2 id="pop-h"><span class="pulse-dot" aria-hidden="true"></span>Populärt just nu</h2>
+      <ol class="pop__list">{"".join(popular_card(a, i) for i, a in enumerate(pop, 1))}
+      </ol>
+    </section>'''
 
 def index(arts):
     first, rest = arts[0], arts[1:]
@@ -504,7 +552,7 @@ def index(arts):
     <h1 class="visually-hidden">Motorpuls, senaste bilnyheterna</h1>
     <div class="hero-grid">{lead(first)}
       {side}
-    </div>
+    </div>{popular_section(arts, {first["slug"]} | {a["slug"] for a in rest[:5]})}
   </div>
 {feed}
 </main>
