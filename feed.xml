@@ -5,8 +5,24 @@
   <link>https://motorpuls.se/</link>
   <description>Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Fri, 30 Oct 2026 11:55:00 +0100</lastBuildDate>
+  <lastBuildDate>Sun, 01 Nov 2026 00:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>BMW lovar 340 km laddning på tio minuter i nya iX3 M60 med 612 hk</title>
+    <link>https://motorpuls.se/artikel/bmw-ix3-m60-highway-assistant-sverige/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/bmw-ix3-m60-highway-assistant-sverige/</guid>
+    <pubDate>Sun, 01 Nov 2026 00:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>BMW har visat iX3 M60 xDrive med 612 hk och 400 kW laddning, samtidigt som iX3 40 får fyrhjulsdrift och Highway Assistant öppnas för svenska kunder i november.</description>
+  </item>
+  <item>
+    <title>Tio EU-länder har sagt ja till Teslas FSD. Därför får Sverige vänta till tidigast 2027</title>
+    <link>https://motorpuls.se/artikel/tesla-fsd-sverige-eu-omrostning-december/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/tesla-fsd-sverige-eu-omrostning-december/</guid>
+    <pubDate>Sat, 31 Oct 2026 00:00:00 +0100</pubDate>
+    <category>Tesla</category>
+    <description>Lettland blev tionde EU-land att tillåta Teslas förarstöd och Italien stödjer ett snabbt EU-beslut, men i Sverige är funktionen fortfarande inte tillåten för vanliga ägare.</description>
+  </item>
   <item>
     <title>BMW säljer en 3-serie med driftläge. Haken: det fungerar först i juli 2027</title>
     <link>https://motorpuls.se/artikel/bmw-m350-drift-moment-juli-2027/</link>
