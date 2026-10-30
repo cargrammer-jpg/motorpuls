@@ -44,6 +44,9 @@ def head(title, desc, path, preload):
 </header>
 '''
 
+ANALYTICS = """<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "bace28864ae04c6fa5e9f4a98ca70f94"}'></script><!-- End Cloudflare Web Analytics -->
+"""
+
 NEWSLETTER = '''
 <aside id="nyhetsbrev" class="nl" popover="manual" aria-labelledby="nl-title">
   <button type="button" class="nl__close" aria-label="Stäng">
@@ -168,7 +171,7 @@ def index():
   </section>
 </main>
 '''
-    return h + body + FOOTER + NEWSLETTER + "</body>\n</html>\n"
+    return h + body + FOOTER + NEWSLETTER + ANALYTICS + "</body>\n</html>\n"
 
 def artikel():
     h = head("Ny laddkorridor längs E4 klar (exempel) · Motorpuls", "Exempelartikel: 14 snabbladdare längs E4.", "/laddning/laddkorridor-e4", "img/hero")
@@ -225,7 +228,7 @@ def artikel():
   </div>
 </main>
 '''
-    return h + body + FOOTER + NEWSLETTER + "</body>\n</html>\n"
+    return h + body + FOOTER + NEWSLETTER + ANALYTICS + "</body>\n</html>\n"
 
 open("index.html","w").write(index())
 open("artikel.html","w").write(artikel())
