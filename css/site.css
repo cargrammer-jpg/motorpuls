@@ -39,24 +39,25 @@ p{margin:0}
 .pulse-dot{display:inline-block;width:.5rem;height:.5rem;border-radius:50%;background:var(--pulse);flex:none;position:relative}
 
 /* Masthead */
-.masthead{position:sticky;top:0;z-index:20;padding-bottom:1px;--mh-cut:31px;--mh-dx:0px;--mh-scale:.72}
-/* Bakgrund, oskärpa och linje ligger på ::before i stället för på det klistrade elementet. Krympt läge (js/site.js
-   sätter .is-small när man skrollat förbi toppen): ::before flyttas upp 31px så att baren blir 34px hög, loggan skalas
-   ned och glider till vänsterkanten. Bara transform: masthuvudets layoutruta är alltid 65px, så innehållet hoppar inte.
-   Utan JS: hel bar som förut. prefers-reduced-motion: växlar direkt (regeln längst ned nollar transition). */
-.masthead::before{content:"";position:absolute;inset:0;z-index:-1;border-bottom:1px solid var(--line);
-  background:rgb(11 13 16 / .86);backdrop-filter:saturate(140%) blur(14px);-webkit-backdrop-filter:saturate(140%) blur(14px);
-  transition:transform .22s var(--ease)}
+.masthead{position:sticky;top:0;z-index:20;height:65px;margin-bottom:0;--mh-dx:0px;--mh-scale:.72;
+  background:#0B0D10;border-bottom:1px solid var(--line);overflow:clip;
+  transition:height .22s var(--ease),margin-bottom .22s var(--ease),transform .25s var(--ease)}
+/* Helt ogenomskinlig bakgrund direkt på det klistrade elementet. Safari 26 färgar statusfältet och adressfältets zon
+   från ett sticky-element med solid bakgrund vid överkanten, så inget av sidan lyser igenom där (ingen backdrop-filter,
+   ingen genomskinlighet). Krympt läge (js/site.js sätter .is-small när man skrollat förbi toppen): baren blir 34px och
+   margin-bottom växer lika mycket (31px), så höjd plus marginal är alltid 65px och innehållet hoppar inte (CLS 0).
+   Raden inuti är alltid 64px och loggan flyttas bara med transform (ingen layoutförskjutning). Loggan skalas ned och glider till vänsterkanten med transform. Längre ned när man läser (.is-hidden) glider den smala
+   baren helt ut uppåt och kommer tillbaka (smal) så fort man skrollar uppåt. Utan JS: hel bar. prefers-reduced-motion: växlar direkt. */
 .masthead .wordmark{transform-origin:0 50%;transition:transform .22s var(--ease)}
-.masthead.is-small{pointer-events:none}
-.masthead.is-small .wordmark{pointer-events:auto}
-.masthead.is-small::before{transform:translateY(calc(var(--mh-cut) * -1))}
-.masthead.is-small .wordmark{transform:translate(var(--mh-dx),calc(var(--mh-cut) / -2)) scale(var(--mh-scale))}
+.masthead.is-small{height:34px;margin-bottom:31px}
+.masthead.is-small .wordmark{transform:translate(var(--mh-dx),-15.5px) scale(var(--mh-scale))}
+.masthead.is-hidden{transform:translateY(calc(-100% - 2px))}
 /* Tangentbordsfokus i sidhuvudet: full storlek så att fokusringen syns ordentligt */
-.masthead:has(:focus-visible)::before,.masthead:has(:focus-visible) .wordmark{transform:none}
+.masthead:has(:focus-visible){height:65px;margin-bottom:0;transform:none}
+.masthead:has(:focus-visible) .wordmark{transform:none}
 html{scroll-padding-top:4.75rem}
 html.mh-js{scroll-padding-top:3rem}
-.masthead__row{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:4rem}
+.masthead__row{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:64px}
 .wordmark{display:inline-flex;align-items:center;text-decoration:none;flex:none}
 /* Logo: Heartline wordmark (img/logo.svg, viewBox 872x88.3, spike dips ~19% below baseline).
    translateY nudges the cap line to optical centre in the row. */

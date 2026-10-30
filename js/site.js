@@ -37,36 +37,43 @@
   addEventListener('scroll', onScroll, { passive: true });
 })();
 
-// Sidhuvud: krymper till en smal bar när man skrollat förbi toppen och loggan glider ut till vänsterkanten.
-// Växer bara tillbaka nära sidans topp (inte vid varje skroll uppåt), så att baren inte pumpar och täcker bilder.
-// JS sätter bara klassen .is-small och hur långt loggan ska åt vänster (--mh-dx); allt annat är transform i CSS.
+// Sidhuvud i tre lägen: hel bar högst upp, smal bar (loggan mindre och ute till vänster) när man skrollat förbi
+// toppen, och helt undanglidd när man skrollar nedåt längre ned och läser. Skroll uppåt tar tillbaka den smala baren,
+// nära toppen blir den hel igen. JS sätter bara klasserna och --mh-dx; utseende och animation ligger i CSS.
 (() => {
   const m = document.querySelector('.masthead');
   const w = m && m.querySelector('.wordmark');
   if (!w) return;
   document.documentElement.classList.add('mh-js');
-  const ON = 40, OFF = 8;  // px, hysteres så att den inte fladdrar vid gränsen
+  const ON = 40, OFF = 8;  // px: krymp efter ON, hel bar igen under OFF (hysteres)
+  const HIDE = 200;        // px: under detta göms baren aldrig helt
+  const STEP = 6;          // px: ignorera små ryck i skrollriktningen
   const EDGE = 12;         // px från vänsterkanten i krympt läge
   const measure = () => {
-    const prev = m.classList.contains('is-small');
-    m.classList.remove('is-small');
+    const cls = m.className;
+    m.classList.remove('is-small', 'is-hidden');
     m.style.transition = 'none'; w.style.transition = 'none';
     const left = w.getBoundingClientRect().left;
     m.style.setProperty('--mh-dx', Math.min(0, EDGE - left) + 'px');
-    m.classList.toggle('is-small', prev);
+    m.className = cls;
     void w.offsetWidth;
     m.style.transition = ''; w.style.transition = '';
   };
-  let ticking = false;
+  let last = Math.max(0, scrollY), ticking = false;
   const update = () => {
     ticking = false;
-    const y = scrollY, small = m.classList.contains('is-small');
-    if (!small && y > ON) m.classList.add('is-small');
-    else if (small && y <= OFF) m.classList.remove('is-small');
+    const y = Math.max(0, scrollY), d = y - last;
+    if (y <= OFF) { m.classList.remove('is-small', 'is-hidden'); last = y; return; }
+    if (y > ON) m.classList.add('is-small');
+    if (y <= HIDE) { m.classList.remove('is-hidden'); last = y; return; }
+    if (Math.abs(d) < STEP) return;
+    m.classList.toggle('is-hidden', d > 0);
+    last = y;
   };
   measure(); update();
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
   addEventListener('resize', measure, { passive: true });
+  m.addEventListener('focusin', () => m.classList.remove('is-hidden'));
 })();
 
 // Bildspel i artiklar (progressiv förbättring): utan JS en rad att svepa i med scroll-snap.
