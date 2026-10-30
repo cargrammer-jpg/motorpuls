@@ -1,4 +1,4 @@
-/* Motorpuls v1 (mörk) */
+/* Motorpuls v1 (mörk), artikelmall v2 */
 @font-face{font-family:"Archivo";src:url(../fonts/archivo-var.woff2) format("woff2");font-weight:100 900;font-stretch:62% 125%;font-display:swap}
 @font-face{font-family:"Newsreader";src:url(../fonts/newsreader-var.woff2) format("woff2");font-weight:200 800;font-display:swap}
 @font-face{font-family:"DM Mono";src:url(../fonts/dmmono-400.woff2) format("woff2");font-weight:400;font-display:swap}
@@ -168,32 +168,66 @@ p{margin:0}
 .site-footer ul{list-style:none;margin:0;padding:0;display:grid;gap:.4rem}
 .site-footer .fine{font-family:var(--mono);font-size:.72rem;color:var(--muted);margin-top:2.5rem;border-top:1px solid var(--line);padding-top:1rem}
 
-/* Article */
+/* Article (v2): one calm reading column (40rem, about 65 characters per line at 18px), a wider image stage. */
 .article{padding-block:clamp(1.5rem,4vw,3.5rem) clamp(3rem,7vw,6rem)}
-.article__head{max-width:54rem;display:grid;gap:1rem}
+.article__col{max-width:40rem;margin-inline:auto}
+.article__head{display:grid;gap:1rem}
 .crumbs{font-size:.85rem}
 .crumbs a{color:var(--muted);text-decoration:none}
 .crumbs a:hover{color:var(--text);text-decoration:underline}
-.article__title{font-size:clamp(2.1rem,5.6vw,4rem);line-height:.98;font-weight:820;font-stretch:115%;letter-spacing:-.04em;color:#fff}
-.article__dek{font-family:var(--serif);font-size:clamp(1.2rem,1.8vw,1.45rem);line-height:1.45;color:var(--text-2);text-wrap:pretty}
+.article__title{font-size:clamp(2rem,4.8vw,3.4rem);line-height:1;font-weight:820;font-stretch:115%;letter-spacing:-.035em;color:#fff}
+.article__dek{font-family:var(--serif);font-size:clamp(1.15rem,1.4vw,1.3rem);line-height:1.5;color:var(--text-2);text-wrap:pretty}
 .byline{display:flex;flex-wrap:wrap;gap:.35rem 1rem;font-family:var(--mono);font-size:.78rem;color:var(--muted);border-top:1px solid var(--line);padding-top:.9rem}
 .byline b{font-weight:500;color:var(--text)}
-.article__figure{margin:2rem 0 0}
-.article__figure .frame{aspect-ratio:16/10;overflow:hidden;border-radius:var(--radius);background:#000;box-shadow:0 0 0 1px var(--line),0 40px 80px -40px rgb(255 91 31 / .25)}
-.article__figure img{width:100%;height:100%;object-fit:cover;object-position:50% 50%}
-.article__figure--natural .frame{aspect-ratio:auto}
-.article__figure--natural img{height:auto;object-fit:contain}
-.article__figure figcaption{font-family:var(--mono);font-size:.72rem;color:var(--muted);margin-top:.6rem}
+
+/* Summary box: "Kort om nyheten". Orange accent from the palette (pulse), text stays light for contrast. */
+.summary{margin-top:1.75rem;padding:1.1rem 1.25rem 1.25rem 1.35rem;border-left:3px solid var(--pulse);border-radius:0 var(--radius) var(--radius) 0;
+  background:linear-gradient(90deg,rgb(255 91 31 / .13),rgb(255 91 31 / .05));box-shadow:inset 0 0 0 1px rgb(255 91 31 / .16)}
+.summary h2{font-family:var(--mono);font-size:.74rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--pulse-text);margin-bottom:.7rem}
+.summary ul{list-style:none;margin:0;padding:0;display:grid;gap:.6rem}
+.summary li{position:relative;padding-left:1.15rem;font-size:1rem;line-height:1.5;font-weight:450;color:var(--text);text-wrap:pretty}
+.summary li::before{content:"";position:absolute;left:0;top:.6em;width:.4rem;height:.4rem;border-radius:50%;background:var(--pulse)}
+
+/* Images: never cropped. One image keeps its own proportions; several share a 3:2 stage with black letterbox. */
+.article__figure{margin:2rem auto 0;max-width:62rem}
+.article__figure .frame{overflow:hidden;border-radius:var(--radius);background:#000;box-shadow:0 0 0 1px var(--line),0 40px 80px -40px rgb(255 91 31 / .25)}
+.article__figure img{width:100%;height:auto}
+.article__figure figcaption,.gallery figcaption{font-family:var(--mono);font-size:.72rem;line-height:1.45;color:var(--muted);margin-top:.6rem}
+.gallery{position:relative;max-width:62rem;margin:2rem auto 0}
+.gallery__track{display:flex;gap:.75rem;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-color:var(--line-strong) transparent;border-radius:var(--radius);padding-bottom:.5rem}
+.gallery__slide{flex:0 0 88%;margin:0;scroll-snap-align:start;scroll-snap-stop:always;min-width:0}
+.gallery__stage{aspect-ratio:3/2;background:#000;border-radius:var(--radius);overflow:hidden;box-shadow:inset 0 0 0 1px var(--line)}
+.gallery__stage img{width:100%;height:100%;object-fit:contain}
+.gallery.is-ready .gallery__track{gap:0;padding-bottom:0;scrollbar-width:none}
+.gallery.is-ready .gallery__track::-webkit-scrollbar{display:none}
+.gallery.is-ready .gallery__slide{flex-basis:100%}
+.gallery.is-ready figcaption{min-height:2.75rem;display:flex;align-items:center;margin-top:.5rem;padding-right:9.5rem}
+.gallery__nav{position:absolute;right:0;bottom:0;display:flex;align-items:center;gap:.4rem}
+.gallery__nav[hidden]{display:none}
+.gallery__count{font-family:var(--mono);font-size:.78rem;color:var(--text-2);min-width:3.2rem;text-align:center}
+.gallery__count b{font-weight:500;color:var(--text)}
+.gallery__btn{appearance:none;width:2.75rem;height:2.75rem;display:grid;place-items:center;border-radius:50%;border:1px solid var(--line-strong);background:var(--surface);color:var(--text);cursor:pointer;
+  transition:background-color .18s var(--ease),border-color .18s var(--ease)}
+.gallery__btn:hover:not(:disabled){background:var(--raised);border-color:var(--pulse)}
+.gallery__btn:disabled{opacity:.4;cursor:default}
+
+/* Reading typography: ~17px mobile, ~18px desktop, line-height 1.6, 65ch measure */
 .article__layout{display:grid;gap:2rem;margin-top:2.25rem}
-@media (min-width:60rem){.article__layout{grid-template-columns:minmax(0,1fr) minmax(0,42rem) minmax(0,1fr)}.article__layout>*{grid-column:2}}
-.brief{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--pulse);border-radius:var(--radius);padding:1.25rem 1.25rem 1.25rem 1.4rem}
-.brief h2{font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.6rem;color:var(--text)}
-.brief ul{margin:0;padding-left:1.1rem;display:grid;gap:.45rem;font-size:1rem;line-height:1.45;color:var(--text-2)}
-.brief li::marker{color:var(--pulse)}
-.prose{font-family:var(--serif);font-size:clamp(1.14rem,1.4vw,1.22rem);line-height:1.65;color:#DCE1E6}
+.prose{font-family:var(--serif);font-size:1.0625rem;line-height:1.6;color:#DCE1E6;text-wrap:pretty}
+@media (min-width:48rem){.prose{font-size:1.125rem}}
+.prose>*+*{margin-top:1.3em}
 .prose strong{color:#fff}
-.prose p+p{margin-top:1.1em}
-.prose h2{font-family:var(--sans);font-size:1.35rem;font-weight:760;font-stretch:108%;letter-spacing:-.02em;margin:1.8em 0 .5em;color:#fff}
+.prose h2,.prose h3{font-family:var(--sans);color:#fff;text-wrap:balance}
+.prose h2{font-size:clamp(1.2rem,1.05rem + .5vw,1.35rem);line-height:1.25;font-weight:760;font-stretch:108%;letter-spacing:-.015em}
+.prose h2::before{content:"";display:inline-block;width:.45rem;height:.45rem;border-radius:50%;background:var(--pulse);margin-right:.6rem;vertical-align:.18em}
+.prose h3{font-size:1.08rem;line-height:1.3;font-weight:720}
+.prose>*+h2{margin-top:2.4em}
+.prose>*+h3{margin-top:1.8em}
+.prose>h2+*,.prose>h3+*{margin-top:.6em}
+.prose ul,.prose ol{margin-bottom:0;padding-left:1.25em}
+.prose li+li{margin-top:.45em}
+.prose li::marker{color:var(--pulse-text)}
+.prose blockquote{margin-inline:0;padding-left:1rem;border-left:2px solid var(--line-strong);color:var(--text-2)}
 .prose a{color:var(--pulse-text);text-decoration-thickness:1px;text-underline-offset:.18em}
 .prose sup{line-height:0;vertical-align:baseline;position:relative;top:-.45em}
 .prose sup a{font-family:var(--mono);font-size:.7em;text-decoration:none;padding:0 .1em}
@@ -238,6 +272,7 @@ p{margin:0}
 /* Motion (opt-in) */
 @media (prefers-reduced-motion:no-preference){
   @view-transition{navigation:auto}
+  .gallery__track{scroll-behavior:smooth}
   .pulse-dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--pulse);animation:pulse 2.8s var(--ease) infinite}
   @keyframes pulse{0%{transform:scale(1);opacity:.6}70%,100%{transform:scale(2.6);opacity:0}}
   .nl:popover-open{animation:rise .22s var(--ease)}
