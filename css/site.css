@@ -23,7 +23,7 @@
   --serif:"Newsreader","Newsreader Fallback",ui-serif,Georgia,"Times New Roman",serif;
   --mono:"DM Mono","DM Mono Fallback",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
   --gutter:clamp(1.25rem,4vw,2.5rem); --max:80rem; --radius:4px;
-  --ease:cubic-bezier(.2,.7,.2,1);
+  --ease:cubic-bezier(.2,.8,.2,1);
 }
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%;background:var(--bg)}
@@ -48,23 +48,23 @@ p{margin:0}
 .pulse-dot{display:inline-block;width:.5rem;height:.5rem;border-radius:50%;background:var(--pulse);flex:none;position:relative}
 
 /* Masthead */
-.masthead{position:sticky;top:0;z-index:20;height:65px;margin-bottom:0;--mh-dx:0px;--mh-scale:.72;
+/* Sidhuvudet animeras bara med transform och opacity (compositor), aldrig med height/margin, så skrollen behöver ingen
+   layout per bildruta. Elementet är alltid 65px högt i flödet (CLS 0) och har helt ogenomskinlig bakgrund direkt på
+   det klistrade elementet: Safari 26 färgar statusfältet och adressfältets zon från ett sticky-element med solid
+   bakgrund vid överkanten (ingen backdrop-filter, ingen genomskinlighet).
+   Krympt läge (.is-small, js/site.js): hela baren glider upp 31px så att 34px syns; loggan skalas ned, glider till
+   vänsterkanten och centreras i den synliga delen. Helt dold (.is-hidden, när man läser nedåt): glider upp OCH tonas ut,
+   eftersom Safari 26 annars visar baren bakom statusfältets glas; opacity (inte visibility) så att loggan nås med Tab.
+   Utan JS: hel bar. prefers-reduced-motion: växlar direkt. */
+.masthead{position:sticky;top:0;z-index:20;height:65px;--mh-dx:0px;--mh-scale:.72;--mh-t:.34s;
   background:#0B0D10;border-bottom:1px solid var(--line);overflow:clip;
-  transition:height .22s var(--ease),margin-bottom .22s var(--ease),transform .25s var(--ease),opacity .25s var(--ease)}
-/* Helt ogenomskinlig bakgrund direkt på det klistrade elementet. Safari 26 färgar statusfältet och adressfältets zon
-   från ett sticky-element med solid bakgrund vid överkanten, så inget av sidan lyser igenom där (ingen backdrop-filter,
-   ingen genomskinlighet). Krympt läge (js/site.js sätter .is-small när man skrollat förbi toppen): baren blir 34px och
-   margin-bottom växer lika mycket (31px), så höjd plus marginal är alltid 65px och innehållet hoppar inte (CLS 0).
-   Raden inuti är alltid 64px och loggan flyttas bara med transform (ingen layoutförskjutning). Loggan skalas ned och glider till vänsterkanten med transform. Längre ned när man läser (.is-hidden) glider den smala
-   baren helt ut uppåt och kommer tillbaka (smal) så fort man skrollar uppåt. Utan JS: hel bar. prefers-reduced-motion: växlar direkt. */
-.masthead .wordmark{transform-origin:0 50%;transition:transform .22s var(--ease)}
-.masthead.is-small{height:34px;margin-bottom:31px}
-.masthead.is-small .wordmark{transform:translate(var(--mh-dx),-15.5px) scale(var(--mh-scale))}
-/* Helt dold: glider upp OCH tonas ut. I Safari 26 ritas sidan även under statusfältet och adressfältets glas, så en bar
-   som bara flyttas upp syns kvar där bakom glaset. opacity (inte visibility) så att loggan fortfarande nås med Tab. */
-.masthead.is-hidden{transform:translateY(calc(-100% - 2px));opacity:0}
+  transition:transform var(--mh-t) var(--ease),opacity var(--mh-t) var(--ease)}
+.masthead .wordmark{transform-origin:0 50%;transition:transform var(--mh-t) var(--ease)}
+.masthead.is-small{transform:translateY(-31px)}
+.masthead.is-small .wordmark{transform:translate(var(--mh-dx),15.5px) scale(var(--mh-scale))}
+.masthead.is-hidden{transform:translateY(calc(-100% - 2px));opacity:0;--mh-t:.28s}
 /* Tangentbordsfokus i sidhuvudet: full storlek så att fokusringen syns ordentligt */
-.masthead:has(:focus-visible){height:65px;margin-bottom:0;transform:none;opacity:1}
+.masthead:has(:focus-visible){transform:none;opacity:1}
 .masthead:has(:focus-visible) .wordmark{transform:none}
 html{scroll-padding-top:4.75rem}
 html.mh-js{scroll-padding-top:3rem}
@@ -102,26 +102,28 @@ html.mh-js{scroll-padding-top:3rem}
   box-shadow:0 0 0 1px var(--line),0 40px 80px -40px rgb(255 91 31 / .25)}
 .lead--text a{background:radial-gradient(40rem 22rem at 0% 0%,rgb(255 91 31 / .14),transparent 70%),linear-gradient(180deg,var(--raised),var(--surface))}
 .lead__media{margin:0;background:#000;align-self:center}
+.lead__frame{position:relative;overflow:hidden}
 .lead__media img{width:100%;height:auto}
 .lead__media figcaption{font-family:var(--mono);font-size:.7rem;color:var(--muted);padding:.5rem .9rem;background:var(--bg-2)}
 .lead__media figcaption:empty{display:none}
-.lead__body{display:grid;gap:1rem;align-content:center;padding:1.5rem 1.25rem 1.75rem}
+.lead__body{display:grid;gap:.65rem;align-content:center;padding:1rem 1rem 1.15rem}
+.lead__kicker{display:flex;flex-wrap:wrap;align-items:center;gap:.35rem .9rem}
 .lead--text .lead__body{padding:clamp(1.75rem,6vw,5rem) clamp(1.25rem,5vw,4.5rem);min-height:clamp(20rem,36vw,28rem)}
-@media (min-width:60rem){.lead--img a{grid-template-columns:minmax(0,1fr) minmax(0,1.2fr)}.lead--img .lead__media{order:2}.lead--img .lead__body{padding:clamp(2rem,3.5vw,3.5rem)}}
+@media (min-width:40rem){.lead__body{gap:.9rem;padding:1.5rem 1.5rem 1.6rem}}
+@media (min-width:60rem){.lead--img a{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}.lead--img .lead__media{order:2}.lead--img .lead__body{padding:clamp(1.75rem,2.6vw,2.75rem)}}
 .lead__title{font-size:clamp(2.1rem,5.2vw,4.4rem);line-height:.98;font-weight:820;font-stretch:115%;letter-spacing:-.04em;color:#fff;max-width:20ch}
-.lead--img .lead__title{font-size:clamp(2rem,3.6vw,3.4rem)}
-.lead a:hover .lead__title{text-decoration:underline;text-decoration-thickness:.05em;text-underline-offset:.12em;text-decoration-color:var(--pulse)}
-.lead__dek{font-family:var(--serif);font-size:clamp(1.12rem,1.5vw,1.35rem);line-height:1.45;color:var(--text-2);max-width:40rem;text-wrap:pretty}
+.lead--img .lead__title{font-size:clamp(1.5rem,1rem + 2.4vw,2.6rem);line-height:1.02;letter-spacing:-.035em}
+.lead__dek{font-family:var(--serif);font-size:clamp(1rem,.94rem + .3vw,1.2rem);line-height:1.45;color:var(--text-2);max-width:40rem;text-wrap:pretty}
+@media (max-width:39.99rem){.lead--img .lead__dek{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow:hidden}.lead--img .lead__more{display:none}}
 .lead__more{font-family:var(--mono);font-size:.8rem;color:var(--pulse-text);letter-spacing:.02em}
 .lead .meta{color:var(--text-2)}
 .front--single{padding-bottom:clamp(3rem,7vw,6rem)}
 
 /* Latest */
-.latest h2,.section-head h2{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:.5rem;color:var(--text)}
+.latest h2,.pop h2,.section-head h2{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:.5rem;color:var(--text)}
 .latest ol{list-style:none;margin:1rem 0 0;padding:0;border-top:1px solid var(--line-strong)}
 .latest li{border-bottom:1px solid var(--line);padding:1.05rem 0}
 .latest a{text-decoration:none;display:grid;gap:.4rem}
-.latest a:hover h3{color:#fff;text-decoration:underline;text-decoration-color:var(--pulse);text-underline-offset:.15em}
 .latest h3{font-size:1.05rem;line-height:1.25;font-weight:620;letter-spacing:-.01em;color:var(--text)}
 
 /* Feed */
@@ -138,7 +140,6 @@ html.mh-js{scroll-padding-top:3rem}
 .item--noimg a{grid-template-columns:minmax(0,1fr)}
 .item__text{display:grid;gap:.5rem;align-content:start}
 .item h4{font-size:clamp(1.12rem,2.1vw,1.5rem);line-height:1.18;font-weight:700;font-stretch:108%;letter-spacing:-.02em;color:var(--text)}
-.item a:hover h4{color:#fff;text-decoration:underline;text-decoration-thickness:.06em;text-underline-offset:.14em;text-decoration-color:var(--pulse)}
 .item p{font-family:var(--serif);font-size:1.04rem;line-height:1.45;color:var(--text-2);display:none;text-wrap:pretty}
 .item__img{margin:0;align-self:start;overflow:hidden;border-radius:var(--radius);background:#000;box-shadow:0 0 0 1px var(--line)}
 .item__img img{width:100%;height:auto}
@@ -283,3 +284,58 @@ html.mh-js{scroll-padding-top:3rem}
 .flag--thumb{top:.35rem;left:.35rem;width:18px}
 .flag--inline{width:20px;vertical-align:middle;box-shadow:0 0 0 1px rgb(0 0 0 / .25)}
 .article__figure .frame,.lead__media,.item__img{position:relative}
+
+/* Populärt just nu: kort med bild, kategori och rubrik. Bilderna beskärs inte: 3:2-scen med svart kant (som bildspelet).
+   Mobil: en rad att svepa i (scroll-snap); bredare skärmar: lika breda kolumner. */
+.pop{margin-top:clamp(2rem,5vw,3.25rem)}
+.pop__list{list-style:none;margin:1rem 0 0;padding:1rem 0 0;border-top:1px solid var(--line-strong);
+  display:grid;grid-auto-flow:column;grid-auto-columns:min(64%,15rem);gap:.9rem;overflow-x:auto;overscroll-behavior-x:contain;
+  scroll-snap-type:x mandatory;scrollbar-width:none;margin-inline:calc(var(--gutter) * -1);padding-inline:var(--gutter);scroll-padding-inline:var(--gutter);
+  border-top:0;background:linear-gradient(var(--line-strong),var(--line-strong)) var(--gutter) 0 / calc(100% - 2 * var(--gutter)) 1px no-repeat}
+.pop__list::-webkit-scrollbar{display:none}
+@media (min-width:40rem){.pop__list{grid-auto-columns:minmax(0,1fr);gap:1.5rem;overflow:visible;margin-inline:0;padding-inline:0;background:none;border-top:1px solid var(--line-strong)}}
+.pop__card{scroll-snap-align:start;min-width:0}
+.pop__card a{display:grid;gap:.65rem;text-decoration:none;color:inherit;border-radius:var(--radius)}
+.pop__media{margin:0}
+.pop__frame{position:relative;aspect-ratio:3/2;overflow:hidden;border-radius:var(--radius);background:#000;box-shadow:0 0 0 1px var(--line)}
+.pop__frame img{width:100%;height:100%;object-fit:contain}
+.pop__body{display:grid;gap:.4rem}
+.pop__rank{font-family:var(--mono);font-weight:500;color:var(--pulse-text)}
+.pop__card h3{font-size:1rem;line-height:1.25;font-weight:620;letter-spacing:-.01em;color:var(--text);text-wrap:balance}
+@media (min-width:60rem){.pop__card h3{font-size:1.08rem}}
+.pop__card--noimg a{background:var(--surface);box-shadow:0 0 0 1px var(--line);padding:1rem}
+.pop .item__credit{border-radius:0 0 var(--radius) var(--radius)}
+
+/* Rörelse: rubriklänkar får en understrykning som glider in, kort lyfter lätt och bilden zoomar inom sin ram.
+   Bara transform, opacity och färger (inget som ger layout). Allt stängs av med prefers-reduced-motion (regeln längre upp). */
+.lead__title,.latest h3,.item h4,.pop__card h3{text-decoration:underline;text-decoration-thickness:.06em;text-decoration-color:transparent;
+  text-underline-offset:.4em;transition:text-decoration-color .25s var(--ease),text-underline-offset .35s var(--ease),color .25s var(--ease)}
+:is(.lead a,.latest a,.item a,.pop__card a):is(:hover,:focus-visible) :is(.lead__title,h3,h4){color:#fff;text-decoration-color:var(--pulse);text-underline-offset:.14em}
+.lead a,.pop__frame{transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
+.lead__frame img,.pop__frame img{transition:transform .7s var(--ease)}
+.chip{transition:background-color .18s var(--ease),border-color .18s var(--ease),color .18s var(--ease),transform .15s var(--ease)}
+.chip:active{transform:scale(.96)}
+@media (hover:hover){
+  .lead a:hover{transform:translateY(-3px);box-shadow:0 0 0 1px var(--line-strong),0 48px 90px -40px rgb(255 91 31 / .38)}
+  .lead a:hover .lead__frame img{transform:scale(1.03)}
+  .pop__card a:hover .pop__frame{transform:translateY(-3px);box-shadow:0 0 0 1px var(--line-strong),0 22px 40px -22px rgb(255 91 31 / .45)}
+  .pop__card a:hover .pop__frame img{transform:scale(1.05)}
+}
+@keyframes rise-in{from{opacity:0;transform:translateY(12px)}}
+@keyframes focus-pop{from{outline-offset:7px}}
+@media (prefers-reduced-motion:no-preference){
+  :focus-visible{animation:focus-pop .22s var(--ease)}
+  /* Senaste-listan (ovanför vecket): kort, förskjuten intoning när sidan laddas */
+  .latest li{animation:rise-in .6s var(--ease) both;animation-delay:calc(.12s + var(--i,0) * 70ms)}
+  .latest li:nth-child(2){--i:1}.latest li:nth-child(3){--i:2}.latest li:nth-child(4){--i:3}.latest li:nth-child(5){--i:4}
+  /* Kort och flödet: tonas upp när de skrollas in (scroll-driven, progressiv förbättring; utan stöd syns de direkt) */
+  @supports ((animation-timeline: view()) and (animation-range: entry)){
+    .item{animation:rise-in linear both;animation-timeline:view();animation-range:entry 0% entry 70%}
+    /* korten följer hela sektionens tidslinje (på mobil ligger de i en vågrät scroller, vars view() inte rör sig) */
+    .pop{view-timeline:--pop block}
+    .pop__card{animation:rise-in linear both;animation-timeline:--pop;animation-range:entry 10% entry 60%}
+    .pop__card:nth-child(2){animation-range:entry 16% entry 66%}
+    .pop__card:nth-child(3){animation-range:entry 22% entry 72%}
+    .pop__card:nth-child(4){animation-range:entry 28% entry 78%}
+  }
+}

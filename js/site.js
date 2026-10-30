@@ -39,7 +39,9 @@
 
 // Sidhuvud i tre lägen: hel bar högst upp, smal bar (loggan mindre och ute till vänster) när man skrollat förbi
 // toppen, och helt undanglidd när man skrollar nedåt längre ned och läser. Skroll uppåt tar tillbaka den smala baren,
-// nära toppen blir den hel igen. JS sätter bara klasserna och --mh-dx; utseende och animation ligger i CSS.
+// nära toppen blir den hel igen. JS sätter bara klasserna och --mh-dx; utseende och animation (bara transform/opacity)
+// ligger i CSS. Skrollhanteraren är passiv, körs högst en gång per bildruta (rAF) och läser bara scrollY: sidans höjd
+// och loggans läge mäts vid load/resize, aldrig under skroll, så den tvingar aldrig fram layout.
 (() => {
   const m = document.querySelector('.masthead');
   const w = m && m.querySelector('.wordmark');
@@ -47,33 +49,42 @@
   document.documentElement.classList.add('mh-js');
   const ON = 40, OFF = 8;  // px: krymp efter ON, hel bar igen under OFF (hysteres)
   const HIDE = 200;        // px: under detta göms baren aldrig helt
-  const STEP = 6;          // px: ignorera små ryck i skrollriktningen
+  const DOWN = 24, UP = 16; // px: så långt man ska ha skrollat åt samma håll innan baren göms resp. visas
   const EDGE = 12;         // px från vänsterkanten i krympt läge
-  // Loggans vänsterkant mäts på raden runt den (som aldrig transformeras), så inget läge behöver nollas vid resize.
-  // iOS skickar resize när Safaris verktygsfält fälls ihop under skroll.
   const row = w.parentElement;
+  let max = 0, last = Math.max(0, scrollY), acc = 0, ticking = false, small = false, hidden = false;
+  // Mätningar (layoutläsningar) bara här. Loggans vänsterkant mäts på raden runt den (som aldrig transformeras).
+  // iOS skickar resize när Safaris verktygsfält fälls ihop under skroll; mätningen läggs då i nästa bildruta.
+  let mq = 0;
   const measure = () => {
+    mq = 0;
+    max = Math.max(0, document.documentElement.scrollHeight - innerHeight);
     const left = row.getBoundingClientRect().left + parseFloat(getComputedStyle(row).paddingLeft);
     m.style.setProperty('--mh-dx', Math.min(0, EDGE - left) + 'px');
   };
-  let last = Math.max(0, scrollY), ticking = false;
+  const remeasure = () => { if (!mq) mq = requestAnimationFrame(measure); };
+  const set = (s, h) => {
+    if (s !== small) m.classList.toggle('is-small', small = s);
+    if (h !== hidden) m.classList.toggle('is-hidden', hidden = h);
+  };
   const update = () => {
     ticking = false;
     // Klämd till sidans gränser: iOS gummibandseffekt ger negativ scrollY högst upp och för stor längst ned.
-    const max = Math.max(0, document.documentElement.scrollHeight - innerHeight);
-    const y = Math.min(max, Math.max(0, scrollY)), d = y - last;
-    if (y <= OFF) { m.classList.remove('is-small', 'is-hidden'); last = y; return; }
-    if (y > ON && !m.classList.contains('is-small')) { measure(); m.classList.add('is-small'); }  // mät när den krymper: WebKit kan köra skriptet innan layouten är klar
-    if (y <= HIDE) { m.classList.remove('is-hidden'); last = y; return; }
-    if (Math.abs(d) < STEP) return;
-    m.classList.toggle('is-hidden', d > 0);
+    const y = Math.min(max || Infinity, Math.max(0, scrollY)), d = y - last;
     last = y;
+    if (y <= OFF) { acc = 0; return set(false, false); }
+    if (y <= HIDE) { acc = 0; return set(small || y > ON, false); }
+    acc = (d > 0) === (acc > 0) ? acc + d : d;  // sträcka åt samma håll; nollställs när riktningen vänder
+    if (acc > DOWN) set(true, true);
+    else if (acc < -UP) set(true, false);
+    else set(true, hidden);
   };
   measure(); update();
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
-  addEventListener('resize', measure, { passive: true });
-  addEventListener('load', measure);
-  m.addEventListener('focusin', () => m.classList.remove('is-hidden'));
+  addEventListener('resize', remeasure, { passive: true });
+  addEventListener('load', remeasure);
+  if ('ResizeObserver' in window) new ResizeObserver(remeasure).observe(document.body);
+  m.addEventListener('focusin', () => set(small, false));
 })();
 
 // Bildspel i artiklar (progressiv förbättring): utan JS en rad att svepa i med scroll-snap.

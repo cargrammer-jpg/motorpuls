@@ -20,6 +20,12 @@ python3 -m venv .venv && .venv/bin/pip install markdown pyyaml pillow
 .venv/bin/python build.py
 ```
 
+### Populärt just nu
+
+Startsidans "Populärt just nu" läser `data/popular.json` (artiklar i ordning efter sidvisningar). Uppdatera den med
+`CLOUDFLARE_ANALYTICS_TOKEN=... .venv/bin/python tools/update_popular.py` (Cloudflare Web Analytics, senaste 7 dygnen;
+token med Account Analytics: Read, skrivs aldrig ut). Saknas filen fylls rutan med de senaste artiklarna.
+
 ### Publicering
 
 GitHub Pages byggs av GitHub Actions (`.github/workflows/pages.yml`). Vid varje push till `main` körs
