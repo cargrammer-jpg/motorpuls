@@ -39,14 +39,23 @@ p{margin:0}
 .pulse-dot{display:inline-block;width:.5rem;height:.5rem;border-radius:50%;background:var(--pulse);flex:none;position:relative}
 
 /* Masthead */
-.masthead{position:sticky;top:0;z-index:20;border-bottom:1px solid var(--line);
-  background:rgb(11 13 16 / .82);backdrop-filter:saturate(140%) blur(14px);-webkit-backdrop-filter:saturate(140%) blur(14px)}
-/* Döljs när man skrollar nedåt och kommer tillbaka uppåt (js/site.js). Bara transform: ingen layoutförskjutning.
-   Med prefers-reduced-motion: reduce växlar den utan animation (regeln längst ned nollar transition). */
-.masthead{transition:transform .28s var(--ease),box-shadow .28s var(--ease);will-change:transform}
-.masthead.is-hidden{transform:translateY(calc(-100% - 2px));box-shadow:none}
-.masthead:focus-within{transform:none}
+.masthead{position:sticky;top:0;z-index:20;padding-bottom:1px;--mh-cut:31px;--mh-dx:0px;--mh-scale:.72}
+/* Bakgrund, oskärpa och linje ligger på ::before i stället för på det klistrade elementet. Krympt läge (js/site.js
+   sätter .is-small när man skrollat förbi toppen): ::before flyttas upp 31px så att baren blir 34px hög, loggan skalas
+   ned och glider till vänsterkanten. Bara transform: masthuvudets layoutruta är alltid 65px, så innehållet hoppar inte.
+   Utan JS: hel bar som förut. prefers-reduced-motion: växlar direkt (regeln längst ned nollar transition). */
+.masthead::before{content:"";position:absolute;inset:0;z-index:-1;border-bottom:1px solid var(--line);
+  background:rgb(11 13 16 / .86);backdrop-filter:saturate(140%) blur(14px);-webkit-backdrop-filter:saturate(140%) blur(14px);
+  transition:transform .22s var(--ease)}
+.masthead .wordmark{transform-origin:0 50%;transition:transform .22s var(--ease)}
+.masthead.is-small{pointer-events:none}
+.masthead.is-small .wordmark{pointer-events:auto}
+.masthead.is-small::before{transform:translateY(calc(var(--mh-cut) * -1))}
+.masthead.is-small .wordmark{transform:translate(var(--mh-dx),calc(var(--mh-cut) / -2)) scale(var(--mh-scale))}
+/* Tangentbordsfokus i sidhuvudet: full storlek så att fokusringen syns ordentligt */
+.masthead:has(:focus-visible)::before,.masthead:has(:focus-visible) .wordmark{transform:none}
 html{scroll-padding-top:4.75rem}
+html.mh-js{scroll-padding-top:3rem}
 .masthead__row{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:4rem}
 .wordmark{display:inline-flex;align-items:center;text-decoration:none;flex:none}
 /* Logo: Heartline wordmark (img/logo.svg, viewBox 872x88.3, spike dips ~19% below baseline).

@@ -37,23 +37,36 @@
   addEventListener('scroll', onScroll, { passive: true });
 })();
 
-// Sidhuvud: döljs när man skrollar nedåt så att det inte täcker bilder, visas igen direkt när man skrollar uppåt
-// eller när fokus hamnar i det. Bara en klass som styr transform i CSS.
+// Sidhuvud: krymper till en smal bar när man skrollat förbi toppen och loggan glider ut till vänsterkanten.
+// Växer bara tillbaka nära sidans topp (inte vid varje skroll uppåt), så att baren inte pumpar och täcker bilder.
+// JS sätter bara klassen .is-small och hur långt loggan ska åt vänster (--mh-dx); allt annat är transform i CSS.
 (() => {
   const m = document.querySelector('.masthead');
-  if (!m) return;
-  const STEP = 6;  // px, ignorerar små ryck
-  let last = Math.max(0, scrollY), ticking = false;
+  const w = m && m.querySelector('.wordmark');
+  if (!w) return;
+  document.documentElement.classList.add('mh-js');
+  const ON = 40, OFF = 8;  // px, hysteres så att den inte fladdrar vid gränsen
+  const EDGE = 12;         // px från vänsterkanten i krympt läge
+  const measure = () => {
+    const prev = m.classList.contains('is-small');
+    m.classList.remove('is-small');
+    m.style.transition = 'none'; w.style.transition = 'none';
+    const left = w.getBoundingClientRect().left;
+    m.style.setProperty('--mh-dx', Math.min(0, EDGE - left) + 'px');
+    m.classList.toggle('is-small', prev);
+    void w.offsetWidth;
+    m.style.transition = ''; w.style.transition = '';
+  };
+  let ticking = false;
   const update = () => {
     ticking = false;
-    const y = Math.max(0, scrollY), d = y - last;
-    if (y <= m.offsetHeight) { m.classList.remove('is-hidden'); last = y; return; }
-    if (Math.abs(d) < STEP) return;
-    m.classList.toggle('is-hidden', d > 0);
-    last = y;
+    const y = scrollY, small = m.classList.contains('is-small');
+    if (!small && y > ON) m.classList.add('is-small');
+    else if (small && y <= OFF) m.classList.remove('is-small');
   };
+  measure(); update();
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
-  m.addEventListener('focusin', () => m.classList.remove('is-hidden'));
+  addEventListener('resize', measure, { passive: true });
 })();
 
 // Bildspel i artiklar (progressiv förbättring): utan JS en rad att svepa i med scroll-snap.
