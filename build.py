@@ -22,7 +22,7 @@
 # images:  lista med {src, alt, credit, license, valfritt caption}. src är en lokal fil: ett filnamn som
 #          letas upp i drafts/img/<slug>/, utkastens form img/<slug>/fil (relativ till drafts/), en sökväg
 #          relativ till projektroten eller en absolut sökväg. Okända fält (t.ex. source_url) ignoreras.
-#          Filen kopieras till img/articles/<slug>/ och får WebP-versioner (1600 och 800 px bred, bara
+#          Filen kopieras till img/articles/<slug>/ och får WebP-versioner (1600, 800 och 400 px bred, bara
 #          storleksändring, aldrig beskärning). Finns WebP-filen redan byggs den inte om (källan behövs inte).
 #          Första bilden är huvudbild (og:image), fler bilder blir ett bildspel.
 # image:   äldre fält (en URL). Laddas ned till img/articles/<slug>.webp om filen saknas, kredit i image_credit.
@@ -37,6 +37,7 @@ DOMAIN = "https://motorpuls.se"
 SITE = "Motorpuls"
 SITE_DESC = "Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor."
 MAX_W = 1600
+VARIANTS = ((MAX_W, ""), (800, "-800"), (400, "-400"))  # bredd, filändelse; minsta används av miniatyrerna (104 px)
 
 MONTHS = ["januari","februari","mars","april","maj","juni","juli","augusti","september","oktober","november","december"]
 DAYS = ["måndag","tisdag","onsdag","torsdag","fredag","lördag","söndag"]
@@ -136,7 +137,8 @@ def check_summary_images(fm, path):
             if not str(im.get("license") or "").strip(): print(f"varning: {path}: images[{i}] saknar license")
 
 def webp_variants(src_path, out_base):
-    """Skriver <out_base>.webp (max 1600 px) och <out_base>-800.webp (om bilden är bredare än 800 px).
+    """Skriver <out_base>.webp (max 1600 px), <out_base>-800.webp och <out_base>-400.webp (de mindre bara om
+    bilden är bredare än så).
     Samma bildformat: bara storleksändring, aldrig beskärning."""
     from PIL import Image, ImageOps
     Image.MAX_IMAGE_PIXELS = None  # pressbilder kan vara över 100 megapixel, källorna är våra egna filer
@@ -144,21 +146,46 @@ def webp_variants(src_path, out_base):
     im = ImageOps.exif_transpose(im)  # följ EXIF-orienteringen (vrider bara, beskär aldrig)
     icc = im.info.get("icc_profile")  # färgprofilen följer med oförändrad (t.ex. Adobe RGB, P3), inga färgändringar
     if im.mode not in ("RGB", "RGBA"): im = im.convert("RGBA" if "A" in im.getbands() else "RGB")
-    for w, suffix in ((MAX_W, ""), (800, "-800")):
-        if suffix and im.width <= 800: break
+    for w, suffix in VARIANTS:
+        if suffix and im.width <= w: continue
         tw = min(w, im.width)
         if tw == im.width and src_path.lower().endswith(".webp"):  # redan WebP i rätt storlek: kopiera, koda inte om
             shutil.copyfile(src_path, os.path.join(ROOT, f"{out_base}{suffix}.webp")); continue
         r = im if tw == im.width else im.resize((tw, round(im.height * tw / im.width)), Image.LANCZOS)
         r.save(os.path.join(ROOT, f"{out_base}{suffix}.webp"), "WEBP", quality=86, method=6, **({"icc_profile": icc} if icc else {}))
 
+def small_variants(out_base):
+    """Äldre bilder byggda innan en mindre storlek fanns: skapa den ur den största WebP-filen (bara storleksändring)."""
+    from PIL import Image
+    main = os.path.join(ROOT, out_base + ".webp")
+    if not os.path.exists(main): return
+    with Image.open(main) as im:
+        for w, suffix in VARIANTS[1:]:
+            p = os.path.join(ROOT, f"{out_base}{suffix}.webp")
+            if im.width > w and not os.path.exists(p):
+                icc = im.info.get("icc_profile")
+                im.resize((w, round(im.height * w / im.width)), Image.LANCZOS).save(p, "WEBP", quality=86, method=6, **({"icc_profile": icc} if icc else {}))
+
+_tracked = None
+def committed(rel):
+    """Sant om filen finns i git (eller om vi inte bygger i ett git-repo). En ny variant som inte är incheckad
+    hamnar inte i srcset, så sajten pekar aldrig på en fil som saknas på GitHub Pages."""
+    global _tracked
+    if _tracked is None:
+        try:
+            import subprocess
+            out = subprocess.run(["git", "ls-files", "-z", "img"], cwd=ROOT, capture_output=True, check=True).stdout
+            _tracked = set(out.decode().split("\0"))
+        except Exception: _tracked = False
+    return _tracked is False or rel in _tracked
+
 def read_variants(out_base):
     from PIL import Image
     res = []
-    for suffix in ("", "-800"):
+    for _, suffix in VARIANTS:
         rel = f"{out_base}{suffix}.webp"
         p = os.path.join(ROOT, rel)
-        if os.path.exists(p):
+        if os.path.exists(p) and (not suffix or committed(rel)):
             with Image.open(p) as im: res.append(("/" + rel, im.width, im.height))
     return res
 
@@ -193,6 +220,7 @@ def ensure_images(a):
                     webp_variants(found, out_base)
             elif not have:
                 raise SystemExit(f"{a['file']}: hittar inte bilden {src!r} (letade i: {', '.join(cands)})")
+            small_variants(out_base)
             v = read_variants(out_base)
             res.append(dict(src=v[0][0], w=v[0][1], h=v[0][2], srcset=", ".join(f"{u} {w}w" for u, w, _ in reversed(v)),
                             alt=str(im["alt"]).strip(), credit=str(im["credit"]).strip(),
