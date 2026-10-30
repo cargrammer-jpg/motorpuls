@@ -217,6 +217,8 @@ def head(title, desc, path, og_type="website", image=None, extra="", preload_img
 <meta name="twitter:description" content="{esc(desc)}">
 <meta name="theme-color" content="#0B0D10">
 <meta name="color-scheme" content="dark">
+<link rel="stylesheet" href="{asset("/css/site.css")}">
+<script src="{asset("/js/site.js")}" defer></script>
 <link rel="icon" href="/favicon/favicon.ico" sizes="48x48">
 <link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon/favicon-32.png" sizes="32x32" type="image/png">
@@ -224,9 +226,7 @@ def head(title, desc, path, og_type="website", image=None, extra="", preload_img
 <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png">
 <link rel="manifest" href="/favicon/site.webmanifest">
 <link rel="preload" href="/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
-{pre}<link rel="stylesheet" href="{asset("/css/site.css")}">
-<script src="{asset("/js/site.js")}" defer></script>
-{extra}</head>
+{pre}{extra}</head>
 <body>
 <a class="skip" href="#innehall">Hoppa till innehållet</a>
 <header class="masthead">
