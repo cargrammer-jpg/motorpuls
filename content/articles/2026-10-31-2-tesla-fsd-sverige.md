@@ -1,6 +1,6 @@
 ---
 title: "Tesla FSD i Sverige: Italien ger stöd, men svenska ägare får vänta"
-date: 2026-10-30
+date: 2026-10-31
 slug: tesla-fsd-sverige-eu-omrostning-december
 tags:
   - Tesla
@@ -18,6 +18,7 @@ sources:
   - https://teslant.com/en/news/italy-salvini-musk-call-tesla-assisted-driving-eu-approval-2026-10
   - https://trendingtesla.com/latvia-tenth-eu-country-tesla-fsd-supervised-why-december-vote-needs-big-four/
   - https://www.fool.com/earnings/call-transcripts/2026/10/22/tesla-tsla-q3-2026-earnings-call-transcript/
+  - https://assets-ir.tesla.com/tesla-contents/IR/TSLA-Q3-2026-Update.pdf
 excerpt: "Lettland blev tionde EU-land att tillåta Teslas förarstöd och Italien stödjer ett snabbt EU-beslut, men i Sverige är funktionen fortfarande inte tillåten för vanliga ägare."
 summary:
   - "Tio EU-länder tillåter Teslas förarstöd, Sverige är inte ett av dem."
@@ -54,7 +55,7 @@ EU:s tekniska fordonskommitté TCMV skulle ha röstat 6 oktober, men det blev in
 
 Ett EU-beslut kräver stöd från minst 15 av 27 länder som tillsammans har minst 65 procent av befolkningen. Utan minst två av de fyra största länderna går det inte att nå befolkningskravet.
 
-Musk sa på Teslas kvartalssamtal 21 oktober att han hoppas på ett EU-beslut inom några månader och skulle bli förvånad om det dröjer längre än första kvartalet. Han tillade att Tesla inte styr tidsplanen.
+Musk sa på Teslas kvartalssamtal, som hölls sent på kvällen 21 oktober svensk tid, att han hoppas på ett EU-beslut inom några månader och skulle bli förvånad om det dröjer längre än första kvartalet. Han tillade att Tesla inte styr tidsplanen.
 
 ## Läget i Sverige
 
@@ -83,3 +84,4 @@ Ett ja i december betyder inte att funktionen dyker upp i svenska bilar dagen ef
 - [Teslant: Italy backs a swift EU approval of Tesla Assisted Driving](https://teslant.com/en/news/italy-salvini-musk-call-tesla-assisted-driving-eu-approval-2026-10)
 - [Trending Tesla: Latvia becomes the 10th EU country to approve Tesla FSD (Supervised)](https://trendingtesla.com/latvia-tenth-eu-country-tesla-fsd-supervised-why-december-vote-needs-big-four/)
 - [The Motley Fool: Tesla Q3 2026 earnings call transcript](https://www.fool.com/earnings/call-transcripts/2026/10/22/tesla-tsla-q3-2026-earnings-call-transcript/)
+- [Tesla: Q3 2026 Update (tid för kvartalssamtalet)](https://assets-ir.tesla.com/tesla-contents/IR/TSLA-Q3-2026-Update.pdf)
