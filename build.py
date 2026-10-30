@@ -101,6 +101,7 @@ def webp_variants(src_path, out_base):
     Image.MAX_IMAGE_PIXELS = None  # pressbilder kan vara över 100 megapixel, källorna är våra egna filer
     im = Image.open(src_path); im.load()
     im = ImageOps.exif_transpose(im)  # följ EXIF-orienteringen (vrider bara, beskär aldrig)
+    icc = im.info.get("icc_profile")  # färgprofilen följer med oförändrad (t.ex. Adobe RGB, P3), inga färgändringar
     if im.mode not in ("RGB", "RGBA"): im = im.convert("RGBA" if "A" in im.getbands() else "RGB")
     for w, suffix in ((MAX_W, ""), (800, "-800")):
         if suffix and im.width <= 800: break
@@ -108,7 +109,7 @@ def webp_variants(src_path, out_base):
         if tw == im.width and src_path.lower().endswith(".webp"):  # redan WebP i rätt storlek: kopiera, koda inte om
             shutil.copyfile(src_path, os.path.join(ROOT, f"{out_base}{suffix}.webp")); continue
         r = im if tw == im.width else im.resize((tw, round(im.height * tw / im.width)), Image.LANCZOS)
-        r.save(os.path.join(ROOT, f"{out_base}{suffix}.webp"), "WEBP", quality=86, method=6)
+        r.save(os.path.join(ROOT, f"{out_base}{suffix}.webp"), "WEBP", quality=86, method=6, **({"icc_profile": icc} if icc else {}))
 
 def read_variants(out_base):
     from PIL import Image
@@ -288,7 +289,9 @@ def lead(a):
     </article>'''
 
 def feed_item(a):
-    thumb = f'<div class="item__img">{flag(a, "thumb")}{img_tag(a["img"], "", sizes="(min-width: 48rem) 15rem, 6.5rem")}</div>' if a["img"] else ""
+    # krediten visas vid varje bild, även miniatyrer (villkor för pressbilder och CC-licenser)
+    thumb = (f'<figure class="item__img">{flag(a, "thumb")}{img_tag(a["img"], "", sizes="(min-width: 48rem) 15rem, 6.5rem")}'
+             f'<figcaption class="item__credit">{esc(a["img"]["credit"])}</figcaption></figure>') if a["img"] else ""
     return f'''
           <li class="item{"" if a["img"] else " item--noimg"}" data-cat="{a["cat"]}">
             <a href="{a["url"]}">
