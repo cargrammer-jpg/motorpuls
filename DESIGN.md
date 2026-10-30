@@ -62,7 +62,7 @@ Etikett i DM Mono versaler, `pulse-text` `#FF8A5C` (7,3:1 mot rutan). Punkterna 
 
 **Bilder** (`images` i front matter). Första bilden är huvudbild och og:image: laddas direkt med `fetchpriority="high"` och preload.
 Övriga laddas lazy. Bilder beskärs aldrig: en enda bild visas i sitt eget format, flera bilder delar en 3:2-scen med
-`object-fit: contain` och svart kant (letterbox) när formatet skiljer sig. Ingen text eller toning ovanpå bilden.
+`object-fit: contain` och svart kant (letterbox) när formatet skiljer sig. Ingen text eller toning ovanpå bilden (enda undantaget är den lilla svenska flaggan, se nedan).
 Bildtext under bilden i DM Mono, `muted` (7:1): valfri `caption`, punkt, sedan kredit ("Foto: Aston Martin").
 Bygget gör WebP i 1600 och 800 px bredd (srcset), bara storleksändring.
 
@@ -72,3 +72,20 @@ räknare "2 / 5" (läses upp som "Bild 2 av 5", aria-live polite), svep via inby
 när bildspelet har fokus. Knappar och räknare ligger till höger på bildtextraden. Smidig scroll bara utan `prefers-reduced-motion: reduce`.
 
 **Äldre artiklar.** Fältet `image` (en URL) med `image_credit` fungerar som förut och ger en bild i eget format. Artiklar utan bild eller sammanfattning visas utan de rutorna.
+
+## Svensk flagga (`sweden: true`)
+Önskemål från ALX: när en nyhet gäller Sverige visas en liten svensk flagga i kanten av bilden eller artikeln.
+
+**Färger och form.** Den äldre, mörkare flaggan: blå `#005293`, gul `#FECB00`. Proportioner 5:2:9 vågrätt och 4:2:4 lodrätt (16x10).
+Inline-SVG i `build.py` (`FLAG_SVG`), 2px rundade hörn, tunn mörk kontur och en mjuk skugga så att den syns mot både ljusa och mörka bilder.
+
+**Placering.** Övre vänstra hörnet, där varken kredit (under bilden) eller bildspelets knappar och räknare (nere till höger) ligger.
+- Artikel: över huvudbilden eller bildspelets scen, 28px bred på mobil och 34px från 48rem. I bildspelet sitter flaggan på bildspelet, inte på varje bild, så den står still när man bläddrar.
+- Startsida: 28 till 32px på huvudkortets bild, 18px på miniatyren i flödet och 20px vid kategorin i listan "Senaste".
+- Utan bild: 20px bredvid kategorin, i artikelns huvud och på korten.
+
+**Bildvillkor.** Flaggan är ett eget DOM-element (`.flag`, `pointer-events: none`) ovanpå bilden. Bildfilerna ändras aldrig, vilket pressvillkoren kräver.
+Det är det enda tillåtna elementet ovanpå en bild.
+
+**Tillgänglighet.** `role="img"`, `aria-label="Gäller Sverige"` och `title` med samma text. SVG:n är `aria-hidden`.
+

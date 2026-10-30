@@ -9,6 +9,9 @@
 # valfritt summary, images, äldre image/image_credit). Brödtexten renderas oförändrad. Rubriken (#) i texten
 # blir sidans h1, avsnittet "## Källor" renderas i källistan. Ordning: datum, sedan filnamn (nyast först).
 #
+# sweden:  valfritt, true när nyheten gäller Sverige. Då visas en liten svensk flagga (äldre, mörkare färger)
+#          som ett eget element ovanpå huvudbildens hörn och på startsidans kort, eller vid kategorin om
+#          artikeln saknar bild. Bildfilerna ändras aldrig.
 # summary: lista med 2 till 4 korta punkter (vanlig text), visas i rutan "Kort om nyheten".
 # images:  lista med {src, alt, credit, license, valfritt caption}. src är en lokal fil: ett filnamn som
 #          letas upp i drafts/img/<slug>/, utkastens form img/<slug>/fil (relativ till drafts/), en sökväg
@@ -55,6 +58,7 @@ def load_articles():
         for k in ("title","date","slug","excerpt","category","author"):
             if not fm.get(k): raise SystemExit(f"{path}: saknar {k}")
         check_summary_images(fm, path)
+        if "sweden" in fm and not isinstance(fm["sweden"], bool): raise SystemExit(f"{path}: sweden ska vara true eller false")
         d = fm["date"] if isinstance(fm["date"], dt.date) else dt.date.fromisoformat(str(fm["date"]))
         # h1 in the body is the page headline; "## Källor" becomes the source list
         h1 = re.search(r"^# (.+)$", body, re.M)
@@ -241,20 +245,33 @@ FOOTER = f'''
 
 def page(h, body): return h + body + FOOTER + ANALYTICS + "</body>\n</html>\n"
 
-def meta_line(a, with_date=True):
+def meta_line(a, with_date=True, flag_html=""):
     t = f'<time datetime="{a["date"].isoformat()}">{sv_date(a["date"])}</time>' if with_date else ""
-    return f'<span class="meta"><span class="tag">{esc(a["category"])}</span>{t}</span>'
+    return f'<span class="meta"><span class="tag">{esc(a["category"])}</span>{flag_html}{t}</span>'
 
 def img_tag(img, alt, eager=False, sizes="100vw"):
     load = 'fetchpriority="high" decoding="async"' if eager else 'loading="lazy" decoding="async"'
     ss = f' srcset="{img["srcset"]}" sizes="{sizes}"' if img.get("srcset") else ""
     return f'<img src="{img["src"]}"{ss} width="{img["w"]}" height="{img["h"]}" alt="{esc(alt)}" {load}>'
 
+# Svensk flagga, äldre mörkare färger: blå #005293, gul #FECB00. Proportioner 5:2:9 och 4:2:4 (16x10).
+# Ett eget DOM-element ovanpå bilden (bildfilen ändras aldrig), placeras med CSS (.flag--*).
+FLAG_SVG = ('<svg viewBox="0 0 16 10" width="16" height="10" aria-hidden="true" focusable="false">'
+            '<rect width="16" height="10" fill="#005293"/><rect x="5" width="2" height="10" fill="#FECB00"/>'
+            '<rect y="4" width="16" height="2" fill="#FECB00"/></svg>')
+def flag(a, where):
+    if not a.get("sweden"): return ""
+    return f'<span class="flag flag--{where}" role="img" aria-label="Gäller Sverige" title="Gäller Sverige">{FLAG_SVG}</span>'
+
+def meta_flag(a, has_img):
+    """Utan bild hamnar flaggan vid kategorin."""
+    return "" if has_img else flag(a, "inline")
+
 # ---------- front page ----------
 LEAD_SIZES = "(min-width: 60rem) 38rem, 100vw"
 def lead(a):
     img = a["img"]
-    media = (f'<figure class="lead__media">{img_tag(img, img["alt"], eager=True, sizes=LEAD_SIZES)}'
+    media = (f'<figure class="lead__media">{flag(a, "lead")}{img_tag(img, img["alt"], eager=True, sizes=LEAD_SIZES)}'
              f'<figcaption>{esc(img["credit"])}</figcaption></figure>') if img else ""
     return f'''
     <article class="lead{" lead--img" if img else " lead--text"}">
@@ -262,7 +279,7 @@ def lead(a):
         {media}
         <div class="lead__body">
           <span class="hero__label"><span class="pulse-dot" aria-hidden="true"></span>Senaste nytt</span>
-          {meta_line(a)}
+          {meta_line(a, flag_html=meta_flag(a, img))}
           <h2 class="lead__title">{nbnum(esc(a["title"]))}</h2>
           <p class="lead__dek">{nbnum(esc(a["excerpt"]))}</p>
           <span class="lead__more">Läs artikeln <span aria-hidden="true">→</span></span>
@@ -271,12 +288,12 @@ def lead(a):
     </article>'''
 
 def feed_item(a):
-    thumb = f'<div class="item__img">{img_tag(a["img"], "", sizes="(min-width: 48rem) 15rem, 6.5rem")}</div>' if a["img"] else ""
+    thumb = f'<div class="item__img">{flag(a, "thumb")}{img_tag(a["img"], "", sizes="(min-width: 48rem) 15rem, 6.5rem")}</div>' if a["img"] else ""
     return f'''
           <li class="item{"" if a["img"] else " item--noimg"}" data-cat="{a["cat"]}">
             <a href="{a["url"]}">
               <div class="item__text">
-                {meta_line(a, with_date=False)}
+                {meta_line(a, with_date=False, flag_html=meta_flag(a, a["img"]))}
                 <h3>{esc(a["title"])}</h3>
                 <p>{esc(a["excerpt"])}</p>
               </div>
@@ -290,7 +307,7 @@ def index(arts):
              preload_img=first["img"], preload_sizes=LEAD_SIZES)
     if rest:
         side = f'<aside class="latest" aria-labelledby="latest-h" style="--n:{min(len(rest),5)}"><h2 id="latest-h"><span class="pulse-dot" aria-hidden="true"></span>Senaste</h2><ol>' + "".join(
-            f'<li><a href="{a["url"]}">{meta_line(a)}<h3>{esc(a["title"])}</h3></a></li>' for a in rest[:5]) + "</ol></aside>"
+            f'<li><a href="{a["url"]}">{meta_line(a, flag_html=flag(a, "inline"))}<h3>{esc(a["title"])}</h3></a></li>' for a in rest[:5]) + "</ol></aside>"
     else:
         side = ""  # one article: the lead card stands alone
     feed = ""
@@ -343,7 +360,7 @@ def caption(im):
     parts = [esc(x) for x in (im["caption"], im["credit"]) if x]
     return f'<figcaption><span>{" <span aria-hidden=\"true\">·</span> ".join(parts)}</span></figcaption>' if parts else ""
 
-def gallery(imgs):
+def gallery(imgs, flag_html=""):
     """En bild: figur i bildens eget format. Flera: bildspel (scroll-snap, utan JS en rad att svepa i).
     Bild 1 laddas direkt med hög prioritet, övriga lazy. Ingen beskärning: object-fit contain på svart scen."""
     if not imgs: return ""
@@ -351,7 +368,7 @@ def gallery(imgs):
         im = imgs[0]
         return f'''
       <figure class="article__figure article__figure--natural">
-        <div class="frame">{img_tag(im, im["alt"], eager=True, sizes=HERO_SIZES)}</div>
+        <div class="frame">{flag_html}{img_tag(im, im["alt"], eager=True, sizes=HERO_SIZES)}</div>
         {caption(im)}
       </figure>'''
     n = len(imgs)
@@ -361,7 +378,7 @@ def gallery(imgs):
             {caption(im)}
           </figure>''' for i, im in enumerate(imgs, 1))
     return f'''
-      <section class="gallery" aria-roledescription="bildspel" aria-label="Bildspel, {n} bilder" data-gallery>
+      <section class="gallery" aria-roledescription="bildspel" aria-label="Bildspel, {n} bilder" data-gallery>{flag_html}
         <div class="gallery__track" tabindex="0" role="group" aria-label="Bilder. Bläddra med piltangenterna eller svep.">{slides}
         </div>
         <div class="gallery__nav" hidden>
@@ -418,11 +435,11 @@ def article(a):
     <article>
       <header class="article__head article__col">
         <nav class="crumbs" aria-label="Brödsmulor"><a href="/">Start</a> / <span>{esc(a["category"])}</span></nav>
-        <span class="meta"><span class="tag">{esc(a["category"])}</span></span>
+        <span class="meta"><span class="tag">{esc(a["category"])}</span>{meta_flag(a, imgs)}</span>
         <h1 class="article__title">{nbnum(esc(a["headline"]))}</h1>
         <p class="article__dek">{nbnum(esc(a["excerpt"]))}</p>
         <p class="byline"><span>Publicerad <b><time datetime="{a["date"].isoformat()}">{sv_date(a["date"])}</time></b></span><span>Läsetid <b>{a["minutes"]} min</b></span><span>Av <b>{esc(a["author"])}</b></span></p>
-      </header>{summary_box(a)}{gallery(imgs)}
+      </header>{summary_box(a)}{gallery(imgs, flag(a, "hero"))}
       <div class="article__layout article__col">
         <div class="prose">
 {nbnum_html(a["body_html"])}
