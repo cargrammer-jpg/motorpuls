@@ -1,22 +1,21 @@
-import asyncio, subprocess, time
+# Skärmdumpar: .venv/bin/python shoot.py <bas-url> <prefix> <sökväg>... (sparas i ../motorpuls/previews/)
+# Ex: shoot.py http://127.0.0.1:8765 lokal / /artikel/slug/
+import asyncio, os, re, sys
 from playwright.async_api import async_playwright
-srv = subprocess.Popen(["python3","-m","http.server","8765","--bind","127.0.0.1"],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
-time.sleep(1)
-B="http://127.0.0.1:8765/"
+OUT = os.environ.get("SHOTS", "/workspace/motorpuls/previews")
+base, prefix, paths = sys.argv[1].rstrip("/"), sys.argv[2], sys.argv[3:]
 async def main():
     async with async_playwright() as p:
         br = await p.chromium.launch(executable_path="/usr/bin/google-chrome")
-        async def shot(url,w,h,out,full=True,scroll=None):
-            pg = await br.new_page(viewport={"width":w,"height":h},device_scale_factor=2 if w<500 else 1)
-            await pg.goto(B+url); await pg.evaluate("document.fonts.ready")
-            await pg.evaluate("(async()=>{for(let y=0;y<document.body.scrollHeight;y+=400){scrollTo(0,y);await new Promise(r=>setTimeout(r,60))}scrollTo(0,0)})()"); await pg.evaluate("localStorage.clear(); if(!location.search) document.getElementById('nyhetsbrev').hidePopover?.()"); await pg.wait_for_timeout(600)
-            if scroll is not None:
-                await pg.evaluate(f"window.scrollTo(0,{scroll})"); await pg.wait_for_timeout(500)
-            await pg.screenshot(path="previews/"+out, full_page=full)
-            await pg.close()
-        await shot("index.html",1440,900,"front-1440.png")
-        await shot("index.html",390,844,"front-390.png")
-        await shot("artikel.html",390,844,"artikel-390.png")
-        await shot("index.html?nyhetsbrev",390,844,"popup-390.png",full=False,scroll=1400)
+        for path in paths:
+            name = "front" if path == "/" else re.sub(r"[^a-z0-9]+", "-", path.strip("/").split("/")[-1])
+            for w, h in ((1440, 900), (390, 844)):
+                ctx = await br.new_context(viewport={"width": w, "height": h}, device_scale_factor=2 if w < 500 else 1)
+                pg = await ctx.new_page()
+                await pg.goto(base + path, wait_until="networkidle"); await pg.evaluate("document.fonts.ready")
+                await pg.evaluate("(async()=>{for(let y=0;y<document.body.scrollHeight;y+=400){scrollTo(0,y);await new Promise(r=>setTimeout(r,50))}scrollTo(0,0)})()")
+                await pg.wait_for_timeout(600)
+                f = f"{OUT}/{prefix}-{name}-{w}.png"; await pg.screenshot(path=f, full_page=True); print(f)
+                await ctx.close()
         await br.close()
-asyncio.run(main()); srv.terminate()
+asyncio.run(main())
