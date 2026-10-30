@@ -41,7 +41,7 @@ p{margin:0}
 /* Masthead */
 .masthead{position:sticky;top:0;z-index:20;height:65px;margin-bottom:0;--mh-dx:0px;--mh-scale:.72;
   background:#0B0D10;border-bottom:1px solid var(--line);overflow:clip;
-  transition:height .22s var(--ease),margin-bottom .22s var(--ease),transform .25s var(--ease)}
+  transition:height .22s var(--ease),margin-bottom .22s var(--ease),transform .25s var(--ease),opacity .25s var(--ease)}
 /* Helt ogenomskinlig bakgrund direkt på det klistrade elementet. Safari 26 färgar statusfältet och adressfältets zon
    från ett sticky-element med solid bakgrund vid överkanten, så inget av sidan lyser igenom där (ingen backdrop-filter,
    ingen genomskinlighet). Krympt läge (js/site.js sätter .is-small när man skrollat förbi toppen): baren blir 34px och
@@ -51,9 +51,11 @@ p{margin:0}
 .masthead .wordmark{transform-origin:0 50%;transition:transform .22s var(--ease)}
 .masthead.is-small{height:34px;margin-bottom:31px}
 .masthead.is-small .wordmark{transform:translate(var(--mh-dx),-15.5px) scale(var(--mh-scale))}
-.masthead.is-hidden{transform:translateY(calc(-100% - 2px))}
+/* Helt dold: glider upp OCH tonas ut. I Safari 26 ritas sidan även under statusfältet och adressfältets glas, så en bar
+   som bara flyttas upp syns kvar där bakom glaset. opacity (inte visibility) så att loggan fortfarande nås med Tab. */
+.masthead.is-hidden{transform:translateY(calc(-100% - 2px));opacity:0}
 /* Tangentbordsfokus i sidhuvudet: full storlek så att fokusringen syns ordentligt */
-.masthead:has(:focus-visible){height:65px;margin-bottom:0;transform:none}
+.masthead:has(:focus-visible){height:65px;margin-bottom:0;transform:none;opacity:1}
 .masthead:has(:focus-visible) .wordmark{transform:none}
 html{scroll-padding-top:4.75rem}
 html.mh-js{scroll-padding-top:3rem}

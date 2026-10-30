@@ -49,22 +49,21 @@
   const HIDE = 200;        // px: under detta göms baren aldrig helt
   const STEP = 6;          // px: ignorera små ryck i skrollriktningen
   const EDGE = 12;         // px från vänsterkanten i krympt läge
+  // Loggans vänsterkant mäts på raden runt den (som aldrig transformeras), så inget läge behöver nollas vid resize.
+  // iOS skickar resize när Safaris verktygsfält fälls ihop under skroll.
+  const row = w.parentElement;
   const measure = () => {
-    const cls = m.className;
-    m.classList.remove('is-small', 'is-hidden');
-    m.style.transition = 'none'; w.style.transition = 'none';
-    const left = w.getBoundingClientRect().left;
+    const left = row.getBoundingClientRect().left + parseFloat(getComputedStyle(row).paddingLeft);
     m.style.setProperty('--mh-dx', Math.min(0, EDGE - left) + 'px');
-    m.className = cls;
-    void w.offsetWidth;
-    m.style.transition = ''; w.style.transition = '';
   };
   let last = Math.max(0, scrollY), ticking = false;
   const update = () => {
     ticking = false;
-    const y = Math.max(0, scrollY), d = y - last;
+    // Klämd till sidans gränser: iOS gummibandseffekt ger negativ scrollY högst upp och för stor längst ned.
+    const max = Math.max(0, document.documentElement.scrollHeight - innerHeight);
+    const y = Math.min(max, Math.max(0, scrollY)), d = y - last;
     if (y <= OFF) { m.classList.remove('is-small', 'is-hidden'); last = y; return; }
-    if (y > ON) m.classList.add('is-small');
+    if (y > ON && !m.classList.contains('is-small')) { measure(); m.classList.add('is-small'); }  // mät när den krymper: WebKit kan köra skriptet innan layouten är klar
     if (y <= HIDE) { m.classList.remove('is-hidden'); last = y; return; }
     if (Math.abs(d) < STEP) return;
     m.classList.toggle('is-hidden', d > 0);
@@ -73,6 +72,7 @@
   measure(); update();
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
   addEventListener('resize', measure, { passive: true });
+  addEventListener('load', measure);
   m.addEventListener('focusin', () => m.classList.remove('is-hidden'));
 })();
 
