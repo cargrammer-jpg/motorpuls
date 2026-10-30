@@ -9,6 +9,12 @@
 # valfritt summary, images, äldre image/image_credit). Brödtexten renderas oförändrad. Rubriken (#) i texten
 # blir sidans h1, avsnittet "## Källor" renderas i källistan. Ordning: datum, sedan filnamn (nyast först).
 #
+# date:    publiceringsdag (2026-10-30) eller tidpunkt med zon (2026-10-30T03:25:00+01:00). Tid utan zon räknas
+#          som Europe/Stockholm. Bygget stoppas om datumet ligger i framtiden (svensk tid; ett datum utan tid
+#          räknas som hela den dagen, så en artikel som mergas på sin egen dag går igenom). För förhandsbygge av
+#          schemalagda artiklar: MOTORPULS_NOW=2026-11-05T07:10+01:00 .venv/bin/python build.py
+# updated: valfritt, samma format som date. Blir dateModified (annars samma som date) och sitemaps lastmod.
+#
 # sweden:  valfritt, true när nyheten gäller Sverige. Då visas en liten svensk flagga (äldre, mörkare färger)
 #          som ett eget element ovanpå huvudbildens hörn och på startsidans kort, eller vid kategorin om
 #          artikeln saknar bild. Bildfilerna ändras aldrig.
@@ -22,6 +28,7 @@
 # image:   äldre fält (en URL). Laddas ned till img/articles/<slug>.webp om filen saknas, kredit i image_credit.
 import datetime as dt, glob, hashlib, html, json, math, os, re, shutil, urllib.request
 import markdown, yaml
+from zoneinfo import ZoneInfo
 
 DRAFTS_IMG = os.environ.get("MOTORPULS_DRAFTS_IMG")  # valfri extra källmapp, standard: <root>/drafts/img
 
@@ -48,6 +55,36 @@ ANALYTICS = """<!-- Cloudflare Web Analytics --><script defer src='https://stati
 """
 
 # ---------- content ----------
+TZ = ZoneInfo("Europe/Stockholm")
+# Tillfällig rättelse tills artikelgrenarna #12-14 (som bär en egen kopia av Tesla-filen) är mergade:
+# Tesla-artikeln gick live 30/10 ~03:25 men filen säger 2026-10-31. Flytta in värdet i filen och ta bort raden sedan.
+DATE_FIXES = {"tesla-model-y-strukturellt-batteri-betyg-d-volvo-ex60": "2026-10-30T03:25:00+01:00"}
+
+def parse_when(v, path, field):
+    """date/updated -> (lokalt datum, tidpunkt med zon eller None)"""
+    try:
+        if isinstance(v, dt.datetime): t = v
+        elif isinstance(v, dt.date): return v, None
+        else:
+            s = str(v).strip()
+            if re.fullmatch(r"\d{4}-\d{2}-\d{2}", s): return dt.date.fromisoformat(s), None
+            t = dt.datetime.fromisoformat(s)
+    except ValueError: raise SystemExit(f"{path}: ogiltigt {field}: {v!r}")
+    t = t.replace(tzinfo=TZ) if t.tzinfo is None else t
+    return t.astimezone(TZ).date(), t
+
+def iso(d, t): return t.isoformat(timespec="seconds") if t else d.isoformat()
+
+def lastmod(url, arts):
+    """sitemap: artikelns updated/date, startsidan får den senaste av dem"""
+    hit = [a for a in arts if a["url"] == url] or [max(arts, key=lambda a: (a["mod_date"], a["modified"]))]
+    return hit[0]["modified"]
+
+def now():
+    n = os.environ.get("MOTORPULS_NOW")
+    t = dt.datetime.fromisoformat(n) if n else dt.datetime.now(TZ)
+    return t.replace(tzinfo=TZ) if t.tzinfo is None else t
+
 def load_articles():
     arts = []
     for path in sorted(glob.glob(os.path.join(ROOT, "content/articles/*.md"))):
@@ -59,7 +96,11 @@ def load_articles():
             if not fm.get(k): raise SystemExit(f"{path}: saknar {k}")
         check_summary_images(fm, path)
         if "sweden" in fm and not isinstance(fm["sweden"], bool): raise SystemExit(f"{path}: sweden ska vara true eller false")
-        d = fm["date"] if isinstance(fm["date"], dt.date) else dt.date.fromisoformat(str(fm["date"]))
+        d, t = parse_when(DATE_FIXES.get(fm["slug"], fm["date"]), path, "date")
+        n = now()
+        if (t and t > n) or d > n.astimezone(TZ).date():
+            raise SystemExit(f"{path}: date {iso(d, t)} ligger i framtiden (nu {n.astimezone(TZ):%Y-%m-%d %H:%M} svensk tid)")
+        ud, ut = parse_when(fm["updated"], path, "updated") if fm.get("updated") else (d, t)
         # h1 in the body is the page headline; "## Källor" becomes the source list
         h1 = re.search(r"^# (.+)$", body, re.M)
         headline = h1.group(1).strip() if h1 else fm["title"]
@@ -73,7 +114,7 @@ def load_articles():
                 elif line.strip(): raise SystemExit(f"{path}: oväntad rad i Källor: {line!r}")
             body = body[:ks.start()]
         words = len(re.findall(r"\w+", body))
-        arts.append(dict(fm, date=d, headline=headline, body_html=markdown.markdown(body.strip()),
+        arts.append(dict(fm, date=d, published=iso(d, t), modified=iso(ud, ut), mod_date=ud, headline=headline, body_html=markdown.markdown(body.strip()),
                          sources=sources, file=os.path.basename(path), minutes=max(1, math.ceil(words/200)),
                          url=f"/artikel/{fm['slug']}/", cat=slugify(fm["category"])))
     arts.sort(key=lambda a: (a["date"], a["file"]), reverse=True)
@@ -253,7 +294,7 @@ FOOTER = f'''
 def page(h, body): return h + body + FOOTER + ANALYTICS + "</body>\n</html>\n"
 
 def meta_line(a, with_date=True, flag_html=""):
-    t = f'<time datetime="{a["date"].isoformat()}">{sv_date(a["date"])}</time>' if with_date else ""
+    t = f'<time datetime="{a["published"]}">{sv_date(a["date"])}</time>' if with_date else ""
     return f'<span class="meta"><span class="tag">{esc(a["category"])}</span>{flag_html}{t}</span>'
 
 def img_tag(img, alt, eager=False, sizes="100vw"):
@@ -410,7 +451,7 @@ def summary_box(a):
 def article(a):
     img, imgs = a["img"], a["images_out"]
     ld = {"@context": "https://schema.org", "@type": "NewsArticle", "headline": a["title"], "description": a["excerpt"],
-          "datePublished": a["date"].isoformat(), "dateModified": a["date"].isoformat(), "inLanguage": "sv-SE",
+          "datePublished": a["published"], "dateModified": a["modified"], "inLanguage": "sv-SE",
           "articleSection": a["category"], "keywords": a.get("tags") or [],
           "mainEntityOfPage": {"@type": "WebPage", "@id": DOMAIN + a["url"]}, "url": DOMAIN + a["url"],
           "author": {"@type": "Person", "name": a["author"]},
@@ -423,7 +464,7 @@ def article(a):
     if a.get("sources"): ld["citation"] = [u for _, u in a["sources"]]
     jsonld = '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace("</", "<\\/") + "</script>\n"
     h = head(f'{a["title"]} · {SITE}', a["excerpt"], a["url"], og_type="article", image=img, og_title=a["title"],
-             extra=f'<meta property="article:published_time" content="{a["date"].isoformat()}">\n'
+             extra=f'<meta property="article:published_time" content="{a["published"]}">\n'
                    f'<meta property="article:section" content="{esc(a["category"])}">\n'
                    + "".join(f'<meta property="article:tag" content="{esc(t)}">\n' for t in a.get("tags") or []) + jsonld,
              preload_img=img, preload_sizes=HERO_SIZES)
@@ -447,7 +488,7 @@ def article(a):
         <span class="meta"><span class="tag">{esc(a["category"])}</span>{meta_flag(a, imgs)}</span>
         <h1 class="article__title">{nbnum(esc(a["headline"]))}</h1>
         <p class="article__dek">{nbnum(esc(a["excerpt"]))}</p>
-        <p class="byline"><span>Publicerad <b><time datetime="{a["date"].isoformat()}">{sv_date(a["date"])}</time></b></span><span>Läsetid <b>{a["minutes"]} min</b></span><span>Av <b>{esc(a["author"])}</b></span></p>
+        <p class="byline"><span>Publicerad <b><time datetime="{a["published"]}">{sv_date(a["date"])}</time></b></span><span>Läsetid <b>{a["minutes"]} min</b></span><span>Av <b>{esc(a["author"])}</b></span></p>
       </header>{summary_box(a)}{gallery(imgs, flag(a, "hero"))}
       <div class="article__layout article__col">
         <div class="prose">
@@ -500,7 +541,7 @@ def main():
     write("404.html", notfound())
     urls = [("/", arts[0]["date"])] + [(a["url"], a["date"]) for a in arts]
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-          + "".join(f"  <url><loc>{DOMAIN}{u}</loc><lastmod>{d.isoformat()}</lastmod></url>\n" for u, d in urls) + "</urlset>\n")
+          + "".join(f"  <url><loc>{DOMAIN}{u}</loc><lastmod>{lastmod(u, arts)}</lastmod></url>\n" for u, d in urls) + "</urlset>\n")
     write("robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {DOMAIN}/sitemap.xml\n")
     print(f"built {len(arts)} artiklar: " + ", ".join(a["slug"] for a in arts))
 
