@@ -29,7 +29,12 @@ images:
     credit: "Foto: Aston Martin"
     license: "Pressbild, endast redaktionell användning"
     caption: "Valfri bildtext"           # valfritt
+sweden: true                           # valfritt: nyheten gäller Sverige, visar en liten svensk flagga
 ```
+
+`sweden: true` ger en liten svensk flagga (äldre, mörkare färger) i övre vänstra hörnet av huvudbilden eller bildspelet
+och på artikelns kort på startsidan. Saknar artikeln bild hamnar flaggan vid kategorin. Flaggan är ett eget element ovanpå
+bilden, bildfilerna ändras aldrig. Utelämnat eller `false` betyder ingen flagga.
 
 Bilderna kopieras till `img/articles/<slug>/` och får WebP-versioner (1600 och 800 px bred, ingen beskärning).
 Den första blir huvudbild och og:image, fler bilder blir ett bildspel. Checka in `img/articles/<slug>/` tillsammans med artikeln.
