@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://motorpuls.se/sitemap.xml
+Sitemap: https://motorpuls.se/sitemap-news.xml

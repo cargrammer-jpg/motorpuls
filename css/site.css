@@ -154,6 +154,7 @@ html.mh-js{scroll-padding-top:3rem}
 .site-footer{background:#07080A;border-top:1px solid var(--line);color:var(--muted);padding-block:3rem;font-size:.9rem}
 .site-footer p{max-width:32rem;line-height:1.55;color:var(--text-2)}
 .site-footer__desc{margin-top:1rem}
+.site-footer .site-footer__nav ul{margin-top:1.25rem;display:flex;flex-wrap:wrap;gap:.5rem 1.5rem}
 .site-footer a{color:var(--text)}
 .site-footer ul{list-style:none;margin:0;padding:0;display:grid;gap:.4rem}
 .site-footer .fine{font-family:var(--mono);font-size:.72rem;color:var(--muted);margin-top:2.5rem;border-top:1px solid var(--line);padding-top:1rem}
@@ -169,6 +170,8 @@ html.mh-js{scroll-padding-top:3rem}
 .article__dek{font-family:var(--serif);font-size:clamp(1.15rem,1.4vw,1.3rem);line-height:1.5;color:var(--text-2);text-wrap:pretty}
 .byline{display:flex;flex-wrap:wrap;gap:.35rem 1rem;font-family:var(--mono);font-size:.78rem;color:var(--muted);border-top:1px solid var(--line);padding-top:.9rem}
 .byline b{font-weight:500;color:var(--text)}
+.byline a{text-decoration:underline;text-decoration-color:var(--line-strong);text-decoration-thickness:1px;text-underline-offset:.2em}
+.byline a:hover{text-decoration-color:currentColor}
 
 /* Summary box: "Kort om nyheten". Orange accent from the palette (pulse), text stays light for contrast. */
 .summary{margin-top:1.75rem;padding:1.1rem 1.25rem 1.25rem 1.35rem;border-left:3px solid var(--pulse);border-radius:0 var(--radius) var(--radius) 0;
@@ -230,6 +233,7 @@ html.mh-js{scroll-padding-top:3rem}
 .sources a{font-weight:620;text-decoration:none;line-height:1.35;color:var(--text)}
 .sources a:hover{text-decoration:underline;text-decoration-color:var(--pulse);text-underline-offset:.15em}
 .sources a::after{content:" ↗";color:var(--muted);font-weight:400}
+.sources--internal a::after{content:none}
 .sources .meta{margin-top:.25rem}
 .ai-note{display:flex;gap:.75rem;align-items:flex-start;font-size:.85rem;line-height:1.5;color:var(--muted);border:1px dashed var(--line-strong);padding:.85rem 1rem;border-radius:var(--radius)}
 .ai-note svg{flex:none;margin-top:.15rem}
@@ -339,6 +343,20 @@ html.mh-js{scroll-padding-top:3rem}
     .pop__card:nth-child(4){animation-range:entry 28% entry 78%}
   }
 }
+/* Skribentruta (author_box i build.py) */
+.author-box{display:flex;gap:1rem;align-items:flex-start;margin-top:1.5rem;padding:1.1rem 1.25rem;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--pulse);border-radius:var(--radius)}
+.author-box__avatar{flex:none;width:4rem;height:4rem;border-radius:50%;object-fit:cover}
+.author-box__body{display:grid;gap:.35rem;min-width:0}
+.author-box__name{font-size:1.1rem;line-height:1.2;font-weight:760;font-stretch:108%;color:#fff}
+.author-box__name a{text-decoration:none}
+.author-box__name a:hover{text-decoration:underline;text-decoration-color:var(--pulse);text-underline-offset:.15em}
+.author-box__role{font-family:var(--mono);font-size:.75rem;color:var(--muted)}
+.author-box__bio{font-family:var(--serif);font-size:1rem;line-height:1.5;color:var(--text-2);text-wrap:pretty}
+.author-box__ai{display:flex;flex-wrap:wrap;align-items:center;gap:.35rem .75rem;font-size:.8rem;color:var(--muted)}
+.author-box__badge{font-family:var(--mono);font-size:.7rem;letter-spacing:.04em;text-transform:uppercase;color:var(--pulse-text);border:1px solid var(--line-strong);border-radius:999px;padding:.15rem .55rem}
+.author-box__ai a,.author-box__more a{color:var(--text);text-underline-offset:.18em;text-decoration-thickness:1px}
+.author-box__more{font-size:.85rem;font-weight:620}
+@media (max-width:30rem){.author-box{display:grid;grid-template-columns:3rem 1fr;column-gap:.85rem}.author-box__avatar{width:3rem;height:3rem}.author-box__body{display:contents}.author-box__name{align-self:end}.author-box__role{grid-column:2;align-self:start;margin-top:-.2rem}.author-box__bio,.author-box__ai,.author-box__more{grid-column:1/-1;margin-top:.5rem}.author-box__avatar{grid-row:1/3;align-self:center}}
 /* RSS: länk i sidfoten (ikon + text) och raden "Prenumerera via RSS" i slutet av artiklar. Ikonen: orange ruta, mörka vågor. */
 .rss-icon{flex:none;width:1rem;height:1rem}
 .site-footer__rss{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .9rem;margin-top:1.25rem;font-size:.85rem;color:var(--muted)}

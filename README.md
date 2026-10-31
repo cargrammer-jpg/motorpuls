@@ -13,6 +13,16 @@ Artiklar ligger som markdown med YAML-front matter i `content/articles/`. `build
 - `404.html`, `sitemap.xml`, `robots.txt`, `feed.xml` (RSS)
 - `feed/<kategori>.xml` (RSS per kategori, plus `feed/sverige.xml` när någon artikel har `sweden: true`)
 - `img/og/<slug>.jpg` (delningsbild 1200×630, checka in den tillsammans med artikeln)
+- `sitemap-news.xml` (Google News-sitemap, bara artiklar från de senaste två dygnen räknat vid bygget, så sajten bör byggas om minst en gång per dygn, se schemat som föreslås i PR:en)
+- `om/` och `om/lukas/` ur `content/pages/*.md` (om-sidan och författarsidan för signaturen Lukas)
+- `img/ld/<slug>-16x9.jpg`, `-4x3.jpg`, `-1x1.jpg` (bilder för NewsArticle-JSON-LD, checka in dem som `img/og/`; skapas inte om huvudbildens licens förbjuder beskärning)
+
+### Google Nyheter och Discover
+
+Artiklarna har NewsArticle-JSON-LD (författare med länk till `/om/lukas/`, utgivare med logotyp, bilder i 16:9, 4:3 och 1:1),
+`<meta name="robots" content="max-image-preview:large">` och en synlig byline med publiceringsdatum och, om fältet `updated`
+finns, "Uppdaterad <datum>". För Search Console-verifiering med HTML-tagg: sätt `GOOGLE_SITE_VERIFICATION` i `build.py`
+till koden från Search Console, då hamnar taggen på startsidan.
 
 Kräver Python 3.12 eller senare (build.py använder bland annat nästlade citattecken i f-strängar).
 
