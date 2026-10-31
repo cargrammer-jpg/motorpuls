@@ -73,13 +73,21 @@ images:
     license: "Pressbild, endast redaktionell användning"
     caption: "Valfri bildtext"           # valfritt
 sweden: true                           # valfritt: nyheten gäller Sverige, visar en liten svensk flagga
+seo_title: "Kort titel för fliken och Google"  # valfritt: <title> när rubriken är längre än ca 48 tecken
 ```
+
+`<title>` kapas aldrig med "…". Ryms inte rubriken med " · Motorpuls" inom 60 tecken används `seo_title` (eller delen före
+": " om den räcker), annars varnar bygget. Rubriken på sidan (h1), og:title och RSS är oförändrade. Skriv `date` med klockslag
+(`2026-10-31T07:30:00+01:00`); ett datum utan tid blir 00:00 svensk tid i JSON-LD och sitemaps.
+
+`css/site.css` bäddas in i varje sida (`<style>` i `<head>`, se `inline_css` i build.py) så att sidan inte väntar på en css-fil.
+Filen är fortfarande källan och publiceras som förut.
 
 `sweden: true` ger en liten svensk flagga (äldre, mörkare färger) i övre vänstra hörnet av huvudbilden eller bildspelet
 och på artikelns kort på startsidan. Saknar artikeln bild hamnar flaggan vid kategorin. Flaggan är ett eget element ovanpå
 bilden, bildfilerna ändras aldrig. Utelämnat eller `false` betyder ingen flagga.
 
-Bilderna kopieras till `img/articles/<slug>/` och får WebP-versioner (1600, 800 och 400 px bred, ingen beskärning).
+Bilderna kopieras till `img/articles/<slug>/` och får WebP-versioner (1600, 1200, 800 och 400 px bred, kvalitet 76, ingen beskärning).
 Den första blir huvudbild (och beskärs till delningsbilden `img/og/<slug>.jpg`), fler bilder blir ett bildspel. Checka in `img/articles/<slug>/` tillsammans med artikeln.
 Det äldre fältet `image` (en URL, med `image_credit`) laddas ned till `img/articles/<slug>.webp` som förut.
 
