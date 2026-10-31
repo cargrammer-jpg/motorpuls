@@ -70,6 +70,16 @@ Resend (utskick), Cloudflare Web Analytics.
 Sidfoten: länken "RSS" med ikon (orange ruta, mörka vågor) och "RSS per kategori" med en länk per kategori. Artikelns slut: en
 lugn rad "Prenumerera via RSS: <kategori> · Alla nyheter" i muted-färg, länkar i textfärg (7:1 respektive 16:1 mot bakgrunden).
 
+## Dela
+Rad med delningsknappar under bylinen ("Dela") och efter källorna ("Dela artikeln"). Runda knappar 2,75rem med ikon (Simple Icons, CC0)
+för X, Facebook, LinkedIn och WhatsApp: vanliga länkar med aria-label "Dela på X (öppnas i ny flik)", fungerar utan JS. "Kopiera länk"
+(text från 40rem, bara ikon på mobil) visar en liten bekräftelse "Länken är kopierad" ovanpå knappen (role="status"). Där webbläsaren
+har Web Share API (mobiler) blir etiketten "Dela" en orange knapp (`pulse`, mörk text 6,3:1) som öppnar systemets delningsmeny.
+Inga skript från tredje part, inga spårningsparametrar. Knapparna som kräver JS har sin plats från början (visibility): inget
+layoutskifte. X-texten är rubriken, utan @-namn (sajten har inget eget X-konto angivet).
+Delningskort: og:title, og:description, og:image 1200x630 med og:image:alt (huvudbildens alt-text), twitter:card summary_large_image,
+article:published_time och article:modified_time.
+
 ## Push-rutan (förhandsvisning, `PUSH_BOX` av)
 **Utseende.** Samma orange ruta som nyhetsbrevet (PR #15): gradient `#FF5B1F` till `#FF7A3D`, 8px rundning, mörk text `#0B0D10`
 (6,3:1 och 7,5:1). "Ja tack": mörk knapp med vit text (19:1). "Inte nu": genomskinlig knapp med 2px mörk kant och mörk text.
