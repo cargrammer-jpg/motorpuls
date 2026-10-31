@@ -511,10 +511,11 @@ def img_tag(img, alt, eager=False, sizes="100vw"):
 FLAG_SVG = ('<svg viewBox="0 0 16 10" width="16" height="10" aria-hidden="true" focusable="false">'
             '<rect width="16" height="10" fill="#005293"/><rect x="5" width="2" height="10" fill="#FECB00"/>'
             '<rect y="4" width="16" height="2" fill="#FECB00"/></svg>')
-# Svensk flagga efter loggan i sidhuvudet (dekorativ, aria-hidden). Klassiska blå #006AA7 och gul #FECC00 (de äldre
-# nyanserna före 2023), samma proportioner som FLAG_SVG. Storlek och läge i css/site.css (.wordmark__flag).
+# Svensk flagga efter loggan i sidhuvudet (dekorativ, aria-hidden). Mörk marinblå #0A2260 (ALX:s referens) och gul
+# #FECC00, samma proportioner som FLAG_SVG. Artiklarnas flagga (FLAG_SVG) är oförändrad. Storlek och läge i
+# css/site.css (.wordmark__flag).
 BANNER_FLAG_SVG = ('<svg class="wordmark__flag" viewBox="0 0 16 10" width="16" height="10" aria-hidden="true" focusable="false">'
-                   '<rect width="16" height="10" fill="#006AA7"/><rect x="5" width="2" height="10" fill="#FECC00"/>'
+                   '<rect width="16" height="10" fill="#0A2260"/><rect x="5" width="2" height="10" fill="#FECC00"/>'
                    '<rect y="4" width="16" height="2" fill="#FECC00"/></svg>')
 def flag(a, where):
     if not a.get("sweden"): return ""
