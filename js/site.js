@@ -129,3 +129,23 @@
     update();
   });
 })();
+
+// Dela (artiklar): länkarna till X, Facebook, LinkedIn och WhatsApp fungerar utan JS. Här: "Kopiera länk" med en kort
+// bekräftelse, och "Dela" (systemets delningsmeny via Web Share API) där webbläsaren har den. Ingen data skickas.
+(() => {
+  document.querySelectorAll('[data-share]').forEach(box => {
+    const { url, title } = box.dataset;
+    const status = box.querySelector('.share__status');
+    box.classList.add('is-ready');
+    if (navigator.share && (!navigator.canShare || navigator.canShare({ title, url }))) {
+      box.classList.add('has-native');
+      box.querySelector('[data-share-native]').addEventListener('click', () => navigator.share({ title, url }).catch(() => {}));
+    }
+    let timer = 0;
+    const say = msg => { status.textContent = msg; clearTimeout(timer); timer = setTimeout(() => { status.textContent = ''; }, 2500); };
+    box.querySelector('[data-share-copy]').addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(url); say('Länken är kopierad'); }
+      catch { say('Kunde inte kopiera, använd adressfältet'); }
+    });
+  });
+})();
