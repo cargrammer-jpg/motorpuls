@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
+    <loc>https://motorpuls.se/artikel/tesla-fsd-sverige-eu-omrostning-december/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-10-31T18:00:00+01:00</news:publication_date>
+      <news:title>Tio EU-länder har sagt ja till Teslas FSD. Därför får Sverige vänta till tidigast 2027</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://motorpuls.se/artikel/bmw-m3-el-fyra-motorer/</loc>
     <news:news>
       <news:publication>
@@ -9,17 +20,6 @@
       </news:publication>
       <news:publication_date>2026-10-31T12:33:00+01:00</news:publication_date>
       <news:title>M3 som elbil: fyra motorer, över 100 kWh och noll fejkat ljud</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/tesla-fsd-sverige-eu-omrostning-december/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-10-31T00:00:00+01:00</news:publication_date>
-      <news:title>Tio EU-länder har sagt ja till Teslas FSD. Därför får Sverige vänta till tidigast 2027</news:title>
     </news:news>
   </url>
   <url>

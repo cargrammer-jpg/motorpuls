@@ -5,8 +5,16 @@
   <link>https://motorpuls.se/</link>
   <description>Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Sat, 31 Oct 2026 12:33:00 +0100</lastBuildDate>
+  <lastBuildDate>Sat, 31 Oct 2026 18:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Tio EU-länder har sagt ja till Teslas FSD. Därför får Sverige vänta till tidigast 2027</title>
+    <link>https://motorpuls.se/artikel/tesla-fsd-sverige-eu-omrostning-december/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/tesla-fsd-sverige-eu-omrostning-december/</guid>
+    <pubDate>Sat, 31 Oct 2026 18:00:00 +0100</pubDate>
+    <category>Tesla</category>
+    <description>Lettland blev tionde EU-land att tillåta Teslas förarstöd och Italien stödjer ett snabbt EU-beslut, men i Sverige är funktionen fortfarande inte tillåten för vanliga ägare.</description>
+  </item>
   <item>
     <title>M3 som elbil: fyra motorer, över 100 kWh och noll fejkat ljud</title>
     <link>https://motorpuls.se/artikel/bmw-m3-el-fyra-motorer/</link>
@@ -14,14 +22,6 @@
     <pubDate>Sat, 31 Oct 2026 12:33:00 +0100</pubDate>
     <category>Sportbil</category>
     <description>BMW:s utvecklingsstyrelse har kört den första helt eldrivna M3:an i förserieutförande, en bil med fyra elmotorer som ska byggas i München.</description>
-  </item>
-  <item>
-    <title>Tio EU-länder har sagt ja till Teslas FSD. Därför får Sverige vänta till tidigast 2027</title>
-    <link>https://motorpuls.se/artikel/tesla-fsd-sverige-eu-omrostning-december/</link>
-    <guid isPermaLink="true">https://motorpuls.se/artikel/tesla-fsd-sverige-eu-omrostning-december/</guid>
-    <pubDate>Sat, 31 Oct 2026 00:00:00 +0100</pubDate>
-    <category>Tesla</category>
-    <description>Lettland blev tionde EU-land att tillåta Teslas förarstöd och Italien stödjer ett snabbt EU-beslut, men i Sverige är funktionen fortfarande inte tillåten för vanliga ägare.</description>
   </item>
   <item>
     <title>BMW säljer en 3-serie med driftläge. Haken: det fungerar först i juli 2027</title>
