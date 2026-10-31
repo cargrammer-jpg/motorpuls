@@ -456,7 +456,7 @@ def newsletter_box():
           <button class="nlf__btn" type="submit">Prenumerera</button>
         </div>
         <div class="nlf__hp" aria-hidden="true"><label>Lämna tomt <input type="text" name="webbplats" tabindex="-1" autocomplete="off"></label></div>
-        <p class="nlf__fine" id="nlf-fine">Gratis. Avsluta när du vill.</p>
+        <p class="nlf__fine" id="nlf-fine">Helt gratis, avsluta när du vill.</p>
         <p class="nlf__status" role="status" aria-live="polite"></p>
       </form>
     </section>'''

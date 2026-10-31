@@ -46,9 +46,8 @@ Liten icke-modal `<aside popover="manual">`-ruta (toast-mönster, ingen modal) n
 efter ~55 % scroll, stängs med knapp eller Esc, minns valet i localStorage. Stjäl inte fokus.
 
 ## Nyhetsbrevsrutan i sidfoten (förhandsvisning, `NEWSLETTER_BOX` av)
-**Utseende.** Orange ruta i `pulse` `#FF5B1F` till `#FF7A3D`, 8px rundning, mörk text `#0B0D10` (6,3:1 och 7,5:1). Synlig etikett
-"Din e-postadress", ljust fält `#FFF7F2` med 2px mörk kant, mörk knapp "Prenumerera" med vit text (19:1). Fokus: 3px mörk ring, 2px avstånd.
-Text: "Få Motorpuls i inkorgen" och "De viktigaste bilnyheterna, korta och med källor. Du hänger med utan att leta." Under fältet: "Gratis. Avsluta när du vill."
+**Utseende.** Synlig etikett "Din e-postadress". Mörk panel `surface` `#151A20` med 1px hårlinje `line` och 2px orange topplinje (`pulse`). Etiketten "Nyhetsbrev" i `pulse-text` `#FF8A5C`, rubrik i `text`, brödtext i `text-2` som resten av sidfoten. Mörkt fält med 1px kant `#6B7682` (3,9:1 mot fältet, 3,6:1 mot panelen), orange knapp "Prenumerera" med mörk text (6,3:1). Fokus: 2px orange ring (`pulse-text`), 2px avstånd. Ingen orange fyllning eller glöd.
+Text: "Få Motorpuls i inkorgen" och "De viktigaste bilnyheterna, korta och med källor. Du hänger med utan att leta." Under fältet: "Helt gratis, avsluta när du vill."
 
 **Placering.** Dator (från 56rem): höger kolumn bredvid sidfotens logga, text och länkar. Mobil: under länkarna, före raden med ©, knappen i full bredd.
 Rutan står i HTML från början och statusraden har reserverad höjd, så inget layoutskift. Utan JS döljs formuläret och en rad säger att anmälan kräver JavaScript.
