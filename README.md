@@ -11,6 +11,7 @@ Artiklar ligger som markdown med YAML-front matter i `content/articles/`. `build
 - `index.html` (startsidan, nyast först)
 - `artikel/<slug>/index.html` (en sida per artikel, URL `/artikel/<slug>/`)
 - `404.html`, `sitemap.xml`, `robots.txt`, `feed.xml` (RSS)
+- `feed/<kategori>.xml` (RSS per kategori, plus `feed/sverige.xml` när någon artikel har `sweden: true`)
 - `img/og/<slug>.jpg` (delningsbild 1200×630, checka in den tillsammans med artikeln)
 - `sitemap-news.xml` (Google News-sitemap, bara artiklar från de senaste två dygnen räknat vid bygget, så sajten bör byggas om minst en gång per dygn, se schemat som föreslås i PR:en)
 - `om/` och `om/lukas/` ur `content/pages/*.md` (om-sidan och författarsidan för signaturen Lukas)
@@ -35,6 +36,20 @@ python3 -m venv .venv && .venv/bin/pip install markdown pyyaml pillow
 Startsidans "Populärt just nu" läser `data/popular.json` (artiklar i ordning efter sidvisningar). Uppdatera den med
 `CLOUDFLARE_ANALYTICS_TOKEN=... .venv/bin/python tools/update_popular.py` (Cloudflare Web Analytics, senaste 7 dygnen;
 token med Account Analytics: Read, skrivs aldrig ut). Saknas filen fylls rutan med de senaste artiklarna.
+
+### RSS
+
+`feed.xml` har alla artiklar, `feed/<kategori>.xml` bara en kategori (RSS 2.0, samma ordning som startsidan). Alla sidor har
+`<link rel="alternate" type="application/rss+xml">` till `feed.xml`. Startsidan listar även kategoriflödena och varje artikel sitt
+kategoriflöde. Sidfoten har länken RSS (ikon + text) och RSS per kategori. Artiklar slutar med raden "Prenumerera via RSS".
+Det finns inga kategorisidor ännu; när de kommer ska raden "Prenumerera via RSS" även stå där.
+
+### Push-rutan (förhandsvisning, av i produktion)
+
+Feature-flaggan `PUSH_BOX` i build.py är av. Förhandsbygge med rutan: `MOTORPULS_PUSH=1 .venv/bin/python build.py --out _preview`
+(fungerar bara med `--out`; projektroten byggs om utan rutan efteråt). Visa rutan direkt med `?push=visa`, iPhone-tipset med `?push=ios`.
+Källor i `push/` (push.js, push.css, sw.js), backend-utkast i `supabase/` (inte kört). Med flaggan av stoppar bygget om något av
+push finns i utdata. Se `DESIGN.md` (Push-rutan) och `supabase/README.md`.
 
 ### Publicering
 

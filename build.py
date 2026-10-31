@@ -12,6 +12,8 @@
 #                                 Ord som TODO i texten ger en varning i bygget.
 #   img/ld/<slug>-16x9.jpg m.fl.  bilder för NewsArticle-JSON-LD: huvudbilden beskuren till 16:9, 4:3 och 1:1, högst
 #                                 1200 px bred, aldrig uppskalad (checka in dem tillsammans med artikeln, som img/og/)
+#   feed/<kategori>.xml           RSS per kategori (och feed/sverige.xml när någon artikel har sweden: true)
+#   sw.js, push.js                bara när PUSH_BOX är på (förhandsvisning av push-rutan, se nedan)
 #   img/og/<slug>.jpg             delningsbild 1200x630 (JPEG) ur huvudbilden; startsidan använder img/og/motorpuls.jpg
 #                                 (ritad från brand/og/startsida.html)
 #
@@ -80,6 +82,19 @@ def nbnum(s):
     return NUM_GAP.sub("\u00a0", s)
 def nbnum_html(h): return re.sub(r">[^<]+<", lambda m: nbnum(m.group(0)), ">" + h + "<")[1:-1]
 def slugify(s): return re.sub(r"[^a-z0-9]+", "-", s.lower().replace("å","a").replace("ä","a").replace("ö","o")).strip("-")
+
+# ---------- feature-flaggor ----------
+# PUSH_BOX: orange ruta "Få en notis när vi publicerar nyheter" (Web Push). AV i produktion. Utskicken är inte
+# inkopplade (se supabase/README.md). Förhandsbygge med rutan på, bara till --out och aldrig till main:
+#   MOTORPULS_PUSH=1 python build.py --out _preview
+# När flaggan är av finns varken rutan, push.js, sw.js eller någon registrering av service worker i utdata
+# (kontrolleras i check_no_push). PUSH_CONFIG fylls i först när ALX har godkänt backend; vapidPublicKey är den
+# publika VAPID-nyckeln (den privata ligger bara som hemlighet i Supabase), subscribeUrl är Supabase REST för
+# tabellen push_subscriptions och anonKey projektets publika nyckel (publishable). Tomma värden: rutan frågar om
+# lov och registrerar service workern, men sparar ingen prenumeration.
+PUSH_BOX = os.environ.get("MOTORPULS_PUSH") == "1"
+PUSH_CONFIG = {"vapidPublicKey": "", "subscribeUrl": "", "anonKey": ""}
+PUSH_SRC = os.path.join(ROOT, "push")  # källor för rutan: push.js, push.css, sw.js (publiceras inte som katalog)
 
 ANALYTICS = """<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "bace28864ae04c6fa5e9f4a98ca70f94"}'></script><!-- End Cloudflare Web Analytics -->
 """
@@ -324,7 +339,7 @@ def short_title(t, limit=60):
     if head_part != t and room // 2 <= len(head_part) <= room: return head_part + suffix
     return t[:room - 1].rsplit(" ", 1)[0].rstrip(" ,.:;–-") + "…" + suffix
 
-def rss(arts):
+def rss(arts, title=SITE, desc=SITE_DESC, path="/feed.xml", link="/"):
     from email.utils import format_datetime
     def rfc822(iso_s):
         t = dt.datetime.fromisoformat(iso_s)
@@ -341,15 +356,68 @@ def rss(arts):
     return f"""<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
-  <title>{SITE}</title>
-  <link>{DOMAIN}/</link>
-  <description>{esc(SITE_DESC)}</description>
+  <title>{esc(title)}</title>
+  <link>{DOMAIN}{link}</link>
+  <description>{esc(desc)}</description>
   <language>sv-SE</language>
   <lastBuildDate>{rfc822(lastmod("/", arts))}</lastBuildDate>
-  <atom:link href="{DOMAIN}/feed.xml" rel="self" type="application/rss+xml"/>
+  <atom:link href="{DOMAIN}{path}" rel="self" type="application/rss+xml"/>
 {items}</channel>
 </rss>
 """
+
+FEEDS = []  # kategoriflöden: dict(key, name, path, arts), sätts i main()
+
+def category_feeds(arts):
+    """Ett RSS-flöde per kategori (feed/<kategori>.xml), i samma ordning som kategorierna först dyker upp, plus
+    feed/sverige.xml när minst en artikel har sweden: true. Tomma flöden skrivs aldrig."""
+    groups = {}
+    for a in arts: groups.setdefault(a["cat"], (a["category"], []))[1].append(a)
+    feeds = [dict(key=k, name=n, path=f"/feed/{k}.xml", arts=g) for k, (n, g) in groups.items()]
+    sv = [a for a in arts if a.get("sweden")]
+    if sv and "sverige" not in groups: feeds.append(dict(key="sverige", name="Sverige", path="/feed/sverige.xml", arts=sv))
+    return feeds
+
+def feed_for(a):
+    return next(f for f in FEEDS if f["key"] == a["cat"])
+
+def feed_links(feeds):
+    return "".join(f'<link rel="alternate" type="application/rss+xml" title="{SITE}: {esc(f["name"])}" href="{f["path"]}">\n' for f in feeds)
+
+RSS_SVG = ('<svg class="rss-icon" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false">'
+           '<rect width="16" height="16" rx="3" fill="#FF5B1F"/><circle cx="4.6" cy="11.4" r="1.5" fill="#0B0D10"/>'
+           '<path d="M3.2 7.1a5.7 5.7 0 0 1 5.7 5.7M3.2 3.6a9.2 9.2 0 0 1 9.2 9.2" fill="none" stroke="#0B0D10" stroke-width="1.8" stroke-linecap="round"/></svg>')
+
+def rss_row(a):
+    """Rad i slutet av artikeln: kategorins flöde och hela sajtens flöde."""
+    f = feed_for(a)
+    return (f'\n        <p class="rss-row">{RSS_SVG}<span>Prenumerera via RSS:</span> '
+            f'<a href="{f["path"]}">{esc(f["name"])}</a><span aria-hidden="true">·</span><a href="/feed.xml">Alla nyheter</a></p>')
+
+# ---------- push (förhandsvisning, PUSH_BOX) ----------
+def push_src(name): return open(os.path.join(PUSH_SRC, name), encoding="utf-8").read()
+
+def push_head():
+    if not PUSH_BOX: return ""
+    return f'<style>{push_src("push.css")}</style>\n<script src="/push.js?v={hashlib.sha256(push_src("push.js").encode()).hexdigest()[:10]}" defer></script>\n'
+
+def push_box(where):
+    """where: "article" (i flödet efter texten) eller "front" (fast ruta nere, visas efter en stunds skrollning)."""
+    if not PUSH_BOX: return ""
+    cfg = esc(json.dumps(PUSH_CONFIG, separators=(",", ":")))
+    cls = "pushb pushb--toast" if where == "front" else "pushb"
+    return f'''
+<section class="{cls}" id="push" aria-labelledby="push-h" data-config="{cfg}" hidden>
+  <p class="pushb__kicker">Notiser</p>
+  <h2 id="push-h">Få en notis när vi publicerar nyheter</h2>
+  <p class="pushb__lede">En kort notis i din telefon eller dator, bara när en ny artikel är ute. Stäng av när du vill.</p>
+  <p class="pushb__ios">På iPhone fungerar notiser när Motorpuls ligger på hemskärmen. Tryck på Dela <span aria-hidden="true">(rutan med pilen)</span> och välj Lägg till på hemskärmen. Öppna sedan Motorpuls därifrån.</p>
+  <div class="pushb__row">
+    <button class="pushb__btn pushb__yes" type="button" data-push="ja">Ja tack</button>
+    <button class="pushb__btn pushb__btn--ghost" type="button" data-push="nej">Inte nu</button>
+  </div>
+  <p class="pushb__status" role="status" aria-live="polite"></p>
+</section>'''
 
 # ---------- shared html ----------
 def asset(rel):
@@ -358,7 +426,7 @@ def asset(rel):
         return f"{rel}?v={hashlib.sha256(f.read()).hexdigest()[:10]}"
 
 
-def head(title, desc, path, og_type="website", image=None, extra="", preload_img=None, og_title=None, preload_sizes="100vw", noindex=False, robots=None):
+def head(title, desc, path, og_type="website", image=None, extra="", preload_img=None, og_title=None, preload_sizes="100vw", noindex=False, robots=None, feeds=()):
     canon = DOMAIN + path if path else None
     og_title = og_title or title
     og_img = ""
@@ -397,9 +465,9 @@ def head(title, desc, path, og_type="website", image=None, extra="", preload_img
 <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png">
 <link rel="manifest" href="/favicon/site.webmanifest">
 <link rel="alternate" type="application/rss+xml" title="{SITE}" href="/feed.xml">
-<link rel="preload" href="/fonts/newsreader-var.woff2" as="font" type="font/woff2" crossorigin>
+{feed_links(feeds)}<link rel="preload" href="/fonts/newsreader-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
-{pre}{extra}</head>
+{pre}{push_head()}{extra}</head>
 <body>
 <a class="skip" href="#innehall">Hoppa till innehållet</a>
 <header class="masthead">
@@ -409,18 +477,25 @@ def head(title, desc, path, og_type="website", image=None, extra="", preload_img
 </header>
 '''
 
-FOOTER = f'''
+def footer():
+    cats = "".join(f'<li><a href="{f["path"]}">{esc(f["name"])}</a></li>' for f in FEEDS)
+    per_cat = (f'\n      <span class="site-footer__feeds-label" id="rss-kat">RSS per kategori:</span>'
+               f'\n      <ul class="site-footer__feeds" aria-labelledby="rss-kat">{cats}</ul>') if FEEDS else ""
+    return f'''
 <footer class="site-footer">
   <div class="wrap">
     <a class="wordmark" href="/"><img class="logo logo--footer" src="/img/logo.svg" alt="Motorpuls" width="872" height="88" loading="lazy"></a>
     <p class="site-footer__desc">{SITE_DESC}</p>
     <nav class="site-footer__nav" aria-label="Om Motorpuls"><ul><li><a href="/om/">Om Motorpuls</a></li><li><a href="/om/lukas/">Lukas, redaktionell signatur</a></li></ul></nav>
+    <div class="site-footer__rss">
+      <a class="rss-link" href="/feed.xml">{RSS_SVG}RSS</a>{per_cat}
+    </div>
     <p class="fine">© {dt.date.today().year} Motorpuls</p>
   </div>
 </footer>
 '''
 
-def page(h, body): return h + body + FOOTER + ANALYTICS + "</body>\n</html>\n"
+def page(h, body): return h + body + footer() + ANALYTICS + "</body>\n</html>\n"
 
 def meta_line(a, with_date=True, flag_html=""):
     t = f'<time datetime="{a["published"]}">{sv_date(a["date"])}</time>' if with_date else ""
@@ -527,7 +602,7 @@ def popular_section(arts, shown):
 def index(arts):
     first, rest = arts[0], arts[1:]
     h = head(f"{SITE}: korta bilnyheter med källor", SITE_DESC, "/", image=DEFAULT_OG,
-             preload_img=first["img"], preload_sizes=LEAD_SIZES)
+             preload_img=first["img"], preload_sizes=LEAD_SIZES, feeds=FEEDS)
     if rest:
         side = f'<aside class="latest" aria-labelledby="latest-h"><h2 id="latest-h"><span class="pulse-dot" aria-hidden="true"></span>Senaste</h2><ol>' + "".join(
             f'<li><a href="{a["url"]}">{meta_line(a, flag_html=flag(a, "inline"))}<h3>{esc(a["title"])}</h3></a></li>' for a in rest[:5]) + "</ol></aside>"
@@ -572,7 +647,7 @@ def index(arts):
     </div>{popular_section(arts, {first["slug"]} | {a["slug"] for a in rest[:5]})}
   </div>
 {feed}
-</main>
+</main>{push_box("front")}
 '''
     return page(h, body)
 
@@ -738,7 +813,7 @@ def article(a):
              extra=f'<meta property="article:published_time" content="{a["published"]}">\n'
                    f'<meta property="article:section" content="{esc(a["category"])}">\n'
                    + "".join(f'<meta property="article:tag" content="{esc(t)}">\n' for t in a.get("tags") or []) + jsonld,
-             preload_img=img, preload_sizes=HERO_SIZES, robots="max-image-preview:large")
+             preload_img=img, preload_sizes=HERO_SIZES, robots="max-image-preview:large", feeds=[feed_for(a)])
     sources = ""
     if a["sources"]:
         lis = "".join(f'''
@@ -773,7 +848,7 @@ def article(a):
           <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M8 7v4.5M8 4.6v.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
           <p>Texten är skriven med hjälp av AI och faktagranskad mot källorna ovan. <a href="/om/">Så arbetar Motorpuls</a></p>
         </aside>
-{author_box(a["author"])}
+{author_box(a["author"])}{push_box("article")}{rss_row(a)}
         <p class="more"><a class="btn" href="/">Fler nyheter på startsidan</a></p>
       </div>
     </article>
@@ -879,6 +954,7 @@ def write(rel, text):
     open(p, "w", encoding="utf-8").write(text)
 
 def main():
+    global FEEDS
     arts = load_articles()
     if not arts: raise SystemExit("inga artiklar i content/articles/")
     pages = load_pages()
@@ -888,6 +964,7 @@ def main():
     for a in arts:
         a["images_out"] = ensure_images(a)
         a["img"] = a["images_out"][0] if a["images_out"] else None
+    FEEDS = category_feeds(arts)
     # clean old article output so removed articles disappear
     shutil.rmtree(os.path.join(ROOT, "artikel"), ignore_errors=True)
     if os.path.exists(os.path.join(ROOT, "artikel.html")): os.remove(os.path.join(ROOT, "artikel.html"))
@@ -903,6 +980,15 @@ def main():
     write("sitemap-news.xml", news_sitemap(arts))
     write("robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {DOMAIN}/sitemap.xml\nSitemap: {DOMAIN}/sitemap-news.xml\n")
     write("feed.xml", rss(arts))
+    shutil.rmtree(os.path.join(ROOT, "feed"), ignore_errors=True)  # borttagna kategorier försvinner
+    for f in FEEDS:
+        write(f"feed/{f['key']}.xml", rss(f["arts"], title=f"{SITE}: {f['name']}",
+              desc=f"Artiklar i kategorin {f['name']} på {SITE}. {SITE_DESC}", path=f["path"]))
+    for rel in ("sw.js", "push.js"):  # gammal förhandsvisning i projektroten tas bort
+        if os.path.exists(os.path.join(ROOT, rel)): os.remove(os.path.join(ROOT, rel))
+    if PUSH_BOX:
+        write("sw.js", push_src("sw.js"))  # i roten så att service workern gäller hela sajten (scope /)
+        write("push.js", push_src("push.js"))
     print(f"built {len(arts)} artiklar: " + ", ".join(a["slug"] for a in arts))
 
 def out_dir(o):
@@ -952,17 +1038,37 @@ def check_links(out):
     if missing: raise SystemExit("saknade filer i utdata:\n  " + "\n  ".join(sorted(set(missing))))
     return len(refs)
 
+def check_no_push(out):
+    """Flaggan av: inget av push-rutan får finnas i utdata (ingen ruta, ingen push.js, ingen sw.js, ingen registrering)."""
+    bad = [f for f in ("sw.js", "push.js") if os.path.exists(os.path.join(out, f))]
+    for dirpath, _, files in os.walk(out):
+        for fn in files:
+            if fn.endswith((".html", ".js")):
+                t = open(os.path.join(dirpath, fn), encoding="utf-8").read()
+                if re.search(r'id="push"|serviceWorker|/sw\.js|/push\.js|PushManager', t): bad.append(os.path.relpath(os.path.join(dirpath, fn), out))
+    if bad: raise SystemExit("PUSH_BOX är av men push finns i utdata: " + ", ".join(sorted(bad)))
+
+def _rebuild_root_without_push():
+    global PUSH_BOX, OUT
+    PUSH_BOX, OUT = False, None
+    WRITTEN.clear(); main()
+    print("projektroten byggd om utan push-rutan (förhandsvisningen finns bara i --out)")
+
 def cli():
     global OUT
     args = sys.argv[1:]
     if args[:1] == ["--out"] and len(args) == 2: OUT = out_dir(args[1])
     elif args: raise SystemExit("användning: build.py [--out _site]")
+    if PUSH_BOX and not OUT: raise SystemExit("MOTORPULS_PUSH=1 är bara för förhandsbygge: använd --out (t.ex. _preview), aldrig utan")
     main()
     if OUT:
         out = publish(OUT)
+        if not PUSH_BOX: check_no_push(out)
         n = check_links(out)
         files = sum(len(f) for _, _, f in os.walk(out))
         print(f"publicerat till {out}: {files} filer, {n} lokala länkar kontrollerade")
+    if PUSH_BOX:  # bygget skriver även i projektroten: bygg om den utan rutan så att inget av förhandsvisningen checkas in
+        _rebuild_root_without_push()
 
 if __name__ == "__main__":
     cli()
