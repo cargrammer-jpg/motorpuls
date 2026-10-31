@@ -72,7 +72,13 @@ html.mh-js{scroll-padding-top:3rem}
 .wordmark{display:inline-flex;align-items:center;text-decoration:none;flex:none}
 /* Logo: Heartline wordmark (img/logo.svg, viewBox 872x88.3, spike dips ~19% below baseline).
    translateY nudges the cap line to optical centre in the row. */
-.logo{height:clamp(1.15rem,1.6vw + .55rem,1.45rem);width:auto;max-width:100%;transform:translateY(8%)}
+.wordmark{--logo-h:clamp(1.15rem,1.6vw + .55rem,1.45rem)}
+.logo{height:var(--logo-h);width:auto;max-width:100%;transform:translateY(8%)}
+/* Svensk flagga efter loggan (BANNER_FLAG_SVG i build.py). Mått ur loggans höjd h: versalhöjden är 0,78h, flaggan 0,8 av
+   den (0,62h) och står på baslinjen (0,387h under radens mitt, inklusive loggans translateY), mellanrum ca 0,35 versalhöjd.
+   Fast storlek och bara transform: ingen CLS. Följer med när .wordmark skalas i krympt läge. */
+.wordmark__flag{flex:none;display:block;height:calc(var(--logo-h) * .62);width:calc(var(--logo-h) * .992);margin-left:calc(var(--logo-h) * .28);
+  border-radius:1px;transform:translateY(calc(var(--logo-h) * .077))}
 .logo--footer{height:1.35rem;transform:none}
 
 /* Chips */
