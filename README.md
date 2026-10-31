@@ -83,4 +83,10 @@ Bilderna kopieras till `img/articles/<slug>/` och får WebP-versioner (1600, 800
 Den första blir huvudbild (och beskärs till delningsbilden `img/og/<slug>.jpg`), fler bilder blir ett bildspel. Checka in `img/articles/<slug>/` tillsammans med artikeln.
 Det äldre fältet `image` (en URL, med `image_credit`) laddas ned till `img/articles/<slug>.webp` som förut.
 
+## Nyhetsbrev i sidfoten (förhandsvisning)
+
+Feature-flaggan `NEWSLETTER_BOX` i build.py är av. Förhandsbygge med rutan: `MOTORPULS_NYHETSBREV=1 .venv/bin/python build.py --out _preview`
+(bara med `--out`, projektroten byggs om utan rutan). Källor i `nyhetsbrev/` (nyhetsbrev.css, nyhetsbrev.js). Med flaggan av stoppar
+bygget om något av rutan finns i utdata. Anmälan går till Supabase-tabellen `newsletter_subscribers` (se `DESIGN.md`, Nyhetsbrevsrutan i sidfoten).
+
 Sidorna har tills vidare `<meta name="robots" content="noindex">`.

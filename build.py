@@ -14,6 +14,7 @@
 #                                 1200 px bred, aldrig uppskalad (checka in dem tillsammans med artikeln, som img/og/)
 #   feed/<kategori>.xml           RSS per kategori (och feed/sverige.xml när någon artikel har sweden: true)
 #   sw.js, push.js                bara när PUSH_BOX är på (förhandsvisning av push-rutan, se nedan)
+#   nyhetsbrev.js                 bara när NEWSLETTER_BOX är på (förhandsvisning av nyhetsbrevsrutan i sidfoten, se nedan)
 #   img/og/<slug>.jpg             delningsbild 1200x630 (JPEG) ur huvudbilden; startsidan använder img/og/motorpuls.jpg
 #                                 (ritad från brand/og/startsida.html)
 #
@@ -95,6 +96,18 @@ def slugify(s): return re.sub(r"[^a-z0-9]+", "-", s.lower().replace("å","a").re
 PUSH_BOX = os.environ.get("MOTORPULS_PUSH") == "1"
 PUSH_CONFIG = {"vapidPublicKey": "", "subscribeUrl": "", "anonKey": ""}
 PUSH_SRC = os.path.join(ROOT, "push")  # källor för rutan: push.js, push.css, sw.js (publiceras inte som katalog)
+
+# NEWSLETTER_BOX: orange nyhetsbrevsruta i sidfoten (e-postfält och knapp, höger om sidfotens text). AV i produktion,
+# lanseringen väntar på ALX:s OK. Förhandsbygge med rutan på, bara till --out och aldrig till main:
+#   MOTORPULS_NYHETSBREV=1 python build.py --out _preview
+# När flaggan är av finns varken rutan, nyhetsbrev.js eller Supabase-adressen i utdata (kontrolleras i check_no_newsletter).
+# NEWSLETTER_CONFIG: Supabase REST för tabellen public.newsletter_subscribers i projektet motorpuls (eu-north-1, samma som
+# PR #15) och projektets publika nyckel (publishable, får synas i klienten; RLS ger anon bara INSERT med consent = true).
+# Tomma värden: rutan visas men skickar inget. Utskick (t.ex. Resend) och integritetssidan är inte på plats än.
+NEWSLETTER_BOX = os.environ.get("MOTORPULS_NYHETSBREV") == "1"
+NEWSLETTER_CONFIG = {"url": "https://yhxnrcykinmuoqbgboda.supabase.co/rest/v1/newsletter_subscribers",
+                     "key": "sb_publishable_obvTElRjWsEDBGP_aJ4dFA_8PcVkx1c"}
+NEWSLETTER_SRC = os.path.join(ROOT, "nyhetsbrev")  # källor: nyhetsbrev.css, nyhetsbrev.js (publiceras inte som katalog)
 
 ANALYTICS = """<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "bace28864ae04c6fa5e9f4a98ca70f94"}'></script><!-- End Cloudflare Web Analytics -->
 """
@@ -419,6 +432,35 @@ def push_box(where):
   <p class="pushb__status" role="status" aria-live="polite"></p>
 </section>'''
 
+# ---------- nyhetsbrev i sidfoten (förhandsvisning, NEWSLETTER_BOX) ----------
+def nl_src(name): return open(os.path.join(NEWSLETTER_SRC, name), encoding="utf-8").read()
+
+def newsletter_head():
+    if not NEWSLETTER_BOX: return ""
+    return (f'<style>{nl_src("nyhetsbrev.css")}</style>\n<noscript><style>.nlf__form{{display:none}}</style></noscript>\n'
+            f'<script src="/nyhetsbrev.js?v={hashlib.sha256(nl_src("nyhetsbrev.js").encode()).hexdigest()[:10]}" defer></script>\n')
+
+def newsletter_box():
+    if not NEWSLETTER_BOX: return ""
+    cfg = esc(json.dumps(NEWSLETTER_CONFIG, separators=(",", ":")))
+    return f'''
+    <section class="nlf" id="nyhetsbrev-fot" aria-labelledby="nlf-h" data-config="{cfg}">
+      <p class="nlf__kicker">Nyhetsbrev</p>
+      <h2 id="nlf-h">Få Motorpuls i inkorgen</h2>
+      <p class="nlf__lede">De viktigaste bilnyheterna, korta och med källor. Du hänger med utan att leta.</p>
+      <noscript><p class="nlf__fine">Anmälan kräver JavaScript.</p></noscript>
+      <form class="nlf__form" novalidate>
+        <label class="nlf__label" for="nlf-email">Din e-postadress</label>
+        <div class="nlf__row">
+          <input class="nlf__input" id="nlf-email" type="email" name="email" inputmode="email" autocomplete="email" maxlength="254" required placeholder="namn@exempel.se" aria-describedby="nlf-fine">
+          <button class="nlf__btn" type="submit">Prenumerera</button>
+        </div>
+        <div class="nlf__hp" aria-hidden="true"><label>Lämna tomt <input type="text" name="webbplats" tabindex="-1" autocomplete="off"></label></div>
+        <p class="nlf__fine" id="nlf-fine">Helt gratis, avsluta när du vill.</p>
+        <p class="nlf__status" role="status" aria-live="polite"></p>
+      </form>
+    </section>'''
+
 # ---------- shared html ----------
 def asset(rel):
     """URL med ?v=<kort innehållshash> så att webbläsare (Safari) alltid hämtar aktuell css/js efter en ändring."""
@@ -467,7 +509,7 @@ def head(title, desc, path, og_type="website", image=None, extra="", preload_img
 <link rel="alternate" type="application/rss+xml" title="{SITE}" href="/feed.xml">
 {feed_links(feeds)}<link rel="preload" href="/fonts/newsreader-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
-{pre}{push_head()}{extra}</head>
+{pre}{push_head()}{newsletter_head()}{extra}</head>
 <body>
 <a class="skip" href="#innehall">Hoppa till innehållet</a>
 <header class="masthead">
@@ -481,16 +523,17 @@ def footer():
     cats = "".join(f'<li><a href="{f["path"]}">{esc(f["name"])}</a></li>' for f in FEEDS)
     per_cat = (f'\n      <span class="site-footer__feeds-label" id="rss-kat">RSS per kategori:</span>'
                f'\n      <ul class="site-footer__feeds" aria-labelledby="rss-kat">{cats}</ul>') if FEEDS else ""
+    main_open, main_close = ('<div class="site-footer__main">\n    ', '\n    </div>') if NEWSLETTER_BOX else ("", "")
     return f'''
-<footer class="site-footer">
+<footer class="site-footer{" site-footer--nl" if NEWSLETTER_BOX else ""}">
   <div class="wrap">
-    <a class="wordmark" href="/"><img class="logo logo--footer" src="/img/logo.svg" alt="Motorpuls" width="872" height="88" loading="lazy"></a>
+    {main_open}<a class="wordmark" href="/"><img class="logo logo--footer" src="/img/logo.svg" alt="Motorpuls" width="872" height="88" loading="lazy"></a>
     <p class="site-footer__desc">{SITE_DESC}</p>
     <nav class="site-footer__nav" aria-label="Om Motorpuls"><ul><li><a href="/om/">Om Motorpuls</a></li><li><a href="/om/lukas/">Om Lukas</a></li></ul></nav>
     <div class="site-footer__rss">
       <a class="rss-link" href="/feed.xml">{RSS_SVG}RSS</a>{per_cat}
     </div>
-    <p class="fine">© {dt.date.today().year} Motorpuls</p>
+    <p class="fine">© {dt.date.today().year} Motorpuls</p>{main_close}{newsletter_box()}
   </div>
 </footer>
 '''
@@ -991,6 +1034,8 @@ def main():
               desc=f"Artiklar i kategorin {f['name']} på {SITE}. {SITE_DESC}", path=f["path"]))
     for rel in ("sw.js", "push.js"):  # gammal förhandsvisning i projektroten tas bort
         if os.path.exists(os.path.join(ROOT, rel)): os.remove(os.path.join(ROOT, rel))
+    if os.path.exists(os.path.join(ROOT, "nyhetsbrev.js")): os.remove(os.path.join(ROOT, "nyhetsbrev.js"))
+    if NEWSLETTER_BOX: write("nyhetsbrev.js", nl_src("nyhetsbrev.js"))
     if PUSH_BOX:
         write("sw.js", push_src("sw.js"))  # i roten så att service workern gäller hela sajten (scope /)
         write("push.js", push_src("push.js"))
@@ -1053,11 +1098,21 @@ def check_no_push(out):
                 if re.search(r'id="push"|serviceWorker|/sw\.js|/push\.js|PushManager', t): bad.append(os.path.relpath(os.path.join(dirpath, fn), out))
     if bad: raise SystemExit("PUSH_BOX är av men push finns i utdata: " + ", ".join(sorted(bad)))
 
-def _rebuild_root_without_push():
-    global PUSH_BOX, OUT
-    PUSH_BOX, OUT = False, None
+def check_no_newsletter(out):
+    """Flaggan av: inget av sidfotens nyhetsbrevsruta får finnas i utdata (ingen ruta, ingen nyhetsbrev.js, ingen Supabase-adress)."""
+    bad = ["nyhetsbrev.js"] if os.path.exists(os.path.join(out, "nyhetsbrev.js")) else []
+    for dirpath, _, files in os.walk(out):
+        for fn in files:
+            if fn.endswith((".html", ".js")):
+                t = open(os.path.join(dirpath, fn), encoding="utf-8").read()
+                if re.search(r'id="nyhetsbrev-fot"|/nyhetsbrev\.js|newsletter_subscribers|site-footer--nl', t): bad.append(os.path.relpath(os.path.join(dirpath, fn), out))
+    if bad: raise SystemExit("NEWSLETTER_BOX är av men nyhetsbrevsrutan finns i utdata: " + ", ".join(sorted(bad)))
+
+def _rebuild_root_without_previews():
+    global PUSH_BOX, NEWSLETTER_BOX, OUT
+    PUSH_BOX, NEWSLETTER_BOX, OUT = False, False, None
     WRITTEN.clear(); main()
-    print("projektroten byggd om utan push-rutan (förhandsvisningen finns bara i --out)")
+    print("projektroten byggd om utan förhandsrutorna (förhandsvisningen finns bara i --out)")
 
 def cli():
     global OUT
@@ -1065,15 +1120,17 @@ def cli():
     if args[:1] == ["--out"] and len(args) == 2: OUT = out_dir(args[1])
     elif args: raise SystemExit("användning: build.py [--out _site]")
     if PUSH_BOX and not OUT: raise SystemExit("MOTORPULS_PUSH=1 är bara för förhandsbygge: använd --out (t.ex. _preview), aldrig utan")
+    if NEWSLETTER_BOX and not OUT: raise SystemExit("MOTORPULS_NYHETSBREV=1 är bara för förhandsbygge: använd --out (t.ex. _preview), aldrig utan")
     main()
     if OUT:
         out = publish(OUT)
         if not PUSH_BOX: check_no_push(out)
+        if not NEWSLETTER_BOX: check_no_newsletter(out)
         n = check_links(out)
         files = sum(len(f) for _, _, f in os.walk(out))
         print(f"publicerat till {out}: {files} filer, {n} lokala länkar kontrollerade")
-    if PUSH_BOX:  # bygget skriver även i projektroten: bygg om den utan rutan så att inget av förhandsvisningen checkas in
-        _rebuild_root_without_push()
+    if PUSH_BOX or NEWSLETTER_BOX:  # bygget skriver även i projektroten: bygg om den utan rutorna så att inget av förhandsvisningen checkas in
+        _rebuild_root_without_previews()
 
 if __name__ == "__main__":
     cli()
