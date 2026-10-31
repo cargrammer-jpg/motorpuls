@@ -77,7 +77,7 @@ NEWS_LANG = "sv"      # news:language i sitemap-news.xml (ISO 639)
 NEWS_DAYS = 2         # Google: bara artiklar från de senaste två dygnen i news-sitemapen
 # Search Console, verifiering med HTML-tagg: klistra in content-värdet från Search Console (bara koden, inte hela
 # taggen). Tom sträng ger ingen tagg. Taggen hamnar bara på startsidan.
-GOOGLE_SITE_VERIFICATION = ""
+GOOGLE_SITE_VERIFICATION = "1G9pdcpgySoszmWhSPBgBxrvZxkyl6kbvszF7FSnVl4"
 SITE_DESC = "Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor."
 MAX_W = 1600
 VARIANTS = ((MAX_W, ""), (800, "-800"), (400, "-400"))  # bredd, filändelse; minsta används av miniatyrerna (104 px)
