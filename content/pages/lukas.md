@@ -2,6 +2,6 @@
 title: "Lukas"
 path: /om/lukas/
 author: lukas
-description: "Lukas är Motorpuls redaktionella signatur för AI-assisterad journalistik."
+description: "Lukas är personen bakom Motorpuls. Lukas är ett mellannamn som används som pseudonym."
 ---
-**Lukas är en redaktionell signatur för AI-assisterad journalistik på Motorpuls.** Lukas är ingen verklig person och inte en enskild journalist. Artiklarna under signaturen tas fram med hjälp av AI utifrån källor som länkas längst ner i varje artikel, och varje artikel granskas och godkänns av en människa innan den publiceras. Läs mer under [Hur artiklarna skrivs](/om/#hur-artiklarna-skrivs).
+**Lukas är personen bakom Motorpuls.** Lukas är ett mellannamn som används som pseudonym av integritetsskäl. Han är bilentusiast med ett särskilt intresse för motorsport, elbilar, Tesla och sportbilar, och kör själv en BMW Z4 M Coupé med kompressor. Texterna på Motorpuls tas fram med hjälp av AI utifrån källor som länkas längst ner i varje artikel, och Lukas granskar varje artikel innan den publiceras. Läs mer under [Hur artiklarna skrivs](/om/#hur-artiklarna-skrivs).
