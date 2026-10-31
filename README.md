@@ -14,7 +14,7 @@ Artiklar ligger som markdown med YAML-front matter i `content/articles/`. `build
 - `feed/<kategori>.xml` (RSS per kategori, plus `feed/sverige.xml` när någon artikel har `sweden: true`)
 - `img/og/<slug>.jpg` (delningsbild 1200×630, checka in den tillsammans med artikeln)
 - `sitemap-news.xml` (Google News-sitemap, bara artiklar från de senaste två dygnen räknat vid bygget, så sajten bör byggas om minst en gång per dygn, se schemat som föreslås i PR:en)
-- `om/` och `om/lukas/` ur `content/pages/*.md` (om-sidan och författarsidan för signaturen Lukas)
+- `om/` och `om/lukas/` ur `content/pages/*.md` (om-sidan och författarsidan för Lukas)
 - `img/ld/<slug>-16x9.jpg`, `-4x3.jpg`, `-1x1.jpg` (bilder för NewsArticle-JSON-LD, checka in dem som `img/og/`; skapas inte om huvudbildens licens förbjuder beskärning)
 
 ### Google Nyheter och Discover
