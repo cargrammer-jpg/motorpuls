@@ -76,7 +76,8 @@ för X, Facebook, LinkedIn och WhatsApp: vanliga länkar med aria-label "Dela p�
 (text från 40rem, bara ikon på mobil) visar en liten bekräftelse "Länken är kopierad" ovanpå knappen (role="status"). Där webbläsaren
 har Web Share API (mobiler) blir etiketten "Dela" en orange knapp (`pulse`, mörk text 6,3:1) som öppnar systemets delningsmeny.
 Inga skript från tredje part, inga spårningsparametrar. Knapparna som kräver JS har sin plats från början (visibility): inget
-layoutskifte. X-texten är rubriken, utan @-namn (sajten har inget eget X-konto angivet).
+layoutskifte. SMS/iMessage (pratbubbla, `sms:?&body=` med rubrik och länk, aria-label "Dela via SMS eller iMessage") visas
+bara på pekskärmar (`(hover: none) and (pointer: coarse)`), dold på dator. X-texten är rubriken, utan @-namn (sajten har inget eget X-konto angivet).
 Delningskort: og:title, og:description, og:image 1200x630 med og:image:alt (huvudbildens alt-text), twitter:card summary_large_image,
 article:published_time och article:modified_time.
 

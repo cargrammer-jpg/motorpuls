@@ -206,6 +206,9 @@ html.mh-js{scroll-padding-top:3rem}
   transition:color .18s var(--ease),border-color .18s var(--ease),background-color .18s var(--ease),transform .15s var(--ease)}
 .share__btn:hover{color:var(--text);border-color:var(--pulse);background:var(--raised)}
 .share__btn svg{flex:none}
+/* SMS/iMessage bara på pekskärmar (mobiler, surfplattor); dold med mus. Raden radbryts vid behov (flex-wrap). */
+.share__sms-wrap{display:none}
+@media (hover:none) and (pointer:coarse){.share__sms-wrap{display:block}}
 .share__copy-wrap{position:relative}
 .share__copy{visibility:hidden}
 .share.is-ready .share__copy{visibility:visible}
