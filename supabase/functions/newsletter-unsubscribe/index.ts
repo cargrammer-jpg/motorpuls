@@ -2,6 +2,6 @@
 // POST /functions/v1/newsletter-unsubscribe?token=<64 hex>  ->  {"status": "unsubscribed" | "missing"}. Raden raderas.
 // GET skickas vidare (303) till sidan på motorpuls.se och ändrar inget. Driftsätts med --no-verify-jwt.
 import { unsubscribeHandler } from "../_shared/handlers.ts";
-import { liveDeps } from "../_shared/deps.ts";
+import { serveLive } from "../_shared/deps.ts";
 
-Deno.serve(unsubscribeHandler(liveDeps()));
+Deno.serve(serveLive(unsubscribeHandler));

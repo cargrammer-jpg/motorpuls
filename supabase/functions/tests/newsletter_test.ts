@@ -127,10 +127,32 @@ Deno.test("mejlen är på svenska, utan tankstreck, med avregistrering", () => {
   assert(!DASHES.test(CONSENT_TEXT));
 });
 
-Deno.test("mejlen visar ingen kontaktadress", () => {
+Deno.test("den enda adressen i mejlen är hello@motorpuls.se", () => {
   const c = renderConfirmEmail({ confirmUrl: "https://motorpuls.se/x", unsubscribePage: "https://motorpuls.se/y" });
   const i = renderIssue(parseFeed(FEED), new Date(), "https://motorpuls.se/y");
-  for (const m of [c, i]) assert(!/[\w.+-]+@[\w-]+\.[\w.]+/.test(m.html + m.text), "e-postadress i mallen");
+  for (const m of [c, i]) {
+    const found = new Set((m.html + m.text).match(/[\w.+-]+@[\w-]+(?:\.[\w-]+)+/g) ?? []);
+    assertEquals([...found], ["hello@motorpuls.se"]);
+    assert(m.html.includes('href="mailto:hello@motorpuls.se"'));
+  }
+});
+
+Deno.test("nyhetsbrevet: huvudartikel med bild, högst fem kort med Läs mer, preheader och 600 px", () => {
+  const many = Array.from({ length: 8 }, (_, n) => ({
+    title: `Nyhet ${n}`, url: `${SITE}/artikel/nyhet-${n}/`, description: `Kort ${n}.`, category: "Elbil",
+    published: new Date(Date.UTC(2026, 9, 31, 10 - n)), image: `${SITE}/img/og/nyhet-${n}.jpg`,
+  }));
+  const m = renderIssue(many, new Date("2026-10-31T10:00:00Z"), `${SITE}/prenumeration/avsluta/?token=x`);
+  assert(m.html.includes(`src="${SITE}/img/og/nyhet-0.jpg"`));
+  assertEquals((m.html.match(/Läs mer&nbsp;&rarr;/g) ?? []).length, 5);
+  assert(!m.html.includes("Nyhet 6<"));
+  assert(m.html.includes("Och 2 till på sajten."));
+  assert(m.html.includes('width="600"'));
+  assert(m.html.includes("Kort 0."));
+  assert(m.html.includes("lördag 31 oktober 2026"));
+  assert(m.text.includes("Läs mer: https://motorpuls.se/artikel/nyhet-1/"));
+  assert(m.html.includes("Avsluta prenumerationen"));
+  assertEquals(parseFeed(FEED)[0].image, `${SITE}/img/og/ny-elbil.jpg`);
 });
 
 // ---------- anmälan ----------
@@ -341,6 +363,15 @@ Deno.test("provmejl går bara till test_to", async () => {
   const r = await (await sendHandler({ store, mailer, config, now: NOW, fetchFeed: feed })(sendReq({ mode: "test", test_to: "alx@exempel.se" }))).json();
   assertEquals(r.mode, "test");
   assertEquals(outbox.map((m) => m.to), ["alx@exempel.se"]);
+  assertMatch(outbox[0].subject, /^\[TEST\] /);
+  assertEquals(outbox[0].headers["List-Unsubscribe"], `<${SITE}/prenumeration/avsluta/>`);
+});
+
+Deno.test("provmejl: trasiga bilder tas bort i stället för att visas", async () => {
+  const { store } = await seeded();
+  const { mailer, outbox } = fakeMailer();
+  await sendHandler({ store, mailer, config, now: NOW, fetchFeed: feed, imageExists: () => Promise.resolve(false) })(sendReq({ mode: "test", test_to: "alx@exempel.se" }));
+  assert(!outbox[0].html.includes("/img/og/"));
 });
 
 // ---------- Resend-klienten ----------

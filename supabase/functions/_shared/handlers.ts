@@ -2,7 +2,7 @@
 // hämtning av feed) skickas in, så att testerna kan köra allt utan nätverk. index.ts i varje funktion kopplar in de riktiga.
 import {
   clientIp, CONSENT_TEXT, isToken, issueKey, links, normalizeEmail, normalizeSource, parseFeed, PENDING_DAYS, pickArticles,
-  planSubscription, renderConfirmEmail, renderIssue, safeEqual, sha256Hex, unsubscribeHeaders,
+  planSubscription, renderConfirmEmail, renderIssue, safeEqual, sha256Hex, unsubscribeHeaders, type Article, ISSUE_CARDS,
 } from "./newsletter.ts";
 import type { Mailer, Outbound } from "./mail.ts";
 import type { Store } from "./store.ts";
@@ -17,7 +17,29 @@ export type Config = {
   feedUrl: string;
 };
 
-export type Deps = { store: Store; mailer: Mailer; config: Config; now?: () => Date; fetchFeed?: (url: string) => Promise<string> };
+export type Deps = {
+  store: Store; mailer: Mailer; config: Config; now?: () => Date; fetchFeed?: (url: string) => Promise<string>;
+  /** true om bilden finns. liveDeps använder headImage (HEAD 200 med image/*). Utan den används bilderna som de är. */
+  imageExists?: (url: string) => Promise<boolean>;
+};
+
+/** Tar bort bildadresser som inte svarar, så att mejlet aldrig visar en trasig bild. Bara artiklarna som visas kontrolleras. */
+async function keepWorkingImages(articles: Article[], exists: (url: string) => Promise<boolean>): Promise<Article[]> {
+  return await Promise.all(articles.map(async (a, i) => {
+    if (!a.image || i > ISSUE_CARDS) return a;
+    try {
+      return (await exists(a.image)) ? a : { ...a, image: undefined };
+    } catch {
+      return { ...a, image: undefined };
+    }
+  }));
+}
+
+export const headImage = async (u: string) => {
+  const r = await fetch(u, { method: "HEAD", headers: { "user-agent": "motorpuls-nyhetsbrev" } });
+  await r.body?.cancel();
+  return r.ok && (r.headers.get("content-type") ?? "").startsWith("image/");
+};
 
 // Gränser som BuildShipper: 5 försök per timme och IP, 3 per timme och adress.
 export const RATE = { ipPerHour: 5, emailPerHour: 3 };
@@ -156,17 +178,22 @@ export function sendHandler(deps: Deps) {
     const at = now();
     try {
       const sinceArg = typeof body.since === "string" ? new Date(body.since) : null;
-      const since = sinceArg && !Number.isNaN(sinceArg.getTime()) ? sinceArg : (await store.lastSentAt()) ?? new Date(at.getTime() - 86400_000);
-      const articles = pickArticles(parseFeed(await fetchFeed(config.feedUrl), config.site), since);
+      // Provmejlet visar de senaste artiklarna (en huvudartikel och upp till ISSUE_CARDS till) om inget since anges.
+      const since = sinceArg && !Number.isNaN(sinceArg.getTime()) ? sinceArg
+        : mode === "test" ? new Date(0) : (await store.lastSentAt()) ?? new Date(at.getTime() - 86400_000);
+      const picked = pickArticles(parseFeed(await fetchFeed(config.feedUrl), config.site), since);
+      const articles = mode === "dry-run" ? picked : await keepWorkingImages(mode === "test" ? picked.slice(0, ISSUE_CARDS + 1) : picked, deps.imageExists ?? (() => Promise.resolve(true)));
       const key = typeof body.issue_key === "string" && /^[\w-]{1,40}$/.test(body.issue_key) ? body.issue_key : issueKey(at);
       const preview = renderIssue(articles, at, `${config.site}/prenumeration/avsluta/`);
 
       if (mode === "test") {
         const to = normalizeEmail(body.test_to);
         if (!to) return json({ error: "test_to" }, 400);
-        if (articles.length === 0) return json({ mode, skipped: "inga nya artiklar", since: since.toISOString() });
-        const r = await mailer.send([{ to, ...preview, headers: {} }]);
-        return json({ mode, subject: preview.subject, articles: articles.length, logged: r.logged });
+        if (articles.length === 0) return json({ mode, skipped: "inga artiklar", since: since.toISOString() });
+        // Provmejlet hör inte till någon rad: avregistreringslänken går till sidan utan kod och List-Unsubscribe pekar dit.
+        const test = renderIssue(articles, at, `${config.site}/prenumeration/avsluta/`, { subjectPrefix: "[TEST] " });
+        const r = await mailer.send([{ to, ...test, headers: { "List-Unsubscribe": `<${config.site}/prenumeration/avsluta/>` } }]);
+        return json({ mode, to, subject: test.subject, articles: articles.length, logged: r.logged, ids: r.ids });
       }
 
       if (mode === "dry-run" || !config.sendEnabled) {

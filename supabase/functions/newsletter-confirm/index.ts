@@ -2,6 +2,6 @@
 // POST /functions/v1/newsletter-confirm  {"token": "<64 hex>"}  ->  {"status": "confirmed" | "already" | "missing"}
 // Driftsätts med --no-verify-jwt.
 import { confirmHandler } from "../_shared/handlers.ts";
-import { liveDeps } from "../_shared/deps.ts";
+import { serveLive } from "../_shared/deps.ts";
 
-Deno.serve(confirmHandler(liveDeps()));
+Deno.serve(serveLive(confirmHandler));

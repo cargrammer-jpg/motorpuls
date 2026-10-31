@@ -105,8 +105,9 @@ PUSH_SRC = os.path.join(ROOT, "push")  # källor för rutan: push.js, push.css, 
 # till newsletter-subscribe, sidorna /prenumeration/bekrafta/ och /prenumeration/avsluta/ till newsletter-confirm och
 # newsletter-unsubscribe. Ingen nyckel behövs i klienten (funktionerna driftsätts med --no-verify-jwt). Dubbel bekräftelse
 # och utskick via Resend: se supabase/README.md. Integritetssidan /integritet/ och sidorna under /prenumeration/ byggs
-# bara med flaggan på och visar ingen kontaktadress.
+# bara med flaggan på. Den enda kontaktadressen på sajten är CONTACT_EMAIL (hello@motorpuls.se, ALX:s beslut 31 okt 2026).
 NEWSLETTER_BOX = os.environ.get("MOTORPULS_NYHETSBREV") == "1"
+CONTACT_EMAIL = "hello@motorpuls.se"  # officiell kontakt: sidfoten, /om/, /integritet/ och Organization i JSON-LD
 NEWSLETTER_CONFIG = {"api": "https://yhxnrcykinmuoqbgboda.supabase.co/functions/v1"}
 NEWSLETTER_PAGES = ("integritet", "prenumeration")  # kataloger som bara byggs med flaggan på
 NEWSLETTER_SRC = os.path.join(ROOT, "nyhetsbrev")  # källor: nyhetsbrev.css, nyhetsbrev.js (publiceras inte som katalog)
@@ -465,7 +466,7 @@ def newsletter_box():
 
 
 # ---------- nyhetsbrevets sidor (bara med NEWSLETTER_BOX) ----------
-# Integritetssidan och sidorna för bekräfta/avsluta. Ingen kontaktadress visas på sajten (ALX:s beslut).
+# Integritetssidan och sidorna för bekräfta/avsluta. Kontakt för frågor om uppgifterna: CONTACT_EMAIL.
 PRIVACY_UPDATED = dt.date(2026, 10, 31)
 
 def _simple_page(title, desc, path, inner, noindex=True):
@@ -501,11 +502,13 @@ def privacy_page():
 <h2>Tjänster vi använder</h2>
 <ul>
 <li><strong>Supabase</strong> lagrar adresserna i en databas i Stockholm (EU).</li>
-<li><strong>Resend</strong> skickar mejlen åt oss.</li>
+<li><strong>Resend</strong> skickar mejlen åt oss och tar emot mejl till {CONTACT_EMAIL}.</li>
 <li><strong>Cloudflare Web Analytics</strong> räknar besök utan kakor (cookies) och sparar inget i din webbläsare.</li>
 </ul>
 <h2>Dina rättigheter</h2>
-<p>Du har rätt att få veta vilka uppgifter vi har om dig, få dem rättade eller raderade och att ta tillbaka ditt samtycke. Svara på något av mejlen du har fått från oss. Du kan också lämna klagomål till Integritetsskyddsmyndigheten (IMY).</p>
+<p>Du har rätt att få veta vilka uppgifter vi har om dig, få dem rättade eller raderade och att ta tillbaka ditt samtycke. Mejla <a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a>, så svarar vi så snart vi kan och senast inom en månad. Du kan också lämna klagomål till Integritetsskyddsmyndigheten (IMY).</p>
+<h2>Kontakt</h2>
+<p>Frågor om hur vi hanterar dina uppgifter skickar du till <a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a>.</p>
 <p>Senast uppdaterad {sv_date(PRIVACY_UPDATED)}.</p>
         </div>'''
     return _simple_page("Integritet", "Vilka uppgifter Motorpuls sparar när du anmäler dig till nyhetsbrevet och hur du får dem raderade.", "/integritet/", inner, noindex=False)
@@ -602,7 +605,7 @@ def footer():
     <div class="site-footer__rss">
       <a class="rss-link" href="/feed.xml">{RSS_SVG}RSS</a>{per_cat}
     </div>
-    <p class="fine">© {dt.date.today().year} Motorpuls</p>{main_close}{newsletter_box()}
+    <p class="fine">© {dt.date.today().year} Motorpuls<span class="site-footer__contact"> <span aria-hidden="true">·</span> <a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a></span></p>{main_close}{newsletter_box()}
   </div>
 </footer>
 '''
@@ -915,7 +918,7 @@ def article(a):
           "articleSection": a["category"], "keywords": a.get("tags") or [],
           "mainEntityOfPage": {"@type": "WebPage", "@id": DOMAIN + a["url"]}, "url": DOMAIN + a["url"],
           "author": author_ld(a["author"]),
-          "publisher": {"@type": "Organization", "name": SITE, "url": DOMAIN + "/",
+          "publisher": {"@type": "Organization", "name": SITE, "url": DOMAIN + "/", "email": CONTACT_EMAIL,
                         "logo": {"@type": "ImageObject", "url": DOMAIN + "/favicon/android-chrome-512.png", "width": 512, "height": 512}}}
     if imgs:
         credit = {k: v for k, v in {"creditText": img["credit"].removeprefix("Foto: ") or None,

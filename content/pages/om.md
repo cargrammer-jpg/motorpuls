@@ -21,4 +21,8 @@ Vi anv채nder pressbilder fr책n tillverkarna eller bilder med en licens som till�
 
 ## R채ttelser
 
-Om vi har fel r채ttar vi artikeln och skriver ut n채r den uppdaterades.
+Om vi har fel r채ttar vi artikeln och skriver ut n채r den uppdaterades. Har du hittat ett fel? Mejla [hello@motorpuls.se](mailto:hello@motorpuls.se).
+
+## Kontakt
+
+Tips, r채ttelser eller fr책gor? Mejla [hello@motorpuls.se](mailto:hello@motorpuls.se).

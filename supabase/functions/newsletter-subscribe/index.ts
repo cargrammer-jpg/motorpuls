@@ -2,6 +2,6 @@
 // POST /functions/v1/newsletter-subscribe  {"email": "...", "source": "/artikel/...", "webbplats": ""}
 // Driftsätts med --no-verify-jwt (anropas från webbläsaren utan inloggning; skyddas av Origin, honungsfälla och gränser).
 import { subscribeHandler } from "../_shared/handlers.ts";
-import { liveDeps } from "../_shared/deps.ts";
+import { serveLive } from "../_shared/deps.ts";
 
-Deno.serve(subscribeHandler(liveDeps()));
+Deno.serve(serveLive(subscribeHandler));

@@ -29,12 +29,24 @@ bekräfta och för att avsluta, one-click-avregistrering med `List-Unsubscribe` 
 Sidorna `/prenumeration/bekrafta/`, `/prenumeration/avsluta/` och `/integritet/` byggs av build.py med `NEWSLETTER_BOX`.
 De ligger på motorpuls.se eftersom Supabase inte visar HTML från sin egen domän.
 
-### Hemligheter och inställningar (sätts med `supabase secrets set`, aldrig i repot)
+### Hemligheter och inställningar (aldrig i repot)
+Funktionerna läser först miljövariabler (`supabase secrets set`). Saknas en hemlighet läses den ur **Supabase Vault** via
+`public.newsletter_vault_secrets()` (migrationen `20261031140000`), som bara `service_role` får köra och som bara kan läsa
+namnen nedan. Värdena läggs in med `select vault.create_secret('<värde>', '<namn>')` direkt i databasen, aldrig i en fil i repot.
+
+| Miljövariabel | Namn i Vault |
+| --- | --- |
+| `RESEND_API_KEY` | `newsletter_resend_api_key` |
+| `NEWSLETTER_HASH_SALT` | `newsletter_hash_salt` |
+| `NEWSLETTER_SEND_SECRET` | `newsletter_send_secret` |
+| `RESEND_INBOUND_WEBHOOK_SECRET` | `resend_inbound_webhook_secret` |
+| `RESEND_INBOUND_API_KEY` | `resend_inbound_api_key` |
+
 | Namn | Krävs | Vad |
 | --- | --- | --- |
 | `RESEND_API_KEY` | för att skicka | Ny nyckel i BuildShippers Resend-konto, bara sändning och bara domänen motorpuls.se. Utan den loggas mejlen och inget skickas |
 | `NEWSLETTER_FROM` | nej | Avsändare. Standard `Motorpuls <nyhetsbrev@motorpuls.se>` |
-| `NEWSLETTER_REPLY_TO` | nej | Svarsadress (en brevlåda som läses). Visas aldrig på sajten |
+| `NEWSLETTER_REPLY_TO` | nej | Svarsadress. Standard `hello@motorpuls.se` (den officiella kontaktadressen) |
 | `NEWSLETTER_HASH_SALT` | ja | Lång slumpsträng för hasharna i `newsletter_rate_hits` |
 | `NEWSLETTER_SEND_SECRET` | för utskick | Hemligheten i `x-newsletter-secret` |
 | `NEWSLETTER_SEND_ENABLED` | nej | Exakt `true` för riktiga utskick. Annars dry-run |
@@ -42,6 +54,14 @@ De ligger på motorpuls.se eftersom Supabase inte visar HTML från sin egen dom�
 | `NEWSLETTER_SITE_URL`, `NEWSLETTER_FEED_URL` | nej | Standard `https://motorpuls.se` och `<sajt>/feed.xml` |
 
 `SUPABASE_URL` och `SUPABASE_SERVICE_ROLE_KEY` finns automatiskt i funktionerna.
+
+### hello@motorpuls.se (inbound-forward)
+`functions/inbound-forward`: Resend tar emot mejl till motorpuls.se (MX hos Strato pekar på Resend) och skickar webhooken
+`email.received`. Funktionen kontrollerar Svix-signaturen, tar bara mejl till hello@motorpuls.se, hoppar över mejl från
+motorpuls.se (slingskydd, utom provet från nyhetsbrev@), hämtar mejlet och bilagorna och skickar en kopia till
+`INBOUND_FORWARD_TO` (standard moedare@mail.grokbot.com) från `Motorpuls <hello@motorpuls.se>` med Reply-To satt till
+avsändaren. Varje `email_id` vidarebefordras en gång (`public.inbound_forwards`). Att läsa mottagna mejl kräver en
+Resend-nyckel med full åtkomst (`RESEND_INBOUND_API_KEY`); sändningsnyckeln räcker inte.
 
 ### Kvar innan nyhetsbrevet fungerar (kräver ALX:s OK)
 1. Resend (BuildShippers konto): lägg till domänen `motorpuls.se` i regionen eu-west-1 (Irland) och skapa en sändningsnyckel

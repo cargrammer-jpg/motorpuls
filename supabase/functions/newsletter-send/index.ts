@@ -3,6 +3,6 @@
 // Body: {"mode": "dry-run" | "test" | "send", "test_to": "...", "since": "...", "issue_key": "..."}. Standard är dry-run.
 // Riktiga utskick bara när NEWSLETTER_SEND_ENABLED=true. Driftsätts med --no-verify-jwt (skyddas av hemligheten).
 import { sendHandler } from "../_shared/handlers.ts";
-import { liveDeps } from "../_shared/deps.ts";
+import { serveLive } from "../_shared/deps.ts";
 
-Deno.serve(sendHandler(liveDeps()));
+Deno.serve(serveLive(sendHandler));

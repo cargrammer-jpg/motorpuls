@@ -6,7 +6,7 @@ export type Outbound = { to: string; subject: string; html: string; text: string
 
 export interface Mailer {
   /** Skickar alla mejl. idempotencyKey (valfri) gör att samma omgång inte skickas två gånger hos Resend. */
-  send(messages: Outbound[], idempotencyKey?: string): Promise<{ sent: number; logged: boolean }>;
+  send(messages: Outbound[], idempotencyKey?: string): Promise<{ sent: number; logged: boolean; ids?: string[] }>;
 }
 
 export function resendMailer(opts: { apiKey?: string; from: string; replyTo?: string; fetchImpl?: typeof fetch }): Mailer {
@@ -19,6 +19,7 @@ export function resendMailer(opts: { apiKey?: string; from: string; replyTo?: st
         return { sent: 0, logged: true };
       }
       let sent = 0;
+      const ids: string[] = [];
       for (let i = 0; i < messages.length; i += BATCH) {
         const chunk = messages.slice(i, i + BATCH).map((m) => ({
           from: opts.from,
@@ -36,10 +37,11 @@ export function resendMailer(opts: { apiKey?: string; from: string; replyTo?: st
           await res.body?.cancel();
           throw new Error(`Resend svarade ${res.status} efter ${sent} mejl`);
         }
-        await res.body?.cancel();
+        const out = await res.json().catch(() => null) as { data?: { id?: string }[] } | null;
+        for (const d of out?.data ?? []) if (d?.id) ids.push(d.id);
         sent += chunk.length;
       }
-      return { sent, logged: false };
+      return { sent, logged: false, ids };
     },
   };
 }

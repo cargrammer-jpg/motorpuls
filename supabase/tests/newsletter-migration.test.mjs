@@ -7,6 +7,16 @@ import { readFileSync } from "node:fs";
 import { PGlite } from "@electric-sql/pglite";
 
 const migration = readFileSync(new URL("../migrations/20261031130000_newsletter_double_opt_in.sql", import.meta.url), "utf8");
+const vaultMigration = readFileSync(new URL("../migrations/20261031140000_newsletter_vault_secrets.sql", import.meta.url), "utf8");
+
+// Supabase Vault finns inte i PGlite: en minimal ersättare med samma vy (vault.decrypted_secrets).
+const VAULT_STUB = `
+create schema if not exists vault;
+create table if not exists vault.decrypted_secrets (name text primary key, decrypted_secret text);
+revoke all on schema vault from public;
+insert into vault.decrypted_secrets values ('newsletter_send_secret', 's1'), ('newsletter_hash_salt', 's2'), ('annan_hemlighet', 'nej')
+  on conflict do nothing;
+`;
 
 // Läget i produktion före migrationen (avläst skrivskyddat ur katalogen 2026-10-31).
 const LIVE_BEFORE = `
@@ -110,5 +120,25 @@ test("utskicksloggen: samma nyckel kan inte tas två gånger", async () => {
   await pg.exec("insert into public.newsletter_sends (issue_key, article_urls) values ('2026-10-31', '{https://motorpuls.se/artikel/x/}')");
   await assert.rejects(pg.exec("insert into public.newsletter_sends (issue_key) values ('2026-10-31')"), /duplicate key|unique/);
   await pg.exec("update public.newsletter_sends set status = 'sent', recipient_count = 2, finished_at = now() where issue_key = '2026-10-31'");
+  await pg.exec("reset role");
+});
+
+test("vault: bara service_role läser, och bara nyhetsbrevets namn", async () => {
+  const pg = await db();
+  await pg.exec(migration);
+  await pg.exec(VAULT_STUB);
+  await pg.exec(vaultMigration);
+  await pg.exec(vaultMigration);
+  for (const role of ["anon", "authenticated"]) {
+    for (const sql of ["select public.newsletter_vault_secrets(array['newsletter_send_secret'])", "select * from public.inbound_forwards"]) {
+      await assert.rejects(pg.exec(`set role ${role}; ${sql}`), /permission denied/, `${role}: ${sql}`);
+      await pg.exec("reset role");
+    }
+  }
+  await pg.exec("set role service_role");
+  const { rows } = await pg.query("select public.newsletter_vault_secrets(array['newsletter_send_secret', 'annan_hemlighet', 'newsletter_hash_salt']) s");
+  assert.deepEqual(rows[0].s, { newsletter_send_secret: "s1", newsletter_hash_salt: "s2" });
+  await pg.exec("insert into public.inbound_forwards (email_id) values ('e1')");
+  await assert.rejects(pg.exec("insert into public.inbound_forwards (email_id) values ('e1')"), /duplicate key|unique/);
   await pg.exec("reset role");
 });
