@@ -1,5 +1,6 @@
 ---
 title: "Teslas batteriingenjör ger Model Y:s strukturella batteri betyget D"
+seo_title: "Teslas ingenjör ger Model Y:s batteri betyget D"
 date: 2026-10-30T03:25:00+01:00
 slug: tesla-model-y-strukturellt-batteri-betyg-d-volvo-ex60
 tags:

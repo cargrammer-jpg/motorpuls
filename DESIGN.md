@@ -20,7 +20,7 @@ Copy: inga tankstreck (en- eller em-streck) i rubriker eller text; använd komma
 
 ## Typografi (fria, självhostade woff2, subset Latin+svenska)
 - **Archivo** (variabel, wdth 62 till 125, wght 100 till 900): rubriker i *expanded* bredd 112 till 125, vikt 750 till 800, tät spärr (-0.02em). Wordmark: wdth 125 / 850. UI-text i normalbredd.
-- **Newsreader** (variabel, opsz): ingress och artikeltext. Brödtext 17px mobil, 18px från 48rem, radhöjd 1,6, spalt 40rem (cirka 65 tecken per rad). Se Artikelmall v2.
+- **Newsreader** (variabel, opsz): ingress och artikeltext. Brödtext 16px mobil, flytande upp till 17px på dator, radhöjd 1,6, spalt 40rem (cirka 65 tecken per rad). Se Artikelmall v2.
 - **DM Mono**: tidsstämplar, datumrubriker, källdomäner: "instrument"-detaljen.
 
 ## Layout
@@ -45,13 +45,63 @@ mörk studio + färgad horisont per kategori. Ersätts senare av licensierade/eg
 Liten icke-modal `<aside popover="manual">`-ruta (toast-mönster, ingen modal) nere till höger (bottom sheet på mobil), visas en gång
 efter ~55 % scroll, stängs med knapp eller Esc, minns valet i localStorage. Stjäl inte fokus.
 
+## Nyhetsbrevsrutan i sidfoten (förhandsvisning, `NEWSLETTER_BOX` av)
+**Utseende.** Synlig etikett "Din e-postadress". Mörk panel `surface` `#151A20` med 1px hårlinje `line` och 2px orange topplinje (`pulse`). Etiketten "Nyhetsbrev" i `pulse-text` `#FF8A5C`, rubrik i `text`, brödtext i `text-2` som resten av sidfoten. Mörkt fält med 1px kant `#6B7682` (3,9:1 mot fältet, 3,6:1 mot panelen), orange knapp "Prenumerera" med mörk text (6,3:1). Fokus: 2px orange ring (`pulse-text`), 2px avstånd. Ingen orange fyllning eller glöd.
+Text: "Få Motorpuls i inkorgen" och "De viktigaste bilnyheterna, korta och med källor. Du hänger med utan att leta." Under fältet: "Helt gratis, avsluta när du vill."
+
+**Placering.** Dator (från 56rem): höger kolumn bredvid sidfotens logga, text och länkar. Mobil: under länkarna, före raden med ©, knappen i full bredd.
+Rutan står i HTML från början och statusraden har reserverad höjd, så inget layoutskift. Utan JS döljs formuläret och en rad säger att anmälan kräver JavaScript.
+
+**Funktion** (`nyhetsbrev/nyhetsbrev.js`, laddas bara med flaggan på). `fetch` POST till edge-funktionen `newsletter-subscribe`
+med adressen, sidans sökväg och honungsfältet. Dubbel bekräftelse: tackraden säger "Nästan klart! Vi har skickat ett mejl till dig..."
+och får fokus. 400 och 429 ger egna felrader. Samma svar oavsett om adressen redan prenumererar. Under fältet: "Helt gratis, avsluta
+när du vill. Du får ett mejl där du bekräftar först." och länken "Så hanterar vi din adress" till `/integritet/`. Rörelse bara utan
+`prefers-reduced-motion: reduce`.
+
+**Bekräfta och avsluta** (`/prenumeration/bekrafta/` och `/prenumeration/avsluta/`, `nyhetsbrev/nyhetsbrev-sida.js`). Länkarna i
+mejlen går hit med `?token=`. Att öppna sidan ändrar inget; först knappen (samma orange knapp som rutan) POSTar koden. Koden tas
+bort ur adressfältet. Svaret står i en statusrad som får fokus. noindex. Supabase visar inte HTML från sin egen domän, därför ligger
+sidorna på motorpuls.se.
+
+**Integritet** (`/integritet/`, bara med flaggan på). Ingen kontaktadress (ALX:s beslut). Tjänster: Supabase (lagring, Stockholm),
+Resend (utskick), Cloudflare Web Analytics.
+
+## RSS
+Sidfoten: länken "RSS" med ikon (orange ruta, mörka vågor) och "RSS per kategori" med en länk per kategori. Artikelns slut: en
+lugn rad "Prenumerera via RSS: <kategori> · Alla nyheter" i muted-färg, länkar i textfärg (7:1 respektive 16:1 mot bakgrunden).
+
+## Dela
+Rad med delningsknappar under bylinen ("Dela") och efter källorna ("Dela artikeln"). Runda knappar 2,75rem med ikon (Simple Icons, CC0)
+för X, Facebook, LinkedIn och WhatsApp: vanliga länkar med aria-label "Dela på X (öppnas i ny flik)", fungerar utan JS. "Kopiera länk"
+(text från 40rem, bara ikon på mobil) visar en liten bekräftelse "Länken är kopierad" ovanpå knappen (role="status"). Där webbläsaren
+har Web Share API (mobiler) blir etiketten "Dela" en orange knapp (`pulse`, mörk text 6,3:1) som öppnar systemets delningsmeny.
+Inga skript från tredje part, inga spårningsparametrar. Knapparna som kräver JS har sin plats från början (visibility): inget
+layoutskifte. SMS/iMessage (pratbubbla, `sms:?&body=` med rubrik och länk, aria-label "Dela via SMS eller iMessage") visas
+bara på pekskärmar (`(hover: none) and (pointer: coarse)`), dold på dator. X-texten är rubriken, utan @-namn (sajten har inget eget X-konto angivet).
+Delningskort: og:title, og:description, og:image 1200x630 med og:image:alt (huvudbildens alt-text), twitter:card summary_large_image,
+article:published_time och article:modified_time.
+
+## Push-rutan (förhandsvisning, `PUSH_BOX` av)
+**Utseende.** Samma orange ruta som nyhetsbrevet (PR #15): gradient `#FF5B1F` till `#FF7A3D`, 8px rundning, mörk text `#0B0D10`
+(6,3:1 och 7,5:1). "Ja tack": mörk knapp med vit text (19:1). "Inte nu": genomskinlig knapp med 2px mörk kant och mörk text.
+Fokus: 3px mörk ring med 2px avstånd. iPhone-tipset står i en ruta med mörk vänsterkant (5,2:1).
+
+**Beteende.** Webbläsarens fråga om notiser visas aldrig av sig själv, bara när läsaren trycker "Ja tack". "Inte nu" gömmer
+rutan i 30 dagar (localStorage). Rutan visas inte om notiser redan är tillåtna eller nekade, eller om webbläsaren saknar Web Push.
+iOS Safari utanför hemskärmen (`navigator.standalone === false`): tipset om Lägg till på hemskärmen visas i stället för "Ja tack".
+Service workern (`/sw.js`) registreras först efter ett ja och hanterar bara `push` och `notificationclick` (ingen cache).
+
+**Placering, utan layoutskift.** Artikel: i flödet efter AI-notisen, och bara om platsen ligger under skärmkanten när skriptet körs.
+Startsida: fast ruta nere (hel bredd på mobil, nere till höger på dator) när läsaren har skrollat till "Alla artiklar". Ingen
+modal, rutan tar inte fokus, Esc stänger den. Intoning bara utan `prefers-reduced-motion: reduce`.
+
 ## Artikelmall v2 (lättare läsning)
 Mål: mindre brödtext, kortare stycken, en lugn läsrad och en tydlig sammanfattning överst.
 
 **Läsyta.** En centrerad spalt `.article__col`, max 40rem, för rubrik, sammanfattning, text och källor. Bilder får en bredare scen, max 62rem.
-Rubrik 2 till 3,4rem (Archivo 115 % bredd, 820). Ingress Newsreader 1,15 till 1,3rem, radhöjd 1,5.
-Brödtext Newsreader 17px (mobil) och 18px (från 48rem), radhöjd 1,6, färg `#DCE1E6` (14,8:1 mot bg), 1,3em mellan stycken.
-H2: Archivo 1,2 till 1,35rem, 760, med en liten orange pulsprick före. 2,4em luft ovanför och 0,6em under, så avsnitten syns när man skummar.
+Rubrik 1,85 till 3rem (Archivo 115 % bredd, 820). Ingress Newsreader 1,05 till 1,15rem, radhöjd 1,5.
+Brödtext Newsreader 16px (mobil) till 17px (dator, flytande med clamp()), radhöjd 1,6, färg `#DCE1E6` (14,8:1 mot bg), 1,3em mellan stycken.
+H2: Archivo 1,125 till 1,25rem, 760, med en liten orange pulsprick före. 2,4em luft ovanför och 0,6em under, så avsnitten syns när man skummar.
 Tusentalsavgränsare ("1 079 hk") renderas med hårt mellanslag så att tal aldrig bryts över två rader.
 Redaktionellt: sikta på stycken om 2 till 3 meningar. Mallen kan inte korta texten, det gör skribenten.
 
@@ -64,7 +114,12 @@ Etikett i DM Mono versaler, `pulse-text` `#FF8A5C` (7,3:1 mot rutan). Punkterna 
 Övriga laddas lazy. Bilder beskärs aldrig: en enda bild visas i sitt eget format, flera bilder delar en 3:2-scen med
 `object-fit: contain` och svart kant (letterbox) när formatet skiljer sig. Ingen text eller toning ovanpå bilden (enda undantaget är den lilla svenska flaggan, se nedan).
 Bildtext under bilden i DM Mono, `muted` (7:1): valfri `caption`, punkt, sedan kredit ("Foto: Aston Martin").
-Bygget gör WebP i 1600 och 800 px bredd (srcset), bara storleksändring.
+Bygget gör WebP i 1600, 1200, 800 och 400 px bredd (srcset, kvalitet 76), bara storleksändring.
+Fotokrediter på korten (`.item__credit`) har färgen `--credit` #A7B0BA (8,5:1). Korten som tonas in vid skroll börjar på
+opacity .7 (`card-in`), så krediterna håller minst 4,7:1 även innan kortet skrollats in helt.
+**Delningsbild (og:image, 1200x630).** Huvudbilden beskärs till formatet, utom när dess `license` förbjuder beskärning eller ändring
+(t.ex. "får inte beskäras", "Oförändrad", "får inte ... ändras"; `NO_MODIFY` i build.py). Då blir delningsbilden hela bilden, bara
+förminskad och centrerad på sajtens mörka botten `#0B0D10` (`img/og/<slug>-hel.jpg`), och inga beskurna JSON-LD-bilder görs.
 
 **Bildspel** (två eller fler bilder). Utan JS: en vågrät rad med scroll-snap där nästa bild sticker fram (88 % bredd), att svepa i.
 Med JS (`js/site.js`, inga bibliotek): helbreda bilder, runda knappar "Föregående bild" och "Nästa bild" (2,75rem, aria-label),
@@ -89,3 +144,16 @@ Det är det enda tillåtna elementet ovanpå en bild.
 
 **Tillgänglighet.** `role="img"`, `aria-label="Gäller Sverige"` och `title` med samma text. SVG:n är `aria-hidden`.
 
+
+## Guider och Läs också
+**Guider.** En artikel med `type: guide` (eller `category: Guider`) är en guide. Guider samlas på `/guider/` (samma flöde som
+startsidan, rubrik i artikelmallens stil), i `feed/guider.xml` och i sitemap.xml. Sidhuvudet får länkarna "Nyheter" och "Guider"
+(aktuell sida: 2px orange understreck) först när minst en guide är publicerad, så inga tomma sidor syns. Guider får `Article` i JSON-LD,
+brödsmulan "Start / Guider / <kategori>" och tas inte med i Google News-sitemapen.
+
+**Läs också.** Under artikeln (efter RSS-raden): tre andra artiklar. Samma kategori väger tyngst, sedan gemensamma taggar, sedan
+de nyaste. Mobil: liten bild till vänster och rubrik till höger; från 40rem tre kolumner. Miniatyrerna är 400 px-varianterna i en
+3:2-scen med svart kant (ingen beskärning) och kredit under, som Populärt.
+
+**Uppdaterad.** `updated:` i front matter ger "Uppdaterad <datum>" i bylinen, `dateModified` och sitemaps `lastmod`. Ett updated före
+date räknas som date, ett i framtiden stoppar bygget.

@@ -1,0 +1,45 @@
+/* Nyhetsbrevsrutan i sidfoten (förhandsvisning, NEWSLETTER_BOX i build.py). Laddas bara när flaggan är på.
+   Smälter in: mörk panel var(--surface) med 1px hårlinje var(--line), orange bara som accent (2px topplinje, etikett i
+   pulse-text #FF8A5C 6,6:1, orange knapp med mörk text 6,3:1, orange fokusring). Typografi som sidfoten (sans, text-2 #C3CAD1 10:1,
+   muted #929CA7 6:1). Dator: höger kolumn bredvid sidfotens text. Mobil: under länkarna, före ©.
+   Rutan finns i HTML från början och statusraden har reserverad höjd, så inget flyttar sig när JS laddas. */
+.site-footer--nl .wrap{display:grid}
+/* Mobil: rutan står efter länkarna och före raden med ©, så sidfoten slutar som förut. */
+@media (max-width:55.99rem){.site-footer__main{display:contents}.site-footer--nl .nlf{margin-top:2.25rem}.site-footer--nl .fine{order:1}}
+@media (min-width:56rem){.site-footer--nl .wrap{grid-template-columns:minmax(0,1fr) minmax(22rem,28rem);column-gap:clamp(2.5rem,6vw,6rem);align-items:start}}
+.nlf{border-radius:var(--radius);color:var(--text-2);padding:clamp(1.25rem,2.6vw,1.6rem);
+  background:var(--surface);border:1px solid var(--line);border-top:2px solid var(--pulse)}
+.site-footer .nlf p{max-width:none}
+.site-footer .nlf__kicker{margin:0;font-family:var(--mono);font-size:.72rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--pulse-text)}
+.nlf h2{margin:.4rem 0 .35rem;font-size:1.2rem;line-height:1.2;font-weight:760;letter-spacing:-.015em;color:var(--text);text-wrap:balance}
+.site-footer .nlf__lede{margin:0;font-size:.9rem;line-height:1.55;color:var(--text-2)}
+.nlf__form{margin-top:1rem}
+.nlf__label{display:block;font-weight:620;font-size:.85rem;color:var(--text);margin-bottom:.35rem}
+.nlf__row{display:flex;flex-wrap:wrap;gap:.5rem}
+.nlf__input{flex:1 1 12rem;min-width:0;min-height:2.875rem;padding:.6rem .8rem;font:inherit;font-size:1rem;color:var(--text);
+  background:var(--bg);border:1px solid #6B7682;border-radius:var(--radius)}
+.nlf__input::placeholder{color:var(--muted)}
+.nlf__input:hover{border-color:#8A949F}
+.nlf__input[aria-invalid="true"]{border-color:var(--pulse-text)}
+.nlf__btn{flex:0 0 auto;min-height:2.875rem;padding:.6rem 1.2rem;font:inherit;font-size:.95rem;font-weight:700;cursor:pointer;
+  color:#0B0D10;background:var(--pulse);border:1px solid var(--pulse);border-radius:var(--radius);transition:background-color .18s}
+.nlf__btn:hover{background:#FF7A3D}
+.nlf__btn[disabled]{cursor:progress;opacity:.85}
+.nlf__input:focus-visible,.nlf__btn:focus-visible,.nlf__done:focus-visible{outline:2px solid var(--pulse-text);outline-offset:2px}
+.nlf__hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.site-footer .nlf__fine{margin:.6rem 0 0;font-size:.8rem;color:var(--muted)}
+.site-footer .nlf__status{min-height:1.4em;margin:.35rem 0 0;font-size:.85rem;font-weight:620;color:var(--text)}
+.nlf__status.is-error{padding:.4rem .7rem;border-radius:var(--radius);background:var(--raised);border-left:3px solid var(--pulse)}
+.site-footer .nlf__done{margin:1rem 0 0;font-size:.95rem;font-weight:620;color:var(--text)}
+@media (max-width:30rem){.nlf__btn{flex-basis:100%}}
+@media (forced-colors:active){.nlf{border:1px solid CanvasText}.nlf__input:focus-visible,.nlf__btn:focus-visible{outline-color:Highlight}}
+@media (prefers-reduced-motion:no-preference){.nlf__done{animation:nlf-in .25s cubic-bezier(.2,.8,.2,1)}@keyframes nlf-in{from{opacity:0}}}
+/* Sidorna /prenumeration/bekrafta/ och /prenumeration/avsluta/: en knapp och en statusrad, samma knapp som rutan. */
+.nlp{margin-top:.5rem}
+.nlp__form{margin:1.4rem 0 0}
+.nlp__msg{min-height:1.5em;margin:1rem 0 0;font-size:1rem;font-weight:620;color:var(--text)}
+.nlp__msg:empty{display:none}
+.nlp__msg.is-error{padding:.6rem .9rem;border-radius:var(--radius);background:var(--raised);border-left:3px solid var(--pulse)}
+.nlp__msg:focus{outline:none}
+.nlp__home{margin-top:2rem;font-size:.95rem}
+.nlp__home a{color:var(--pulse-text)}

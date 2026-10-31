@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+  <url>
+    <loc>https://motorpuls.se/artikel/tesla-roadster-avtackad-produktion-2028/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-01T18:00:00+01:00</news:publication_date>
+      <news:title>Över en halv miljon kronor för en plats i kön. Tesla lovar inte ens att Roadster levereras</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://motorpuls.se/artikel/bmw-ix3-m60-highway-assistant-sverige/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-01T00:00:00+01:00</news:publication_date>
+      <news:title>BMW lovar 340 km laddning på tio minuter i nya iX3 M60 med 612 hk</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://motorpuls.se/artikel/bmw-m3-el-fyra-motorer/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-10-31T12:33:00+01:00</news:publication_date>
+      <news:title>M3 som elbil: fyra motorer, över 100 kWh och noll fejkat ljud</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://motorpuls.se/artikel/tesla-fsd-sverige-eu-omrostning-december/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-10-31T00:00:00+01:00</news:publication_date>
+      <news:title>Tio EU-länder har sagt ja till Teslas FSD. Därför får Sverige vänta till tidigast 2027</news:title>
+    </news:news>
+  </url>
+</urlset>

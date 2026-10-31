@@ -1,5 +1,6 @@
 ---
 title: "Bensin-Macan slog elversionen med nästan 5 000 bilar. Nu gör Porsche helt om"
+seo_title: "Porsche Macan med bensinmotor kommer 2028"
 date: 2026-10-30T11:54:00+01:00
 slug: porsche-macan-bensin-namn-2028
 tags:
