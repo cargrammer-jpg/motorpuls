@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Integritet · Motorpuls</title>
+<meta name="description" content="Vilka uppgifter Motorpuls sparar när du anmäler dig till nyhetsbrevet och hur du får dem raderade.">
+<link rel="canonical" href="https://motorpuls.se/integritet/">
+<meta property="og:site_name" content="Motorpuls">
+<meta property="og:locale" content="sv_SE">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Integritet · Motorpuls">
+<meta property="og:description" content="Vilka uppgifter Motorpuls sparar när du anmäler dig till nyhetsbrevet och hur du får dem raderade.">
+<meta property="og:url" content="https://motorpuls.se/integritet/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Integritet · Motorpuls">
+<meta name="twitter:description" content="Vilka uppgifter Motorpuls sparar när du anmäler dig till nyhetsbrevet och hur du får dem raderade.">
+<meta name="theme-color" content="#0B0D10">
+<meta name="color-scheme" content="dark">
+<link rel="stylesheet" href="/css/site.css?v=59d3d2510c">
+<script src="/js/site.js?v=1befba1bb4" defer></script>
+<link rel="icon" href="/favicon/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/favicon/favicon-16.png" sizes="16x16" type="image/png">
+<link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png">
+<link rel="manifest" href="/favicon/site.webmanifest">
+<link rel="alternate" type="application/rss+xml" title="Motorpuls" href="/feed.xml">
+<link rel="preload" href="/fonts/newsreader-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
+<style>/* Nyhetsbrevsrutan i sidfoten (förhandsvisning, NEWSLETTER_BOX i build.py). Laddas bara när flaggan är på.
+   Smälter in: mörk panel var(--surface) med 1px hårlinje var(--line), orange bara som accent (2px topplinje, etikett i
+   pulse-text #FF8A5C 6,6:1, orange knapp med mörk text 6,3:1, orange fokusring). Typografi som sidfoten (sans, text-2 #C3CAD1 10:1,
+   muted #929CA7 6:1). Dator: höger kolumn bredvid sidfotens text. Mobil: under länkarna, före ©.
+   Rutan finns i HTML från början och statusraden har reserverad höjd, så inget flyttar sig när JS laddas. */
+.site-footer--nl .wrap{display:grid}
+/* Mobil: rutan står efter länkarna och före raden med ©, så sidfoten slutar som förut. */
+@media (max-width:55.99rem){.site-footer__main{display:contents}.site-footer--nl .nlf{margin-top:2.25rem}.site-footer--nl .fine{order:1}}
+@media (min-width:56rem){.site-footer--nl .wrap{grid-template-columns:minmax(0,1fr) minmax(22rem,28rem);column-gap:clamp(2.5rem,6vw,6rem);align-items:start}}
+.nlf{border-radius:var(--radius);color:var(--text-2);padding:clamp(1.25rem,2.6vw,1.6rem);
+  background:var(--surface);border:1px solid var(--line);border-top:2px solid var(--pulse)}
+.site-footer .nlf p{max-width:none}
+.site-footer .nlf__kicker{margin:0;font-family:var(--mono);font-size:.72rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--pulse-text)}
+.nlf h2{margin:.4rem 0 .35rem;font-size:1.2rem;line-height:1.2;font-weight:760;letter-spacing:-.015em;color:var(--text);text-wrap:balance}
+.site-footer .nlf__lede{margin:0;font-size:.9rem;line-height:1.55;color:var(--text-2)}
+.nlf__form{margin-top:1rem}
+.nlf__label{display:block;font-weight:620;font-size:.85rem;color:var(--text);margin-bottom:.35rem}
+.nlf__row{display:flex;flex-wrap:wrap;gap:.5rem}
+.nlf__input{flex:1 1 12rem;min-width:0;min-height:2.875rem;padding:.6rem .8rem;font:inherit;font-size:1rem;color:var(--text);
+  background:var(--bg);border:1px solid #6B7682;border-radius:var(--radius)}
+.nlf__input::placeholder{color:var(--muted)}
+.nlf__input:hover{border-color:#8A949F}
+.nlf__input[aria-invalid="true"]{border-color:var(--pulse-text)}
+.nlf__btn{flex:0 0 auto;min-height:2.875rem;padding:.6rem 1.2rem;font:inherit;font-size:.95rem;font-weight:700;cursor:pointer;
+  color:#0B0D10;background:var(--pulse);border:1px solid var(--pulse);border-radius:var(--radius);transition:background-color .18s}
+.nlf__btn:hover{background:#FF7A3D}
+.nlf__btn[disabled]{cursor:progress;opacity:.85}
+.nlf__input:focus-visible,.nlf__btn:focus-visible,.nlf__done:focus-visible{outline:2px solid var(--pulse-text);outline-offset:2px}
+.nlf__hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.site-footer .nlf__fine{margin:.6rem 0 0;font-size:.8rem;color:var(--muted)}
+.site-footer .nlf__status{min-height:1.4em;margin:.35rem 0 0;font-size:.85rem;font-weight:620;color:var(--text)}
+.nlf__status.is-error{padding:.4rem .7rem;border-radius:var(--radius);background:var(--raised);border-left:3px solid var(--pulse)}
+.site-footer .nlf__done{margin:1rem 0 0;font-size:.95rem;font-weight:620;color:var(--text)}
+@media (max-width:30rem){.nlf__btn{flex-basis:100%}}
+@media (forced-colors:active){.nlf{border:1px solid CanvasText}.nlf__input:focus-visible,.nlf__btn:focus-visible{outline-color:Highlight}}
+@media (prefers-reduced-motion:no-preference){.nlf__done{animation:nlf-in .25s cubic-bezier(.2,.8,.2,1)}@keyframes nlf-in{from{opacity:0}}}
+/* Sidorna /prenumeration/bekrafta/ och /prenumeration/avsluta/: en knapp och en statusrad, samma knapp som rutan. */
+.nlp{margin-top:.5rem}
+.nlp__form{margin:1.4rem 0 0}
+.nlp__msg{min-height:1.5em;margin:1rem 0 0;font-size:1rem;font-weight:620;color:var(--text)}
+.nlp__msg:empty{display:none}
+.nlp__msg.is-error{padding:.6rem .9rem;border-radius:var(--radius);background:var(--raised);border-left:3px solid var(--pulse)}
+.nlp__msg:focus{outline:none}
+.nlp__home{margin-top:2rem;font-size:.95rem}
+.nlp__home a{color:var(--pulse-text)}
+</style>
+<noscript><style>.nlf__form{display:none}</style></noscript>
+<script src="/nyhetsbrev.js?v=f5846ee28d" defer></script>
+</head>
+<body>
+<a class="skip" href="#innehall">Hoppa till innehållet</a>
+<header class="masthead">
+  <div class="wrap masthead__row">
+    <a class="wordmark" href="/"><img class="logo" src="/img/logo.svg" alt="Motorpuls" width="872" height="88"><svg class="wordmark__flag" viewBox="0 0 16 10" width="16" height="10" aria-hidden="true" focusable="false"><rect width="16" height="10" fill="#0A2260"/><rect x="5" width="2" height="10" fill="#FECC00"/><rect y="4" width="16" height="2" fill="#FECC00"/></svg></a>
+  </div>
+</header>
+
+<main id="innehall" class="article">
+  <div class="wrap">
+    <article>
+      <header class="article__head article__col">
+        <h1 class="article__title">Integritet</h1>
+      </header>
+      <div class="article__layout article__col">
+        <div class="prose">
+<p>Kort om vilka uppgifter Motorpuls sparar, varför och hur länge.</p>
+<h2>Nyhetsbrevet</h2>
+<p>När du anmäler dig sparar vi din e-postadress, när du anmälde dig och bekräftade, vilken sida på Motorpuls du anmälde dig från och texten du godkände. Vi använder uppgifterna bara för att skicka Motorpuls nyhetsbrev. Vi säljer dem inte och lämnar inte ut dem för marknadsföring.</p>
+<p>Rättslig grund är ditt samtycke. Därför skickar vi först ett mejl där du bekräftar att adressen är din. Inga nyhetsbrev skickas förrän du har bekräftat.</p>
+<h2>Hur länge</h2>
+<p>En adress som inte bekräftas raderas efter 30 dagar. En bekräftad adress sparas tills du avslutar prenumerationen.</p>
+<h2>Avsluta och radera</h2>
+<p>Varje mejl från oss har en länk för att avsluta. Då raderas din adress direkt och helt. Många mejlprogram visar också en knapp för att avsluta, den fungerar på samma sätt.</p>
+<h2>Skydd mot missbruk</h2>
+<p>För att stoppa automatiska anmälningar räknar vi antalet försök per IP-adress och per e-postadress. Vi sparar då bara en förvrängd kod (hash) av dem, aldrig själva adresserna, och koden raderas efter ett dygn.</p>
+<h2>Tjänster vi använder</h2>
+<ul>
+<li><strong>Supabase</strong> lagrar adresserna i en databas i Stockholm (EU).</li>
+<li><strong>Resend</strong> skickar mejlen åt oss och tar emot mejl till hello@motorpuls.se.</li>
+<li><strong>Cloudflare Web Analytics</strong> räknar besök utan kakor (cookies) och sparar inget i din webbläsare.</li>
+</ul>
+<h2>Dina rättigheter</h2>
+<p>Du har rätt att få veta vilka uppgifter vi har om dig, få dem rättade eller raderade och att ta tillbaka ditt samtycke. Mejla <a href="mailto:hello@motorpuls.se">hello@motorpuls.se</a>, så svarar vi så snart vi kan och senast inom en månad. Du kan också lämna klagomål till Integritetsskyddsmyndigheten (IMY).</p>
+<h2>Kontakt</h2>
+<p>Frågor om hur vi hanterar dina uppgifter skickar du till <a href="mailto:hello@motorpuls.se">hello@motorpuls.se</a>.</p>
+<p>Senast uppdaterad 31 oktober 2026.</p>
+        </div>
+      </div>
+    </article>
+  </div>
+</main>
+
+<footer class="site-footer site-footer--nl">
+  <div class="wrap">
+    <div class="site-footer__main">
+    <a class="wordmark" href="/"><img class="logo logo--footer" src="/img/logo.svg" alt="Motorpuls" width="872" height="88" loading="lazy"></a>
+    <p class="site-footer__desc">Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</p>
+    <nav class="site-footer__nav" aria-label="Om Motorpuls"><ul><li><a href="/om/">Om Motorpuls</a></li><li><a href="/om/lukas/">Om Lukas</a></li></ul></nav>
+    <div class="site-footer__rss">
+      <a class="rss-link" href="/feed.xml"><svg class="rss-icon" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><rect width="16" height="16" rx="3" fill="#FF5B1F"/><circle cx="4.6" cy="11.4" r="1.5" fill="#0B0D10"/><path d="M3.2 7.1a5.7 5.7 0 0 1 5.7 5.7M3.2 3.6a9.2 9.2 0 0 1 9.2 9.2" fill="none" stroke="#0B0D10" stroke-width="1.8" stroke-linecap="round"/></svg>RSS</a>
+      <span class="site-footer__feeds-label" id="rss-kat">RSS per kategori:</span>
+      <ul class="site-footer__feeds" aria-labelledby="rss-kat"><li><a href="/feed/sportbil.xml">Sportbil</a></li><li><a href="/feed/tesla.xml">Tesla</a></li><li><a href="/feed/bransle.xml">Bränsle</a></li></ul>
+    </div>
+    <p class="fine">© 2026 Motorpuls<span class="site-footer__contact"> <span aria-hidden="true">·</span> <a href="mailto:hello@motorpuls.se">hello@motorpuls.se</a></span></p>
+    </div>
+    <section class="nlf" id="nyhetsbrev-fot" aria-labelledby="nlf-h" data-config="{&quot;api&quot;:&quot;https://yhxnrcykinmuoqbgboda.supabase.co/functions/v1&quot;}">
+      <p class="nlf__kicker">Nyhetsbrev</p>
+      <h2 id="nlf-h">Få Motorpuls i inkorgen</h2>
+      <p class="nlf__lede">De viktigaste bilnyheterna, korta och med källor. Du hänger med utan att leta.</p>
+      <noscript><p class="nlf__fine">Anmälan kräver JavaScript.</p></noscript>
+      <form class="nlf__form" novalidate>
+        <label class="nlf__label" for="nlf-email">Din e-postadress</label>
+        <div class="nlf__row">
+          <input class="nlf__input" id="nlf-email" type="email" name="email" inputmode="email" autocomplete="email" maxlength="254" required placeholder="namn@exempel.se" aria-describedby="nlf-fine">
+          <button class="nlf__btn" type="submit">Prenumerera</button>
+        </div>
+        <div class="nlf__hp" aria-hidden="true"><label>Lämna tomt <input type="text" name="webbplats" tabindex="-1" autocomplete="off"></label></div>
+        <p class="nlf__fine" id="nlf-fine">Helt gratis, avsluta när du vill. Du får ett mejl där du bekräftar först. <a href="/integritet/">Så hanterar vi din adress</a>.</p>
+        <p class="nlf__status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </div>
+</footer>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "bace28864ae04c6fa5e9f4a98ca70f94"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

@@ -34,3 +34,12 @@
 @media (max-width:30rem){.nlf__btn{flex-basis:100%}}
 @media (forced-colors:active){.nlf{border:1px solid CanvasText}.nlf__input:focus-visible,.nlf__btn:focus-visible{outline-color:Highlight}}
 @media (prefers-reduced-motion:no-preference){.nlf__done{animation:nlf-in .25s cubic-bezier(.2,.8,.2,1)}@keyframes nlf-in{from{opacity:0}}}
+/* Sidorna /prenumeration/bekrafta/ och /prenumeration/avsluta/: en knapp och en statusrad, samma knapp som rutan. */
+.nlp{margin-top:.5rem}
+.nlp__form{margin:1.4rem 0 0}
+.nlp__msg{min-height:1.5em;margin:1rem 0 0;font-size:1rem;font-weight:620;color:var(--text)}
+.nlp__msg:empty{display:none}
+.nlp__msg.is-error{padding:.6rem .9rem;border-radius:var(--radius);background:var(--raised);border-left:3px solid var(--pulse)}
+.nlp__msg:focus{outline:none}
+.nlp__home{margin-top:2rem;font-size:.95rem}
+.nlp__home a{color:var(--pulse-text)}

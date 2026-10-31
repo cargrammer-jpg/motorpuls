@@ -97,16 +97,19 @@ PUSH_BOX = os.environ.get("MOTORPULS_PUSH") == "1"
 PUSH_CONFIG = {"vapidPublicKey": "", "subscribeUrl": "", "anonKey": ""}
 PUSH_SRC = os.path.join(ROOT, "push")  # källor för rutan: push.js, push.css, sw.js (publiceras inte som katalog)
 
-# NEWSLETTER_BOX: orange nyhetsbrevsruta i sidfoten (e-postfält och knapp, höger om sidfotens text). AV i produktion,
-# lanseringen väntar på ALX:s OK. Förhandsbygge med rutan på, bara till --out och aldrig till main:
-#   MOTORPULS_NYHETSBREV=1 python build.py --out _preview
+# NEWSLETTER_BOX: nyhetsbrevsrutan i sidfoten (e-postfält och knapp, höger om sidfotens text). PÅ i produktion sedan
+# 31 oktober 2026 (ALX:s OK), så Pages-bygget (python build.py --out _site) tar med den utan ändring i workflowen.
+# Bygge utan rutan: MOTORPULS_NYHETSBREV=0 python build.py --out _site
 # När flaggan är av finns varken rutan, nyhetsbrev.js eller Supabase-adressen i utdata (kontrolleras i check_no_newsletter).
-# NEWSLETTER_CONFIG: Supabase REST för tabellen public.newsletter_subscribers i projektet motorpuls (eu-north-1, samma som
-# PR #15) och projektets publika nyckel (publishable, får synas i klienten; RLS ger anon bara INSERT med consent = true).
-# Tomma värden: rutan visas men skickar inget. Utskick (t.ex. Resend) och integritetssidan är inte på plats än.
-NEWSLETTER_BOX = os.environ.get("MOTORPULS_NYHETSBREV") == "1"
-NEWSLETTER_CONFIG = {"url": "https://yhxnrcykinmuoqbgboda.supabase.co/rest/v1/newsletter_subscribers",
-                     "key": "sb_publishable_obvTElRjWsEDBGP_aJ4dFA_8PcVkx1c"}
+# NEWSLETTER_CONFIG: adressen till edge-funktionerna newsletter-* i Supabase-projektet motorpuls (eu-north-1). Rutan POSTar
+# till newsletter-subscribe, sidorna /prenumeration/bekrafta/ och /prenumeration/avsluta/ till newsletter-confirm och
+# newsletter-unsubscribe. Ingen nyckel behövs i klienten (funktionerna driftsätts med --no-verify-jwt). Dubbel bekräftelse
+# och utskick via Resend: se supabase/README.md. Integritetssidan /integritet/ och sidorna under /prenumeration/ byggs
+# bara med flaggan på. Den enda kontaktadressen på sajten är CONTACT_EMAIL (hello@motorpuls.se, ALX:s beslut 31 okt 2026).
+NEWSLETTER_BOX = os.environ.get("MOTORPULS_NYHETSBREV", "1") != "0"  # PÅ i produktion sedan 31 okt 2026 (ALX:s OK). MOTORPULS_NYHETSBREV=0 stänger av
+CONTACT_EMAIL = "hello@motorpuls.se"  # officiell kontakt: sidfoten, /om/, /integritet/ och Organization i JSON-LD
+NEWSLETTER_CONFIG = {"api": "https://yhxnrcykinmuoqbgboda.supabase.co/functions/v1"}
+NEWSLETTER_PAGES = ("integritet", "prenumeration")  # kataloger som bara byggs med flaggan på
 NEWSLETTER_SRC = os.path.join(ROOT, "nyhetsbrev")  # källor: nyhetsbrev.css, nyhetsbrev.js (publiceras inte som katalog)
 
 ANALYTICS = """<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "bace28864ae04c6fa5e9f4a98ca70f94"}'></script><!-- End Cloudflare Web Analytics -->
@@ -456,10 +459,79 @@ def newsletter_box():
           <button class="nlf__btn" type="submit">Prenumerera</button>
         </div>
         <div class="nlf__hp" aria-hidden="true"><label>Lämna tomt <input type="text" name="webbplats" tabindex="-1" autocomplete="off"></label></div>
-        <p class="nlf__fine" id="nlf-fine">Helt gratis, avsluta när du vill.</p>
+        <p class="nlf__fine" id="nlf-fine">Helt gratis, avsluta när du vill. Du får ett mejl där du bekräftar först. <a href="/integritet/">Så hanterar vi din adress</a>.</p>
         <p class="nlf__status" role="status" aria-live="polite"></p>
       </form>
     </section>'''
+
+
+# ---------- nyhetsbrevets sidor (bara med NEWSLETTER_BOX) ----------
+# Integritetssidan och sidorna för bekräfta/avsluta. Kontakt för frågor om uppgifterna: CONTACT_EMAIL.
+PRIVACY_UPDATED = dt.date(2026, 10, 31)
+
+def _simple_page(title, desc, path, inner, noindex=True):
+    h = head(f"{title} · {SITE}", desc, path, noindex=noindex)
+    body = f'''
+<main id="innehall" class="article">
+  <div class="wrap">
+    <article>
+      <header class="article__head article__col">
+        <h1 class="article__title">{esc(title)}</h1>
+      </header>
+      <div class="article__layout article__col">
+{inner}
+      </div>
+    </article>
+  </div>
+</main>
+'''
+    return page(h, body)
+
+def privacy_page():
+    inner = f'''        <div class="prose">
+<p>Kort om vilka uppgifter Motorpuls sparar, varför och hur länge.</p>
+<h2>Nyhetsbrevet</h2>
+<p>När du anmäler dig sparar vi din e-postadress, när du anmälde dig och bekräftade, vilken sida på Motorpuls du anmälde dig från och texten du godkände. Vi använder uppgifterna bara för att skicka Motorpuls nyhetsbrev. Vi säljer dem inte och lämnar inte ut dem för marknadsföring.</p>
+<p>Rättslig grund är ditt samtycke. Därför skickar vi först ett mejl där du bekräftar att adressen är din. Inga nyhetsbrev skickas förrän du har bekräftat.</p>
+<h2>Hur länge</h2>
+<p>En adress som inte bekräftas raderas efter 30 dagar. En bekräftad adress sparas tills du avslutar prenumerationen.</p>
+<h2>Avsluta och radera</h2>
+<p>Varje mejl från oss har en länk för att avsluta. Då raderas din adress direkt och helt. Många mejlprogram visar också en knapp för att avsluta, den fungerar på samma sätt.</p>
+<h2>Skydd mot missbruk</h2>
+<p>För att stoppa automatiska anmälningar räknar vi antalet försök per IP-adress och per e-postadress. Vi sparar då bara en förvrängd kod (hash) av dem, aldrig själva adresserna, och koden raderas efter ett dygn.</p>
+<h2>Tjänster vi använder</h2>
+<ul>
+<li><strong>Supabase</strong> lagrar adresserna i en databas i Stockholm (EU).</li>
+<li><strong>Resend</strong> skickar mejlen åt oss och tar emot mejl till {CONTACT_EMAIL}.</li>
+<li><strong>Cloudflare Web Analytics</strong> räknar besök utan kakor (cookies) och sparar inget i din webbläsare.</li>
+</ul>
+<h2>Dina rättigheter</h2>
+<p>Du har rätt att få veta vilka uppgifter vi har om dig, få dem rättade eller raderade och att ta tillbaka ditt samtycke. Mejla <a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a>, så svarar vi så snart vi kan och senast inom en månad. Du kan också lämna klagomål till Integritetsskyddsmyndigheten (IMY).</p>
+<h2>Kontakt</h2>
+<p>Frågor om hur vi hanterar dina uppgifter skickar du till <a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a>.</p>
+<p>Senast uppdaterad {sv_date(PRIVACY_UPDATED)}.</p>
+        </div>'''
+    return _simple_page("Integritet", "Vilka uppgifter Motorpuls sparar när du anmäler dig till nyhetsbrevet och hur du får dem raderade.", "/integritet/", inner, noindex=False)
+
+# Sidorna som länkarna i mejlen går till. Att öppna sidan ändrar inget (länkskannrar i mejl öppnar länkar);
+# först knappen skickar koden till edge-funktionen. Svaret visas i statusraden.
+def _action_page(kind):
+    api = esc(NEWSLETTER_CONFIG["api"])
+    if kind == "bekrafta":
+        title, lede, btn = "Bekräfta prenumerationen", "Tryck på knappen så börjar Motorpuls nyhetsbrev komma till din inkorg.", "Bekräfta prenumerationen"
+        fn = "newsletter-confirm"
+    else:
+        title, lede, btn = "Avsluta prenumerationen", "Tryck på knappen så raderar vi din e-postadress. Du får inga fler nyhetsbrev från Motorpuls.", "Avsluta prenumerationen"
+        fn = "newsletter-unsubscribe"
+    inner = f'''        <section class="nlp" data-api="{api}/{fn}" data-kind="{kind}">
+          <p class="article__dek">{esc(lede)}</p>
+          <noscript><p class="nlp__msg">Sidan kräver JavaScript.</p></noscript>
+          <form class="nlp__form" hidden><button class="nlf__btn" type="submit">{esc(btn)}</button></form>
+          <p class="nlp__msg" role="status" aria-live="polite" tabindex="-1"></p>
+          <p class="nlp__home"><a href="/">Till startsidan</a></p>
+        </section>
+        <script src="/nyhetsbrev-sida.js?v={hashlib.sha256(nl_src("nyhetsbrev-sida.js").encode()).hexdigest()[:10]}" defer></script>'''
+    return _simple_page(title, lede, f"/prenumeration/{kind}/", inner)
 
 # ---------- shared html ----------
 def asset(rel):
@@ -533,7 +605,7 @@ def footer():
     <div class="site-footer__rss">
       <a class="rss-link" href="/feed.xml">{RSS_SVG}RSS</a>{per_cat}
     </div>
-    <p class="fine">© {dt.date.today().year} Motorpuls</p>{main_close}{newsletter_box()}
+    <p class="fine">© {dt.date.today().year} Motorpuls<span class="site-footer__contact"> <span aria-hidden="true">·</span> <a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a></span></p>{main_close}{newsletter_box()}
   </div>
 </footer>
 '''
@@ -846,7 +918,7 @@ def article(a):
           "articleSection": a["category"], "keywords": a.get("tags") or [],
           "mainEntityOfPage": {"@type": "WebPage", "@id": DOMAIN + a["url"]}, "url": DOMAIN + a["url"],
           "author": author_ld(a["author"]),
-          "publisher": {"@type": "Organization", "name": SITE, "url": DOMAIN + "/",
+          "publisher": {"@type": "Organization", "name": SITE, "url": DOMAIN + "/", "email": CONTACT_EMAIL,
                         "logo": {"@type": "ImageObject", "url": DOMAIN + "/favicon/android-chrome-512.png", "width": 512, "height": 512}}}
     if imgs:
         credit = {k: v for k, v in {"creditText": img["credit"].removeprefix("Foto: ") or None,
@@ -1034,8 +1106,14 @@ def main():
               desc=f"Artiklar i kategorin {f['name']} på {SITE}. {SITE_DESC}", path=f["path"]))
     for rel in ("sw.js", "push.js"):  # gammal förhandsvisning i projektroten tas bort
         if os.path.exists(os.path.join(ROOT, rel)): os.remove(os.path.join(ROOT, rel))
-    if os.path.exists(os.path.join(ROOT, "nyhetsbrev.js")): os.remove(os.path.join(ROOT, "nyhetsbrev.js"))
-    if NEWSLETTER_BOX: write("nyhetsbrev.js", nl_src("nyhetsbrev.js"))
+    for rel in ("nyhetsbrev.js", "nyhetsbrev-sida.js"):
+        if os.path.exists(os.path.join(ROOT, rel)): os.remove(os.path.join(ROOT, rel))
+    for d in NEWSLETTER_PAGES: shutil.rmtree(os.path.join(ROOT, d), ignore_errors=True)
+    if NEWSLETTER_BOX:
+        write("nyhetsbrev.js", nl_src("nyhetsbrev.js"))
+        write("nyhetsbrev-sida.js", nl_src("nyhetsbrev-sida.js"))
+        write("integritet/index.html", privacy_page())  # inte i sitemap.xml förrän nyhetsbrevet är live
+        for kind in ("bekrafta", "avsluta"): write(f"prenumeration/{kind}/index.html", _action_page(kind))
     if PUSH_BOX:
         write("sw.js", push_src("sw.js"))  # i roten så att service workern gäller hela sajten (scope /)
         write("push.js", push_src("push.js"))
@@ -1099,18 +1177,18 @@ def check_no_push(out):
     if bad: raise SystemExit("PUSH_BOX är av men push finns i utdata: " + ", ".join(sorted(bad)))
 
 def check_no_newsletter(out):
-    """Flaggan av: inget av sidfotens nyhetsbrevsruta får finnas i utdata (ingen ruta, ingen nyhetsbrev.js, ingen Supabase-adress)."""
-    bad = ["nyhetsbrev.js"] if os.path.exists(os.path.join(out, "nyhetsbrev.js")) else []
+    """Flaggan av: inget av nyhetsbrevet får finnas i utdata (ingen ruta, inga skript, inga sidor, ingen Supabase-adress)."""
+    bad = [f for f in ("nyhetsbrev.js", "nyhetsbrev-sida.js") + NEWSLETTER_PAGES if os.path.exists(os.path.join(out, f))]
     for dirpath, _, files in os.walk(out):
         for fn in files:
             if fn.endswith((".html", ".js")):
                 t = open(os.path.join(dirpath, fn), encoding="utf-8").read()
-                if re.search(r'id="nyhetsbrev-fot"|/nyhetsbrev\.js|newsletter_subscribers|site-footer--nl', t): bad.append(os.path.relpath(os.path.join(dirpath, fn), out))
+                if re.search(r'id="nyhetsbrev-fot"|/nyhetsbrev\.js|/nyhetsbrev-sida\.js|newsletter_subscribers|functions/v1/newsletter|site-footer--nl', t): bad.append(os.path.relpath(os.path.join(dirpath, fn), out))
     if bad: raise SystemExit("NEWSLETTER_BOX är av men nyhetsbrevsrutan finns i utdata: " + ", ".join(sorted(bad)))
 
 def _rebuild_root_without_previews():
-    global PUSH_BOX, NEWSLETTER_BOX, OUT
-    PUSH_BOX, NEWSLETTER_BOX, OUT = False, False, None
+    global PUSH_BOX, OUT
+    PUSH_BOX, OUT = False, None
     WRITTEN.clear(); main()
     print("projektroten byggd om utan förhandsrutorna (förhandsvisningen finns bara i --out)")
 
@@ -1120,7 +1198,6 @@ def cli():
     if args[:1] == ["--out"] and len(args) == 2: OUT = out_dir(args[1])
     elif args: raise SystemExit("användning: build.py [--out _site]")
     if PUSH_BOX and not OUT: raise SystemExit("MOTORPULS_PUSH=1 är bara för förhandsbygge: använd --out (t.ex. _preview), aldrig utan")
-    if NEWSLETTER_BOX and not OUT: raise SystemExit("MOTORPULS_NYHETSBREV=1 är bara för förhandsbygge: använd --out (t.ex. _preview), aldrig utan")
     main()
     if OUT:
         out = publish(OUT)
@@ -1129,7 +1206,7 @@ def cli():
         n = check_links(out)
         files = sum(len(f) for _, _, f in os.walk(out))
         print(f"publicerat till {out}: {files} filer, {n} lokala länkar kontrollerade")
-    if PUSH_BOX or NEWSLETTER_BOX:  # bygget skriver även i projektroten: bygg om den utan rutorna så att inget av förhandsvisningen checkas in
+    if PUSH_BOX:  # bygget skriver även i projektroten: bygg om den utan push-rutan så att inget av förhandsvisningen checkas in
         _rebuild_root_without_previews()
 
 if __name__ == "__main__":

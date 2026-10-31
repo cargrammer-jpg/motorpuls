@@ -1,6 +1,6 @@
-// Motorpuls nyhetsbrevsruta i sidfoten (förhandsvisning, NEWSLETTER_BOX i build.py). Laddas bara när flaggan är på.
-// Rutan finns redan i HTML (inget layoutskift). Anmälan: fetch POST till Supabase REST (tabellen newsletter_subscribers,
-// anon får bara INSERT med consent = true, RLS) med projektets publika nyckel. Tom konfiguration: inget skickas.
+// Motorpuls nyhetsbrevsruta i sidfoten (NEWSLETTER_BOX i build.py). Laddas bara när flaggan är på.
+// Rutan finns redan i HTML (inget layoutskift). Anmälan: fetch POST till edge-funktionen newsletter-subscribe i Supabase
+// (dubbel bekräftelse: funktionen sparar en väntande rad och skickar ett bekräftelsemejl via Resend). Ingen nyckel i klienten.
 (() => {
   const box = document.getElementById('nyhetsbrev-fot');
   if (!box) return;
@@ -14,27 +14,30 @@
   const done = () => {
     const p = document.createElement('p');
     p.className = 'nlf__done'; p.tabIndex = -1; p.setAttribute('role', 'status');
-    p.textContent = 'Tack! Du är anmäld. Vi hör av oss när första utskicket går.';
+    p.textContent = 'Nästan klart! Vi har skickat ett mejl till dig. Öppna det och tryck på Bekräfta, annars kommer inga nyhetsbrev. Hittar du det inte, titta i skräpposten.';
     form.replaceWith(p); p.focus();
   };
   const valid = v => v.length >= 6 && v.length <= 254 && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v);
   input.addEventListener('input', () => { if (input.hasAttribute('aria-invalid')) { input.removeAttribute('aria-invalid'); say(''); } });
   form.addEventListener('submit', async e => {
     e.preventDefault();
-    if (form.elements.webbplats.value) return done();  // honungsfälla: botar får ett tack men inget sparas
+    const trap = form.elements.webbplats.value;
+    if (trap) return done();  // honungsfälla: botar får ett tack men inget sparas (servern kontrollerar också)
     const email = input.value.trim().toLowerCase();
     if (!valid(email)) { input.setAttribute('aria-invalid', 'true'); say('Skriv en giltig e-postadress, till exempel namn@exempel.se.', true); input.focus(); return; }
-    if (!cfg.url || !cfg.key || !window.fetch) { say('Förhandsvisning: anmälan är inte inkopplad än.', true); return; }
+    if (!cfg.api || !window.fetch) { say('Förhandsvisning: anmälan är inte inkopplad än.', true); return; }
     btn.disabled = true; btn.textContent = 'Skickar...'; say('');
     try {
-      const r = await fetch(cfg.url, {
+      const r = await fetch(cfg.api + '/newsletter-subscribe', {
         method: 'POST',
-        headers: { apikey: cfg.key, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
-        body: JSON.stringify({ email, consent: true, source: location.pathname })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, source: location.pathname, webbplats: trap })
       });
-      // 409: adressen finns redan. Visas som lyckad anmälan så att ingen kan se vilka adresser som är anmälda.
-      if (r.ok || r.status === 409) return done();
-      say(r.status === 400 ? 'Adressen kunde inte sparas. Kontrollera att den är rätt skriven.' : 'Något gick fel. Försök igen om en stund.', true);
+      // Samma svar oavsett om adressen redan prenumererar, så att ingen kan se vilka adresser som är anmälda.
+      if (r.ok) return done();
+      say(r.status === 400 ? 'Adressen kunde inte sparas. Kontrollera att den är rätt skriven.'
+        : r.status === 429 ? 'För många försök. Vänta en stund och försök igen.'
+        : 'Något gick fel. Försök igen om en stund.', true);
     } catch {
       say('Ingen kontakt med servern. Kontrollera uppkopplingen och försök igen.', true);
     }
