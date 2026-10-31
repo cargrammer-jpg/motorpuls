@@ -128,3 +128,16 @@ Det är det enda tillåtna elementet ovanpå en bild.
 
 **Tillgänglighet.** `role="img"`, `aria-label="Gäller Sverige"` och `title` med samma text. SVG:n är `aria-hidden`.
 
+
+## Guider och Läs också
+**Guider.** En artikel med `type: guide` (eller `category: Guider`) är en guide. Guider samlas på `/guider/` (samma flöde som
+startsidan, rubrik i artikelmallens stil), i `feed/guider.xml` och i sitemap.xml. Sidhuvudet får länkarna "Nyheter" och "Guider"
+(aktuell sida: 2px orange understreck) först när minst en guide är publicerad, så inga tomma sidor syns. Guider får `Article` i JSON-LD,
+brödsmulan "Start / Guider / <kategori>" och tas inte med i Google News-sitemapen.
+
+**Läs också.** Under artikeln (efter RSS-raden): tre andra artiklar. Samma kategori väger tyngst, sedan gemensamma taggar, sedan
+de nyaste. Mobil: liten bild till vänster och rubrik till höger; från 40rem tre kolumner. Miniatyrerna är 400 px-varianterna i en
+3:2-scen med svart kant (ingen beskärning) och kredit under, som Populärt.
+
+**Uppdaterad.** `updated:` i front matter ger "Uppdaterad <datum>" i bylinen, `dateModified` och sitemaps `lastmod`. Ett updated före
+date räknas som date, ett i framtiden stoppar bygget.

@@ -146,7 +146,7 @@ html.mh-js{scroll-padding-top:3rem}
 .item a{display:grid;grid-template-columns:minmax(0,1fr) 6.5rem;gap:1rem 1.25rem;padding:1.25rem 0;text-decoration:none}
 .item--noimg a{grid-template-columns:minmax(0,1fr)}
 .item__text{display:grid;gap:.5rem;align-content:start}
-.item h4{font-size:clamp(1.12rem,2.1vw,1.5rem);line-height:1.18;font-weight:700;font-stretch:108%;letter-spacing:-.02em;color:var(--text)}
+.item :is(h2,h4){font-size:clamp(1.12rem,2.1vw,1.5rem);line-height:1.18;font-weight:700;font-stretch:108%;letter-spacing:-.02em;color:var(--text)}
 .item p{font-family:var(--serif);font-size:1.04rem;line-height:1.45;color:var(--text-2);display:none;text-wrap:pretty}
 .item__img{margin:0;align-self:start;overflow:hidden;border-radius:var(--radius);background:#000;box-shadow:0 0 0 1px var(--line)}
 .item__img img{width:100%;height:auto}
@@ -320,9 +320,9 @@ html.mh-js{scroll-padding-top:3rem}
 
 /* Rörelse: rubriklänkar får en understrykning som glider in, kort lyfter lätt och bilden zoomar inom sin ram.
    Bara transform, opacity och färger (inget som ger layout). Allt stängs av med prefers-reduced-motion (regeln längre upp). */
-.lead__title,.latest h3,.item h4,.pop__card h3{text-decoration:underline;text-decoration-thickness:.06em;text-decoration-color:transparent;
+.lead__title,.latest h3,.item :is(h2,h4),.pop__card h3,.related__card h3{text-decoration:underline;text-decoration-thickness:.06em;text-decoration-color:transparent;
   text-underline-offset:.4em;transition:text-decoration-color .25s var(--ease),text-underline-offset .35s var(--ease),color .25s var(--ease)}
-:is(.lead a,.latest a,.item a,.pop__card a):is(:hover,:focus-visible) :is(.lead__title,h3,h4){color:#fff;text-decoration-color:var(--pulse);text-underline-offset:.14em}
+:is(.lead a,.latest a,.item a,.pop__card a,.related__card a):is(:hover,:focus-visible) :is(.lead__title,h2,h3,h4){color:#fff;text-decoration-color:var(--pulse);text-underline-offset:.14em}
 .lead a,.pop__frame{transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
 .lead__frame img,.pop__frame img{transition:transform .7s var(--ease)}
 .chip{transition:background-color .18s var(--ease),border-color .18s var(--ease),color .18s var(--ease),transform .15s var(--ease)}
@@ -374,3 +374,48 @@ html.mh-js{scroll-padding-top:3rem}
 .rss-row{display:flex;flex-wrap:wrap;align-items:center;gap:.35rem .55rem;margin:0;font-size:.85rem;color:var(--muted)}
 .rss-row a{color:var(--text);font-weight:620;text-underline-offset:.2em;padding-block:.35rem}
 .rss-row a:hover{text-decoration-color:var(--pulse)}
+
+/* Sidhuvudets länkar (Nyheter, Guider): bara när minst en guide är publicerad. Följer med när baren krymper (samma
+   förskjutning som loggan). Aktuell sida: orange understreck. */
+.topnav ul{list-style:none;margin:0;padding:0;display:flex;gap:.25rem}
+.topnav a{display:inline-flex;align-items:center;min-height:2.75rem;padding-inline:.6rem;font-size:.9rem;font-weight:650;color:var(--text-2);text-decoration:none;
+  text-decoration-line:underline;text-decoration-thickness:2px;text-underline-offset:.45em;text-decoration-color:transparent;
+  transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
+.topnav a:hover{color:var(--text);text-decoration-color:var(--line-strong)}
+.topnav a[aria-current="page"]{color:var(--text);text-decoration-color:var(--pulse)}
+.masthead .topnav{transition:transform var(--mh-t) var(--ease)}
+.masthead.is-small .topnav{transform:translateY(15.5px)}
+.masthead:has(:focus-visible) .topnav{transform:none}
+@media (max-width:23rem){.topnav a{padding-inline:.4rem;font-size:.85rem}}
+
+/* Kategorisidan (Guider): samma flöde som startsidan, rubrik i artikelmallens stil */
+.catpage{padding-block:clamp(1.5rem,4vw,3.5rem) clamp(3rem,7vw,6rem)}
+.catpage__head{display:grid;gap:1rem;max-width:48rem}
+.catpage__title{font-size:clamp(2rem,1rem + 4vw,3.5rem);line-height:1;font-weight:820;font-stretch:115%;letter-spacing:-.035em;color:#fff}
+.catpage__dek{font-family:var(--serif);font-size:clamp(1.05rem,.95rem + .45vw,1.2rem);line-height:1.5;color:var(--text-2);text-wrap:pretty;max-width:40rem}
+.catpage__list{padding-block:1.5rem 0;margin-top:1rem;border-top:1px solid var(--line-strong)}
+
+/* Läs också: tre kort under artikeln. Mobil: liten bild till vänster, rubrik till höger. Från 40rem: tre kolumner.
+   Bilderna beskärs inte (3:2-scen med svart kant, som Populärt). width/height på bilden: inget layoutskifte. */
+.related{border-top:1px solid var(--line-strong);padding-top:1rem;margin-top:.5rem}
+.related h2{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:.5rem;color:var(--text)}
+.related__list{list-style:none;margin:1rem 0 0;padding:0;display:grid;gap:1rem}
+.related__card{min-width:0}
+.related__card a{display:grid;grid-template-columns:7rem minmax(0,1fr);gap:.9rem;align-items:start;text-decoration:none;color:inherit;border-radius:var(--radius)}
+.related__card--noimg a{grid-template-columns:minmax(0,1fr);background:var(--surface);box-shadow:0 0 0 1px var(--line);padding:1rem}
+.related__media{margin:0}
+.related__frame{position:relative;aspect-ratio:3/2;overflow:hidden;border-radius:var(--radius) var(--radius) 0 0;background:#000;box-shadow:0 0 0 1px var(--line)}
+.related__frame img{width:100%;height:100%;object-fit:contain}
+.related .item__credit{border-radius:0 0 var(--radius) var(--radius);font-size:.62rem;overflow-wrap:anywhere}
+.related__body{display:grid;gap:.4rem;align-content:start}
+.related__card h3{font-size:1rem;line-height:1.25;font-weight:650;letter-spacing:-.01em;color:var(--text);text-wrap:balance}
+@media (min-width:40rem){
+  .related__list{grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem}
+  .related__card a{grid-template-columns:minmax(0,1fr);gap:.65rem}
+}
+.related__frame{transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
+.related__frame img{transition:transform .7s var(--ease)}
+@media (hover:hover){
+  .related__card a:hover .related__frame{transform:translateY(-3px);box-shadow:0 0 0 1px var(--line-strong),0 22px 40px -22px rgb(255 91 31 / .45)}
+  .related__card a:hover .related__frame img{transform:scale(1.05)}
+}

@@ -12,7 +12,9 @@
 #                                 Ord som TODO i texten ger en varning i bygget.
 #   img/ld/<slug>-16x9.jpg m.fl.  bilder för NewsArticle-JSON-LD: huvudbilden beskuren till 16:9, 4:3 och 1:1, högst
 #                                 1200 px bred, aldrig uppskalad (checka in dem tillsammans med artikeln, som img/og/)
-#   feed/<kategori>.xml           RSS per kategori (och feed/sverige.xml när någon artikel har sweden: true)
+#   feed/<kategori>.xml           RSS per kategori (och feed/sverige.xml när någon artikel har sweden: true,
+#                                 feed/guider.xml när någon guide är publicerad)
+#   guider/index.html             kategorisidan Guider (bara när minst en guide är publicerad, då även länken i sidhuvudet)
 #   sw.js, push.js                bara när PUSH_BOX är på (förhandsvisning av push-rutan, se nedan)
 #   nyhetsbrev.js                 bara när NEWSLETTER_BOX är på (förhandsvisning av nyhetsbrevsrutan i sidfoten, se nedan)
 #   img/og/<slug>.jpg             delningsbild 1200x630 (JPEG) ur huvudbilden; startsidan använder img/og/motorpuls.jpg
@@ -29,7 +31,14 @@
 #          räknas som hela den dagen, så en artikel som mergas på sin egen dag går igenom). För förhandsbygge av
 #          schemalagda artiklar: MOTORPULS_NOW=2026-11-05T07:10+01:00 .venv/bin/python build.py
 # updated: valfritt, samma format som date. Blir dateModified (annars samma som date) och sitemaps lastmod, och
-#          artikeln visar "Uppdaterad <datum>" i bylinen när tidpunkten är senare än date.
+#          artikeln visar "Uppdaterad <datum>" i bylinen när tidpunkten är senare än date. Ett updated före date
+#          räknas som date (dateModified blir aldrig tidigare än datePublished). Bygget stoppas om updated ligger i
+#          framtiden, precis som för date.
+# type:    valfritt, "guide" gör artikeln till en guide (som category: Guider). Guider samlas på /guider/ och i
+#          feed/guider.xml, får Article i stället för NewsArticle i JSON-LD och hamnar inte i sitemap-news.xml.
+#
+# Läs också: under varje artikel tre andra artiklar. Samma kategori (guider räknas som en kategori) och gemensamma
+#          taggar först, sedan de nyaste. Aldrig artikeln själv. Miniatyrerna använder 400 px-varianterna.
 #
 # sweden:  valfritt, true när nyheten gäller Sverige. Då visas en liten svensk flagga (äldre, mörkare färger)
 #          som ett eget element ovanpå huvudbildens hörn och på startsidans kort, eller vid kategorin om
@@ -83,6 +92,14 @@ def nbnum(s):
     return NUM_GAP.sub("\u00a0", s)
 def nbnum_html(h): return re.sub(r">[^<]+<", lambda m: nbnum(m.group(0)), ">" + h + "<")[1:-1]
 def slugify(s): return re.sub(r"[^a-z0-9]+", "-", s.lower().replace("å","a").replace("ä","a").replace("ö","o")).strip("-")
+
+# ---------- Guider ----------
+# En artikel är en guide om front matter har type: guide eller category: Guider. Kategorisidan, länken i sidhuvudet och
+# feed/guider.xml finns bara när minst en guide är publicerad (som de andra kategoriflödena: inga tomma sidor).
+GUIDE_KEY, GUIDE_NAME, GUIDE_PATH = "guider", "Guider", "/guider/"
+GUIDE_DESC = "Guider från Motorpuls: regler, kostnader och uträkningar förklarade steg för steg, med länkar till källorna."
+GUIDES = []  # publicerade guider, nyast först, sätts i main()
+def is_guide(a): return str(a.get("type") or "").strip().lower() == "guide" or a["cat"] == GUIDE_KEY
 
 # ---------- feature-flaggor ----------
 # PUSH_BOX: orange ruta "Få en notis när vi publicerar nyheter" (Web Push). AV i produktion. Utskicken är inte
@@ -158,11 +175,16 @@ def load_articles():
             if not fm.get(k): raise SystemExit(f"{path}: saknar {k}")
         check_summary_images(fm, path)
         if "sweden" in fm and not isinstance(fm["sweden"], bool): raise SystemExit(f"{path}: sweden ska vara true eller false")
+        if fm.get("type") is not None and str(fm["type"]).strip().lower() not in ("guide", "nyhet"):
+            raise SystemExit(f"{path}: type ska vara guide (eller utelämnas)")
         d, t = parse_when(fm["date"], path, "date")
         n = now()
         if (t and t > n) or d > n.astimezone(TZ).date():
             raise SystemExit(f"{path}: date {iso(d, t)} ligger i framtiden (nu {n.astimezone(TZ):%Y-%m-%d %H:%M} svensk tid)")
         ud, ut = parse_when(fm["updated"], path, "updated") if fm.get("updated") else (d, t)
+        if (ut and ut > n) or ud > n.astimezone(TZ).date():
+            raise SystemExit(f"{path}: updated {iso(ud, ut)} ligger i framtiden (nu {n.astimezone(TZ):%Y-%m-%d %H:%M} svensk tid)")
+        if instant(ud, ut) < instant(d, t): ud, ut = d, t  # uppdaterad före publicering: räknas som date
         # h1 in the body is the page headline; "## Källor" becomes the source list
         h1 = re.search(r"^# (.+)$", body, re.M)
         headline = h1.group(1).strip() if h1 else fm["title"]
@@ -392,10 +414,17 @@ def category_feeds(arts):
     feeds = [dict(key=k, name=n, path=f"/feed/{k}.xml", arts=g) for k, (n, g) in groups.items()]
     sv = [a for a in arts if a.get("sweden")]
     if sv and "sverige" not in groups: feeds.append(dict(key="sverige", name="Sverige", path="/feed/sverige.xml", arts=sv))
+    gd = [a for a in arts if is_guide(a)]
+    if gd and GUIDE_KEY not in groups: feeds.append(dict(key=GUIDE_KEY, name=GUIDE_NAME, path=f"/feed/{GUIDE_KEY}.xml", arts=gd))
     return feeds
 
 def feed_for(a):
     return next(f for f in FEEDS if f["key"] == a["cat"])
+
+def feeds_for(a):
+    """Flöden i artikelns <head>: kategorin, och för guider även Guider."""
+    g = [f for f in FEEDS if f["key"] == GUIDE_KEY and f["key"] != a["cat"]] if is_guide(a) else []
+    return [feed_for(a)] + g
 
 def feed_links(feeds):
     return "".join(f'<link rel="alternate" type="application/rss+xml" title="{SITE}: {esc(f["name"])}" href="{f["path"]}">\n' for f in feeds)
@@ -406,9 +435,9 @@ RSS_SVG = ('<svg class="rss-icon" viewBox="0 0 16 16" width="16" height="16" ari
 
 def rss_row(a):
     """Rad i slutet av artikeln: kategorins flöde och hela sajtens flöde."""
-    f = feed_for(a)
+    links = "".join(f'<a href="{f["path"]}">{esc(f["name"])}</a><span aria-hidden="true">·</span>' for f in feeds_for(a))
     return (f'\n        <p class="rss-row">{RSS_SVG}<span>Prenumerera via RSS:</span> '
-            f'<a href="{f["path"]}">{esc(f["name"])}</a><span aria-hidden="true">·</span><a href="/feed.xml">Alla nyheter</a></p>')
+            f'{links}<a href="/feed.xml">Alla nyheter</a></p>')
 
 # ---------- push (förhandsvisning, PUSH_BOX) ----------
 def push_src(name): return open(os.path.join(PUSH_SRC, name), encoding="utf-8").read()
@@ -586,10 +615,17 @@ def head(title, desc, path, og_type="website", image=None, extra="", preload_img
 <a class="skip" href="#innehall">Hoppa till innehållet</a>
 <header class="masthead">
   <div class="wrap masthead__row">
-    <a class="wordmark" href="/"><img class="logo" src="/img/logo.svg" alt="Motorpuls" width="872" height="88">{BANNER_FLAG_SVG}</a>
+    <a class="wordmark" href="/"><img class="logo" src="/img/logo.svg" alt="Motorpuls" width="872" height="88">{BANNER_FLAG_SVG}</a>{topnav(path)}
   </div>
 </header>
 '''
+
+def topnav(path):
+    """Länkarna i sidhuvudet: Nyheter (startsidan) och Guider. Bara när minst en guide är publicerad."""
+    if not GUIDES: return ""
+    li = "".join(f'<li><a href="{u}"{" aria-current=\"page\"" if path == u else ""}>{t}</a></li>'
+                 for u, t in (("/", "Nyheter"), (GUIDE_PATH, GUIDE_NAME)))
+    return f'\n    <nav class="topnav" aria-label="Huvudmeny"><ul>{li}</ul></nav>'
 
 def footer():
     cats = "".join(f'<li><a href="{f["path"]}">{esc(f["name"])}</a></li>' for f in FEEDS)
@@ -660,7 +696,7 @@ def lead(a):
       </a>
     </article>'''
 
-def feed_item(a):
+def feed_item(a, h="h4"):
     # krediten visas vid varje bild, även miniatyrer (villkor för pressbilder och CC-licenser)
     thumb = (f'<figure class="item__img">{flag(a, "thumb")}{img_tag(a["img"], "", sizes="(min-width: 48rem) 15rem, 6.5rem")}'
              f'<figcaption class="item__credit">{esc(a["img"]["credit"])}</figcaption></figure>') if a["img"] else ""
@@ -669,7 +705,7 @@ def feed_item(a):
             <a href="{a["url"]}">
               <div class="item__text">
                 {meta_line(a, with_date=False, flag_html=meta_flag(a, a["img"]))}
-                <h4>{esc(a["title"])}</h4>
+                <{h}>{esc(a["title"])}</{h}>
                 <p>{esc(a["excerpt"])}</p>
               </div>
               {thumb}
@@ -911,9 +947,9 @@ def author_box(name):
           </div>
         </aside>'''
 
-def article(a):
+def article(a, arts=()):
     img, imgs = a["img"], a["images_out"]
-    ld = {"@context": "https://schema.org", "@type": "NewsArticle", "headline": a["title"], "description": a["excerpt"],
+    ld = {"@context": "https://schema.org", "@type": "Article" if is_guide(a) else "NewsArticle", "headline": a["title"], "description": a["excerpt"],
           "datePublished": a["published"], "dateModified": a["modified"], "inLanguage": "sv-SE",
           "articleSection": a["category"], "keywords": a.get("tags") or [],
           "mainEntityOfPage": {"@type": "WebPage", "@id": DOMAIN + a["url"]}, "url": DOMAIN + a["url"],
@@ -933,7 +969,7 @@ def article(a):
              extra=f'<meta property="article:published_time" content="{a["published"]}">\n'
                    f'<meta property="article:section" content="{esc(a["category"])}">\n'
                    + "".join(f'<meta property="article:tag" content="{esc(t)}">\n' for t in a.get("tags") or []) + jsonld,
-             preload_img=img, preload_sizes=HERO_SIZES, robots="max-image-preview:large", feeds=[feed_for(a)])
+             preload_img=img, preload_sizes=HERO_SIZES, robots="max-image-preview:large", feeds=feeds_for(a))
     sources = ""
     if a["sources"]:
         lis = "".join(f'''
@@ -947,6 +983,8 @@ def article(a):
         </section>'''
     updated = (f'<span>Uppdaterad <b><time datetime="{a["modified"]}">{sv_date(a["mod_date"])}</time></b></span>'
                if a["mod_when"] > a["when"] else "")
+    guide_crumb = (f'<a href="{GUIDE_PATH}">{GUIDE_NAME}</a><span aria-hidden="true">/</span>'
+                   if is_guide(a) and a["cat"] != GUIDE_KEY and GUIDES else "")
     au = find_author(a["author"])
     author = f'<a href="{au["url"]}" rel="author">{esc(au["name"])}</a>' if au else esc(a["author"])
     body = f'''
@@ -954,7 +992,7 @@ def article(a):
   <div class="wrap">
     <article>
       <header class="article__head article__col">
-        <nav class="crumbs" aria-label="Brödsmulor"><a href="/">Start</a><span aria-hidden="true">/</span><span class="tag">{esc(a["category"])}</span>{meta_flag(a, imgs)}</nav>
+        <nav class="crumbs" aria-label="Brödsmulor"><a href="/">Start</a><span aria-hidden="true">/</span>{guide_crumb}<span class="tag">{esc(a["category"])}</span>{meta_flag(a, imgs)}</nav>
         <h1 class="article__title">{nbnum(esc(a["headline"]))}</h1>
         <p class="article__dek">{nbnum(esc(a["excerpt"]))}</p>
         <p class="byline"><span>Publicerad <b><time datetime="{a["published"]}">{sv_date(a["date"])}</time></b></span>{updated}<span>Läsetid <b>{a["minutes"]} min</b></span><span>Av <b>{author}</b></span></p>
@@ -968,10 +1006,81 @@ def article(a):
           <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M8 7v4.5M8 4.6v.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
           <p>Texten är skriven med hjälp av AI och faktagranskad mot källorna ovan. <a href="/om/">Så arbetar Motorpuls</a></p>
         </aside>
-{author_box(a["author"])}{push_box("article")}{rss_row(a)}
+{author_box(a["author"])}{push_box("article")}{rss_row(a)}{related_section(a, arts)}
         <p class="more"><a class="btn" href="/">Fler nyheter på startsidan</a></p>
       </div>
     </article>
+  </div>
+</main>
+'''
+    return page(h, body)
+
+# ---------- Läs också ----------
+RELATED_N = 3
+RELATED_SIZES = "(min-width: 40rem) 12rem, 7rem"
+
+def related(a, arts, n=RELATED_N):
+    """Tre andra artiklar: samma kategori (guider räknas som en kategori) och gemensamma taggar först, sedan de nyaste."""
+    tags = {str(t).lower() for t in a.get("tags") or []}
+    def rank(b):
+        same = b["cat"] == a["cat"] or (is_guide(a) and is_guide(b))
+        shared = len(tags & {str(t).lower() for t in b.get("tags") or []})
+        return (2 if same else 0) + (1 if shared else 0), shared, b["when"]  # kategori väger tyngst, sedan taggar
+    return sorted((b for b in arts if b["slug"] != a["slug"]), key=rank, reverse=True)[:n]
+
+def thumb(img):
+    """Miniatyr: 400 px-varianten (finns den inte, den minsta som finns). Samma format, ingen beskärning."""
+    vs = [(int(w[:-1]), u) for u, w in (x.split() for x in img["srcset"].split(", "))] if img.get("srcset") else []
+    small = min(vs)[1] if vs else img["src"]
+    return dict(img, src=small)
+
+def related_card(b):
+    img = b["img"]
+    media = (f'<figure class="related__media"><div class="related__frame">{flag(b, "thumb")}{img_tag(thumb(img), "", sizes=RELATED_SIZES)}</div>'
+             f'<figcaption class="item__credit">{esc(img["credit"])}</figcaption></figure>') if img else ""
+    return f'''
+            <li class="related__card{"" if img else " related__card--noimg"}">
+              <a href="{b["url"]}">
+                {media}
+                <div class="related__body">
+                  <span class="meta"><span class="tag">{esc(GUIDE_NAME if is_guide(b) and b["cat"] != GUIDE_KEY else b["category"])}</span>{meta_flag(b, img)}<time datetime="{b["published"]}">{sv_date(b["date"])}</time></span>
+                  <h3>{nbnum(esc(b["title"]))}</h3>
+                </div>
+              </a>
+            </li>'''
+
+def related_section(a, arts):
+    rel = related(a, arts)
+    if not rel: return ""
+    return f'''
+        <section class="related" aria-labelledby="related-h">
+          <h2 id="related-h"><span class="pulse-dot" aria-hidden="true"></span>Läs också</h2>
+          <ul class="related__list">{"".join(related_card(b) for b in rel)}
+          </ul>
+        </section>'''
+
+# ---------- kategorisidan Guider ----------
+def guides_page(guides):
+    f = next(x for x in FEEDS if x["key"] == GUIDE_KEY)
+    ld = {"@context": "https://schema.org", "@type": "CollectionPage", "name": f"{GUIDE_NAME} · {SITE}", "description": GUIDE_DESC,
+          "url": DOMAIN + GUIDE_PATH, "inLanguage": "sv-SE",
+          "mainEntity": {"@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": i, "url": DOMAIN + a["url"]}
+                                                                   for i, a in enumerate(guides, 1)]}}
+    extra = '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace("</", "<\\/") + "</script>\n"
+    h = head(f"{GUIDE_NAME} · {SITE}", GUIDE_DESC, GUIDE_PATH, image=DEFAULT_OG, feeds=[f], extra=extra)
+    body = f'''
+<main id="innehall" class="catpage">
+  <div class="wrap">
+    <header class="catpage__head">
+      <nav class="crumbs" aria-label="Brödsmulor"><a href="/">Start</a><span aria-hidden="true">/</span><span class="tag">{GUIDE_NAME}</span></nav>
+      <h1 class="catpage__title">{GUIDE_NAME}</h1>
+      <p class="catpage__dek">{esc(GUIDE_DESC)}</p>
+      <p class="rss-row">{RSS_SVG}<span>Prenumerera via RSS:</span> <a href="{f["path"]}">{GUIDE_NAME}</a><span aria-hidden="true">·</span><a href="/feed.xml">Alla nyheter</a></p>
+    </header>
+    <section class="feed-section catpage__list" aria-label="Alla guider">
+      <ol class="feed">{"".join(feed_item(a, "h2") for a in guides)}
+      </ol>
+    </section>
   </div>
 </main>
 '''
@@ -1051,7 +1160,7 @@ def info_page(p, arts):
 
 def news_sitemap(arts):
     """Google News-sitemap: artiklar publicerade de senaste NEWS_DAYS dygnen räknat från byggtiden (kan bli tom,
-    det är tillåtet). publication_date är den ursprungliga publiceringstidpunkten."""
+    det är tillåtet). Guider är inte nyheter och tas inte med. publication_date är den ursprungliga publiceringstidpunkten."""
     cutoff = now() - dt.timedelta(days=NEWS_DAYS)
     items = "".join(f"""  <url>
     <loc>{DOMAIN}{a["url"]}</loc>
@@ -1064,7 +1173,7 @@ def news_sitemap(arts):
       <news:title>{esc(a["headline"])}</news:title>
     </news:news>
   </url>
-""" for a in arts if a["when"] >= cutoff)
+""" for a in arts if a["when"] >= cutoff and not is_guide(a))
     return ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
             'xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">\n' + items + "</urlset>\n")
 
@@ -1085,17 +1194,21 @@ def main():
         a["images_out"] = ensure_images(a)
         a["img"] = a["images_out"][0] if a["images_out"] else None
     FEEDS = category_feeds(arts)
+    GUIDES[:] = [a for a in arts if is_guide(a)]
     # clean old article output so removed articles disappear
     shutil.rmtree(os.path.join(ROOT, "artikel"), ignore_errors=True)
     if os.path.exists(os.path.join(ROOT, "artikel.html")): os.remove(os.path.join(ROOT, "artikel.html"))
     write("index.html", index(arts))
-    for a in arts: write(f"artikel/{a['slug']}/index.html", article(a))
+    for a in arts: write(f"artikel/{a['slug']}/index.html", article(a, arts))
+    shutil.rmtree(os.path.join(ROOT, GUIDE_PATH.strip("/")), ignore_errors=True)  # inga guider: ingen sida
+    if GUIDES: write(GUIDE_PATH.lstrip("/") + "index.html", guides_page(GUIDES))
     shutil.rmtree(os.path.join(ROOT, "om"), ignore_errors=True)
     for p in pages: write(p["path"].lstrip("/") + "index.html", info_page(p, arts))
     write("404.html", notfound())
     urls = [("/", arts[0]["date"])] + [(a["url"], a["date"]) for a in arts]
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
           + "".join(f"  <url><loc>{DOMAIN}{u}</loc><lastmod>{lastmod(u, arts)}</lastmod></url>\n" for u, d in urls)
+          + (f"  <url><loc>{DOMAIN}{GUIDE_PATH}</loc><lastmod>{lastmod(GUIDE_PATH, GUIDES)}</lastmod></url>\n" if GUIDES else "")
           + "".join(f"  <url><loc>{DOMAIN}{p['path']}</loc></url>\n" for p in pages) + "</urlset>\n")
     write("sitemap-news.xml", news_sitemap(arts))
     write("robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {DOMAIN}/sitemap.xml\nSitemap: {DOMAIN}/sitemap-news.xml\n")
