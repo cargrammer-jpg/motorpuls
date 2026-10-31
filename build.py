@@ -486,7 +486,7 @@ def footer():
   <div class="wrap">
     <a class="wordmark" href="/"><img class="logo logo--footer" src="/img/logo.svg" alt="Motorpuls" width="872" height="88" loading="lazy"></a>
     <p class="site-footer__desc">{SITE_DESC}</p>
-    <nav class="site-footer__nav" aria-label="Om Motorpuls"><ul><li><a href="/om/">Om Motorpuls</a></li><li><a href="/om/lukas/">Lukas, redaktionell signatur</a></li></ul></nav>
+    <nav class="site-footer__nav" aria-label="Om Motorpuls"><ul><li><a href="/om/">Om Motorpuls</a></li><li><a href="/om/lukas/">Om Lukas</a></li></ul></nav>
     <div class="site-footer__rss">
       <a class="rss-link" href="/feed.xml">{RSS_SVG}RSS</a>{per_cat}
     </div>
@@ -784,7 +784,7 @@ def author_box(name):
     av = au["avatar"]
     img = (f'<img class="author-box__avatar" src="{av[0][0]}" srcset="{", ".join(f"{u} {w}w" for u, w in reversed(av))}" sizes="4rem" '
            f'width="64" height="64" alt="" loading="lazy" decoding="async">') if av else ""
-    ai = '<p class="author-box__ai"><span class="author-box__badge">AI-assisterad signatur</span></p>' if au.get("ai_signature") else ""
+    ai = '<p class="author-box__ai"><span class="author-box__badge">Skrivet med AI-stöd</span></p>' if au.get("ai_signature") else ""
     return f'''
         <aside class="author-box" aria-labelledby="author-box-h">
           {img}

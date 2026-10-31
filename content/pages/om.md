@@ -9,7 +9,7 @@ Motorpuls är en svensk nyhetssajt om bilar. Fokus ligger på elbilar, Tesla, sp
 
 ## Hur artiklarna skrivs
 
-Artiklarna tas fram med hjälp av AI. Signaturen Lukas är en redaktionell signatur för Motorpuls och ingen verklig person. Lukas har inte provkört bilarna, besökt evenemang eller intervjuat någon. Varje artikel granskas och godkänns av en människa innan den publiceras.
+Artiklarna tas fram med hjälp av AI. Lukas, som står som skribent, är personen bakom Motorpuls och skriver under sitt mellannamn som pseudonym. Artiklarna bygger på källor och inte på egna provkörningar, besök eller intervjuer. Varje artikel granskas och godkänns av en människa innan den publiceras.
 
 ## Källor och fakta
 
