@@ -5,8 +5,16 @@
   <link>https://motorpuls.se/</link>
   <description>Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Sat, 31 Oct 2026 00:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Sat, 31 Oct 2026 12:33:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>M3 som elbil: fyra motorer, över 100 kWh och noll fejkat ljud</title>
+    <link>https://motorpuls.se/artikel/bmw-m3-el-fyra-motorer/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/bmw-m3-el-fyra-motorer/</guid>
+    <pubDate>Sat, 31 Oct 2026 12:33:00 +0100</pubDate>
+    <category>Sportbil</category>
+    <description>BMW:s utvecklingsstyrelse har kört den första helt eldrivna M3:an i förserieutförande, en bil med fyra elmotorer som ska byggas i München.</description>
+  </item>
   <item>
     <title>Tio EU-länder har sagt ja till Teslas FSD. Därför får Sverige vänta till tidigast 2027</title>
     <link>https://motorpuls.se/artikel/tesla-fsd-sverige-eu-omrostning-december/</link>
@@ -43,7 +51,7 @@
     <title>Aston Martin Valhalla Spider: 1 079 hk och samma toppfart utan tak</title>
     <link>https://motorpuls.se/artikel/aston-martin-valhalla-spider/</link>
     <guid isPermaLink="true">https://motorpuls.se/artikel/aston-martin-valhalla-spider/</guid>
-    <pubDate>Fri, 30 Oct 2026 00:00:00 +0100</pubDate>
+    <pubDate>Fri, 30 Oct 2026 03:15:00 +0100</pubDate>
     <category>Sportbil</category>
     <description>Aston Martin visar Valhalla Spider, en öppen laddhybrid med 1 079 hk, över 600 kilo downforce och leveranser från tredje kvartalet 2027.</description>
   </item>
@@ -51,7 +59,7 @@
     <title>Utredning vill föra in HVO100 i reduktionsplikten senast 2031</title>
     <link>https://motorpuls.se/artikel/hvo100-reduktionsplikten-utredning-2031/</link>
     <guid isPermaLink="true">https://motorpuls.se/artikel/hvo100-reduktionsplikten-utredning-2031/</guid>
-    <pubDate>Fri, 30 Oct 2026 00:00:00 +0100</pubDate>
+    <pubDate>Fri, 30 Oct 2026 01:19:00 +0100</pubDate>
     <category>Bränsle</category>
     <description>Styrmedelsutredningen föreslår 21, 23 och 25 procents reduktionsplikt 2028 till 2030 och att HVO100 förs in i plikten och beskattas fullt senast 2031.</description>
   </item>

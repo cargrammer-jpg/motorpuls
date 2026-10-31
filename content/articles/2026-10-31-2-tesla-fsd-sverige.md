@@ -1,6 +1,6 @@
 ---
 title: "Tio EU-länder har sagt ja till Teslas FSD. Därför får Sverige vänta till tidigast 2027"
-date: 2026-10-31
+date: 2026-10-31T18:05:00+01:00
 slug: tesla-fsd-sverige-eu-omrostning-december
 tags:
   - Tesla

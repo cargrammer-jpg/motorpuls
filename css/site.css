@@ -18,12 +18,13 @@
   --bg:#0B0D10; --bg-2:#101318; --surface:#151A20; --raised:#1B2129;
   --line:#252C35; --line-strong:#3A434E;
   --text:#EEF1F4; --text-2:#C3CAD1; --muted:#929CA7;
+  --credit:#A7B0BA; /* fotokrediter på korten: 8,5:1 mot --bg-2, minst 4,7:1 även mitt i intoningen (se card-in) */
   --pulse:#FF5B1F; --pulse-text:#FF8A5C; --glow:rgb(255 91 31 / .16);
   --sans:"Archivo","Archivo Fallback",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
   --serif:"Newsreader","Newsreader Fallback",ui-serif,Georgia,"Times New Roman",serif;
   --mono:"DM Mono","DM Mono Fallback",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
   --gutter:clamp(1.25rem,4vw,2.5rem); --max:80rem; --radius:4px;
-  --ease:cubic-bezier(.2,.7,.2,1);
+  --ease:cubic-bezier(.2,.8,.2,1);
 }
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%;background:var(--bg)}
@@ -48,23 +49,23 @@ p{margin:0}
 .pulse-dot{display:inline-block;width:.5rem;height:.5rem;border-radius:50%;background:var(--pulse);flex:none;position:relative}
 
 /* Masthead */
-.masthead{position:sticky;top:0;z-index:20;height:65px;margin-bottom:0;--mh-dx:0px;--mh-scale:.72;
+/* Sidhuvudet animeras bara med transform och opacity (compositor), aldrig med height/margin, så skrollen behöver ingen
+   layout per bildruta. Elementet är alltid 65px högt i flödet (CLS 0) och har helt ogenomskinlig bakgrund direkt på
+   det klistrade elementet: Safari 26 färgar statusfältet och adressfältets zon från ett sticky-element med solid
+   bakgrund vid överkanten (ingen backdrop-filter, ingen genomskinlighet).
+   Krympt läge (.is-small, js/site.js): hela baren glider upp 31px så att 34px syns; loggan skalas ned, glider till
+   vänsterkanten och centreras i den synliga delen. Helt dold (.is-hidden, när man läser nedåt): glider upp OCH tonas ut,
+   eftersom Safari 26 annars visar baren bakom statusfältets glas; opacity (inte visibility) så att loggan nås med Tab.
+   Utan JS: hel bar. prefers-reduced-motion: växlar direkt. */
+.masthead{position:sticky;top:0;z-index:20;height:65px;--mh-dx:0px;--mh-scale:.72;--mh-t:.34s;
   background:#0B0D10;border-bottom:1px solid var(--line);overflow:clip;
-  transition:height .22s var(--ease),margin-bottom .22s var(--ease),transform .25s var(--ease),opacity .25s var(--ease)}
-/* Helt ogenomskinlig bakgrund direkt på det klistrade elementet. Safari 26 färgar statusfältet och adressfältets zon
-   från ett sticky-element med solid bakgrund vid överkanten, så inget av sidan lyser igenom där (ingen backdrop-filter,
-   ingen genomskinlighet). Krympt läge (js/site.js sätter .is-small när man skrollat förbi toppen): baren blir 34px och
-   margin-bottom växer lika mycket (31px), så höjd plus marginal är alltid 65px och innehållet hoppar inte (CLS 0).
-   Raden inuti är alltid 64px och loggan flyttas bara med transform (ingen layoutförskjutning). Loggan skalas ned och glider till vänsterkanten med transform. Längre ned när man läser (.is-hidden) glider den smala
-   baren helt ut uppåt och kommer tillbaka (smal) så fort man skrollar uppåt. Utan JS: hel bar. prefers-reduced-motion: växlar direkt. */
-.masthead .wordmark{transform-origin:0 50%;transition:transform .22s var(--ease)}
-.masthead.is-small{height:34px;margin-bottom:31px}
-.masthead.is-small .wordmark{transform:translate(var(--mh-dx),-15.5px) scale(var(--mh-scale))}
-/* Helt dold: glider upp OCH tonas ut. I Safari 26 ritas sidan även under statusfältet och adressfältets glas, så en bar
-   som bara flyttas upp syns kvar där bakom glaset. opacity (inte visibility) så att loggan fortfarande nås med Tab. */
-.masthead.is-hidden{transform:translateY(calc(-100% - 2px));opacity:0}
+  transition:transform var(--mh-t) var(--ease),opacity var(--mh-t) var(--ease)}
+.masthead .wordmark{transform-origin:0 50%;transition:transform var(--mh-t) var(--ease)}
+.masthead.is-small{transform:translateY(-31px)}
+.masthead.is-small .wordmark{transform:translate(var(--mh-dx),15.5px) scale(var(--mh-scale))}
+.masthead.is-hidden{transform:translateY(calc(-100% - 2px));opacity:0;--mh-t:.28s}
 /* Tangentbordsfokus i sidhuvudet: full storlek så att fokusringen syns ordentligt */
-.masthead:has(:focus-visible){height:65px;margin-bottom:0;transform:none;opacity:1}
+.masthead:has(:focus-visible){transform:none;opacity:1}
 .masthead:has(:focus-visible) .wordmark{transform:none}
 html{scroll-padding-top:4.75rem}
 html.mh-js{scroll-padding-top:3rem}
@@ -72,7 +73,14 @@ html.mh-js{scroll-padding-top:3rem}
 .wordmark{display:inline-flex;align-items:center;text-decoration:none;flex:none}
 /* Logo: Heartline wordmark (img/logo.svg, viewBox 872x88.3, spike dips ~19% below baseline).
    translateY nudges the cap line to optical centre in the row. */
-.logo{height:clamp(1.15rem,1.6vw + .55rem,1.45rem);width:auto;max-width:100%;transform:translateY(8%)}
+.wordmark{--logo-h:clamp(1.15rem,1.6vw + .55rem,1.45rem)}
+.logo{height:var(--logo-h);width:auto;max-width:100%;transform:translateY(8%)}
+/* Svensk flagga efter loggan (BANNER_FLAG_SVG i build.py). Mått ur loggans höjd h: versalhöjden är 0,779h och flaggan är
+   lika hög, med överkant i linje med versalernas topp och underkant på baslinjen (mitten 0,0021h ovanför radens mitt,
+   inklusive loggans translateY). Mellanrum ca 0,35 versalhöjd. Fast storlek och bara transform: ingen CLS. Följer med
+   när .wordmark skalas i krympt läge. */
+.wordmark__flag{flex:none;display:block;height:calc(var(--logo-h) * .779);width:calc(var(--logo-h) * 1.2466);margin-left:calc(var(--logo-h) * .28);
+  border-radius:1px;transform:translateY(calc(var(--logo-h) * -.0021))}
 .logo--footer{height:1.35rem;transform:none}
 
 /* Chips */
@@ -102,26 +110,28 @@ html.mh-js{scroll-padding-top:3rem}
   box-shadow:0 0 0 1px var(--line),0 40px 80px -40px rgb(255 91 31 / .25)}
 .lead--text a{background:radial-gradient(40rem 22rem at 0% 0%,rgb(255 91 31 / .14),transparent 70%),linear-gradient(180deg,var(--raised),var(--surface))}
 .lead__media{margin:0;background:#000;align-self:center}
+.lead__frame{position:relative;overflow:hidden}
 .lead__media img{width:100%;height:auto}
 .lead__media figcaption{font-family:var(--mono);font-size:.7rem;color:var(--muted);padding:.5rem .9rem;background:var(--bg-2)}
 .lead__media figcaption:empty{display:none}
-.lead__body{display:grid;gap:1rem;align-content:center;padding:1.5rem 1.25rem 1.75rem}
+.lead__body{display:grid;gap:.65rem;align-content:center;padding:1rem 1rem 1.15rem}
+.lead__kicker{display:flex;flex-wrap:wrap;align-items:center;gap:.35rem .9rem}
 .lead--text .lead__body{padding:clamp(1.75rem,6vw,5rem) clamp(1.25rem,5vw,4.5rem);min-height:clamp(20rem,36vw,28rem)}
-@media (min-width:60rem){.lead--img a{grid-template-columns:minmax(0,1fr) minmax(0,1.2fr)}.lead--img .lead__media{order:2}.lead--img .lead__body{padding:clamp(2rem,3.5vw,3.5rem)}}
+@media (min-width:40rem){.lead__body{gap:.9rem;padding:1.5rem 1.5rem 1.6rem}}
+@media (min-width:60rem){.lead--img a{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}.lead--img .lead__media{order:2}.lead--img .lead__body{padding:clamp(1.75rem,2.6vw,2.75rem)}}
 .lead__title{font-size:clamp(2.1rem,5.2vw,4.4rem);line-height:.98;font-weight:820;font-stretch:115%;letter-spacing:-.04em;color:#fff;max-width:20ch}
-.lead--img .lead__title{font-size:clamp(2rem,3.6vw,3.4rem)}
-.lead a:hover .lead__title{text-decoration:underline;text-decoration-thickness:.05em;text-underline-offset:.12em;text-decoration-color:var(--pulse)}
-.lead__dek{font-family:var(--serif);font-size:clamp(1.12rem,1.5vw,1.35rem);line-height:1.45;color:var(--text-2);max-width:40rem;text-wrap:pretty}
+.lead--img .lead__title{font-size:clamp(1.5rem,1rem + 2.4vw,2.6rem);line-height:1.02;letter-spacing:-.035em}
+.lead__dek{font-family:var(--serif);font-size:clamp(1rem,.94rem + .3vw,1.2rem);line-height:1.45;color:var(--text-2);max-width:40rem;text-wrap:pretty}
+@media (max-width:39.99rem){.lead--img .lead__dek{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow:hidden}.lead--img .lead__more{display:none}}
 .lead__more{font-family:var(--mono);font-size:.8rem;color:var(--pulse-text);letter-spacing:.02em}
 .lead .meta{color:var(--text-2)}
 .front--single{padding-bottom:clamp(3rem,7vw,6rem)}
 
 /* Latest */
-.latest h2,.section-head h2{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:.5rem;color:var(--text)}
+.latest h2,.pop h2,.section-head h2{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:.5rem;color:var(--text)}
 .latest ol{list-style:none;margin:1rem 0 0;padding:0;border-top:1px solid var(--line-strong)}
 .latest li{border-bottom:1px solid var(--line);padding:1.05rem 0}
 .latest a{text-decoration:none;display:grid;gap:.4rem}
-.latest a:hover h3{color:#fff;text-decoration:underline;text-decoration-color:var(--pulse);text-underline-offset:.15em}
 .latest h3{font-size:1.05rem;line-height:1.25;font-weight:620;letter-spacing:-.01em;color:var(--text)}
 
 /* Feed */
@@ -137,8 +147,7 @@ html.mh-js{scroll-padding-top:3rem}
 .item a{display:grid;grid-template-columns:minmax(0,1fr) 6.5rem;gap:1rem 1.25rem;padding:1.25rem 0;text-decoration:none}
 .item--noimg a{grid-template-columns:minmax(0,1fr)}
 .item__text{display:grid;gap:.5rem;align-content:start}
-.item h4{font-size:clamp(1.12rem,2.1vw,1.5rem);line-height:1.18;font-weight:700;font-stretch:108%;letter-spacing:-.02em;color:var(--text)}
-.item a:hover h4{color:#fff;text-decoration:underline;text-decoration-thickness:.06em;text-underline-offset:.14em;text-decoration-color:var(--pulse)}
+.item :is(h2,h4){font-size:clamp(1.12rem,2.1vw,1.5rem);line-height:1.18;font-weight:700;font-stretch:108%;letter-spacing:-.02em;color:var(--text)}
 .item p{font-family:var(--serif);font-size:1.04rem;line-height:1.45;color:var(--text-2);display:none;text-wrap:pretty}
 .item__img{margin:0;align-self:start;overflow:hidden;border-radius:var(--radius);background:#000;box-shadow:0 0 0 1px var(--line)}
 .item__img img{width:100%;height:auto}
@@ -153,21 +162,63 @@ html.mh-js{scroll-padding-top:3rem}
 .site-footer{background:#07080A;border-top:1px solid var(--line);color:var(--muted);padding-block:3rem;font-size:.9rem}
 .site-footer p{max-width:32rem;line-height:1.55;color:var(--text-2)}
 .site-footer__desc{margin-top:1rem}
+.site-footer .site-footer__nav ul{margin-top:1.25rem;display:flex;flex-wrap:wrap;gap:.5rem 1.5rem}
 .site-footer a{color:var(--text)}
 .site-footer ul{list-style:none;margin:0;padding:0;display:grid;gap:.4rem}
 .site-footer .fine{font-family:var(--mono);font-size:.72rem;color:var(--muted);margin-top:2.5rem;border-top:1px solid var(--line);padding-top:1rem}
+.site-footer .site-footer__contact a{color:var(--muted);text-underline-offset:.2em;text-decoration-color:var(--line-strong)}
+.site-footer .site-footer__contact a:hover{color:var(--text)}
 
-/* Article (v2): one calm reading column (40rem, about 65 characters per line at 18px), a wider image stage. */
+/* Article (v2): one calm reading column (40rem, about 65 characters per line at 17px), a wider image stage. */
 .article{padding-block:clamp(1.5rem,4vw,3.5rem) clamp(3rem,7vw,6rem)}
 .article__col{max-width:40rem;margin-inline:auto}
 .article__head{display:grid;gap:1rem}
 .crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;font-size:.85rem;color:var(--muted)}
 .crumbs a{color:var(--muted);text-decoration:none}
 .crumbs a:hover{color:var(--text);text-decoration:underline}
-.article__title{font-size:clamp(2rem,4.8vw,3.4rem);line-height:1;font-weight:820;font-stretch:115%;letter-spacing:-.035em;color:#fff}
-.article__dek{font-family:var(--serif);font-size:clamp(1.15rem,1.4vw,1.3rem);line-height:1.5;color:var(--text-2);text-wrap:pretty}
+.article__title{font-size:clamp(1.85rem,1rem + 3.4vw,3rem);line-height:1;font-weight:820;font-stretch:115%;letter-spacing:-.035em;color:#fff}
+.article__dek{font-family:var(--serif);font-size:clamp(1.05rem,.95rem + .45vw,1.15rem);line-height:1.5;color:var(--text-2);text-wrap:pretty}
 .byline{display:flex;flex-wrap:wrap;gap:.35rem 1rem;font-family:var(--mono);font-size:.78rem;color:var(--muted);border-top:1px solid var(--line);padding-top:.9rem}
 .byline b{font-weight:500;color:var(--text)}
+.byline a{text-decoration:underline;text-decoration-color:var(--line-strong);text-decoration-thickness:1px;text-underline-offset:.2em}
+.byline a:hover{text-decoration-color:currentColor}
+
+/* Dela (share_bar i build.py): under bylinen och efter källorna. Runda knappar 2,75rem (44px) med ikon, "Kopiera länk" med text
+   från 40rem. "Dela" (Web Share API) och "Kopiera länk" har sin plats från början och blir bara synliga med JS (visibility),
+   så inget flyttar sig. Orange Dela-knapp med mörk text (6,3:1). Bekräftelsen ligger ovanpå (position:absolute), inte i flödet. */
+.share{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .75rem}
+.share--end{margin-top:-.5rem}
+.share__label-more{display:none}
+@media (min-width:40rem){.share__label-more{display:inline}}
+.share__lead{display:grid}
+.share__lead>*{grid-area:1/1}
+.share__label,.share__native{display:inline-flex;align-items:center;gap:.4rem;min-height:2.75rem;padding-inline:.85rem;font:inherit;font-size:.9rem;font-weight:700;border-radius:999px;white-space:nowrap}
+.share__label{color:var(--text-2);padding-left:0}
+.share__label::before{content:"";width:.45rem;height:.45rem;border-radius:50%;background:var(--pulse);margin-right:.15rem}
+.share__native{appearance:none;border:0;cursor:pointer;background:var(--pulse);color:var(--bg);visibility:hidden;
+  transition:background-color .18s var(--ease),transform .15s var(--ease)}
+.share__native:hover{background:#FF7A3D}
+.share__native:active,.share__btn:active{transform:scale(.96)}
+.share.has-native .share__native{visibility:visible}
+.share.has-native .share__label{visibility:hidden}
+.share__list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.4rem}
+.share__btn{appearance:none;box-sizing:border-box;width:2.75rem;height:2.75rem;display:inline-flex;align-items:center;justify-content:center;gap:.45rem;
+  border-radius:999px;border:1px solid var(--line-strong);background:var(--surface);color:var(--text-2);cursor:pointer;font:inherit;font-size:.85rem;font-weight:650;text-decoration:none;
+  transition:color .18s var(--ease),border-color .18s var(--ease),background-color .18s var(--ease),transform .15s var(--ease)}
+.share__btn:hover{color:var(--text);border-color:var(--pulse);background:var(--raised)}
+.share__btn svg{flex:none}
+/* SMS/iMessage bara på pekskärmar (mobiler, surfplattor); dold med mus. Raden radbryts vid behov (flex-wrap). */
+.share__sms-wrap{display:none}
+@media (hover:none) and (pointer:coarse){.share__sms-wrap{display:block}}
+.share__copy-wrap{position:relative}
+.share__copy{visibility:hidden}
+.share.is-ready .share__copy{visibility:visible}
+.share__copy-text{display:none}
+@media (min-width:40rem){.share__copy{width:auto;padding-inline:.9rem}.share__copy-text{display:inline}}
+.share__status{position:absolute;right:0;bottom:calc(100% + .5rem);z-index:3;pointer-events:none;white-space:nowrap;
+  font-family:var(--mono);font-size:.75rem;color:var(--bg);background:var(--text);border-radius:var(--radius);padding:.35rem .6rem;
+  box-shadow:0 8px 24px rgb(0 0 0 / .45);opacity:0;transform:translateY(4px);transition:opacity .18s var(--ease),transform .18s var(--ease)}
+.share__status:not(:empty){opacity:1;transform:none}
 
 /* Summary box: "Kort om nyheten". Orange accent from the palette (pulse), text stays light for contrast. */
 .summary{margin-top:1.75rem;padding:1.1rem 1.25rem 1.25rem 1.35rem;border-left:3px solid var(--pulse);border-radius:0 var(--radius) var(--radius) 0;
@@ -201,16 +252,15 @@ html.mh-js{scroll-padding-top:3rem}
 .gallery__btn:hover:not(:disabled){background:var(--raised);border-color:var(--pulse)}
 .gallery__btn:disabled{opacity:.4;cursor:default}
 
-/* Reading typography: ~17px mobile, ~18px desktop, line-height 1.6, 65ch measure */
+/* Reading typography: 16px mobile growing to 17px from about 40rem viewport, line-height 1.6, about 65 characters per line */
 .article__layout{display:grid;gap:2rem;margin-top:2.25rem}
-.prose{font-family:var(--serif);font-size:1.0625rem;line-height:1.6;color:#DCE1E6;text-wrap:pretty}
-@media (min-width:48rem){.prose{font-size:1.125rem}}
+.prose{font-family:var(--serif);font-size:clamp(1rem,.9rem + .4vw,1.0625rem);line-height:1.6;color:#DCE1E6;text-wrap:pretty}
 .prose>*+*{margin-top:1.3em}
 .prose strong{color:#fff}
 .prose h2,.prose h3{font-family:var(--sans);color:#fff;text-wrap:balance}
-.prose h2{font-size:clamp(1.2rem,1.05rem + .5vw,1.35rem);line-height:1.25;font-weight:700;font-stretch:108%;letter-spacing:-.015em}
+.prose h2{font-size:clamp(1.125rem,1rem + .4vw,1.25rem);line-height:1.25;font-weight:700;font-stretch:108%;letter-spacing:-.015em}
 .prose h2::before{content:"";display:inline-block;width:.45rem;height:.45rem;border-radius:50%;background:var(--pulse);margin-right:.6rem;vertical-align:.18em}
-.prose h3{font-size:1.08rem;line-height:1.3;font-weight:700}
+.prose h3{font-size:1.0625rem;line-height:1.3;font-weight:700}
 .prose>*+h2{margin-top:2.4em}
 .prose>*+h3{margin-top:1.8em}
 .prose>h2+*,.prose>h3+*{margin-top:.6em}
@@ -229,6 +279,7 @@ html.mh-js{scroll-padding-top:3rem}
 .sources a{font-weight:620;text-decoration:none;line-height:1.35;color:var(--text)}
 .sources a:hover{text-decoration:underline;text-decoration-color:var(--pulse);text-underline-offset:.15em}
 .sources a::after{content:" ↗";color:var(--muted);font-weight:400}
+.sources--internal a::after{content:none}
 .sources .meta{margin-top:.25rem}
 .ai-note{display:flex;gap:.75rem;align-items:flex-start;font-size:.85rem;line-height:1.5;color:var(--muted);border:1px dashed var(--line-strong);padding:.85rem 1rem;border-radius:var(--radius)}
 .ai-note svg{flex:none;margin-top:.15rem}
@@ -269,7 +320,7 @@ html.mh-js{scroll-padding-top:3rem}
   @keyframes rise{from{transform:translateY(12px);opacity:0}}
 }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:0s!important;animation:none!important}}
-.item__credit{font-family:var(--mono);font-size:.7rem;line-height:1.3;color:var(--muted);padding:.3rem .4rem;background:var(--bg-2)}
+.item__credit{font-family:var(--mono);font-size:.7rem;line-height:1.3;color:var(--credit);padding:.3rem .4rem;background:var(--bg-2)}
 .item__credit:empty{display:none}
 /* Svensk flagga (sweden: true): eget element ovanpå bildens övre vänstra hörn, bildfilen ändras aldrig.
    Hörnet är fritt: krediten ligger under bilden och bildspelets knappar nere till höger. */
@@ -283,3 +334,129 @@ html.mh-js{scroll-padding-top:3rem}
 .flag--thumb{top:.35rem;left:.35rem;width:18px}
 .flag--inline{width:20px;vertical-align:middle;box-shadow:0 0 0 1px rgb(0 0 0 / .25)}
 .article__figure .frame,.lead__media,.item__img{position:relative}
+
+/* Populärt just nu: kort med bild, kategori och rubrik. Bilderna beskärs inte: 3:2-scen med svart kant (som bildspelet).
+   Mobil: en rad att svepa i (scroll-snap); bredare skärmar: lika breda kolumner. */
+.pop{margin-top:clamp(2rem,5vw,3.25rem)}
+.pop__list{list-style:none;margin:1rem 0 0;padding:1rem 0 0;border-top:1px solid var(--line-strong);
+  display:grid;grid-auto-flow:column;grid-auto-columns:min(64%,15rem);gap:.9rem;overflow-x:auto;overscroll-behavior-x:contain;
+  scroll-snap-type:x mandatory;scrollbar-width:none;margin-inline:calc(var(--gutter) * -1);padding-inline:var(--gutter);scroll-padding-inline:var(--gutter);
+  border-top:0;background:linear-gradient(var(--line-strong),var(--line-strong)) var(--gutter) 0 / calc(100% - 2 * var(--gutter)) 1px no-repeat}
+.pop__list::-webkit-scrollbar{display:none}
+@media (min-width:40rem){.pop__list{grid-auto-columns:minmax(0,1fr);gap:1.5rem;overflow:visible;margin-inline:0;padding-inline:0;background:none;border-top:1px solid var(--line-strong)}}
+.pop__card{scroll-snap-align:start;min-width:0}
+.pop__card a{display:grid;gap:.65rem;text-decoration:none;color:inherit;border-radius:var(--radius)}
+.pop__media{margin:0}
+.pop__frame{position:relative;aspect-ratio:3/2;overflow:hidden;border-radius:var(--radius);background:#000;box-shadow:0 0 0 1px var(--line)}
+.pop__frame img{width:100%;height:100%;object-fit:contain}
+.pop__body{display:grid;gap:.4rem}
+.pop__rank{font-family:var(--mono);font-weight:500;color:var(--pulse-text)}
+.pop__card h3{font-size:1rem;line-height:1.25;font-weight:620;letter-spacing:-.01em;color:var(--text);text-wrap:balance}
+@media (min-width:60rem){.pop__card h3{font-size:1.08rem}}
+.pop__card--noimg a{background:var(--surface);box-shadow:0 0 0 1px var(--line);padding:1rem}
+.pop .item__credit{border-radius:0 0 var(--radius) var(--radius)}
+
+/* Rörelse: rubriklänkar får en understrykning som glider in, kort lyfter lätt och bilden zoomar inom sin ram.
+   Bara transform, opacity och färger (inget som ger layout). Allt stängs av med prefers-reduced-motion (regeln längre upp). */
+.lead__title,.latest h3,.item :is(h2,h4),.pop__card h3,.related__card h3{text-decoration:underline;text-decoration-thickness:.06em;text-decoration-color:transparent;
+  text-underline-offset:.4em;transition:text-decoration-color .25s var(--ease),text-underline-offset .35s var(--ease),color .25s var(--ease)}
+:is(.lead a,.latest a,.item a,.pop__card a,.related__card a):is(:hover,:focus-visible) :is(.lead__title,h2,h3,h4){color:#fff;text-decoration-color:var(--pulse);text-underline-offset:.14em}
+.lead a,.pop__frame{transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
+.lead__frame img,.pop__frame img{transition:transform .7s var(--ease)}
+.chip{transition:background-color .18s var(--ease),border-color .18s var(--ease),color .18s var(--ease),transform .15s var(--ease)}
+.chip:active{transform:scale(.96)}
+@media (hover:hover){
+  .lead a:hover{transform:translateY(-3px);box-shadow:0 0 0 1px var(--line-strong),0 48px 90px -40px rgb(255 91 31 / .38)}
+  .lead a:hover .lead__frame img{transform:scale(1.03)}
+  .pop__card a:hover .pop__frame{transform:translateY(-3px);box-shadow:0 0 0 1px var(--line-strong),0 22px 40px -22px rgb(255 91 31 / .45)}
+  .pop__card a:hover .pop__frame img{transform:scale(1.05)}
+}
+@keyframes rise-in{from{opacity:0;transform:translateY(12px)}}
+/* Kort som tonas in vid skroll börjar på opacity .7 (inte 0): text och fotokrediter håller då minst 4,5:1 i kontrast
+   även innan kortet skrollats in helt (WCAG AA, Lighthouse mäter utan att skrolla). */
+@keyframes card-in{from{opacity:.7;transform:translateY(12px)}}
+@keyframes focus-pop{from{outline-offset:7px}}
+@media (prefers-reduced-motion:no-preference){
+  :focus-visible{animation:focus-pop .22s var(--ease)}
+  /* Senaste-listan (ovanför vecket): kort, förskjuten intoning när sidan laddas */
+  .latest li{animation:rise-in .6s var(--ease) both;animation-delay:calc(.12s + var(--i,0) * 70ms)}
+  .latest li:nth-child(2){--i:1}.latest li:nth-child(3){--i:2}.latest li:nth-child(4){--i:3}.latest li:nth-child(5){--i:4}
+  /* Kort och flödet: tonas upp när de skrollas in (scroll-driven, progressiv förbättring; utan stöd syns de direkt) */
+  @supports ((animation-timeline: view()) and (animation-range: entry)){
+    .item{animation:card-in linear both;animation-timeline:view();animation-range:entry 0% entry 70%}
+    /* korten följer hela sektionens tidslinje (på mobil ligger de i en vågrät scroller, vars view() inte rör sig) */
+    .pop{view-timeline:--pop block}
+    .pop__card{animation:card-in linear both;animation-timeline:--pop;animation-range:entry 10% entry 60%}
+    .pop__card:nth-child(2){animation-range:entry 16% entry 66%}
+    .pop__card:nth-child(3){animation-range:entry 22% entry 72%}
+    .pop__card:nth-child(4){animation-range:entry 28% entry 78%}
+  }
+}
+/* Skribentruta (author_box i build.py) */
+.author-box{display:flex;gap:1rem;align-items:flex-start;margin-top:1.5rem;padding:1.1rem 1.25rem;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--pulse);border-radius:var(--radius)}
+.author-box__avatar{flex:none;width:4rem;height:4rem;border-radius:50%;object-fit:cover}
+.author-box__body{display:grid;gap:.35rem;min-width:0}
+.author-box__name{font-size:1.05rem;line-height:1.2;font-weight:760;font-stretch:108%;color:#fff}
+.author-box__name a{text-decoration:none}
+.author-box__name a:hover{text-decoration:underline;text-decoration-color:var(--pulse);text-underline-offset:.15em}
+.author-box__role{font-family:var(--mono);font-size:.75rem;color:var(--muted)}
+.author-box__bio{font-family:var(--serif);font-size:.9375rem;line-height:1.5;color:var(--text-2);text-wrap:pretty}
+.author-box__ai{display:flex;margin-top:.25rem}
+/* Orange märke sist i rutan: mörk text (--bg) på --pulse, kontrast 6,3:1 (WCAG AA) */
+.author-box__badge{font-family:var(--mono);font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--bg);background:var(--pulse);border-radius:999px;padding:.2rem .6rem}
+@media (max-width:30rem){.author-box{display:grid;grid-template-columns:3rem 1fr;column-gap:.85rem}.author-box__avatar{width:3rem;height:3rem}.author-box__body{display:contents}.author-box__name{align-self:end}.author-box__role{grid-column:2;align-self:start;margin-top:-.2rem}.author-box__bio,.author-box__ai{grid-column:1/-1;margin-top:.5rem}.author-box__avatar{grid-row:1/3;align-self:center}}
+/* RSS: länk i sidfoten (ikon + text) och raden "Prenumerera via RSS" i slutet av artiklar. Ikonen: orange ruta, mörka vågor. */
+.rss-icon{flex:none;width:1rem;height:1rem}
+.site-footer__rss{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .9rem;margin-top:1.25rem;font-size:.85rem;color:var(--muted)}
+.rss-link{display:inline-flex;align-items:center;gap:.45rem;font-weight:700;text-decoration:none;min-height:2.75rem;padding-inline:.15rem}
+.rss-link:hover{text-decoration:underline;text-decoration-color:var(--pulse);text-underline-offset:.2em}
+.site-footer ul.site-footer__feeds{display:flex;flex-wrap:wrap;gap:.25rem .9rem}
+.site-footer__feeds a{display:inline-block;padding-block:.35rem;text-underline-offset:.2em}
+.rss-row{display:flex;flex-wrap:wrap;align-items:center;gap:.35rem .55rem;margin:0;font-size:.85rem;color:var(--muted)}
+.rss-row a{color:var(--text);font-weight:620;text-underline-offset:.2em;padding-block:.35rem}
+.rss-row a:hover{text-decoration-color:var(--pulse)}
+
+/* Sidhuvudets länkar (Nyheter, Guider): bara när minst en guide är publicerad. Följer med när baren krymper (samma
+   förskjutning som loggan). Aktuell sida: orange understreck. */
+.topnav ul{list-style:none;margin:0;padding:0;display:flex;gap:.25rem}
+.topnav a{display:inline-flex;align-items:center;min-height:2.75rem;padding-inline:.6rem;font-size:.9rem;font-weight:650;color:var(--text-2);text-decoration:none;
+  text-decoration-line:underline;text-decoration-thickness:2px;text-underline-offset:.45em;text-decoration-color:transparent;
+  transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
+.topnav a:hover{color:var(--text);text-decoration-color:var(--line-strong)}
+.topnav a[aria-current="page"]{color:var(--text);text-decoration-color:var(--pulse)}
+.masthead .topnav{transition:transform var(--mh-t) var(--ease)}
+.masthead.is-small .topnav{transform:translateY(15.5px)}
+.masthead:has(:focus-visible) .topnav{transform:none}
+@media (max-width:23rem){.topnav a{padding-inline:.4rem;font-size:.85rem}}
+
+/* Kategorisidan (Guider): samma flöde som startsidan, rubrik i artikelmallens stil */
+.catpage{padding-block:clamp(1.5rem,4vw,3.5rem) clamp(3rem,7vw,6rem)}
+.catpage__head{display:grid;gap:1rem;max-width:48rem}
+.catpage__title{font-size:clamp(2rem,1rem + 4vw,3.5rem);line-height:1;font-weight:820;font-stretch:115%;letter-spacing:-.035em;color:#fff}
+.catpage__dek{font-family:var(--serif);font-size:clamp(1.05rem,.95rem + .45vw,1.2rem);line-height:1.5;color:var(--text-2);text-wrap:pretty;max-width:40rem}
+.catpage__list{padding-block:1.5rem 0;margin-top:1rem;border-top:1px solid var(--line-strong)}
+
+/* Läs också: tre kort under artikeln. Mobil: liten bild till vänster, rubrik till höger. Från 40rem: tre kolumner.
+   Bilderna beskärs inte (3:2-scen med svart kant, som Populärt). width/height på bilden: inget layoutskifte. */
+.related{border-top:1px solid var(--line-strong);padding-top:1rem;margin-top:.5rem}
+.related h2{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:.5rem;color:var(--text)}
+.related__list{list-style:none;margin:1rem 0 0;padding:0;display:grid;gap:1rem}
+.related__card{min-width:0}
+.related__card a{display:grid;grid-template-columns:7rem minmax(0,1fr);gap:.9rem;align-items:start;text-decoration:none;color:inherit;border-radius:var(--radius)}
+.related__card--noimg a{grid-template-columns:minmax(0,1fr);background:var(--surface);box-shadow:0 0 0 1px var(--line);padding:1rem}
+.related__media{margin:0}
+.related__frame{position:relative;aspect-ratio:3/2;overflow:hidden;border-radius:var(--radius) var(--radius) 0 0;background:#000;box-shadow:0 0 0 1px var(--line)}
+.related__frame img{width:100%;height:100%;object-fit:contain}
+.related .item__credit{border-radius:0 0 var(--radius) var(--radius);font-size:.62rem;overflow-wrap:anywhere}
+.related__body{display:grid;gap:.4rem;align-content:start}
+.related__card h3{font-size:1rem;line-height:1.25;font-weight:650;letter-spacing:-.01em;color:var(--text);text-wrap:balance}
+@media (min-width:40rem){
+  .related__list{grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem}
+  .related__card a{grid-template-columns:minmax(0,1fr);gap:.65rem}
+}
+.related__frame{transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
+.related__frame img{transition:transform .7s var(--ease)}
+@media (hover:hover){
+  .related__card a:hover .related__frame{transform:translateY(-3px);box-shadow:0 0 0 1px var(--line-strong),0 22px 40px -22px rgb(255 91 31 / .45)}
+  .related__card a:hover .related__frame img{transform:scale(1.05)}
+}
