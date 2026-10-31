@@ -189,6 +189,8 @@ border-radius:999px;border:1px solid var(--line-strong);background:var(--surface
 transition:color .18s var(--ease),border-color .18s var(--ease),background-color .18s var(--ease),transform .15s var(--ease)}
 .share__btn:hover{color:var(--text);border-color:var(--pulse);background:var(--raised)}
 .share__btn svg{flex:none}
+.share__sms-wrap{display:none}
+@media (hover:none) and (pointer:coarse){.share__sms-wrap{display:block}}
 .share__copy-wrap{position:relative}
 .share__copy{visibility:hidden}
 .share.is-ready .share__copy{visibility:visible}
