@@ -343,3 +343,16 @@ html.mh-js{scroll-padding-top:3rem}
     .pop__card:nth-child(4){animation-range:entry 28% entry 78%}
   }
 }
+/* Skribentruta (author_box i build.py) */
+.author-box{display:flex;gap:1rem;align-items:flex-start;margin-top:1.5rem;padding:1.1rem 1.25rem;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--pulse);border-radius:var(--radius)}
+.author-box__avatar{flex:none;width:4rem;height:4rem;border-radius:50%;object-fit:cover;background:var(--raised);box-shadow:0 0 0 2px var(--bg),0 0 0 3px var(--pulse)}
+.author-box__body{display:grid;gap:.35rem;min-width:0}
+.author-box__name{font-size:1.1rem;line-height:1.2;font-weight:760;font-stretch:108%;color:#fff}
+.author-box__name a{text-decoration:none}
+.author-box__name a:hover{text-decoration:underline;text-decoration-color:var(--pulse);text-underline-offset:.15em}
+.author-box__role{font-family:var(--mono);font-size:.75rem;color:var(--muted)}
+.author-box__bio{font-family:var(--serif);font-size:1rem;line-height:1.5;color:var(--text-2);text-wrap:pretty}
+.author-box__ai{display:flex;flex-wrap:wrap;align-items:center;gap:.35rem .75rem;font-size:.8rem;color:var(--muted)}
+.author-box__badge{font-family:var(--mono);font-size:.7rem;letter-spacing:.04em;text-transform:uppercase;color:var(--pulse-text);border:1px solid var(--line-strong);border-radius:999px;padding:.15rem .55rem}
+.author-box__ai a,.author-box__more a{color:var(--text);text-underline-offset:.18em;text-decoration-thickness:1px}
+.author-box__more{font-size:.85rem;font-weight:620}

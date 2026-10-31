@@ -5,9 +5,10 @@
 #   artikel/<slug>/index.html     en sida per artikel (rena URL:er: /artikel/<slug>/)
 #   404.html, sitemap.xml, robots.txt, feed.xml (RSS, samma artiklar som sitemap)
 #   sitemap-news.xml              Google News-sitemap: bara artiklar publicerade de senaste 2 dygnen (Googles regel),
-#                                 kan vara tom. Räknas vid bygget, så sajten behöver byggas om minst en gång per dygn (schema i pages.yml).
+#                                 kan vara tom. Räknas vid bygget, så sajten behöver byggas om minst en gång per dygn (föreslaget schema i pages.yml, se PR:en).
 #   om/, om/<författare>/         sidor ur content/pages/*.md (front matter: title, path, description, valfritt author).
-#                                 En sida med author blir författarsida: bylines länkar dit och JSON-LD får author.url.
+#                                 En sida med author (id i data/authors.json) blir författarsida med ProfilePage-JSON-LD.
+#   skribentruta                  längst ner i varje artikel, en mall (author_box) med data ur data/authors.json
 #                                 Ord som TODO i texten ger en varning i bygget.
 #   img/ld/<slug>-16x9.jpg m.fl.  bilder för NewsArticle-JSON-LD: huvudbilden beskuren till 16:9, 4:3 och 1:1, högst
 #                                 1200 px bred, aldrig uppskalad (checka in dem tillsammans med artikeln, som img/og/)
@@ -646,12 +647,68 @@ def ld_images(a):
             with Image.open(p) as im: res.append(dict(src="/" + rel, w=im.width, h=im.height))
     return res
 
-AUTHORS = {}  # namn -> sökväg till författarsidan, fylls från content/pages (fältet author)
+# ---------- författare ----------
+# data/authors.json: {"<id>": {name, url (författarsidan), avatar_src, bio, ai_signature}}. Artikelns author är id:t
+# eller namnet (author: Lukas -> lukas). avatar_src är en fil i repot (t.ex. brand/authors/...); den beskärs till en
+# kvadrat i mitten och blir img/authors/<id>.webp (192 px) och img/authors/<id>-96.webp. Byt bild genom att peka
+# avatar_src på en ny fil (WebP-filerna byggs om när källan är nyare). Ordet TODO i bio ger en varning i bygget.
+AUTHORS = {}
+AVATAR_SIZES = ((192, ""), (96, "-96"))
+
+def load_authors():
+    p = os.path.join(ROOT, "data/authors.json")
+    if not os.path.exists(p): return {}
+    try: d = json.load(open(p, encoding="utf-8"))
+    except ValueError as e: raise SystemExit(f"data/authors.json: {e}")
+    for k, v in d.items():
+        for f in ("name", "url", "bio"):
+            if not str(v.get(f) or "").strip(): raise SystemExit(f"data/authors.json: {k} saknar {f}")
+        if re.search(r"\bTODO\b", v["bio"]): print(f"varning: data/authors.json: {k}: bio innehåller TODO")
+        v["id"] = k
+        v["avatar"] = author_avatar(k, v.get("avatar_src"))
+    return d
+
+def author_avatar(aid, src):
+    """[(url, bredd)] för avataren, största först. Tom lista om ingen bild finns."""
+    from PIL import Image, ImageOps
+    base = f"img/authors/{aid}"
+    main = os.path.join(ROOT, base + ".webp")
+    sp = os.path.join(ROOT, src) if src and not os.path.isabs(src) else src
+    if sp and os.path.isfile(sp) and (not os.path.exists(main) or os.path.getmtime(sp) > os.path.getmtime(main)):
+        os.makedirs(os.path.dirname(main), exist_ok=True)
+        with Image.open(sp) as im:
+            im = ImageOps.exif_transpose(im).convert("RGB")
+            for w, suf in AVATAR_SIZES:
+                ImageOps.fit(im, (w, w), Image.LANCZOS).save(os.path.join(ROOT, f"{base}{suf}.webp"), "WEBP", quality=88, method=6)
+    return [(f"/{base}{suf}.webp", w) for w, suf in AVATAR_SIZES if committed(f"{base}{suf}.webp")]
+
+def find_author(name):
+    return AUTHORS.get(slugify(name)) or next((v for v in AUTHORS.values() if v["name"] == name), None)
 
 def author_ld(name):
-    au = {"@type": "Person", "name": name}
-    if name in AUTHORS: au["url"] = DOMAIN + AUTHORS[name]
-    return au
+    au = find_author(name)
+    return {"@type": "Person", "name": au["name"], "url": DOMAIN + au["url"]} if au else {"@type": "Person", "name": name}
+
+def author_box(name):
+    """Skribentruta längst ner i varje artikel. En mall för alla författare, data från data/authors.json."""
+    au = find_author(name)
+    if not au: return ""
+    av = au["avatar"]
+    img = (f'<img class="author-box__avatar" src="{av[0][0]}" srcset="{", ".join(f"{u} {w}w" for u, w in reversed(av))}" sizes="4rem" '
+           f'width="64" height="64" alt="" loading="lazy" decoding="async">') if av else ""
+    ai = (f'<p class="author-box__ai"><span class="author-box__badge">AI-assisterad signatur</span> '
+          f'<a href="/om/#hur-artiklarna-skrivs">Så skrivs artiklarna</a></p>') if au.get("ai_signature") else ""
+    return f'''
+        <aside class="author-box" aria-labelledby="author-box-h">
+          {img}
+          <div class="author-box__body">
+            <h2 class="author-box__name" id="author-box-h"><a href="{au["url"]}" rel="author">{esc(au["name"])}</a></h2>
+            <p class="author-box__role">Skriver på Motorpuls.se</p>
+            <p class="author-box__bio">{nbnum(esc(au["bio"]))}</p>
+            {ai}
+            <p class="author-box__more"><a href="{au["url"]}">Om {esc(au["name"])} och alla artiklar <span aria-hidden="true">→</span></a></p>
+          </div>
+        </aside>'''
 
 def article(a):
     img, imgs = a["img"], a["images_out"]
@@ -689,7 +746,8 @@ def article(a):
         </section>'''
     updated = (f'<span>Uppdaterad <b><time datetime="{a["modified"]}">{sv_date(a["mod_date"])}</time></b></span>'
                if a["mod_when"] > a["when"] else "")
-    author = f'<a href="{AUTHORS[a["author"]]}" rel="author">{esc(a["author"])}</a>' if a["author"] in AUTHORS else esc(a["author"])
+    au = find_author(a["author"])
+    author = f'<a href="{au["url"]}" rel="author">{esc(au["name"])}</a>' if au else esc(a["author"])
     body = f'''
 <main id="innehall" class="article">
   <div class="wrap">
@@ -709,7 +767,7 @@ def article(a):
           <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M8 7v4.5M8 4.6v.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
           <p>Texten är skriven med hjälp av AI och faktagranskad mot källorna ovan. <a href="/om/">Så arbetar Motorpuls</a></p>
         </aside>
-
+{author_box(a["author"])}
         <p class="more"><a class="btn" href="/">Fler nyheter på startsidan</a></p>
       </div>
     </article>
@@ -756,7 +814,9 @@ def info_page(p, arts):
         ld = {"@context": "https://schema.org", "@type": "ProfilePage", "url": DOMAIN + p["path"],
               "mainEntity": dict(author_ld(p["author"]), description=p["description"])}
         extra = '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace("</", "<\\/") + "</script>\n"
-        mine = [a for a in arts if a["author"] == p["author"]]
+        au = find_author(p["author"])
+        if not au or au["url"] != p["path"]: raise SystemExit(f"content/pages/{p['file']}: author {p['author']!r} saknas i data/authors.json eller har en annan url")
+        mine = [a for a in arts if find_author(a["author"]) is au]
         if mine:
             lis = "".join(f'''
             <li><div><a href="{a["url"]}">{esc(a["title"])}</a>
@@ -816,9 +876,9 @@ def main():
     arts = load_articles()
     if not arts: raise SystemExit("inga artiklar i content/articles/")
     pages = load_pages()
-    AUTHORS.update({p["author"]: p["path"] for p in pages if p.get("author")})
+    AUTHORS.update(load_authors())
     for a in arts:
-        if a["author"] not in AUTHORS: print(f"varning: {a['file']}: ingen författarsida för {a['author']!r} i content/pages")
+        if not find_author(a["author"]): print(f"varning: {a['file']}: författaren {a['author']!r} saknas i data/authors.json")
     for a in arts:
         a["images_out"] = ensure_images(a)
         a["img"] = a["images_out"][0] if a["images_out"] else None
