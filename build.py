@@ -4,6 +4,13 @@
 #   index.html                    startsida, riktiga artiklar, nyast först
 #   artikel/<slug>/index.html     en sida per artikel (rena URL:er: /artikel/<slug>/)
 #   404.html, sitemap.xml, robots.txt, feed.xml (RSS, samma artiklar som sitemap)
+#   sitemap-news.xml              Google News-sitemap: bara artiklar publicerade de senaste 2 dygnen (Googles regel),
+#                                 kan vara tom. Räknas vid bygget, så sajten behöver byggas om minst en gång per dygn (schema i pages.yml).
+#   om/, om/<författare>/         sidor ur content/pages/*.md (front matter: title, path, description, valfritt author).
+#                                 En sida med author blir författarsida: bylines länkar dit och JSON-LD får author.url.
+#                                 Ord som TODO i texten ger en varning i bygget.
+#   img/ld/<slug>-16x9.jpg m.fl.  bilder för NewsArticle-JSON-LD: huvudbilden beskuren till 16:9, 4:3 och 1:1, högst
+#                                 1200 px bred, aldrig uppskalad (checka in dem tillsammans med artikeln, som img/og/)
 #   img/og/<slug>.jpg             delningsbild 1200x630 (JPEG) ur huvudbilden; startsidan använder img/og/motorpuls.jpg
 #                                 (ritad från brand/og/startsida.html)
 #
@@ -17,7 +24,8 @@
 #          som Europe/Stockholm. Bygget stoppas om datumet ligger i framtiden (svensk tid; ett datum utan tid
 #          räknas som hela den dagen, så en artikel som mergas på sin egen dag går igenom). För förhandsbygge av
 #          schemalagda artiklar: MOTORPULS_NOW=2026-11-05T07:10+01:00 .venv/bin/python build.py
-# updated: valfritt, samma format som date. Blir dateModified (annars samma som date) och sitemaps lastmod.
+# updated: valfritt, samma format som date. Blir dateModified (annars samma som date) och sitemaps lastmod, och
+#          artikeln visar "Uppdaterad <datum>" i bylinen när tidpunkten är senare än date.
 #
 # sweden:  valfritt, true när nyheten gäller Sverige. Då visas en liten svensk flagga (äldre, mörkare färger)
 #          som ett eget element ovanpå huvudbildens hörn och på startsidans kort, eller vid kategorin om
@@ -50,6 +58,11 @@ DRAFTS_IMG = os.environ.get("MOTORPULS_DRAFTS_IMG")  # valfri extra källmapp, s
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DOMAIN = "https://motorpuls.se"
 SITE = "Motorpuls"
+NEWS_LANG = "sv"      # news:language i sitemap-news.xml (ISO 639)
+NEWS_DAYS = 2         # Google: bara artiklar från de senaste två dygnen i news-sitemapen
+# Search Console, verifiering med HTML-tagg: klistra in content-värdet från Search Console (bara koden, inte hela
+# taggen). Tom sträng ger ingen tagg. Taggen hamnar bara på startsidan.
+GOOGLE_SITE_VERIFICATION = ""
 SITE_DESC = "Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor."
 MAX_W = 1600
 VARIANTS = ((MAX_W, ""), (800, "-800"), (400, "-400"))  # bredd, filändelse; minsta används av miniatyrerna (104 px)
@@ -344,7 +357,7 @@ def asset(rel):
         return f"{rel}?v={hashlib.sha256(f.read()).hexdigest()[:10]}"
 
 
-def head(title, desc, path, og_type="website", image=None, extra="", preload_img=None, og_title=None, preload_sizes="100vw", noindex=False):
+def head(title, desc, path, og_type="website", image=None, extra="", preload_img=None, og_title=None, preload_sizes="100vw", noindex=False, robots=None):
     canon = DOMAIN + path if path else None
     og_title = og_title or title
     og_img = ""
@@ -364,7 +377,7 @@ def head(title, desc, path, og_type="website", image=None, extra="", preload_img
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
-{'<meta name="robots" content="noindex">' + chr(10) if noindex else ""}{f'<link rel="canonical" href="{canon}">' + chr(10) if canon else ""}<meta property="og:site_name" content="{SITE}">
+{f'<meta name="robots" content="{"noindex" if noindex else robots}">' + chr(10) if noindex or robots else ""}{f'<link rel="canonical" href="{canon}">' + chr(10) if canon else ""}{f'<meta name="google-site-verification" content="{esc(GOOGLE_SITE_VERIFICATION)}">' + chr(10) if GOOGLE_SITE_VERIFICATION and path == "/" else ""}<meta property="og:site_name" content="{SITE}">
 <meta property="og:locale" content="sv_SE">
 <meta property="og:type" content="{og_type}">
 <meta property="og:title" content="{esc(og_title)}">
@@ -400,6 +413,7 @@ FOOTER = f'''
   <div class="wrap">
     <a class="wordmark" href="/"><img class="logo logo--footer" src="/img/logo.svg" alt="Motorpuls" width="872" height="88" loading="lazy"></a>
     <p class="site-footer__desc">{SITE_DESC}</p>
+    <nav class="site-footer__nav" aria-label="Om Motorpuls"><ul><li><a href="/om/">Om Motorpuls</a></li><li><a href="/om/lukas/">Lukas, redaktionell signatur</a></li></ul></nav>
     <p class="fine">© {dt.date.today().year} Motorpuls</p>
   </div>
 </footer>
@@ -606,17 +620,53 @@ def summary_box(a):
         </ul>
       </section>'''
 
+LD_RATIOS = (("16x9", 16, 9), ("4x3", 4, 3), ("1x1", 1, 1))
+LD_W = 1200
+NO_CROP = re.compile(r"beskär|oförändrad|får inte ändras", re.I)  # licenstext (huvudbilden) som utesluter beskärning
+
+def ld_images(a):
+    """Huvudbilden beskuren till 16:9, 4:3 och 1:1 för NewsArticle (Google rekommenderar alla tre, Discover vill ha
+    bilder minst 1200 px breda). Största möjliga mittbeskärning, högst 1200 px bred, aldrig uppskalad. 16:9 och 4:3
+    hoppas över om beskärningen blir smalare än 1200 px, 1:1 om den blir under 800 px. Inga beskärningar alls om
+    huvudbildens licens förbjuder det (NO_CROP), då används bara originalbilderna. Sajtens egna bilder beskärs aldrig. Bara incheckade filer används (som img/og/), i --out-läget allt som finns."""
+    img = a["img"]
+    if not img or NO_CROP.search(img["license"]): return []  # licensen förbjuder beskärning: originalbilderna räcker
+    from PIL import Image, ImageOps
+    res = []
+    for name, rw, rh in LD_RATIOS:
+        w = min(LD_W, img["w"], img["h"] * rw // rh); h = round(w * rh / rw)
+        if w < (800 if name == "1x1" else LD_W): continue
+        rel = f"img/ld/{a['slug']}-{name}.jpg"
+        p = os.path.join(ROOT, rel)
+        if not os.path.exists(p):
+            os.makedirs(os.path.dirname(p), exist_ok=True)
+            with Image.open(os.path.join(ROOT, img["src"].lstrip("/"))) as im:
+                ImageOps.fit(im.convert("RGB"), (w, h), Image.LANCZOS).save(p, "JPEG", quality=84, optimize=True, progressive=True)
+        if committed(rel):
+            with Image.open(p) as im: res.append(dict(src="/" + rel, w=im.width, h=im.height))
+    return res
+
+AUTHORS = {}  # namn -> sökväg till författarsidan, fylls från content/pages (fältet author)
+
+def author_ld(name):
+    au = {"@type": "Person", "name": name}
+    if name in AUTHORS: au["url"] = DOMAIN + AUTHORS[name]
+    return au
+
 def article(a):
     img, imgs = a["img"], a["images_out"]
     ld = {"@context": "https://schema.org", "@type": "NewsArticle", "headline": a["title"], "description": a["excerpt"],
           "datePublished": a["published"], "dateModified": a["modified"], "inLanguage": "sv-SE",
           "articleSection": a["category"], "keywords": a.get("tags") or [],
           "mainEntityOfPage": {"@type": "WebPage", "@id": DOMAIN + a["url"]}, "url": DOMAIN + a["url"],
-          "author": {"@type": "Person", "name": a["author"]},
+          "author": author_ld(a["author"]),
           "publisher": {"@type": "Organization", "name": SITE, "url": DOMAIN + "/",
                         "logo": {"@type": "ImageObject", "url": DOMAIN + "/favicon/android-chrome-512.png", "width": 512, "height": 512}}}
     if imgs:
-        ld["image"] = [{k: v for k, v in {"@type": "ImageObject", "url": DOMAIN + im["src"], "width": im["w"], "height": im["h"],
+        credit = {k: v for k, v in {"creditText": img["credit"].removeprefix("Foto: ") or None,
+                                    "copyrightNotice": img["license"] or None}.items() if v}
+        ld["image"] = [dict({"@type": "ImageObject", "url": DOMAIN + c["src"], "width": c["w"], "height": c["h"]}, **credit)
+                       for c in ld_images(a)] + [{k: v for k, v in {"@type": "ImageObject", "url": DOMAIN + im["src"], "width": im["w"], "height": im["h"],
                                           "caption": im["alt"], "creditText": im["credit"].removeprefix("Foto: ") or None,
                                           "copyrightNotice": im["license"] or None}.items() if v} for im in imgs]
     if a.get("sources"): ld["citation"] = [u for _, u in a["sources"]]
@@ -625,7 +675,7 @@ def article(a):
              extra=f'<meta property="article:published_time" content="{a["published"]}">\n'
                    f'<meta property="article:section" content="{esc(a["category"])}">\n'
                    + "".join(f'<meta property="article:tag" content="{esc(t)}">\n' for t in a.get("tags") or []) + jsonld,
-             preload_img=img, preload_sizes=HERO_SIZES)
+             preload_img=img, preload_sizes=HERO_SIZES, robots="max-image-preview:large")
     sources = ""
     if a["sources"]:
         lis = "".join(f'''
@@ -637,6 +687,9 @@ def article(a):
           <ol>{lis}
           </ol>
         </section>'''
+    updated = (f'<span>Uppdaterad <b><time datetime="{a["modified"]}">{sv_date(a["mod_date"])}</time></b></span>'
+               if a["mod_when"] > a["when"] else "")
+    author = f'<a href="{AUTHORS[a["author"]]}" rel="author">{esc(a["author"])}</a>' if a["author"] in AUTHORS else esc(a["author"])
     body = f'''
 <main id="innehall" class="article">
   <div class="wrap">
@@ -645,7 +698,7 @@ def article(a):
         <nav class="crumbs" aria-label="Brödsmulor"><a href="/">Start</a><span aria-hidden="true">/</span><span class="tag">{esc(a["category"])}</span>{meta_flag(a, imgs)}</nav>
         <h1 class="article__title">{nbnum(esc(a["headline"]))}</h1>
         <p class="article__dek">{nbnum(esc(a["excerpt"]))}</p>
-        <p class="byline"><span>Publicerad <b><time datetime="{a["published"]}">{sv_date(a["date"])}</time></b></span><span>Läsetid <b>{a["minutes"]} min</b></span><span>Av <b>{esc(a["author"])}</b></span></p>
+        <p class="byline"><span>Publicerad <b><time datetime="{a["published"]}">{sv_date(a["date"])}</time></b></span>{updated}<span>Läsetid <b>{a["minutes"]} min</b></span><span>Av <b>{author}</b></span></p>
       </header>{summary_box(a)}{gallery(imgs, flag(a, "hero"))}
       <div class="article__layout article__col">
         <div class="prose">
@@ -654,7 +707,7 @@ def article(a):
 {sources}
         <aside class="ai-note" aria-label="Om texten">
           <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M8 7v4.5M8 4.6v.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-          <p>Texten är skriven med hjälp av AI och faktagranskad mot källorna ovan.</p>
+          <p>Texten är skriven med hjälp av AI och faktagranskad mot källorna ovan. <a href="/om/">Så arbetar Motorpuls</a></p>
         </aside>
 
         <p class="more"><a class="btn" href="/">Fler nyheter på startsidan</a></p>
@@ -680,6 +733,80 @@ def notfound():
 '''
     return page(h, body)
 
+def load_pages():
+    pages = []
+    for path in sorted(glob.glob(os.path.join(ROOT, "content/pages/*.md"))):
+        raw = open(path, encoding="utf-8").read()
+        m = re.match(r"^---\n(.*?)\n---\n(.*)$", raw, re.S)
+        if not m: raise SystemExit(f"saknar front matter: {path}")
+        fm, body = yaml.safe_load(m.group(1)), m.group(2)
+        for k in ("title", "path", "description"):
+            if not fm.get(k): raise SystemExit(f"{path}: saknar {k}")
+        if not re.fullmatch(r"/([a-z0-9-]+/)+", fm["path"]): raise SystemExit(f"{path}: path ska se ut som /om/")
+        todos = len(re.findall(r"\bTODO\b", body))
+        if todos: print(f"varning: {os.path.relpath(path, ROOT)}: {todos} TODO kvar att skriva")
+        pages.append(dict(fm, file=os.path.basename(path), body_html=markdown.markdown(body.strip(), extensions=["toc"])))
+    if len({p["path"] for p in pages}) != len(pages): raise SystemExit("content/pages: dubbla path")
+    return pages
+
+def info_page(p, arts):
+    """Om-sidor och författarsidor: samma artikelmall som nyheterna, utan bilder och utan extra JS."""
+    extra, listing = "", ""
+    if p.get("author"):
+        ld = {"@context": "https://schema.org", "@type": "ProfilePage", "url": DOMAIN + p["path"],
+              "mainEntity": dict(author_ld(p["author"]), description=p["description"])}
+        extra = '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace("</", "<\\/") + "</script>\n"
+        mine = [a for a in arts if a["author"] == p["author"]]
+        if mine:
+            lis = "".join(f'''
+            <li><div><a href="{a["url"]}">{esc(a["title"])}</a>
+              <div class="meta"><time datetime="{a["published"]}">{sv_date(a["date"])}</time></div></div></li>''' for a in mine)
+            listing = f'''
+        <section class="sources sources--internal" aria-labelledby="art-h">
+          <h2 id="art-h">Artiklar</h2>
+          <ol>{lis}
+          </ol>
+        </section>'''
+    h = head(short_title(p["title"]), p["description"], p["path"], og_title=p["title"], extra=extra)
+    body = f'''
+<main id="innehall" class="article">
+  <div class="wrap">
+    <article>
+      <header class="article__head article__col">
+        <nav class="crumbs" aria-label="Brödsmulor"><a href="/">Start</a><span aria-hidden="true">/</span><span class="tag">Om Motorpuls</span></nav>
+        <h1 class="article__title">{esc(p["title"])}</h1>
+        <p class="article__dek">{esc(p["description"])}</p>
+      </header>
+      <div class="article__layout article__col">
+        <div class="prose">
+{p["body_html"]}
+        </div>{listing}
+      </div>
+    </article>
+  </div>
+</main>
+'''
+    return page(h, body)
+
+def news_sitemap(arts):
+    """Google News-sitemap: artiklar publicerade de senaste NEWS_DAYS dygnen räknat från byggtiden (kan bli tom,
+    det är tillåtet). publication_date är den ursprungliga publiceringstidpunkten."""
+    cutoff = now() - dt.timedelta(days=NEWS_DAYS)
+    items = "".join(f"""  <url>
+    <loc>{DOMAIN}{a["url"]}</loc>
+    <news:news>
+      <news:publication>
+        <news:name>{esc(SITE)}</news:name>
+        <news:language>{NEWS_LANG}</news:language>
+      </news:publication>
+      <news:publication_date>{a["published"]}</news:publication_date>
+      <news:title>{esc(a["headline"])}</news:title>
+    </news:news>
+  </url>
+""" for a in arts if a["when"] >= cutoff)
+    return ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
+            'xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">\n' + items + "</urlset>\n")
+
 def write(rel, text):
     WRITTEN.append(rel)
     p = os.path.join(ROOT, rel); os.makedirs(os.path.dirname(p), exist_ok=True)
@@ -688,6 +815,10 @@ def write(rel, text):
 def main():
     arts = load_articles()
     if not arts: raise SystemExit("inga artiklar i content/articles/")
+    pages = load_pages()
+    AUTHORS.update({p["author"]: p["path"] for p in pages if p.get("author")})
+    for a in arts:
+        if a["author"] not in AUTHORS: print(f"varning: {a['file']}: ingen författarsida för {a['author']!r} i content/pages")
     for a in arts:
         a["images_out"] = ensure_images(a)
         a["img"] = a["images_out"][0] if a["images_out"] else None
@@ -696,11 +827,15 @@ def main():
     if os.path.exists(os.path.join(ROOT, "artikel.html")): os.remove(os.path.join(ROOT, "artikel.html"))
     write("index.html", index(arts))
     for a in arts: write(f"artikel/{a['slug']}/index.html", article(a))
+    shutil.rmtree(os.path.join(ROOT, "om"), ignore_errors=True)
+    for p in pages: write(p["path"].lstrip("/") + "index.html", info_page(p, arts))
     write("404.html", notfound())
     urls = [("/", arts[0]["date"])] + [(a["url"], a["date"]) for a in arts]
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-          + "".join(f"  <url><loc>{DOMAIN}{u}</loc><lastmod>{lastmod(u, arts)}</lastmod></url>\n" for u, d in urls) + "</urlset>\n")
-    write("robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {DOMAIN}/sitemap.xml\n")
+          + "".join(f"  <url><loc>{DOMAIN}{u}</loc><lastmod>{lastmod(u, arts)}</lastmod></url>\n" for u, d in urls)
+          + "".join(f"  <url><loc>{DOMAIN}{p['path']}</loc></url>\n" for p in pages) + "</urlset>\n")
+    write("sitemap-news.xml", news_sitemap(arts))
+    write("robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {DOMAIN}/sitemap.xml\nSitemap: {DOMAIN}/sitemap-news.xml\n")
     write("feed.xml", rss(arts))
     print(f"built {len(arts)} artiklar: " + ", ".join(a["slug"] for a in arts))
 
