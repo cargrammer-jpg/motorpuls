@@ -345,7 +345,7 @@ html.mh-js{scroll-padding-top:3rem}
 }
 /* Skribentruta (author_box i build.py) */
 .author-box{display:flex;gap:1rem;align-items:flex-start;margin-top:1.5rem;padding:1.1rem 1.25rem;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--pulse);border-radius:var(--radius)}
-.author-box__avatar{flex:none;width:4rem;height:4rem;border-radius:50%;object-fit:cover;background:var(--raised);box-shadow:0 0 0 2px var(--bg),0 0 0 3px var(--pulse)}
+.author-box__avatar{flex:none;width:4rem;height:4rem;border-radius:50%;object-fit:cover}
 .author-box__body{display:grid;gap:.35rem;min-width:0}
 .author-box__name{font-size:1.1rem;line-height:1.2;font-weight:760;font-stretch:108%;color:#fff}
 .author-box__name a{text-decoration:none}

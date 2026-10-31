@@ -650,7 +650,7 @@ def ld_images(a):
 # ---------- författare ----------
 # data/authors.json: {"<id>": {name, url (författarsidan), avatar_src, bio, ai_signature}}. Artikelns author är id:t
 # eller namnet (author: Lukas -> lukas). avatar_src är en fil i repot (t.ex. brand/authors/...); den beskärs till en
-# kvadrat i mitten och blir img/authors/<id>.webp (192 px) och img/authors/<id>-96.webp. Byt bild genom att peka
+# kvadrat i mitten (färdiga <namn>-192/-96 bredvid källan används i första hand) och blir img/authors/<id>.webp (192 px) och img/authors/<id>-96.webp. Byt bild genom att peka
 # avatar_src på en ny fil (WebP-filerna byggs om när källan är nyare). Ordet TODO i bio ger en varning i bygget.
 AUTHORS = {}
 AVATAR_SIZES = ((192, ""), (96, "-96"))
@@ -677,9 +677,15 @@ def author_avatar(aid, src):
     if sp and os.path.isfile(sp) and (not os.path.exists(main) or os.path.getmtime(sp) > os.path.getmtime(main)):
         os.makedirs(os.path.dirname(main), exist_ok=True)
         with Image.open(sp) as im:
-            im = ImageOps.exif_transpose(im).convert("RGB")
+            im = ImageOps.exif_transpose(im)
+            im = im.convert("RGBA" if "A" in im.getbands() else "RGB")  # transparenta hörn behålls
             for w, suf in AVATAR_SIZES:
-                ImageOps.fit(im, (w, w), Image.LANCZOS).save(os.path.join(ROOT, f"{base}{suf}.webp"), "WEBP", quality=88, method=6)
+                # färdig storlek bredvid källan (lukas-avatar-1024.png -> lukas-avatar-192.png) används i första hand
+                pre = re.sub(r"-\d+(\.\w+)$", rf"-{w}\1", sp)
+                if pre != sp and os.path.isfile(pre):
+                    with Image.open(pre) as pi: r = pi.convert(im.mode); r.load()
+                else: r = ImageOps.fit(im, (w, w), Image.LANCZOS)
+                r.save(os.path.join(ROOT, f"{base}{suf}.webp"), "WEBP", quality=90, method=6)
     return [(f"/{base}{suf}.webp", w) for w, suf in AVATAR_SIZES if committed(f"{base}{suf}.webp")]
 
 def find_author(name):
