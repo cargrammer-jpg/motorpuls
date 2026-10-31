@@ -45,6 +45,24 @@ mörk studio + färgad horisont per kategori. Ersätts senare av licensierade/eg
 Liten icke-modal `<aside popover="manual">`-ruta (toast-mönster, ingen modal) nere till höger (bottom sheet på mobil), visas en gång
 efter ~55 % scroll, stängs med knapp eller Esc, minns valet i localStorage. Stjäl inte fokus.
 
+## RSS
+Sidfoten: länken "RSS" med ikon (orange ruta, mörka vågor) och "RSS per kategori" med en länk per kategori. Artikelns slut: en
+lugn rad "Prenumerera via RSS: <kategori> · Alla nyheter" i muted-färg, länkar i textfärg (7:1 respektive 16:1 mot bakgrunden).
+
+## Push-rutan (förhandsvisning, `PUSH_BOX` av)
+**Utseende.** Samma orange ruta som nyhetsbrevet (PR #15): gradient `#FF5B1F` till `#FF7A3D`, 8px rundning, mörk text `#0B0D10`
+(6,3:1 och 7,5:1). "Ja tack": mörk knapp med vit text (19:1). "Inte nu": genomskinlig knapp med 2px mörk kant och mörk text.
+Fokus: 3px mörk ring med 2px avstånd. iPhone-tipset står i en ruta med mörk vänsterkant (5,2:1).
+
+**Beteende.** Webbläsarens fråga om notiser visas aldrig av sig själv, bara när läsaren trycker "Ja tack". "Inte nu" gömmer
+rutan i 30 dagar (localStorage). Rutan visas inte om notiser redan är tillåtna eller nekade, eller om webbläsaren saknar Web Push.
+iOS Safari utanför hemskärmen (`navigator.standalone === false`): tipset om Lägg till på hemskärmen visas i stället för "Ja tack".
+Service workern (`/sw.js`) registreras först efter ett ja och hanterar bara `push` och `notificationclick` (ingen cache).
+
+**Placering, utan layoutskift.** Artikel: i flödet efter AI-notisen, och bara om platsen ligger under skärmkanten när skriptet körs.
+Startsida: fast ruta nere (hel bredd på mobil, nere till höger på dator) när läsaren har skrollat till "Alla artiklar". Ingen
+modal, rutan tar inte fokus, Esc stänger den. Intoning bara utan `prefers-reduced-motion: reduce`.
+
 ## Artikelmall v2 (lättare läsning)
 Mål: mindre brödtext, kortare stycken, en lugn läsrad och en tydlig sammanfattning överst.
 

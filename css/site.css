@@ -339,3 +339,13 @@ html.mh-js{scroll-padding-top:3rem}
     .pop__card:nth-child(4){animation-range:entry 28% entry 78%}
   }
 }
+/* RSS: länk i sidfoten (ikon + text) och raden "Prenumerera via RSS" i slutet av artiklar. Ikonen: orange ruta, mörka vågor. */
+.rss-icon{flex:none;width:1rem;height:1rem}
+.site-footer__rss{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .9rem;margin-top:1.25rem;font-size:.85rem;color:var(--muted)}
+.rss-link{display:inline-flex;align-items:center;gap:.45rem;font-weight:700;text-decoration:none;min-height:2.75rem;padding-inline:.15rem}
+.rss-link:hover{text-decoration:underline;text-decoration-color:var(--pulse);text-underline-offset:.2em}
+.site-footer ul.site-footer__feeds{display:flex;flex-wrap:wrap;gap:.25rem .9rem}
+.site-footer__feeds a{display:inline-block;padding-block:.35rem;text-underline-offset:.2em}
+.rss-row{display:flex;flex-wrap:wrap;align-items:center;gap:.35rem .55rem;margin:0;font-size:.85rem;color:var(--muted)}
+.rss-row a{color:var(--text);font-weight:620;text-underline-offset:.2em;padding-block:.35rem}
+.rss-row a:hover{text-decoration-color:var(--pulse)}
