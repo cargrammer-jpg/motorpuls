@@ -771,14 +771,14 @@ def author_ld(name):
     return {"@type": "Person", "name": au["name"], "url": DOMAIN + au["url"]} if au else {"@type": "Person", "name": name}
 
 def author_box(name):
-    """Skribentruta längst ner i varje artikel. En mall för alla författare, data från data/authors.json."""
+    """Skribentruta längst ner i varje artikel. En mall för alla författare, data från data/authors.json.
+    Visar bara namn (länk till författarsidan), avatar, "Skriver på Motorpuls.se", bio och sist det orange märket."""
     au = find_author(name)
     if not au: return ""
     av = au["avatar"]
     img = (f'<img class="author-box__avatar" src="{av[0][0]}" srcset="{", ".join(f"{u} {w}w" for u, w in reversed(av))}" sizes="4rem" '
            f'width="64" height="64" alt="" loading="lazy" decoding="async">') if av else ""
-    ai = (f'<p class="author-box__ai"><span class="author-box__badge">AI-assisterad signatur</span> '
-          f'<a href="/om/#hur-artiklarna-skrivs">Så skrivs artiklarna</a></p>') if au.get("ai_signature") else ""
+    ai = '<p class="author-box__ai"><span class="author-box__badge">AI-assisterad signatur</span></p>' if au.get("ai_signature") else ""
     return f'''
         <aside class="author-box" aria-labelledby="author-box-h">
           {img}
@@ -787,7 +787,6 @@ def author_box(name):
             <p class="author-box__role">Skriver på Motorpuls.se</p>
             <p class="author-box__bio">{nbnum(esc(au["bio"]))}</p>
             {ai}
-            <p class="author-box__more"><a href="{au["url"]}">Om {esc(au["name"])} och alla artiklar <span aria-hidden="true">→</span></a></p>
           </div>
         </aside>'''
 
