@@ -41,7 +41,9 @@
 // toppen, och helt undanglidd när man skrollar nedåt längre ned och läser. Skroll uppåt tar tillbaka den smala baren,
 // nära toppen blir den hel igen. JS sätter bara klasserna och --mh-dx; utseende och animation (bara transform/opacity)
 // ligger i CSS. Skrollhanteraren är passiv, körs högst en gång per bildruta (rAF) och läser bara scrollY: sidans höjd
-// och loggans läge mäts vid load/resize, aldrig under skroll, så den tvingar aldrig fram layout.
+// och loggans läge mäts vid load/resize, aldrig under skroll, så den tvingar aldrig fram layout. Inget läses heller
+// direkt när skriptet körs (det tvingade fram sidans första layout, 110 ms i Lighthouse): första mätningen görs i
+// ResizeObserver-anropet, som kommer efter att webbläsaren själv gjort layouten.
 (() => {
   const m = document.querySelector('.masthead');
   const w = m && m.querySelector('.wordmark');
@@ -52,12 +54,13 @@
   const DOWN = 24, UP = 16; // px: så långt man ska ha skrollat åt samma håll innan baren göms resp. visas
   const EDGE = 12;         // px från vänsterkanten i krympt läge
   const row = w.parentElement;
-  let max = 0, last = Math.max(0, scrollY), acc = 0, ticking = false, small = false, hidden = false;
+  let max = 0, last = 0, acc = 0, ticking = false, small = false, hidden = false;
   // Mätningar (layoutläsningar) bara här. Loggans vänsterkant mäts på raden runt den (som aldrig transformeras).
   // iOS skickar resize när Safaris verktygsfält fälls ihop under skroll; mätningen läggs då i nästa bildruta.
   let mq = 0;
   const measure = () => {
     mq = 0;
+    // alla läsningar först, sedan skrivningen (ingen läsning efter en ändring)
     max = Math.max(0, document.documentElement.scrollHeight - innerHeight);
     const left = row.getBoundingClientRect().left + parseFloat(getComputedStyle(row).paddingLeft);
     m.style.setProperty('--mh-dx', Math.min(0, EDGE - left) + 'px');
@@ -79,11 +82,15 @@
     else if (acc < -UP) set(true, false);
     else set(true, hidden);
   };
-  measure(); update();
+  // Första mätningen: i ResizeObserver-anropet (layouten är redan gjord) och direkt därefter läget för en sida som
+  // öppnas nedskrollad. Utan ResizeObserver: i nästa bildruta.
+  let first = true;
+  const init = () => { if (first) { first = false; last = Math.max(0, scrollY); measure(); update(); } else remeasure(); };
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
   addEventListener('resize', remeasure, { passive: true });
   addEventListener('load', remeasure);
-  if ('ResizeObserver' in window) new ResizeObserver(remeasure).observe(document.body);
+  if ('ResizeObserver' in window) new ResizeObserver(init).observe(document.body);
+  else requestAnimationFrame(init);
   m.addEventListener('focusin', () => set(small, false));
 })();
 
@@ -126,7 +133,7 @@
     track.addEventListener('scroll', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(update); }, { passive: true });
     track.addEventListener('scrollend', settle);
     addEventListener('resize', settle, { passive: true });
-    update();
+    render();  // bildspelet börjar på första bilden; att läsa scrollLeft här direkt efter is-ready tvingade fram layout
   });
 })();
 

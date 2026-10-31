@@ -32,6 +32,10 @@
 #          som Europe/Stockholm. Bygget stoppas om datumet ligger i framtiden (svensk tid; ett datum utan tid
 #          räknas som hela den dagen, så en artikel som mergas på sin egen dag går igenom). För förhandsbygge av
 #          schemalagda artiklar: MOTORPULS_NOW=2026-11-05T07:10+01:00 .venv/bin/python build.py
+#          Skriv helst tidpunkten: i JSON-LD, article:published_time, sitemaps och <time> blir det alltid full tid med
+#          zon, och ett datum utan tid blir där 00:00 svensk tid (bygget varnar).
+# seo_title: valfritt, sidans <title> (utan " · Motorpuls", som läggs till när det ryms inom 60 tecken). Behövs när
+#          rubriken är för lång: <title> kapas aldrig med "…" (se page_title). h1, og:title och RSS behåller title.
 # updated: valfritt, samma format som date. Blir dateModified (annars samma som date) och sitemaps lastmod, och
 #          artikeln visar "Uppdaterad <datum>" i bylinen när tidpunkten är senare än date. Ett updated före date
 #          räknas som date (dateModified blir aldrig tidigare än datePublished). Bygget stoppas om updated ligger i
@@ -49,7 +53,7 @@
 # images:  lista med {src, alt, credit, license, valfritt caption}. src är en lokal fil: ett filnamn som
 #          letas upp i drafts/img/<slug>/, utkastens form img/<slug>/fil (relativ till drafts/), en sökväg
 #          relativ till projektroten eller en absolut sökväg. Okända fält (t.ex. source_url) ignoreras.
-#          Filen kopieras till img/articles/<slug>/ och får WebP-versioner (1600, 800 och 400 px bred, bara
+#          Filen kopieras till img/articles/<slug>/ och får WebP-versioner (1600, 1200, 800 och 400 px bred, bara
 #          storleksändring, aldrig beskärning). Finns WebP-filen redan byggs den inte om (källan behövs inte).
 #          Första bilden är huvudbild (og:image), fler bilder blir ett bildspel.
 # image:   äldre fält (en URL). Laddas ned till img/articles/<slug>.webp om filen saknas, kredit i image_credit.
@@ -80,7 +84,10 @@ NEWS_DAYS = 2         # Google: bara artiklar från de senaste två dygnen i new
 GOOGLE_SITE_VERIFICATION = "1G9pdcpgySoszmWhSPBgBxrvZxkyl6kbvszF7FSnVl4"
 SITE_DESC = "Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor."
 MAX_W = 1600
-VARIANTS = ((MAX_W, ""), (800, "-800"), (400, "-400"))  # bredd, filändelse; minsta används av miniatyrerna (104 px)
+VARIANTS = ((MAX_W, ""), (1200, "-1200"), (800, "-800"), (400, "-400"))  # bredd, filändelse; minsta används av miniatyrerna (104 px)
+# WebP-kvalitet för artikelbilderna. 76 ger ungefär en tredjedel mindre filer än 86 utan synlig skillnad i bildspelet
+# (uppmätt på pressbilderna 31 okt 2026). Bara omkodning och storleksändring, aldrig beskärning.
+WEBP_Q = 76
 
 MONTHS = ["januari","februari","mars","april","maj","juni","juli","augusti","september","oktober","november","december"]
 DAYS = ["måndag","tisdag","onsdag","torsdag","fredag","lördag","söndag"]
@@ -150,7 +157,10 @@ def parse_when(v, path, field):
     t = t.replace(tzinfo=TZ) if t.tzinfo is None else t
     return t.astimezone(TZ).date(), t
 
-def iso(d, t): return t.isoformat(timespec="seconds") if t else d.isoformat()
+def iso(d, t):
+    """ISO 8601 med zon (+01:00/+02:00, Europe/Stockholm) för JSON-LD, article:*_time, sitemaps och <time>. Ett datum
+    utan klockslag blir dagens början i svensk tid, så att utdata alltid har tid och zon (Google News vill ha det)."""
+    return (t or dt.datetime.combine(d, dt.time.min, TZ)).isoformat(timespec="seconds")
 
 def instant(d, t):
     """jämförbar tidpunkt: tiden om den finns, annars dagens början i svensk tid"""
@@ -180,6 +190,7 @@ def load_articles():
         if fm.get("type") is not None and str(fm["type"]).strip().lower() not in ("guide", "nyhet"):
             raise SystemExit(f"{path}: type ska vara guide (eller utelämnas)")
         d, t = parse_when(fm["date"], path, "date")
+        if not t: print(f"varning: {os.path.basename(path)}: date saknar klockslag, skriv publiceringstiden (t.ex. {d}T07:30:00+01:00)")
         n = now()
         if (t and t > n) or d > n.astimezone(TZ).date():
             raise SystemExit(f"{path}: date {iso(d, t)} ligger i framtiden (nu {n.astimezone(TZ):%Y-%m-%d %H:%M} svensk tid)")
@@ -235,8 +246,8 @@ def check_summary_images(fm, path):
             if not str(im.get("license") or "").strip(): print(f"varning: {path}: images[{i}] saknar license")
 
 def webp_variants(src_path, out_base):
-    """Skriver <out_base>.webp (max 1600 px), <out_base>-800.webp och <out_base>-400.webp (de mindre bara om
-    bilden är bredare än så).
+    """Skriver <out_base>.webp (max 1600 px), <out_base>-1200.webp, -800.webp och -400.webp (de mindre bara om
+    bilden är bredare än så), med kvaliteten WEBP_Q.
     Samma bildformat: bara storleksändring, aldrig beskärning."""
     from PIL import Image, ImageOps
     Image.MAX_IMAGE_PIXELS = None  # pressbilder kan vara över 100 megapixel, källorna är våra egna filer
@@ -250,7 +261,7 @@ def webp_variants(src_path, out_base):
         if tw == im.width and src_path.lower().endswith(".webp"):  # redan WebP i rätt storlek: kopiera, koda inte om
             shutil.copyfile(src_path, os.path.join(ROOT, f"{out_base}{suffix}.webp")); continue
         r = im if tw == im.width else im.resize((tw, round(im.height * tw / im.width)), Image.LANCZOS)
-        r.save(os.path.join(ROOT, f"{out_base}{suffix}.webp"), "WEBP", quality=86, method=6, **({"icc_profile": icc} if icc else {}))
+        r.save(os.path.join(ROOT, f"{out_base}{suffix}.webp"), "WEBP", quality=WEBP_Q, method=6, **({"icc_profile": icc} if icc else {}))
 
 def small_variants(out_base):
     """Äldre bilder byggda innan en mindre storlek fanns: skapa den ur den största WebP-filen (bara storleksändring)."""
@@ -262,7 +273,7 @@ def small_variants(out_base):
             p = os.path.join(ROOT, f"{out_base}{suffix}.webp")
             if im.width > w and not os.path.exists(p):
                 icc = im.info.get("icc_profile")
-                im.resize((w, round(im.height * w / im.width)), Image.LANCZOS).save(p, "WEBP", quality=86, method=6, **({"icc_profile": icc} if icc else {}))
+                im.resize((w, round(im.height * w / im.width)), Image.LANCZOS).save(p, "WEBP", quality=WEBP_Q, method=6, **({"icc_profile": icc} if icc else {}))
 
 _tracked = None
 OUT = None          # utkatalog (--out), sätts i main()
@@ -395,15 +406,24 @@ def og_image(a):
             out.save(p, "JPEG", quality=86, optimize=True, progressive=True)
     return dict(src="/" + rel, w=OG_W, h=OG_H) if committed(rel) else img
 
-def short_title(t, limit=60):
-    """<title>: artikelrubriken kortas så att hela titeln med " · Motorpuls" blir högst ~60 tecken. Helst vid
-    ": " eller ". " (utan …), annars vid ett ordslut med …. og:title och twitter:title behåller hela rubriken."""
+TITLE_MAX = 60  # tecken i <title>, ungefär vad Google visar
+
+def page_title(t, seo_title=None, limit=TITLE_MAX):
+    """<title>. Kapas aldrig med "…". I tur och ordning: seo_title ur front matter, hela rubriken, delen före ": " eller
+    ". " (om den är minst halva utrymmet), alla med " · Motorpuls" när det ryms inom limit. Ryms inget av dem blir
+    titeln hela rubriken (eller seo_title) utan sajtnamnet, och bygget varnar så att artikeln kan få en seo_title.
+    og:title och twitter:title behåller alltid hela rubriken, sidans h1 är oförändrad."""
     suffix = f" · {SITE}"
     room = limit - len(suffix)
+    if seo_title:
+        seo_title = str(seo_title).strip()
+        if len(seo_title) > limit: print(f"varning: seo_title är {len(seo_title)} tecken (högst {limit}): {seo_title!r}")
+        return seo_title + suffix if len(seo_title) <= room else seo_title
     if len(t) <= room: return t + suffix
     head_part = re.split(r"[:.] ", t, maxsplit=1)[0]
     if head_part != t and room // 2 <= len(head_part) <= room: return head_part + suffix
-    return t[:room - 1].rsplit(" ", 1)[0].rstrip(" ,.:;–-") + "…" + suffix
+    print(f"varning: rubriken ryms inte i {limit} tecken, lägg till seo_title i front matter: {t!r}")
+    return t
 
 def rss(arts, title=SITE, desc=SITE_DESC, path="/feed.xml", link="/"):
     from email.utils import format_datetime
@@ -527,7 +547,7 @@ def newsletter_box():
 PRIVACY_UPDATED = dt.date(2026, 10, 31)
 
 def _simple_page(title, desc, path, inner, noindex=True):
-    h = head(f"{title} · {SITE}", desc, path, noindex=noindex)
+    h = head(f"{title} · {SITE}", desc, path, image=DEFAULT_OG, noindex=noindex)
     body = f'''
 <main id="innehall" class="article">
   <div class="wrap">
@@ -591,6 +611,22 @@ def _action_page(kind):
     return _simple_page(title, lede, f"/prenumeration/{kind}/", inner)
 
 # ---------- shared html ----------
+SITE_CSS = None  # css/site.css förminskad, läses en gång per bygge (inline_css)
+
+def inline_css():
+    """css/site.css inbäddad i <head> (<style>), så att sidan inte väntar på en renderblockerande css-fil. css/site.css
+    är fortfarande källan och publiceras som förut. Kommentarer och indrag tas bort, url(../x) blir /x eftersom
+    stilen nu ligger i sidan och inte i /css/. Byte av css syns direkt i sidan (ingen ?v= behövs)."""
+    global SITE_CSS
+    if SITE_CSS is None:
+        t = open(os.path.join(ROOT, "css/site.css"), encoding="utf-8").read()
+        t = re.sub(r"/\*.*?\*/", "", t, flags=re.S)
+        t = re.sub(r"url\(\.\./", "url(/", t)
+        t = "\n".join(line.strip() for line in t.splitlines() if line.strip())
+        if "</" in t: raise SystemExit("css/site.css innehåller </ och kan inte bäddas in i <style>")
+        SITE_CSS = t
+    return SITE_CSS
+
 def asset(rel):
     """URL med ?v=<kort innehållshash> så att webbläsare (Safari) alltid hämtar aktuell css/js efter en ändring."""
     with open(os.path.join(ROOT, rel.lstrip("/")), "rb") as f:
@@ -633,7 +669,7 @@ def head(title, desc, path, og_type="website", image=None, extra="", preload_img
 <meta name="twitter:description" content="{esc(desc)}">
 <meta name="theme-color" content="#0B0D10">
 <meta name="color-scheme" content="dark">
-<link rel="stylesheet" href="{asset("/css/site.css")}">
+<style>{inline_css()}</style>
 <script src="{asset("/js/site.js")}" defer></script>
 <link rel="icon" href="/favicon/favicon.ico" sizes="48x48">
 <link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml">
@@ -790,10 +826,25 @@ def popular_section(arts, shown):
       </ol>
     </section>'''
 
+ORG_ID = DOMAIN + "/#organization"
+
+def organization_ld():
+    """Utgivaren: samma uppgifter på startsidan (Organization) och i artiklarnas publisher."""
+    return {"@type": "Organization", "@id": ORG_ID, "name": SITE, "url": DOMAIN + "/", "email": CONTACT_EMAIL,
+            "logo": {"@type": "ImageObject", "url": DOMAIN + "/favicon/android-chrome-512.png", "width": 512, "height": 512}}
+
+def home_ld():
+    """Startsidan: WebSite och Organization (utgivaren) i en @graph."""
+    ld = {"@context": "https://schema.org", "@graph": [
+        {"@type": "WebSite", "@id": DOMAIN + "/#website", "name": SITE, "url": DOMAIN + "/", "description": SITE_DESC,
+         "inLanguage": "sv-SE", "publisher": {"@id": ORG_ID}},
+        dict(organization_ld(), description=SITE_DESC)]}
+    return '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace("</", "<\\/") + "</script>\n"
+
 def index(arts):
     first, rest = arts[0], arts[1:]
     h = head(f"{SITE}: korta bilnyheter med källor", SITE_DESC, "/", image=DEFAULT_OG,
-             preload_img=first["img"], preload_sizes=LEAD_SIZES, feeds=FEEDS)
+             preload_img=first["img"], preload_sizes=LEAD_SIZES, feeds=FEEDS, extra=home_ld())
     if rest:
         side = f'<aside class="latest" aria-labelledby="latest-h"><h2 id="latest-h"><span class="pulse-dot" aria-hidden="true"></span>Senaste</h2><ol>' + "".join(
             f'<li><a href="{a["url"]}">{meta_line(a, flag_html=flag(a, "inline"))}<h3>{esc(a["title"])}</h3></a></li>' for a in rest[:5]) + "</ol></aside>"
@@ -1044,8 +1095,7 @@ def article(a, arts=()):
           "articleSection": a["category"], "keywords": a.get("tags") or [],
           "mainEntityOfPage": {"@type": "WebPage", "@id": DOMAIN + a["url"]}, "url": DOMAIN + a["url"],
           "author": author_ld(a["author"]),
-          "publisher": {"@type": "Organization", "name": SITE, "url": DOMAIN + "/", "email": CONTACT_EMAIL,
-                        "logo": {"@type": "ImageObject", "url": DOMAIN + "/favicon/android-chrome-512.png", "width": 512, "height": 512}}}
+          "publisher": organization_ld()}
     if imgs:
         credit = {k: v for k, v in {"creditText": img["credit"].removeprefix("Foto: ") or None,
                                     "copyrightNotice": img["license"] or None}.items() if v}
@@ -1057,7 +1107,7 @@ def article(a, arts=()):
     jsonld = '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace("</", "<\\/") + "</script>\n"
     og = og_image(a)
     if og: og = dict(og, alt=img["alt"])  # og:image:alt och twitter:image:alt: huvudbildens alt-text
-    h = head(short_title(a["title"]), a["excerpt"], a["url"], og_type="article", image=og, og_title=a["title"],
+    h = head(page_title(a["title"], a.get("seo_title")), a["excerpt"], a["url"], og_type="article", image=og, og_title=a["title"],
              extra=f'<meta property="article:published_time" content="{a["published"]}">\n'
                    f'<meta property="article:modified_time" content="{a["modified"]}">\n'
                    f'<meta property="article:section" content="{esc(a["category"])}">\n'
@@ -1230,7 +1280,7 @@ def info_page(p, arts):
           <ol>{lis}
           </ol>
         </section>'''
-    h = head(short_title(p["title"]), p["description"], p["path"], og_title=p["title"], image=DEFAULT_OG, extra=extra)
+    h = head(page_title(p["title"], p.get("seo_title")), p["description"], p["path"], og_title=p["title"], image=DEFAULT_OG, extra=extra)
     body = f'''
 <main id="innehall" class="article">
   <div class="wrap">

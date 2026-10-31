@@ -18,6 +18,7 @@
   --bg:#0B0D10; --bg-2:#101318; --surface:#151A20; --raised:#1B2129;
   --line:#252C35; --line-strong:#3A434E;
   --text:#EEF1F4; --text-2:#C3CAD1; --muted:#929CA7;
+  --credit:#A7B0BA; /* fotokrediter på korten: 8,5:1 mot --bg-2, minst 4,7:1 även mitt i intoningen (se card-in) */
   --pulse:#FF5B1F; --pulse-text:#FF8A5C; --glow:rgb(255 91 31 / .16);
   --sans:"Archivo","Archivo Fallback",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
   --serif:"Newsreader","Newsreader Fallback",ui-serif,Georgia,"Times New Roman",serif;
@@ -319,7 +320,7 @@ html.mh-js{scroll-padding-top:3rem}
   @keyframes rise{from{transform:translateY(12px);opacity:0}}
 }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:0s!important;animation:none!important}}
-.item__credit{font-family:var(--mono);font-size:.7rem;line-height:1.3;color:var(--muted);padding:.3rem .4rem;background:var(--bg-2)}
+.item__credit{font-family:var(--mono);font-size:.7rem;line-height:1.3;color:var(--credit);padding:.3rem .4rem;background:var(--bg-2)}
 .item__credit:empty{display:none}
 /* Svensk flagga (sweden: true): eget element ovanpå bildens övre vänstra hörn, bildfilen ändras aldrig.
    Hörnet är fritt: krediten ligger under bilden och bildspelets knappar nere till höger. */
@@ -371,6 +372,9 @@ html.mh-js{scroll-padding-top:3rem}
   .pop__card a:hover .pop__frame img{transform:scale(1.05)}
 }
 @keyframes rise-in{from{opacity:0;transform:translateY(12px)}}
+/* Kort som tonas in vid skroll börjar på opacity .7 (inte 0): text och fotokrediter håller då minst 4,5:1 i kontrast
+   även innan kortet skrollats in helt (WCAG AA, Lighthouse mäter utan att skrolla). */
+@keyframes card-in{from{opacity:.7;transform:translateY(12px)}}
 @keyframes focus-pop{from{outline-offset:7px}}
 @media (prefers-reduced-motion:no-preference){
   :focus-visible{animation:focus-pop .22s var(--ease)}
@@ -379,10 +383,10 @@ html.mh-js{scroll-padding-top:3rem}
   .latest li:nth-child(2){--i:1}.latest li:nth-child(3){--i:2}.latest li:nth-child(4){--i:3}.latest li:nth-child(5){--i:4}
   /* Kort och flödet: tonas upp när de skrollas in (scroll-driven, progressiv förbättring; utan stöd syns de direkt) */
   @supports ((animation-timeline: view()) and (animation-range: entry)){
-    .item{animation:rise-in linear both;animation-timeline:view();animation-range:entry 0% entry 70%}
+    .item{animation:card-in linear both;animation-timeline:view();animation-range:entry 0% entry 70%}
     /* korten följer hela sektionens tidslinje (på mobil ligger de i en vågrät scroller, vars view() inte rör sig) */
     .pop{view-timeline:--pop block}
-    .pop__card{animation:rise-in linear both;animation-timeline:--pop;animation-range:entry 10% entry 60%}
+    .pop__card{animation:card-in linear both;animation-timeline:--pop;animation-range:entry 10% entry 60%}
     .pop__card:nth-child(2){animation-range:entry 16% entry 66%}
     .pop__card:nth-child(3){animation-range:entry 22% entry 72%}
     .pop__card:nth-child(4){animation-range:entry 28% entry 78%}
