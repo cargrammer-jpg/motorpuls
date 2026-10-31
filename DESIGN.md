@@ -20,7 +20,7 @@ Copy: inga tankstreck (en- eller em-streck) i rubriker eller text; använd komma
 
 ## Typografi (fria, självhostade woff2, subset Latin+svenska)
 - **Archivo** (variabel, wdth 62 till 125, wght 100 till 900): rubriker i *expanded* bredd 112 till 125, vikt 750 till 800, tät spärr (-0.02em). Wordmark: wdth 125 / 850. UI-text i normalbredd.
-- **Newsreader** (variabel, opsz): ingress och artikeltext. Brödtext 17px mobil, 18px från 48rem, radhöjd 1,6, spalt 40rem (cirka 65 tecken per rad). Se Artikelmall v2.
+- **Newsreader** (variabel, opsz): ingress och artikeltext. Brödtext 16px mobil, flytande upp till 17px på dator, radhöjd 1,6, spalt 40rem (cirka 65 tecken per rad). Se Artikelmall v2.
 - **DM Mono**: tidsstämplar, datumrubriker, källdomäner: "instrument"-detaljen.
 
 ## Layout
@@ -88,9 +88,9 @@ modal, rutan tar inte fokus, Esc stänger den. Intoning bara utan `prefers-reduc
 Mål: mindre brödtext, kortare stycken, en lugn läsrad och en tydlig sammanfattning överst.
 
 **Läsyta.** En centrerad spalt `.article__col`, max 40rem, för rubrik, sammanfattning, text och källor. Bilder får en bredare scen, max 62rem.
-Rubrik 2 till 3,4rem (Archivo 115 % bredd, 820). Ingress Newsreader 1,15 till 1,3rem, radhöjd 1,5.
-Brödtext Newsreader 17px (mobil) och 18px (från 48rem), radhöjd 1,6, färg `#DCE1E6` (14,8:1 mot bg), 1,3em mellan stycken.
-H2: Archivo 1,2 till 1,35rem, 760, med en liten orange pulsprick före. 2,4em luft ovanför och 0,6em under, så avsnitten syns när man skummar.
+Rubrik 1,85 till 3rem (Archivo 115 % bredd, 820). Ingress Newsreader 1,05 till 1,15rem, radhöjd 1,5.
+Brödtext Newsreader 16px (mobil) till 17px (dator, flytande med clamp()), radhöjd 1,6, färg `#DCE1E6` (14,8:1 mot bg), 1,3em mellan stycken.
+H2: Archivo 1,125 till 1,25rem, 760, med en liten orange pulsprick före. 2,4em luft ovanför och 0,6em under, så avsnitten syns när man skummar.
 Tusentalsavgränsare ("1 079 hk") renderas med hårt mellanslag så att tal aldrig bryts över två rader.
 Redaktionellt: sikta på stycken om 2 till 3 meningar. Mallen kan inte korta texten, det gör skribenten.
 
