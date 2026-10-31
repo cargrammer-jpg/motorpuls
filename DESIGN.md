@@ -52,8 +52,19 @@ Text: "Få Motorpuls i inkorgen" och "De viktigaste bilnyheterna, korta och med 
 **Placering.** Dator (från 56rem): höger kolumn bredvid sidfotens logga, text och länkar. Mobil: under länkarna, före raden med ©, knappen i full bredd.
 Rutan står i HTML från början och statusraden har reserverad höjd, så inget layoutskift. Utan JS döljs formuläret och en rad säger att anmälan kräver JavaScript.
 
-**Funktion** (`nyhetsbrev/nyhetsbrev.js`, laddas bara med flaggan på). `fetch` POST till Supabase REST `newsletter_subscribers` med den publika nyckeln,
-`consent: true` och sidans sökväg. Honungsfälla, `aria-invalid` och felrad, 409 visas som lyckad anmälan, tackraden får fokus. Rörelse bara utan `prefers-reduced-motion: reduce`.
+**Funktion** (`nyhetsbrev/nyhetsbrev.js`, laddas bara med flaggan på). `fetch` POST till edge-funktionen `newsletter-subscribe`
+med adressen, sidans sökväg och honungsfältet. Dubbel bekräftelse: tackraden säger "Nästan klart! Vi har skickat ett mejl till dig..."
+och får fokus. 400 och 429 ger egna felrader. Samma svar oavsett om adressen redan prenumererar. Under fältet: "Helt gratis, avsluta
+när du vill. Du får ett mejl där du bekräftar först." och länken "Så hanterar vi din adress" till `/integritet/`. Rörelse bara utan
+`prefers-reduced-motion: reduce`.
+
+**Bekräfta och avsluta** (`/prenumeration/bekrafta/` och `/prenumeration/avsluta/`, `nyhetsbrev/nyhetsbrev-sida.js`). Länkarna i
+mejlen går hit med `?token=`. Att öppna sidan ändrar inget; först knappen (samma orange knapp som rutan) POSTar koden. Koden tas
+bort ur adressfältet. Svaret står i en statusrad som får fokus. noindex. Supabase visar inte HTML från sin egen domän, därför ligger
+sidorna på motorpuls.se.
+
+**Integritet** (`/integritet/`, bara med flaggan på). Ingen kontaktadress (ALX:s beslut). Tjänster: Supabase (lagring, Stockholm),
+Resend (utskick), Cloudflare Web Analytics.
 
 ## RSS
 Sidfoten: länken "RSS" med ikon (orange ruta, mörka vågor) och "RSS per kategori" med en länk per kategori. Artikelns slut: en

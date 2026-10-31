@@ -86,7 +86,9 @@ Det äldre fältet `image` (en URL, med `image_credit`) laddas ned till `img/art
 ## Nyhetsbrev i sidfoten (förhandsvisning)
 
 Feature-flaggan `NEWSLETTER_BOX` i build.py är av. Förhandsbygge med rutan: `MOTORPULS_NYHETSBREV=1 .venv/bin/python build.py --out _preview`
-(bara med `--out`, projektroten byggs om utan rutan). Källor i `nyhetsbrev/` (nyhetsbrev.css, nyhetsbrev.js). Med flaggan av stoppar
-bygget om något av rutan finns i utdata. Anmälan går till Supabase-tabellen `newsletter_subscribers` (se `DESIGN.md`, Nyhetsbrevsrutan i sidfoten).
+(bara med `--out`, projektroten byggs om utan rutan). Källor i `nyhetsbrev/` (nyhetsbrev.css, nyhetsbrev.js, nyhetsbrev-sida.js). Med flaggan av stoppar
+bygget om något av nyhetsbrevet finns i utdata. Anmälan går till edge-funktionen `newsletter-subscribe` med dubbel bekräftelse
+och utskick via Resend (se `supabase/README.md`). Med flaggan på byggs också `/integritet/`, `/prenumeration/bekrafta/` och
+`/prenumeration/avsluta/`. Ingen kontaktadress visas på sajten.
 
 Sidorna har tills vidare `<meta name="robots" content="noindex">`.
