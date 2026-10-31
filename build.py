@@ -18,7 +18,9 @@
 #   sw.js, push.js                bara när PUSH_BOX är på (förhandsvisning av push-rutan, se nedan)
 #   nyhetsbrev.js                 bara när NEWSLETTER_BOX är på (förhandsvisning av nyhetsbrevsrutan i sidfoten, se nedan)
 #   img/og/<slug>.jpg             delningsbild 1200x630 (JPEG) ur huvudbilden; startsidan använder img/og/motorpuls.jpg
-#                                 (ritad från brand/og/startsida.html)
+#                                 (ritad från brand/og/startsida.html). Förbjuder huvudbildens license ändringar eller
+#                                 beskärning (NO_MODIFY) blir den i stället img/og/<slug>-hel.jpg: hela bilden, bara
+#                                 förminskad, centrerad på mörk botten (#0B0D10) i 1200x630. Ingen beskärning, ingen text.
 #
 # Artiklar: markdown med YAML-front matter (title, date, slug, tags, excerpt, category, author,
 # valfritt summary, images, sources, äldre image/image_credit). Brödtexten renderas oförändrad. Rubriken (#) i texten
@@ -351,20 +353,46 @@ def ensure_images(a):
                  caption="", license=str(a.get("image_license") or "").strip())]
 
 OG_W, OG_H = 1200, 630
+OG_BG = (0x0B, 0x0D, 0x10)  # sajtens bakgrund (bg), botten runt hela bilden när den inte får beskäras
 DEFAULT_OG = dict(src="/img/og/motorpuls.jpg", w=OG_W, h=OG_H)
+# Licenstext (images[].license, huvudbilden) som förbjuder beskärning eller ändring: "får inte beskäras", "Oförändrad",
+# "får inte ändras", "får inte kopieras, distribueras, ändras ...". Då beskärs bilden aldrig, varken till delningsbilden
+# (og:image) eller till JSON-LD-bilderna (ld_images).
+NO_MODIFY = re.compile(r"beskär|oförändrad|får inte[^.]*?\bändras|unmodified|not be (?:cropped|altered|modified)", re.I)
+NO_CROP = NO_MODIFY
+
+def no_modify(img): return bool(img and NO_MODIFY.search(img.get("license") or ""))
+
+def og_contain(im):
+    """Hela bilden i 1200x630: förminskas (aldrig förstoras) så att den ryms, centreras på mörk botten. Bildens
+    pixlar beskärs inte och inget läggs ovanpå."""
+    from PIL import Image
+    im = im.convert("RGB")
+    k = min(OG_W / im.width, OG_H / im.height, 1)
+    if k < 1: im = im.resize((max(1, round(im.width * k)), max(1, round(im.height * k))), Image.LANCZOS)
+    out = Image.new("RGB", (OG_W, OG_H), OG_BG)
+    out.paste(im, ((OG_W - im.width) // 2, (OG_H - im.height) // 2))
+    return out
 
 def og_image(a):
-    """Delningsbild: huvudbilden beskuren till 1200x630 som JPEG (bara för og:image/twitter:image, sajtens bilder
-    beskärs aldrig). Skrivs om den saknas. Används bara om filen är incheckad, annars WebP-huvudbilden som förut."""
+    """Delningsbild 1200x630 som JPEG (bara för og:image/twitter:image, sajtens bilder beskärs aldrig). Huvudbilden
+    beskärs till formatet, utom när dess licens förbjuder det (no_modify): då hela bilden på mörk botten
+    (img/og/<slug>-hel.jpg) och en äldre beskuren img/og/<slug>.jpg tas bort. Skrivs om den saknas. Används bara om
+    filen är incheckad, annars WebP-huvudbilden som förut."""
     img = a["img"]
     if not img: return None
-    rel = f"img/og/{a['slug']}.jpg"
+    whole = no_modify(img)
+    rel = f"img/og/{a['slug']}{'-hel' if whole else ''}.jpg"
     p = os.path.join(ROOT, rel)
+    if whole:  # en beskuren delningsbild får inte ligga kvar (img/ publiceras i sin helhet)
+        old = os.path.join(ROOT, f"img/og/{a['slug']}.jpg")
+        if os.path.exists(old): os.remove(old)
     if not os.path.exists(p):
         from PIL import Image, ImageOps
         os.makedirs(os.path.dirname(p), exist_ok=True)
         with Image.open(os.path.join(ROOT, img["src"].lstrip("/"))) as im:
-            ImageOps.fit(im.convert("RGB"), (OG_W, OG_H), Image.LANCZOS).save(p, "JPEG", quality=85, optimize=True, progressive=True)
+            out = og_contain(im) if whole else ImageOps.fit(im.convert("RGB"), (OG_W, OG_H), Image.LANCZOS)
+            out.save(p, "JPEG", quality=86, optimize=True, progressive=True)
     return dict(src="/" + rel, w=OG_W, h=OG_H) if committed(rel) else img
 
 def short_title(t, limit=60):
@@ -855,7 +883,6 @@ def summary_box(a):
 
 LD_RATIOS = (("16x9", 16, 9), ("4x3", 4, 3), ("1x1", 1, 1))
 LD_W = 1200
-NO_CROP = re.compile(r"beskär|oförändrad|får inte ändras", re.I)  # licenstext (huvudbilden) som utesluter beskärning
 
 def ld_images(a):
     """Huvudbilden beskuren till 16:9, 4:3 och 1:1 för NewsArticle (Google rekommenderar alla tre, Discover vill ha
@@ -863,7 +890,12 @@ def ld_images(a):
     hoppas över om beskärningen blir smalare än 1200 px, 1:1 om den blir under 800 px. Inga beskärningar alls om
     huvudbildens licens förbjuder det (NO_CROP), då används bara originalbilderna. Sajtens egna bilder beskärs aldrig. Bara incheckade filer används (som img/og/), i --out-läget allt som finns."""
     img = a["img"]
-    if not img or NO_CROP.search(img["license"]): return []  # licensen förbjuder beskärning: originalbilderna räcker
+    if not img: return []
+    if no_modify(img):  # licensen förbjuder beskärning: originalbilderna räcker, gamla beskärningar tas bort
+        for name, _, _ in LD_RATIOS:
+            old = os.path.join(ROOT, f"img/ld/{a['slug']}-{name}.jpg")
+            if os.path.exists(old): os.remove(old)
+        return []
     from PIL import Image, ImageOps
     res = []
     for name, rw, rh in LD_RATIOS:

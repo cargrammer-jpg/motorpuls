@@ -104,6 +104,9 @@ Etikett i DM Mono versaler, `pulse-text` `#FF8A5C` (7,3:1 mot rutan). Punkterna 
 `object-fit: contain` och svart kant (letterbox) när formatet skiljer sig. Ingen text eller toning ovanpå bilden (enda undantaget är den lilla svenska flaggan, se nedan).
 Bildtext under bilden i DM Mono, `muted` (7:1): valfri `caption`, punkt, sedan kredit ("Foto: Aston Martin").
 Bygget gör WebP i 1600 och 800 px bredd (srcset), bara storleksändring.
+**Delningsbild (og:image, 1200x630).** Huvudbilden beskärs till formatet, utom när dess `license` förbjuder beskärning eller ändring
+(t.ex. "får inte beskäras", "Oförändrad", "får inte ... ändras"; `NO_MODIFY` i build.py). Då blir delningsbilden hela bilden, bara
+förminskad och centrerad på sajtens mörka botten `#0B0D10` (`img/og/<slug>-hel.jpg`), och inga beskurna JSON-LD-bilder görs.
 
 **Bildspel** (två eller fler bilder). Utan JS: en vågrät rad med scroll-snap där nästa bild sticker fram (88 % bredd), att svepa i.
 Med JS (`js/site.js`, inga bibliotek): helbreda bilder, runda knappar "Föregående bild" och "Nästa bild" (2,75rem, aria-label),
