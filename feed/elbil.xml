@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Motorpuls: Elbil</title>
+  <link>https://motorpuls.se/</link>
+  <description>Artiklar i kategorin Elbil på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
+  <language>sv-SE</language>
+  <lastBuildDate>Sun, 01 Nov 2026 00:00:00 +0100</lastBuildDate>
+  <atom:link href="https://motorpuls.se/feed/elbil.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>BMW lovar 340 km laddning på tio minuter i nya iX3 M60 med 612 hk</title>
+    <link>https://motorpuls.se/artikel/bmw-ix3-m60-highway-assistant-sverige/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/bmw-ix3-m60-highway-assistant-sverige/</guid>
+    <pubDate>Sun, 01 Nov 2026 00:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>BMW har visat iX3 M60 xDrive med 612 hk och 400 kW laddning, samtidigt som iX3 40 får fyrhjulsdrift och Highway Assistant öppnas för svenska kunder i november.</description>
+  </item>
+</channel>
+</rss>
