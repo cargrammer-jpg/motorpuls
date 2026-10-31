@@ -448,6 +448,7 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
 .nlf__input:focus-visible,.nlf__btn:focus-visible,.nlf__done:focus-visible{outline:2px solid var(--pulse-text);outline-offset:2px}
 .nlf__hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .site-footer .nlf__fine{margin:.6rem 0 0;font-size:.8rem;color:var(--muted)}
+.nlf__privacy{display:block;width:fit-content;margin-top:.3rem}
 .site-footer .nlf__status{min-height:1.4em;margin:.35rem 0 0;font-size:.85rem;font-weight:620;color:var(--text)}
 .nlf__status.is-error{padding:.4rem .7rem;border-radius:var(--radius);background:var(--raised);border-left:3px solid var(--pulse)}
 .site-footer .nlf__done{margin:1rem 0 0;font-size:.95rem;font-weight:620;color:var(--text)}
@@ -660,7 +661,7 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
           <button class="nlf__btn" type="submit">Prenumerera</button>
         </div>
         <div class="nlf__hp" aria-hidden="true"><label>Lämna tomt <input type="text" name="webbplats" tabindex="-1" autocomplete="off"></label></div>
-        <p class="nlf__fine" id="nlf-fine">Helt gratis, avsluta när du vill. Du får ett mejl där du bekräftar först. <a href="/integritet/">Så hanterar vi din adress</a>.</p>
+        <p class="nlf__fine" id="nlf-fine">Helt gratis, avsluta när du vill. Du får ett mejl där du bekräftar först. <a class="nlf__privacy" href="/integritet/">Så hanterar vi din adress</a></p>
         <p class="nlf__status" role="status" aria-live="polite"></p>
       </form>
     </section>
