@@ -17,10 +17,16 @@ export const VAULT_KEYS: Record<string, string> = {
   RESEND_INBOUND_API_KEY: "resend_inbound_api_key", // läsrätt till mottagna mejl (sändningsnyckeln räcker inte)
 };
 
-/** Läser värden: miljön först, Vault för det som saknas. Vault-anropet görs bara om något saknas. */
-export async function liveGetter(url: string, key: string): Promise<(k: string) => string | undefined> {
+/** Hemligheterna som nyhetsbrevsfunktionerna får läsa. Nyckeln med full åtkomst (RESEND_INBOUND_API_KEY) och webhookens
+ *  signeringsnyckel läses bara av inbound-forward. */
+export const NEWSLETTER_KEYS = ["RESEND_API_KEY", "NEWSLETTER_HASH_SALT", "NEWSLETTER_SEND_SECRET"];
+export const INBOUND_KEYS = ["RESEND_API_KEY", "RESEND_INBOUND_WEBHOOK_SECRET", "RESEND_INBOUND_API_KEY"];
+
+/** Läser värden: miljön först, Vault för det som saknas. Bara namnen i names läses, och Vault anropas bara om något saknas. */
+export async function liveGetter(url: string, key: string, names: string[]): Promise<(k: string) => string | undefined> {
   const env = (k: string) => Deno.env.get(k) || undefined;
-  const missing = Object.keys(VAULT_KEYS).filter((k) => !env(k));
+  const allowed = new Set(names.filter((k) => VAULT_KEYS[k]));
+  const missing = [...allowed].filter((k) => !env(k));
   let vault: Record<string, string> = {};
   if (missing.length > 0) {
     const db = createClient(url, key, { auth: { persistSession: false, autoRefreshToken: false } });
@@ -28,14 +34,17 @@ export async function liveGetter(url: string, key: string): Promise<(k: string) 
     if (error) throw new Error(`vault: ${error.message}`);
     vault = (data ?? {}) as Record<string, string>;
   }
-  return (k: string) => env(k) ?? (VAULT_KEYS[k] ? vault[VAULT_KEYS[k]] || undefined : undefined);
+  return (k: string) => {
+    if (VAULT_KEYS[k] && !allowed.has(k)) return undefined; // hemligheter utanför names läses aldrig, inte ens från miljön
+    return env(k) ?? (VAULT_KEYS[k] ? vault[VAULT_KEYS[k]] || undefined : undefined);
+  };
 }
 
 export async function liveDeps(): Promise<Deps> {
   const url = Deno.env.get("SUPABASE_URL");
   const key = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
   if (!url || !key) throw new Error("saknar SUPABASE_URL eller SUPABASE_SERVICE_ROLE_KEY");
-  const get = await liveGetter(url, key);
+  const get = await liveGetter(url, key, NEWSLETTER_KEYS);
   return {
     store: supabaseStore(url, key),
     mailer: resendMailer({ apiKey: get("RESEND_API_KEY"), from: get("NEWSLETTER_FROM") || FROM_DEFAULT, replyTo: get("NEWSLETTER_REPLY_TO") || REPLY_TO_DEFAULT }),
