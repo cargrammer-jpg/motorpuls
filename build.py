@@ -919,7 +919,7 @@ def ld_images(a):
 
 # ---------- dela ----------
 # Delningsknappar under bylinen och i slutet av artikeln. Vanliga länkar (fungerar utan JS) till X, Facebook, LinkedIn och
-# WhatsApp, plus "Kopiera länk" och, där webbläsaren har Web Share API (mobiler), en "Dela"-knapp som öppnar systemets
+# WhatsApp (och SMS/iMessage på pekskärmar), plus "Kopiera länk" och, där webbläsaren har Web Share API (mobiler), en "Dela"-knapp som öppnar systemets
 # delningsmeny. Inga skript från tredje part, inga spårningsparametrar. js/site.js visar Dela- och kopieraknapparna; de
 # har sin plats reserverad från början (visibility), så inget flyttar sig. Ikonerna: Simple Icons (CC0), LinkedIn ur v9.
 SHARE_ICONS = {
@@ -932,6 +932,12 @@ SHARE_NATIVE_SVG = ('<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden
                     'fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>')
 SHARE_COPY_SVG = ('<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3.2-3.2a4.5 4.5 0 0 0-6.4-6.4l-1 1M14 10a4.5 4.5 0 0 0-6.4 0l-3.2 3.2a4.5 4.5 0 0 0 6.4 6.4l1-1" '
                   'fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>')
+SHARE_SMS_SVG = ('<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M12 4c4.97 0 9 3.13 9 7s-4.03 7-9 7c-1 0-1.96-.13-2.86-.36L4.5 20l1.14-3.6C4 15.07 3 13.12 3 11c0-3.87 4.03-7 9-7Z" '
+                 'fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></svg>')
+
+def share_sms(a):
+    """SMS/iMessage: "sms:?&body=" fungerar i både iOS och Android. Visas bara på pekskärmar (CSS), ingen ny flik."""
+    return f"sms:?&body={urllib.parse.quote(a['title'] + ' ' + DOMAIN + a['url'], safe='')}"
 
 def share_links(a):
     """(nyckel, namn, delningslänk). X: rubriken som text (sajten har inget eget X-konto att nämna)."""
@@ -949,7 +955,8 @@ def share_bar(a, where):
     label = "Dela" if where == "top" else 'Dela<span class="share__label-more"> artikeln</span>'  # "artikeln" bara på bredare skärmar
     links = "".join(f'''
             <li><a class="share__btn share__btn--{k}" href="{esc(u)}" target="_blank" rel="noopener noreferrer" aria-label="Dela på {n} (öppnas i ny flik)" title="Dela på {n}">{share_icon(k)}</a></li>'''
-                    for k, n, u in share_links(a))
+                    for k, n, u in share_links(a)) + f'''
+            <li class="share__sms-wrap"><a class="share__btn share__btn--sms" href="{esc(share_sms(a))}" aria-label="Dela via SMS eller iMessage" title="Dela via SMS eller iMessage">{SHARE_SMS_SVG}</a></li>'''
     return f'''
         <div class="share share--{where}" role="group" aria-label="Dela artikeln" data-share data-url="{esc(DOMAIN + a["url"])}" data-title="{esc(a["title"])}">
           <div class="share__lead">
