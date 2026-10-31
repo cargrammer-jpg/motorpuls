@@ -97,16 +97,16 @@ PUSH_BOX = os.environ.get("MOTORPULS_PUSH") == "1"
 PUSH_CONFIG = {"vapidPublicKey": "", "subscribeUrl": "", "anonKey": ""}
 PUSH_SRC = os.path.join(ROOT, "push")  # källor för rutan: push.js, push.css, sw.js (publiceras inte som katalog)
 
-# NEWSLETTER_BOX: orange nyhetsbrevsruta i sidfoten (e-postfält och knapp, höger om sidfotens text). AV i produktion,
-# lanseringen väntar på ALX:s OK. Förhandsbygge med rutan på, bara till --out och aldrig till main:
-#   MOTORPULS_NYHETSBREV=1 python build.py --out _preview
+# NEWSLETTER_BOX: nyhetsbrevsrutan i sidfoten (e-postfält och knapp, höger om sidfotens text). PÅ i produktion sedan
+# 31 oktober 2026 (ALX:s OK), så Pages-bygget (python build.py --out _site) tar med den utan ändring i workflowen.
+# Bygge utan rutan: MOTORPULS_NYHETSBREV=0 python build.py --out _site
 # När flaggan är av finns varken rutan, nyhetsbrev.js eller Supabase-adressen i utdata (kontrolleras i check_no_newsletter).
 # NEWSLETTER_CONFIG: adressen till edge-funktionerna newsletter-* i Supabase-projektet motorpuls (eu-north-1). Rutan POSTar
 # till newsletter-subscribe, sidorna /prenumeration/bekrafta/ och /prenumeration/avsluta/ till newsletter-confirm och
 # newsletter-unsubscribe. Ingen nyckel behövs i klienten (funktionerna driftsätts med --no-verify-jwt). Dubbel bekräftelse
 # och utskick via Resend: se supabase/README.md. Integritetssidan /integritet/ och sidorna under /prenumeration/ byggs
 # bara med flaggan på. Den enda kontaktadressen på sajten är CONTACT_EMAIL (hello@motorpuls.se, ALX:s beslut 31 okt 2026).
-NEWSLETTER_BOX = os.environ.get("MOTORPULS_NYHETSBREV") == "1"
+NEWSLETTER_BOX = os.environ.get("MOTORPULS_NYHETSBREV", "1") != "0"  # PÅ i produktion sedan 31 okt 2026 (ALX:s OK). MOTORPULS_NYHETSBREV=0 stänger av
 CONTACT_EMAIL = "hello@motorpuls.se"  # officiell kontakt: sidfoten, /om/, /integritet/ och Organization i JSON-LD
 NEWSLETTER_CONFIG = {"api": "https://yhxnrcykinmuoqbgboda.supabase.co/functions/v1"}
 NEWSLETTER_PAGES = ("integritet", "prenumeration")  # kataloger som bara byggs med flaggan på
@@ -1187,8 +1187,8 @@ def check_no_newsletter(out):
     if bad: raise SystemExit("NEWSLETTER_BOX är av men nyhetsbrevsrutan finns i utdata: " + ", ".join(sorted(bad)))
 
 def _rebuild_root_without_previews():
-    global PUSH_BOX, NEWSLETTER_BOX, OUT
-    PUSH_BOX, NEWSLETTER_BOX, OUT = False, False, None
+    global PUSH_BOX, OUT
+    PUSH_BOX, OUT = False, None
     WRITTEN.clear(); main()
     print("projektroten byggd om utan förhandsrutorna (förhandsvisningen finns bara i --out)")
 
@@ -1198,7 +1198,6 @@ def cli():
     if args[:1] == ["--out"] and len(args) == 2: OUT = out_dir(args[1])
     elif args: raise SystemExit("användning: build.py [--out _site]")
     if PUSH_BOX and not OUT: raise SystemExit("MOTORPULS_PUSH=1 är bara för förhandsbygge: använd --out (t.ex. _preview), aldrig utan")
-    if NEWSLETTER_BOX and not OUT: raise SystemExit("MOTORPULS_NYHETSBREV=1 är bara för förhandsbygge: använd --out (t.ex. _preview), aldrig utan")
     main()
     if OUT:
         out = publish(OUT)
@@ -1207,7 +1206,7 @@ def cli():
         n = check_links(out)
         files = sum(len(f) for _, _, f in os.walk(out))
         print(f"publicerat till {out}: {files} filer, {n} lokala länkar kontrollerade")
-    if PUSH_BOX or NEWSLETTER_BOX:  # bygget skriver även i projektroten: bygg om den utan rutorna så att inget av förhandsvisningen checkas in
+    if PUSH_BOX:  # bygget skriver även i projektroten: bygg om den utan push-rutan så att inget av förhandsvisningen checkas in
         _rebuild_root_without_previews()
 
 if __name__ == "__main__":
