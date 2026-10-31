@@ -4,12 +4,12 @@
 // RESEND_INBOUND_API_KEY (får läsa mottagna mejl), RESEND_API_KEY (sändningsnyckeln för motorpuls.se).
 // INBOUND_FORWARD_TO (valfri): mottagaren, standard moedare@mail.grokbot.com.
 import { createClient } from "npm:@supabase/supabase-js@2";
-import { liveGetter } from "../_shared/deps.ts";
+import { INBOUND_KEYS, liveGetter } from "../_shared/deps.ts";
 import { FORWARD_TO_DEFAULT, type InboundDeps, inboundHandler } from "../_shared/inbound.ts";
 
 async function live(): Promise<(req: Request) => Promise<Response>> {
   const url = Deno.env.get("SUPABASE_URL")!, key = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
-  const get = await liveGetter(url, key);
+  const get = await liveGetter(url, key, INBOUND_KEYS);
   const db = createClient(url, key, { auth: { persistSession: false, autoRefreshToken: false } });
   const readKey = get("RESEND_INBOUND_API_KEY");
   const sendKey = get("RESEND_API_KEY");
