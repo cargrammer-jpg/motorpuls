@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Motorpuls: korta bilnyheter med källor</title>
 <meta name="description" content="Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.">
+<meta name="robots" content="max-image-preview:large">
 <link rel="canonical" href="https://motorpuls.se/">
 <meta name="google-site-verification" content="1G9pdcpgySoszmWhSPBgBxrvZxkyl6kbvszF7FSnVl4">
 <meta property="og:site_name" content="Motorpuls">
@@ -160,9 +161,17 @@ box-shadow:0 0 0 1px var(--line),0 40px 80px -40px rgb(255 91 31 / .25)}
 .article{padding-block:clamp(1.5rem,4vw,3.5rem) clamp(3rem,7vw,6rem)}
 .article__col{max-width:40rem;margin-inline:auto}
 .article__head{display:grid;gap:1rem}
-.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;font-size:.85rem;color:var(--muted)}
-.crumbs a{color:var(--muted);text-decoration:none}
+.crumbs{display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:var(--muted);min-width:0}
+.crumbs ol{display:flex;align-items:center;gap:.5rem;min-width:0;margin:0;padding:0;list-style:none}
+.crumbs li{display:flex;align-items:center;gap:.5rem;flex:none;min-width:0}
+.crumbs li+li::before{content:"/";content:"/"/"";color:var(--line-strong)}
+.crumbs li[aria-current]{flex:0 1 auto;overflow:hidden}
+.crumbs li[aria-current]>span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text-2)}
+.crumbs li[aria-current]>span.tag{color:var(--pulse-text)}
+.crumbs a{display:inline-block;padding-block:.3rem;color:var(--muted);text-decoration:none}
+.crumbs a.tag{color:var(--pulse-text)}
 .crumbs a:hover{color:var(--text);text-decoration:underline}
+.crumbs a.tag:hover{color:#fff}
 .article__title{font-size:clamp(1.85rem,1rem + 3.4vw,3rem);line-height:1;font-weight:820;font-stretch:115%;letter-spacing:-.035em;color:#fff}
 .article__dek{font-family:var(--serif);font-size:clamp(1.05rem,.95rem + .45vw,1.15rem);line-height:1.5;color:var(--text-2);text-wrap:pretty}
 .byline{display:flex;flex-wrap:wrap;gap:.35rem 1rem;font-family:var(--mono);font-size:.78rem;color:var(--muted);border-top:1px solid var(--line);padding-top:.9rem}
@@ -171,6 +180,14 @@ box-shadow:0 0 0 1px var(--line),0 40px 80px -40px rgb(255 91 31 / .25)}
 .byline a:hover{text-decoration-color:currentColor}
 .share{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .75rem}
 .share--end{margin-top:-.5rem}
+.prefsrc{display:grid;gap:.4rem;justify-items:start}
+.prefsrc__btn{display:inline-flex;align-items:center;gap:.6rem;min-height:2.75rem;padding:.55rem 1rem;border:1px solid var(--line-strong);border-radius:999px;background:var(--surface);color:var(--text);font-family:var(--sans);font-size:.9rem;font-weight:700;line-height:1.25;text-decoration:none;transition:border-color .18s var(--ease),background-color .18s var(--ease)}
+.prefsrc__btn svg{flex:none;color:var(--pulse)}
+.prefsrc__btn span{text-wrap:balance}
+.prefsrc__btn:hover{border-color:var(--pulse);background:var(--raised)}
+.prefsrc__btn:focus-visible{outline:2px solid var(--pulse);outline-offset:3px}
+.prefsrc__note{margin:0;font-size:.8rem;line-height:1.45;color:var(--muted)}
+.site-footer .site-footer__topics ul{margin-top:.75rem}
 .share__label-more{display:none}
 @media (min-width:40rem){.share__label-more{display:inline}}
 .share__lead{display:grid}
@@ -421,7 +438,7 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
 <link rel="alternate" type="application/rss+xml" title="Motorpuls: Sverige" href="/feed/sverige.xml">
 <link rel="preload" href="/fonts/newsreader-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" as="image" href="/img/articles/tesla-roadster-avtackad-produktion-2028/tesla-roadster-press-2.webp" imagesrcset="/img/articles/tesla-roadster-avtackad-produktion-2028/tesla-roadster-press-2.webp 1600w" imagesizes="(min-width: 60rem) 38rem, 100vw" fetchpriority="high">
+<link rel="preload" as="image" href="/img/articles/tesla-roadster-avtackad-produktion-2028/tesla-roadster-press-2.webp" imagesrcset="/img/articles/tesla-roadster-avtackad-produktion-2028/tesla-roadster-press-2-400.webp 400w, /img/articles/tesla-roadster-avtackad-produktion-2028/tesla-roadster-press-2-800.webp 800w, /img/articles/tesla-roadster-avtackad-produktion-2028/tesla-roadster-press-2-1200.webp 1200w, /img/articles/tesla-roadster-avtackad-produktion-2028/tesla-roadster-press-2.webp 1600w" imagesizes="(min-width: 60rem) 38rem, 100vw" fetchpriority="high">
 <style>/* Nyhetsbrevsrutan i sidfoten (förhandsvisning, NEWSLETTER_BOX i build.py). Laddas bara när flaggan är på.
    Smälter in: mörk panel var(--surface) med 1px hårlinje var(--line), orange bara som accent (2px topplinje, etikett i
    pulse-text #FF8A5C 6,6:1, orange knapp med mörk text 6,3:1, orange fokusring). Typografi som sidfoten (sans, text-2 #C3CAD1 10:1,
@@ -452,6 +469,7 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
 .nlf__input:focus-visible,.nlf__btn:focus-visible,.nlf__done:focus-visible{outline:2px solid var(--pulse-text);outline-offset:2px}
 .nlf__hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .site-footer .nlf__fine{margin:.6rem 0 0;font-size:.8rem;color:var(--muted)}
+.nlf__privacy{display:block;width:fit-content;margin-top:.3rem}
 .site-footer .nlf__status{min-height:1.4em;margin:.35rem 0 0;font-size:.85rem;font-weight:620;color:var(--text)}
 .nlf__status.is-error{padding:.4rem .7rem;border-radius:var(--radius);background:var(--raised);border-left:3px solid var(--pulse)}
 .site-footer .nlf__done{margin:1rem 0 0;font-size:.95rem;font-weight:620;color:var(--text)}
@@ -470,7 +488,7 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
 </style>
 <noscript><style>.nlf__form{display:none}</style></noscript>
 <script src="/nyhetsbrev.js?v=f5846ee28d" defer></script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://motorpuls.se/#website", "name": "Motorpuls", "url": "https://motorpuls.se/", "description": "Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.", "inLanguage": "sv-SE", "publisher": {"@id": "https://motorpuls.se/#organization"}}, {"@type": "Organization", "@id": "https://motorpuls.se/#organization", "name": "Motorpuls", "url": "https://motorpuls.se/", "email": "hello@motorpuls.se", "logo": {"@type": "ImageObject", "url": "https://motorpuls.se/favicon/android-chrome-512.png", "width": 512, "height": 512}, "description": "Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor."}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://motorpuls.se/#website", "name": "Motorpuls", "url": "https://motorpuls.se/", "description": "Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.", "inLanguage": "sv-SE", "publisher": {"@id": "https://motorpuls.se/#organization"}}, {"@type": "NewsMediaOrganization", "@id": "https://motorpuls.se/#organization", "name": "Motorpuls", "url": "https://motorpuls.se/", "email": "hello@motorpuls.se", "logo": {"@type": "ImageObject", "url": "https://motorpuls.se/favicon/android-chrome-512.png", "width": 512, "height": 512}, "publishingPrinciples": "https://motorpuls.se/om/", "description": "Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor."}]}</script>
 </head>
 <body>
 <a class="skip" href="#innehall">Hoppa till innehållet</a>
@@ -486,7 +504,7 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
     <div class="hero-grid">
     <article class="lead lead--img">
       <a href="/artikel/tesla-roadster-avtackad-produktion-2028/">
-        <figure class="lead__media"><div class="lead__frame"><span class="flag flag--lead" role="img" aria-label="Gäller Sverige" title="Gäller Sverige"><svg viewBox="0 0 16 10" width="16" height="10" aria-hidden="true" focusable="false"><rect width="16" height="10" fill="#005293"/><rect x="5" width="2" height="10" fill="#FECB00"/><rect y="4" width="16" height="2" fill="#FECB00"/></svg></span><img src="/img/articles/tesla-roadster-avtackad-produktion-2028/tesla-roadster-press-2.webp" srcset="/img/articles/tesla-roadster-avtackad-produktion-2028/tesla-roadster-press-2.webp 1600w" sizes="(min-width: 60rem) 38rem, 100vw" width="1600" height="933" alt="Tesla Roadster bakifrån med utfälld vinge och vita gasmoln från dysorna under bilen." fetchpriority="high" decoding="async"></div><figcaption>Foto: Courtesy of Tesla, Inc.</figcaption></figure>
+        <figure class="lead__media"><div class="lead__frame"><span class="flag flag--lead" role="img" aria-label="Gäller Sverige" title="Gäller Sverige"><svg viewBox="0 0 16 10" width="16" height="10" aria-hidden="true" focusable="false"><rect width="16" height="10" fill="#005293"/><rect x="5" width="2" height="10" fill="#FECB00"/><rect y="4" width="16" height="2" fill="#FECB00"/></svg></span><img src="/img/articles/tesla-roadster-avtackad-produktion-2028/tesla-roadster-press-2.webp" srcset="/img/articles/tesla-roadster-avtackad-produktion-2028/tesla-roadster-press-2-400.webp 400w, /img/articles/tesla-roadster-avtackad-produktion-2028/tesla-roadster-press-2-800.webp 800w, /img/articles/tesla-roadster-avtackad-produktion-2028/tesla-roadster-press-2-1200.webp 1200w, /img/articles/tesla-roadster-avtackad-produktion-2028/tesla-roadster-press-2.webp 1600w" sizes="(min-width: 60rem) 38rem, 100vw" width="1600" height="933" alt="Tesla Roadster bakifrån med utfälld vinge och vita gasmoln från dysorna under bilen." fetchpriority="high" decoding="async"></div><figcaption>Foto: Courtesy of Tesla, Inc.</figcaption></figure>
         <div class="lead__body">
           <div class="lead__kicker"><span class="hero__label"><span class="pulse-dot" aria-hidden="true"></span>Senaste nytt</span>
           <span class="meta"><span class="tag">Tesla</span><time datetime="2026-11-01T18:00:00+01:00">1 november 2026</time></span></div>
@@ -496,7 +514,7 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
         </div>
       </a>
     </article>
-      <aside class="latest" aria-labelledby="latest-h"><h2 id="latest-h"><span class="pulse-dot" aria-hidden="true"></span>Senaste</h2><ol><li><a href="/artikel/bmw-ix3-m60-highway-assistant-sverige/"><span class="meta"><span class="tag">Elbil</span><time datetime="2026-11-01T00:00:00+01:00">1 november 2026</time></span><h3>BMW lovar 340 km laddning på tio minuter i nya iX3 M60 med 612 hk</h3></a></li><li><a href="/artikel/bmw-m3-el-fyra-motorer/"><span class="meta"><span class="tag">Sportbil</span><time datetime="2026-10-31T12:33:00+01:00">31 oktober 2026</time></span><h3>M3 som elbil: fyra motorer, över 100 kWh och noll fejkat ljud</h3></a></li><li><a href="/artikel/tesla-fsd-sverige-eu-omrostning-december/"><span class="meta"><span class="tag">Tesla</span><span class="flag flag--inline" role="img" aria-label="Gäller Sverige" title="Gäller Sverige"><svg viewBox="0 0 16 10" width="16" height="10" aria-hidden="true" focusable="false"><rect width="16" height="10" fill="#005293"/><rect x="5" width="2" height="10" fill="#FECB00"/><rect y="4" width="16" height="2" fill="#FECB00"/></svg></span><time datetime="2026-10-31T00:00:00+01:00">31 oktober 2026</time></span><h3>Tio EU-länder har sagt ja till Teslas FSD. Därför får Sverige vänta till tidigast 2027</h3></a></li><li><a href="/artikel/bmw-m350-drift-moment-juli-2027/"><span class="meta"><span class="tag">Sportbil</span><time datetime="2026-10-30T11:55:00+01:00">30 oktober 2026</time></span><h3>BMW säljer en 3-serie med driftläge. Haken: det fungerar först i juli 2027</h3></a></li><li><a href="/artikel/porsche-macan-bensin-namn-2028/"><span class="meta"><span class="tag">Sportbil</span><time datetime="2026-10-30T11:54:00+01:00">30 oktober 2026</time></span><h3>Bensin-Macan slog elversionen med nästan 5 000 bilar. Nu gör Porsche helt om</h3></a></li></ol></aside>
+      <aside class="latest" aria-labelledby="latest-h"><h2 id="latest-h"><span class="pulse-dot" aria-hidden="true"></span>Senaste</h2><ol><li><a href="/artikel/bmw-ix3-m60-highway-assistant-sverige/"><span class="meta"><span class="tag">Elbil</span><time datetime="2026-11-01T00:00:00+01:00">1 november 2026</time></span><h3>BMW lovar 340 km laddning på tio minuter i nya iX3 M60 med 612 hk</h3></a></li><li><a href="/artikel/tesla-fsd-sverige-eu-omrostning-december/"><span class="meta"><span class="tag">Tesla</span><span class="flag flag--inline" role="img" aria-label="Gäller Sverige" title="Gäller Sverige"><svg viewBox="0 0 16 10" width="16" height="10" aria-hidden="true" focusable="false"><rect width="16" height="10" fill="#005293"/><rect x="5" width="2" height="10" fill="#FECB00"/><rect y="4" width="16" height="2" fill="#FECB00"/></svg></span><time datetime="2026-10-31T18:00:00+01:00">31 oktober 2026</time></span><h3>Tio EU-länder har sagt ja till Teslas FSD. Därför får Sverige vänta till tidigast 2027</h3></a></li><li><a href="/artikel/bmw-m3-el-fyra-motorer/"><span class="meta"><span class="tag">Sportbil</span><time datetime="2026-10-31T12:33:00+01:00">31 oktober 2026</time></span><h3>M3 som elbil: fyra motorer, över 100 kWh och noll fejkat ljud</h3></a></li><li><a href="/artikel/bmw-m350-drift-moment-juli-2027/"><span class="meta"><span class="tag">Sportbil</span><time datetime="2026-10-30T11:55:00+01:00">30 oktober 2026</time></span><h3>BMW säljer en 3-serie med driftläge. Haken: det fungerar först i juli 2027</h3></a></li><li><a href="/artikel/porsche-macan-bensin-namn-2028/"><span class="meta"><span class="tag">Sportbil</span><time datetime="2026-10-30T11:54:00+01:00">30 oktober 2026</time></span><h3>Bensin-Macan slog elversionen med nästan 5 000 bilar. Nu gör Porsche helt om</h3></a></li></ol></aside>
     </div>
     <section class="pop" aria-labelledby="pop-h">
       <h2 id="pop-h"><span class="pulse-dot" aria-hidden="true"></span>Populärt just nu</h2>
@@ -511,20 +529,20 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
           </a>
         </li>
         <li class="pop__card">
-          <a href="/artikel/aston-martin-valhalla-spider/">
-            <figure class="pop__media"><div class="pop__frame"><img src="/img/articles/aston-martin-valhalla-spider/aston-martin-valhalla-spider-1.webp" srcset="/img/articles/aston-martin-valhalla-spider/aston-martin-valhalla-spider-1-400.webp 400w, /img/articles/aston-martin-valhalla-spider/aston-martin-valhalla-spider-1-800.webp 800w, /img/articles/aston-martin-valhalla-spider/aston-martin-valhalla-spider-1-1200.webp 1200w, /img/articles/aston-martin-valhalla-spider/aston-martin-valhalla-spider-1.webp 1600w" sizes="(min-width: 60rem) 17rem, (min-width: 40rem) 30vw, 46vw" width="1600" height="1067" alt="" loading="lazy" decoding="async"></div><figcaption class="item__credit">Foto: Aston Martin</figcaption></figure>
+          <a href="/artikel/tesla-model-y-strukturellt-batteri-betyg-d-volvo-ex60/">
+            <figure class="pop__media"><div class="pop__frame"><img src="/img/articles/tesla-model-y-strukturellt-batteri-betyg-d-volvo-ex60/tesla-model-y-press.webp" srcset="/img/articles/tesla-model-y-strukturellt-batteri-betyg-d-volvo-ex60/tesla-model-y-press-400.webp 400w, /img/articles/tesla-model-y-strukturellt-batteri-betyg-d-volvo-ex60/tesla-model-y-press-800.webp 800w, /img/articles/tesla-model-y-strukturellt-batteri-betyg-d-volvo-ex60/tesla-model-y-press-1200.webp 1200w, /img/articles/tesla-model-y-strukturellt-batteri-betyg-d-volvo-ex60/tesla-model-y-press.webp 1600w" sizes="(min-width: 60rem) 17rem, (min-width: 40rem) 30vw, 46vw" width="1600" height="900" alt="" loading="lazy" decoding="async"></div><figcaption class="item__credit">Foto: Courtesy of Tesla, Inc.</figcaption></figure>
             <div class="pop__body">
-              <span class="meta"><span class="pop__rank" aria-hidden="true">02</span><span class="tag">Sportbil</span></span>
-              <h3>Aston Martin Valhalla Spider: 1 079 hk och samma toppfart utan tak</h3>
+              <span class="meta"><span class="pop__rank" aria-hidden="true">02</span><span class="tag">Tesla</span></span>
+              <h3>Teslas batteriingenjör ger Model Y:s strukturella batteri betyget D</h3>
             </div>
           </a>
         </li>
         <li class="pop__card">
-          <a href="/artikel/tesla-model-y-strukturellt-batteri-betyg-d-volvo-ex60/">
-            <figure class="pop__media"><div class="pop__frame"><img src="/img/articles/tesla-model-y-strukturellt-batteri-betyg-d-volvo-ex60/tesla-model-y-press.webp" srcset="/img/articles/tesla-model-y-strukturellt-batteri-betyg-d-volvo-ex60/tesla-model-y-press-400.webp 400w, /img/articles/tesla-model-y-strukturellt-batteri-betyg-d-volvo-ex60/tesla-model-y-press-800.webp 800w, /img/articles/tesla-model-y-strukturellt-batteri-betyg-d-volvo-ex60/tesla-model-y-press-1200.webp 1200w, /img/articles/tesla-model-y-strukturellt-batteri-betyg-d-volvo-ex60/tesla-model-y-press.webp 1600w" sizes="(min-width: 60rem) 17rem, (min-width: 40rem) 30vw, 46vw" width="1600" height="900" alt="" loading="lazy" decoding="async"></div><figcaption class="item__credit">Foto: Courtesy of Tesla, Inc.</figcaption></figure>
+          <a href="/artikel/aston-martin-valhalla-spider/">
+            <figure class="pop__media"><div class="pop__frame"><img src="/img/articles/aston-martin-valhalla-spider/aston-martin-valhalla-spider-1.webp" srcset="/img/articles/aston-martin-valhalla-spider/aston-martin-valhalla-spider-1-400.webp 400w, /img/articles/aston-martin-valhalla-spider/aston-martin-valhalla-spider-1-800.webp 800w, /img/articles/aston-martin-valhalla-spider/aston-martin-valhalla-spider-1-1200.webp 1200w, /img/articles/aston-martin-valhalla-spider/aston-martin-valhalla-spider-1.webp 1600w" sizes="(min-width: 60rem) 17rem, (min-width: 40rem) 30vw, 46vw" width="1600" height="1067" alt="" loading="lazy" decoding="async"></div><figcaption class="item__credit">Foto: Aston Martin</figcaption></figure>
             <div class="pop__body">
-              <span class="meta"><span class="pop__rank" aria-hidden="true">03</span><span class="tag">Tesla</span></span>
-              <h3>Teslas batteriingenjör ger Model Y:s strukturella batteri betyget D</h3>
+              <span class="meta"><span class="pop__rank" aria-hidden="true">03</span><span class="tag">Sportbil</span></span>
+              <h3>Aston Martin Valhalla Spider: 1 079 hk och samma toppfart utan tak</h3>
             </div>
           </a>
         </li>
@@ -559,7 +577,7 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
                 <h4>Över en halv miljon kronor för en plats i kön. Tesla lovar inte ens att Roadster levereras</h4>
                 <p>Att reservera nya Tesla Roadster i Sverige kostar enligt Tesla Roadster Info 545 000 kronor, men det amerikanska avtalet lovar varken pris eller leverans.</p>
               </div>
-              <figure class="item__img"><span class="flag flag--thumb" role="img" aria-label="Gäller Sverige" title="Gäller Sverige"><svg viewBox="0 0 16 10" width="16" height="10" aria-hidden="true" focusable="false"><rect width="16" height="10" fill="#005293"/><rect x="5" width="2" height="10" fill="#FECB00"/><rect y="4" width="16" height="2" fill="#FECB00"/></svg></span><img src="/img/articles/tesla-roadster-avtackad-produktion-2028/tesla-roadster-press-2.webp" srcset="/img/articles/tesla-roadster-avtackad-produktion-2028/tesla-roadster-press-2.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="933" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: Courtesy of Tesla, Inc.</figcaption></figure>
+              <figure class="item__img"><span class="flag flag--thumb" role="img" aria-label="Gäller Sverige" title="Gäller Sverige"><svg viewBox="0 0 16 10" width="16" height="10" aria-hidden="true" focusable="false"><rect width="16" height="10" fill="#005293"/><rect x="5" width="2" height="10" fill="#FECB00"/><rect y="4" width="16" height="2" fill="#FECB00"/></svg></span><img src="/img/articles/tesla-roadster-avtackad-produktion-2028/tesla-roadster-press-2.webp" srcset="/img/articles/tesla-roadster-avtackad-produktion-2028/tesla-roadster-press-2-400.webp 400w, /img/articles/tesla-roadster-avtackad-produktion-2028/tesla-roadster-press-2-800.webp 800w, /img/articles/tesla-roadster-avtackad-produktion-2028/tesla-roadster-press-2-1200.webp 1200w, /img/articles/tesla-roadster-avtackad-produktion-2028/tesla-roadster-press-2.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="933" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: Courtesy of Tesla, Inc.</figcaption></figure>
             </a>
           </li>
           <li class="item" data-cat="elbil">
@@ -569,7 +587,7 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
                 <h4>BMW lovar 340 km laddning på tio minuter i nya iX3 M60 med 612 hk</h4>
                 <p>BMW har visat iX3 M60 xDrive med 612 hk och 400 kW laddning, samtidigt som iX3 40 får fyrhjulsdrift och Highway Assistant öppnas för svenska kunder i november.</p>
               </div>
-              <figure class="item__img"><img src="/img/articles/bmw-ix3-m60-highway-assistant-sverige/bmw-ix3-m60-press-1.webp" srcset="/img/articles/bmw-ix3-m60-highway-assistant-sverige/bmw-ix3-m60-press-1-400.webp 400w, /img/articles/bmw-ix3-m60-highway-assistant-sverige/bmw-ix3-m60-press-1-800.webp 800w, /img/articles/bmw-ix3-m60-highway-assistant-sverige/bmw-ix3-m60-press-1.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="1067" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: BMW Group</figcaption></figure>
+              <figure class="item__img"><img src="/img/articles/bmw-ix3-m60-highway-assistant-sverige/bmw-ix3-m60-press-1.webp" srcset="/img/articles/bmw-ix3-m60-highway-assistant-sverige/bmw-ix3-m60-press-1-400.webp 400w, /img/articles/bmw-ix3-m60-highway-assistant-sverige/bmw-ix3-m60-press-1-800.webp 800w, /img/articles/bmw-ix3-m60-highway-assistant-sverige/bmw-ix3-m60-press-1-1200.webp 1200w, /img/articles/bmw-ix3-m60-highway-assistant-sverige/bmw-ix3-m60-press-1.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="1067" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: BMW Group</figcaption></figure>
             </a>
           </li>
         </ol>
@@ -577,6 +595,16 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
       <section class="day" aria-labelledby="d-2026-10-31">
         <h3 class="day__label" id="d-2026-10-31"><time datetime="2026-10-31">Lördag 31 oktober</time></h3>
         <ol class="feed">
+          <li class="item" data-cat="tesla">
+            <a href="/artikel/tesla-fsd-sverige-eu-omrostning-december/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Tesla</span></span>
+                <h4>Tio EU-länder har sagt ja till Teslas FSD. Därför får Sverige vänta till tidigast 2027</h4>
+                <p>Lettland blev tionde EU-land att tillåta Teslas förarstöd och Italien stödjer ett snabbt EU-beslut, men i Sverige är funktionen fortfarande inte tillåten för vanliga ägare.</p>
+              </div>
+              <figure class="item__img"><span class="flag flag--thumb" role="img" aria-label="Gäller Sverige" title="Gäller Sverige"><svg viewBox="0 0 16 10" width="16" height="10" aria-hidden="true" focusable="false"><rect width="16" height="10" fill="#005293"/><rect x="5" width="2" height="10" fill="#FECB00"/><rect y="4" width="16" height="2" fill="#FECB00"/></svg></span><img src="/img/articles/tesla-fsd-sverige-eu-omrostning-december/tesla-model-y-press.webp" srcset="/img/articles/tesla-fsd-sverige-eu-omrostning-december/tesla-model-y-press-400.webp 400w, /img/articles/tesla-fsd-sverige-eu-omrostning-december/tesla-model-y-press-800.webp 800w, /img/articles/tesla-fsd-sverige-eu-omrostning-december/tesla-model-y-press-1200.webp 1200w, /img/articles/tesla-fsd-sverige-eu-omrostning-december/tesla-model-y-press.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="900" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: Courtesy of Tesla, Inc.</figcaption></figure>
+            </a>
+          </li>
           <li class="item" data-cat="sportbil">
             <a href="/artikel/bmw-m3-el-fyra-motorer/">
               <div class="item__text">
@@ -585,16 +613,6 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
                 <p>BMW:s utvecklingsstyrelse har kört den första helt eldrivna M3:an i förserieutförande, en bil med fyra elmotorer som ska byggas i München.</p>
               </div>
               <figure class="item__img"><img src="/img/articles/bmw-m3-el-fyra-motorer/bmw-m3-el-kamouflage-fram.webp" srcset="/img/articles/bmw-m3-el-fyra-motorer/bmw-m3-el-kamouflage-fram-400.webp 400w, /img/articles/bmw-m3-el-fyra-motorer/bmw-m3-el-kamouflage-fram-800.webp 800w, /img/articles/bmw-m3-el-fyra-motorer/bmw-m3-el-kamouflage-fram-1200.webp 1200w, /img/articles/bmw-m3-el-fyra-motorer/bmw-m3-el-kamouflage-fram.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="1067" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: BMW Group</figcaption></figure>
-            </a>
-          </li>
-          <li class="item" data-cat="tesla">
-            <a href="/artikel/tesla-fsd-sverige-eu-omrostning-december/">
-              <div class="item__text">
-                <span class="meta"><span class="tag">Tesla</span></span>
-                <h4>Tio EU-länder har sagt ja till Teslas FSD. Därför får Sverige vänta till tidigast 2027</h4>
-                <p>Lettland blev tionde EU-land att tillåta Teslas förarstöd och Italien stödjer ett snabbt EU-beslut, men i Sverige är funktionen fortfarande inte tillåten för vanliga ägare.</p>
-              </div>
-              <figure class="item__img"><span class="flag flag--thumb" role="img" aria-label="Gäller Sverige" title="Gäller Sverige"><svg viewBox="0 0 16 10" width="16" height="10" aria-hidden="true" focusable="false"><rect width="16" height="10" fill="#005293"/><rect x="5" width="2" height="10" fill="#FECB00"/><rect y="4" width="16" height="2" fill="#FECB00"/></svg></span><img src="/img/articles/tesla-fsd-sverige-eu-omrostning-december/tesla-model-y-press.webp" srcset="/img/articles/tesla-fsd-sverige-eu-omrostning-december/tesla-model-y-press-400.webp 400w, /img/articles/tesla-fsd-sverige-eu-omrostning-december/tesla-model-y-press-800.webp 800w, /img/articles/tesla-fsd-sverige-eu-omrostning-december/tesla-model-y-press.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="900" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: Courtesy of Tesla, Inc.</figcaption></figure>
             </a>
           </li>
         </ol>
@@ -664,6 +682,7 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
     <a class="wordmark" href="/"><img class="logo logo--footer" src="/img/logo.svg" alt="Motorpuls" width="872" height="88" loading="lazy"></a>
     <p class="site-footer__desc">Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</p>
     <nav class="site-footer__nav" aria-label="Om Motorpuls"><ul><li><a href="/om/">Om Motorpuls</a></li><li><a href="/om/lukas/">Om Lukas</a></li></ul></nav>
+    <nav class="site-footer__nav site-footer__topics" aria-label="Ämnen"><ul><li><a href="/tesla/">Tesla</a></li><li><a href="/elbil/">Elbil</a></li><li><a href="/sportbil/">Sportbil</a></li><li><a href="/bransle/">Bränsle</a></li></ul></nav>
     <div class="site-footer__rss">
       <a class="rss-link" href="/feed.xml"><svg class="rss-icon" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><rect width="16" height="16" rx="3" fill="#FF5B1F"/><circle cx="4.6" cy="11.4" r="1.5" fill="#0B0D10"/><path d="M3.2 7.1a5.7 5.7 0 0 1 5.7 5.7M3.2 3.6a9.2 9.2 0 0 1 9.2 9.2" fill="none" stroke="#0B0D10" stroke-width="1.8" stroke-linecap="round"/></svg>RSS</a>
       <span class="site-footer__feeds-label" id="rss-kat">RSS per kategori:</span>
@@ -683,7 +702,7 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
           <button class="nlf__btn" type="submit">Prenumerera</button>
         </div>
         <div class="nlf__hp" aria-hidden="true"><label>Lämna tomt <input type="text" name="webbplats" tabindex="-1" autocomplete="off"></label></div>
-        <p class="nlf__fine" id="nlf-fine">Helt gratis, avsluta när du vill. Du får ett mejl där du bekräftar först. <a href="/integritet/">Så hanterar vi din adress</a>.</p>
+        <p class="nlf__fine" id="nlf-fine">Helt gratis, avsluta när du vill. Du får ett mejl där du bekräftar först. <a class="nlf__privacy" href="/integritet/">Så hanterar vi din adress</a></p>
         <p class="nlf__status" role="status" aria-live="polite"></p>
       </form>
     </section>
