@@ -228,6 +228,8 @@ background:linear-gradient(90deg,rgb(255 91 31 / .13),rgb(255 91 31 / .05));box-
 .article__figure .frame{overflow:hidden;border-radius:var(--radius);background:#000;box-shadow:0 0 0 1px var(--line),0 40px 80px -40px rgb(255 91 31 / .25)}
 .article__figure img{width:100%;height:auto}
 .article__figure figcaption,.gallery figcaption{font-family:var(--mono);font-size:.72rem;line-height:1.45;color:var(--muted);margin-top:.6rem}
+.article__figure figcaption a,.gallery figcaption a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.18em}
+.prose>.article__figure--inline{margin-block:1.8em}
 .gallery{position:relative;max-width:62rem;margin:2rem auto 0}
 .gallery__track{display:flex;gap:.75rem;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-color:var(--line-strong) transparent;border-radius:var(--radius);padding-bottom:.5rem}
 .gallery__slide{flex:0 0 88%;scroll-snap-align:start;scroll-snap-stop:always;min-width:0}
@@ -431,14 +433,14 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
 <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png">
 <link rel="manifest" href="/favicon/site.webmanifest">
 <link rel="alternate" type="application/rss+xml" title="Motorpuls" href="/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="Motorpuls: Sportbil" href="/feed/sportbil.xml">
 <link rel="alternate" type="application/rss+xml" title="Motorpuls: Elbil" href="/feed/elbil.xml">
 <link rel="alternate" type="application/rss+xml" title="Motorpuls: Tesla" href="/feed/tesla.xml">
-<link rel="alternate" type="application/rss+xml" title="Motorpuls: Sportbil" href="/feed/sportbil.xml">
 <link rel="alternate" type="application/rss+xml" title="Motorpuls: Bränsle" href="/feed/bransle.xml">
 <link rel="alternate" type="application/rss+xml" title="Motorpuls: Sverige" href="/feed/sverige.xml">
 <link rel="preload" href="/fonts/newsreader-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" as="image" href="/img/articles/bmw-ix3-m60-highway-assistant-sverige/bmw-ix3-m60-press-1.webp" imagesrcset="/img/articles/bmw-ix3-m60-highway-assistant-sverige/bmw-ix3-m60-press-1-400.webp 400w, /img/articles/bmw-ix3-m60-highway-assistant-sverige/bmw-ix3-m60-press-1-800.webp 800w, /img/articles/bmw-ix3-m60-highway-assistant-sverige/bmw-ix3-m60-press-1-1200.webp 1200w, /img/articles/bmw-ix3-m60-highway-assistant-sverige/bmw-ix3-m60-press-1.webp 1600w" imagesizes="(min-width: 60rem) 38rem, 100vw" fetchpriority="high">
+<link rel="preload" as="image" href="/img/articles/ferrari-f40-sista-enzo-ferrari/ferrari-f40-pa-vag.webp" imagesrcset="/img/articles/ferrari-f40-sista-enzo-ferrari/ferrari-f40-pa-vag-400.webp 400w, /img/articles/ferrari-f40-sista-enzo-ferrari/ferrari-f40-pa-vag-800.webp 800w, /img/articles/ferrari-f40-sista-enzo-ferrari/ferrari-f40-pa-vag-1200.webp 1200w, /img/articles/ferrari-f40-sista-enzo-ferrari/ferrari-f40-pa-vag.webp 1600w" imagesizes="(min-width: 60rem) 38rem, 100vw" fetchpriority="high">
 <style>/* Nyhetsbrevsrutan i sidfoten (förhandsvisning, NEWSLETTER_BOX i build.py). Laddas bara när flaggan är på.
    Smälter in: mörk panel var(--surface) med 1px hårlinje var(--line), orange bara som accent (2px topplinje, etikett i
    pulse-text #FF8A5C 6,6:1, orange knapp med mörk text 6,3:1, orange fokusring). Typografi som sidfoten (sans, text-2 #C3CAD1 10:1,
@@ -503,18 +505,18 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
     <h1 class="visually-hidden">Motorpuls, senaste bilnyheterna</h1>
     <div class="hero-grid">
     <article class="lead lead--img">
-      <a href="/artikel/bmw-ix3-m60-highway-assistant-sverige/">
-        <figure class="lead__media"><div class="lead__frame"><img src="/img/articles/bmw-ix3-m60-highway-assistant-sverige/bmw-ix3-m60-press-1.webp" srcset="/img/articles/bmw-ix3-m60-highway-assistant-sverige/bmw-ix3-m60-press-1-400.webp 400w, /img/articles/bmw-ix3-m60-highway-assistant-sverige/bmw-ix3-m60-press-1-800.webp 800w, /img/articles/bmw-ix3-m60-highway-assistant-sverige/bmw-ix3-m60-press-1-1200.webp 1200w, /img/articles/bmw-ix3-m60-highway-assistant-sverige/bmw-ix3-m60-press-1.webp 1600w" sizes="(min-width: 60rem) 38rem, 100vw" width="1600" height="1067" alt="Mörkgrön BMW iX3 M60 xDrive snett framifrån på en kurvig kustväg." fetchpriority="high" decoding="async"></div><figcaption>Foto: BMW Group</figcaption></figure>
+      <a href="/artikel/ferrari-f40-sista-enzo-ferrari/">
+        <figure class="lead__media"><div class="lead__frame"><span class="flag flag--lead" role="img" aria-label="Gäller Sverige" title="Gäller Sverige"><svg viewBox="0 0 16 10" width="16" height="10" aria-hidden="true" focusable="false"><rect width="16" height="10" fill="#005293"/><rect x="5" width="2" height="10" fill="#FECB00"/><rect y="4" width="16" height="2" fill="#FECB00"/></svg></span><img src="/img/articles/ferrari-f40-sista-enzo-ferrari/ferrari-f40-pa-vag.webp" srcset="/img/articles/ferrari-f40-sista-enzo-ferrari/ferrari-f40-pa-vag-400.webp 400w, /img/articles/ferrari-f40-sista-enzo-ferrari/ferrari-f40-pa-vag-800.webp 800w, /img/articles/ferrari-f40-sista-enzo-ferrari/ferrari-f40-pa-vag-1200.webp 1200w, /img/articles/ferrari-f40-sista-enzo-ferrari/ferrari-f40-pa-vag.webp 1600w" sizes="(min-width: 60rem) 38rem, 100vw" width="1600" height="922" alt="Röd Ferrari F40 i fart på en landsväg, snett framifrån med den stora bakvingen synlig." fetchpriority="high" decoding="async"></div><figcaption>Foto: Will ainsworth, Wikimedia Commons (retuscherad av Bob Castle: vägskylt borttagen, himlen något beskuren)</figcaption></figure>
         <div class="lead__body">
           <div class="lead__kicker"><span class="hero__label"><span class="pulse-dot" aria-hidden="true"></span>Senaste nytt</span>
-          <span class="meta"><span class="tag">Elbil</span><time datetime="2026-11-01T00:00:00+01:00">1 november 2026</time></span></div>
-          <h2 class="lead__title">BMW lovar 340 km laddning på tio minuter i nya iX3 M60 med 612 hk</h2>
-          <p class="lead__dek">BMW har visat iX3 M60 xDrive med 612 hk och 400 kW laddning, samtidigt som iX3 40 får fyrhjulsdrift och Highway Assistant öppnas för svenska kunder i november.</p>
+          <span class="meta"><span class="tag">Sportbil</span><time datetime="2026-11-04T18:00:00+01:00">4 november 2026</time></span></div>
+          <h2 class="lead__title">Enzo Ferraris sista bil. En F40 som stod i Sverige i 20 år såldes för 51 miljoner kronor</h2>
+          <p class="lead__dek">Ferrari F40 togs fram på 13 månader och blev den sista bilen Enzo Ferrari själv presenterade. 1 311 byggdes, och ingen vet exakt hur många som finns kvar.</p>
           <span class="lead__more">Läs artikeln <span aria-hidden="true">→</span></span>
         </div>
       </a>
     </article>
-      <aside class="latest" aria-labelledby="latest-h"><h2 id="latest-h"><span class="pulse-dot" aria-hidden="true"></span>Senaste</h2><ol><li><a href="/artikel/tesla-fsd-sverige-eu-omrostning-december/"><span class="meta"><span class="tag">Tesla</span><span class="flag flag--inline" role="img" aria-label="Gäller Sverige" title="Gäller Sverige"><svg viewBox="0 0 16 10" width="16" height="10" aria-hidden="true" focusable="false"><rect width="16" height="10" fill="#005293"/><rect x="5" width="2" height="10" fill="#FECB00"/><rect y="4" width="16" height="2" fill="#FECB00"/></svg></span><time datetime="2026-10-31T18:00:00+01:00">31 oktober 2026</time></span><h3>Tio EU-länder har sagt ja till Teslas FSD. Därför får Sverige vänta till tidigast 2027</h3></a></li><li><a href="/artikel/bmw-m3-el-fyra-motorer/"><span class="meta"><span class="tag">Sportbil</span><time datetime="2026-10-31T12:33:00+01:00">31 oktober 2026</time></span><h3>M3 som elbil: fyra motorer, över 100 kWh och noll fejkat ljud</h3></a></li><li><a href="/artikel/bmw-m350-drift-moment-juli-2027/"><span class="meta"><span class="tag">Sportbil</span><time datetime="2026-10-30T11:55:00+01:00">30 oktober 2026</time></span><h3>BMW säljer en 3-serie med driftläge. Haken: det fungerar först i juli 2027</h3></a></li><li><a href="/artikel/porsche-macan-bensin-namn-2028/"><span class="meta"><span class="tag">Sportbil</span><time datetime="2026-10-30T11:54:00+01:00">30 oktober 2026</time></span><h3>Bensin-Macan slog elversionen med nästan 5 000 bilar. Nu gör Porsche helt om</h3></a></li><li><a href="/artikel/tesla-model-y-strukturellt-batteri-betyg-d-volvo-ex60/"><span class="meta"><span class="tag">Tesla</span><time datetime="2026-10-30T03:25:00+01:00">30 oktober 2026</time></span><h3>Teslas batteriingenjör ger Model Y:s strukturella batteri betyget D</h3></a></li></ol></aside>
+      <aside class="latest" aria-labelledby="latest-h"><h2 id="latest-h"><span class="pulse-dot" aria-hidden="true"></span>Senaste</h2><ol><li><a href="/artikel/bmw-ix3-m60-highway-assistant-sverige/"><span class="meta"><span class="tag">Elbil</span><time datetime="2026-11-01T00:00:00+01:00">1 november 2026</time></span><h3>BMW lovar 340 km laddning på tio minuter i nya iX3 M60 med 612 hk</h3></a></li><li><a href="/artikel/tesla-fsd-sverige-eu-omrostning-december/"><span class="meta"><span class="tag">Tesla</span><span class="flag flag--inline" role="img" aria-label="Gäller Sverige" title="Gäller Sverige"><svg viewBox="0 0 16 10" width="16" height="10" aria-hidden="true" focusable="false"><rect width="16" height="10" fill="#005293"/><rect x="5" width="2" height="10" fill="#FECB00"/><rect y="4" width="16" height="2" fill="#FECB00"/></svg></span><time datetime="2026-10-31T18:00:00+01:00">31 oktober 2026</time></span><h3>Tio EU-länder har sagt ja till Teslas FSD. Därför får Sverige vänta till tidigast 2027</h3></a></li><li><a href="/artikel/bmw-m3-el-fyra-motorer/"><span class="meta"><span class="tag">Sportbil</span><time datetime="2026-10-31T12:33:00+01:00">31 oktober 2026</time></span><h3>M3 som elbil: fyra motorer, över 100 kWh och noll fejkat ljud</h3></a></li><li><a href="/artikel/bmw-m350-drift-moment-juli-2027/"><span class="meta"><span class="tag">Sportbil</span><time datetime="2026-10-30T11:55:00+01:00">30 oktober 2026</time></span><h3>BMW säljer en 3-serie med driftläge. Haken: det fungerar först i juli 2027</h3></a></li><li><a href="/artikel/porsche-macan-bensin-namn-2028/"><span class="meta"><span class="tag">Sportbil</span><time datetime="2026-10-30T11:54:00+01:00">30 oktober 2026</time></span><h3>Bensin-Macan slog elversionen med nästan 5 000 bilar. Nu gör Porsche helt om</h3></a></li></ol></aside>
     </div>
     <section class="pop" aria-labelledby="pop-h">
       <h2 id="pop-h"><span class="pulse-dot" aria-hidden="true"></span>Populärt just nu</h2>
@@ -563,10 +565,25 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
     <div class="wrap">
       <div class="section-head">
         <h2 id="feed-h">Alla artiklar</h2>
-        <nav aria-label="Kategorier"><ul class="chips"><li><button class="chip" type="button" data-filter="alla" aria-pressed="true">Alla</button></li><li><button class="chip" type="button" data-filter="elbil" aria-pressed="false">Elbil</button></li><li><button class="chip" type="button" data-filter="tesla" aria-pressed="false">Tesla</button></li><li><button class="chip" type="button" data-filter="sportbil" aria-pressed="false">Sportbil</button></li><li><button class="chip" type="button" data-filter="bransle" aria-pressed="false">Bränsle</button></li></ul></nav>
+        <nav aria-label="Kategorier"><ul class="chips"><li><button class="chip" type="button" data-filter="alla" aria-pressed="true">Alla</button></li><li><button class="chip" type="button" data-filter="sportbil" aria-pressed="false">Sportbil</button></li><li><button class="chip" type="button" data-filter="elbil" aria-pressed="false">Elbil</button></li><li><button class="chip" type="button" data-filter="tesla" aria-pressed="false">Tesla</button></li><li><button class="chip" type="button" data-filter="bransle" aria-pressed="false">Bränsle</button></li></ul></nav>
       </div>
       <p id="filter-status" class="visually-hidden" role="status" aria-live="polite"></p>
       
+      <section class="day" aria-labelledby="d-2026-11-04">
+        <h3 class="day__label" id="d-2026-11-04"><time datetime="2026-11-04">Onsdag 4 november</time></h3>
+        <ol class="feed">
+          <li class="item" data-cat="sportbil">
+            <a href="/artikel/ferrari-f40-sista-enzo-ferrari/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Sportbil</span></span>
+                <h4>Enzo Ferraris sista bil. En F40 som stod i Sverige i 20 år såldes för 51 miljoner kronor</h4>
+                <p>Ferrari F40 togs fram på 13 månader och blev den sista bilen Enzo Ferrari själv presenterade. 1 311 byggdes, och ingen vet exakt hur många som finns kvar.</p>
+              </div>
+              <figure class="item__img"><span class="flag flag--thumb" role="img" aria-label="Gäller Sverige" title="Gäller Sverige"><svg viewBox="0 0 16 10" width="16" height="10" aria-hidden="true" focusable="false"><rect width="16" height="10" fill="#005293"/><rect x="5" width="2" height="10" fill="#FECB00"/><rect y="4" width="16" height="2" fill="#FECB00"/></svg></span><img src="/img/articles/ferrari-f40-sista-enzo-ferrari/ferrari-f40-pa-vag.webp" srcset="/img/articles/ferrari-f40-sista-enzo-ferrari/ferrari-f40-pa-vag-400.webp 400w, /img/articles/ferrari-f40-sista-enzo-ferrari/ferrari-f40-pa-vag-800.webp 800w, /img/articles/ferrari-f40-sista-enzo-ferrari/ferrari-f40-pa-vag-1200.webp 1200w, /img/articles/ferrari-f40-sista-enzo-ferrari/ferrari-f40-pa-vag.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="922" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: Will ainsworth, Wikimedia Commons (retuscherad av Bob Castle: vägskylt borttagen, himlen något beskuren)</figcaption></figure>
+            </a>
+          </li>
+        </ol>
+      </section>
       <section class="day" aria-labelledby="d-2026-11-01">
         <h3 class="day__label" id="d-2026-11-01"><time datetime="2026-11-01">Söndag 1 november</time></h3>
         <ol class="feed">
@@ -672,11 +689,11 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
     <a class="wordmark" href="/"><img class="logo logo--footer" src="/img/logo.svg" alt="Motorpuls" width="872" height="88" loading="lazy"></a>
     <p class="site-footer__desc">Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</p>
     <nav class="site-footer__nav" aria-label="Om Motorpuls"><ul><li><a href="/om/">Om Motorpuls</a></li><li><a href="/om/lukas/">Om Lukas</a></li></ul></nav>
-    <nav class="site-footer__nav site-footer__topics" aria-label="Ämnen"><ul><li><a href="/elbil/">Elbil</a></li><li><a href="/tesla/">Tesla</a></li><li><a href="/sportbil/">Sportbil</a></li><li><a href="/bransle/">Bränsle</a></li></ul></nav>
+    <nav class="site-footer__nav site-footer__topics" aria-label="Ämnen"><ul><li><a href="/sportbil/">Sportbil</a></li><li><a href="/elbil/">Elbil</a></li><li><a href="/tesla/">Tesla</a></li><li><a href="/bransle/">Bränsle</a></li></ul></nav>
     <div class="site-footer__rss">
       <a class="rss-link" href="/feed.xml"><svg class="rss-icon" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><rect width="16" height="16" rx="3" fill="#FF5B1F"/><circle cx="4.6" cy="11.4" r="1.5" fill="#0B0D10"/><path d="M3.2 7.1a5.7 5.7 0 0 1 5.7 5.7M3.2 3.6a9.2 9.2 0 0 1 9.2 9.2" fill="none" stroke="#0B0D10" stroke-width="1.8" stroke-linecap="round"/></svg>RSS</a>
       <span class="site-footer__feeds-label" id="rss-kat">RSS per kategori:</span>
-      <ul class="site-footer__feeds" aria-labelledby="rss-kat"><li><a href="/feed/elbil.xml">Elbil</a></li><li><a href="/feed/tesla.xml">Tesla</a></li><li><a href="/feed/sportbil.xml">Sportbil</a></li><li><a href="/feed/bransle.xml">Bränsle</a></li><li><a href="/feed/sverige.xml">Sverige</a></li></ul>
+      <ul class="site-footer__feeds" aria-labelledby="rss-kat"><li><a href="/feed/sportbil.xml">Sportbil</a></li><li><a href="/feed/elbil.xml">Elbil</a></li><li><a href="/feed/tesla.xml">Tesla</a></li><li><a href="/feed/bransle.xml">Bränsle</a></li><li><a href="/feed/sverige.xml">Sverige</a></li></ul>
     </div>
     <p class="fine">© 2026 Motorpuls<span class="site-footer__contact"> <span aria-hidden="true">·</span> <a href="mailto:hello@motorpuls.se">hello@motorpuls.se</a></span></p>
     </div>
