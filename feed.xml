@@ -6,8 +6,16 @@
   <link>https://motorpuls.se/</link>
   <description>Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Sun, 01 Nov 2026 00:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Mon, 02 Nov 2026 12:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Inte en enda bensinbil kvar. Svenska Volvo slåss om Europas finaste bilpris</title>
+    <link>https://motorpuls.se/artikel/arets-bil-2027-bara-elbilar-volvo-ex60/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/arets-bil-2027-bara-elbilar-volvo-ex60/</guid>
+    <pubDate>Mon, 02 Nov 2026 12:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>För första gången på 63 år är alla finalister i Car of the Year elbilar, och Volvo EX60 är en av sju som kan vinna.</description>
+  </item>
   <item>
     <title>BMW lovar 340 km laddning på tio minuter i nya iX3 M60 med 612 hk</title>
     <link>https://motorpuls.se/artikel/bmw-ix3-m60-highway-assistant-sverige/</link>
