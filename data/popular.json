@@ -1,9 +1,13 @@
 {
-  "updated": "2026-10-31T12:05+01:00",
-  "source": "Cloudflare Web Analytics, sidvisningar 2026-10-25 till 2026-10-31",
+  "updated": "2026-11-01T12:10+01:00",
+  "source": "Cloudflare Web Analytics, sidvisningar 2026-10-26 till 2026-11-01",
   "articles": [
     {
       "slug": "bmw-m350-drift-moment-juli-2027",
+      "views": 17
+    },
+    {
+      "slug": "tesla-model-y-strukturellt-batteri-betyg-d-volvo-ex60",
       "views": 16
     },
     {
@@ -11,12 +15,36 @@
       "views": 15
     },
     {
-      "slug": "tesla-model-y-strukturellt-batteri-betyg-d-volvo-ex60",
-      "views": 13
+      "slug": "hvo100-reduktionsplikten-utredning-2031",
+      "views": 9
     },
     {
-      "slug": "hvo100-reduktionsplikten-utredning-2031",
+      "slug": "bmw-m3-el-fyra-motorer",
       "views": 8
+    },
+    {
+      "slug": "polisens-radarbilar-hela-sverige",
+      "views": 6
+    },
+    {
+      "slug": "formansvarde-elbil-2027-per-modell",
+      "views": 6
+    },
+    {
+      "slug": "bmw-ix3-m60-highway-assistant-sverige",
+      "views": 5
+    },
+    {
+      "slug": "jaguar-type-01-rackvidd-type-00",
+      "views": 5
+    },
+    {
+      "slug": "mest-salda-elbilen-inte-tesla",
+      "views": 2
+    },
+    {
+      "slug": "tesla-fsd-sverige-eu-omrostning-december",
+      "views": 1
     }
   ]
 }
