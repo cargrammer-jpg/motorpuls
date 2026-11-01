@@ -246,6 +246,13 @@ transition:background-color .18s var(--ease),border-color .18s var(--ease)}
 .prose a{color:var(--pulse-text);text-decoration-thickness:1px;text-underline-offset:.18em}
 .prose sup{line-height:0;vertical-align:baseline;position:relative;top:-.45em}
 .prose sup a{font-family:var(--mono);font-size:.7em;text-decoration:none;padding:0 .1em}
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:var(--radius)}
+.table-wrap:focus-visible{outline:2px solid var(--pulse);outline-offset:2px}
+.prose table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:.875rem;line-height:1.4;font-variant-numeric:tabular-nums}
+.prose th,.prose td{padding:.55rem .75rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+.prose th{color:#fff;font-weight:700;background:var(--surface)}
+.prose td:not(:first-child),.prose th:not(:first-child){text-align:right;white-space:nowrap}
+.prose tr:last-child td{border-bottom:0}
 .sources{border-top:1px solid var(--line-strong);padding-top:1rem}
 .sources h2{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
 .sources ol{list-style:none;counter-reset:s;margin:.75rem 0 0;padding:0}
@@ -470,6 +477,7 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
 <header class="masthead">
   <div class="wrap masthead__row">
     <a class="wordmark" href="/"><img class="logo" src="/img/logo.svg" alt="Motorpuls" width="872" height="88"><svg class="wordmark__flag" viewBox="0 0 16 10" width="16" height="10" aria-hidden="true" focusable="false"><rect width="16" height="10" fill="#0A2260"/><rect x="5" width="2" height="10" fill="#FECC00"/><rect y="4" width="16" height="2" fill="#FECC00"/></svg></a>
+    <nav class="topnav" aria-label="Huvudmeny"><ul><li><a href="/">Nyheter</a></li><li><a href="/guider/">Guider</a></li></ul></nav>
   </div>
 </header>
 
@@ -517,7 +525,7 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
     <div class="site-footer__rss">
       <a class="rss-link" href="/feed.xml"><svg class="rss-icon" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><rect width="16" height="16" rx="3" fill="#FF5B1F"/><circle cx="4.6" cy="11.4" r="1.5" fill="#0B0D10"/><path d="M3.2 7.1a5.7 5.7 0 0 1 5.7 5.7M3.2 3.6a9.2 9.2 0 0 1 9.2 9.2" fill="none" stroke="#0B0D10" stroke-width="1.8" stroke-linecap="round"/></svg>RSS</a>
       <span class="site-footer__feeds-label" id="rss-kat">RSS per kategori:</span>
-      <ul class="site-footer__feeds" aria-labelledby="rss-kat"><li><a href="/feed/elbil.xml">Elbil</a></li><li><a href="/feed/tesla.xml">Tesla</a></li><li><a href="/feed/sportbil.xml">Sportbil</a></li><li><a href="/feed/bransle.xml">Bränsle</a></li><li><a href="/feed/sverige.xml">Sverige</a></li></ul>
+      <ul class="site-footer__feeds" aria-labelledby="rss-kat"><li><a href="/feed/guider.xml">Guider</a></li><li><a href="/feed/elbil.xml">Elbil</a></li><li><a href="/feed/tesla.xml">Tesla</a></li><li><a href="/feed/sportbil.xml">Sportbil</a></li><li><a href="/feed/bransle.xml">Bränsle</a></li><li><a href="/feed/sverige.xml">Sverige</a></li></ul>
     </div>
     <p class="fine">© 2026 Motorpuls<span class="site-footer__contact"> <span aria-hidden="true">·</span> <a href="mailto:hello@motorpuls.se">hello@motorpuls.se</a></span></p>
     </div>

@@ -101,6 +101,11 @@ def nbnum(s):
     return NUM_GAP.sub("\u00a0", s)
 def nbnum_html(h): return re.sub(r">[^<]+<", lambda m: nbnum(m.group(0)), ">" + h + "<")[1:-1]
 def slugify(s): return re.sub(r"[^a-z0-9]+", "-", s.lower().replace("å","a").replace("ä","a").replace("ö","o")).strip("-")
+def md_body(t):
+    """Artikeltext till html. Tabeller i markdown (| a | b |) blir <table> i en ruta som kan rullas i sidled på smala
+    skärmar (tabindex så att den går att rulla med tangentbordet)."""
+    h = markdown.markdown(t, extensions=["tables"])
+    return h.replace("<table>", '<div class="table-wrap" role="region" aria-label="Tabell" tabindex="0"><table>').replace("</table>", "</table></div>")
 
 # ---------- Guider ----------
 # En artikel är en guide om front matter har type: guide eller category: Guider. Kategorisidan, länken i sidhuvudet och
@@ -212,7 +217,7 @@ def load_articles():
             body = body[:ks.start()]
         check_sources(fm, sources, path)
         words = len(re.findall(r"\w+", body))
-        arts.append(dict(fm, date=d, published=iso(d, t), modified=iso(ud, ut), mod_date=ud, when=instant(d, t), mod_when=instant(ud, ut), headline=headline, body_html=markdown.markdown(body.strip()),
+        arts.append(dict(fm, date=d, published=iso(d, t), modified=iso(ud, ut), mod_date=ud, when=instant(d, t), mod_when=instant(ud, ut), headline=headline, body_html=md_body(body.strip()),
                          sources=sources, file=os.path.basename(path), minutes=max(1, math.ceil(words/200)),
                          url=f"/artikel/{fm['slug']}/", cat=slugify(fm["category"])))
     arts.sort(key=lambda a: (a["when"], a["file"]), reverse=True)
