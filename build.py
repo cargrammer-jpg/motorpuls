@@ -279,7 +279,7 @@ _tracked = None
 OUT = None          # utkatalog (--out), sätts i main()
 WRITTEN = []        # sidor och filer som bygget skrivit (relativa sökvägar), publiceras med --out
 PUBLIC_DIRS = ("css", "js", "fonts", "img", "favicon")
-PUBLIC_FILES = ("favicon.ico", "CNAME")
+PUBLIC_FILES = ("favicon.ico", "CNAME", "feed.xsl")  # feed.xsl: flödena som läsbar sida i webbläsaren
 
 def committed(rel):
     """Sant om filen finns i git (eller om vi inte bygger i ett git-repo). En ny variant som inte är incheckad
@@ -440,6 +440,7 @@ def rss(arts, title=SITE, desc=SITE_DESC, path="/feed.xml", link="/"):
   </item>
 """ for a in arts)
     return f"""<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/feed.xsl"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
   <title>{esc(title)}</title>
