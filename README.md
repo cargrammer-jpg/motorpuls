@@ -88,7 +88,9 @@ och på artikelns kort på startsidan. Saknar artikeln bild hamnar flaggan vid k
 bilden, bildfilerna ändras aldrig. Utelämnat eller `false` betyder ingen flagga.
 
 Bilderna kopieras till `img/articles/<slug>/` och får WebP-versioner (1600, 1200, 800 och 400 px bred, kvalitet 76, ingen beskärning).
-Den första blir huvudbild (och beskärs till delningsbilden `img/og/<slug>.jpg`), fler bilder blir ett bildspel. Checka in `img/articles/<slug>/` tillsammans med artikeln.
+Den första blir huvudbild (och beskärs till delningsbilden `img/og/<slug>.jpg`), fler bilder blir ett bildspel. En rad med bara `{{bild 2}}`
+(eller 3, 4 ...) i brödtexten visar den bilden just där i texten i stället för i bildspelet. CC-licenser (länk till creativecommons.org i `license`)
+visas i bildtexten med licensens namn länkat till licensen, och krediten länkar till `source_url`. Checka in `img/articles/<slug>/` tillsammans med artikeln.
 Det äldre fältet `image` (en URL, med `image_credit`) laddas ned till `img/articles/<slug>.webp` som förut.
 
 ## Nyhetsbrev i sidfoten (förhandsvisning)
