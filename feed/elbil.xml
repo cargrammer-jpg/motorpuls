@@ -5,8 +5,16 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Elbil på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Sun, 01 Nov 2026 00:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Wed, 04 Nov 2026 07:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/elbil.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Jaguars nya elbil har 1 030 hk. Men den når inte räckvidden Jaguar lovade</title>
+    <link>https://motorpuls.se/artikel/jaguar-type-01-rackvidd-type-00/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/jaguar-type-01-rackvidd-type-00/</guid>
+    <pubDate>Wed, 04 Nov 2026 07:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>Jaguar Type 01 är produktionsbilen efter konceptet Type 00. Den har 1 030 hk och laddar snabbare än utlovat, men räckvidden blev 5 mil kortare.</description>
+  </item>
   <item>
     <title>BMW lovar 340 km laddning på tio minuter i nya iX3 M60 med 612 hk</title>
     <link>https://motorpuls.se/artikel/bmw-ix3-m60-highway-assistant-sverige/</link>
