@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Motorpuls: Sportbil</title>
+  <link>https://motorpuls.se/</link>
+  <description>Artiklar i kategorin Sportbil på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
+  <language>sv-SE</language>
+  <lastBuildDate>Sat, 31 Oct 2026 12:33:00 +0100</lastBuildDate>
+  <atom:link href="https://motorpuls.se/feed/sportbil.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>M3 som elbil: fyra motorer, över 100 kWh och noll fejkat ljud</title>
+    <link>https://motorpuls.se/artikel/bmw-m3-el-fyra-motorer/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/bmw-m3-el-fyra-motorer/</guid>
+    <pubDate>Sat, 31 Oct 2026 12:33:00 +0100</pubDate>
+    <category>Sportbil</category>
+    <description>BMW:s utvecklingsstyrelse har kört den första helt eldrivna M3:an i förserieutförande, en bil med fyra elmotorer som ska byggas i München.</description>
+  </item>
+  <item>
+    <title>BMW säljer en 3-serie med driftläge. Haken: det fungerar först i juli 2027</title>
+    <link>https://motorpuls.se/artikel/bmw-m350-drift-moment-juli-2027/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/bmw-m350-drift-moment-juli-2027/</guid>
+    <pubDate>Fri, 30 Oct 2026 11:55:00 +0100</pubDate>
+    <category>Sportbil</category>
+    <description>Nya BMW M350 xDrive kan skicka hela motorkraften till bakhjulen med ett tryck på skärmen, men funktionen låses upp först i juli 2027.</description>
+  </item>
+  <item>
+    <title>Bensin-Macan slog elversionen med nästan 5 000 bilar. Nu gör Porsche helt om</title>
+    <link>https://motorpuls.se/artikel/porsche-macan-bensin-namn-2028/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/porsche-macan-bensin-namn-2028/</guid>
+    <pubDate>Fri, 30 Oct 2026 11:54:00 +0100</pubDate>
+    <category>Sportbil</category>
+    <description>Porsches nya SUV med bensin- och laddhybridmotor kommer 2028 och ska heta Macan, samma namn som elbilen.</description>
+  </item>
+  <item>
+    <title>Aston Martin Valhalla Spider: 1 079 hk och samma toppfart utan tak</title>
+    <link>https://motorpuls.se/artikel/aston-martin-valhalla-spider/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/aston-martin-valhalla-spider/</guid>
+    <pubDate>Fri, 30 Oct 2026 03:15:00 +0100</pubDate>
+    <category>Sportbil</category>
+    <description>Aston Martin visar Valhalla Spider, en öppen laddhybrid med 1 079 hk, över 600 kilo downforce och leveranser från tredje kvartalet 2027.</description>
+  </item>
+</channel>
+</rss>
