@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
+    <loc>https://motorpuls.se/artikel/polisens-radarbilar-hela-sverige/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-02T07:00:00+01:00</news:publication_date>
+      <news:title>Polisens radar mäter 18 gånger i sekunden. Nu finns den i hela Sverige</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://motorpuls.se/artikel/bmw-ix3-m60-highway-assistant-sverige/</loc>
     <news:news>
       <news:publication>
@@ -31,28 +42,6 @@
       </news:publication>
       <news:publication_date>2026-10-31T12:33:00+01:00</news:publication_date>
       <news:title>M3 som elbil: fyra motorer, över 100 kWh och noll fejkat ljud</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/bmw-m350-drift-moment-juli-2027/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-10-30T11:55:00+01:00</news:publication_date>
-      <news:title>BMW säljer en 3-serie med driftläge. Haken: det fungerar först i juli 2027</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/porsche-macan-bensin-namn-2028/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-10-30T11:54:00+01:00</news:publication_date>
-      <news:title>Bensin-Macan slog elversionen med nästan 5 000 bilar. Nu gör Porsche helt om</news:title>
     </news:news>
   </url>
 </urlset>
