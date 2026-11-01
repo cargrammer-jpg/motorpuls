@@ -55,7 +55,10 @@
 #          relativ till projektroten eller en absolut sökväg. Okända fält (t.ex. source_url) ignoreras.
 #          Filen kopieras till img/articles/<slug>/ och får WebP-versioner (1600, 1200, 800 och 400 px bred, bara
 #          storleksändring, aldrig beskärning). Finns WebP-filen redan byggs den inte om (källan behövs inte).
-#          Första bilden är huvudbild (og:image), fler bilder blir ett bildspel.
+#          Första bilden är huvudbild (og:image), fler bilder blir ett bildspel. En rad med bara {{bild N}} i brödtexten
+#          (N = 2, 3 ... i images-listan) visar bild N just där i texten i stället för i bildspelet (huvudbilden kan inte
+#          flyttas, varje bild högst en gång). Bildtexten: caption, kredit och, för CC-licenser (en creativecommons.org-länk
+#          i license), licensens namn (texten före första kommat) länkat till licensen och krediten länkad till source_url.
 # image:   äldre fält (en URL). Laddas ned till img/articles/<slug>.webp om filen saknas, kredit i image_credit.
 #
 # Populärt: startsidans "Populärt just nu" tar artiklarna i data/popular.json i tur och ordning (skrivs av
@@ -211,7 +214,7 @@ def load_articles():
                 elif line.strip(): raise SystemExit(f"{path}: oväntad rad i Källor: {line!r}")
             body = body[:ks.start()]
         check_sources(fm, sources, path)
-        words = len(re.findall(r"\w+", body))
+        words = len(re.findall(r"\w+", INLINE_IMG.sub("", body)))
         arts.append(dict(fm, date=d, published=iso(d, t), modified=iso(ud, ut), mod_date=ud, when=instant(d, t), mod_when=instant(ud, ut), headline=headline, body_html=markdown.markdown(body.strip()),
                          sources=sources, file=os.path.basename(path), minutes=max(1, math.ceil(words/200)),
                          url=f"/artikel/{fm['slug']}/", cat=slugify(fm["category"])))
@@ -339,7 +342,8 @@ def ensure_images(a):
             v = read_variants(out_base)
             res.append(dict(src=v[0][0], w=v[0][1], h=v[0][2], srcset=", ".join(f"{u} {w}w" for u, w, _ in reversed(v)),
                             alt=str(im["alt"]).strip(), credit=str(im["credit"]).strip(),
-                            caption=str(im.get("caption") or "").strip(), license=str(im.get("license") or "").strip()))
+                            caption=str(im.get("caption") or "").strip(), license=str(im.get("license") or "").strip(),
+                            source_url=str(im.get("source_url") or "").strip()))
         return res
     if not a.get("image"): return []
     # äldre fält: en bild-URL
@@ -914,9 +918,40 @@ def index(arts):
 # ---------- article ----------
 HERO_SIZES = "(min-width: 66rem) 62rem, calc(100vw - 2.5rem)"
 
+INLINE_IMG = re.compile(r"^\{\{bild (\d+)\}\}[ \t]*$", re.M)  # markören i markdown (en egen rad)
+INLINE_IMG_HTML = re.compile(r"<p>\{\{bild(?: |\u00a0)(\d+)\}\}</p>")  # samma rad efter markdown
+INLINE_SIZES = "(min-width: 42.5rem) 40rem, calc(100vw - 2.5rem)"
+CC_URL = re.compile(r"https?://creativecommons\.org/[^\s,;)]+")
+
+def license_link(im):
+    """CC-licens (creativecommons.org-länk i license): licensens namn, texten före första kommat, länkat till licensen.
+    Övriga licenser (pressbilder) visas inte i bildtexten, där räcker krediten."""
+    m = CC_URL.search(im.get("license") or "")
+    if not m: return ""
+    return f'<a href="{esc(m.group(0).rstrip("."))}" rel="license">{esc(im["license"].split(",")[0].strip())}</a>'
+
 def caption(im):
-    parts = [esc(x) for x in (im["caption"], im["credit"]) if x]
+    lic = license_link(im)
+    credit = esc(im["credit"]) if im["credit"] else ""
+    if lic and credit and im.get("source_url"): credit = f'<a href="{esc(im["source_url"])}">{credit}</a>'
+    parts = [x for x in (esc(im["caption"]) if im["caption"] else "", credit, lic) if x]
     return f'<figcaption><span>{" <span aria-hidden=\"true\">·</span> ".join(parts)}</span></figcaption>' if parts else ""
+
+def inline_images(a, imgs, body_html):
+    """Byter rader med {{bild N}} mot bild N (figur i bildens eget format, lazy, samma bildtext som övriga bilder).
+    Returnerar (html, bilderna som blir kvar till huvudbild/bildspel)."""
+    used = []
+    def fig(m):
+        n = int(m.group(1))
+        if not 2 <= n <= len(imgs): raise SystemExit(f"{a['file']}: {{{{bild {n}}}}} finns inte (bild 2 till {len(imgs)} går att placera i texten)")
+        if n in used: raise SystemExit(f"{a['file']}: {{{{bild {n}}}}} står mer än en gång")
+        used.append(n)
+        im = imgs[n - 1]
+        return (f'<figure class="article__figure article__figure--natural article__figure--inline">\n'
+                f'  <div class="frame">{img_tag(im, im["alt"], sizes=INLINE_SIZES)}</div>\n  {caption(im)}\n</figure>')
+    out = INLINE_IMG_HTML.sub(fig, body_html)
+    if "{{bild" in out: raise SystemExit(f"{a['file']}: {{{{bild N}}}} ska stå ensamt på en egen rad")
+    return out, [im for i, im in enumerate(imgs, 1) if i not in used]
 
 def gallery(imgs, flag_html=""):
     """En bild: figur i bildens eget format. Flera: bildspel (scroll-snap, utan JS en rad att svepa i).
@@ -1268,6 +1303,7 @@ def article(a, arts=()):
         </section>'''
     updated = (f'<span>Uppdaterad <b><time datetime="{a["modified"]}">{sv_date(a["mod_date"])}</time></b></span>'
                if a["mod_when"] > a["when"] else "")
+    prose, top_imgs = inline_images(a, imgs, nbnum_html(a["body_html"]))
     au = find_author(a["author"])
     author = f'<a href="{au["url"]}" rel="author">{esc(au["name"])}</a>' if au else esc(a["author"])
     body = f'''
@@ -1279,10 +1315,10 @@ def article(a, arts=()):
         <h1 class="article__title">{nbnum(esc(a["headline"]))}</h1>
         <p class="article__dek">{nbnum(esc(a["excerpt"]))}</p>
         <p class="byline"><span>Publicerad <b><time datetime="{a["published"]}">{sv_date(a["date"])}</time></b></span>{updated}<span>Läsetid <b>{a["minutes"]} min</b></span><span>Av <b>{author}</b></span></p>{share_bar(a, "top")}
-      </header>{summary_box(a)}{gallery(imgs, flag(a, "hero"))}
+      </header>{summary_box(a)}{gallery(top_imgs, flag(a, "hero"))}
       <div class="article__layout article__col">
         <div class="prose">
-{nbnum_html(a["body_html"])}
+{prose}
         </div>
 {sources}{share_bar(a, "end")}{preferred_source()}
         <aside class="ai-note" aria-label="Om texten">

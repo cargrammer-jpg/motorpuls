@@ -6,8 +6,16 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Sportbil på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Sat, 31 Oct 2026 12:33:00 +0100</lastBuildDate>
+  <lastBuildDate>Fri, 06 Nov 2026 18:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/sportbil.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Byggd för gatan, vann Le Mans på första försöket. 100 McLaren F1 finns kvar, ingen i Sverige</title>
+    <link>https://motorpuls.se/artikel/mclaren-f1-mittensits-le-mans/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/mclaren-f1-mittensits-le-mans/</guid>
+    <pubDate>Fri, 06 Nov 2026 18:00:00 +0100</pubDate>
+    <category>Sportbil</category>
+    <description>McLaren F1 var tänkt som världens bästa gatbil och vann Le Mans 1995. Av 106 byggda finns 100 kvar enligt Hagerty, och ingen är registrerad i Sverige.</description>
+  </item>
   <item>
     <title>M3 som elbil: fyra motorer, över 100 kWh och noll fejkat ljud</title>
     <link>https://motorpuls.se/artikel/bmw-m3-el-fyra-motorer/</link>
