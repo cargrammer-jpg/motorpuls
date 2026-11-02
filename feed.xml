@@ -6,8 +6,16 @@
   <link>https://motorpuls.se/</link>
   <description>Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Sun, 01 Nov 2026 18:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Wed, 11 Nov 2026 15:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Om tre veckor kan sommardäcken kosta 2 000 kronor. Och fyra gator till stängs för dubbdäck</title>
+    <link>https://motorpuls.se/artikel/vinterdack-bot-dubbdacksforbud-stockholm/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/vinterdack-bot-dubbdacksforbud-stockholm/</guid>
+    <pubDate>Wed, 11 Nov 2026 15:00:00 +0100</pubDate>
+    <category>Bränsle</category>
+    <description>Den 1 december börjar vinterdäckskravet gälla. Så mycket kostar fel däck, och här blir det förbjudet att köra med dubbar.</description>
+  </item>
   <item>
     <title>Över en halv miljon kronor för en plats i kön. Tesla lovar inte ens att Roadster levereras</title>
     <link>https://motorpuls.se/artikel/tesla-roadster-avtackad-produktion-2028/</link>
