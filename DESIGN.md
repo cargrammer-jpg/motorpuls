@@ -69,6 +69,9 @@ Resend (utskick), Cloudflare Web Analytics.
 ## RSS
 Sidfoten: länken "RSS" med ikon (orange ruta, mörka vågor) och "RSS per kategori" med en länk per kategori. Artikelns slut: en
 lugn rad "Prenumerera via RSS: <kategori> · Alla nyheter" i muted-färg, länkar i textfärg (7:1 respektive 16:1 mot bakgrunden).
+Flödena (`/feed.xml`, `/feed/*.xml`) har `<?xml-stylesheet href="/feed.xsl"?>`: i webbläsaren visas de som en mörk sida med loggan,
+en ruta "Så prenumererar du" (adressen och knappen "Kopiera adressen", knappen bara när urklipp fungerar) och artiklarna med datum och utdrag.
+noindex, inga externa anrop. RSS-läsare ignorerar stilmallen. Chrome tar bort XSLT i version 158: då visas rå XML igen, flödet fungerar som vanligt.
 
 ## Dela
 Rad med delningsknappar under bylinen ("Dela") och efter källorna ("Dela artikeln"). Runda knappar 2,75rem med ikon (Simple Icons, CC0)
