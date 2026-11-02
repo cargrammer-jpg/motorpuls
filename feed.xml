@@ -6,8 +6,16 @@
   <link>https://motorpuls.se/</link>
   <description>Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Sun, 01 Nov 2026 18:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Mon, 09 Nov 2026 15:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Fartkamerorna gav 119 000 böter på ett år. Nu kommer 21 nya, här står de</title>
+    <link>https://motorpuls.se/artikel/fartkameror-119000-boter-21-nya-kameror/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/fartkameror-119000-boter-21-nya-kameror/</guid>
+    <pubDate>Mon, 09 Nov 2026 15:00:00 +0100</pubDate>
+    <category>Bränsle</category>
+    <description>Trafikverket sätter upp 21 nya fartkameror på fyra vägar i höst. Samtidigt visar myndighetens egen rapport hur många som faktiskt får böter.</description>
+  </item>
   <item>
     <title>Över en halv miljon kronor för en plats i kön. Tesla lovar inte ens att Roadster levereras</title>
     <link>https://motorpuls.se/artikel/tesla-roadster-avtackad-produktion-2028/</link>
