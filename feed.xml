@@ -6,8 +6,16 @@
   <link>https://motorpuls.se/</link>
   <description>Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Mon, 02 Nov 2026 12:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Thu, 12 Nov 2026 15:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Bensin och diesel kan bli 3 kronor dyrare över en natt. Försöket att stoppa det fick nej</title>
+    <link>https://motorpuls.se/artikel/bensin-diesel-3-kronor-dyrare-1-december/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/bensin-diesel-3-kronor-dyrare-1-december/</guid>
+    <pubDate>Thu, 12 Nov 2026 15:00:00 +0100</pubDate>
+    <category>Bränsle</category>
+    <description>Den 30 november tar den stora skattesänkningen på bensin och diesel slut. Skatten stiger med 2,40 kronor litern, och ett försök att förlänga sänkningen har redan stoppats.</description>
+  </item>
   <item>
     <title>Inte en enda bensinbil kvar. Svenska Volvo slåss om Europas finaste bilpris</title>
     <link>https://motorpuls.se/artikel/arets-bil-2027-bara-elbilar-volvo-ex60/</link>
