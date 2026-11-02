@@ -6,8 +6,16 @@
   <link>https://motorpuls.se/</link>
   <description>Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Sun, 01 Nov 2026 18:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Tue, 10 Nov 2026 15:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Stockholms 51-miljardersväg öppnar 6 december. Du får köra 3,5 av 21 kilometer</title>
+    <link>https://motorpuls.se/artikel/e4-forbifart-stockholm-oppnar-6-december/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/e4-forbifart-stockholm-oppnar-6-december/</guid>
+    <pubDate>Tue, 10 Nov 2026 15:00:00 +0100</pubDate>
+    <category>Bränsle</category>
+    <description>Den 6 december släpps trafiken på i den första delen av E4 Förbifart Stockholm, mellan Häggvik och Hjulsta. Resten av vägen dröjer till 2030.</description>
+  </item>
   <item>
     <title>Över en halv miljon kronor för en plats i kön. Tesla lovar inte ens att Roadster levereras</title>
     <link>https://motorpuls.se/artikel/tesla-roadster-avtackad-produktion-2028/</link>
