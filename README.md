@@ -72,7 +72,7 @@ images:
     credit: "Foto: Aston Martin"
     license: "Pressbild, endast redaktionell användning"
     caption: "Valfri bildtext"           # valfritt
-sweden: true                           # valfritt: nyheten gäller Sverige, visar en liten svensk flagga
+sweden: true                           # valfritt: nyheten gäller Sverige (tas med i feed/sverige.xml)
 seo_title: "Kort titel för fliken och Google"  # valfritt: <title> när rubriken är längre än ca 48 tecken
 ```
 
@@ -83,9 +83,8 @@ seo_title: "Kort titel för fliken och Google"  # valfritt: <title> när rubrike
 `css/site.css` bäddas in i varje sida (`<style>` i `<head>`, se `inline_css` i build.py) så att sidan inte väntar på en css-fil.
 Filen är fortfarande källan och publiceras som förut.
 
-`sweden: true` ger en liten svensk flagga (äldre, mörkare färger) i övre vänstra hörnet av huvudbilden eller bildspelet
-och på artikelns kort på startsidan. Saknar artikeln bild hamnar flaggan vid kategorin. Flaggan är ett eget element ovanpå
-bilden, bildfilerna ändras aldrig. Utelämnat eller `false` betyder ingen flagga.
+`sweden: true` tar med artikeln i `feed/sverige.xml`. Ingen flagga ritas på bilderna. Utelämnat eller `false`
+betyder att artikeln inte ingår i det flödet. Sidhuvudets flagga bredvid logotypen är oförändrad.
 
 Bilderna kopieras till `img/articles/<slug>/` och får WebP-versioner (1600, 1200, 800 och 400 px bred, kvalitet 76, ingen beskärning).
 Den första blir huvudbild (och beskärs till delningsbilden `img/og/<slug>.jpg`), fler bilder blir ett bildspel. Checka in `img/articles/<slug>/` tillsammans med artikeln.
