@@ -6,8 +6,16 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Bränsle på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Fri, 30 Oct 2026 01:19:00 +0100</lastBuildDate>
+  <lastBuildDate>Mon, 09 Nov 2026 15:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/bransle.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Fartkamerorna gav 119 000 böter på ett år. Nu kommer 21 nya, här står de</title>
+    <link>https://motorpuls.se/artikel/fartkameror-119000-boter-21-nya-kameror/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/fartkameror-119000-boter-21-nya-kameror/</guid>
+    <pubDate>Mon, 09 Nov 2026 15:00:00 +0100</pubDate>
+    <category>Bränsle</category>
+    <description>Trafikverket sätter upp 21 nya fartkameror på fyra vägar i höst. Samtidigt visar myndighetens egen rapport hur många som faktiskt får böter.</description>
+  </item>
   <item>
     <title>Utredning vill föra in HVO100 i reduktionsplikten senast 2031</title>
     <link>https://motorpuls.se/artikel/hvo100-reduktionsplikten-utredning-2031/</link>
