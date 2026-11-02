@@ -6,8 +6,16 @@
   <link>https://motorpuls.se/</link>
   <description>Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Sun, 01 Nov 2026 18:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Mon, 02 Nov 2026 07:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Polisens radar mäter 18 gånger i sekunden. Nu finns den i hela Sverige</title>
+    <link>https://motorpuls.se/artikel/polisens-radarbilar-hela-sverige/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/polisens-radarbilar-hela-sverige/</guid>
+    <pubDate>Mon, 02 Nov 2026 07:00:00 +0100</pubDate>
+    <category>Bränsle</category>
+    <description>Polisbilar som mäter hastigheten på bilar framför och i mötande körfält finns nu i alla sju polisregioner. Inga automatiska böter, men fler kan åka fast.</description>
+  </item>
   <item>
     <title>Över en halv miljon kronor för en plats i kön. Tesla lovar inte ens att Roadster levereras</title>
     <link>https://motorpuls.se/artikel/tesla-roadster-avtackad-produktion-2028/</link>
