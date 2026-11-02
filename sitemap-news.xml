@@ -1,58 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
-    <loc>https://motorpuls.se/artikel/arets-bil-2027-bara-elbilar-volvo-ex60/</loc>
+    <loc>https://motorpuls.se/artikel/bensin-diesel-3-kronor-dyrare-1-december/</loc>
     <news:news>
       <news:publication>
         <news:name>Motorpuls</news:name>
         <news:language>sv</news:language>
       </news:publication>
-      <news:publication_date>2026-11-02T12:00:00+01:00</news:publication_date>
-      <news:title>Inte en enda bensinbil kvar. Svenska Volvo slåss om Europas finaste bilpris</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/polisens-radarbilar-hela-sverige/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-02T07:00:00+01:00</news:publication_date>
-      <news:title>Polisens radar mäter 18 gånger i sekunden. Nu finns den i hela Sverige</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/tesla-roadster-avtackad-produktion-2028/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-01T18:00:00+01:00</news:publication_date>
-      <news:title>Över en halv miljon kronor för en plats i kön. Tesla lovar inte ens att Roadster levereras</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/bmw-ix3-m60-highway-assistant-sverige/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-01T00:00:00+01:00</news:publication_date>
-      <news:title>BMW lovar 340 km laddning på tio minuter i nya iX3 M60 med 612 hk</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/tesla-fsd-sverige-eu-omrostning-december/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-10-31T18:00:00+01:00</news:publication_date>
-      <news:title>Tio EU-länder har sagt ja till Teslas FSD. Därför får Sverige vänta till tidigast 2027</news:title>
+      <news:publication_date>2026-11-12T15:00:00+01:00</news:publication_date>
+      <news:title>Bensin och diesel kan bli 3 kronor dyrare över en natt. Försöket att stoppa det fick nej</news:title>
     </news:news>
   </url>
 </urlset>
