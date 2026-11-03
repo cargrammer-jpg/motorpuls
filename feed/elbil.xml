@@ -1,13 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="/feed.xsl"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
 <channel>
   <title>Motorpuls: Elbil</title>
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Elbil på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Sun, 01 Nov 2026 00:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Tue, 03 Nov 2026 07:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/elbil.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Teslas ras i oktober: Model Y föll från etta till elfte plats på en månad</title>
+    <link>https://motorpuls.se/artikel/mest-salda-elbilen-inte-tesla/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/mest-salda-elbilen-inte-tesla/</guid>
+    <pubDate>Tue, 03 Nov 2026 07:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>I september var Tesla Model Y Sveriges mest registrerade elbil. I oktober hamnade den på elfte plats, medan Volvo EX40 drog ifrån i kampen om årets elbilsetta.</description>
+    <enclosure url="https://motorpuls.se/img/og/mest-salda-elbilen-inte-tesla.jpg" length="156135" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/mest-salda-elbilen-inte-tesla.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="156135"/>
+  </item>
+  <item>
+    <title>Inte en enda bensinbil kvar. Svenska Volvo slåss om Europas finaste bilpris</title>
+    <link>https://motorpuls.se/artikel/arets-bil-2027-bara-elbilar-volvo-ex60/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/arets-bil-2027-bara-elbilar-volvo-ex60/</guid>
+    <pubDate>Mon, 02 Nov 2026 12:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>För första gången på 63 år är alla finalister i Car of the Year elbilar, och Volvo EX60 är en av sju som kan vinna.</description>
+    <enclosure url="https://motorpuls.se/img/og/arets-bil-2027-bara-elbilar-volvo-ex60-hel.jpg" length="162887" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/arets-bil-2027-bara-elbilar-volvo-ex60-hel.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="162887"/>
+  </item>
   <item>
     <title>BMW lovar 340 km laddning på tio minuter i nya iX3 M60 med 612 hk</title>
     <link>https://motorpuls.se/artikel/bmw-ix3-m60-highway-assistant-sverige/</link>
@@ -15,6 +35,8 @@
     <pubDate>Sun, 01 Nov 2026 00:00:00 +0100</pubDate>
     <category>Elbil</category>
     <description>BMW har visat iX3 M60 xDrive med 612 hk och 400 kW laddning, samtidigt som iX3 40 får fyrhjulsdrift och Highway Assistant öppnas för svenska kunder i november.</description>
+    <enclosure url="https://motorpuls.se/img/og/bmw-ix3-m60-highway-assistant-sverige-hel.jpg" length="139059" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/bmw-ix3-m60-highway-assistant-sverige-hel.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="139059"/>
   </item>
 </channel>
 </rss>

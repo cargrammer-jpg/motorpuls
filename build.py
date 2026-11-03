@@ -46,9 +46,9 @@
 # Läs också: under varje artikel tre andra artiklar. Samma kategori (guider räknas som en kategori) och gemensamma
 #          taggar först, sedan de nyaste. Aldrig artikeln själv. Miniatyrerna använder 400 px-varianterna.
 #
-# sweden:  valfritt, true när nyheten gäller Sverige. Då visas en liten svensk flagga (äldre, mörkare färger)
-#          som ett eget element ovanpå huvudbildens hörn och på startsidans kort, eller vid kategorin om
-#          artikeln saknar bild. Bildfilerna ändras aldrig.
+# sweden:  valfritt, true när nyheten gäller Sverige. Artikeln tas då med i feed/sverige.xml.
+#          Ingen flagga ritas på bilder (varken i HTML eller i bildfilerna). Sidhuvudets flagga
+#          bredvid logotypen är oförändrad.
 # summary: lista med 2 till 4 korta punkter (vanlig text), visas i rutan "Kort om nyheten".
 # images:  lista med {src, alt, credit, license, valfritt caption}. src är en lokal fil: ett filnamn som
 #          letas upp i drafts/img/<slug>/, utkastens form img/<slug>/fil (relativ till drafts/), en sökväg
@@ -436,12 +436,12 @@ def rss(arts, title=SITE, desc=SITE_DESC, path="/feed.xml", link="/"):
     <guid isPermaLink="true">{DOMAIN}{a["url"]}</guid>
     <pubDate>{rfc822(a["published"])}</pubDate>
     <category>{esc(a["category"])}</category>
-    <description>{esc(a["excerpt"])}</description>
+    <description>{esc(a["excerpt"])}</description>{rss_image(a)}
   </item>
 """ for a in arts)
     return f"""<?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="/feed.xsl"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
 <channel>
   <title>{esc(title)}</title>
   <link>{DOMAIN}{link}</link>
@@ -452,6 +452,18 @@ def rss(arts, title=SITE, desc=SITE_DESC, path="/feed.xml", link="/"):
 {items}</channel>
 </rss>
 """
+
+def rss_image(a):
+    """Delningsbilden (1200x630 JPEG, samma som og:image) som media:content och enclosure, så att flödesläsare och
+    nyhetsbrevsverktyg visar en bild. Saknas en incheckad delningsbild används huvudbilden (som og:image)."""
+    im = og_image(a)
+    if not im: return ""
+    p = os.path.join(ROOT, im["src"].lstrip("/"))
+    if not os.path.isfile(p): return ""
+    typ = {".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp", ".png": "image/png"}[os.path.splitext(p)[1].lower()]
+    url, n = f"{DOMAIN}{im['src']}", os.path.getsize(p)
+    return (f'\n    <enclosure url="{url}" length="{n}" type="{typ}"/>'
+            f'\n    <media:content url="{url}" medium="image" type="{typ}" width="{im["w"]}" height="{im["h"]}" fileSize="{n}"/>')
 
 FEEDS = []  # kategoriflöden: dict(key, name, path, arts), sätts i main()
 
@@ -654,7 +666,12 @@ def head(title, desc, path, og_type="website", image=None, extra="", preload_img
     pre = ""
     if preload_img:
         ss = f' imagesrcset="{preload_img["srcset"]}" imagesizes="{preload_sizes}"' if preload_img.get("srcset") else ""
-        pre = f'<link rel="preload" as="image" href="{preload_img["src"]}"{ss} fetchpriority="high">\n'
+        mob = lead_mobile_srcset(preload_img) if preload_sizes == LEAD_SIZES else ""
+        if mob:  # samma val som <picture> i lead(): mobil-srcset under LEAD_MOBILE_MQ, hela srcset över
+            pre = (f'<link rel="preload" as="image" href="{preload_img["src"]}" imagesrcset="{mob}" imagesizes="{LEAD_MOBILE_SIZES}" media="{LEAD_MOBILE_MQ}" fetchpriority="high">\n'
+                   f'<link rel="preload" as="image" href="{preload_img["src"]}"{ss} media="not all and {LEAD_MOBILE_MQ}" fetchpriority="high">\n')
+        else:
+            pre = f'<link rel="preload" as="image" href="{preload_img["src"]}"{ss} fetchpriority="high">\n'
 
     return f'''<!doctype html>
 <html lang="sv">
@@ -692,7 +709,7 @@ def head(title, desc, path, og_type="website", image=None, extra="", preload_img
   <div class="wrap masthead__row">
     <a class="wordmark" href="/"><img class="logo" src="/img/logo.svg" alt="Motorpuls" width="872" height="88">{BANNER_FLAG_SVG}</a>{topnav(path)}
   </div>
-</header>
+</header>{section_nav(path)}
 '''
 
 def topnav(path):
@@ -701,6 +718,18 @@ def topnav(path):
     li = "".join(f'<li><a href="{u}"{" aria-current=\"page\"" if path == u else ""}>{t}</a></li>'
                  for u, t in (("/", "Nyheter"), (GUIDE_PATH, GUIDE_NAME)))
     return f'\n    <nav class="topnav" aria-label="Huvudmeny"><ul>{li}</ul></nav>'
+
+# Ämnesraden under sidhuvudet: vanliga länkar till ämnessidorna (crawlbara, fungerar utan JS) och till nyhetsbrevsrutan i
+# sidfoten. Ligger utanför den klistrade .masthead så att krympningen i js/site.js inte påverkas. På smala skärmar en rad
+# att svepa i sidled. Bara ämnen som har en sida visas, i SECTION_NAV-ordning.
+SECTION_NAV = ("elbil", "sportbil", "motorsport", "bransle", "tesla")
+
+def section_nav(path):
+    items = [(TOPICS[k]["path"], TOPICS[k]["name"]) for k in SECTION_NAV if k in TOPICS]
+    if NEWSLETTER_BOX: items.append(("#nyhetsbrev-fot", "Nyhetsbrev"))
+    if not items: return ""
+    li = "".join(f'<li><a href="{u}"{" aria-current=\"page\"" if path == u else ""}>{esc(n)}</a></li>' for u, n in items)
+    return f'\n<nav class="secnav" aria-label="Kategorier"><div class="wrap"><ul class="secnav__list">{li}</ul></div></nav>'
 
 def footer():
     cats = "".join(f'<li><a href="{f["path"]}">{esc(f["name"])}</a></li>' for f in FEEDS)
@@ -725,44 +754,49 @@ def page(h, body): return h + body + footer() + ANALYTICS + "</body>\n</html>\n"
 
 def topics_nav():
     """Ämnessidorna (och Guider) i sidfoten, så att de nås från varje sida."""
-    items = [(t["path"], t["name"]) for t in TOPICS.values()] + ([(GUIDE_PATH, GUIDE_NAME)] if GUIDES else [])
+    order = [k for k in SECTION_NAV if k in TOPICS] + [k for k in TOPICS if k not in SECTION_NAV]  # samma ordning som ämnesraden
+    items = ([(TOPICS[k]["path"], TOPICS[k]["name"]) for k in order] + ([(SWEDEN["path"], SWEDEN["name"])] if SWEDEN else [])
+             + ([(GUIDE_PATH, GUIDE_NAME)] if GUIDES else []))
     if not items: return ""
     return ('\n    <nav class="site-footer__nav site-footer__topics" aria-label="Ämnen"><ul>'
             + "".join(f'<li><a href="{u}">{esc(n)}</a></li>' for u, n in items) + "</ul></nav>")
 
-def meta_line(a, with_date=True, flag_html=""):
+def meta_line(a, with_date=True):
     t = f'<time datetime="{a["published"]}">{sv_date(a["date"])}</time>' if with_date else ""
-    return f'<span class="meta"><span class="tag">{esc(a["category"])}</span>{flag_html}{t}</span>'
+    return f'<span class="meta"><span class="tag">{esc(a["category"])}</span>{t}</span>'
 
 def img_tag(img, alt, eager=False, sizes="100vw"):
     load = 'fetchpriority="high" decoding="async"' if eager else 'loading="lazy" decoding="async"'
     ss = f' srcset="{img["srcset"]}" sizes="{sizes}"' if img.get("srcset") else ""
     return f'<img src="{img["src"]}"{ss} width="{img["w"]}" height="{img["h"]}" alt="{esc(alt)}" {load}>'
 
-# Svensk flagga, äldre mörkare färger: blå #005293, gul #FECB00. Proportioner 5:2:9 och 4:2:4 (16x10).
-# Ett eget DOM-element ovanpå bilden (bildfilen ändras aldrig), placeras med CSS (.flag--*).
-FLAG_SVG = ('<svg viewBox="0 0 16 10" width="16" height="10" aria-hidden="true" focusable="false">'
-            '<rect width="16" height="10" fill="#005293"/><rect x="5" width="2" height="10" fill="#FECB00"/>'
-            '<rect y="4" width="16" height="2" fill="#FECB00"/></svg>')
 # Svensk flagga efter loggan i sidhuvudet (dekorativ, aria-hidden). Mörk marinblå #0A2260 (ALX:s referens) och gul
-# #FECC00, samma proportioner som FLAG_SVG. Artiklarnas flagga (FLAG_SVG) är oförändrad. Storlek och läge i
+# #FECC00, proportioner 5:2:9 och 4:2:4 (16x10). Den ritas inte på artikelbilder. Storlek och läge i
 # css/site.css (.wordmark__flag).
 BANNER_FLAG_SVG = ('<svg class="wordmark__flag" viewBox="0 0 16 10" width="16" height="10" aria-hidden="true" focusable="false">'
                    '<rect width="16" height="10" fill="#0A2260"/><rect x="5" width="2" height="10" fill="#FECC00"/>'
                    '<rect y="4" width="16" height="2" fill="#FECC00"/></svg>')
-def flag(a, where):
-    if not a.get("sweden"): return ""
-    return f'<span class="flag flag--{where}" role="img" aria-label="Gäller Sverige" title="Gäller Sverige">{FLAG_SVG}</span>'
-
-def meta_flag(a, has_img):
-    """Utan bild hamnar flaggan vid kategorin."""
-    return "" if has_img else flag(a, "inline")
 
 # ---------- front page ----------
-LEAD_SIZES = "(min-width: 60rem) 38rem, 100vw"
+# Bredd på mobil: sidans bredd minus 1,25rem marginal per sida (samma som HERO_SIZES), så att preload och <img> väljer samma fil.
+LEAD_SIZES = "(min-width: 60rem) 38rem, calc(100vw - 2.5rem)"
+# Mobil (upp till LEAD_MOBILE_MQ): toppbilden väljs bara bland varianter upp till LEAD_MOBILE_MAX_W px breda. En telefon med
+# 3x skärm skulle annars hämta 1200w (ca 95 kB) till en 350 px bred ruta; 800w ger drygt 2x täthet och är ca 40 % lättare.
+# <picture><source media> och preload med samma media/srcset/sizes, så att bara en fil hämtas.
+LEAD_MOBILE_MQ, LEAD_MOBILE_MAX_W, LEAD_MOBILE_SIZES = "(max-width: 40rem)", 800, "calc(100vw - 2.5rem)"
+def lead_mobile_srcset(img):
+    """Toppbildens srcset för mobil: bara varianter upp till LEAD_MOBILE_MAX_W (tom sträng om det inte finns några)."""
+    parts = [x.strip() for x in (img.get("srcset") or "").split(",") if x.strip()]
+    keep = [x for x in parts if x.endswith("w") and int(x.split()[-1][:-1]) <= LEAD_MOBILE_MAX_W]
+    return ", ".join(keep) if keep and len(keep) < len(parts) else ""
+
 def lead(a):
     img = a["img"]
-    media = (f'<figure class="lead__media"><div class="lead__frame">{flag(a, "lead")}{img_tag(img, img["alt"], eager=True, sizes=LEAD_SIZES)}</div>'
+    pic = img_tag(img, img["alt"], eager=True, sizes=LEAD_SIZES) if img else ""
+    if img and lead_mobile_srcset(img):
+        pic = (f'<picture><source media="{LEAD_MOBILE_MQ}" srcset="{lead_mobile_srcset(img)}" sizes="{LEAD_MOBILE_SIZES}">'
+               f'{pic}</picture>')
+    media = (f'<figure class="lead__media"><div class="lead__frame">{pic}</div>'
              f'<figcaption>{esc(img["credit"])}</figcaption></figure>') if img else ""
     return f'''
     <article class="lead{" lead--img" if img else " lead--text"}">
@@ -770,7 +804,7 @@ def lead(a):
         {media}
         <div class="lead__body">
           <div class="lead__kicker"><span class="hero__label"><span class="pulse-dot" aria-hidden="true"></span>Senaste nytt</span>
-          {meta_line(a, flag_html=meta_flag(a, img))}</div>
+          {meta_line(a)}</div>
           <h2 class="lead__title">{nbnum(esc(a["title"]))}</h2>
           <p class="lead__dek">{nbnum(esc(a["excerpt"]))}</p>
           <span class="lead__more">Läs artikeln <span aria-hidden="true">→</span></span>
@@ -780,13 +814,13 @@ def lead(a):
 
 def feed_item(a, h="h4"):
     # krediten visas vid varje bild, även miniatyrer (villkor för pressbilder och CC-licenser)
-    thumb = (f'<figure class="item__img">{flag(a, "thumb")}{img_tag(a["img"], "", sizes="(min-width: 48rem) 15rem, 6.5rem")}'
+    thumb = (f'<figure class="item__img">{img_tag(a["img"], "", sizes="(min-width: 48rem) 15rem, 6.5rem")}'
              f'<figcaption class="item__credit">{esc(a["img"]["credit"])}</figcaption></figure>') if a["img"] else ""
     return f'''
           <li class="item{"" if a["img"] else " item--noimg"}" data-cat="{a["cat"]}">
             <a href="{a["url"]}">
               <div class="item__text">
-                {meta_line(a, with_date=False, flag_html=meta_flag(a, a["img"]))}
+                {meta_line(a, with_date=False)}
                 <{h}>{esc(a["title"])}</{h}>
                 <p>{esc(a["excerpt"])}</p>
               </div>
@@ -815,14 +849,14 @@ def pick_popular(arts, shown):
 
 def popular_card(a, rank):
     img = a["img"]
-    media = (f'<figure class="pop__media"><div class="pop__frame">{flag(a, "thumb")}{img_tag(img, "", sizes=POP_SIZES)}</div>'
+    media = (f'<figure class="pop__media"><div class="pop__frame">{img_tag(img, "", sizes=POP_SIZES)}</div>'
              f'<figcaption class="item__credit">{esc(img["credit"])}</figcaption></figure>') if img else ""
     return f'''
         <li class="pop__card{"" if img else " pop__card--noimg"}">
           <a href="{a["url"]}">
             {media}
             <div class="pop__body">
-              <span class="meta"><span class="pop__rank" aria-hidden="true">{rank:02d}</span><span class="tag">{esc(a["category"])}</span>{meta_flag(a, img)}</span>
+              <span class="meta"><span class="pop__rank" aria-hidden="true">{rank:02d}</span><span class="tag">{esc(a["category"])}</span></span>
               <h3>{esc(a["title"])}</h3>
             </div>
           </a>
@@ -865,21 +899,22 @@ def index(arts):
              preload_img=first["img"], preload_sizes=LEAD_SIZES, feeds=FEEDS, extra=home_ld())
     if rest:
         side = f'<aside class="latest" aria-labelledby="latest-h"><h2 id="latest-h"><span class="pulse-dot" aria-hidden="true"></span>Senaste</h2><ol>' + "".join(
-            f'<li><a href="{a["url"]}">{meta_line(a, flag_html=flag(a, "inline"))}<h3>{esc(a["title"])}</h3></a></li>' for a in rest[:5]) + "</ol></aside>"
+            f'<li><a href="{a["url"]}">{meta_line(a)}<h3>{esc(a["title"])}</h3></a></li>' for a in rest[:5]) + "</ol></aside>"
     else:
         side = ""  # one article: the lead card stands alone
     feed = ""
-    if len(arts) > 1:
+    if rest:
+        # "Alla artiklar" börjar efter toppnyheten: den syns redan stort överst (och bilden laddas då inte två gånger)
         days, order = {}, []
-        for a in arts:
+        for a in rest:
             if a["date"] not in days: days[a["date"]] = []; order.append(a["date"])
             days[a["date"]].append(a)
         cats = []
-        for a in arts:
+        for a in rest:
             if (a["cat"], a["category"]) not in cats: cats.append((a["cat"], a["category"]))
         chips = ""
         if len(cats) > 1:
-            chips = ('<nav aria-label="Kategorier"><ul class="chips"><li><button class="chip" type="button" data-filter="alla" aria-pressed="true">Alla</button></li>'
+            chips = ('<nav aria-label="Filtrera artiklar"><ul class="chips"><li><button class="chip" type="button" data-filter="alla" aria-pressed="true">Alla</button></li>'
                      + "".join(f'<li><button class="chip" type="button" data-filter="{k}" aria-pressed="false">{esc(v)}</button></li>' for k, v in cats) + "</ul></nav>")
         sections = "".join(f'''
       <section class="day" aria-labelledby="d-{d.isoformat()}">
@@ -918,15 +953,16 @@ def caption(im):
     parts = [esc(x) for x in (im["caption"], im["credit"]) if x]
     return f'<figcaption><span>{" <span aria-hidden=\"true\">·</span> ".join(parts)}</span></figcaption>' if parts else ""
 
-def gallery(imgs, flag_html=""):
+def gallery(imgs):
     """En bild: figur i bildens eget format. Flera: bildspel (scroll-snap, utan JS en rad att svepa i).
-    Bild 1 laddas direkt med hög prioritet, övriga lazy. Ingen beskärning: object-fit contain på svart scen."""
+    Bild 1 laddas direkt med hög prioritet, övriga lazy. Ingen beskärning: object-fit contain på svart scen.
+    Inget läggs ovanpå bilden."""
     if not imgs: return ""
     if len(imgs) == 1:
         im = imgs[0]
         return f'''
       <figure class="article__figure article__figure--natural">
-        <div class="frame">{flag_html}{img_tag(im, im["alt"], eager=True, sizes=HERO_SIZES)}</div>
+        <div class="frame">{img_tag(im, im["alt"], eager=True, sizes=HERO_SIZES)}</div>
         {caption(im)}
       </figure>'''
     n = len(imgs)
@@ -936,7 +972,7 @@ def gallery(imgs, flag_html=""):
             {caption(im)}
           </figure></div>''' for i, im in enumerate(imgs, 1))
     return f'''
-      <section class="gallery" aria-roledescription="bildspel" aria-label="Bildspel, {n} bilder" data-gallery>{flag_html}
+      <section class="gallery" aria-roledescription="bildspel" aria-label="Bildspel, {n} bilder" data-gallery>
         <div class="gallery__track" tabindex="0" role="group" aria-label="Bilder. Bläddra med piltangenterna eller svep.">{slides}
         </div>
         <div class="gallery__nav" hidden>
@@ -1015,13 +1051,18 @@ def ld_whole_16x9(a, img):
 TOPIC_DESC = {
     "elbil": "Nyheter om elbilar: nya modeller, priser, räckvidd, laddning och regler som påverkar dig som kör el i Sverige. Varje text länkar till sina källor.",
     "tesla": "Nyheter om Tesla: modeller, priser, mjukvara som FSD och vad som gäller för svenska Teslaägare. Varje text länkar till sina källor.",
-    "sportbil": "Sportbilsnyheter: nya modeller, prestanda, återkallelser och teknik från motorsporten. Varje text länkar till sina källor.",
+    "sportbil": "Sportbilsnyheter: nya modeller, prestanda, återkallelser och teknik. Varje text länkar till sina källor.",
+    "motorsport": "Motorsportnyheter: Formel 1, rally, Le Mans och andra racingserier, med fokus på det som berör svenska fans. Varje text länkar till sina källor.",
     "bransle": "Nyheter om drivmedel, avgifter och regler för bilister: HVO100, reduktionsplikten, skatter och annat som påverkar bilåkandet i Sverige.",
     "laddning": "Nyheter om laddning av elbilar: laddnätverk, priser och teknik. Varje text länkar till sina källor.",
 }
 TOPIC_RESERVED = {"artikel", "om", "feed", "img", "css", "js", "fonts", "favicon", "brand", "content", "data", "drafts",
                   "tools", "supabase", "push", "nyhetsbrev", "integritet", "prenumeration", GUIDE_KEY, "sverige"}
 TOPICS = {}  # kategori-nyckel -> dict(key, name, path, desc, arts), sätts i main()
+# /sverige/: samlingssida för artiklar med sweden: true (samma mall som ämnessidorna, flödet feed/sverige.xml). Ingen
+# kategori, så nyckeln står kvar i TOPIC_RESERVED. Byggs bara när minst en sådan artikel finns.
+SWEDEN = {}  # dict(key, name, path, desc, arts) eller tom, sätts i main()
+SWEDEN_DESC = "Bilnyheter som gäller Sverige: regler, priser, avgifter och modeller som påverkar dig som kör bil här. Varje text länkar till sina källor."
 
 def topic_path(key): return f"/{key}/"
 
@@ -1044,7 +1085,7 @@ def article_topic(a):
     t = TOPICS.get(a["cat"])
     return dict(name=a["category"], path=t["path"]) if t else None
 
-def breadcrumbs(items, extra=""):
+def breadcrumbs(items):
     """items: [(namn, url eller None)], sista ledet är sidan själv. Synliga brödsmulor och BreadcrumbList (JSON-LD)."""
     lis = []
     for i, (name, url) in enumerate(items):
@@ -1052,7 +1093,7 @@ def breadcrumbs(items, extra=""):
         cls = ' class="tag"' if (i == 1 and not last) or (last and len(items) == 2) else ""
         if last: lis.append(f'<li aria-current="page"><span{cls}>{nbnum(esc(name))}</span></li>')
         else: lis.append(f'<li><a{cls} href="{url}">{esc(name)}</a></li>')
-    html_ = f'<nav class="crumbs" aria-label="Brödsmulor"><ol>{"".join(lis)}</ol>{extra}</nav>'
+    html_ = f'<nav class="crumbs" aria-label="Brödsmulor"><ol>{"".join(lis)}</ol></nav>'
     ld = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
         {k: v for k, v in {"@type": "ListItem", "position": i, "name": name, "item": DOMAIN + url if url else None}.items() if v}
         for i, (name, url) in enumerate(items, 1)]}
@@ -1243,8 +1284,7 @@ def article(a, arts=()):
                                           "copyrightNotice": im["license"] or None}.items() if v} for im in imgs]
     if a.get("sources"): ld["citation"] = [u for _, u in a["sources"]]
     topic = article_topic(a)
-    crumbs_html, crumbs_ld = breadcrumbs([("Start", "/")] + ([(topic["name"], topic["path"])] if topic else []) + [(a["headline"], a["url"])],
-                                         meta_flag(a, imgs))
+    crumbs_html, crumbs_ld = breadcrumbs([("Start", "/")] + ([(topic["name"], topic["path"])] if topic else []) + [(a["headline"], a["url"])])
     jsonld = ('<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace("</", "<\\/") + "</script>\n"
               + ld_script(crumbs_ld))
     og = og_image(a)
@@ -1279,7 +1319,7 @@ def article(a, arts=()):
         <h1 class="article__title">{nbnum(esc(a["headline"]))}</h1>
         <p class="article__dek">{nbnum(esc(a["excerpt"]))}</p>
         <p class="byline"><span>Publicerad <b><time datetime="{a["published"]}">{sv_date(a["date"])}</time></b></span>{updated}<span>Läsetid <b>{a["minutes"]} min</b></span><span>Av <b>{author}</b></span></p>{share_bar(a, "top")}
-      </header>{summary_box(a)}{gallery(imgs, flag(a, "hero"))}
+      </header>{summary_box(a)}{gallery(imgs)}
       <div class="article__layout article__col">
         <div class="prose">
 {nbnum_html(a["body_html"])}
@@ -1319,14 +1359,14 @@ def thumb(img):
 
 def related_card(b):
     img = b["img"]
-    media = (f'<figure class="related__media"><div class="related__frame">{flag(b, "thumb")}{img_tag(thumb(img), "", sizes=RELATED_SIZES)}</div>'
+    media = (f'<figure class="related__media"><div class="related__frame">{img_tag(thumb(img), "", sizes=RELATED_SIZES)}</div>'
              f'<figcaption class="item__credit">{esc(img["credit"])}</figcaption></figure>') if img else ""
     return f'''
             <li class="related__card{"" if img else " related__card--noimg"}">
               <a href="{b["url"]}">
                 {media}
                 <div class="related__body">
-                  <span class="meta"><span class="tag">{esc(GUIDE_NAME if is_guide(b) and b["cat"] != GUIDE_KEY else b["category"])}</span>{meta_flag(b, img)}<time datetime="{b["published"]}">{sv_date(b["date"])}</time></span>
+                  <span class="meta"><span class="tag">{esc(GUIDE_NAME if is_guide(b) and b["cat"] != GUIDE_KEY else b["category"])}</span><time datetime="{b["published"]}">{sv_date(b["date"])}</time></span>
                   <h3>{nbnum(esc(b["title"]))}</h3>
                 </div>
               </a>
@@ -1459,6 +1499,9 @@ def main():
     FEEDS = category_feeds(arts)
     GUIDES[:] = [a for a in arts if is_guide(a)]
     TOPICS.clear(); TOPICS.update(build_topics(arts))
+    sv = [a for a in arts if a.get("sweden")]
+    SWEDEN.clear()
+    if sv: SWEDEN.update(key="sverige", name="Sverige", path="/sverige/", desc=SWEDEN_DESC, arts=sv)
     # clean old article output so removed articles disappear
     shutil.rmtree(os.path.join(ROOT, "artikel"), ignore_errors=True)
     if os.path.exists(os.path.join(ROOT, "artikel.html")): os.remove(os.path.join(ROOT, "artikel.html"))
@@ -1469,6 +1512,8 @@ def main():
     for k in set(TOPIC_DESC) | set(TOPICS):  # ämnen utan artiklar: ingen sida
         if k not in TOPIC_RESERVED and re.fullmatch(r"[a-z0-9-]+", k): shutil.rmtree(os.path.join(ROOT, k), ignore_errors=True)
     for t in TOPICS.values(): write(t["path"].lstrip("/") + "index.html", topic_page(t))
+    shutil.rmtree(os.path.join(ROOT, "sverige"), ignore_errors=True)
+    if SWEDEN: write("sverige/index.html", topic_page(SWEDEN, list_label="Alla artiklar som gäller Sverige"))
     shutil.rmtree(os.path.join(ROOT, "om"), ignore_errors=True)
     for p in pages: write(p["path"].lstrip("/") + "index.html", info_page(p, arts))
     write("404.html", notfound())
@@ -1476,6 +1521,7 @@ def main():
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
           + "".join(f"  <url><loc>{DOMAIN}{u}</loc><lastmod>{lastmod(u, arts)}</lastmod></url>\n" for u, d in urls)
           + "".join(f"  <url><loc>{DOMAIN}{t['path']}</loc><lastmod>{lastmod(t['path'], t['arts'])}</lastmod></url>\n" for t in TOPICS.values())
+          + (f"  <url><loc>{DOMAIN}{SWEDEN['path']}</loc><lastmod>{lastmod(SWEDEN['path'], SWEDEN['arts'])}</lastmod></url>\n" if SWEDEN else "")
           + (f"  <url><loc>{DOMAIN}{GUIDE_PATH}</loc><lastmod>{lastmod(GUIDE_PATH, GUIDES)}</lastmod></url>\n" if GUIDES else "")
           + "".join(f"  <url><loc>{DOMAIN}{p['path']}</loc></url>\n" for p in pages) + "</urlset>\n")
     write("sitemap-news.xml", news_sitemap(arts))
