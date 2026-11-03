@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="/feed.xsl"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
 <channel>
   <title>Motorpuls: Bränsle</title>
   <link>https://motorpuls.se/</link>
@@ -15,6 +15,8 @@
     <pubDate>Mon, 02 Nov 2026 07:00:00 +0100</pubDate>
     <category>Bränsle</category>
     <description>Polisbilar som mäter hastigheten på bilar framför och i mötande körfält finns nu i alla sju polisregioner. Inga automatiska böter, men fler kan åka fast.</description>
+    <enclosure url="https://motorpuls.se/img/og/polisens-radarbilar-hela-sverige.jpg" length="171587" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/polisens-radarbilar-hela-sverige.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="171587"/>
   </item>
   <item>
     <title>Utredning vill föra in HVO100 i reduktionsplikten senast 2031</title>
@@ -23,6 +25,8 @@
     <pubDate>Fri, 30 Oct 2026 01:19:00 +0100</pubDate>
     <category>Bränsle</category>
     <description>Styrmedelsutredningen föreslår 21, 23 och 25 procents reduktionsplikt 2028 till 2030 och att HVO100 förs in i plikten och beskattas fullt senast 2031.</description>
+    <enclosure url="https://motorpuls.se/img/og/hvo100-reduktionsplikten-utredning-2031.jpg" length="142297" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/hvo100-reduktionsplikten-utredning-2031.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="142297"/>
   </item>
 </channel>
 </rss>

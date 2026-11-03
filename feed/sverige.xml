@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="/feed.xsl"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
 <channel>
   <title>Motorpuls: Sverige</title>
   <link>https://motorpuls.se/</link>
@@ -15,6 +15,8 @@
     <pubDate>Mon, 02 Nov 2026 12:00:00 +0100</pubDate>
     <category>Elbil</category>
     <description>För första gången på 63 år är alla finalister i Car of the Year elbilar, och Volvo EX60 är en av sju som kan vinna.</description>
+    <enclosure url="https://motorpuls.se/img/og/arets-bil-2027-bara-elbilar-volvo-ex60-hel.jpg" length="162887" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/arets-bil-2027-bara-elbilar-volvo-ex60-hel.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="162887"/>
   </item>
   <item>
     <title>Polisens radar mäter 18 gånger i sekunden. Nu finns den i hela Sverige</title>
@@ -23,6 +25,8 @@
     <pubDate>Mon, 02 Nov 2026 07:00:00 +0100</pubDate>
     <category>Bränsle</category>
     <description>Polisbilar som mäter hastigheten på bilar framför och i mötande körfält finns nu i alla sju polisregioner. Inga automatiska böter, men fler kan åka fast.</description>
+    <enclosure url="https://motorpuls.se/img/og/polisens-radarbilar-hela-sverige.jpg" length="171587" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/polisens-radarbilar-hela-sverige.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="171587"/>
   </item>
   <item>
     <title>Över en halv miljon kronor för en plats i kön. Tesla lovar inte ens att Roadster levereras</title>
@@ -31,6 +35,8 @@
     <pubDate>Sun, 01 Nov 2026 18:00:00 +0100</pubDate>
     <category>Tesla</category>
     <description>Att reservera nya Tesla Roadster i Sverige kostar enligt Tesla Roadster Info 545 000 kronor, men det amerikanska avtalet lovar varken pris eller leverans.</description>
+    <enclosure url="https://motorpuls.se/img/og/tesla-roadster-avtackad-produktion-2028.jpg" length="55012" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/tesla-roadster-avtackad-produktion-2028.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="55012"/>
   </item>
   <item>
     <title>Tio EU-länder har sagt ja till Teslas FSD. Därför får Sverige vänta till tidigast 2027</title>
@@ -39,6 +45,8 @@
     <pubDate>Sat, 31 Oct 2026 18:00:00 +0100</pubDate>
     <category>Tesla</category>
     <description>Lettland blev tionde EU-land att tillåta Teslas förarstöd och Italien stödjer ett snabbt EU-beslut, men i Sverige är funktionen fortfarande inte tillåten för vanliga ägare.</description>
+    <enclosure url="https://motorpuls.se/img/og/tesla-fsd-sverige-eu-omrostning-december.jpg" length="133874" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/tesla-fsd-sverige-eu-omrostning-december.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="133874"/>
   </item>
 </channel>
 </rss>

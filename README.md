@@ -36,13 +36,18 @@ python3 -m venv .venv && .venv/bin/pip install markdown pyyaml pillow
 Startsidans "Populärt just nu" läser `data/popular.json` (artiklar i ordning efter sidvisningar). Uppdatera den med
 `CLOUDFLARE_ANALYTICS_TOKEN=... .venv/bin/python tools/update_popular.py` (Cloudflare Web Analytics, senaste 7 dygnen;
 token med Account Analytics: Read, skrivs aldrig ut). Saknas filen fylls rutan med de senaste artiklarna.
+Obs: sedan 3 november 2026 finns ingen Cloudflare Web Analytics-beacon i sidorna (`ANALYTICS` i build.py är tom), så
+skriptet får inga nya sidvisningar och filen står still tills en annan källa väljs.
 
 ### RSS
 
 `feed.xml` har alla artiklar, `feed/<kategori>.xml` bara en kategori (RSS 2.0, samma ordning som startsidan). Alla sidor har
 `<link rel="alternate" type="application/rss+xml">` till `feed.xml`. Startsidan listar även kategoriflödena och varje artikel sitt
 kategoriflöde. Sidfoten har länken RSS (ikon + text) och RSS per kategori. Artiklar slutar med raden "Prenumerera via RSS".
-Det finns inga kategorisidor ännu; när de kommer ska raden "Prenumerera via RSS" även stå där.
+Varje item har delningsbilden (1200×630 JPEG) som `<enclosure>` och `<media:content>` (namnrymden Media RSS).
+Ämnessidorna (`/elbil/`, `/sportbil/`, `/motorsport/`, `/bransle/`, `/tesla/`) och `/sverige/` (artiklar med `sweden: true`)
+har raden "Prenumerera via RSS" med sitt eget flöde. Ämnesraden under sidhuvudet länkar till ämnessidorna och nyhetsbrevsrutan
+(`SECTION_NAV` i build.py).
 
 ### Push-rutan (förhandsvisning, av i produktion)
 
