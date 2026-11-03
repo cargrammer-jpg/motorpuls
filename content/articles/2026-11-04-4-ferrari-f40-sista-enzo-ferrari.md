@@ -1,7 +1,7 @@
 ---
 title: "Enzo Ferraris sista bil. En F40 som stod i Sverige i 20 år såldes för 51 miljoner kronor"
 seo_title: "Ferrari F40: design, fakta och hur många som finns kvar"
-date: 2026-11-04T18:00:00+01:00
+date: 2026-11-13T18:00:00+01:00
 slug: ferrari-f40-sista-enzo-ferrari
 tags: [Ferrari, F40, Enzo Ferrari, Pininfarina, klassiker, sportbil, Le Mans, BPR, auktion]
 sources:
