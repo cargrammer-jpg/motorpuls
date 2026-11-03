@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Tue, 03 Nov 2026 12:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Thu, 05 Nov 2026 18:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Han missade VM-guldet med fem poäng. Nu får Oliver Solberg ratta Toyotas nya Celica</title>
+    <link>https://motorpuls.se/artikel/toyota-celica-rally-vm-oliver-solberg-2027/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/toyota-celica-rally-vm-oliver-solberg-2027/</guid>
+    <pubDate>Thu, 05 Nov 2026 18:00:00 +0100</pubDate>
+    <category>Motorsport</category>
+    <description>Toyota tar tillbaka Celica till rally-VM 2027 och delar upp fabrikssatsningen i två stall. Oliver Solberg blir en av tre förare i den nya bilen.</description>
+    <enclosure url="https://motorpuls.se/img/articles/toyota-celica-rally-vm-oliver-solberg-2027/celica-st165-sanremo-1990-commons.webp" length="113720" type="image/webp"/>
+    <media:content url="https://motorpuls.se/img/articles/toyota-celica-rally-vm-oliver-solberg-2027/celica-st165-sanremo-1990-commons.webp" medium="image" type="image/webp" width="1600" height="1068" fileSize="113720"/>
+  </item>
   <item>
     <title>Golf blir hybrid för 373 900 kronor. Samtidigt lägger VW eldrivna Golf på is</title>
     <link>https://motorpuls.se/artikel/volkswagen-golf-hybrid-pris-id-golf-pausas/</link>

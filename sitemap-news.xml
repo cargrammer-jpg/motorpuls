@@ -1,69 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
-    <loc>https://motorpuls.se/artikel/volkswagen-golf-hybrid-pris-id-golf-pausas/</loc>
+    <loc>https://motorpuls.se/artikel/toyota-celica-rally-vm-oliver-solberg-2027/</loc>
     <news:news>
       <news:publication>
         <news:name>Motorpuls</news:name>
         <news:language>sv</news:language>
       </news:publication>
-      <news:publication_date>2026-11-03T12:00:00+01:00</news:publication_date>
-      <news:title>Golf blir hybrid för 373 900 kronor. Samtidigt lägger VW eldrivna Golf på is</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/mest-salda-elbilen-inte-tesla/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-03T07:00:00+01:00</news:publication_date>
-      <news:title>Teslas ras i oktober: Model Y föll från etta till elfte plats på en månad</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/antonelli-yngste-varldsmastare-f1/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-02T18:00:00+01:00</news:publication_date>
-      <news:title>20 år gammal och redan världsmästare. Antonelli krossade Vettels rekord med över tre år</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/arets-bil-2027-bara-elbilar-volvo-ex60/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-02T12:00:00+01:00</news:publication_date>
-      <news:title>Inte en enda bensinbil kvar. Svenska Volvo slåss om Europas finaste bilpris</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/polisens-radarbilar-hela-sverige/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-02T07:00:00+01:00</news:publication_date>
-      <news:title>Polisens radar mäter 18 gånger i sekunden. Nu finns den i hela Sverige</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/tesla-roadster-avtackad-produktion-2028/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-01T18:00:00+01:00</news:publication_date>
-      <news:title>Över en halv miljon kronor för en plats i kön. Tesla lovar inte ens att Roadster levereras</news:title>
+      <news:publication_date>2026-11-05T18:00:00+01:00</news:publication_date>
+      <news:title>Han missade VM-guldet med fem poäng. Nu får Oliver Solberg ratta Toyotas nya Celica</news:title>
     </news:news>
   </url>
 </urlset>
