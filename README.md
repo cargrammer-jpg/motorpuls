@@ -36,8 +36,6 @@ python3 -m venv .venv && .venv/bin/pip install markdown pyyaml pillow
 Startsidans "Populärt just nu" läser `data/popular.json` (artiklar i ordning efter sidvisningar). Uppdatera den med
 `CLOUDFLARE_ANALYTICS_TOKEN=... .venv/bin/python tools/update_popular.py` (Cloudflare Web Analytics, senaste 7 dygnen;
 token med Account Analytics: Read, skrivs aldrig ut). Saknas filen fylls rutan med de senaste artiklarna.
-Obs: sedan 3 november 2026 finns ingen Cloudflare Web Analytics-beacon i sidorna (`ANALYTICS` i build.py är tom), så
-skriptet får inga nya sidvisningar och filen står still tills en annan källa väljs.
 
 ### RSS
 

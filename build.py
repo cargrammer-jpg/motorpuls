@@ -138,9 +138,8 @@ NEWSLETTER_CONFIG = {"api": "https://yhxnrcykinmuoqbgboda.supabase.co/functions/
 NEWSLETTER_PAGES = ("integritet", "prenumeration")  # kataloger som bara byggs med flaggan på
 NEWSLETTER_SRC = os.path.join(ROOT, "nyhetsbrev")  # källor: nyhetsbrev.css, nyhetsbrev.js (publiceras inte som katalog)
 
-# Ingen statistik i sidorna: Cloudflare Web Analytics togs bort 3 nov 2026 (Cloudflare används inte längre). Lägg inte
-# till något annat utan ALX:s beslut. data/popular.json uppdateras därför inte med nya siffror (tools/update_popular.py).
-ANALYTICS = ""
+ANALYTICS = """<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "bace28864ae04c6fa5e9f4a98ca70f94"}'></script><!-- End Cloudflare Web Analytics -->
+"""
 
 # ---------- content ----------
 TZ = ZoneInfo("Europe/Stockholm")
