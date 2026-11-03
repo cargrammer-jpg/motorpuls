@@ -98,6 +98,7 @@ box-shadow:0 0 0 1px var(--line),0 40px 80px -40px rgb(255 91 31 / .25)}
 .lead--text a{background:radial-gradient(40rem 22rem at 0% 0%,rgb(255 91 31 / .14),transparent 70%),linear-gradient(180deg,var(--raised),var(--surface))}
 .lead__media{margin:0;background:#000;align-self:center}
 .lead__frame{position:relative;overflow:hidden}
+.lead__frame picture{display:block}
 .lead__media img{width:100%;height:auto}
 .lead__media figcaption{font-family:var(--mono);font-size:.7rem;color:var(--muted);padding:.5rem .9rem;background:var(--bg-2)}
 .lead__media figcaption:empty{display:none}
@@ -376,6 +377,18 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
 .masthead.is-small .topnav{transform:translateY(15.5px)}
 .masthead:has(:focus-visible) .topnav{transform:none}
 @media (max-width:23rem){.topnav a{padding-inline:.4rem;font-size:.85rem}}
+.secnav{border-bottom:1px solid var(--line);background:var(--bg)}
+.secnav__list{list-style:none;margin:0;padding:0;display:flex;gap:.25rem;overflow-x:auto;scrollbar-width:none;
+margin-inline:-.6rem;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 2rem),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 2rem),transparent)}
+.secnav__list::-webkit-scrollbar{display:none}
+.secnav__list li:last-child{padding-right:1.5rem}
+.secnav a{display:inline-flex;align-items:center;min-height:2.75rem;padding-inline:.6rem;font-size:.875rem;font-weight:650;white-space:nowrap;
+color:var(--text-2);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:.45em;text-decoration-color:transparent;
+transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
+.secnav a:hover{color:var(--text);text-decoration-color:var(--line-strong)}
+.secnav a[aria-current="page"]{color:var(--text);text-decoration-color:var(--pulse)}
+.secnav a:focus-visible{outline-offset:-2px}
+@media (min-width:48rem){.secnav__list{-webkit-mask-image:none;mask-image:none}.secnav__list li:last-child{padding-right:0}}
 .catpage{padding-block:clamp(1.5rem,4vw,3.5rem) clamp(3rem,7vw,6rem)}
 .catpage__head{display:grid;gap:1rem;max-width:48rem}
 .catpage__title{font-size:clamp(2rem,1rem + 4vw,3.5rem);line-height:1;font-weight:820;font-stretch:115%;letter-spacing:-.035em;color:#fff}
@@ -470,6 +483,7 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
     <a class="wordmark" href="/"><img class="logo" src="/img/logo.svg" alt="Motorpuls" width="872" height="88"><svg class="wordmark__flag" viewBox="0 0 16 10" width="16" height="10" aria-hidden="true" focusable="false"><rect width="16" height="10" fill="#0A2260"/><rect x="5" width="2" height="10" fill="#FECC00"/><rect y="4" width="16" height="2" fill="#FECC00"/></svg></a>
   </div>
 </header>
+<nav class="secnav" aria-label="Kategorier"><div class="wrap"><ul class="secnav__list"><li><a href="/elbil/">Elbil</a></li><li><a href="/sportbil/">Sportbil</a></li><li><a href="/motorsport/">Motorsport</a></li><li><a href="/bransle/">Bränsle</a></li><li><a href="/tesla/">Tesla</a></li><li><a href="#nyhetsbrev-fot">Nyhetsbrev</a></li></ul></div></nav>
 
 <main id="innehall" class="article">
   <div class="wrap">
@@ -487,11 +501,11 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
     <a class="wordmark" href="/"><img class="logo logo--footer" src="/img/logo.svg" alt="Motorpuls" width="872" height="88" loading="lazy"></a>
     <p class="site-footer__desc">Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</p>
     <nav class="site-footer__nav" aria-label="Om Motorpuls"><ul><li><a href="/om/">Om Motorpuls</a></li><li><a href="/om/lukas/">Om Lukas</a></li></ul></nav>
-    <nav class="site-footer__nav site-footer__topics" aria-label="Ämnen"><ul><li><a href="/sportbil/">Sportbil</a></li><li><a href="/elbil/">Elbil</a></li><li><a href="/bransle/">Bränsle</a></li><li><a href="/tesla/">Tesla</a></li></ul></nav>
+    <nav class="site-footer__nav site-footer__topics" aria-label="Ämnen"><ul><li><a href="/elbil/">Elbil</a></li><li><a href="/sportbil/">Sportbil</a></li><li><a href="/motorsport/">Motorsport</a></li><li><a href="/bransle/">Bränsle</a></li><li><a href="/tesla/">Tesla</a></li><li><a href="/sverige/">Sverige</a></li></ul></nav>
     <div class="site-footer__rss">
       <a class="rss-link" href="/feed.xml"><svg class="rss-icon" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><rect width="16" height="16" rx="3" fill="#FF5B1F"/><circle cx="4.6" cy="11.4" r="1.5" fill="#0B0D10"/><path d="M3.2 7.1a5.7 5.7 0 0 1 5.7 5.7M3.2 3.6a9.2 9.2 0 0 1 9.2 9.2" fill="none" stroke="#0B0D10" stroke-width="1.8" stroke-linecap="round"/></svg>RSS</a>
       <span class="site-footer__feeds-label" id="rss-kat">RSS per kategori:</span>
-      <ul class="site-footer__feeds" aria-labelledby="rss-kat"><li><a href="/feed/sportbil.xml">Sportbil</a></li><li><a href="/feed/elbil.xml">Elbil</a></li><li><a href="/feed/bransle.xml">Bränsle</a></li><li><a href="/feed/tesla.xml">Tesla</a></li><li><a href="/feed/sverige.xml">Sverige</a></li></ul>
+      <ul class="site-footer__feeds" aria-labelledby="rss-kat"><li><a href="/feed/motorsport.xml">Motorsport</a></li><li><a href="/feed/elbil.xml">Elbil</a></li><li><a href="/feed/bransle.xml">Bränsle</a></li><li><a href="/feed/tesla.xml">Tesla</a></li><li><a href="/feed/sportbil.xml">Sportbil</a></li><li><a href="/feed/sverige.xml">Sverige</a></li></ul>
     </div>
     <p class="fine">© 2026 Motorpuls<span class="site-footer__contact"> <span aria-hidden="true">·</span> <a href="mailto:hello@motorpuls.se">hello@motorpuls.se</a></span></p>
     </div>

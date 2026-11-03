@@ -14,7 +14,7 @@ summary:
   - "Antonelli säkrade VM-titeln med en tredjeplats i Mexikos GP. Han behövde bara bli nia."
   - "Han är 20 år och 68 dagar. Vettels gamla rekord från 2010 var 23 år och 134 dagar."
   - "Första italienska världsmästaren sedan Alberto Ascari 1953. Verstappen vann loppet."
-category: Sportbil
+category: Motorsport
 author: Lukas
 images:
   - src: "img/antonelli-yngste-varldsmastare-f1/antonelli-kina-2026-firande-commons.jpg"

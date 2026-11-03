@@ -1,21 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="/feed.xsl"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
 <channel>
   <title>Motorpuls: Sportbil</title>
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Sportbil på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Mon, 02 Nov 2026 18:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Sat, 31 Oct 2026 12:33:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/sportbil.xml" rel="self" type="application/rss+xml"/>
-  <item>
-    <title>20 år gammal och redan världsmästare. Antonelli krossade Vettels rekord med över tre år</title>
-    <link>https://motorpuls.se/artikel/antonelli-yngste-varldsmastare-f1/</link>
-    <guid isPermaLink="true">https://motorpuls.se/artikel/antonelli-yngste-varldsmastare-f1/</guid>
-    <pubDate>Mon, 02 Nov 2026 18:00:00 +0100</pubDate>
-    <category>Sportbil</category>
-    <description>En tredjeplats i Mexiko räckte. Kimi Antonelli blev Formel 1:s yngste världsmästare, 20 år och 68 dagar gammal, och första italienska mästaren sedan 1953.</description>
-  </item>
   <item>
     <title>M3 som elbil: fyra motorer, över 100 kWh och noll fejkat ljud</title>
     <link>https://motorpuls.se/artikel/bmw-m3-el-fyra-motorer/</link>
@@ -23,6 +15,8 @@
     <pubDate>Sat, 31 Oct 2026 12:33:00 +0100</pubDate>
     <category>Sportbil</category>
     <description>BMW:s utvecklingsstyrelse har kört den första helt eldrivna M3:an i förserieutförande, en bil med fyra elmotorer som ska byggas i München.</description>
+    <enclosure url="https://motorpuls.se/img/og/bmw-m3-el-fyra-motorer-hel.jpg" length="132085" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/bmw-m3-el-fyra-motorer-hel.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="132085"/>
   </item>
   <item>
     <title>BMW säljer en 3-serie med driftläge. Haken: det fungerar först i juli 2027</title>
@@ -31,6 +25,8 @@
     <pubDate>Fri, 30 Oct 2026 11:55:00 +0100</pubDate>
     <category>Sportbil</category>
     <description>Nya BMW M350 xDrive kan skicka hela motorkraften till bakhjulen med ett tryck på skärmen, men funktionen låses upp först i juli 2027.</description>
+    <enclosure url="https://motorpuls.se/img/og/bmw-m350-drift-moment-juli-2027-hel.jpg" length="80153" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/bmw-m350-drift-moment-juli-2027-hel.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="80153"/>
   </item>
   <item>
     <title>Bensin-Macan slog elversionen med nästan 5 000 bilar. Nu gör Porsche helt om</title>
@@ -39,6 +35,8 @@
     <pubDate>Fri, 30 Oct 2026 11:54:00 +0100</pubDate>
     <category>Sportbil</category>
     <description>Porsches nya SUV med bensin- och laddhybridmotor kommer 2028 och ska heta Macan, samma namn som elbilen.</description>
+    <enclosure url="https://motorpuls.se/img/og/porsche-macan-bensin-namn-2028-hel.jpg" length="227602" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/porsche-macan-bensin-namn-2028-hel.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="227602"/>
   </item>
   <item>
     <title>Aston Martin Valhalla Spider: 1 079 hk och samma toppfart utan tak</title>
@@ -47,6 +45,8 @@
     <pubDate>Fri, 30 Oct 2026 03:15:00 +0100</pubDate>
     <category>Sportbil</category>
     <description>Aston Martin visar Valhalla Spider, en öppen laddhybrid med 1 079 hk, över 600 kilo downforce och leveranser från tredje kvartalet 2027.</description>
+    <enclosure url="https://motorpuls.se/img/og/aston-martin-valhalla-spider-hel.jpg" length="75570" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/aston-martin-valhalla-spider-hel.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="75570"/>
   </item>
 </channel>
 </rss>
