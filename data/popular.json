@@ -1,9 +1,13 @@
 {
-  "updated": "2026-10-31T12:05+01:00",
-  "source": "Cloudflare Web Analytics, sidvisningar 2026-10-25 till 2026-10-31",
+  "updated": "2026-11-02T12:06+01:00",
+  "source": "Cloudflare Web Analytics, sidvisningar 2026-10-27 till 2026-11-02",
   "articles": [
     {
       "slug": "bmw-m350-drift-moment-juli-2027",
+      "views": 18
+    },
+    {
+      "slug": "tesla-model-y-strukturellt-batteri-betyg-d-volvo-ex60",
       "views": 16
     },
     {
@@ -11,12 +15,76 @@
       "views": 15
     },
     {
-      "slug": "tesla-model-y-strukturellt-batteri-betyg-d-volvo-ex60",
-      "views": 13
+      "slug": "bmw-m3-el-fyra-motorer",
+      "views": 10
+    },
+    {
+      "slug": "arets-bil-2027-bara-elbilar-volvo-ex60",
+      "views": 9
     },
     {
       "slug": "hvo100-reduktionsplikten-utredning-2031",
+      "views": 9
+    },
+    {
+      "slug": "polisens-radarbilar-hela-sverige",
       "views": 8
+    },
+    {
+      "slug": "mest-salda-elbilen-inte-tesla",
+      "views": 7
+    },
+    {
+      "slug": "bmw-ix3-m60-highway-assistant-sverige",
+      "views": 7
+    },
+    {
+      "slug": "e4-forbifart-stockholm-oppnar-6-december",
+      "views": 6
+    },
+    {
+      "slug": "ferrari-f40-sista-enzo-ferrari",
+      "views": 6
+    },
+    {
+      "slug": "volkswagen-golf-hybrid-pris-id-golf-pausas",
+      "views": 6
+    },
+    {
+      "slug": "jaguar-type-01-rackvidd-type-00",
+      "views": 6
+    },
+    {
+      "slug": "vinterdack-bot-dubbdacksforbud-stockholm",
+      "views": 6
+    },
+    {
+      "slug": "formansvarde-elbil-2027-per-modell",
+      "views": 6
+    },
+    {
+      "slug": "fartkameror-119000-boter-21-nya-kameror",
+      "views": 5
+    },
+    {
+      "slug": "bmw-m3-e30-homologering-dtm",
+      "views": 4
+    },
+    {
+      "slug": "lamborghini-diablo-djavulen-chrysler",
+      "views": 3
+    },
+    {
+      "slug": "mclaren-f1-mittensits-le-mans",
+      "views": 3
+    },
+    {
+      "slug": "tesla-fsd-sverige-eu-omrostning-december",
+      "views": 2
+    },
+    {
+      "slug": "tesla-roadster-avtackad-produktion-2028",
+      "views": 1
     }
   ]
 }
