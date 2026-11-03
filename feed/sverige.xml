@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Sverige på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Tue, 03 Nov 2026 12:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Wed, 04 Nov 2026 18:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/sverige.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Ditt vanliga körkort kan snart räcka till 4,25 ton. Men bara i rätt sorts bil</title>
+    <link>https://motorpuls.se/artikel/b-korkort-4-25-ton-b1-korkort-15-aringar/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/b-korkort-4-25-ton-b1-korkort-15-aringar/</guid>
+    <pubDate>Wed, 04 Nov 2026 18:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>Ett nytt förslag höjer gränsen för B-körkort till 4,25 ton och för BE till 7,75 ton med släp. Haken är att bilen måste gå på el, vätgas eller gas.</description>
+    <enclosure url="https://motorpuls.se/img/articles/b-korkort-4-25-ton-b1-korkort-15-aringar/elbil-med-slap-commons.webp" length="156602" type="image/webp"/>
+    <media:content url="https://motorpuls.se/img/articles/b-korkort-4-25-ton-b1-korkort-15-aringar/elbil-med-slap-commons.webp" medium="image" type="image/webp" width="1600" height="1061" fileSize="156602"/>
+  </item>
   <item>
     <title>Golf blir hybrid för 373 900 kronor. Samtidigt lägger VW eldrivna Golf på is</title>
     <link>https://motorpuls.se/artikel/volkswagen-golf-hybrid-pris-id-golf-pausas/</link>
