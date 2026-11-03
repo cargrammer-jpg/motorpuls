@@ -1,7 +1,7 @@
 ---
 title: "Chrysler tyckte att Diablo var för vass. Så många av Lamborghinis djävul finns kvar"
 seo_title: "Lamborghini Diablo: design, fakta och hur många som är kvar"
-date: 2026-11-05T18:00:00+01:00
+date: 2026-11-14T18:00:00+01:00
 slug: lamborghini-diablo-djavulen-chrysler
 tags: [Lamborghini, Diablo, Marcello Gandini, Chrysler, V12, klassiker, sportbil, auktion]
 sources:
