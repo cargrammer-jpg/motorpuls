@@ -12,6 +12,17 @@
     </news:news>
   </url>
   <url>
+    <loc>https://motorpuls.se/artikel/jaguar-type-01-rackvidd-type-00/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-04T07:00:00+01:00</news:publication_date>
+      <news:title>Jaguars nya elbil har 1 030 hk. Men den når inte räckvidden Jaguar lovade</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://motorpuls.se/artikel/volkswagen-golf-hybrid-pris-id-golf-pausas/</loc>
     <news:news>
       <news:publication>
