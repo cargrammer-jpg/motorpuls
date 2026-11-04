@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
+    <loc>https://motorpuls.se/artikel/volvo-forsaljning-ras-oktober-2026/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-04T21:00:00+01:00</news:publication_date>
+      <news:title>Volvo tappar nästan var sjätte bil. I Sverige halverades XC60 på ett år</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://motorpuls.se/artikel/b-korkort-4-25-ton-b1-korkort-15-aringar/</loc>
     <news:news>
       <news:publication>
