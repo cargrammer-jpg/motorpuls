@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
+    <loc>https://motorpuls.se/artikel/jaguar-type-01-rackvidd-type-00/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-04T07:00:00+01:00</news:publication_date>
+      <news:title>Jaguars nya elbil har 1 030 hk. Men den når inte räckvidden Jaguar lovade</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://motorpuls.se/artikel/volkswagen-golf-hybrid-pris-id-golf-pausas/</loc>
     <news:news>
       <news:publication>
@@ -42,28 +53,6 @@
       </news:publication>
       <news:publication_date>2026-11-02T12:00:00+01:00</news:publication_date>
       <news:title>Inte en enda bensinbil kvar. Svenska Volvo slåss om Europas finaste bilpris</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/polisens-radarbilar-hela-sverige/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-02T07:00:00+01:00</news:publication_date>
-      <news:title>Polisens radar mäter 18 gånger i sekunden. Nu finns den i hela Sverige</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/tesla-roadster-avtackad-produktion-2028/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-01T18:00:00+01:00</news:publication_date>
-      <news:title>Över en halv miljon kronor för en plats i kön. Tesla lovar inte ens att Roadster levereras</news:title>
     </news:news>
   </url>
 </urlset>

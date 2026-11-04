@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Elbil på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Tue, 03 Nov 2026 07:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Wed, 04 Nov 2026 07:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/elbil.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Jaguars nya elbil har 1 030 hk. Men den når inte räckvidden Jaguar lovade</title>
+    <link>https://motorpuls.se/artikel/jaguar-type-01-rackvidd-type-00/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/jaguar-type-01-rackvidd-type-00/</guid>
+    <pubDate>Wed, 04 Nov 2026 07:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>Jaguar Type 01 är produktionsbilen efter konceptet Type 00. Den har 1 030 hk och laddar snabbare än utlovat, men räckvidden blev 5 mil kortare.</description>
+    <enclosure url="https://motorpuls.se/img/og/jaguar-type-01-rackvidd-type-00-hel.jpg" length="65478" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/jaguar-type-01-rackvidd-type-00-hel.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="65478"/>
+  </item>
   <item>
     <title>Teslas ras i oktober: Model Y föll från etta till elfte plats på en månad</title>
     <link>https://motorpuls.se/artikel/mest-salda-elbilen-inte-tesla/</link>
