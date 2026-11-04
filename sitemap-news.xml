@@ -12,6 +12,17 @@
     </news:news>
   </url>
   <url>
+    <loc>https://motorpuls.se/artikel/b-korkort-4-25-ton-b1-korkort-15-aringar/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-04T18:00:00+01:00</news:publication_date>
+      <news:title>Ditt vanliga körkort kan snart räcka till 4,25 ton. Men bara i rätt sorts bil</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://motorpuls.se/artikel/jaguar-type-01-rackvidd-type-00/</loc>
     <news:news>
       <news:publication>
