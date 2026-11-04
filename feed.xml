@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Wed, 04 Nov 2026 07:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Wed, 04 Nov 2026 18:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Ditt vanliga körkort kan snart räcka till 4,25 ton. Men bara i rätt sorts bil</title>
+    <link>https://motorpuls.se/artikel/b-korkort-4-25-ton-b1-korkort-15-aringar/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/b-korkort-4-25-ton-b1-korkort-15-aringar/</guid>
+    <pubDate>Wed, 04 Nov 2026 18:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>Ett nytt förslag höjer gränsen för B-körkort till 4,25 ton och för BE till 7,75 ton med släp. Haken är att bilen måste gå på el, vätgas eller gas.</description>
+    <enclosure url="https://motorpuls.se/img/og/b-korkort-4-25-ton-b1-korkort-15-aringar.jpg" length="130689" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/b-korkort-4-25-ton-b1-korkort-15-aringar.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="130689"/>
+  </item>
   <item>
     <title>Jaguars nya elbil har 1 030 hk. Men den når inte räckvidden Jaguar lovade</title>
     <link>https://motorpuls.se/artikel/jaguar-type-01-rackvidd-type-00/</link>
