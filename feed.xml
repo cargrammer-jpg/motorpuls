@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Wed, 04 Nov 2026 07:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Fri, 13 Nov 2026 07:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Italien vill ge böter till dig som kör under 100 km/h. Men bara i ett körfält</title>
+    <link>https://motorpuls.se/artikel/italien-minimihastighet-100-vanster-korfalt/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/italien-minimihastighet-100-vanster-korfalt/</guid>
+    <pubDate>Fri, 13 Nov 2026 07:00:00 +0100</pubDate>
+    <category>Bränsle</category>
+    <description>Italiens förslag till ny trafiklag kräver minst 100 km/h i vänstra körfältet på motorvägar med tre eller fler körfält. Reglerna ska gälla från 2028.</description>
+    <enclosure url="https://motorpuls.se/img/articles/italien-minimihastighet-100-vanster-korfalt/a1-commons.webp" length="91464" type="image/webp"/>
+    <media:content url="https://motorpuls.se/img/articles/italien-minimihastighet-100-vanster-korfalt/a1-commons.webp" medium="image" type="image/webp" width="1600" height="1067" fileSize="91464"/>
+  </item>
   <item>
     <title>Jaguars nya elbil har 1 030 hk. Men den når inte räckvidden Jaguar lovade</title>
     <link>https://motorpuls.se/artikel/jaguar-type-01-rackvidd-type-00/</link>
