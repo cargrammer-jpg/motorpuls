@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Sverige på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Wed, 04 Nov 2026 21:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Thu, 05 Nov 2026 16:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/sverige.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Bensinen nere på 15,89 kronor. Men glädjen kan bli kort</title>
+    <link>https://motorpuls.se/artikel/bensinpris-sanks-1589/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/bensinpris-sanks-1589/</guid>
+    <pubDate>Thu, 05 Nov 2026 16:00:00 +0100</pubDate>
+    <category>Bränsle</category>
+    <description>Circle K sänker 95-oktan till 15,89 kronor litern den 5 november. Nedgången märks i plånboken, men den tillfälliga skatterabatten tar slut den 1 december.</description>
+    <enclosure url="https://motorpuls.se/img/articles/bensinpris-sanks-1589/circle-k-stockholm-commons.webp" length="121444" type="image/webp"/>
+    <media:content url="https://motorpuls.se/img/articles/bensinpris-sanks-1589/circle-k-stockholm-commons.webp" medium="image" type="image/webp" width="1600" height="1067" fileSize="121444"/>
+  </item>
   <item>
     <title>Volvo tappar nästan var sjätte bil. I Sverige halverades XC60 på ett år</title>
     <link>https://motorpuls.se/artikel/volvo-forsaljning-ras-oktober-2026/</link>
