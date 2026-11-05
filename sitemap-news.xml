@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
+    <loc>https://motorpuls.se/artikel/tesla-semi-brand-i-880-hayward/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-05T07:00:00+01:00</news:publication_date>
+      <news:title>Tesla Semi började brinna utan krock. Motorvägen var stängd i tio timmar</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://motorpuls.se/artikel/volvo-forsaljning-ras-oktober-2026/</loc>
     <news:news>
       <news:publication>
@@ -42,17 +53,6 @@
       </news:publication>
       <news:publication_date>2026-11-03T12:00:00+01:00</news:publication_date>
       <news:title>Golf blir hybrid för 373 900 kronor. Samtidigt lägger VW eldrivna Golf på is</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/mest-salda-elbilen-inte-tesla/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-03T07:00:00+01:00</news:publication_date>
-      <news:title>Teslas ras i oktober: Model Y föll från etta till elfte plats på en månad</news:title>
     </news:news>
   </url>
 </urlset>
