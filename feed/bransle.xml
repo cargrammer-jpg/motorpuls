@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/feed.xsl"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
+<channel>
+  <title>Motorpuls: Bränsle</title>
+  <link>https://motorpuls.se/</link>
+  <description>Artiklar i kategorin Bränsle på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
+  <language>sv-SE</language>
+  <lastBuildDate>Tue, 03 Nov 2026 12:00:00 +0100</lastBuildDate>
+  <atom:link href="https://motorpuls.se/feed/bransle.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Golf blir hybrid för 373 900 kronor. Samtidigt lägger VW eldrivna Golf på is</title>
+    <link>https://motorpuls.se/artikel/volkswagen-golf-hybrid-pris-id-golf-pausas/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/volkswagen-golf-hybrid-pris-id-golf-pausas/</guid>
+    <pubDate>Tue, 03 Nov 2026 12:00:00 +0100</pubDate>
+    <category>Bränsle</category>
+    <description>Golf och T-Roc kommer som fullhybrider i Sverige med lägre fordonsskatt, samtidigt som VW pausar utvecklingen av eldrivna ID. Golf.</description>
+    <enclosure url="https://motorpuls.se/img/og/volkswagen-golf-hybrid-pris-id-golf-pausas-hel.jpg" length="154806" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/volkswagen-golf-hybrid-pris-id-golf-pausas-hel.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="154806"/>
+  </item>
+  <item>
+    <title>Polisens radar mäter 18 gånger i sekunden. Nu finns den i hela Sverige</title>
+    <link>https://motorpuls.se/artikel/polisens-radarbilar-hela-sverige/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/polisens-radarbilar-hela-sverige/</guid>
+    <pubDate>Mon, 02 Nov 2026 07:00:00 +0100</pubDate>
+    <category>Bränsle</category>
+    <description>Polisbilar som mäter hastigheten på bilar framför och i mötande körfält finns nu i alla sju polisregioner. Inga automatiska böter, men fler kan åka fast.</description>
+    <enclosure url="https://motorpuls.se/img/og/polisens-radarbilar-hela-sverige.jpg" length="171587" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/polisens-radarbilar-hela-sverige.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="171587"/>
+  </item>
+  <item>
+    <title>Utredning vill föra in HVO100 i reduktionsplikten senast 2031</title>
+    <link>https://motorpuls.se/artikel/hvo100-reduktionsplikten-utredning-2031/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/hvo100-reduktionsplikten-utredning-2031/</guid>
+    <pubDate>Fri, 30 Oct 2026 01:19:00 +0100</pubDate>
+    <category>Bränsle</category>
+    <description>Styrmedelsutredningen föreslår 21, 23 och 25 procents reduktionsplikt 2028 till 2030 och att HVO100 förs in i plikten och beskattas fullt senast 2031.</description>
+    <enclosure url="https://motorpuls.se/img/og/hvo100-reduktionsplikten-utredning-2031.jpg" length="142297" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/hvo100-reduktionsplikten-utredning-2031.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="142297"/>
+  </item>
+</channel>
+</rss>

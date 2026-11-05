@@ -1,6 +1,7 @@
 ---
 title: "Aston Martin Valhalla Spider: 1 079 hk och samma toppfart utan tak"
-date: 2026-10-30
+seo_title: "Aston Martin Valhalla Spider: 1 079 hk utan tak"
+date: 2026-10-30T03:15:00+01:00
 slug: aston-martin-valhalla-spider
 tags:
   - Aston Martin

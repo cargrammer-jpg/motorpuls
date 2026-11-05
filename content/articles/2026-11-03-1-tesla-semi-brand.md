@@ -1,6 +1,6 @@
 ---
 title: "Tesla Semi började brinna utan krock. Motorvägen var stängd i tio timmar"
-date: 2026-11-03
+date: 2026-11-05T07:00:00+01:00
 slug: tesla-semi-brand-i-880-hayward
 tags: [Tesla, Semi, lastbil, batteri, brand, elbil]
 sources:
