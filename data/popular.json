@@ -1,6 +1,6 @@
 {
-  "updated": "2026-11-04T12:04+01:00",
-  "source": "Cloudflare Web Analytics, sidvisningar 2026-10-29 till 2026-11-04",
+  "updated": "2026-11-05T12:06+01:00",
+  "source": "Cloudflare Web Analytics, sidvisningar 2026-10-30 till 2026-11-05",
   "articles": [
     {
       "slug": "bmw-m350-drift-moment-juli-2027",
@@ -23,11 +23,15 @@
       "views": 12
     },
     {
+      "slug": "toyota-celica-rally-vm-oliver-solberg-2027",
+      "views": 11
+    },
+    {
       "slug": "polisens-radarbilar-hela-sverige",
       "views": 11
     },
     {
-      "slug": "toyota-celica-rally-vm-oliver-solberg-2027",
+      "slug": "italien-minimihastighet-100-vanster-korfalt",
       "views": 11
     },
     {
@@ -48,7 +52,11 @@
     },
     {
       "slug": "b-korkort-4-25-ton-b1-korkort-15-aringar",
-      "views": 7
+      "views": 9
+    },
+    {
+      "slug": "volvo-forsaljning-ras-oktober-2026",
+      "views": 8
     },
     {
       "slug": "bmw-ix3-m60-highway-assistant-sverige",
@@ -59,19 +67,19 @@
       "views": 7
     },
     {
-      "slug": "formansvarde-elbil-2027-per-modell",
-      "views": 6
-    },
-    {
       "slug": "e4-forbifart-stockholm-oppnar-6-december",
       "views": 6
     },
     {
-      "slug": "ferrari-f40-sista-enzo-ferrari",
+      "slug": "formansvarde-elbil-2027-per-modell",
       "views": 6
     },
     {
       "slug": "vinterdack-bot-dubbdacksforbud-stockholm",
+      "views": 6
+    },
+    {
+      "slug": "ferrari-f40-sista-enzo-ferrari",
       "views": 6
     },
     {
@@ -97,6 +105,14 @@
     {
       "slug": "tesla-fsd-sverige-eu-omrostning-december",
       "views": 2
+    },
+    {
+      "slug": "porsche-macan-bensin-namn-2028",
+      "views": 1
+    },
+    {
+      "slug": "tesla-semi-brand-i-880-hayward",
+      "views": 1
     }
   ]
 }
