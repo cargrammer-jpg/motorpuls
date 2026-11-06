@@ -6,17 +6,97 @@
   <link>https://motorpuls.se/</link>
   <description>Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Wed, 04 Nov 2026 00:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Fri, 06 Nov 2026 07:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
     <title>V8:orna kan komma tillbaka i F1. Men inte som du minns dem</title>
     <link>https://motorpuls.se/artikel/f1-v8-turbohybrid-forslag-2030/</link>
     <guid isPermaLink="true">https://motorpuls.se/artikel/f1-v8-turbohybrid-forslag-2030/</guid>
-    <pubDate>Wed, 04 Nov 2026 00:00:00 +0100</pubDate>
+    <pubDate>Fri, 06 Nov 2026 07:00:00 +0100</pubDate>
     <category>Motorsport</category>
     <description>FIA har skickat ett förslag till F1:s sex motortillverkare om turboladdade V8-hybrider från 2030 eller 2031.</description>
     <enclosure url="https://motorpuls.se/img/og/f1-v8-turbohybrid-forslag-2030.jpg" length="127211" type="image/jpeg"/>
     <media:content url="https://motorpuls.se/img/og/f1-v8-turbohybrid-forslag-2030.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="127211"/>
+  </item>
+  <item>
+    <title>Han missade VM-guldet med fem poäng. Nu får Oliver Solberg ratta Toyotas nya Celica</title>
+    <link>https://motorpuls.se/artikel/toyota-celica-rally-vm-oliver-solberg-2027/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/toyota-celica-rally-vm-oliver-solberg-2027/</guid>
+    <pubDate>Thu, 05 Nov 2026 18:00:00 +0100</pubDate>
+    <category>Motorsport</category>
+    <description>Toyota tar tillbaka Celica till rally-VM 2027 och delar upp fabrikssatsningen i två stall. Oliver Solberg blir en av tre förare i den nya bilen.</description>
+    <enclosure url="https://motorpuls.se/img/og/toyota-celica-rally-vm-oliver-solberg-2027.jpg" length="129963" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/toyota-celica-rally-vm-oliver-solberg-2027.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="129963"/>
+  </item>
+  <item>
+    <title>Bensinen nere på 15,89 kronor. Men glädjen kan bli kort</title>
+    <link>https://motorpuls.se/artikel/bensinpris-sanks-1589/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/bensinpris-sanks-1589/</guid>
+    <pubDate>Thu, 05 Nov 2026 16:00:00 +0100</pubDate>
+    <category>Bränsle</category>
+    <description>Circle K sänker 95-oktan till 15,89 kronor litern den 5 november. Nedgången märks i plånboken, men den tillfälliga skatterabatten tar slut den 1 december.</description>
+    <enclosure url="https://motorpuls.se/img/og/bensinpris-sanks-1589.jpg" length="132737" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/bensinpris-sanks-1589.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="132737"/>
+  </item>
+  <item>
+    <title>Tesla Semi började brinna utan krock. Motorvägen var stängd i tio timmar</title>
+    <link>https://motorpuls.se/artikel/tesla-semi-brand-i-880-hayward/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/tesla-semi-brand-i-880-hayward/</guid>
+    <pubDate>Thu, 05 Nov 2026 07:00:00 +0100</pubDate>
+    <category>Tesla</category>
+    <description>En Tesla Semi fattade eld på motorväg I-880 i Kalifornien utan att ha krockat, och orsaken är ännu okänd.</description>
+    <enclosure url="https://motorpuls.se/img/og/tesla-semi-brand-i-880-hayward.jpg" length="80935" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/tesla-semi-brand-i-880-hayward.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="80935"/>
+  </item>
+  <item>
+    <title>Volvo tappar nästan var sjätte bil. I Sverige halverades XC60 på ett år</title>
+    <link>https://motorpuls.se/artikel/volvo-forsaljning-ras-oktober-2026/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/volvo-forsaljning-ras-oktober-2026/</guid>
+    <pubDate>Wed, 04 Nov 2026 21:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>Volvo Cars sålde 16 procent färre bilar under augusti till oktober. I Sverige föll registreringarna med 24 procent i oktober, medan elbilarna EX30 och EX60 växte.</description>
+    <enclosure url="https://motorpuls.se/img/og/volvo-forsaljning-ras-oktober-2026-hel.jpg" length="162887" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/volvo-forsaljning-ras-oktober-2026-hel.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="162887"/>
+  </item>
+  <item>
+    <title>Ditt vanliga körkort kan snart räcka till 4,25 ton. Men bara i rätt sorts bil</title>
+    <link>https://motorpuls.se/artikel/b-korkort-4-25-ton-b1-korkort-15-aringar/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/b-korkort-4-25-ton-b1-korkort-15-aringar/</guid>
+    <pubDate>Wed, 04 Nov 2026 18:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>Ett nytt förslag höjer gränsen för B-körkort till 4,25 ton och för BE till 7,75 ton med släp. Haken är att bilen måste gå på el, vätgas eller gas.</description>
+    <enclosure url="https://motorpuls.se/img/og/b-korkort-4-25-ton-b1-korkort-15-aringar.jpg" length="130689" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/b-korkort-4-25-ton-b1-korkort-15-aringar.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="130689"/>
+  </item>
+  <item>
+    <title>Jaguars nya elbil har 1 030 hk. Men den når inte räckvidden Jaguar lovade</title>
+    <link>https://motorpuls.se/artikel/jaguar-type-01-rackvidd-type-00/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/jaguar-type-01-rackvidd-type-00/</guid>
+    <pubDate>Wed, 04 Nov 2026 07:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>Jaguar Type 01 är produktionsbilen efter konceptet Type 00. Den har 1 030 hk och laddar snabbare än utlovat, men räckvidden blev 5 mil kortare.</description>
+    <enclosure url="https://motorpuls.se/img/og/jaguar-type-01-rackvidd-type-00-hel.jpg" length="65478" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/jaguar-type-01-rackvidd-type-00-hel.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="65478"/>
+  </item>
+  <item>
+    <title>Golf blir hybrid för 373 900 kronor. Samtidigt lägger VW eldrivna Golf på is</title>
+    <link>https://motorpuls.se/artikel/volkswagen-golf-hybrid-pris-id-golf-pausas/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/volkswagen-golf-hybrid-pris-id-golf-pausas/</guid>
+    <pubDate>Tue, 03 Nov 2026 12:00:00 +0100</pubDate>
+    <category>Bränsle</category>
+    <description>Golf och T-Roc kommer som fullhybrider i Sverige med lägre fordonsskatt, samtidigt som VW pausar utvecklingen av eldrivna ID. Golf.</description>
+    <enclosure url="https://motorpuls.se/img/og/volkswagen-golf-hybrid-pris-id-golf-pausas-hel.jpg" length="154806" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/volkswagen-golf-hybrid-pris-id-golf-pausas-hel.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="154806"/>
+  </item>
+  <item>
+    <title>Teslas ras i oktober: Model Y föll från etta till elfte plats på en månad</title>
+    <link>https://motorpuls.se/artikel/mest-salda-elbilen-inte-tesla/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/mest-salda-elbilen-inte-tesla/</guid>
+    <pubDate>Tue, 03 Nov 2026 07:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>I september var Tesla Model Y Sveriges mest registrerade elbil. I oktober hamnade den på elfte plats, medan Volvo EX40 drog ifrån i kampen om årets elbilsetta.</description>
+    <enclosure url="https://motorpuls.se/img/og/mest-salda-elbilen-inte-tesla.jpg" length="156135" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/mest-salda-elbilen-inte-tesla.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="156135"/>
   </item>
   <item>
     <title>20 år gammal och redan världsmästare. Antonelli krossade Vettels rekord med över tre år</title>

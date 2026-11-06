@@ -6,8 +6,48 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Elbil på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Mon, 02 Nov 2026 12:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Wed, 04 Nov 2026 21:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/elbil.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Volvo tappar nästan var sjätte bil. I Sverige halverades XC60 på ett år</title>
+    <link>https://motorpuls.se/artikel/volvo-forsaljning-ras-oktober-2026/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/volvo-forsaljning-ras-oktober-2026/</guid>
+    <pubDate>Wed, 04 Nov 2026 21:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>Volvo Cars sålde 16 procent färre bilar under augusti till oktober. I Sverige föll registreringarna med 24 procent i oktober, medan elbilarna EX30 och EX60 växte.</description>
+    <enclosure url="https://motorpuls.se/img/og/volvo-forsaljning-ras-oktober-2026-hel.jpg" length="162887" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/volvo-forsaljning-ras-oktober-2026-hel.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="162887"/>
+  </item>
+  <item>
+    <title>Ditt vanliga körkort kan snart räcka till 4,25 ton. Men bara i rätt sorts bil</title>
+    <link>https://motorpuls.se/artikel/b-korkort-4-25-ton-b1-korkort-15-aringar/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/b-korkort-4-25-ton-b1-korkort-15-aringar/</guid>
+    <pubDate>Wed, 04 Nov 2026 18:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>Ett nytt förslag höjer gränsen för B-körkort till 4,25 ton och för BE till 7,75 ton med släp. Haken är att bilen måste gå på el, vätgas eller gas.</description>
+    <enclosure url="https://motorpuls.se/img/og/b-korkort-4-25-ton-b1-korkort-15-aringar.jpg" length="130689" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/b-korkort-4-25-ton-b1-korkort-15-aringar.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="130689"/>
+  </item>
+  <item>
+    <title>Jaguars nya elbil har 1 030 hk. Men den når inte räckvidden Jaguar lovade</title>
+    <link>https://motorpuls.se/artikel/jaguar-type-01-rackvidd-type-00/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/jaguar-type-01-rackvidd-type-00/</guid>
+    <pubDate>Wed, 04 Nov 2026 07:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>Jaguar Type 01 är produktionsbilen efter konceptet Type 00. Den har 1 030 hk och laddar snabbare än utlovat, men räckvidden blev 5 mil kortare.</description>
+    <enclosure url="https://motorpuls.se/img/og/jaguar-type-01-rackvidd-type-00-hel.jpg" length="65478" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/jaguar-type-01-rackvidd-type-00-hel.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="65478"/>
+  </item>
+  <item>
+    <title>Teslas ras i oktober: Model Y föll från etta till elfte plats på en månad</title>
+    <link>https://motorpuls.se/artikel/mest-salda-elbilen-inte-tesla/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/mest-salda-elbilen-inte-tesla/</guid>
+    <pubDate>Tue, 03 Nov 2026 07:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>I september var Tesla Model Y Sveriges mest registrerade elbil. I oktober hamnade den på elfte plats, medan Volvo EX40 drog ifrån i kampen om årets elbilsetta.</description>
+    <enclosure url="https://motorpuls.se/img/og/mest-salda-elbilen-inte-tesla.jpg" length="156135" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/mest-salda-elbilen-inte-tesla.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="156135"/>
+  </item>
   <item>
     <title>Inte en enda bensinbil kvar. Svenska Volvo slåss om Europas finaste bilpris</title>
     <link>https://motorpuls.se/artikel/arets-bil-2027-bara-elbilar-volvo-ex60/</link>

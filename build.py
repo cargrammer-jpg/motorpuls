@@ -372,9 +372,10 @@ OG_W, OG_H = 1200, 630
 OG_BG = (0x0B, 0x0D, 0x10)  # sajtens bakgrund (bg), botten runt hela bilden när den inte får beskäras
 DEFAULT_OG = dict(src="/img/og/motorpuls.jpg", w=OG_W, h=OG_H)
 # Licenstext (images[].license, huvudbilden) som förbjuder beskärning eller ändring: "får inte beskäras", "Oförändrad",
-# "får inte ändras", "får inte kopieras, distribueras, ändras ...". Då beskärs bilden aldrig, varken till delningsbilden
+# "får inte ändras", "får inte kopieras, distribueras, ändras ...", "oförändrat och i sin helhet" (Mynewsdesk),
+# "utan förvanskning" (JLR). Då beskärs bilden aldrig, varken till delningsbilden
 # (og:image) eller till JSON-LD-bilderna (ld_images).
-NO_MODIFY = re.compile(r"beskär|oförändrad|får inte[^.]*?\bändras|unmodified|not be (?:cropped|altered|modified)", re.I)
+NO_MODIFY = re.compile(r"beskär|oförändra[dt]|i sin helhet|förvanskning|får inte[^.]*?\bändras|unmodified|not be (?:cropped|altered|modified)", re.I)
 NO_CROP = NO_MODIFY
 
 def no_modify(img): return bool(img and NO_MODIFY.search(img.get("license") or ""))

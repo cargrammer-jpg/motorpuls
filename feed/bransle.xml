@@ -6,8 +6,28 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Bränsle på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Mon, 02 Nov 2026 07:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Thu, 05 Nov 2026 16:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/bransle.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Bensinen nere på 15,89 kronor. Men glädjen kan bli kort</title>
+    <link>https://motorpuls.se/artikel/bensinpris-sanks-1589/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/bensinpris-sanks-1589/</guid>
+    <pubDate>Thu, 05 Nov 2026 16:00:00 +0100</pubDate>
+    <category>Bränsle</category>
+    <description>Circle K sänker 95-oktan till 15,89 kronor litern den 5 november. Nedgången märks i plånboken, men den tillfälliga skatterabatten tar slut den 1 december.</description>
+    <enclosure url="https://motorpuls.se/img/og/bensinpris-sanks-1589.jpg" length="132737" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/bensinpris-sanks-1589.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="132737"/>
+  </item>
+  <item>
+    <title>Golf blir hybrid för 373 900 kronor. Samtidigt lägger VW eldrivna Golf på is</title>
+    <link>https://motorpuls.se/artikel/volkswagen-golf-hybrid-pris-id-golf-pausas/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/volkswagen-golf-hybrid-pris-id-golf-pausas/</guid>
+    <pubDate>Tue, 03 Nov 2026 12:00:00 +0100</pubDate>
+    <category>Bränsle</category>
+    <description>Golf och T-Roc kommer som fullhybrider i Sverige med lägre fordonsskatt, samtidigt som VW pausar utvecklingen av eldrivna ID. Golf.</description>
+    <enclosure url="https://motorpuls.se/img/og/volkswagen-golf-hybrid-pris-id-golf-pausas-hel.jpg" length="154806" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/volkswagen-golf-hybrid-pris-id-golf-pausas-hel.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="154806"/>
+  </item>
   <item>
     <title>Polisens radar mäter 18 gånger i sekunden. Nu finns den i hela Sverige</title>
     <link>https://motorpuls.se/artikel/polisens-radarbilar-hela-sverige/</link>
