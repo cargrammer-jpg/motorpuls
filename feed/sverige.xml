@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Sverige på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Thu, 05 Nov 2026 16:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Sat, 14 Nov 2026 18:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/sverige.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Chrysler tyckte att Diablo var för vass. Så många av Lamborghinis djävul finns kvar</title>
+    <link>https://motorpuls.se/artikel/lamborghini-diablo-djavulen-chrysler/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/lamborghini-diablo-djavulen-chrysler/</guid>
+    <pubDate>Sat, 14 Nov 2026 18:00:00 +0100</pubDate>
+    <category>Sportbil</category>
+    <description>Lamborghini Diablo började som Gandinis skarpa skiss och slipades till av Chrysler. 2 903 byggdes på elva år, och 29 finns registrerade i Sverige.</description>
+    <enclosure url="https://motorpuls.se/img/og/lamborghini-diablo-djavulen-chrysler.jpg" length="126022" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/lamborghini-diablo-djavulen-chrysler.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="126022"/>
+  </item>
   <item>
     <title>Bensinen nere på 15,89 kronor. Men glädjen kan bli kort</title>
     <link>https://motorpuls.se/artikel/bensinpris-sanks-1589/</link>
