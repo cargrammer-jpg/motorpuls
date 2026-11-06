@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Sverige på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Thu, 05 Nov 2026 16:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Sun, 15 Nov 2026 07:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/sverige.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Polestar blir nederländskt bolag. Huvudkontoret stannar i Göteborg</title>
+    <link>https://motorpuls.se/artikel/polestar-ombildas-nederlanderna-goteborg/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/polestar-ombildas-nederlanderna-goteborg/</guid>
+    <pubDate>Sun, 15 Nov 2026 07:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>Polestar Performance AB lämnade den 5 november in en plan till Bolagsverket om att ombildas till nederländskt B.V. Huvudkontoret och verksamheten ska enligt bolaget stanna i Göteborg.</description>
+    <enclosure url="https://motorpuls.se/img/og/polestar-ombildas-nederlanderna-goteborg.jpg" length="55888" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/polestar-ombildas-nederlanderna-goteborg.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="55888"/>
+  </item>
   <item>
     <title>Bensinen nere på 15,89 kronor. Men glädjen kan bli kort</title>
     <link>https://motorpuls.se/artikel/bensinpris-sanks-1589/</link>
