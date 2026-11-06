@@ -1,57 +1,53 @@
 {
-  "updated": "2026-11-05T12:06+01:00",
-  "source": "Cloudflare Web Analytics, sidvisningar 2026-10-30 till 2026-11-05",
+  "updated": "2026-11-06T12:10+01:00",
+  "source": "Cloudflare Web Analytics, sidvisningar 2026-10-31 till 2026-11-06",
   "articles": [
+    {
+      "slug": "antonelli-yngste-varldsmastare-f1",
+      "views": 19
+    },
     {
       "slug": "bmw-m350-drift-moment-juli-2027",
       "views": 18
     },
     {
-      "slug": "antonelli-yngste-varldsmastare-f1",
-      "views": 17
-    },
-    {
-      "slug": "tesla-model-y-strukturellt-batteri-betyg-d-volvo-ex60",
-      "views": 16
-    },
-    {
-      "slug": "aston-martin-valhalla-spider",
-      "views": 15
-    },
-    {
       "slug": "arets-bil-2027-bara-elbilar-volvo-ex60",
-      "views": 12
+      "views": 14
     },
     {
       "slug": "toyota-celica-rally-vm-oliver-solberg-2027",
-      "views": 11
+      "views": 14
     },
     {
       "slug": "polisens-radarbilar-hela-sverige",
-      "views": 11
+      "views": 13
+    },
+    {
+      "slug": "volkswagen-golf-hybrid-pris-id-golf-pausas",
+      "views": 12
+    },
+    {
+      "slug": "bmw-m3-el-fyra-motorer",
+      "views": 12
+    },
+    {
+      "slug": "mest-salda-elbilen-inte-tesla",
+      "views": 12
     },
     {
       "slug": "italien-minimihastighet-100-vanster-korfalt",
       "views": 11
     },
     {
-      "slug": "bmw-m3-el-fyra-motorer",
-      "views": 10
-    },
-    {
-      "slug": "mest-salda-elbilen-inte-tesla",
-      "views": 10
-    },
-    {
-      "slug": "volkswagen-golf-hybrid-pris-id-golf-pausas",
-      "views": 10
-    },
-    {
-      "slug": "hvo100-reduktionsplikten-utredning-2031",
-      "views": 9
-    },
-    {
       "slug": "b-korkort-4-25-ton-b1-korkort-15-aringar",
+      "views": 11
+    },
+    {
+      "slug": "bensinpris-sanks-1589",
+      "views": 10
+    },
+    {
+      "slug": "jaguar-type-01-rackvidd-type-00",
       "views": 9
     },
     {
@@ -60,10 +56,6 @@
     },
     {
       "slug": "bmw-ix3-m60-highway-assistant-sverige",
-      "views": 7
-    },
-    {
-      "slug": "jaguar-type-01-rackvidd-type-00",
       "views": 7
     },
     {
@@ -87,6 +79,14 @@
       "views": 5
     },
     {
+      "slug": "tesla-model-y-strukturellt-batteri-betyg-d-volvo-ex60",
+      "views": 5
+    },
+    {
+      "slug": "tesla-roadster-avtackad-produktion-2028",
+      "views": 5
+    },
+    {
       "slug": "bmw-m3-e30-homologering-dtm",
       "views": 4
     },
@@ -95,23 +95,31 @@
       "views": 3
     },
     {
-      "slug": "tesla-roadster-avtackad-produktion-2028",
+      "slug": "lamborghini-diablo-djavulen-chrysler",
       "views": 3
     },
     {
-      "slug": "lamborghini-diablo-djavulen-chrysler",
+      "slug": "tesla-semi-brand-i-880-hayward",
       "views": 3
+    },
+    {
+      "slug": "porsche-macan-bensin-namn-2028",
+      "views": 2
     },
     {
       "slug": "tesla-fsd-sverige-eu-omrostning-december",
       "views": 2
     },
     {
-      "slug": "porsche-macan-bensin-namn-2028",
+      "slug": "aston-martin-valhalla-spider",
       "views": 1
     },
     {
-      "slug": "tesla-semi-brand-i-880-hayward",
+      "slug": "f1-v8-turbohybrid-forslag-2030",
+      "views": 1
+    },
+    {
+      "slug": "hvo100-reduktionsplikten-utredning-2031",
       "views": 1
     }
   ]
