@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Thu, 05 Nov 2026 18:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Fri, 06 Nov 2026 07:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>V8:orna kan komma tillbaka i F1. Men inte som du minns dem</title>
+    <link>https://motorpuls.se/artikel/f1-v8-turbohybrid-forslag-2030/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/f1-v8-turbohybrid-forslag-2030/</guid>
+    <pubDate>Fri, 06 Nov 2026 07:00:00 +0100</pubDate>
+    <category>Motorsport</category>
+    <description>FIA har skickat ett förslag till F1:s sex motortillverkare om turboladdade V8-hybrider från 2030 eller 2031.</description>
+    <enclosure url="https://motorpuls.se/img/og/f1-v8-turbohybrid-forslag-2030.jpg" length="127211" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/f1-v8-turbohybrid-forslag-2030.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="127211"/>
+  </item>
   <item>
     <title>Han missade VM-guldet med fem poäng. Nu får Oliver Solberg ratta Toyotas nya Celica</title>
     <link>https://motorpuls.se/artikel/toyota-celica-rally-vm-oliver-solberg-2027/</link>
