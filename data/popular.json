@@ -1,6 +1,6 @@
 {
-  "updated": "2026-11-03T12:10+01:00",
-  "source": "Cloudflare Web Analytics, sidvisningar 2026-10-28 till 2026-11-03",
+  "updated": "2026-11-05T12:06+01:00",
+  "source": "Cloudflare Web Analytics, sidvisningar 2026-10-30 till 2026-11-05",
   "articles": [
     {
       "slug": "bmw-m350-drift-moment-juli-2027",
@@ -8,7 +8,7 @@
     },
     {
       "slug": "antonelli-yngste-varldsmastare-f1",
-      "views": 16
+      "views": 17
     },
     {
       "slug": "tesla-model-y-strukturellt-batteri-betyg-d-volvo-ex60",
@@ -23,7 +23,15 @@
       "views": 12
     },
     {
+      "slug": "toyota-celica-rally-vm-oliver-solberg-2027",
+      "views": 11
+    },
+    {
       "slug": "polisens-radarbilar-hela-sverige",
+      "views": 11
+    },
+    {
+      "slug": "italien-minimihastighet-100-vanster-korfalt",
       "views": 11
     },
     {
@@ -31,11 +39,23 @@
       "views": 10
     },
     {
+      "slug": "mest-salda-elbilen-inte-tesla",
+      "views": 10
+    },
+    {
+      "slug": "volkswagen-golf-hybrid-pris-id-golf-pausas",
+      "views": 10
+    },
+    {
       "slug": "hvo100-reduktionsplikten-utredning-2031",
       "views": 9
     },
     {
-      "slug": "mest-salda-elbilen-inte-tesla",
+      "slug": "b-korkort-4-25-ton-b1-korkort-15-aringar",
+      "views": 9
+    },
+    {
+      "slug": "volvo-forsaljning-ras-oktober-2026",
       "views": 8
     },
     {
@@ -43,7 +63,7 @@
       "views": 7
     },
     {
-      "slug": "volkswagen-golf-hybrid-pris-id-golf-pausas",
+      "slug": "jaguar-type-01-rackvidd-type-00",
       "views": 7
     },
     {
@@ -51,11 +71,7 @@
       "views": 6
     },
     {
-      "slug": "ferrari-f40-sista-enzo-ferrari",
-      "views": 6
-    },
-    {
-      "slug": "jaguar-type-01-rackvidd-type-00",
+      "slug": "formansvarde-elbil-2027-per-modell",
       "views": 6
     },
     {
@@ -63,7 +79,7 @@
       "views": 6
     },
     {
-      "slug": "formansvarde-elbil-2027-per-modell",
+      "slug": "ferrari-f40-sista-enzo-ferrari",
       "views": 6
     },
     {
@@ -75,7 +91,7 @@
       "views": 4
     },
     {
-      "slug": "lamborghini-diablo-djavulen-chrysler",
+      "slug": "mclaren-f1-mittensits-le-mans",
       "views": 3
     },
     {
@@ -83,12 +99,20 @@
       "views": 3
     },
     {
-      "slug": "mclaren-f1-mittensits-le-mans",
+      "slug": "lamborghini-diablo-djavulen-chrysler",
       "views": 3
     },
     {
       "slug": "tesla-fsd-sverige-eu-omrostning-december",
       "views": 2
+    },
+    {
+      "slug": "porsche-macan-bensin-namn-2028",
+      "views": 1
+    },
+    {
+      "slug": "tesla-semi-brand-i-880-hayward",
+      "views": 1
     }
   ]
 }
