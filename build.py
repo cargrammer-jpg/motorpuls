@@ -603,10 +603,13 @@ def privacy_page():
 <h2>Besöksstatistik</h2>
 <p>Vi använder Cloudflare Web Analytics för att se hur många som besöker sajten och vilka sidor som läses. Mätningen sker utan kakor (cookies) och sparar inget i din webbläsare. Besöken räknas på ett sätt som inte identifierar dig.</p>
 <h2>Annonser</h2>
-<p>På artikelsidor kan Motorpuls visa annonser via Google AdSense. Google och dess partner kan då använda kakor och liknande identifierare för att visa och mäta annonser. Annonser som anpassas efter vad du tros vara intresserad av används bara efter samtycke, där lagen kräver det, bland annat i EU och EES. Startsidan och kategorisidorna har inga annonser.</p>
-<p>Hur Google använder uppgifter från webbplatser och appar som använder deras tjänster står på <a href="https://policies.google.com/technologies/partner-sites">https://policies.google.com/<wbr>technologies/<wbr>partner-sites</a>.</p>
-<h2>Ändra samtycke</h2>
-<p>Du kan när som helst ändra eller ta tillbaka ditt samtycke till annonskakor. Det gör du i <a href="https://adssettings.google.com/">Googles annonsinställningar</a> eller i <a href="https://myadcenter.google.com/">Mitt annonscenter</a>. Du kan också radera kakorna för motorpuls.se i webbläsaren. Utan samtycke används inte kakor för att anpassa annonser där lagen kräver ett ja.</p>
+<p>På artikelsidor kan Motorpuls visa annonser via Google AdSense. Tredjepartsleverantörer, däribland Google, använder kakor (cookies) för att visa annonser utifrån dina tidigare besök på den här webbplatsen och på andra webbplatser.</p>
+<p>Googles annonskakor gör att Google och dess partner kan visa annonser utifrån besök på den här webbplatsen och/eller andra webbplatser på internet.</p>
+<p>Annonser som anpassas efter vad du tros vara intresserad av används bara efter ditt samtycke, där lagen kräver det. Startsidan och kategorisidorna har inga annonser.</p>
+<p>Du kan välja bort anpassad annonsering i <a href="https://adssettings.google.com/">Googles annonsinställningar</a>. Mer om hur Google använder annonsteknik finns på <a href="https://policies.google.com/technologies/ads">https://policies.google.com/<wbr>technologies/<wbr>ads</a>. Hur Google använder uppgifter från webbplatser och appar som använder deras tjänster står på <a href="https://policies.google.com/technologies/partner-sites">https://policies.google.com/<wbr>technologies/<wbr>partner-sites</a>.</p>
+<h2>Samtycke i EU och EES</h2>
+<p>Besökare i EU och EES får ett samtyckesmeddelande från Googles certifierade CMP (Integritet och meddelanden). Där kan du godkänna, avvisa eller hantera dina val.</p>
+<p>Du kan ändra valet senare via länken Integritets- och cookieinställningar längst ned på sidan. Det är integritetsinställningarna som Googles CMP lägger dit automatiskt där meddelandet visas, och länken öppnar samma val igen. Syns inte länken kan du radera kakorna för motorpuls.se i webbläsaren och ladda om sidan.</p>
 <h2>Nyhetsbrevet</h2>
 <p>När du anmäler dig sparar vi din e-postadress, när du anmälde dig och bekräftade, vilken sida på Motorpuls du anmälde dig från och texten du godkände. Vi använder uppgifterna bara för att skicka Motorpuls nyhetsbrev. Vi säljer dem inte och lämnar inte ut dem för marknadsföring.</p>
 <p>Rättslig grund är ditt samtycke. Därför skickar vi först ett mejl där du bekräftar att adressen är din. Inga nyhetsbrev skickas förrän du har bekräftat.</p>
@@ -619,7 +622,7 @@ def privacy_page():
 <h2>Tjänster vi använder</h2>
 <ul>
 <li><strong>Cloudflare Web Analytics</strong> räknar besök utan kakor och sparar inget i din webbläsare.</li>
-<li><strong>Google AdSense</strong> kan visa annonser på artikelsidor och använda kakor och identifierare, efter samtycke där det krävs.</li>
+<li><strong>Google AdSense</strong> kan visa annonser på artikelsidor. Google och andra leverantörer kan använda kakor utifrån tidigare besök, efter samtycke där det krävs.</li>
 <li><strong>Supabase</strong> lagrar nyhetsbrevets adresser i en databas i Stockholm (EU).</li>
 <li><strong>Resend</strong> skickar mejlen åt oss och tar emot mejl till {CONTACT_EMAIL}.</li>
 </ul>
@@ -627,7 +630,7 @@ def privacy_page():
 <p>Du har rätt att få veta vilka uppgifter vi har om dig, få dem rättade eller raderade och att ta tillbaka ditt samtycke. Mejla <a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a>, så svarar vi så snart vi kan och senast inom en månad. Du kan också lämna klagomål till Integritetsskyddsmyndigheten (IMY).</p>
 <h2>Kontakt</h2>
 <p>Frågor om hur vi hanterar dina uppgifter skickar du till <a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a>.</p>
-<p>Senast uppdaterad {sv_date(PRIVACY_UPDATED)}.</p>
+<p>Senast uppdaterad {PRIVACY_UPDATED.isoformat()}.</p>
         </div>'''
     return _simple_page("Integritetspolicy", desc, "/integritet/", inner, noindex=False)
 
