@@ -17,14 +17,6 @@ category: Elbil
 author: Lukas
 sweden: true
 images:
-  - src: "img/polestar-ombildas-nederlanderna-goteborg/polestar-hq-goteborg.jpg"
-    alt: "Polestars huvudkontor på Assar Gabrielssons väg 9 i Göteborg."
-    credit: "Foto: Alex Gutaga / Wikimedia Commons"
-    license: "Creative Commons Attribution 3.0. Villkor: https://creativecommons.org/licenses/by/3.0/"
-    license_name: "CC BY 3.0"
-    license_url: "https://creativecommons.org/licenses/by/3.0/"
-    source_url: "https://commons.wikimedia.org/wiki/File:Polestar_headquarters_in_Gothenburg,_Sweden.png"
-    credit_url: "https://commons.wikimedia.org/wiki/File:Polestar_headquarters_in_Gothenburg,_Sweden.png"
   - src: "img/polestar-ombildas-nederlanderna-goteborg/polestar-4.jpg"
     alt: "Polestar 4, mörk elsuve i närbild framifrån."
     credit: "Foto: JustAnotherCarDesigner / Wikimedia Commons"
@@ -33,6 +25,14 @@ images:
     license_url: "https://creativecommons.org/publicdomain/zero/1.0/"
     source_url: "https://commons.wikimedia.org/wiki/File:Polestar_4_012.jpg"
     credit_url: "https://commons.wikimedia.org/wiki/File:Polestar_4_012.jpg"
+  - src: "img/polestar-ombildas-nederlanderna-goteborg/polestar-hq-goteborg.jpg"
+    alt: "Polestars huvudkontor på Assar Gabrielssons väg 9 i Göteborg."
+    credit: "Foto: Alex Gutaga / Wikimedia Commons"
+    license: "Creative Commons Attribution 3.0. Villkor: https://creativecommons.org/licenses/by/3.0/"
+    license_name: "CC BY 3.0"
+    license_url: "https://creativecommons.org/licenses/by/3.0/"
+    source_url: "https://commons.wikimedia.org/wiki/File:Polestar_headquarters_in_Gothenburg,_Sweden.png"
+    credit_url: "https://commons.wikimedia.org/wiki/File:Polestar_headquarters_in_Gothenburg,_Sweden.png"
   - src: "img/polestar-ombildas-nederlanderna-goteborg/polestar-2-2023.jpg"
     alt: "Vit Polestar 2 från 2023, snett framifrån på parkering."
     credit: "Foto: Calreyn88 / Wikimedia Commons"
@@ -47,13 +47,13 @@ images:
 
 Elbilstillverkaren Polestar lämnade den 5 november in en plan till Bolagsverket. Polestar Performance AB ska ombildas till ett nederländskt B.V. Det juridiska sätet flyttar, men bolaget säger att huvudkontoret och verksamheten stannar i Göteborg.
 
+{{bild 2}}
+
 ## Vad SEC-handlingen säger
 
 Polestar Automotive Holding UK PLC rapporterade förändringen i en Form 6-K till den amerikanska finansinspektionen SEC. Där står att Polestar Performance AB den 5 november 2026 lämnade in en ombildningsplan till Bolagsverket. Bolaget ska fortsätta som samma juridiska person, men byta registrerad adress, bolagsform och tillämplig associationsrätt från Sverige till Nederländerna.
 
 Motivet enligt 6-K är att göra organisationen slankare och effektivare, bland annat i holdingstrukturen. Nederländsk bolagsrätt bedöms mer effektiv för Polestar Performance som holdingbolag och för kapitalfördelning i koncernen. Verksamhet och huvudkontor för det ombildade bolaget planeras kvar i Göteborg.
-
-{{bild 2}}
 
 Läs också: [Volvo tappar nästan var sjätte bil. I Sverige halverades XC60 på ett år](/artikel/volvo-forsaljning-ras-oktober-2026/)
 
