@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Motorsport på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Mon, 02 Nov 2026 18:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Thu, 05 Nov 2026 18:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/motorsport.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Han missade VM-guldet med fem poäng. Nu får Oliver Solberg ratta Toyotas nya Celica</title>
+    <link>https://motorpuls.se/artikel/toyota-celica-rally-vm-oliver-solberg-2027/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/toyota-celica-rally-vm-oliver-solberg-2027/</guid>
+    <pubDate>Thu, 05 Nov 2026 18:00:00 +0100</pubDate>
+    <category>Motorsport</category>
+    <description>Toyota tar tillbaka Celica till rally-VM 2027 och delar upp fabrikssatsningen i två stall. Oliver Solberg blir en av tre förare i den nya bilen.</description>
+    <enclosure url="https://motorpuls.se/img/og/toyota-celica-rally-vm-oliver-solberg-2027.jpg" length="129963" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/toyota-celica-rally-vm-oliver-solberg-2027.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="129963"/>
+  </item>
   <item>
     <title>20 år gammal och redan världsmästare. Antonelli krossade Vettels rekord med över tre år</title>
     <link>https://motorpuls.se/artikel/antonelli-yngste-varldsmastare-f1/</link>
