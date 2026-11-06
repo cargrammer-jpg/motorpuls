@@ -123,6 +123,7 @@ opacity .7 (`card-in`), så krediterna håller minst 4,7:1 även innan kortet sk
 **Delningsbild (og:image, 1200x630).** Huvudbilden beskärs till formatet, utom när dess `license` förbjuder beskärning eller ändring
 (t.ex. "får inte beskäras", "Oförändrad", "får inte ... ändras"; `NO_MODIFY` i build.py). Då blir delningsbilden hela bilden, bara
 förminskad och centrerad på sajtens mörka botten `#0B0D10` (`img/og/<slug>-hel.jpg`), och inga beskurna JSON-LD-bilder görs.
+En rad med bara `{{bild N}}` i brödtexten visar bild N (2, 3 ...) där i texten, i textspaltens bredd och sitt eget format, i stället för i bildspelet.
 
 **Bildspel** (två eller fler bilder). Utan JS: en vågrät rad med scroll-snap där nästa bild sticker fram (88 % bredd), att svepa i.
 Med JS (`js/site.js`, inga bibliotek): helbreda bilder, runda knappar "Föregående bild" och "Nästa bild" (2,75rem, aria-label),
