@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
+    <loc>https://motorpuls.se/artikel/bmw-m3-e30-homologering-dtm/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-07T18:00:00+01:00</news:publication_date>
+      <news:title>BMW behövde bara 5 000. Det blev 17 970 E30 M3, och de bästa kostar miljoner</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://motorpuls.se/artikel/f1-v8-turbohybrid-forslag-2030/</loc>
     <news:news>
       <news:publication>
@@ -9,61 +20,6 @@
       </news:publication>
       <news:publication_date>2026-11-06T07:00:00+01:00</news:publication_date>
       <news:title>V8:orna kan komma tillbaka i F1. Men inte som du minns dem</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/toyota-celica-rally-vm-oliver-solberg-2027/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-05T18:00:00+01:00</news:publication_date>
-      <news:title>Han missade VM-guldet med fem poäng. Nu får Oliver Solberg ratta Toyotas nya Celica</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/bensinpris-sanks-1589/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-05T16:00:00+01:00</news:publication_date>
-      <news:title>Bensinen nere på 15,89 kronor. Men glädjen kan bli kort</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/tesla-semi-brand-i-880-hayward/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-05T07:00:00+01:00</news:publication_date>
-      <news:title>Tesla Semi började brinna utan krock. Motorvägen var stängd i tio timmar</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/volvo-forsaljning-ras-oktober-2026/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-04T21:00:00+01:00</news:publication_date>
-      <news:title>Volvo tappar nästan var sjätte bil. I Sverige halverades XC60 på ett år</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/b-korkort-4-25-ton-b1-korkort-15-aringar/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-04T18:00:00+01:00</news:publication_date>
-      <news:title>Ditt vanliga körkort kan snart räcka till 4,25 ton. Men bara i rätt sorts bil</news:title>
     </news:news>
   </url>
 </urlset>

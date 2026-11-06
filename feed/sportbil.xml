@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Sportbil på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Sat, 31 Oct 2026 12:33:00 +0100</lastBuildDate>
+  <lastBuildDate>Sat, 07 Nov 2026 18:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/sportbil.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>BMW behövde bara 5 000. Det blev 17 970 E30 M3, och de bästa kostar miljoner</title>
+    <link>https://motorpuls.se/artikel/bmw-m3-e30-homologering-dtm/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/bmw-m3-e30-homologering-dtm/</guid>
+    <pubDate>Sat, 07 Nov 2026 18:00:00 +0100</pubDate>
+    <category>Sportbil</category>
+    <description>Första BMW M3 byggdes för att få tävla i Grupp A och blev en av de mest framgångsrika standardvagnarna någonsin. 17 970 byggdes, men ingen vet hur många som finns kvar.</description>
+    <enclosure url="https://motorpuls.se/img/og/bmw-m3-e30-homologering-dtm.jpg" length="214927" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/bmw-m3-e30-homologering-dtm.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="214927"/>
+  </item>
   <item>
     <title>M3 som elbil: fyra motorer, över 100 kWh och noll fejkat ljud</title>
     <link>https://motorpuls.se/artikel/bmw-m3-el-fyra-motorer/</link>

@@ -58,9 +58,11 @@
 #          Filen kopieras till img/articles/<slug>/ och får WebP-versioner (1600, 1200, 800 och 400 px bred, bara
 #          storleksändring, aldrig beskärning). Finns WebP-filen redan byggs den inte om (källan behövs inte).
 #          Första bilden är huvudbild (og:image), fler bilder blir ett bildspel.
+#          En rad med bara {{bild N}} i brödtexten (N = 2, 3 ... i images-listan) visar bild N just där
+#          i texten i stället för i bildspelet (huvudbilden kan inte flyttas, varje bild högst en gång).
 #          Valfritt för fria licenser (t.ex. Creative Commons): credit_url (länk på krediten, t.ex. filsidan
 #          på Wikimedia Commons), license_name och license_url (licensens namn som länk efter krediten,
-#          t.ex. "CC BY-SA 3.0"). Utan dem ser bildtexten ut som förut.
+#          t.ex. "CC BY-SA 4.0"). Utan dem ser bildtexten ut som förut.
 # image:   äldre fält (en URL). Laddas ned till img/articles/<slug>.webp om filen saknas, kredit i image_credit.
 #
 # Populärt: startsidans "Populärt just nu" tar artiklarna i data/popular.json i tur och ordning (skrivs av
@@ -228,7 +230,7 @@ def load_articles():
                 elif line.strip(): raise SystemExit(f"{path}: oväntad rad i Källor: {line!r}")
             body = body[:ks.start()]
         check_sources(fm, sources, path)
-        words = len(re.findall(r"\w+", body))
+        words = len(re.findall(r"\w+", INLINE_IMG.sub("", body)))
         arts.append(dict(fm, date=d, published=iso(d, t), modified=iso(ud, ut), mod_date=ud, when=instant(d, t), mod_when=instant(ud, ut), headline=headline, body_html=markdown.markdown(body.strip()),
                          sources=sources, file=os.path.basename(path), minutes=max(1, math.ceil(words/200)),
                          url=f"/artikel/{fm['slug']}/", cat=slugify(fm["category"])))
@@ -980,6 +982,9 @@ def index(arts):
 
 # ---------- article ----------
 HERO_SIZES = "(min-width: 66rem) 62rem, calc(100vw - 2.5rem)"
+INLINE_IMG = re.compile(r"^\{\{bild (\d+)\}\}[ \t]*$", re.M)  # markören i markdown (en egen rad)
+INLINE_IMG_HTML = re.compile(r"<p>\{\{bild(?: |\u00a0)(\d+)\}\}</p>")  # samma rad efter markdown
+INLINE_SIZES = "(min-width: 42.5rem) 40rem, calc(100vw - 2.5rem)"
 
 def link(text, url, rel="noopener"):
     return f'<a href="{esc(url)}" rel="{rel}" target="_blank">{esc(text)}</a>' if url else esc(text)
@@ -989,6 +994,22 @@ def caption(im):
     if im["credit"]: parts.append(link(im["credit"], im.get("credit_url")))
     if im.get("license_name") or im.get("license_url"): parts.append(link(im.get("license_name") or "Licens", im.get("license_url"), "noopener license"))
     return f'<figcaption><span>{" <span aria-hidden=\"true\">·</span> ".join(parts)}</span></figcaption>' if parts else ""
+
+def inline_images(a, imgs, body_html):
+    """Byter rader med {{bild N}} mot bild N (figur i bildens eget format, lazy, samma bildtext som övriga bilder).
+    Returnerar (html, bilderna som blir kvar till huvudbild/bildspel). Huvudbilden (1) kan inte flyttas."""
+    used = []
+    def fig(m):
+        n = int(m.group(1))
+        if not 2 <= n <= len(imgs): raise SystemExit(f"{a['file']}: {{{{bild {n}}}}} finns inte (bild 2 till {len(imgs)} går att placera i texten)")
+        if n in used: raise SystemExit(f"{a['file']}: {{{{bild {n}}}}} står mer än en gång")
+        used.append(n)
+        im = imgs[n - 1]
+        return (f'<figure class="article__figure article__figure--natural article__figure--inline">\n'
+                f'  <div class="frame">{img_tag(im, im["alt"], sizes=INLINE_SIZES)}</div>\n  {caption(im)}\n</figure>')
+    out = INLINE_IMG_HTML.sub(fig, body_html)
+    if "{{bild" in out: raise SystemExit(f"{a['file']}: {{{{bild N}}}} ska stå ensamt på en egen rad")
+    return out, [im for i, im in enumerate(imgs, 1) if i not in used]
 
 def gallery(imgs):
     """En bild: figur i bildens eget format. Flera: bildspel (scroll-snap, utan JS en rad att svepa i).
@@ -1408,7 +1429,8 @@ def article(a, arts=()):
                if a["mod_when"] > a["when"] else "")
     au = find_author(a["author"])
     author = f'<a href="{au["url"]}" rel="author">{esc(au["name"])}</a>' if au else esc(a["author"])
-    prose = insert_after_paragraph(nbnum_html(a["body_html"]), ad_slot(ADSENSE_SLOT_INCONTENT))
+    prose_html, top_imgs = inline_images(a, imgs, nbnum_html(a["body_html"]))
+    prose = insert_after_paragraph(prose_html, ad_slot(ADSENSE_SLOT_INCONTENT))
     body = f'''
 <main id="innehall" class="article">
   <div class="wrap">
@@ -1418,7 +1440,7 @@ def article(a, arts=()):
         <h1 class="article__title">{nbnum(esc(a["headline"]))}</h1>
         <p class="article__dek">{nbnum(esc(a["excerpt"]))}</p>
         <p class="byline"><span>Publicerad <b><time datetime="{a["published"]}">{sv_date(a["date"])}</time></b></span>{updated}<span>Läsetid <b>{a["minutes"]} min</b></span><span>Av <b>{author}</b></span></p>{share_bar(a, "top")}
-      </header>{summary_box(a)}{gallery(imgs)}
+      </header>{summary_box(a)}{gallery(top_imgs)}
       <div class="article__layout article__col">
         <div class="prose">
 {prose}
