@@ -145,11 +145,12 @@ NEWSLETTER_PAGES = ("prenumeration",)  # kataloger som bara byggs med flaggan p�
 NEWSLETTER_SRC = os.path.join(ROOT, "nyhetsbrev")  # källor: nyhetsbrev.css, nyhetsbrev.js (publiceras inte som katalog)
 
 # Google AdSense. Tom ADSENSE_CLIENT: inget annonsrelaterat ritas (inget skript, inga rutor, ingen ads.txt).
-# När kontot finns: sätt ca-pub-... och de två slot-id:na från AdSense. Då laddas adsbygoogle.js en gång per
-# artikelsida och två rutor visas, efter ungefär tredje stycket och före Läs också. Båda märks "Annons".
-# Startsidan och kategorisidor får inga annonser. Inga popups, inga klistrade annonser, ingen egen samtyckesdialog:
-# EU-samtycke sköts av Googles certifierade meddelande (AdSense, Privacy & messaging) när det slås på i kontot.
-ADSENSE_CLIENT = ""             # t.ex. "ca-pub-1234567890123456"
+# När kontot finns: meta google-adsense-account och adsbygoogle.js (async) i <head> på varje sida, även utan
+# slot-id, så att Google kan verifiera sajten och visa EU-samtycket. ads.txt skrivs i roten och följer med till --out.
+# Annonsrutor bara i artiklar, och bara när respektive slot-id är ifyllt. Tomma slot-id: inga rutor och ingen
+# reserverad höjd. Startsidan och kategorisidor får inga annonsrutor. Inga popups, inga klistrade annonser,
+# ingen egen samtyckesdialog: EU-samtycke sköts av Googles certifierade meddelande (AdSense, Privacy & messaging).
+ADSENSE_CLIENT = "ca-pub-7329870923296365"
 ADSENSE_SLOT_INCONTENT = ""     # data-ad-slot, i texten efter ungefär tredje stycket
 ADSENSE_SLOT_END = ""           # data-ad-slot, före Läs också
 ADSENSE_ADS_TXT_CERT = "f08c47fec0942fa0"  # Googles certifierings-id i ads.txt, fast värde
@@ -733,7 +734,7 @@ def head(title, desc, path, og_type="website", image=None, extra="", preload_img
 <link rel="alternate" type="application/rss+xml" title="{SITE}" href="/feed.xml">
 {feed_links(feeds)}<link rel="preload" href="/fonts/newsreader-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
-{pre}{push_head()}{newsletter_head()}{extra}</head>
+{pre}{push_head()}{newsletter_head()}{extra}{adsense_loader()}</head>
 <body>
 <a class="skip" href="#innehall">Hoppa till innehållet</a>
 <header class="masthead">
@@ -1304,7 +1305,8 @@ def author_box(name):
         </aside>'''
 
 # Annonsrutor bara i artiklar, och bara när ADSENSE_CLIENT och respektive slot-id är ifyllda.
-# Stilen följer med i <head> på de sidorna (inte i css/site.css) så att ett tomt konto inte ändrar någon annan sida.
+# Rutornas stil följer med i <head> på de sidorna (inte i css/site.css). Tomma slot-id ger ingen stil och ingen ruta.
+# Skriptet och meta-taggen ligger i adsense_loader() och följer med på varje sida så fort kontot är satt.
 # min-height sitter på ramen, inte bara på <ins>: Googles skript skriver om ins-elementets style, ramen behåller höjden.
 ADSENSE_CSS = (
     ".adslot{margin:0;font-family:var(--sans)}"
@@ -1342,12 +1344,18 @@ def ad_slot(slot_id):
         '</aside>'
     )
 
-def adsense_head():
-    """Skriptet en gång per artikelsida, plus rutornas stil. Tomt när inget slot-id är satt."""
-    if not adsense_client_id() or not (ADSENSE_SLOT_INCONTENT.strip() or ADSENSE_SLOT_END.strip()): return ""
+def adsense_loader():
+    """Meta och adsbygoogle.js (async) i <head> på varje sida när kontot är satt. Inga slot-id krävs:
+    Google ska kunna verifiera sajten och visa EU-samtycket innan rutorna slås på. Tomt konto: ingenting."""
     client = esc(adsense_client_id())
-    return ('<style>' + ADSENSE_CSS + '</style>\n'
+    if not client: return ""
+    return (f'<meta name="google-adsense-account" content="{client}">\n'
             f'<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={client}" crossorigin="anonymous"></script>\n')
+
+def adsense_head():
+    """Rutornas stil, bara på artikelsidor när minst ett slot-id är satt. Själva skriptet ligger i adsense_loader()."""
+    if not adsense_client_id() or not (ADSENSE_SLOT_INCONTENT.strip() or ADSENSE_SLOT_END.strip()): return ""
+    return '<style>' + ADSENSE_CSS + '</style>\n'
 
 def insert_after_paragraph(html, snippet, n=3):
     """Klistrar in snippet efter det n:te stycket. Färre stycken: efter det sista. Tom snippet: oförändrad html."""
@@ -1695,8 +1703,10 @@ def write_ads_txt():
         return
     pub = adsense_pub_id()
     if not pub.startswith("pub-"): print(f"varning: ADSENSE_CLIENT {ADSENSE_CLIENT!r} ser inte ut som ca-pub-...")
-    if not ADSENSE_SLOT_INCONTENT.strip() or not ADSENSE_SLOT_END.strip():
-        print("varning: ADSENSE_CLIENT är satt men något slot-id är tomt, den rutan ritas inte (ads.txt skrivs ändå)")
+    if not ADSENSE_SLOT_INCONTENT.strip() and not ADSENSE_SLOT_END.strip():
+        print("AdSense: konto satt, inga slot-id, inga annonsrutor (ads.txt och skriptet skrivs ändå)")
+    elif not ADSENSE_SLOT_INCONTENT.strip() or not ADSENSE_SLOT_END.strip():
+        print("varning: ADSENSE_CLIENT är satt men bara ett slot-id är ifyllt, den tomma rutan ritas inte")
     write("ads.txt", f"google.com, {pub}, DIRECT, {ADSENSE_ADS_TXT_CERT}\n")
 
 def check_no_push(out):
@@ -1723,13 +1733,40 @@ def check_no_adsense(out):
     """Tom ADSENSE_CLIENT: inget annonsrelaterat i utdata (inget skript, ingen ruta, ingen ads.txt)."""
     if adsense_client_id(): return
     bad = ["ads.txt"] if os.path.exists(os.path.join(out, "ads.txt")) else []
-    markers = ("adsbygoogle", "pagead2.googlesyndication.com", 'class="adslot"', "data-ad-client", "data-ad-slot")
+    markers = ("adsbygoogle", "pagead2.googlesyndication.com", 'class="adslot"', "data-ad-client", "data-ad-slot", "google-adsense-account")
     for dirpath, _, files in os.walk(out):
         for fn in files:
             if fn.endswith((".html", ".js", ".css", ".txt", ".xml")):
                 t = open(os.path.join(dirpath, fn), encoding="utf-8", errors="ignore").read()
                 if any(m in t for m in markers): bad.append(os.path.relpath(os.path.join(dirpath, fn), out))
     if bad: raise SystemExit("ADSENSE_CLIENT är tom men annonser finns i utdata: " + ", ".join(sorted(set(bad))))
+
+def check_adsense(out):
+    """Konto satt: ads.txt i utdataroten, och meta plus adsbygoogle.js exakt en gång per html-sida.
+    Tomma slot-id: inga annonsrutor. Tomt konto: check_no_adsense."""
+    if not adsense_client_id():
+        check_no_adsense(out)
+        return
+    expected = f"google.com, {adsense_pub_id()}, DIRECT, {ADSENSE_ADS_TXT_CERT}\n"
+    ads = os.path.join(out, "ads.txt")
+    got = open(ads, encoding="utf-8").read() if os.path.isfile(ads) else ""
+    if got != expected: raise SystemExit(f"ads.txt i utdata ska vara {expected!r}, var {got!r}")
+    client = esc(adsense_client_id())
+    script = f'<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={client}" crossorigin="anonymous"></script>'
+    meta = f'<meta name="google-adsense-account" content="{client}">'
+    slots_on = bool(ADSENSE_SLOT_INCONTENT.strip() or ADSENSE_SLOT_END.strip())
+    bad, htmls = [], []
+    for dirpath, _, files in os.walk(out):
+        for fn in files:
+            if not fn.endswith(".html"): continue
+            rel = os.path.relpath(os.path.join(dirpath, fn), out)
+            htmls.append(rel)
+            t = open(os.path.join(dirpath, fn), encoding="utf-8").read()
+            if t.count(script) != 1 or t.count(meta) != 1: bad.append(f"{rel}: AdSense-taggen saknas eller finns mer än en gång")
+            if "static.cloudflareinsights.com/beacon.min.js" not in t: bad.append(f"{rel}: saknar Cloudflare Web Analytics")
+            if not slots_on and ('class="adslot"' in t or "data-ad-slot" in t): bad.append(f"{rel}: annonsruta trots tomma slot-id")
+    if not htmls: bad.append("inga html-filer")
+    if bad: raise SystemExit("AdSense-kontroll:\n  " + "\n  ".join(bad))
 
 def _rebuild_root_without_previews():
     global PUSH_BOX, OUT
@@ -1748,7 +1785,7 @@ def cli():
         out = publish(OUT)
         if not PUSH_BOX: check_no_push(out)
         if not NEWSLETTER_BOX: check_no_newsletter(out)
-        if not adsense_client_id(): check_no_adsense(out)
+        check_adsense(out)
         n = check_links(out)
         files = sum(len(f) for _, _, f in os.walk(out))
         print(f"publicerat till {out}: {files} filer, {n} lokala länkar kontrollerade")
