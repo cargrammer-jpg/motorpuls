@@ -117,6 +117,10 @@ Etikett i DM Mono versaler, `pulse-text` `#FF8A5C` (7,3:1 mot rutan). Punkterna 
 Övriga laddas lazy. Bilder beskärs aldrig: en enda bild visas i sitt eget format, flera bilder delar en 3:2-scen med
 `object-fit: contain` och svart kant (letterbox) när formatet skiljer sig. Ingen text, flagga eller toning ovanpå bilden.
 Bildtext under bilden i DM Mono, `muted` (7:1): valfri `caption`, punkt, sedan kredit ("Foto: Aston Martin").
+För fria licenser länkar krediten till `credit_url` (t.ex. filsidan på Wikimedia Commons) och `license_name` länkar till
+`license_url` (t.ex. "CC BY-SA 4.0", https://creativecommons.org/licenses/by-sa/4.0/). Länkarna har samma färg som bildtexten.
+En rad med bara `{{bild N}}` i brödtexten visar bild N (2, 3 ...) där i texten, i textspaltens bredd och sitt eget format,
+i stället för i bildspelet. Ingen flagga ritas på de bilderna.
 Bygget gör WebP i 1600, 1200, 800 och 400 px bredd (srcset, kvalitet 76), bara storleksändring.
 Fotokrediter på korten (`.item__credit`) har färgen `--credit` #A7B0BA (8,5:1). Korten som tonas in vid skroll börjar på
 opacity .7 (`card-in`), så krediterna håller minst 4,7:1 även innan kortet skrollats in helt.
