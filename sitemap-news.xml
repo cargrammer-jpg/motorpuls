@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
+    <loc>https://motorpuls.se/artikel/mclaren-f1-mittensits-le-mans/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-06T18:00:00+01:00</news:publication_date>
+      <news:title>Byggd för gatan, vann Le Mans på första försöket. 100 McLaren F1 finns kvar, ingen i Sverige</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://motorpuls.se/artikel/f1-v8-turbohybrid-forslag-2030/</loc>
     <news:news>
       <news:publication>
@@ -53,17 +64,6 @@
       </news:publication>
       <news:publication_date>2026-11-04T21:00:00+01:00</news:publication_date>
       <news:title>Volvo tappar nästan var sjätte bil. I Sverige halverades XC60 på ett år</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/b-korkort-4-25-ton-b1-korkort-15-aringar/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-04T18:00:00+01:00</news:publication_date>
-      <news:title>Ditt vanliga körkort kan snart räcka till 4,25 ton. Men bara i rätt sorts bil</news:title>
     </news:news>
   </url>
 </urlset>
