@@ -115,11 +115,12 @@ Etikett i DM Mono versaler, `pulse-text` `#FF8A5C` (7,3:1 mot rutan). Punkterna 
 
 **Bilder** (`images` i front matter). Första bilden är huvudbild och og:image: laddas direkt med `fetchpriority="high"` och preload.
 Övriga laddas lazy. Bilder beskärs aldrig: en enda bild visas i sitt eget format, flera bilder delar en 3:2-scen med
-`object-fit: contain` och svart kant (letterbox) när formatet skiljer sig. Ingen text eller toning ovanpå bilden (enda undantaget är den lilla svenska flaggan, se nedan).
+`object-fit: contain` och svart kant (letterbox) när formatet skiljer sig. Ingen text, flagga eller toning ovanpå bilden.
 Bildtext under bilden i DM Mono, `muted` (7:1): valfri `caption`, punkt, sedan kredit ("Foto: Aston Martin").
-För CC-licenser (en creativecommons.org-länk i `license`) följer licensens namn länkat till licensen ("CC BY-SA 3.0"), och krediten
-länkar till `source_url` (t.ex. Commons-sidan). Länkarna har samma färg som bildtexten. En rad med bara `{{bild N}}` i brödtexten
-visar bild N (2, 3 ...) där i texten, i textspaltens bredd och sitt eget format, i stället för i bildspelet.
+För fria licenser länkar krediten till `credit_url` (t.ex. filsidan på Wikimedia Commons) och `license_name` länkar till
+`license_url` (t.ex. "CC BY-SA 4.0", https://creativecommons.org/licenses/by-sa/4.0/). Länkarna har samma färg som bildtexten.
+En rad med bara `{{bild N}}` i brödtexten visar bild N (2, 3 ...) där i texten, i textspaltens bredd och sitt eget format,
+i stället för i bildspelet. Ingen flagga ritas på de bilderna.
 Bygget gör WebP i 1600, 1200, 800 och 400 px bredd (srcset, kvalitet 76), bara storleksändring.
 Fotokrediter på korten (`.item__credit`) har färgen `--credit` #A7B0BA (8,5:1). Korten som tonas in vid skroll börjar på
 opacity .7 (`card-in`), så krediterna håller minst 4,7:1 även innan kortet skrollats in helt.
@@ -134,21 +135,10 @@ när bildspelet har fokus. Knappar och räknare ligger till höger på bildtextr
 
 **Äldre artiklar.** Fältet `image` (en URL) med `image_credit` fungerar som förut och ger en bild i eget format. Artiklar utan bild eller sammanfattning visas utan de rutorna.
 
-## Svensk flagga (`sweden: true`)
-Önskemål från ALX: när en nyhet gäller Sverige visas en liten svensk flagga i kanten av bilden eller artikeln.
+## Sverige (`sweden: true`)
+`sweden: true` betyder att nyheten gäller Sverige. Artikeln tas med i `feed/sverige.xml`. Ingen svensk flagga ritas på bilderna: inte på huvudbilden eller bildspelet, inte på korten och listorna, och inte i delningsbilder, JSON-LD-bilder eller flöden. Bildfilerna ändras aldrig.
 
-**Färger och form.** Den äldre, mörkare flaggan: blå `#005293`, gul `#FECB00`. Proportioner 5:2:9 vågrätt och 4:2:4 lodrätt (16x10).
-Inline-SVG i `build.py` (`FLAG_SVG`), 2px rundade hörn, tunn mörk kontur och en mjuk skugga så att den syns mot både ljusa och mörka bilder.
-
-**Placering.** Övre vänstra hörnet, där varken kredit (under bilden) eller bildspelets knappar och räknare (nere till höger) ligger.
-- Artikel: över huvudbilden eller bildspelets scen, 28px bred på mobil och 34px från 48rem. I bildspelet sitter flaggan på bildspelet, inte på varje bild, så den står still när man bläddrar.
-- Startsida: 28 till 32px på huvudkortets bild, 18px på miniatyren i flödet och 20px vid kategorin i listan "Senaste".
-- Utan bild: 20px bredvid kategorin, i artikelns huvud och på korten.
-
-**Bildvillkor.** Flaggan är ett eget DOM-element (`.flag`, `pointer-events: none`) ovanpå bilden. Bildfilerna ändras aldrig, vilket pressvillkoren kräver.
-Det är det enda tillåtna elementet ovanpå en bild.
-
-**Tillgänglighet.** `role="img"`, `aria-label="Gäller Sverige"` och `title` med samma text. SVG:n är `aria-hidden`.
+Sidhuvudets lilla flagga bredvid logotypen (`.wordmark__flag`) hör till logotypen. Den läggs inte på pressbilder.
 
 
 ## Guider och Läs också

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="/feed.xsl"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
 <channel>
   <title>Motorpuls: Sverige</title>
   <link>https://motorpuls.se/</link>
@@ -15,6 +15,88 @@
     <pubDate>Sat, 07 Nov 2026 18:00:00 +0100</pubDate>
     <category>Sportbil</category>
     <description>Första BMW M3 byggdes för att få tävla i Grupp A och blev en av de mest framgångsrika standardvagnarna någonsin. 17 970 byggdes, men ingen vet hur många som finns kvar.</description>
+    <enclosure url="https://motorpuls.se/img/og/bmw-m3-e30-homologering-dtm.jpg" length="214927" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/bmw-m3-e30-homologering-dtm.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="214927"/>
+  </item>
+  <item>
+    <title>Bensinen nere på 15,89 kronor. Men glädjen kan bli kort</title>
+    <link>https://motorpuls.se/artikel/bensinpris-sanks-1589/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/bensinpris-sanks-1589/</guid>
+    <pubDate>Thu, 05 Nov 2026 16:00:00 +0100</pubDate>
+    <category>Bränsle</category>
+    <description>Circle K sänker 95-oktan till 15,89 kronor litern den 5 november. Nedgången märks i plånboken, men den tillfälliga skatterabatten tar slut den 1 december.</description>
+    <enclosure url="https://motorpuls.se/img/og/bensinpris-sanks-1589.jpg" length="132737" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/bensinpris-sanks-1589.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="132737"/>
+  </item>
+  <item>
+    <title>Volvo tappar nästan var sjätte bil. I Sverige halverades XC60 på ett år</title>
+    <link>https://motorpuls.se/artikel/volvo-forsaljning-ras-oktober-2026/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/volvo-forsaljning-ras-oktober-2026/</guid>
+    <pubDate>Wed, 04 Nov 2026 21:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>Volvo Cars sålde 16 procent färre bilar under augusti till oktober. I Sverige föll registreringarna med 24 procent i oktober, medan elbilarna EX30 och EX60 växte.</description>
+    <enclosure url="https://motorpuls.se/img/og/volvo-forsaljning-ras-oktober-2026-hel.jpg" length="162887" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/volvo-forsaljning-ras-oktober-2026-hel.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="162887"/>
+  </item>
+  <item>
+    <title>Ditt vanliga körkort kan snart räcka till 4,25 ton. Men bara i rätt sorts bil</title>
+    <link>https://motorpuls.se/artikel/b-korkort-4-25-ton-b1-korkort-15-aringar/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/b-korkort-4-25-ton-b1-korkort-15-aringar/</guid>
+    <pubDate>Wed, 04 Nov 2026 18:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>Ett nytt förslag höjer gränsen för B-körkort till 4,25 ton och för BE till 7,75 ton med släp. Haken är att bilen måste gå på el, vätgas eller gas.</description>
+    <enclosure url="https://motorpuls.se/img/og/b-korkort-4-25-ton-b1-korkort-15-aringar.jpg" length="130689" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/b-korkort-4-25-ton-b1-korkort-15-aringar.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="130689"/>
+  </item>
+  <item>
+    <title>Golf blir hybrid för 373 900 kronor. Samtidigt lägger VW eldrivna Golf på is</title>
+    <link>https://motorpuls.se/artikel/volkswagen-golf-hybrid-pris-id-golf-pausas/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/volkswagen-golf-hybrid-pris-id-golf-pausas/</guid>
+    <pubDate>Tue, 03 Nov 2026 12:00:00 +0100</pubDate>
+    <category>Bränsle</category>
+    <description>Golf och T-Roc kommer som fullhybrider i Sverige med lägre fordonsskatt, samtidigt som VW pausar utvecklingen av eldrivna ID. Golf.</description>
+    <enclosure url="https://motorpuls.se/img/og/volkswagen-golf-hybrid-pris-id-golf-pausas-hel.jpg" length="154806" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/volkswagen-golf-hybrid-pris-id-golf-pausas-hel.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="154806"/>
+  </item>
+  <item>
+    <title>Teslas ras i oktober: Model Y föll från etta till elfte plats på en månad</title>
+    <link>https://motorpuls.se/artikel/mest-salda-elbilen-inte-tesla/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/mest-salda-elbilen-inte-tesla/</guid>
+    <pubDate>Tue, 03 Nov 2026 07:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>I september var Tesla Model Y Sveriges mest registrerade elbil. I oktober hamnade den på elfte plats, medan Volvo EX40 drog ifrån i kampen om årets elbilsetta.</description>
+    <enclosure url="https://motorpuls.se/img/og/mest-salda-elbilen-inte-tesla.jpg" length="156135" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/mest-salda-elbilen-inte-tesla.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="156135"/>
+  </item>
+  <item>
+    <title>Inte en enda bensinbil kvar. Svenska Volvo slåss om Europas finaste bilpris</title>
+    <link>https://motorpuls.se/artikel/arets-bil-2027-bara-elbilar-volvo-ex60/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/arets-bil-2027-bara-elbilar-volvo-ex60/</guid>
+    <pubDate>Mon, 02 Nov 2026 12:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>För första gången på 63 år är alla finalister i Car of the Year elbilar, och Volvo EX60 är en av sju som kan vinna.</description>
+    <enclosure url="https://motorpuls.se/img/og/arets-bil-2027-bara-elbilar-volvo-ex60-hel.jpg" length="162887" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/arets-bil-2027-bara-elbilar-volvo-ex60-hel.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="162887"/>
+  </item>
+  <item>
+    <title>Polisens radar mäter 18 gånger i sekunden. Nu finns den i hela Sverige</title>
+    <link>https://motorpuls.se/artikel/polisens-radarbilar-hela-sverige/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/polisens-radarbilar-hela-sverige/</guid>
+    <pubDate>Mon, 02 Nov 2026 07:00:00 +0100</pubDate>
+    <category>Bränsle</category>
+    <description>Polisbilar som mäter hastigheten på bilar framför och i mötande körfält finns nu i alla sju polisregioner. Inga automatiska böter, men fler kan åka fast.</description>
+    <enclosure url="https://motorpuls.se/img/og/polisens-radarbilar-hela-sverige.jpg" length="171587" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/polisens-radarbilar-hela-sverige.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="171587"/>
+  </item>
+  <item>
+    <title>Över en halv miljon kronor för en plats i kön. Tesla lovar inte ens att Roadster levereras</title>
+    <link>https://motorpuls.se/artikel/tesla-roadster-avtackad-produktion-2028/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/tesla-roadster-avtackad-produktion-2028/</guid>
+    <pubDate>Sun, 01 Nov 2026 18:00:00 +0100</pubDate>
+    <category>Tesla</category>
+    <description>Att reservera nya Tesla Roadster i Sverige kostar enligt Tesla Roadster Info 545 000 kronor, men det amerikanska avtalet lovar varken pris eller leverans.</description>
+    <enclosure url="https://motorpuls.se/img/og/tesla-roadster-avtackad-produktion-2028.jpg" length="55012" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/tesla-roadster-avtackad-produktion-2028.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="55012"/>
   </item>
   <item>
     <title>Tio EU-länder har sagt ja till Teslas FSD. Därför får Sverige vänta till tidigast 2027</title>
@@ -23,6 +105,8 @@
     <pubDate>Sat, 31 Oct 2026 18:00:00 +0100</pubDate>
     <category>Tesla</category>
     <description>Lettland blev tionde EU-land att tillåta Teslas förarstöd och Italien stödjer ett snabbt EU-beslut, men i Sverige är funktionen fortfarande inte tillåten för vanliga ägare.</description>
+    <enclosure url="https://motorpuls.se/img/og/tesla-fsd-sverige-eu-omrostning-december.jpg" length="133874" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/tesla-fsd-sverige-eu-omrostning-december.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="133874"/>
   </item>
 </channel>
 </rss>
