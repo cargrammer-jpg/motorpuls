@@ -1,58 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
-    <loc>https://motorpuls.se/artikel/adac-nodbroms-barn-reflexer/</loc>
+    <loc>https://motorpuls.se/artikel/eu-dorrhandtag-mekanisk-oppnare-ex60-tesla/</loc>
     <news:news>
       <news:publication>
         <news:name>Motorpuls</news:name>
         <news:language>sv</news:language>
       </news:publication>
-      <news:publication_date>2026-11-07T07:00:00+01:00</news:publication_date>
-      <news:title>Bilarnas nödbroms missar barn med reflexer. Bara en av sex bilar såg barnet</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/mclaren-f1-mittensits-le-mans/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-06T18:00:00+01:00</news:publication_date>
-      <news:title>Byggd för gatan, vann Le Mans på första försöket. 100 McLaren F1 finns kvar, ingen i Sverige</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/f1-v8-turbohybrid-forslag-2030/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-06T07:00:00+01:00</news:publication_date>
-      <news:title>V8:orna kan komma tillbaka i F1. Men inte som du minns dem</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/toyota-celica-rally-vm-oliver-solberg-2027/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-05T18:00:00+01:00</news:publication_date>
-      <news:title>Han missade VM-guldet med fem poäng. Nu får Oliver Solberg ratta Toyotas nya Celica</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/bensinpris-sanks-1589/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-05T16:00:00+01:00</news:publication_date>
-      <news:title>Bensinen nere på 15,89 kronor. Men glädjen kan bli kort</news:title>
+      <news:publication_date>2026-11-09T12:00:00+01:00</news:publication_date>
+      <news:title>EU-utskott vill kräva mekanisk dörröppning. EX60 kan beröras</news:title>
     </news:news>
   </url>
 </urlset>
