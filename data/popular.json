@@ -1,14 +1,10 @@
 {
-  "updated": "2026-11-06T12:10+01:00",
-  "source": "Cloudflare Web Analytics, sidvisningar 2026-10-31 till 2026-11-06",
+  "updated": "2026-11-07T12:08+01:00",
+  "source": "cloudflare",
   "articles": [
     {
       "slug": "antonelli-yngste-varldsmastare-f1",
       "views": 19
-    },
-    {
-      "slug": "bmw-m350-drift-moment-juli-2027",
-      "views": 18
     },
     {
       "slug": "arets-bil-2027-bara-elbilar-volvo-ex60",
@@ -24,10 +20,6 @@
     },
     {
       "slug": "volkswagen-golf-hybrid-pris-id-golf-pausas",
-      "views": 12
-    },
-    {
-      "slug": "bmw-m3-el-fyra-motorer",
       "views": 12
     },
     {
@@ -55,19 +47,23 @@
       "views": 8
     },
     {
-      "slug": "bmw-ix3-m60-highway-assistant-sverige",
+      "slug": "yangwang-u9-xtreme-503-kmh",
       "views": 7
     },
     {
-      "slug": "e4-forbifart-stockholm-oppnar-6-december",
-      "views": 6
+      "slug": "polestar-ombildas-nederlanderna-goteborg",
+      "views": 7
+    },
+    {
+      "slug": "bmw-ix3-m60-highway-assistant-sverige",
+      "views": 7
     },
     {
       "slug": "formansvarde-elbil-2027-per-modell",
       "views": 6
     },
     {
-      "slug": "vinterdack-bot-dubbdacksforbud-stockholm",
+      "slug": "tesla-roadster-avtackad-produktion-2028",
       "views": 6
     },
     {
@@ -75,15 +71,23 @@
       "views": 6
     },
     {
+      "slug": "e4-forbifart-stockholm-oppnar-6-december",
+      "views": 6
+    },
+    {
+      "slug": "vinterdack-bot-dubbdacksforbud-stockholm",
+      "views": 6
+    },
+    {
+      "slug": "mclaren-f1-mittensits-le-mans",
+      "views": 5
+    },
+    {
       "slug": "fartkameror-119000-boter-21-nya-kameror",
       "views": 5
     },
     {
-      "slug": "tesla-model-y-strukturellt-batteri-betyg-d-volvo-ex60",
-      "views": 5
-    },
-    {
-      "slug": "tesla-roadster-avtackad-produktion-2028",
+      "slug": "bmw-m3-el-fyra-motorer",
       "views": 5
     },
     {
@@ -91,8 +95,8 @@
       "views": 4
     },
     {
-      "slug": "mclaren-f1-mittensits-le-mans",
-      "views": 3
+      "slug": "f1-v8-turbohybrid-forslag-2030",
+      "views": 4
     },
     {
       "slug": "lamborghini-diablo-djavulen-chrysler",
@@ -107,19 +111,19 @@
       "views": 2
     },
     {
+      "slug": "tesla-model-y-strukturellt-batteri-betyg-d-volvo-ex60",
+      "views": 1
+    },
+    {
+      "slug": "adac-nodbroms-barn-reflexer",
+      "views": 1
+    },
+    {
+      "slug": "bmw-m350-drift-moment-juli-2027",
+      "views": 1
+    },
+    {
       "slug": "tesla-fsd-sverige-eu-omrostning-december",
-      "views": 2
-    },
-    {
-      "slug": "aston-martin-valhalla-spider",
-      "views": 1
-    },
-    {
-      "slug": "f1-v8-turbohybrid-forslag-2030",
-      "views": 1
-    },
-    {
-      "slug": "hvo100-reduktionsplikten-utredning-2031",
       "views": 1
     }
   ]
