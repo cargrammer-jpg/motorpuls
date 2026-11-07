@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Tesla på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Thu, 05 Nov 2026 07:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Sun, 08 Nov 2026 15:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/tesla.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Musk: Cybertruck fasas ut i Texas. Cybercab tar platsen</title>
+    <link>https://motorpuls.se/artikel/tesla-cybertruck-avvecklas-cybercab/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/tesla-cybertruck-avvecklas-cybercab/</guid>
+    <pubDate>Sun, 08 Nov 2026 15:00:00 +0100</pubDate>
+    <category>Tesla</category>
+    <description>Elon Musk meddelade den 6 november att Tesla börjar avveckla Cybertruck-produktionen vid Gigafactory Texas kring mitten av 2027, för att ge plats åt Cybercab.</description>
+    <enclosure url="https://motorpuls.se/img/og/tesla-cybertruck-avvecklas-cybercab.jpg" length="191520" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/tesla-cybertruck-avvecklas-cybercab.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="191520"/>
+  </item>
   <item>
     <title>Tesla Semi började brinna utan krock. Motorvägen var stängd i tio timmar</title>
     <link>https://motorpuls.se/artikel/tesla-semi-brand-i-880-hayward/</link>
