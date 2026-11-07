@@ -1,6 +1,6 @@
 ---
 title: "Bilarnas nödbroms missar barn med reflexer. Bara en av sex bilar såg barnet"
-date: 2026-11-05
+date: 2026-11-07T07:00+01:00
 slug: adac-nodbroms-barn-reflexer
 tags: [ADAC, nödbromsassistent, aktiv säkerhet, reflexer, Mercedes CLA, Tesla Model Y, BYD Seal, Hyundai Tucson, Dacia Duster, Opel Astra]
 sources:
