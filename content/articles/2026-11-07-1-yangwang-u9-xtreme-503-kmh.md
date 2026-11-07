@@ -1,40 +1,37 @@
 ---
-seo_title: "Kinesisk elbil kör 503 km/h. FIA godkänner rekordet"
-title: "Kinesisk elbil kör 503 km/h. FIA godkänner rekordet över 500 km/h"
-date: 2026-11-14T07:00:00+01:00
+seo_title: "Kinesisk elbil kör 503 km/h. Farten erkänd av FIA"
+title: "Kinesisk elbil kör 503 km/h. FIA erkänner farten över 500 km/h"
+date: 2026-11-07T18:00:00+01:00
 slug: yangwang-u9-xtreme-503-kmh
 tags: [Yangwang, BYD, U9 Xtreme, världsrekord, FIA, Guinness, elbil, sportbil, Abu Dhabi, Marc Basseng]
 sources:
   - https://www.fia.com/news/yangwang-u9-xtreme-surpasses-500-kmh-speed-achievement-recognised-fia
   - https://www.mediaoffice.abudhabi/en/transport/abu-dhabi-marks-global-automotive-milestone-as-yangwang-u9-xtreme-sets-new-global-speed-record-of-50317kph/
   - https://cnevpost.com/2026/11/06/byd-yangwang-u9-xtreme-breaches-500-km-h/
-excerpt: "Yangwang U9 Xtreme nådde 503,17 km/h på en avstängd motorväg i Abu Dhabi den 1 november. FIA och Guinness har godkänt resultatet som första produktionsbil över 500 km/h."
+excerpt: "Yangwang U9 Xtreme nådde 503,17 km/h på en avstängd motorväg i Abu Dhabi den 1 november. FIA har erkänt farten och Guinness gav två rekord för körning i en riktning."
 summary:
   - "503,17 km/h den 1 november 2026 på E11 i Abu Dhabi, med Marc Basseng bakom ratten."
-  - "FIA och Guinness godkänner rekordet för produktionsbil och eldriven produktionsbil i en riktning."
+  - "FIA erkänner farten. Guinness ger två rekord, för produktionsbil och eldriven produktionsbil, i en riktning."
   - "Fyra elmotorer på över 3 000 hk, 1 200-voltssystem. Bara 30 exemplar, enligt Yangwang."
 category: Sportbil
 author: Lukas
 sweden: false
 images:
-  - src: "img/yangwang-u9-xtreme-503-kmh/yangwang-u9-xtreme-fia.jpg"
-    alt: "Yangwang U9 Xtreme i mörk lack under hög fart på raksträcka, med aktiv aerodynamik synlig."
-    credit: "Foto: BYD / Yangwang via FIA"
-    license: "Pressbild publicerad av FIA i samband med nyheten. Redaktionell användning."
-    source_url: "https://www.fia.com/sites/default/files/news/main_image/byd-1.png"
-  - src: "img/yangwang-u9-xtreme-503-kmh/yangwang-u9-xtreme-byd-press.jpg"
-    alt: "Yangwang U9 Xtreme i studio, guldlackad hyperbil med aggressiv aerodynamik."
-    credit: "Foto: BYD / Yangwang (press.bydauto.be)"
-    license: "Tillverkarens pressbild för redaktionell användning."
-    source_url: "https://press.bydauto.be/media/album/df4c18f5-8b35-442c-9e41-b7904d340d7e"
-  - src: "img/yangwang-u9-xtreme-503-kmh/yangwang-u9-xtreme-abu-dhabi.jpg"
-    alt: "Yangwang U9 Xtreme under rekordförsöket i Abu Dhabi, ökenmiljö längs motorväg."
-    credit: "Foto: Abu Dhabi Media Office / BYD"
-    license: "Pressbild från Abu Dhabis mediekontor om rekordet. Redaktionell användning."
-    source_url: "https://www.mediaoffice.abudhabi/en/transport/abu-dhabi-marks-global-automotive-milestone-as-yangwang-u9-xtreme-sets-new-global-speed-record-of-50317kph/"
+  - src: "img/yangwang-u9-xtreme-503-kmh/yangwang-u9-shenzhen-cc0.jpg"
+    alt: "Yangwang U9, standardmodellen, utställd på bilmässan i Shenzhen 2025."
+    credit: "Foto: LKS1990 / Wikimedia Commons (CC0). Bilden visar standardmodellen U9."
+    credit_url: "https://commons.wikimedia.org/wiki/File:Yangwang_U9_Shenzhen_Auto_2025.jpg"
+    license: "CC0 1.0, https://creativecommons.org/publicdomain/zero/1.0/"
+    license_url: "https://creativecommons.org/publicdomain/zero/1.0/"
+  - src: "img/yangwang-u9-xtreme-503-kmh/yangwang-u9-goodwood-ccby2.jpg"
+    alt: "Yangwang U9, standardmodellen, på Goodwood Festival of Speed."
+    credit: "Foto: David Merrett / Wikimedia Commons (CC BY 2.0). Standardmodellen U9."
+    credit_url: "https://commons.wikimedia.org/wiki/File:Yangwang_U9_(53877996703).jpg"
+    license: "CC BY 2.0, https://creativecommons.org/licenses/by/2.0/"
+    license_url: "https://creativecommons.org/licenses/by/2.0/"
 ---
 
-# Kinesisk elbil kör 503 km/h. FIA godkänner rekordet över 500 km/h
+# Kinesisk elbil kör 503 km/h. FIA erkänner farten över 500 km/h
 
 En produktionsbil har för första gången passerat 500 km/h i en officiellt erkänd körning. Yangwang U9 Xtreme, lyxmärket under kinesiska BYD, klockades för 503,17 km/h i Abu Dhabi den 1 november. Resultatet offentliggjordes den 6 november.
 
@@ -56,9 +53,7 @@ Abu Dhabis mediekontor beskriver hur ADIO, turistmyndigheten och transportmyndig
 
 ## Över 3 000 hästkrafter, 30 exemplar
 
-FIA anger fyra oberoende elmotorer med sammanlagt mer än 3 000 PS, 1 200-volts arkitektur och specialdäck från Giti Tire. CnEVPost, som citerar Yangwang, anger 2 220 kW toppeffekt och att U9 Xtreme är begränsad till 30 exemplar globalt. Standardmodellen U9 har sålts i Kina sedan 2024 till ett betydligt lägre pris.
-
-{{bild 3}}
+FIA anger fyra oberoende elmotorer med sammanlagt mer än 3 000 PS, 1 200-volts arkitektur och specialdäck från Giti Tire. CnEVPost, som citerar Yangwang, anger 2 220 kW toppeffekt och att U9 Xtreme är begränsad till 30 exemplar globalt. Standardmodellen U9 har sålts i Kina sedan 2024.
 
 Läs också: [Nya Tesla Roadster: produktion 2028, men pris och vägstatus saknas](/artikel/tesla-roadster-avtackad-produktion-2028/)
 
@@ -66,9 +61,9 @@ Läs också: [M3 som elbil: fyra motorer, över 100 kWh och noll fejkat ljud](/a
 
 ## Lukas analys
 
-Siffran 503,17 km/h är ett tydligt tekniskt bevis: eldrift kan nu slå de klassiska förbränningsikonerna i raksträcksfart, åtminstone i den här typen av godkänd envägskörning. Det är dock en hyperbil i 30 exemplar, inte en bil du köper på Biltema. För svenska läsare är poängen mer symbolisk. Kinesisk elteknik sätter världsrekord medan europeiska jättar fortfarande pratar om omställning.
+Siffran 503,17 km/h är ett tydligt tekniskt bevis: eldrift kan nu nå över 500 km/h i en erkänd körning, åtminstone i den här typen av envägskörning. Det är dock en hyperbil i 30 exemplar, inte en bil du köper på Biltema. För svenska läsare är poängen mer symbolisk. Kinesisk elteknik sätter världsrekord medan europeiska jättar fortfarande pratar om omställning.
 
-Samtidigt ska man läsa fotnoten. Guinness och FIA godkänner en toppnotering i en riktning. Det är fortfarande en bedrift, men det är inte samma sak som ett klassiskt tvåvägsrekord. För den som jämför med Bugatti och Koenigsegg är det den skillnaden som avgör hur historieböckerna skrivs.
+Samtidigt ska man läsa fotnoten. FIA har erkänt farten och Guinness har gett rekord för en körning i en riktning. Det är fortfarande en bedrift, men det är inte samma sak som ett klassiskt tvåvägsrekord. Det är den skillnaden som avgör hur rekordet bör jämföras med äldre toppfartsrekord.
 
 ## Källor
 
