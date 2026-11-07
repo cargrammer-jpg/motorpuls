@@ -159,6 +159,9 @@ ADSENSE_ADS_TXT_CERT = "f08c47fec0942fa0"  # Googles certifierings-id i ads.txt,
 
 ANALYTICS = """<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "bace28864ae04c6fa5e9f4a98ca70f94"}'></script><!-- End Cloudflare Web Analytics -->
 """
+# Umami (egeninstallerad, utan kakor, inga personuppgifter) i <head> på varje sida.
+# Cloudflare-beaconen ovan lämnas oförändrad och skrivs som förut före </body>.
+UMAMI = '<script defer src="https://82-70-60-43.sslip.io/s.js" data-website-id="ffb8602c-4d57-4164-824c-9823ad5c42bb" data-domains="motorpuls.se,www.motorpuls.se"></script>'
 
 # ---------- content ----------
 TZ = ZoneInfo("Europe/Stockholm")
@@ -579,7 +582,7 @@ def newsletter_box():
 
 # ---------- integritetspolicy (alltid) och nyhetsbrevets åtgärdssidor (bara med NEWSLETTER_BOX) ----------
 # Kontakt för frågor om uppgifterna: CONTACT_EMAIL.
-PRIVACY_UPDATED = dt.date(2026, 11, 6)
+PRIVACY_UPDATED = dt.date(2026, 11, 7)
 
 def _simple_page(title, desc, path, inner, noindex=True):
     h = head(f"{title} · {SITE}", desc, path, image=DEFAULT_OG, noindex=noindex)
@@ -605,6 +608,7 @@ def privacy_page():
 <p>Här står vilka uppgifter Motorpuls samlar in, varför vi gör det och hur du kontaktar oss. Vi säljer inte personuppgifter.</p>
 <h2>Besöksstatistik</h2>
 <p>Vi använder Cloudflare Web Analytics för att se hur många som besöker sajten och vilka sidor som läses. Mätningen sker utan kakor (cookies) och sparar inget i din webbläsare. Besöken räknas på ett sätt som inte identifierar dig.</p>
+<p>Vi använder också Umami, besöksstatistik som vi kör själva. Umami sätter inga kakor och samlar inga personuppgifter.</p>
 <h2>Annonser</h2>
 <p>På artikelsidor kan Motorpuls visa annonser via Google AdSense. Tredjepartsleverantörer, däribland Google, använder kakor (cookies) för att visa annonser utifrån dina tidigare besök på den här webbplatsen och på andra webbplatser.</p>
 <p>Googles annonskakor gör att Google och dess partner kan visa annonser utifrån besök på den här webbplatsen och/eller andra webbplatser på internet.</p>
@@ -625,6 +629,7 @@ def privacy_page():
 <h2>Tjänster vi använder</h2>
 <ul>
 <li><strong>Cloudflare Web Analytics</strong> räknar besök utan kakor och sparar inget i din webbläsare.</li>
+<li><strong>Umami</strong> är vår egeninstallerade besöksstatistik. Den sätter inga kakor och samlar inga personuppgifter.</li>
 <li><strong>Google AdSense</strong> kan visa annonser på artikelsidor. Google och andra leverantörer kan använda kakor utifrån tidigare besök, efter samtycke där det krävs.</li>
 <li><strong>Supabase</strong> lagrar nyhetsbrevets adresser i en databas i Stockholm (EU).</li>
 <li><strong>Resend</strong> skickar mejlen åt oss och tar emot mejl till {CONTACT_EMAIL}.</li>
@@ -736,7 +741,9 @@ def head(title, desc, path, og_type="website", image=None, extra="", preload_img
 <link rel="alternate" type="application/rss+xml" title="{SITE}" href="/feed.xml">
 {feed_links(feeds)}<link rel="preload" href="/fonts/newsreader-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
-{pre}{push_head()}{newsletter_head()}{extra}{adsense_loader()}</head>
+{pre}{push_head()}{newsletter_head()}{extra}{adsense_loader()}
+{UMAMI}
+</head>
 <body>
 <a class="skip" href="#innehall">Hoppa till innehållet</a>
 <header class="masthead">
@@ -1763,6 +1770,23 @@ def check_no_adsense(out):
                 if any(m in t for m in markers): bad.append(os.path.relpath(os.path.join(dirpath, fn), out))
     if bad: raise SystemExit("ADSENSE_CLIENT är tom men annonser finns i utdata: " + ", ".join(sorted(set(bad))))
 
+def check_umami(out):
+    """Umami-scriptet exakt en gång per html-sida, inne i <head>. Cloudflare-beaconen ska finnas oförändrad."""
+    bad, htmls = [], []
+    for dirpath, _, files in os.walk(out):
+        for fn in files:
+            if not fn.endswith(".html"): continue
+            rel = os.path.relpath(os.path.join(dirpath, fn), out)
+            htmls.append(rel)
+            t = open(os.path.join(dirpath, fn), encoding="utf-8").read()
+            head, sep, _rest = t.partition("</head>")
+            if not sep or head.count(UMAMI) != 1 or t.count(UMAMI) != 1:
+                bad.append(f"{rel}: Umami ska ligga exakt en gång, i <head>")
+            if ANALYTICS.strip() not in t or t.count(ANALYTICS.strip()) != 1:
+                bad.append(f"{rel}: Cloudflare Web Analytics ska ligga oförändrad, exakt en gång")
+    if not htmls: bad.append("inga html-filer")
+    if bad: raise SystemExit("Umami-kontroll:\n  " + "\n  ".join(bad))
+
 def check_adsense(out):
     """Konto satt: ads.txt i utdataroten, och meta plus adsbygoogle.js exakt en gång per html-sida.
     Tomma slot-id: inga annonsrutor. Tomt konto: check_no_adsense."""
@@ -1808,6 +1832,7 @@ def cli():
         if not PUSH_BOX: check_no_push(out)
         if not NEWSLETTER_BOX: check_no_newsletter(out)
         check_adsense(out)
+        check_umami(out)
         n = check_links(out)
         files = sum(len(f) for _, _, f in os.walk(out))
         print(f"publicerat till {out}: {files} filer, {n} lokala länkar kontrollerade")
