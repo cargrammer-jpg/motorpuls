@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Fri, 06 Nov 2026 18:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Sat, 07 Nov 2026 07:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Bilarnas nödbroms missar barn med reflexer. Bara en av sex bilar såg barnet</title>
+    <link>https://motorpuls.se/artikel/adac-nodbroms-barn-reflexer/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/adac-nodbroms-barn-reflexer/</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>ADAC har testat nödbromsen i sex bilar i mörker, och nästan alla missade ett barn i reflexkläder. Bara Mercedes CLA reagerade.</description>
+    <enclosure url="https://motorpuls.se/img/articles/adac-nodbroms-barn-reflexer/mercedes-cla-250-heddesheim.webp" length="167378" type="image/webp"/>
+    <media:content url="https://motorpuls.se/img/articles/adac-nodbroms-barn-reflexer/mercedes-cla-250-heddesheim.webp" medium="image" type="image/webp" width="1600" height="1200" fileSize="167378"/>
+  </item>
   <item>
     <title>Byggd för gatan, vann Le Mans på första försöket. 100 McLaren F1 finns kvar, ingen i Sverige</title>
     <link>https://motorpuls.se/artikel/mclaren-f1-mittensits-le-mans/</link>
