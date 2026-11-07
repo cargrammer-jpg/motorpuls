@@ -66,7 +66,7 @@
 # image:   äldre fält (en URL). Laddas ned till img/articles/<slug>.webp om filen saknas, kredit i image_credit.
 #
 # Populärt: startsidans "Populärt just nu" tar artiklarna i data/popular.json i tur och ordning (skrivs av
-# tools/update_popular.py från Cloudflare Web Analytics; okända slugs hoppas över). Saknas filen eller räcker den
+# tools/update_popular.py från Umami, med Cloudflare Web Analytics som reserv; okända slugs hoppas över). Saknas filen eller räcker den
 # inte fylls det på med de senaste artiklarna som inte redan syns högst upp. Rutan visas när det finns minst 2.
 #
 # Publicering: GitHub Actions (.github/workflows/pages.yml) kör `python build.py --out _site`. Då byggs allt som vanligt
