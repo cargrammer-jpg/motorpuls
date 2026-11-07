@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Sat, 07 Nov 2026 07:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Sat, 07 Nov 2026 18:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Kinesisk elbil kör 503 km/h. FIA erkänner farten över 500 km/h</title>
+    <link>https://motorpuls.se/artikel/yangwang-u9-xtreme-503-kmh/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/yangwang-u9-xtreme-503-kmh/</guid>
+    <pubDate>Sat, 07 Nov 2026 18:00:00 +0100</pubDate>
+    <category>Sportbil</category>
+    <description>Yangwang U9 Xtreme nådde 503,17 km/h på en avstängd motorväg i Abu Dhabi den 1 november. FIA har erkänt farten och Guinness gav två rekord för körning i en riktning.</description>
+    <enclosure url="https://motorpuls.se/img/og/yangwang-u9-xtreme-503-kmh.jpg" length="134807" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/yangwang-u9-xtreme-503-kmh.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="134807"/>
+  </item>
   <item>
     <title>Bilarnas nödbroms missar barn med reflexer. Bara en av sex bilar såg barnet</title>
     <link>https://motorpuls.se/artikel/adac-nodbroms-barn-reflexer/</link>
