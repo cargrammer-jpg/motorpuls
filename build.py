@@ -3,33 +3,98 @@
 # Utdata:
 #   index.html                    startsida, riktiga artiklar, nyast först
 #   artikel/<slug>/index.html     en sida per artikel (rena URL:er: /artikel/<slug>/)
-#   404.html, sitemap.xml, robots.txt
+#   404.html, sitemap.xml, robots.txt, feed.xml (RSS, samma artiklar som sitemap)
+#   sitemap-news.xml              Google News-sitemap: bara artiklar publicerade de senaste 2 dygnen (Googles regel),
+#                                 kan vara tom. Räknas vid bygget, så sajten behöver byggas om minst en gång per dygn (föreslaget schema i pages.yml, se PR:en).
+#   om/, om/<författare>/         sidor ur content/pages/*.md (front matter: title, path, description, valfritt author).
+#                                 En sida med author (id i data/authors.json) blir författarsida med ProfilePage-JSON-LD.
+#   skribentruta                  längst ner i varje artikel, en mall (author_box) med data ur data/authors.json
+#                                 Ord som TODO i texten ger en varning i bygget.
+#   img/ld/<slug>-16x9.jpg m.fl.  bilder för NewsArticle-JSON-LD: huvudbilden beskuren till 16:9, 4:3 och 1:1, högst
+#                                 1200 px bred, aldrig uppskalad (checka in dem tillsammans med artikeln, som img/og/)
+#   feed/<kategori>.xml           RSS per kategori (och feed/sverige.xml när någon artikel har sweden: true,
+#                                 feed/guider.xml när någon guide är publicerad)
+#   guider/index.html             kategorisidan Guider (bara när minst en guide är publicerad, då även länken i sidhuvudet)
+#   sw.js, push.js                bara när PUSH_BOX är på (förhandsvisning av push-rutan, se nedan)
+#   nyhetsbrev.js                 bara när NEWSLETTER_BOX är på (förhandsvisning av nyhetsbrevsrutan i sidfoten, se nedan)
+#   integritet/index.html         integritetspolicy, alltid. Länk i sidfoten och post i sitemap.xml
+#   ads.txt                       bara när ADSENSE_CLIENT är satt (google.com, pub-..., DIRECT, f08c47fec0942fa0)
+#   img/og/<slug>.jpg             delningsbild 1200x630 (JPEG) ur huvudbilden; startsidan använder img/og/motorpuls.jpg
+#                                 (ritad från brand/og/startsida.html). Förbjuder huvudbildens license ändringar eller
+#                                 beskärning (NO_MODIFY) blir den i stället img/og/<slug>-hel.jpg: hela bilden, bara
+#                                 förminskad, centrerad på mörk botten (#0B0D10) i 1200x630. Ingen beskärning, ingen text.
 #
-# Artiklar: markdown med YAML-front matter (title, date, slug, tags, sources, excerpt, category, author,
-# valfritt summary, images, äldre image/image_credit). Brödtexten renderas oförändrad. Rubriken (#) i texten
-# blir sidans h1, avsnittet "## Källor" renderas i källistan. Ordning: datum, sedan filnamn (nyast först).
+# Artiklar: markdown med YAML-front matter (title, date, slug, tags, excerpt, category, author,
+# valfritt summary, images, sources, äldre image/image_credit). Brödtexten renderas oförändrad. Rubriken (#) i texten
+# blir sidans h1, avsnittet "## Källor" renderas i källistan. Fältet sources är valfritt, men finns det måste
+# länkarna vara desamma som under "## Källor" (annars avbryts bygget). Ordning: publiceringstidpunkt (date med tid, ett datum utan tid räknas som
+# dagens början), sedan filnamn, nyast först. Samma ordning gäller startsidan, feed.xml och sitemap.xml.
 #
-# sweden:  valfritt, true när nyheten gäller Sverige. Då visas en liten svensk flagga (äldre, mörkare färger)
-#          som ett eget element ovanpå huvudbildens hörn och på startsidans kort, eller vid kategorin om
-#          artikeln saknar bild. Bildfilerna ändras aldrig.
+# date:    publiceringsdag (2026-10-30) eller tidpunkt med zon (2026-10-30T03:25:00+01:00). Tid utan zon räknas
+#          som Europe/Stockholm. Bygget stoppas om datumet ligger i framtiden (svensk tid; ett datum utan tid
+#          räknas som hela den dagen, så en artikel som mergas på sin egen dag går igenom). För förhandsbygge av
+#          schemalagda artiklar: MOTORPULS_NOW=2026-11-05T07:10+01:00 .venv/bin/python build.py
+#          Skriv helst tidpunkten: i JSON-LD, article:published_time, sitemaps och <time> blir det alltid full tid med
+#          zon, och ett datum utan tid blir där 00:00 svensk tid (bygget varnar).
+# seo_title: valfritt, sidans <title> (utan " · Motorpuls", som läggs till när det ryms inom 60 tecken). Behövs när
+#          rubriken är för lång: <title> kapas aldrig med "…" (se page_title). h1, og:title och RSS behåller title.
+# updated: valfritt, samma format som date. Blir dateModified (annars samma som date) och sitemaps lastmod, och
+#          artikeln visar "Uppdaterad <datum>" i bylinen när tidpunkten är senare än date. Ett updated före date
+#          räknas som date (dateModified blir aldrig tidigare än datePublished). Bygget stoppas om updated ligger i
+#          framtiden, precis som för date.
+# type:    valfritt, "guide" gör artikeln till en guide (som category: Guider). Guider samlas på /guider/ och i
+#          feed/guider.xml, får Article i stället för NewsArticle i JSON-LD och hamnar inte i sitemap-news.xml.
+#
+# Läs också: under varje artikel tre andra artiklar. Samma kategori (guider räknas som en kategori) och gemensamma
+#          taggar först, sedan de nyaste. Aldrig artikeln själv. Miniatyrerna använder 400 px-varianterna.
+#
+# sweden:  valfritt, true när nyheten gäller Sverige. Artikeln tas då med i feed/sverige.xml.
+#          Ingen flagga ritas på bilder (varken i HTML eller i bildfilerna). Sidhuvudets flagga
+#          bredvid logotypen är oförändrad.
 # summary: lista med 2 till 4 korta punkter (vanlig text), visas i rutan "Kort om nyheten".
 # images:  lista med {src, alt, credit, license, valfritt caption}. src är en lokal fil: ett filnamn som
 #          letas upp i drafts/img/<slug>/, utkastens form img/<slug>/fil (relativ till drafts/), en sökväg
 #          relativ till projektroten eller en absolut sökväg. Okända fält (t.ex. source_url) ignoreras.
-#          Filen kopieras till img/articles/<slug>/ och får WebP-versioner (1600 och 800 px bred, bara
+#          Filen kopieras till img/articles/<slug>/ och får WebP-versioner (1600, 1200, 800 och 400 px bred, bara
 #          storleksändring, aldrig beskärning). Finns WebP-filen redan byggs den inte om (källan behövs inte).
 #          Första bilden är huvudbild (og:image), fler bilder blir ett bildspel.
+#          En rad med bara {{bild N}} i brödtexten (N = 2, 3 ... i images-listan) visar bild N just där
+#          i texten i stället för i bildspelet (huvudbilden kan inte flyttas, varje bild högst en gång).
+#          Valfritt för fria licenser (t.ex. Creative Commons): credit_url (länk på krediten, t.ex. filsidan
+#          på Wikimedia Commons), license_name och license_url (licensens namn som länk efter krediten,
+#          t.ex. "CC BY-SA 4.0"). Utan dem ser bildtexten ut som förut.
 # image:   äldre fält (en URL). Laddas ned till img/articles/<slug>.webp om filen saknas, kredit i image_credit.
-import datetime as dt, glob, hashlib, html, json, math, os, re, shutil, urllib.request
+#
+# Populärt: startsidans "Populärt just nu" tar artiklarna i data/popular.json i tur och ordning (skrivs av
+# tools/update_popular.py från Umami, med Cloudflare Web Analytics som reserv; okända slugs hoppas över). Saknas filen eller räcker den
+# inte fylls det på med de senaste artiklarna som inte redan syns högst upp. Rutan visas när det finns minst 2.
+#
+# Publicering: GitHub Actions (.github/workflows/pages.yml) kör `python build.py --out _site`. Då byggs allt som vanligt
+# i projektroten och sedan kopieras bara den publika delen till _site (genererade sidor, css, js, fonts, img, favicon,
+# CNAME). Källor som build.py, content/, DESIGN.md, brand/ och drafts/ publiceras alltså inte. I --out-läget används
+# även genererade bilder som inte är incheckade (WebP-varianter, img/og/<slug>.jpg), eftersom de följer med till _site.
+# Till sist kontrolleras att varje lokal länk i sidorna, css:en och manifestet finns i _site (annars avbryts bygget).
+# Utan --out fungerar allt som förut (resultatet skrivs i projektroten och checkas in).
+import datetime as dt, glob, hashlib, html, json, math, os, re, shutil, sys, urllib.parse, urllib.request
 import markdown, yaml
+from zoneinfo import ZoneInfo
 
 DRAFTS_IMG = os.environ.get("MOTORPULS_DRAFTS_IMG")  # valfri extra källmapp, standard: <root>/drafts/img
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DOMAIN = "https://motorpuls.se"
 SITE = "Motorpuls"
+NEWS_LANG = "sv"      # news:language i sitemap-news.xml (ISO 639)
+NEWS_DAYS = 2         # Google: bara artiklar från de senaste två dygnen i news-sitemapen
+# Search Console, verifiering med HTML-tagg: klistra in content-värdet från Search Console (bara koden, inte hela
+# taggen). Tom sträng ger ingen tagg. Taggen hamnar bara på startsidan.
+GOOGLE_SITE_VERIFICATION = "1G9pdcpgySoszmWhSPBgBxrvZxkyl6kbvszF7FSnVl4"
 SITE_DESC = "Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor."
 MAX_W = 1600
+VARIANTS = ((MAX_W, ""), (1200, "-1200"), (800, "-800"), (400, "-400"))  # bredd, filändelse; minsta används av miniatyrerna (104 px)
+# WebP-kvalitet för artikelbilderna. 76 ger ungefär en tredjedel mindre filer än 86 utan synlig skillnad i bildspelet
+# (uppmätt på pressbilderna 31 okt 2026). Bara omkodning och storleksändring, aldrig beskärning.
+WEBP_Q = 76
 
 MONTHS = ["januari","februari","mars","april","maj","juni","juli","augusti","september","oktober","november","december"]
 DAYS = ["måndag","tisdag","onsdag","torsdag","fredag","lördag","söndag"]
@@ -44,10 +109,95 @@ def nbnum(s):
 def nbnum_html(h): return re.sub(r">[^<]+<", lambda m: nbnum(m.group(0)), ">" + h + "<")[1:-1]
 def slugify(s): return re.sub(r"[^a-z0-9]+", "-", s.lower().replace("å","a").replace("ä","a").replace("ö","o")).strip("-")
 
+# ---------- Guider ----------
+# En artikel är en guide om front matter har type: guide eller category: Guider. Kategorisidan, länken i sidhuvudet och
+# feed/guider.xml finns bara när minst en guide är publicerad (som de andra kategoriflödena: inga tomma sidor).
+GUIDE_KEY, GUIDE_NAME, GUIDE_PATH = "guider", "Guider", "/guider/"
+GUIDE_DESC = "Guider från Motorpuls: regler, kostnader och uträkningar förklarade steg för steg, med länkar till källorna."
+GUIDES = []  # publicerade guider, nyast först, sätts i main()
+def is_guide(a): return str(a.get("type") or "").strip().lower() == "guide" or a["cat"] == GUIDE_KEY
+
+# ---------- feature-flaggor ----------
+# PUSH_BOX: orange ruta "Få en notis när vi publicerar nyheter" (Web Push). AV i produktion. Utskicken är inte
+# inkopplade (se supabase/README.md). Förhandsbygge med rutan på, bara till --out och aldrig till main:
+#   MOTORPULS_PUSH=1 python build.py --out _preview
+# När flaggan är av finns varken rutan, push.js, sw.js eller någon registrering av service worker i utdata
+# (kontrolleras i check_no_push). PUSH_CONFIG fylls i först när ALX har godkänt backend; vapidPublicKey är den
+# publika VAPID-nyckeln (den privata ligger bara som hemlighet i Supabase), subscribeUrl är Supabase REST för
+# tabellen push_subscriptions och anonKey projektets publika nyckel (publishable). Tomma värden: rutan frågar om
+# lov och registrerar service workern, men sparar ingen prenumeration.
+PUSH_BOX = os.environ.get("MOTORPULS_PUSH") == "1"
+PUSH_CONFIG = {"vapidPublicKey": "", "subscribeUrl": "", "anonKey": ""}
+PUSH_SRC = os.path.join(ROOT, "push")  # källor för rutan: push.js, push.css, sw.js (publiceras inte som katalog)
+
+# NEWSLETTER_BOX: nyhetsbrevsrutan i sidfoten (e-postfält och knapp, höger om sidfotens text). PÅ i produktion sedan
+# 31 oktober 2026 (ALX:s OK), så Pages-bygget (python build.py --out _site) tar med den utan ändring i workflowen.
+# Bygge utan rutan: MOTORPULS_NYHETSBREV=0 python build.py --out _site
+# När flaggan är av finns varken rutan, nyhetsbrev.js eller Supabase-adressen i utdata (kontrolleras i check_no_newsletter).
+# NEWSLETTER_CONFIG: adressen till edge-funktionerna newsletter-* i Supabase-projektet motorpuls (eu-north-1). Rutan POSTar
+# till newsletter-subscribe, sidorna /prenumeration/bekrafta/ och /prenumeration/avsluta/ till newsletter-confirm och
+# newsletter-unsubscribe. Ingen nyckel behövs i klienten (funktionerna driftsätts med --no-verify-jwt). Dubbel bekräftelse
+# och utskick via Resend: se supabase/README.md. Integritetspolicyn /integritet/ byggs alltid (och ligger i sidfoten
+# och i sitemap.xml). Sidorna under /prenumeration/ byggs bara med flaggan på. Den enda kontaktadressen på sajten är
+# CONTACT_EMAIL (hello@motorpuls.se, ALX:s beslut 31 okt 2026).
+NEWSLETTER_BOX = os.environ.get("MOTORPULS_NYHETSBREV", "1") != "0"  # PÅ i produktion sedan 31 okt 2026 (ALX:s OK). MOTORPULS_NYHETSBREV=0 stänger av
+CONTACT_EMAIL = "hello@motorpuls.se"  # officiell kontakt: sidfoten, /om/, /integritet/ och Organization i JSON-LD
+NEWSLETTER_CONFIG = {"api": "https://yhxnrcykinmuoqbgboda.supabase.co/functions/v1"}
+NEWSLETTER_PAGES = ("prenumeration",)  # kataloger som bara byggs med flaggan på. /integritet/ byggs alltid.
+NEWSLETTER_SRC = os.path.join(ROOT, "nyhetsbrev")  # källor: nyhetsbrev.css, nyhetsbrev.js (publiceras inte som katalog)
+
+# Google AdSense. Tom ADSENSE_CLIENT: inget annonsrelaterat ritas (inget skript, inga rutor, ingen ads.txt).
+# När kontot finns: meta google-adsense-account och adsbygoogle.js (async) i <head> på varje sida, även utan
+# slot-id, så att Google kan verifiera sajten och visa EU-samtycket. ads.txt skrivs i roten och följer med till --out.
+# Annonsrutor bara i artiklar, och bara när respektive slot-id är ifyllt. Tomma slot-id: inga rutor och ingen
+# reserverad höjd. Startsidan och kategorisidor får inga annonsrutor. Inga popups, inga klistrade annonser,
+# ingen egen samtyckesdialog: EU-samtycke sköts av Googles certifierade meddelande (AdSense, Privacy & messaging).
+ADSENSE_CLIENT = "ca-pub-7329870923296365"
+ADSENSE_SLOT_INCONTENT = ""     # data-ad-slot, i texten efter ungefär tredje stycket
+ADSENSE_SLOT_END = ""           # data-ad-slot, före Läs också
+ADSENSE_ADS_TXT_CERT = "f08c47fec0942fa0"  # Googles certifierings-id i ads.txt, fast värde
+
 ANALYTICS = """<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "bace28864ae04c6fa5e9f4a98ca70f94"}'></script><!-- End Cloudflare Web Analytics -->
 """
+# Umami (egeninstallerad, utan kakor, inga personuppgifter) i <head> på varje sida.
+# Cloudflare-beaconen ovan lämnas oförändrad och skrivs som förut före </body>.
+UMAMI = '<script defer src="https://82-70-60-43.sslip.io/s.js" data-website-id="ffb8602c-4d57-4164-824c-9823ad5c42bb" data-domains="motorpuls.se,www.motorpuls.se"></script>'
 
 # ---------- content ----------
+TZ = ZoneInfo("Europe/Stockholm")
+
+def parse_when(v, path, field):
+    """date/updated -> (lokalt datum, tidpunkt med zon eller None)"""
+    try:
+        if isinstance(v, dt.datetime): t = v
+        elif isinstance(v, dt.date): return v, None
+        else:
+            s = str(v).strip()
+            if re.fullmatch(r"\d{4}-\d{2}-\d{2}", s): return dt.date.fromisoformat(s), None
+            t = dt.datetime.fromisoformat(s)
+    except ValueError: raise SystemExit(f"{path}: ogiltigt {field}: {v!r}")
+    t = t.replace(tzinfo=TZ) if t.tzinfo is None else t
+    return t.astimezone(TZ).date(), t
+
+def iso(d, t):
+    """ISO 8601 med zon (+01:00/+02:00, Europe/Stockholm) för JSON-LD, article:*_time, sitemaps och <time>. Ett datum
+    utan klockslag blir dagens början i svensk tid, så att utdata alltid har tid och zon (Google News vill ha det)."""
+    return (t or dt.datetime.combine(d, dt.time.min, TZ)).isoformat(timespec="seconds")
+
+def instant(d, t):
+    """jämförbar tidpunkt: tiden om den finns, annars dagens början i svensk tid"""
+    return t if t else dt.datetime.combine(d, dt.time.min, TZ)
+
+def lastmod(url, arts):
+    """sitemap: artikelns updated/date, startsidan får den senaste av dem"""
+    hit = [a for a in arts if a["url"] == url] or [max(arts, key=lambda a: a["mod_when"])]
+    return hit[0]["modified"]
+
+def now():
+    n = os.environ.get("MOTORPULS_NOW")
+    t = dt.datetime.fromisoformat(n) if n else dt.datetime.now(TZ)
+    return t.replace(tzinfo=TZ) if t.tzinfo is None else t
+
 def load_articles():
     arts = []
     for path in sorted(glob.glob(os.path.join(ROOT, "content/articles/*.md"))):
@@ -59,7 +209,17 @@ def load_articles():
             if not fm.get(k): raise SystemExit(f"{path}: saknar {k}")
         check_summary_images(fm, path)
         if "sweden" in fm and not isinstance(fm["sweden"], bool): raise SystemExit(f"{path}: sweden ska vara true eller false")
-        d = fm["date"] if isinstance(fm["date"], dt.date) else dt.date.fromisoformat(str(fm["date"]))
+        if fm.get("type") is not None and str(fm["type"]).strip().lower() not in ("guide", "nyhet"):
+            raise SystemExit(f"{path}: type ska vara guide (eller utelämnas)")
+        d, t = parse_when(fm["date"], path, "date")
+        if not t: print(f"varning: {os.path.basename(path)}: date saknar klockslag, skriv publiceringstiden (t.ex. {d}T07:30:00+01:00)")
+        n = now()
+        if (t and t > n) or d > n.astimezone(TZ).date():
+            raise SystemExit(f"{path}: date {iso(d, t)} ligger i framtiden (nu {n.astimezone(TZ):%Y-%m-%d %H:%M} svensk tid)")
+        ud, ut = parse_when(fm["updated"], path, "updated") if fm.get("updated") else (d, t)
+        if (ut and ut > n) or ud > n.astimezone(TZ).date():
+            raise SystemExit(f"{path}: updated {iso(ud, ut)} ligger i framtiden (nu {n.astimezone(TZ):%Y-%m-%d %H:%M} svensk tid)")
+        if instant(ud, ut) < instant(d, t): ud, ut = d, t  # uppdaterad före publicering: räknas som date
         # h1 in the body is the page headline; "## Källor" becomes the source list
         h1 = re.search(r"^# (.+)$", body, re.M)
         headline = h1.group(1).strip() if h1 else fm["title"]
@@ -72,13 +232,26 @@ def load_articles():
                 if lm: sources.append((lm.group(1), lm.group(2)))
                 elif line.strip(): raise SystemExit(f"{path}: oväntad rad i Källor: {line!r}")
             body = body[:ks.start()]
-        words = len(re.findall(r"\w+", body))
-        arts.append(dict(fm, date=d, headline=headline, body_html=markdown.markdown(body.strip()),
+        check_sources(fm, sources, path)
+        words = len(re.findall(r"\w+", INLINE_IMG.sub("", body)))
+        arts.append(dict(fm, date=d, published=iso(d, t), modified=iso(ud, ut), mod_date=ud, when=instant(d, t), mod_when=instant(ud, ut), headline=headline, body_html=markdown.markdown(body.strip()),
                          sources=sources, file=os.path.basename(path), minutes=max(1, math.ceil(words/200)),
                          url=f"/artikel/{fm['slug']}/", cat=slugify(fm["category"])))
-    arts.sort(key=lambda a: (a["date"], a["file"]), reverse=True)
+    arts.sort(key=lambda a: (a["when"], a["file"]), reverse=True)
     if len({a["slug"] for a in arts}) != len(arts): raise SystemExit("dubbla slugs")
     return arts
+
+def check_sources(fm, sources, path):
+    """Front matter-fältet sources är valfritt. Finns det ska det vara samma länkar som under "## Källor"
+    (det är Källor-listan som visas på sidan och hamnar i JSON-LD)."""
+    fs = fm.get("sources")
+    if fs is None: return
+    if not isinstance(fs, list) or not all(isinstance(u, str) for u in fs):
+        raise SystemExit(f"{path}: sources ska vara en lista med länkar")
+    shown = [u for _, u in sources]
+    if set(fs) != set(shown):
+        raise SystemExit(f"{path}: sources i front matter stämmer inte med ## Källor "
+                         f"(saknas i Källor: {sorted(set(fs) - set(shown))}, saknas i sources: {sorted(set(shown) - set(fs))})")
 
 def check_summary_images(fm, path):
     sm = fm.get("summary")
@@ -95,7 +268,8 @@ def check_summary_images(fm, path):
             if not str(im.get("license") or "").strip(): print(f"varning: {path}: images[{i}] saknar license")
 
 def webp_variants(src_path, out_base):
-    """Skriver <out_base>.webp (max 1600 px) och <out_base>-800.webp (om bilden är bredare än 800 px).
+    """Skriver <out_base>.webp (max 1600 px), <out_base>-1200.webp, -800.webp och -400.webp (de mindre bara om
+    bilden är bredare än så), med kvaliteten WEBP_Q.
     Samma bildformat: bara storleksändring, aldrig beskärning."""
     from PIL import Image, ImageOps
     Image.MAX_IMAGE_PIXELS = None  # pressbilder kan vara över 100 megapixel, källorna är våra egna filer
@@ -103,21 +277,52 @@ def webp_variants(src_path, out_base):
     im = ImageOps.exif_transpose(im)  # följ EXIF-orienteringen (vrider bara, beskär aldrig)
     icc = im.info.get("icc_profile")  # färgprofilen följer med oförändrad (t.ex. Adobe RGB, P3), inga färgändringar
     if im.mode not in ("RGB", "RGBA"): im = im.convert("RGBA" if "A" in im.getbands() else "RGB")
-    for w, suffix in ((MAX_W, ""), (800, "-800")):
-        if suffix and im.width <= 800: break
+    for w, suffix in VARIANTS:
+        if suffix and im.width <= w: continue
         tw = min(w, im.width)
         if tw == im.width and src_path.lower().endswith(".webp"):  # redan WebP i rätt storlek: kopiera, koda inte om
             shutil.copyfile(src_path, os.path.join(ROOT, f"{out_base}{suffix}.webp")); continue
         r = im if tw == im.width else im.resize((tw, round(im.height * tw / im.width)), Image.LANCZOS)
-        r.save(os.path.join(ROOT, f"{out_base}{suffix}.webp"), "WEBP", quality=86, method=6, **({"icc_profile": icc} if icc else {}))
+        r.save(os.path.join(ROOT, f"{out_base}{suffix}.webp"), "WEBP", quality=WEBP_Q, method=6, **({"icc_profile": icc} if icc else {}))
+
+def small_variants(out_base):
+    """Äldre bilder byggda innan en mindre storlek fanns: skapa den ur den största WebP-filen (bara storleksändring)."""
+    from PIL import Image
+    main = os.path.join(ROOT, out_base + ".webp")
+    if not os.path.exists(main): return
+    with Image.open(main) as im:
+        for w, suffix in VARIANTS[1:]:
+            p = os.path.join(ROOT, f"{out_base}{suffix}.webp")
+            if im.width > w and not os.path.exists(p):
+                icc = im.info.get("icc_profile")
+                im.resize((w, round(im.height * w / im.width)), Image.LANCZOS).save(p, "WEBP", quality=WEBP_Q, method=6, **({"icc_profile": icc} if icc else {}))
+
+_tracked = None
+OUT = None          # utkatalog (--out), sätts i main()
+WRITTEN = []        # sidor och filer som bygget skrivit (relativa sökvägar), publiceras med --out
+PUBLIC_DIRS = ("css", "js", "fonts", "img", "favicon")
+PUBLIC_FILES = ("favicon.ico", "CNAME", "feed.xsl")  # feed.xsl: flödena som läsbar sida i webbläsaren
+
+def committed(rel):
+    """Sant om filen finns i git (eller om vi inte bygger i ett git-repo). En ny variant som inte är incheckad
+    hamnar inte i srcset, så sajten pekar aldrig på en fil som saknas på GitHub Pages."""
+    global _tracked
+    if OUT: return os.path.exists(os.path.join(ROOT, rel))  # --out: allt som finns följer med till _site
+    if _tracked is None:
+        try:
+            import subprocess
+            out = subprocess.run(["git", "ls-files", "-z", "img"], cwd=ROOT, capture_output=True, check=True).stdout
+            _tracked = set(out.decode().split("\0"))
+        except Exception: _tracked = False
+    return _tracked is False or rel in _tracked
 
 def read_variants(out_base):
     from PIL import Image
     res = []
-    for suffix in ("", "-800"):
+    for _, suffix in VARIANTS:
         rel = f"{out_base}{suffix}.webp"
         p = os.path.join(ROOT, rel)
-        if os.path.exists(p):
+        if os.path.exists(p) and (not suffix or committed(rel)):
             with Image.open(p) as im: res.append(("/" + rel, im.width, im.height))
     return res
 
@@ -152,10 +357,13 @@ def ensure_images(a):
                     webp_variants(found, out_base)
             elif not have:
                 raise SystemExit(f"{a['file']}: hittar inte bilden {src!r} (letade i: {', '.join(cands)})")
+            small_variants(out_base)
             v = read_variants(out_base)
             res.append(dict(src=v[0][0], w=v[0][1], h=v[0][2], srcset=", ".join(f"{u} {w}w" for u, w, _ in reversed(v)),
                             alt=str(im["alt"]).strip(), credit=str(im["credit"]).strip(),
-                            caption=str(im.get("caption") or "").strip(), license=str(im.get("license") or "").strip()))
+                            caption=str(im.get("caption") or "").strip(), license=str(im.get("license") or "").strip(),
+                            credit_url=str(im.get("credit_url") or "").strip(), license_name=str(im.get("license_name") or "").strip(),
+                            license_url=str(im.get("license_url") or "").strip()))
         return res
     if not a.get("image"): return []
     # äldre fält: en bild-URL
@@ -179,25 +387,330 @@ def ensure_images(a):
     return [dict(src="/" + rel, w=w, h=h, srcset="", alt=a["headline"], credit=str(a.get("image_credit") or "").strip(),
                  caption="", license=str(a.get("image_license") or "").strip())]
 
+OG_W, OG_H = 1200, 630
+OG_BG = (0x0B, 0x0D, 0x10)  # sajtens bakgrund (bg), botten runt hela bilden när den inte får beskäras
+DEFAULT_OG = dict(src="/img/og/motorpuls.jpg", w=OG_W, h=OG_H)
+# Licenstext (images[].license, huvudbilden) som förbjuder beskärning eller ändring: "får inte beskäras", "Oförändrad",
+# "får inte ändras", "får inte kopieras, distribueras, ändras ...", "oförändrat och i sin helhet" (Mynewsdesk),
+# "utan förvanskning" (JLR). Då beskärs bilden aldrig, varken till delningsbilden
+# (og:image) eller till JSON-LD-bilderna (ld_images).
+NO_MODIFY = re.compile(r"beskär|oförändra[dt]|i sin helhet|förvanskning|får inte[^.]*?\bändras|unmodified|not be (?:cropped|altered|modified)", re.I)
+NO_CROP = NO_MODIFY
+
+def no_modify(img): return bool(img and NO_MODIFY.search(img.get("license") or ""))
+
+def og_contain(im):
+    """Hela bilden i 1200x630: förminskas (aldrig förstoras) så att den ryms, centreras på mörk botten. Bildens
+    pixlar beskärs inte och inget läggs ovanpå."""
+    from PIL import Image
+    im = im.convert("RGB")
+    k = min(OG_W / im.width, OG_H / im.height, 1)
+    if k < 1: im = im.resize((max(1, round(im.width * k)), max(1, round(im.height * k))), Image.LANCZOS)
+    out = Image.new("RGB", (OG_W, OG_H), OG_BG)
+    out.paste(im, ((OG_W - im.width) // 2, (OG_H - im.height) // 2))
+    return out
+
+def og_image(a):
+    """Delningsbild 1200x630 som JPEG (bara för og:image/twitter:image, sajtens bilder beskärs aldrig). Huvudbilden
+    beskärs till formatet, utom när dess licens förbjuder det (no_modify): då hela bilden på mörk botten
+    (img/og/<slug>-hel.jpg) och en äldre beskuren img/og/<slug>.jpg tas bort. Skrivs om den saknas. Används bara om
+    filen är incheckad, annars WebP-huvudbilden som förut."""
+    img = a["img"]
+    if not img: return None
+    whole = no_modify(img)
+    rel = f"img/og/{a['slug']}{'-hel' if whole else ''}.jpg"
+    p = os.path.join(ROOT, rel)
+    if whole:  # en beskuren delningsbild får inte ligga kvar (img/ publiceras i sin helhet)
+        old = os.path.join(ROOT, f"img/og/{a['slug']}.jpg")
+        if os.path.exists(old): os.remove(old)
+    if not os.path.exists(p):
+        from PIL import Image, ImageOps
+        os.makedirs(os.path.dirname(p), exist_ok=True)
+        with Image.open(os.path.join(ROOT, img["src"].lstrip("/"))) as im:
+            out = og_contain(im) if whole else ImageOps.fit(im.convert("RGB"), (OG_W, OG_H), Image.LANCZOS)
+            out.save(p, "JPEG", quality=86, optimize=True, progressive=True)
+    return dict(src="/" + rel, w=OG_W, h=OG_H) if committed(rel) else img
+
+TITLE_MAX = 60  # tecken i <title>, ungefär vad Google visar
+
+def page_title(t, seo_title=None, limit=TITLE_MAX):
+    """<title>. Kapas aldrig med "…". I tur och ordning: seo_title ur front matter, hela rubriken, delen före ": " eller
+    ". " (om den är minst halva utrymmet), alla med " · Motorpuls" när det ryms inom limit. Ryms inget av dem blir
+    titeln hela rubriken (eller seo_title) utan sajtnamnet, och bygget varnar så att artikeln kan få en seo_title.
+    og:title och twitter:title behåller alltid hela rubriken, sidans h1 är oförändrad."""
+    suffix = f" · {SITE}"
+    room = limit - len(suffix)
+    if seo_title:
+        seo_title = str(seo_title).strip()
+        if len(seo_title) > limit: print(f"varning: seo_title är {len(seo_title)} tecken (högst {limit}): {seo_title!r}")
+        return seo_title + suffix if len(seo_title) <= room else seo_title
+    if len(t) <= room: return t + suffix
+    head_part = re.split(r"[:.] ", t, maxsplit=1)[0]
+    if head_part != t and room // 2 <= len(head_part) <= room: return head_part + suffix
+    print(f"varning: rubriken ryms inte i {limit} tecken, lägg till seo_title i front matter: {t!r}")
+    return t
+
+def rss(arts, title=SITE, desc=SITE_DESC, path="/feed.xml", link="/"):
+    from email.utils import format_datetime
+    def rfc822(iso_s):
+        t = dt.datetime.fromisoformat(iso_s)
+        return format_datetime(t.replace(tzinfo=TZ) if t.tzinfo is None else t)
+    items = "".join(f"""  <item>
+    <title>{esc(a["title"])}</title>
+    <link>{DOMAIN}{a["url"]}</link>
+    <guid isPermaLink="true">{DOMAIN}{a["url"]}</guid>
+    <pubDate>{rfc822(a["published"])}</pubDate>
+    <category>{esc(a["category"])}</category>
+    <description>{esc(a["excerpt"])}</description>{rss_image(a)}
+  </item>
+""" for a in arts)
+    return f"""<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/feed.xsl"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
+<channel>
+  <title>{esc(title)}</title>
+  <link>{DOMAIN}{link}</link>
+  <description>{esc(desc)}</description>
+  <language>sv-SE</language>
+  <lastBuildDate>{rfc822(lastmod("/", arts))}</lastBuildDate>
+  <atom:link href="{DOMAIN}{path}" rel="self" type="application/rss+xml"/>
+{items}</channel>
+</rss>
+"""
+
+def rss_image(a):
+    """Delningsbilden (1200x630 JPEG, samma som og:image) som media:content och enclosure, så att flödesläsare och
+    nyhetsbrevsverktyg visar en bild. Saknas en incheckad delningsbild används huvudbilden (som og:image)."""
+    im = og_image(a)
+    if not im: return ""
+    p = os.path.join(ROOT, im["src"].lstrip("/"))
+    if not os.path.isfile(p): return ""
+    typ = {".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp", ".png": "image/png"}[os.path.splitext(p)[1].lower()]
+    url, n = f"{DOMAIN}{im['src']}", os.path.getsize(p)
+    return (f'\n    <enclosure url="{url}" length="{n}" type="{typ}"/>'
+            f'\n    <media:content url="{url}" medium="image" type="{typ}" width="{im["w"]}" height="{im["h"]}" fileSize="{n}"/>')
+
+FEEDS = []  # kategoriflöden: dict(key, name, path, arts), sätts i main()
+
+def category_feeds(arts):
+    """Ett RSS-flöde per kategori (feed/<kategori>.xml), i samma ordning som kategorierna först dyker upp, plus
+    feed/sverige.xml när minst en artikel har sweden: true. Tomma flöden skrivs aldrig."""
+    groups = {}
+    for a in arts: groups.setdefault(a["cat"], (a["category"], []))[1].append(a)
+    feeds = [dict(key=k, name=n, path=f"/feed/{k}.xml", arts=g) for k, (n, g) in groups.items()]
+    sv = [a for a in arts if a.get("sweden")]
+    if sv and "sverige" not in groups: feeds.append(dict(key="sverige", name="Sverige", path="/feed/sverige.xml", arts=sv))
+    gd = [a for a in arts if is_guide(a)]
+    if gd and GUIDE_KEY not in groups: feeds.append(dict(key=GUIDE_KEY, name=GUIDE_NAME, path=f"/feed/{GUIDE_KEY}.xml", arts=gd))
+    return feeds
+
+def feed_for(a):
+    return next(f for f in FEEDS if f["key"] == a["cat"])
+
+def feeds_for(a):
+    """Flöden i artikelns <head>: kategorin, och för guider även Guider."""
+    g = [f for f in FEEDS if f["key"] == GUIDE_KEY and f["key"] != a["cat"]] if is_guide(a) else []
+    return [feed_for(a)] + g
+
+def feed_links(feeds):
+    return "".join(f'<link rel="alternate" type="application/rss+xml" title="{SITE}: {esc(f["name"])}" href="{f["path"]}">\n' for f in feeds)
+
+RSS_SVG = ('<svg class="rss-icon" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false">'
+           '<rect width="16" height="16" rx="3" fill="#FF5B1F"/><circle cx="4.6" cy="11.4" r="1.5" fill="#0B0D10"/>'
+           '<path d="M3.2 7.1a5.7 5.7 0 0 1 5.7 5.7M3.2 3.6a9.2 9.2 0 0 1 9.2 9.2" fill="none" stroke="#0B0D10" stroke-width="1.8" stroke-linecap="round"/></svg>')
+
+def rss_row(a):
+    """Rad i slutet av artikeln: kategorins flöde och hela sajtens flöde."""
+    links = "".join(f'<a href="{f["path"]}">{esc(f["name"])}</a><span aria-hidden="true">·</span>' for f in feeds_for(a))
+    return (f'\n        <p class="rss-row">{RSS_SVG}<span>Prenumerera via RSS:</span> '
+            f'{links}<a href="/feed.xml">Alla nyheter</a></p>')
+
+# ---------- push (förhandsvisning, PUSH_BOX) ----------
+def push_src(name): return open(os.path.join(PUSH_SRC, name), encoding="utf-8").read()
+
+def push_head():
+    if not PUSH_BOX: return ""
+    return f'<style>{push_src("push.css")}</style>\n<script src="/push.js?v={hashlib.sha256(push_src("push.js").encode()).hexdigest()[:10]}" defer></script>\n'
+
+def push_box(where):
+    """where: "article" (i flödet efter texten) eller "front" (fast ruta nere, visas efter en stunds skrollning)."""
+    if not PUSH_BOX: return ""
+    cfg = esc(json.dumps(PUSH_CONFIG, separators=(",", ":")))
+    cls = "pushb pushb--toast" if where == "front" else "pushb"
+    return f'''
+<section class="{cls}" id="push" aria-labelledby="push-h" data-config="{cfg}" hidden>
+  <p class="pushb__kicker">Notiser</p>
+  <h2 id="push-h">Få en notis när vi publicerar nyheter</h2>
+  <p class="pushb__lede">En kort notis i din telefon eller dator, bara när en ny artikel är ute. Stäng av när du vill.</p>
+  <p class="pushb__ios">På iPhone fungerar notiser när Motorpuls ligger på hemskärmen. Tryck på Dela <span aria-hidden="true">(rutan med pilen)</span> och välj Lägg till på hemskärmen. Öppna sedan Motorpuls därifrån.</p>
+  <div class="pushb__row">
+    <button class="pushb__btn pushb__yes" type="button" data-push="ja">Ja tack</button>
+    <button class="pushb__btn pushb__btn--ghost" type="button" data-push="nej">Inte nu</button>
+  </div>
+  <p class="pushb__status" role="status" aria-live="polite"></p>
+</section>'''
+
+# ---------- nyhetsbrev i sidfoten (förhandsvisning, NEWSLETTER_BOX) ----------
+def nl_src(name): return open(os.path.join(NEWSLETTER_SRC, name), encoding="utf-8").read()
+
+def newsletter_head():
+    if not NEWSLETTER_BOX: return ""
+    return (f'<style>{nl_src("nyhetsbrev.css")}</style>\n<noscript><style>.nlf__form{{display:none}}</style></noscript>\n'
+            f'<script src="/nyhetsbrev.js?v={hashlib.sha256(nl_src("nyhetsbrev.js").encode()).hexdigest()[:10]}" defer></script>\n')
+
+def newsletter_box():
+    if not NEWSLETTER_BOX: return ""
+    cfg = esc(json.dumps(NEWSLETTER_CONFIG, separators=(",", ":")))
+    return f'''
+    <section class="nlf" id="nyhetsbrev-fot" aria-labelledby="nlf-h" data-config="{cfg}">
+      <p class="nlf__kicker">Nyhetsbrev</p>
+      <h2 id="nlf-h">Få Motorpuls i inkorgen</h2>
+      <p class="nlf__lede">De viktigaste bilnyheterna, korta och med källor. Du hänger med utan att leta.</p>
+      <noscript><p class="nlf__fine">Anmälan kräver JavaScript.</p></noscript>
+      <form class="nlf__form" novalidate>
+        <label class="nlf__label" for="nlf-email">Din e-postadress</label>
+        <div class="nlf__row">
+          <input class="nlf__input" id="nlf-email" type="email" name="email" inputmode="email" autocomplete="email" maxlength="254" required placeholder="namn@exempel.se" aria-describedby="nlf-fine">
+          <button class="nlf__btn" type="submit">Prenumerera</button>
+        </div>
+        <div class="nlf__hp" aria-hidden="true"><label>Lämna tomt <input type="text" name="webbplats" tabindex="-1" autocomplete="off"></label></div>
+        <p class="nlf__fine" id="nlf-fine">Helt gratis, avsluta när du vill. Du får ett mejl där du bekräftar först. <a class="nlf__privacy" href="/integritet/">Så hanterar vi din adress</a></p>
+        <p class="nlf__status" role="status" aria-live="polite"></p>
+      </form>
+    </section>'''
+
+
+# ---------- integritetspolicy (alltid) och nyhetsbrevets åtgärdssidor (bara med NEWSLETTER_BOX) ----------
+# Kontakt för frågor om uppgifterna: CONTACT_EMAIL.
+PRIVACY_UPDATED = dt.date(2026, 11, 7)
+
+def _simple_page(title, desc, path, inner, noindex=True):
+    h = head(f"{title} · {SITE}", desc, path, image=DEFAULT_OG, noindex=noindex)
+    body = f'''
+<main id="innehall" class="article">
+  <div class="wrap">
+    <article>
+      <header class="article__head article__col">
+        <h1 class="article__title">{esc(title)}</h1>
+      </header>
+      <div class="article__layout article__col">
+{inner}
+      </div>
+    </article>
+  </div>
+</main>
+'''
+    return page(h, body)
+
+def privacy_page():
+    desc = "Vilka uppgifter Motorpuls samlar in: besöksstatistik utan kakor, annonser via Google AdSense och nyhetsbrevet."
+    inner = f'''        <div class="prose">
+<p>Här står vilka uppgifter Motorpuls samlar in, varför vi gör det och hur du kontaktar oss. Vi säljer inte personuppgifter.</p>
+<h2>Besöksstatistik</h2>
+<p>Vi använder Cloudflare Web Analytics för att se hur många som besöker sajten och vilka sidor som läses. Mätningen sker utan kakor (cookies) och sparar inget i din webbläsare. Besöken räknas på ett sätt som inte identifierar dig.</p>
+<p>Vi använder också Umami, besöksstatistik som vi kör själva. Umami sätter inga kakor och samlar inga personuppgifter.</p>
+<h2>Annonser</h2>
+<p>På artikelsidor kan Motorpuls visa annonser via Google AdSense. Tredjepartsleverantörer, däribland Google, använder kakor (cookies) för att visa annonser utifrån dina tidigare besök på den här webbplatsen och på andra webbplatser.</p>
+<p>Googles annonskakor gör att Google och dess partner kan visa annonser utifrån besök på den här webbplatsen och/eller andra webbplatser på internet.</p>
+<p>Annonser som anpassas efter vad du tros vara intresserad av används bara efter ditt samtycke, där lagen kräver det. Startsidan och kategorisidorna har inga annonser.</p>
+<p>Du kan välja bort anpassad annonsering i <a href="https://adssettings.google.com/">Googles annonsinställningar</a>. Mer om hur Google använder annonsteknik finns på <a href="https://policies.google.com/technologies/ads">https://policies.google.com/<wbr>technologies/<wbr>ads</a>. Hur Google använder uppgifter från webbplatser och appar som använder deras tjänster står på <a href="https://policies.google.com/technologies/partner-sites">https://policies.google.com/<wbr>technologies/<wbr>partner-sites</a>.</p>
+<h2>Samtycke i EU och EES</h2>
+<p>Besökare i EU och EES får ett samtyckesmeddelande från Googles certifierade CMP (Integritet och meddelanden). Där kan du godkänna, avvisa eller hantera dina val.</p>
+<p>Du kan ändra valet senare via länken Integritets- och cookieinställningar längst ned på sidan. Det är integritetsinställningarna som Googles CMP lägger dit automatiskt där meddelandet visas, och länken öppnar samma val igen. Syns inte länken kan du radera kakorna för motorpuls.se i webbläsaren och ladda om sidan.</p>
+<h2>Nyhetsbrevet</h2>
+<p>När du anmäler dig sparar vi din e-postadress, när du anmälde dig och bekräftade, vilken sida på Motorpuls du anmälde dig från och texten du godkände. Vi använder uppgifterna bara för att skicka Motorpuls nyhetsbrev. Vi säljer dem inte och lämnar inte ut dem för marknadsföring.</p>
+<p>Rättslig grund är ditt samtycke. Därför skickar vi först ett mejl där du bekräftar att adressen är din. Inga nyhetsbrev skickas förrän du har bekräftat.</p>
+<h2>Hur länge</h2>
+<p>En adress som inte bekräftas raderas efter 30 dagar. En bekräftad adress sparas tills du avslutar prenumerationen.</p>
+<h2>Avsluta och radera</h2>
+<p>Varje mejl från oss har en länk för att avsluta. Då raderas din adress direkt och helt. Många mejlprogram visar också en knapp för att avsluta, den fungerar på samma sätt.</p>
+<h2>Skydd mot missbruk</h2>
+<p>För att stoppa automatiska anmälningar räknar vi antalet försök per IP-adress och per e-postadress. Vi sparar då bara en förvrängd kod (hash) av dem, aldrig själva adresserna, och koden raderas efter ett dygn.</p>
+<h2>Tjänster vi använder</h2>
+<ul>
+<li><strong>Cloudflare Web Analytics</strong> räknar besök utan kakor och sparar inget i din webbläsare.</li>
+<li><strong>Umami</strong> är vår egeninstallerade besöksstatistik. Den sätter inga kakor och samlar inga personuppgifter.</li>
+<li><strong>Google AdSense</strong> kan visa annonser på artikelsidor. Google och andra leverantörer kan använda kakor utifrån tidigare besök, efter samtycke där det krävs.</li>
+<li><strong>Supabase</strong> lagrar nyhetsbrevets adresser i en databas i Stockholm (EU).</li>
+<li><strong>Resend</strong> skickar mejlen åt oss och tar emot mejl till {CONTACT_EMAIL}.</li>
+</ul>
+<h2>Dina rättigheter</h2>
+<p>Du har rätt att få veta vilka uppgifter vi har om dig, få dem rättade eller raderade och att ta tillbaka ditt samtycke. Mejla <a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a>, så svarar vi så snart vi kan och senast inom en månad. Du kan också lämna klagomål till Integritetsskyddsmyndigheten (IMY).</p>
+<h2>Kontakt</h2>
+<p>Frågor om hur vi hanterar dina uppgifter skickar du till <a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a>.</p>
+<p>Senast uppdaterad {PRIVACY_UPDATED.isoformat()}.</p>
+        </div>'''
+    return _simple_page("Integritetspolicy", desc, "/integritet/", inner, noindex=False)
+
+# Sidorna som länkarna i mejlen går till. Att öppna sidan ändrar inget (länkskannrar i mejl öppnar länkar);
+# först knappen skickar koden till edge-funktionen. Svaret visas i statusraden.
+def _action_page(kind):
+    api = esc(NEWSLETTER_CONFIG["api"])
+    if kind == "bekrafta":
+        title, lede, btn = "Bekräfta prenumerationen", "Tryck på knappen så börjar Motorpuls nyhetsbrev komma till din inkorg.", "Bekräfta prenumerationen"
+        fn = "newsletter-confirm"
+    else:
+        title, lede, btn = "Avsluta prenumerationen", "Tryck på knappen så raderar vi din e-postadress. Du får inga fler nyhetsbrev från Motorpuls.", "Avsluta prenumerationen"
+        fn = "newsletter-unsubscribe"
+    inner = f'''        <section class="nlp" data-api="{api}/{fn}" data-kind="{kind}">
+          <p class="article__dek">{esc(lede)}</p>
+          <noscript><p class="nlp__msg">Sidan kräver JavaScript.</p></noscript>
+          <form class="nlp__form" hidden><button class="nlf__btn" type="submit">{esc(btn)}</button></form>
+          <p class="nlp__msg" role="status" aria-live="polite" tabindex="-1"></p>
+          <p class="nlp__home"><a href="/">Till startsidan</a></p>
+        </section>
+        <script src="/nyhetsbrev-sida.js?v={hashlib.sha256(nl_src("nyhetsbrev-sida.js").encode()).hexdigest()[:10]}" defer></script>'''
+    return _simple_page(title, lede, f"/prenumeration/{kind}/", inner)
+
 # ---------- shared html ----------
+SITE_CSS = None  # css/site.css förminskad, läses en gång per bygge (inline_css)
+
+def inline_css():
+    """css/site.css inbäddad i <head> (<style>), så att sidan inte väntar på en renderblockerande css-fil. css/site.css
+    är fortfarande källan och publiceras som förut. Kommentarer och indrag tas bort, url(../x) blir /x eftersom
+    stilen nu ligger i sidan och inte i /css/. Byte av css syns direkt i sidan (ingen ?v= behövs)."""
+    global SITE_CSS
+    if SITE_CSS is None:
+        t = open(os.path.join(ROOT, "css/site.css"), encoding="utf-8").read()
+        t = re.sub(r"/\*.*?\*/", "", t, flags=re.S)
+        t = re.sub(r"url\(\.\./", "url(/", t)
+        t = "\n".join(line.strip() for line in t.splitlines() if line.strip())
+        if "</" in t: raise SystemExit("css/site.css innehåller </ och kan inte bäddas in i <style>")
+        SITE_CSS = t
+    return SITE_CSS
+
 def asset(rel):
     """URL med ?v=<kort innehållshash> så att webbläsare (Safari) alltid hämtar aktuell css/js efter en ändring."""
     with open(os.path.join(ROOT, rel.lstrip("/")), "rb") as f:
         return f"{rel}?v={hashlib.sha256(f.read()).hexdigest()[:10]}"
 
 
-def head(title, desc, path, og_type="website", image=None, extra="", preload_img=None, og_title=None, preload_sizes="100vw"):
+OG_ALT = f"{SITE}: korta bilnyheter med källor"  # alt-text till delningsbilden när sidan inte har en egen bild
+# Alla indexerade sidor (startsidan, artiklar, ämnessidor, om-sidor) får stora bildförhandsvisningar i Google (Discover).
+# Sidor som inte ska indexeras (404, prenumerationssidorna) har noindex som förut.
+ROBOTS_DEFAULT = "max-image-preview:large"
+
+def head(title, desc, path, og_type="website", image=None, extra="", preload_img=None, og_title=None, preload_sizes="100vw", noindex=False, robots=None, feeds=()):
     canon = DOMAIN + path if path else None
     og_title = og_title or title
     og_img = ""
     if image:
+        typ = {".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp", ".png": "image/png"}.get(os.path.splitext(image["src"])[1].lower())
+        alt = image.get("alt") or OG_ALT
         og_img = (f'<meta property="og:image" content="{DOMAIN}{image["src"]}">\n'
-                  f'<meta property="og:image:width" content="{image["w"]}">\n<meta property="og:image:height" content="{image["h"]}">\n'
-                  f'<meta name="twitter:image" content="{DOMAIN}{image["src"]}">\n')
+                  + (f'<meta property="og:image:type" content="{typ}">\n' if typ else "")
+                  + f'<meta property="og:image:width" content="{image["w"]}">\n<meta property="og:image:height" content="{image["h"]}">\n'
+                  f'<meta property="og:image:alt" content="{esc(alt)}">\n'
+                  f'<meta name="twitter:image" content="{DOMAIN}{image["src"]}">\n<meta name="twitter:image:alt" content="{esc(alt)}">\n')
     pre = ""
     if preload_img:
         ss = f' imagesrcset="{preload_img["srcset"]}" imagesizes="{preload_sizes}"' if preload_img.get("srcset") else ""
-        pre = f'<link rel="preload" as="image" href="{preload_img["src"]}"{ss} fetchpriority="high">\n'
+        mob = lead_mobile_srcset(preload_img) if preload_sizes == LEAD_SIZES else ""
+        if mob:  # samma val som <picture> i lead(): mobil-srcset under LEAD_MOBILE_MQ, hela srcset över
+            pre = (f'<link rel="preload" as="image" href="{preload_img["src"]}" imagesrcset="{mob}" imagesizes="{LEAD_MOBILE_SIZES}" media="{LEAD_MOBILE_MQ}" fetchpriority="high">\n'
+                   f'<link rel="preload" as="image" href="{preload_img["src"]}"{ss} media="not all and {LEAD_MOBILE_MQ}" fetchpriority="high">\n')
+        else:
+            pre = f'<link rel="preload" as="image" href="{preload_img["src"]}"{ss} fetchpriority="high">\n'
 
     return f'''<!doctype html>
 <html lang="sv">
@@ -206,8 +719,8 @@ def head(title, desc, path, og_type="website", image=None, extra="", preload_img
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
-<meta name="robots" content="noindex">
-{f'<link rel="canonical" href="{canon}">' + chr(10) if canon else ""}<meta property="og:site_name" content="{SITE}">
+<meta name="robots" content="{"noindex" if noindex else (robots or ROBOTS_DEFAULT)}">
+{f'<link rel="canonical" href="{canon}">' + chr(10) if canon else ""}{f'<meta name="google-site-verification" content="{esc(GOOGLE_SITE_VERIFICATION)}">' + chr(10) if GOOGLE_SITE_VERIFICATION and path == "/" else ""}<meta property="og:site_name" content="{SITE}">
 <meta property="og:locale" content="sv_SE">
 <meta property="og:type" content="{og_type}">
 <meta property="og:title" content="{esc(og_title)}">
@@ -217,7 +730,7 @@ def head(title, desc, path, og_type="website", image=None, extra="", preload_img
 <meta name="twitter:description" content="{esc(desc)}">
 <meta name="theme-color" content="#0B0D10">
 <meta name="color-scheme" content="dark">
-<link rel="stylesheet" href="{asset("/css/site.css")}">
+<style>{inline_css()}</style>
 <script src="{asset("/js/site.js")}" defer></script>
 <link rel="icon" href="/favicon/favicon.ico" sizes="48x48">
 <link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml">
@@ -225,68 +738,114 @@ def head(title, desc, path, og_type="website", image=None, extra="", preload_img
 <link rel="icon" href="/favicon/favicon-16.png" sizes="16x16" type="image/png">
 <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png">
 <link rel="manifest" href="/favicon/site.webmanifest">
+<link rel="alternate" type="application/rss+xml" title="{SITE}" href="/feed.xml">
+{feed_links(feeds)}<link rel="preload" href="/fonts/newsreader-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
-{pre}{extra}</head>
+{pre}{push_head()}{newsletter_head()}{extra}{adsense_loader()}
+{UMAMI}
+</head>
 <body>
 <a class="skip" href="#innehall">Hoppa till innehållet</a>
 <header class="masthead">
   <div class="wrap masthead__row">
-    <a class="wordmark" href="/"><img class="logo" src="/img/logo.svg" alt="Motorpuls" width="872" height="88"></a>
+    <a class="wordmark" href="/"><img class="logo" src="/img/logo.svg" alt="Motorpuls" width="872" height="88">{BANNER_FLAG_SVG}</a>{topnav(path)}
   </div>
-</header>
+</header>{section_nav(path)}
 '''
 
-FOOTER = f'''
-<footer class="site-footer">
+def topnav(path):
+    """Länkarna i sidhuvudet: Nyheter (startsidan) och Guider. Bara när minst en guide är publicerad."""
+    if not GUIDES: return ""
+    li = "".join(f'<li><a href="{u}"{" aria-current=\"page\"" if path == u else ""}>{t}</a></li>'
+                 for u, t in (("/", "Nyheter"), (GUIDE_PATH, GUIDE_NAME)))
+    return f'\n    <nav class="topnav" aria-label="Huvudmeny"><ul>{li}</ul></nav>'
+
+# Ämnesraden under sidhuvudet: vanliga länkar till ämnessidorna (crawlbara, fungerar utan JS) och till nyhetsbrevsrutan i
+# sidfoten. Ligger utanför den klistrade .masthead så att krympningen i js/site.js inte påverkas. På smala skärmar en rad
+# att svepa i sidled. Bara ämnen som har en sida visas, i SECTION_NAV-ordning.
+SECTION_NAV = ("elbil", "sportbil", "motorsport", "bransle", "tesla")
+
+def section_nav(path):
+    items = [(TOPICS[k]["path"], TOPICS[k]["name"]) for k in SECTION_NAV if k in TOPICS]
+    if NEWSLETTER_BOX: items.append(("#nyhetsbrev-fot", "Nyhetsbrev"))
+    if not items: return ""
+    li = "".join(f'<li><a href="{u}"{" aria-current=\"page\"" if path == u else ""}>{esc(n)}</a></li>' for u, n in items)
+    return f'\n<nav class="secnav" aria-label="Kategorier"><div class="wrap"><ul class="secnav__list">{li}</ul></div></nav>'
+
+def footer():
+    cats = "".join(f'<li><a href="{f["path"]}">{esc(f["name"])}</a></li>' for f in FEEDS)
+    per_cat = (f'\n      <span class="site-footer__feeds-label" id="rss-kat">RSS per kategori:</span>'
+               f'\n      <ul class="site-footer__feeds" aria-labelledby="rss-kat">{cats}</ul>') if FEEDS else ""
+    main_open, main_close = ('<div class="site-footer__main">\n    ', '\n    </div>') if NEWSLETTER_BOX else ("", "")
+    return f'''
+<footer class="site-footer{" site-footer--nl" if NEWSLETTER_BOX else ""}">
   <div class="wrap">
-    <div class="footer-grid">
-      <div>
-        <a class="wordmark" href="/"><img class="logo logo--footer" src="/img/logo.svg" alt="Motorpuls" width="872" height="88" loading="lazy"></a>
-        <p style="margin-top:1rem">{SITE_DESC}</p>
-      </div>
+    {main_open}<a class="wordmark" href="/"><img class="logo logo--footer" src="/img/logo.svg" alt="Motorpuls" width="872" height="88" loading="lazy"></a>
+    <p class="site-footer__desc">{SITE_DESC}</p>
+    <nav class="site-footer__nav" aria-label="Om Motorpuls"><ul><li><a href="/om/">Om Motorpuls</a></li><li><a href="/om/lukas/">Om Lukas</a></li><li><a href="/integritet/">Integritetspolicy</a></li></ul></nav>{topics_nav()}
+    <div class="site-footer__rss">
+      <a class="rss-link" href="/feed.xml">{RSS_SVG}RSS</a>{per_cat}
     </div>
-    <p class="fine">© 2026 Motorpuls</p>
+    <p class="fine">© {dt.date.today().year} Motorpuls<span class="site-footer__contact"> <span aria-hidden="true">·</span> <a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a></span></p>{main_close}{newsletter_box()}
   </div>
 </footer>
 '''
 
-def page(h, body): return h + body + FOOTER + ANALYTICS + "</body>\n</html>\n"
+def page(h, body): return h + body + footer() + ANALYTICS + "</body>\n</html>\n"
 
-def meta_line(a, with_date=True, flag_html=""):
-    t = f'<time datetime="{a["date"].isoformat()}">{sv_date(a["date"])}</time>' if with_date else ""
-    return f'<span class="meta"><span class="tag">{esc(a["category"])}</span>{flag_html}{t}</span>'
+def topics_nav():
+    """Ämnessidorna (och Guider) i sidfoten, så att de nås från varje sida."""
+    order = [k for k in SECTION_NAV if k in TOPICS] + [k for k in TOPICS if k not in SECTION_NAV]  # samma ordning som ämnesraden
+    items = ([(TOPICS[k]["path"], TOPICS[k]["name"]) for k in order] + ([(SWEDEN["path"], SWEDEN["name"])] if SWEDEN else [])
+             + ([(GUIDE_PATH, GUIDE_NAME)] if GUIDES else []))
+    if not items: return ""
+    return ('\n    <nav class="site-footer__nav site-footer__topics" aria-label="Ämnen"><ul>'
+            + "".join(f'<li><a href="{u}">{esc(n)}</a></li>' for u, n in items) + "</ul></nav>")
+
+def meta_line(a, with_date=True):
+    t = f'<time datetime="{a["published"]}">{sv_date(a["date"])}</time>' if with_date else ""
+    return f'<span class="meta"><span class="tag">{esc(a["category"])}</span>{t}</span>'
 
 def img_tag(img, alt, eager=False, sizes="100vw"):
     load = 'fetchpriority="high" decoding="async"' if eager else 'loading="lazy" decoding="async"'
     ss = f' srcset="{img["srcset"]}" sizes="{sizes}"' if img.get("srcset") else ""
     return f'<img src="{img["src"]}"{ss} width="{img["w"]}" height="{img["h"]}" alt="{esc(alt)}" {load}>'
 
-# Svensk flagga, äldre mörkare färger: blå #005293, gul #FECB00. Proportioner 5:2:9 och 4:2:4 (16x10).
-# Ett eget DOM-element ovanpå bilden (bildfilen ändras aldrig), placeras med CSS (.flag--*).
-FLAG_SVG = ('<svg viewBox="0 0 16 10" width="16" height="10" aria-hidden="true" focusable="false">'
-            '<rect width="16" height="10" fill="#005293"/><rect x="5" width="2" height="10" fill="#FECB00"/>'
-            '<rect y="4" width="16" height="2" fill="#FECB00"/></svg>')
-def flag(a, where):
-    if not a.get("sweden"): return ""
-    return f'<span class="flag flag--{where}" role="img" aria-label="Gäller Sverige" title="Gäller Sverige">{FLAG_SVG}</span>'
-
-def meta_flag(a, has_img):
-    """Utan bild hamnar flaggan vid kategorin."""
-    return "" if has_img else flag(a, "inline")
+# Svensk flagga efter loggan i sidhuvudet (dekorativ, aria-hidden). Mörk marinblå #0A2260 (ALX:s referens) och gul
+# #FECC00, proportioner 5:2:9 och 4:2:4 (16x10). Den ritas inte på artikelbilder. Storlek och läge i
+# css/site.css (.wordmark__flag).
+BANNER_FLAG_SVG = ('<svg class="wordmark__flag" viewBox="0 0 16 10" width="16" height="10" aria-hidden="true" focusable="false">'
+                   '<rect width="16" height="10" fill="#0A2260"/><rect x="5" width="2" height="10" fill="#FECC00"/>'
+                   '<rect y="4" width="16" height="2" fill="#FECC00"/></svg>')
 
 # ---------- front page ----------
-LEAD_SIZES = "(min-width: 60rem) 38rem, 100vw"
+# Bredd på mobil: sidans bredd minus 1,25rem marginal per sida (samma som HERO_SIZES), så att preload och <img> väljer samma fil.
+LEAD_SIZES = "(min-width: 60rem) 38rem, calc(100vw - 2.5rem)"
+# Mobil (upp till LEAD_MOBILE_MQ): toppbilden väljs bara bland varianter upp till LEAD_MOBILE_MAX_W px breda. En telefon med
+# 3x skärm skulle annars hämta 1200w (ca 95 kB) till en 350 px bred ruta; 800w ger drygt 2x täthet och är ca 40 % lättare.
+# <picture><source media> och preload med samma media/srcset/sizes, så att bara en fil hämtas.
+LEAD_MOBILE_MQ, LEAD_MOBILE_MAX_W, LEAD_MOBILE_SIZES = "(max-width: 40rem)", 800, "calc(100vw - 2.5rem)"
+def lead_mobile_srcset(img):
+    """Toppbildens srcset för mobil: bara varianter upp till LEAD_MOBILE_MAX_W (tom sträng om det inte finns några)."""
+    parts = [x.strip() for x in (img.get("srcset") or "").split(",") if x.strip()]
+    keep = [x for x in parts if x.endswith("w") and int(x.split()[-1][:-1]) <= LEAD_MOBILE_MAX_W]
+    return ", ".join(keep) if keep and len(keep) < len(parts) else ""
+
 def lead(a):
     img = a["img"]
-    media = (f'<figure class="lead__media">{flag(a, "lead")}{img_tag(img, img["alt"], eager=True, sizes=LEAD_SIZES)}'
+    pic = img_tag(img, img["alt"], eager=True, sizes=LEAD_SIZES) if img else ""
+    if img and lead_mobile_srcset(img):
+        pic = (f'<picture><source media="{LEAD_MOBILE_MQ}" srcset="{lead_mobile_srcset(img)}" sizes="{LEAD_MOBILE_SIZES}">'
+               f'{pic}</picture>')
+    media = (f'<figure class="lead__media"><div class="lead__frame">{pic}</div>'
              f'<figcaption>{esc(img["credit"])}</figcaption></figure>') if img else ""
     return f'''
     <article class="lead{" lead--img" if img else " lead--text"}">
       <a href="{a["url"]}">
         {media}
         <div class="lead__body">
-          <span class="hero__label"><span class="pulse-dot" aria-hidden="true"></span>Senaste nytt</span>
-          {meta_line(a, flag_html=meta_flag(a, img))}
+          <div class="lead__kicker"><span class="hero__label"><span class="pulse-dot" aria-hidden="true"></span>Senaste nytt</span>
+          {meta_line(a)}</div>
           <h2 class="lead__title">{nbnum(esc(a["title"]))}</h2>
           <p class="lead__dek">{nbnum(esc(a["excerpt"]))}</p>
           <span class="lead__more">Läs artikeln <span aria-hidden="true">→</span></span>
@@ -294,43 +853,109 @@ def lead(a):
       </a>
     </article>'''
 
-def feed_item(a):
+def feed_item(a, h="h4"):
     # krediten visas vid varje bild, även miniatyrer (villkor för pressbilder och CC-licenser)
-    thumb = (f'<figure class="item__img">{flag(a, "thumb")}{img_tag(a["img"], "", sizes="(min-width: 48rem) 15rem, 6.5rem")}'
+    thumb = (f'<figure class="item__img">{img_tag(a["img"], "", sizes="(min-width: 48rem) 15rem, 6.5rem")}'
              f'<figcaption class="item__credit">{esc(a["img"]["credit"])}</figcaption></figure>') if a["img"] else ""
     return f'''
           <li class="item{"" if a["img"] else " item--noimg"}" data-cat="{a["cat"]}">
             <a href="{a["url"]}">
               <div class="item__text">
-                {meta_line(a, with_date=False, flag_html=meta_flag(a, a["img"]))}
-                <h3>{esc(a["title"])}</h3>
+                {meta_line(a, with_date=False)}
+                <{h}>{esc(a["title"])}</{h}>
                 <p>{esc(a["excerpt"])}</p>
               </div>
               {thumb}
             </a>
           </li>'''
 
+POPULAR_MAX = 4
+POP_SIZES = "(min-width: 60rem) 17rem, (min-width: 40rem) 30vw, 46vw"
+
+def popular_slugs():
+    p = os.path.join(ROOT, "data/popular.json")
+    if not os.path.exists(p): return []
+    try: d = json.load(open(p, encoding="utf-8"))
+    except ValueError as e: raise SystemExit(f"data/popular.json: {e}")
+    items = d.get("articles", d) if isinstance(d, dict) else d
+    return [x["slug"] if isinstance(x, dict) else x for x in items]
+
+def pick_popular(arts, shown):
+    """Populära först (i filens ordning), sedan de senaste som inte redan syns, sist de som syns i Senaste-listan."""
+    by_slug = {a["slug"]: a for a in arts}
+    picked = [by_slug[s] for s in dict.fromkeys(popular_slugs()) if s in by_slug]
+    picked += [a for a in arts if a not in picked and a["slug"] not in shown]
+    picked += [a for a in arts[1:] if a not in picked]
+    return picked[:POPULAR_MAX]
+
+def popular_card(a, rank):
+    img = a["img"]
+    media = (f'<figure class="pop__media"><div class="pop__frame">{img_tag(img, "", sizes=POP_SIZES)}</div>'
+             f'<figcaption class="item__credit">{esc(img["credit"])}</figcaption></figure>') if img else ""
+    return f'''
+        <li class="pop__card{"" if img else " pop__card--noimg"}">
+          <a href="{a["url"]}">
+            {media}
+            <div class="pop__body">
+              <span class="meta"><span class="pop__rank" aria-hidden="true">{rank:02d}</span><span class="tag">{esc(a["category"])}</span></span>
+              <h3>{esc(a["title"])}</h3>
+            </div>
+          </a>
+        </li>'''
+
+def popular_section(arts, shown):
+    pop = pick_popular(arts, shown)
+    if len(pop) < 2: return ""
+    return f'''
+    <section class="pop" aria-labelledby="pop-h">
+      <h2 id="pop-h"><span class="pulse-dot" aria-hidden="true"></span>Populärt just nu</h2>
+      <ol class="pop__list">{"".join(popular_card(a, i) for i, a in enumerate(pop, 1))}
+      </ol>
+    </section>'''
+
+ORG_ID = DOMAIN + "/#organization"
+
+SAME_AS = []  # sajtens officiella profiler (t.ex. X, Instagram) när de finns; tom lista ger inget sameAs
+
+def organization_ld():
+    """Utgivaren: samma uppgifter på startsidan och i artiklarnas publisher. NewsMediaOrganization (en sorts
+    Organization) med logotyp, url, sameAs när det finns och om-sidan som publishingPrinciples."""
+    org = {"@type": "NewsMediaOrganization", "@id": ORG_ID, "name": SITE, "url": DOMAIN + "/", "email": CONTACT_EMAIL,
+           "logo": {"@type": "ImageObject", "url": DOMAIN + "/favicon/android-chrome-512.png", "width": 512, "height": 512},
+           "publishingPrinciples": DOMAIN + "/om/"}
+    if SAME_AS: org["sameAs"] = SAME_AS
+    return org
+
+def home_ld():
+    """Startsidan: WebSite och Organization (utgivaren) i en @graph."""
+    ld = {"@context": "https://schema.org", "@graph": [
+        {"@type": "WebSite", "@id": DOMAIN + "/#website", "name": SITE, "url": DOMAIN + "/", "description": SITE_DESC,
+         "inLanguage": "sv-SE", "publisher": {"@id": ORG_ID}},
+        dict(organization_ld(), description=SITE_DESC)]}
+    return '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace("</", "<\\/") + "</script>\n"
+
 def index(arts):
     first, rest = arts[0], arts[1:]
-    h = head(f"{SITE}: korta bilnyheter med källor", SITE_DESC, "/",
-             preload_img=first["img"], preload_sizes=LEAD_SIZES)
+    h = head(f"{SITE}: korta bilnyheter med källor", SITE_DESC, "/", image=DEFAULT_OG,
+             preload_img=first["img"], preload_sizes=LEAD_SIZES, feeds=FEEDS, extra=home_ld())
     if rest:
-        side = f'<aside class="latest" aria-labelledby="latest-h" style="--n:{min(len(rest),5)}"><h2 id="latest-h"><span class="pulse-dot" aria-hidden="true"></span>Senaste</h2><ol>' + "".join(
-            f'<li><a href="{a["url"]}">{meta_line(a, flag_html=flag(a, "inline"))}<h3>{esc(a["title"])}</h3></a></li>' for a in rest[:5]) + "</ol></aside>"
+        side = f'<aside class="latest" aria-labelledby="latest-h"><h2 id="latest-h"><span class="pulse-dot" aria-hidden="true"></span>Senaste</h2><ol>' + "".join(
+            f'<li><a href="{a["url"]}">{meta_line(a)}<h3>{esc(a["title"])}</h3></a></li>' for a in rest[:5]) + "</ol></aside>"
     else:
         side = ""  # one article: the lead card stands alone
     feed = ""
-    if len(arts) > 1:
+    if rest:
+        # "Alla artiklar" börjar efter toppnyheten: den syns redan stort överst (och bilden laddas då inte två gånger)
         days, order = {}, []
-        for a in arts:
+        for a in rest:
             if a["date"] not in days: days[a["date"]] = []; order.append(a["date"])
             days[a["date"]].append(a)
         cats = []
-        for a in arts:
+        for a in rest:
             if (a["cat"], a["category"]) not in cats: cats.append((a["cat"], a["category"]))
         chips = ""
         if len(cats) > 1:
-            chips = ('<nav aria-label="Kategorier"><ul class="chips"><li><button class="chip" type="button" data-filter="alla" aria-pressed="true">Alla</button></li>'
+            chips = ('<nav aria-label="Filtrera artiklar"><ul class="chips"><li><button class="chip" type="button" data-filter="alla" aria-pressed="true">Alla</button></li>'
                      + "".join(f'<li><button class="chip" type="button" data-filter="{k}" aria-pressed="false">{esc(v)}</button></li>' for k, v in cats) + "</ul></nav>")
         sections = "".join(f'''
       <section class="day" aria-labelledby="d-{d.isoformat()}">
@@ -355,39 +980,64 @@ def index(arts):
     <h1 class="visually-hidden">Motorpuls, senaste bilnyheterna</h1>
     <div class="hero-grid">{lead(first)}
       {side}
-    </div>
+    </div>{popular_section(arts, {first["slug"]} | {a["slug"] for a in rest[:5]})}
   </div>
 {feed}
-</main>
+</main>{push_box("front")}
 '''
     return page(h, body)
 
 # ---------- article ----------
 HERO_SIZES = "(min-width: 66rem) 62rem, calc(100vw - 2.5rem)"
+INLINE_IMG = re.compile(r"^\{\{bild (\d+)\}\}[ \t]*$", re.M)  # markören i markdown (en egen rad)
+INLINE_IMG_HTML = re.compile(r"<p>\{\{bild(?: |\u00a0)(\d+)\}\}</p>")  # samma rad efter markdown
+INLINE_SIZES = "(min-width: 42.5rem) 40rem, calc(100vw - 2.5rem)"
+
+def link(text, url, rel="noopener"):
+    return f'<a href="{esc(url)}" rel="{rel}" target="_blank">{esc(text)}</a>' if url else esc(text)
 
 def caption(im):
-    parts = [esc(x) for x in (im["caption"], im["credit"]) if x]
+    parts = [esc(x) for x in (im["caption"],) if x]
+    if im["credit"]: parts.append(link(im["credit"], im.get("credit_url")))
+    if im.get("license_name") or im.get("license_url"): parts.append(link(im.get("license_name") or "Licens", im.get("license_url"), "noopener license"))
     return f'<figcaption><span>{" <span aria-hidden=\"true\">·</span> ".join(parts)}</span></figcaption>' if parts else ""
 
-def gallery(imgs, flag_html=""):
+def inline_images(a, imgs, body_html):
+    """Byter rader med {{bild N}} mot bild N (figur i bildens eget format, lazy, samma bildtext som övriga bilder).
+    Returnerar (html, bilderna som blir kvar till huvudbild/bildspel). Huvudbilden (1) kan inte flyttas."""
+    used = []
+    def fig(m):
+        n = int(m.group(1))
+        if not 2 <= n <= len(imgs): raise SystemExit(f"{a['file']}: {{{{bild {n}}}}} finns inte (bild 2 till {len(imgs)} går att placera i texten)")
+        if n in used: raise SystemExit(f"{a['file']}: {{{{bild {n}}}}} står mer än en gång")
+        used.append(n)
+        im = imgs[n - 1]
+        return (f'<figure class="article__figure article__figure--natural article__figure--inline">\n'
+                f'  <div class="frame">{img_tag(im, im["alt"], sizes=INLINE_SIZES)}</div>\n  {caption(im)}\n</figure>')
+    out = INLINE_IMG_HTML.sub(fig, body_html)
+    if "{{bild" in out: raise SystemExit(f"{a['file']}: {{{{bild N}}}} ska stå ensamt på en egen rad")
+    return out, [im for i, im in enumerate(imgs, 1) if i not in used]
+
+def gallery(imgs):
     """En bild: figur i bildens eget format. Flera: bildspel (scroll-snap, utan JS en rad att svepa i).
-    Bild 1 laddas direkt med hög prioritet, övriga lazy. Ingen beskärning: object-fit contain på svart scen."""
+    Bild 1 laddas direkt med hög prioritet, övriga lazy. Ingen beskärning: object-fit contain på svart scen.
+    Inget läggs ovanpå bilden."""
     if not imgs: return ""
     if len(imgs) == 1:
         im = imgs[0]
         return f'''
       <figure class="article__figure article__figure--natural">
-        <div class="frame">{flag_html}{img_tag(im, im["alt"], eager=True, sizes=HERO_SIZES)}</div>
+        <div class="frame">{img_tag(im, im["alt"], eager=True, sizes=HERO_SIZES)}</div>
         {caption(im)}
       </figure>'''
     n = len(imgs)
     slides = "".join(f'''
-          <figure class="gallery__slide" role="group" aria-roledescription="bild" aria-label="{i} av {n}">
+          <div class="gallery__slide" role="group" aria-roledescription="bild" aria-label="{i} av {n}"><figure>
             <div class="gallery__stage">{img_tag(im, im["alt"], eager=(i == 1), sizes=HERO_SIZES)}</div>
             {caption(im)}
-          </figure>''' for i, im in enumerate(imgs, 1))
+          </figure></div>''' for i, im in enumerate(imgs, 1))
     return f'''
-      <section class="gallery" aria-roledescription="bildspel" aria-label="Bildspel, {n} bilder" data-gallery>{flag_html}
+      <section class="gallery" aria-roledescription="bildspel" aria-label="Bildspel, {n} bilder" data-gallery>
         <div class="gallery__track" tabindex="0" role="group" aria-label="Bilder. Bläddra med piltangenterna eller svep.">{slides}
         </div>
         <div class="gallery__nav" hidden>
@@ -407,26 +1057,370 @@ def summary_box(a):
         </ul>
       </section>'''
 
-def article(a):
+LD_RATIOS = (("16x9", 16, 9), ("4x3", 4, 3), ("1x1", 1, 1))
+LD_W = 1200
+
+def ld_images(a):
+    """Huvudbilden beskuren till 16:9, 4:3 och 1:1 för NewsArticle (Google rekommenderar alla tre, Discover vill ha
+    bilder minst 1200 px breda). Största möjliga mittbeskärning, högst 1200 px bred, aldrig uppskalad. 16:9 och 4:3
+    hoppas över om beskärningen blir smalare än 1200 px, 1:1 om den blir under 800 px. Inga beskärningar alls om
+    huvudbildens licens förbjuder det (NO_CROP), då används bara originalbilderna. Sajtens egna bilder beskärs aldrig. Bara incheckade filer används (som img/og/), i --out-läget allt som finns."""
+    img = a["img"]
+    if not img: return []
+    if no_modify(img):  # licensen förbjuder beskärning: gamla beskärningar tas bort, hela bilden i 16:9 på mörk botten
+        for name, _, _ in LD_RATIOS:
+            old = os.path.join(ROOT, f"img/ld/{a['slug']}-{name}.jpg")
+            if os.path.exists(old): os.remove(old)
+        return ld_whole_16x9(a, img)
+    from PIL import Image, ImageOps
+    res = []
+    for name, rw, rh in LD_RATIOS:
+        w = min(LD_W, img["w"], img["h"] * rw // rh); h = round(w * rh / rw)
+        if w < (800 if name == "1x1" else LD_W): continue
+        rel = f"img/ld/{a['slug']}-{name}.jpg"
+        p = os.path.join(ROOT, rel)
+        if not os.path.exists(p):
+            os.makedirs(os.path.dirname(p), exist_ok=True)
+            with Image.open(os.path.join(ROOT, img["src"].lstrip("/"))) as im:
+                ImageOps.fit(im.convert("RGB"), (w, h), Image.LANCZOS).save(p, "JPEG", quality=84, optimize=True, progressive=True)
+        if committed(rel):
+            with Image.open(p) as im: res.append(dict(src="/" + rel, w=im.width, h=im.height))
+    return res
+
+LD_HEL_W, LD_HEL_H = 1200, 675
+
+def ld_whole_16x9(a, img):
+    """16:9-bild (1200x675) för JSON-LD när huvudbildens licens förbjuder beskärning: hela bilden, bara förminskad,
+    centrerad på mörk botten, samma princip som delningsbilden img/og/<slug>-hel.jpg. Ingen beskärning, ingen text.
+    Discover vill ha en bild som är minst 1200 px bred; de vanliga 16:9-, 4:3- och 1:1-beskärningarna görs inte."""
+    from PIL import Image
+    rel = f"img/ld/{a['slug']}-16x9-hel.jpg"
+    p = os.path.join(ROOT, rel)
+    if not os.path.exists(p):
+        os.makedirs(os.path.dirname(p), exist_ok=True)
+        with Image.open(os.path.join(ROOT, img["src"].lstrip("/"))) as im:
+            im = im.convert("RGB")
+            k = min(LD_HEL_W / im.width, LD_HEL_H / im.height, 1)
+            if k < 1: im = im.resize((max(1, round(im.width * k)), max(1, round(im.height * k))), Image.LANCZOS)
+            out = Image.new("RGB", (LD_HEL_W, LD_HEL_H), OG_BG)
+            out.paste(im, ((LD_HEL_W - im.width) // 2, (LD_HEL_H - im.height) // 2))
+            out.save(p, "JPEG", quality=84, optimize=True, progressive=True)
+    return [dict(src="/" + rel, w=LD_HEL_W, h=LD_HEL_H)] if committed(rel) else []
+
+# ---------- brödsmulor och ämnessidor ----------
+# Brödsmulor: synlig lista (nav > ol, sista ledet aria-current="page") och BreadcrumbList i JSON-LD, samma led.
+# Ämnessidor: en sida per kategori på /<kategori>/ (slugify: Bränsle -> /bransle/), som /guider/ för guiderna. Listar alla
+# artiklar i kategorin, nyast först, med CollectionPage/ItemList och BreadcrumbList i JSON-LD, och finns i sitemap.xml.
+# Guider har kvar sin egen sida (/guider/, guides_page) som byggs med samma mall. Kategorier vars slug krockar med en
+# katalog i sajten får ingen ämnessida (bygget varnar).
+TOPIC_DESC = {
+    "elbil": "Nyheter om elbilar: nya modeller, priser, räckvidd, laddning och regler som påverkar dig som kör el i Sverige. Varje text länkar till sina källor.",
+    "tesla": "Nyheter om Tesla: modeller, priser, mjukvara som FSD och vad som gäller för svenska Teslaägare. Varje text länkar till sina källor.",
+    "sportbil": "Sportbilsnyheter: nya modeller, prestanda, återkallelser och teknik. Varje text länkar till sina källor.",
+    "motorsport": "Motorsportnyheter: Formel 1, rally, Le Mans och andra racingserier, med fokus på det som berör svenska fans. Varje text länkar till sina källor.",
+    "bransle": "Nyheter om drivmedel, avgifter och regler för bilister: HVO100, reduktionsplikten, skatter och annat som påverkar bilåkandet i Sverige.",
+    "laddning": "Nyheter om laddning av elbilar: laddnätverk, priser och teknik. Varje text länkar till sina källor.",
+}
+TOPIC_RESERVED = {"artikel", "om", "feed", "img", "css", "js", "fonts", "favicon", "brand", "content", "data", "drafts",
+                  "tools", "supabase", "push", "nyhetsbrev", "integritet", "prenumeration", GUIDE_KEY, "sverige"}
+TOPICS = {}  # kategori-nyckel -> dict(key, name, path, desc, arts), sätts i main()
+# /sverige/: samlingssida för artiklar med sweden: true (samma mall som ämnessidorna, flödet feed/sverige.xml). Ingen
+# kategori, så nyckeln står kvar i TOPIC_RESERVED. Byggs bara när minst en sådan artikel finns.
+SWEDEN = {}  # dict(key, name, path, desc, arts) eller tom, sätts i main()
+SWEDEN_DESC = "Bilnyheter som gäller Sverige: regler, priser, avgifter och modeller som påverkar dig som kör bil här. Varje text länkar till sina källor."
+
+def topic_path(key): return f"/{key}/"
+
+def build_topics(arts):
+    groups = {}
+    for a in arts:
+        if a["cat"] == GUIDE_KEY: continue
+        groups.setdefault(a["cat"], (a["category"], []))[1].append(a)
+    topics = {}
+    for k, (n, g) in groups.items():
+        if k in TOPIC_RESERVED or not re.fullmatch(r"[a-z0-9-]+", k):
+            print(f"varning: kategorin {n!r} får ingen ämnessida (/{k}/ krockar med en katalog i sajten)"); continue
+        topics[k] = dict(key=k, name=n, path=topic_path(k), arts=g,
+                         desc=TOPIC_DESC.get(k) or f"Alla artiklar i kategorin {n} på {SITE}. {SITE_DESC}")
+    return topics
+
+def article_topic(a):
+    """Ämnet som artikelns brödsmulor och kategorietikett länkar till: Guider för guider, annars kategorins ämnessida."""
+    if is_guide(a) and GUIDES: return dict(name=GUIDE_NAME, path=GUIDE_PATH)
+    t = TOPICS.get(a["cat"])
+    return dict(name=a["category"], path=t["path"]) if t else None
+
+def breadcrumbs(items):
+    """items: [(namn, url eller None)], sista ledet är sidan själv. Synliga brödsmulor och BreadcrumbList (JSON-LD)."""
+    lis = []
+    for i, (name, url) in enumerate(items):
+        last = i == len(items) - 1
+        cls = ' class="tag"' if (i == 1 and not last) or (last and len(items) == 2) else ""
+        if last: lis.append(f'<li aria-current="page"><span{cls}>{nbnum(esc(name))}</span></li>')
+        else: lis.append(f'<li><a{cls} href="{url}">{esc(name)}</a></li>')
+    html_ = f'<nav class="crumbs" aria-label="Brödsmulor"><ol>{"".join(lis)}</ol></nav>'
+    ld = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+        {k: v for k, v in {"@type": "ListItem", "position": i, "name": name, "item": DOMAIN + url if url else None}.items() if v}
+        for i, (name, url) in enumerate(items, 1)]}
+    return html_, ld
+
+def ld_script(ld): return '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace("</", "<\\/") + "</script>\n"
+
+def topic_page(t, feed=None, list_label=None):
+    """Ämnessida (och /guider/): rubrik, beskrivning, RSS och alla artiklar i ämnet, nyast först."""
+    title = f"{t['name']}: senaste nyheterna · {SITE}" if t["key"] != GUIDE_KEY else f"{t['name']} · {SITE}"
+    crumbs_html, crumbs_ld = breadcrumbs([("Start", "/"), (t["name"], t["path"])])
+    ld = {"@context": "https://schema.org", "@graph": [
+        {"@type": "CollectionPage", "@id": DOMAIN + t["path"], "name": f"{t['name']} · {SITE}", "description": t["desc"],
+         "url": DOMAIN + t["path"], "inLanguage": "sv-SE", "isPartOf": {"@id": DOMAIN + "/#website"},
+         "breadcrumb": {k: v for k, v in crumbs_ld.items() if k != "@context"},
+         "mainEntity": {"@type": "ItemList", "numberOfItems": len(t["arts"]),
+                        "itemListElement": [{"@type": "ListItem", "position": i, "url": DOMAIN + a["url"], "name": a["title"]}
+                                            for i, a in enumerate(t["arts"], 1)]}}]}
+    feed = feed or next((x for x in FEEDS if x["key"] == t["key"]), None)
+    rss = (f'\n      <p class="rss-row">{RSS_SVG}<span>Prenumerera via RSS:</span> <a href="{feed["path"]}">{esc(t["name"])}</a>'
+           f'<span aria-hidden="true">·</span><a href="/feed.xml">Alla nyheter</a></p>') if feed else ""
+    h = head(title, t["desc"], t["path"], image=DEFAULT_OG, feeds=[feed] if feed else (), extra=ld_script(ld))
+    body = f'''
+<main id="innehall" class="catpage">
+  <div class="wrap">
+    <header class="catpage__head">
+      {crumbs_html}
+      <h1 class="catpage__title">{esc(t["name"])}</h1>
+      <p class="catpage__dek">{esc(t["desc"])}</p>{rss}
+    </header>
+    <section class="feed-section catpage__list" aria-label="{esc(list_label or "Alla artiklar i " + t["name"])}">
+      <ol class="feed">{"".join(feed_item(a, "h2") for a in t["arts"])}
+      </ol>
+    </section>
+  </div>
+</main>
+'''
+    return page(h, body)
+
+# ---------- föredragen källa i Google ----------
+# Länk till Googles verktyg för föredragna källor (deeplink enligt developers.google.com/search/docs/appearance/preferred-sources).
+# Googles JS-knapp laddar ett skript från tredje part, så sajten använder deeplinken med egen stil (mörk, orange accent).
+PREFERRED_SOURCE_URL = "https://www.google.com/preferences/source?q=motorpuls.se"
+PREF_STAR_SVG = ('<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="m12 3.2 2.7 5.5 6 .9-4.35 4.25 1.03 6L12 17l-5.38 2.85 1.03-6L3.3 9.6l6-.9Z" '
+                 'fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>')
+
+def preferred_source():
+    return f'''
+        <div class="prefsrc">
+          <a class="prefsrc__btn" href="{PREFERRED_SOURCE_URL}" target="_blank" rel="noopener">{PREF_STAR_SVG}<span>Lägg till Motorpuls som föredragen källa i Google</span><span class="visually-hidden"> (öppnas i ny flik)</span></a>
+          <p class="prefsrc__note">Då visas våra nyheter oftare under Huvudnyheter när du söker på Google.</p>
+        </div>'''
+
+# ---------- dela ----------
+# Delningsknappar under bylinen och i slutet av artikeln. Vanliga länkar (fungerar utan JS) till X, Facebook, LinkedIn och
+# WhatsApp (och SMS/iMessage på pekskärmar), plus "Kopiera länk" och, där webbläsaren har Web Share API (mobiler), en "Dela"-knapp som öppnar systemets
+# delningsmeny. Inga skript från tredje part, inga spårningsparametrar. js/site.js visar Dela- och kopieraknapparna; de
+# har sin plats reserverad från början (visibility), så inget flyttar sig. Ikonerna: Simple Icons (CC0), LinkedIn ur v9.
+SHARE_ICONS = {
+    "x": "M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z",
+    "facebook": "M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z",
+    "linkedin": "M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z",
+    "whatsapp": "M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z",
+}
+SHARE_NATIVE_SVG = ('<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M12 3v12M7.5 7.5 12 3l4.5 4.5M5 12v7.5A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V12" '
+                    'fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>')
+SHARE_COPY_SVG = ('<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3.2-3.2a4.5 4.5 0 0 0-6.4-6.4l-1 1M14 10a4.5 4.5 0 0 0-6.4 0l-3.2 3.2a4.5 4.5 0 0 0 6.4 6.4l1-1" '
+                  'fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>')
+SHARE_SMS_SVG = ('<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M12 4c4.97 0 9 3.13 9 7s-4.03 7-9 7c-1 0-1.96-.13-2.86-.36L4.5 20l1.14-3.6C4 15.07 3 13.12 3 11c0-3.87 4.03-7 9-7Z" '
+                 'fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></svg>')
+
+def share_sms(a):
+    """SMS/iMessage: "sms:?&body=" fungerar i både iOS och Android. Visas bara på pekskärmar (CSS), ingen ny flik."""
+    return f"sms:?&body={urllib.parse.quote(a['title'] + ' ' + DOMAIN + a['url'], safe='')}"
+
+def share_links(a):
+    """(nyckel, namn, delningslänk). X: rubriken som text (sajten har inget eget X-konto att nämna)."""
+    url, title, q = DOMAIN + a["url"], a["title"], urllib.parse.quote
+    return (("x", "X", f"https://x.com/intent/post?text={q(title, safe='')}&url={q(url, safe='')}"),
+            ("facebook", "Facebook", f"https://www.facebook.com/sharer/sharer.php?u={q(url, safe='')}"),
+            ("linkedin", "LinkedIn", f"https://www.linkedin.com/sharing/share-offsite/?url={q(url, safe='')}"),
+            ("whatsapp", "WhatsApp", f"https://wa.me/?text={q(title + ' ' + url, safe='')}"))
+
+def share_icon(k):
+    return f'<svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" focusable="false"><path d="{SHARE_ICONS[k]}" fill="currentColor"/></svg>'
+
+def share_bar(a, where):
+    """where: "top" (under bylinen) eller "end" (efter texten och källorna)."""
+    label = "Dela" if where == "top" else 'Dela<span class="share__label-more"> artikeln</span>'  # "artikeln" bara på bredare skärmar
+    links = "".join(f'''
+            <li><a class="share__btn share__btn--{k}" href="{esc(u)}" target="_blank" rel="noopener noreferrer" aria-label="Dela på {n} (öppnas i ny flik)" title="Dela på {n}">{share_icon(k)}</a></li>'''
+                    for k, n, u in share_links(a)) + f'''
+            <li class="share__sms-wrap"><a class="share__btn share__btn--sms" href="{esc(share_sms(a))}" aria-label="Dela via SMS eller iMessage" title="Dela via SMS eller iMessage">{SHARE_SMS_SVG}</a></li>'''
+    return f'''
+        <div class="share share--{where}" role="group" aria-label="Dela artikeln" data-share data-url="{esc(DOMAIN + a["url"])}" data-title="{esc(a["title"])}">
+          <div class="share__lead">
+            <span class="share__label" aria-hidden="true">{label}</span>
+            <button class="share__native" type="button" data-share-native>{SHARE_NATIVE_SVG}<span>Dela</span></button>
+          </div>
+          <ul class="share__list">{links}
+            <li class="share__copy-wrap"><button class="share__btn share__copy" type="button" data-share-copy aria-label="Kopiera länk" title="Kopiera länk">{SHARE_COPY_SVG}<span class="share__copy-text" aria-hidden="true">Kopiera länk</span></button>
+              <span class="share__status" role="status" aria-live="polite"></span></li>
+          </ul>
+        </div>'''
+
+# ---------- författare ----------
+# data/authors.json: {"<id>": {name, url (författarsidan), avatar_src, bio, ai_signature}}. Artikelns author är id:t
+# eller namnet (author: Lukas -> lukas). avatar_src är en fil i repot (t.ex. brand/authors/...); den beskärs till en
+# kvadrat i mitten (färdiga <namn>-192/-96 bredvid källan används i första hand) och blir img/authors/<id>.webp (192 px) och img/authors/<id>-96.webp. Byt bild genom att peka
+# avatar_src på en ny fil (WebP-filerna byggs om när källan är nyare). Ordet TODO i bio ger en varning i bygget.
+AUTHORS = {}
+AVATAR_SIZES = ((192, ""), (96, "-96"))
+
+def load_authors():
+    p = os.path.join(ROOT, "data/authors.json")
+    if not os.path.exists(p): return {}
+    try: d = json.load(open(p, encoding="utf-8"))
+    except ValueError as e: raise SystemExit(f"data/authors.json: {e}")
+    for k, v in d.items():
+        for f in ("name", "url", "bio"):
+            if not str(v.get(f) or "").strip(): raise SystemExit(f"data/authors.json: {k} saknar {f}")
+        if re.search(r"\bTODO\b", v["bio"]): print(f"varning: data/authors.json: {k}: bio innehåller TODO")
+        v["id"] = k
+        v["avatar"] = author_avatar(k, v.get("avatar_src"))
+    return d
+
+def author_avatar(aid, src):
+    """[(url, bredd)] för avataren, största först. Tom lista om ingen bild finns."""
+    from PIL import Image, ImageOps
+    base = f"img/authors/{aid}"
+    main = os.path.join(ROOT, base + ".webp")
+    sp = os.path.join(ROOT, src) if src and not os.path.isabs(src) else src
+    if sp and os.path.isfile(sp) and (not os.path.exists(main) or os.path.getmtime(sp) > os.path.getmtime(main)):
+        os.makedirs(os.path.dirname(main), exist_ok=True)
+        with Image.open(sp) as im:
+            im = ImageOps.exif_transpose(im)
+            im = im.convert("RGBA" if "A" in im.getbands() else "RGB")  # transparenta hörn behålls
+            for w, suf in AVATAR_SIZES:
+                # färdig storlek bredvid källan (lukas-avatar-1024.png -> lukas-avatar-192.png) används i första hand
+                pre = re.sub(r"-\d+(\.\w+)$", rf"-{w}\1", sp)
+                if pre != sp and os.path.isfile(pre):
+                    with Image.open(pre) as pi: r = pi.convert(im.mode); r.load()
+                else: r = ImageOps.fit(im, (w, w), Image.LANCZOS)
+                r.save(os.path.join(ROOT, f"{base}{suf}.webp"), "WEBP", quality=90, method=6)
+    return [(f"/{base}{suf}.webp", w) for w, suf in AVATAR_SIZES if committed(f"{base}{suf}.webp")]
+
+def find_author(name):
+    return AUTHORS.get(slugify(name)) or next((v for v in AUTHORS.values() if v["name"] == name), None)
+
+def author_ld(name):
+    au = find_author(name)
+    return {"@type": "Person", "name": au["name"], "url": DOMAIN + au["url"]} if au else {"@type": "Person", "name": name}
+
+def author_box(name):
+    """Skribentruta längst ner i varje artikel. En mall för alla författare, data från data/authors.json.
+    Visar bara namn (länk till författarsidan), avatar, "Skriver på Motorpuls.se", bio och sist det orange märket."""
+    au = find_author(name)
+    if not au: return ""
+    av = au["avatar"]
+    img = (f'<img class="author-box__avatar" src="{av[0][0]}" srcset="{", ".join(f"{u} {w}w" for u, w in reversed(av))}" sizes="4rem" '
+           f'width="64" height="64" alt="" loading="lazy" decoding="async">') if av else ""
+    ai = '<p class="author-box__ai"><span class="author-box__badge">Skrivet med AI-stöd</span></p>' if au.get("ai_signature") else ""
+    return f'''
+        <aside class="author-box" aria-labelledby="author-box-h">
+          {img}
+          <div class="author-box__body">
+            <h2 class="author-box__name" id="author-box-h"><a href="{au["url"]}" rel="author">{esc(au["name"])}</a></h2>
+            <p class="author-box__role">Skriver på Motorpuls.se</p>
+            <p class="author-box__bio">{nbnum(esc(au["bio"]))}</p>
+            {ai}
+          </div>
+        </aside>'''
+
+# Annonsrutor bara i artiklar, och bara när ADSENSE_CLIENT och respektive slot-id är ifyllda.
+# Rutornas stil följer med i <head> på de sidorna (inte i css/site.css). Tomma slot-id ger ingen stil och ingen ruta.
+# Skriptet och meta-taggen ligger i adsense_loader() och följer med på varje sida så fort kontot är satt.
+# min-height sitter på ramen, inte bara på <ins>: Googles skript skriver om ins-elementets style, ramen behåller höjden.
+ADSENSE_CSS = (
+    ".adslot{margin:0;font-family:var(--sans)}"
+    ".prose>.adslot{margin-block:2.25rem}"
+    ".adslot__label{margin:0 0 .45rem;font-family:var(--mono);font-size:.72rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}"
+    ".adslot__frame{min-height:280px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--pulse);border-radius:var(--radius)}"
+    ".adslot .adsbygoogle{display:block;width:100%;min-height:250px}"
+    "@media (max-width:40rem){.adslot__frame{min-height:250px}.adslot .adsbygoogle{min-height:220px}}"
+)
+_P_RE = re.compile(r"<p(?:\s[^>]*)?>.*?</p>", re.S)
+
+def adsense_client_id():
+    """ca-pub-... även om värdet klistrats in som pub-..."""
+    c = ADSENSE_CLIENT.strip()
+    return "ca-" + c if c.startswith("pub-") else c
+
+def adsense_pub_id():
+    """pub-... till ads.txt (utan ca-)."""
+    c = adsense_client_id()
+    return c[3:] if c.startswith("ca-") else c
+
+def ad_slot(slot_id):
+    """En responsiv ruta märkt Annons, eller tom sträng när annonser är av eller slot-id saknas."""
+    slot = str(slot_id or "").strip()
+    client = adsense_client_id()
+    if not client or not slot: return ""
+    return (
+        '\n<aside class="adslot" aria-label="Annons">'
+        '<p class="adslot__label">Annons</p>'
+        '<div class="adslot__frame">'
+        f'<ins class="adsbygoogle" style="display:block" data-ad-client="{esc(client)}" data-ad-slot="{esc(slot)}" '
+        'data-ad-format="auto" data-full-width-responsive="true"></ins>'
+        '</div>'
+        '<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>'
+        '</aside>'
+    )
+
+def adsense_loader():
+    """Meta och adsbygoogle.js (async) i <head> på varje sida när kontot är satt. Inga slot-id krävs:
+    Google ska kunna verifiera sajten och visa EU-samtycket innan rutorna slås på. Tomt konto: ingenting."""
+    client = esc(adsense_client_id())
+    if not client: return ""
+    return (f'<meta name="google-adsense-account" content="{client}">\n'
+            f'<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={client}" crossorigin="anonymous"></script>\n')
+
+def adsense_head():
+    """Rutornas stil, bara på artikelsidor när minst ett slot-id är satt. Själva skriptet ligger i adsense_loader()."""
+    if not adsense_client_id() or not (ADSENSE_SLOT_INCONTENT.strip() or ADSENSE_SLOT_END.strip()): return ""
+    return '<style>' + ADSENSE_CSS + '</style>\n'
+
+def insert_after_paragraph(html, snippet, n=3):
+    """Klistrar in snippet efter det n:te stycket. Färre stycken: efter det sista. Tom snippet: oförändrad html."""
+    if not snippet: return html
+    matches = list(_P_RE.finditer(html))
+    if not matches: return snippet + html
+    m = matches[min(n, len(matches)) - 1]
+    return html[:m.end()] + snippet + html[m.end():]
+
+def article(a, arts=()):
     img, imgs = a["img"], a["images_out"]
-    ld = {"@context": "https://schema.org", "@type": "NewsArticle", "headline": a["title"], "description": a["excerpt"],
-          "datePublished": a["date"].isoformat(), "dateModified": a["date"].isoformat(), "inLanguage": "sv-SE",
+    ld = {"@context": "https://schema.org", "@type": "Article" if is_guide(a) else "NewsArticle", "headline": a["title"], "description": a["excerpt"],
+          "datePublished": a["published"], "dateModified": a["modified"], "inLanguage": "sv-SE",
           "articleSection": a["category"], "keywords": a.get("tags") or [],
           "mainEntityOfPage": {"@type": "WebPage", "@id": DOMAIN + a["url"]}, "url": DOMAIN + a["url"],
-          "author": {"@type": "Person", "name": a["author"]},
-          "publisher": {"@type": "Organization", "name": SITE, "url": DOMAIN + "/",
-                        "logo": {"@type": "ImageObject", "url": DOMAIN + "/favicon/android-chrome-512.png", "width": 512, "height": 512}}}
+          "author": author_ld(a["author"]),
+          "publisher": organization_ld()}
     if imgs:
-        ld["image"] = [{k: v for k, v in {"@type": "ImageObject", "url": DOMAIN + im["src"], "width": im["w"], "height": im["h"],
+        credit = {k: v for k, v in {"creditText": img["credit"].removeprefix("Foto: ") or None,
+                                    "copyrightNotice": img["license"] or None}.items() if v}
+        ld["image"] = [dict({"@type": "ImageObject", "url": DOMAIN + c["src"], "width": c["w"], "height": c["h"]}, **credit)
+                       for c in ld_images(a)] + [{k: v for k, v in {"@type": "ImageObject", "url": DOMAIN + im["src"], "width": im["w"], "height": im["h"],
                                           "caption": im["alt"], "creditText": im["credit"].removeprefix("Foto: ") or None,
-                                          "copyrightNotice": im["license"] or None}.items() if v} for im in imgs]
+                                          "copyrightNotice": im["license"] or None, "license": im.get("license_url") or None}.items() if v} for im in imgs]
     if a.get("sources"): ld["citation"] = [u for _, u in a["sources"]]
-    jsonld = '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace("</", "<\\/") + "</script>\n"
-    h = head(f'{a["title"]} · {SITE}', a["excerpt"], a["url"], og_type="article", image=img, og_title=a["title"],
-             extra=f'<meta property="article:published_time" content="{a["date"].isoformat()}">\n'
+    topic = article_topic(a)
+    crumbs_html, crumbs_ld = breadcrumbs([("Start", "/")] + ([(topic["name"], topic["path"])] if topic else []) + [(a["headline"], a["url"])])
+    jsonld = ('<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace("</", "<\\/") + "</script>\n"
+              + ld_script(crumbs_ld))
+    og = og_image(a)
+    if og: og = dict(og, alt=img["alt"])  # og:image:alt och twitter:image:alt: huvudbildens alt-text
+    h = head(page_title(a["title"], a.get("seo_title")), a["excerpt"], a["url"], og_type="article", image=og, og_title=a["title"],
+             extra=f'<meta property="article:published_time" content="{a["published"]}">\n'
+                   f'<meta property="article:modified_time" content="{a["modified"]}">\n'
                    f'<meta property="article:section" content="{esc(a["category"])}">\n'
-                   + "".join(f'<meta property="article:tag" content="{esc(t)}">\n' for t in a.get("tags") or []) + jsonld,
-             preload_img=img, preload_sizes=HERO_SIZES)
+                   + "".join(f'<meta property="article:tag" content="{esc(t)}">\n' for t in a.get("tags") or []) + jsonld + adsense_head(),
+             preload_img=img, preload_sizes=HERO_SIZES, robots="max-image-preview:large", feeds=feeds_for(a))
     sources = ""
     if a["sources"]:
         lis = "".join(f'''
@@ -438,28 +1432,33 @@ def article(a):
           <ol>{lis}
           </ol>
         </section>'''
+    updated = (f'<span>Uppdaterad <b><time datetime="{a["modified"]}">{sv_date(a["mod_date"])}</time></b></span>'
+               if a["mod_when"] > a["when"] else "")
+    au = find_author(a["author"])
+    author = f'<a href="{au["url"]}" rel="author">{esc(au["name"])}</a>' if au else esc(a["author"])
+    prose_html, top_imgs = inline_images(a, imgs, nbnum_html(a["body_html"]))
+    prose = insert_after_paragraph(prose_html, ad_slot(ADSENSE_SLOT_INCONTENT))
     body = f'''
 <main id="innehall" class="article">
   <div class="wrap">
     <article>
       <header class="article__head article__col">
-        <nav class="crumbs" aria-label="Brödsmulor"><a href="/">Start</a> / <span>{esc(a["category"])}</span></nav>
-        <span class="meta"><span class="tag">{esc(a["category"])}</span>{meta_flag(a, imgs)}</span>
+        {crumbs_html}
         <h1 class="article__title">{nbnum(esc(a["headline"]))}</h1>
         <p class="article__dek">{nbnum(esc(a["excerpt"]))}</p>
-        <p class="byline"><span>Publicerad <b><time datetime="{a["date"].isoformat()}">{sv_date(a["date"])}</time></b></span><span>Läsetid <b>{a["minutes"]} min</b></span><span>Av <b>{esc(a["author"])}</b></span></p>
-      </header>{summary_box(a)}{gallery(imgs, flag(a, "hero"))}
+        <p class="byline"><span>Publicerad <b><time datetime="{a["published"]}">{sv_date(a["date"])}</time></b></span>{updated}<span>Läsetid <b>{a["minutes"]} min</b></span><span>Av <b>{author}</b></span></p>{share_bar(a, "top")}
+      </header>{summary_box(a)}{gallery(top_imgs)}
       <div class="article__layout article__col">
         <div class="prose">
-{nbnum_html(a["body_html"])}
+{prose}
         </div>
-{sources}
+{sources}{share_bar(a, "end")}{preferred_source()}
         <aside class="ai-note" aria-label="Om texten">
           <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M8 7v4.5M8 4.6v.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-          <p>Texten är skriven med hjälp av AI och faktagranskad mot källorna ovan.</p>
+          <p>Texten är skriven med hjälp av AI och faktagranskad mot källorna ovan. <a href="/om/">Så arbetar Motorpuls</a></p>
         </aside>
-
-        <p class="more"><a class="btn" href="/" style="text-decoration:none;display:inline-block">Fler nyheter på startsidan</a></p>
+{author_box(a["author"])}{push_box("article")}{rss_row(a)}{ad_slot(ADSENSE_SLOT_END)}{related_section(a, arts)}
+        <p class="more"><a class="btn" href="/">Fler nyheter på startsidan</a></p>
       </div>
     </article>
   </div>
@@ -467,42 +1466,378 @@ def article(a):
 '''
     return page(h, body)
 
+# ---------- Läs också ----------
+RELATED_N = 3
+RELATED_SIZES = "(min-width: 40rem) 12rem, 7rem"
+
+def related(a, arts, n=RELATED_N):
+    """Tre andra artiklar: samma kategori (guider räknas som en kategori) och gemensamma taggar först, sedan de nyaste."""
+    tags = {str(t).lower() for t in a.get("tags") or []}
+    def rank(b):
+        same = b["cat"] == a["cat"] or (is_guide(a) and is_guide(b))
+        shared = len(tags & {str(t).lower() for t in b.get("tags") or []})
+        return (2 if same else 0) + (1 if shared else 0), shared, b["when"]  # kategori väger tyngst, sedan taggar
+    return sorted((b for b in arts if b["slug"] != a["slug"]), key=rank, reverse=True)[:n]
+
+def thumb(img):
+    """Miniatyr: 400 px-varianten (finns den inte, den minsta som finns). Samma format, ingen beskärning."""
+    vs = [(int(w[:-1]), u) for u, w in (x.split() for x in img["srcset"].split(", "))] if img.get("srcset") else []
+    small = min(vs)[1] if vs else img["src"]
+    return dict(img, src=small)
+
+def related_card(b):
+    img = b["img"]
+    media = (f'<figure class="related__media"><div class="related__frame">{img_tag(thumb(img), "", sizes=RELATED_SIZES)}</div>'
+             f'<figcaption class="item__credit">{esc(img["credit"])}</figcaption></figure>') if img else ""
+    return f'''
+            <li class="related__card{"" if img else " related__card--noimg"}">
+              <a href="{b["url"]}">
+                {media}
+                <div class="related__body">
+                  <span class="meta"><span class="tag">{esc(GUIDE_NAME if is_guide(b) and b["cat"] != GUIDE_KEY else b["category"])}</span><time datetime="{b["published"]}">{sv_date(b["date"])}</time></span>
+                  <h3>{nbnum(esc(b["title"]))}</h3>
+                </div>
+              </a>
+            </li>'''
+
+def related_section(a, arts):
+    rel = related(a, arts)
+    if not rel: return ""
+    return f'''
+        <section class="related" aria-labelledby="related-h">
+          <h2 id="related-h"><span class="pulse-dot" aria-hidden="true"></span>Läs också</h2>
+          <ul class="related__list">{"".join(related_card(b) for b in rel)}
+          </ul>
+        </section>'''
+
+# ---------- kategorisidan Guider ----------
+def guides_page(guides):
+    f = next(x for x in FEEDS if x["key"] == GUIDE_KEY)
+    return topic_page(dict(key=GUIDE_KEY, name=GUIDE_NAME, path=GUIDE_PATH, desc=GUIDE_DESC, arts=guides), feed=f, list_label="Alla guider")
+
 def notfound():
-    h = head(f"Sidan finns inte · {SITE}", SITE_DESC, None)
+    h = head(f"Sidan finns inte · {SITE}", SITE_DESC, None, noindex=True)
     body = '''
 <main id="innehall" class="article">
   <div class="wrap">
     <header class="article__head">
       <h1 class="article__title">Sidan finns inte</h1>
       <p class="article__dek">Länken kan vara fel eller sidan flyttad.</p>
-      <p class="more"><a class="btn" href="/" style="text-decoration:none;display:inline-block">Till startsidan</a></p>
+      <p class="more"><a class="btn" href="/">Till startsidan</a></p>
     </header>
   </div>
 </main>
 '''
     return page(h, body)
 
+def load_pages():
+    pages = []
+    for path in sorted(glob.glob(os.path.join(ROOT, "content/pages/*.md"))):
+        raw = open(path, encoding="utf-8").read()
+        m = re.match(r"^---\n(.*?)\n---\n(.*)$", raw, re.S)
+        if not m: raise SystemExit(f"saknar front matter: {path}")
+        fm, body = yaml.safe_load(m.group(1)), m.group(2)
+        for k in ("title", "path", "description"):
+            if not fm.get(k): raise SystemExit(f"{path}: saknar {k}")
+        if not re.fullmatch(r"/([a-z0-9-]+/)+", fm["path"]): raise SystemExit(f"{path}: path ska se ut som /om/")
+        todos = len(re.findall(r"\bTODO\b", body))
+        if todos: print(f"varning: {os.path.relpath(path, ROOT)}: {todos} TODO kvar att skriva")
+        pages.append(dict(fm, file=os.path.basename(path), body_html=markdown.markdown(body.strip(), extensions=["toc"])))
+    if len({p["path"] for p in pages}) != len(pages): raise SystemExit("content/pages: dubbla path")
+    return pages
+
+def info_page(p, arts):
+    """Om-sidor och författarsidor: samma artikelmall som nyheterna, utan bilder och utan extra JS."""
+    extra, listing = "", ""
+    if p.get("author"):
+        ld = {"@context": "https://schema.org", "@type": "ProfilePage", "url": DOMAIN + p["path"],
+              "mainEntity": dict(author_ld(p["author"]), description=p["description"])}
+        extra = '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace("</", "<\\/") + "</script>\n"
+        au = find_author(p["author"])
+        if not au or au["url"] != p["path"]: raise SystemExit(f"content/pages/{p['file']}: author {p['author']!r} saknas i data/authors.json eller har en annan url")
+        mine = [a for a in arts if find_author(a["author"]) is au]
+        if mine:
+            lis = "".join(f'''
+            <li><div><a href="{a["url"]}">{esc(a["title"])}</a>
+              <div class="meta"><time datetime="{a["published"]}">{sv_date(a["date"])}</time></div></div></li>''' for a in mine)
+            listing = f'''
+        <section class="sources sources--internal" aria-labelledby="art-h">
+          <h2 id="art-h">Artiklar</h2>
+          <ol>{lis}
+          </ol>
+        </section>'''
+    trail = [("Start", "/")] + ([("Om Motorpuls", "/om/")] if p["path"] != "/om/" and p["path"].startswith("/om/") else []) + [(p["title"], p["path"])]
+    crumbs_html, crumbs_ld = breadcrumbs(trail)
+    h = head(page_title(p["title"], p.get("seo_title")), p["description"], p["path"], og_title=p["title"], image=DEFAULT_OG, extra=extra + ld_script(crumbs_ld))
+    body = f'''
+<main id="innehall" class="article">
+  <div class="wrap">
+    <article>
+      <header class="article__head article__col">
+        {crumbs_html}
+        <h1 class="article__title">{esc(p["title"])}</h1>
+        <p class="article__dek">{esc(p["description"])}</p>
+      </header>
+      <div class="article__layout article__col">
+        <div class="prose">
+{p["body_html"]}
+        </div>{listing}
+      </div>
+    </article>
+  </div>
+</main>
+'''
+    return page(h, body)
+
+def news_sitemap(arts):
+    """Google News-sitemap: artiklar publicerade de senaste NEWS_DAYS dygnen räknat från byggtiden (kan bli tom,
+    det är tillåtet). Guider är inte nyheter och tas inte med. publication_date är den ursprungliga publiceringstidpunkten."""
+    cutoff = now() - dt.timedelta(days=NEWS_DAYS)
+    items = "".join(f"""  <url>
+    <loc>{DOMAIN}{a["url"]}</loc>
+    <news:news>
+      <news:publication>
+        <news:name>{esc(SITE)}</news:name>
+        <news:language>{NEWS_LANG}</news:language>
+      </news:publication>
+      <news:publication_date>{a["published"]}</news:publication_date>
+      <news:title>{esc(a["headline"])}</news:title>
+    </news:news>
+  </url>
+""" for a in arts if a["when"] >= cutoff and not is_guide(a))
+    return ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
+            'xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">\n' + items + "</urlset>\n")
+
 def write(rel, text):
+    WRITTEN.append(rel)
     p = os.path.join(ROOT, rel); os.makedirs(os.path.dirname(p), exist_ok=True)
     open(p, "w", encoding="utf-8").write(text)
 
 def main():
+    global FEEDS
     arts = load_articles()
     if not arts: raise SystemExit("inga artiklar i content/articles/")
+    pages = load_pages()
+    AUTHORS.update(load_authors())
+    for a in arts:
+        if not find_author(a["author"]): print(f"varning: {a['file']}: författaren {a['author']!r} saknas i data/authors.json")
     for a in arts:
         a["images_out"] = ensure_images(a)
         a["img"] = a["images_out"][0] if a["images_out"] else None
+    FEEDS = category_feeds(arts)
+    GUIDES[:] = [a for a in arts if is_guide(a)]
+    TOPICS.clear(); TOPICS.update(build_topics(arts))
+    sv = [a for a in arts if a.get("sweden")]
+    SWEDEN.clear()
+    if sv: SWEDEN.update(key="sverige", name="Sverige", path="/sverige/", desc=SWEDEN_DESC, arts=sv)
     # clean old article output so removed articles disappear
     shutil.rmtree(os.path.join(ROOT, "artikel"), ignore_errors=True)
     if os.path.exists(os.path.join(ROOT, "artikel.html")): os.remove(os.path.join(ROOT, "artikel.html"))
     write("index.html", index(arts))
-    for a in arts: write(f"artikel/{a['slug']}/index.html", article(a))
+    for a in arts: write(f"artikel/{a['slug']}/index.html", article(a, arts))
+    shutil.rmtree(os.path.join(ROOT, GUIDE_PATH.strip("/")), ignore_errors=True)  # inga guider: ingen sida
+    if GUIDES: write(GUIDE_PATH.lstrip("/") + "index.html", guides_page(GUIDES))
+    for k in set(TOPIC_DESC) | set(TOPICS):  # ämnen utan artiklar: ingen sida
+        if k not in TOPIC_RESERVED and re.fullmatch(r"[a-z0-9-]+", k): shutil.rmtree(os.path.join(ROOT, k), ignore_errors=True)
+    for t in TOPICS.values(): write(t["path"].lstrip("/") + "index.html", topic_page(t))
+    shutil.rmtree(os.path.join(ROOT, "sverige"), ignore_errors=True)
+    if SWEDEN: write("sverige/index.html", topic_page(SWEDEN, list_label="Alla artiklar som gäller Sverige"))
+    shutil.rmtree(os.path.join(ROOT, "om"), ignore_errors=True)
+    for p in pages: write(p["path"].lstrip("/") + "index.html", info_page(p, arts))
     write("404.html", notfound())
     urls = [("/", arts[0]["date"])] + [(a["url"], a["date"]) for a in arts]
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-          + "".join(f"  <url><loc>{DOMAIN}{u}</loc><lastmod>{d.isoformat()}</lastmod></url>\n" for u, d in urls) + "</urlset>\n")
-    write("robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {DOMAIN}/sitemap.xml\n")
+          + "".join(f"  <url><loc>{DOMAIN}{u}</loc><lastmod>{lastmod(u, arts)}</lastmod></url>\n" for u, d in urls)
+          + "".join(f"  <url><loc>{DOMAIN}{t['path']}</loc><lastmod>{lastmod(t['path'], t['arts'])}</lastmod></url>\n" for t in TOPICS.values())
+          + (f"  <url><loc>{DOMAIN}{SWEDEN['path']}</loc><lastmod>{lastmod(SWEDEN['path'], SWEDEN['arts'])}</lastmod></url>\n" if SWEDEN else "")
+          + (f"  <url><loc>{DOMAIN}{GUIDE_PATH}</loc><lastmod>{lastmod(GUIDE_PATH, GUIDES)}</lastmod></url>\n" if GUIDES else "")
+          + "".join(f"  <url><loc>{DOMAIN}{p['path']}</loc></url>\n" for p in pages)
+          + f"  <url><loc>{DOMAIN}/integritet/</loc></url>\n" + "</urlset>\n")
+    write("sitemap-news.xml", news_sitemap(arts))
+    write("robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {DOMAIN}/sitemap.xml\nSitemap: {DOMAIN}/sitemap-news.xml\n")
+    write("feed.xml", rss(arts))
+    shutil.rmtree(os.path.join(ROOT, "feed"), ignore_errors=True)  # borttagna kategorier försvinner
+    for f in FEEDS:
+        write(f"feed/{f['key']}.xml", rss(f["arts"], title=f"{SITE}: {f['name']}",
+              desc=f"Artiklar i kategorin {f['name']} på {SITE}. {SITE_DESC}", path=f["path"]))
+    for rel in ("sw.js", "push.js"):  # gammal förhandsvisning i projektroten tas bort
+        if os.path.exists(os.path.join(ROOT, rel)): os.remove(os.path.join(ROOT, rel))
+    for rel in ("nyhetsbrev.js", "nyhetsbrev-sida.js"):
+        if os.path.exists(os.path.join(ROOT, rel)): os.remove(os.path.join(ROOT, rel))
+    for d in NEWSLETTER_PAGES: shutil.rmtree(os.path.join(ROOT, d), ignore_errors=True)
+    if NEWSLETTER_BOX:
+        write("nyhetsbrev.js", nl_src("nyhetsbrev.js"))
+        write("nyhetsbrev-sida.js", nl_src("nyhetsbrev-sida.js"))
+        for kind in ("bekrafta", "avsluta"): write(f"prenumeration/{kind}/index.html", _action_page(kind))
+    write("integritet/index.html", privacy_page())
+    write_ads_txt()
+    if PUSH_BOX:
+        write("sw.js", push_src("sw.js"))  # i roten så att service workern gäller hela sajten (scope /)
+        write("push.js", push_src("push.js"))
     print(f"built {len(arts)} artiklar: " + ", ".join(a["slug"] for a in arts))
 
-if __name__ == "__main__":
+def out_dir(o):
+    out = os.path.abspath(o)
+    top = os.path.relpath(out, ROOT).split(os.sep)[0]
+    if out == ROOT or ROOT.startswith(out + os.sep) or top in PUBLIC_DIRS + ("artikel", "content", "drafts", "brand", ".git"):
+        raise SystemExit(f"--out {out}: välj en egen katalog som rensas vid varje bygge (t.ex. _site)")
+    return out
+
+def publish(out):
+    """Kopiera den publika delen av sajten till out (tom katalog först)."""
+    shutil.rmtree(out, ignore_errors=True); os.makedirs(out)
+    skip = shutil.ignore_patterns("__pycache__", ".DS_Store", "*-original.*")
+    for d in PUBLIC_DIRS:
+        if os.path.isdir(os.path.join(ROOT, d)): shutil.copytree(os.path.join(ROOT, d), os.path.join(out, d), ignore=skip)
+    for rel in [f for f in PUBLIC_FILES if os.path.exists(os.path.join(ROOT, f))] + sorted(set(WRITTEN)):
+        os.makedirs(os.path.dirname(os.path.join(out, rel)), exist_ok=True)
+        shutil.copyfile(os.path.join(ROOT, rel), os.path.join(out, rel))
+    return out
+
+def check_links(out):
+    """Varje lokal URL i html (href, src, srcset, og:image m.fl.), css (url()) och webbmanifest ska finnas i out."""
+    refs = []  # (fil, url)
+    for dirpath, _, files in os.walk(out):
+        for fn in files:
+            p = os.path.join(dirpath, fn); rel = os.path.relpath(p, out)
+            if fn.endswith((".html", ".xml")):
+                t = open(p, encoding="utf-8").read()
+                for attr, v in re.findall(r'(href|src|srcset|content)="([^"]*)"', t):
+                    if attr == "srcset": refs += [(rel, x.split()[0]) for x in v.split(",") if x.strip()]
+                    elif attr == "content" and not v.startswith((DOMAIN + "/", "/")): continue
+                    else: refs.append((rel, v))
+                if fn.endswith(".xml"): refs += [(rel, u) for u in re.findall(r"<(?:loc|link)>([^<]+)</", t)]
+            elif fn.endswith(".css"):
+                refs += [(rel, u.strip("'\"")) for u in re.findall(r"url\(([^)]+)\)", open(p, encoding="utf-8").read())]
+            elif fn.endswith(".webmanifest"):
+                refs += [(rel, i["src"]) for i in json.load(open(p, encoding="utf-8")).get("icons", [])]
+    missing = []
+    for rel, u in refs:
+        if u.startswith(DOMAIN): u = u[len(DOMAIN):] or "/"
+        if not u or u.startswith(("#", "data:", "mailto:", "tel:", "javascript:")) or re.match(r"^[a-z]+:", u): continue
+        path = urllib.parse.urlsplit(u).path
+        target = os.path.normpath(os.path.join(out, path.lstrip("/")) if path.startswith("/")
+                                  else os.path.join(out, os.path.dirname(rel), path))
+        if path.endswith("/") or os.path.isdir(target): target = os.path.join(target, "index.html")
+        if not os.path.isfile(target): missing.append(f"{rel}: {u}")
+    if missing: raise SystemExit("saknade filer i utdata:\n  " + "\n  ".join(sorted(set(missing))))
+    return len(refs)
+
+def write_ads_txt():
+    """ads.txt bara när ADSENSE_CLIENT är satt. Tomt konto: filen ska inte ligga kvar."""
+    path = os.path.join(ROOT, "ads.txt")
+    client = adsense_client_id()
+    if not client:
+        if os.path.exists(path): os.remove(path)
+        return
+    pub = adsense_pub_id()
+    if not pub.startswith("pub-"): print(f"varning: ADSENSE_CLIENT {ADSENSE_CLIENT!r} ser inte ut som ca-pub-...")
+    if not ADSENSE_SLOT_INCONTENT.strip() and not ADSENSE_SLOT_END.strip():
+        print("AdSense: konto satt, inga slot-id, inga annonsrutor (ads.txt och skriptet skrivs ändå)")
+    elif not ADSENSE_SLOT_INCONTENT.strip() or not ADSENSE_SLOT_END.strip():
+        print("varning: ADSENSE_CLIENT är satt men bara ett slot-id är ifyllt, den tomma rutan ritas inte")
+    write("ads.txt", f"google.com, {pub}, DIRECT, {ADSENSE_ADS_TXT_CERT}\n")
+
+def check_no_push(out):
+    """Flaggan av: inget av push-rutan får finnas i utdata (ingen ruta, ingen push.js, ingen sw.js, ingen registrering)."""
+    bad = [f for f in ("sw.js", "push.js") if os.path.exists(os.path.join(out, f))]
+    for dirpath, _, files in os.walk(out):
+        for fn in files:
+            if fn.endswith((".html", ".js")):
+                t = open(os.path.join(dirpath, fn), encoding="utf-8").read()
+                if re.search(r'id="push"|serviceWorker|/sw\.js|/push\.js|PushManager', t): bad.append(os.path.relpath(os.path.join(dirpath, fn), out))
+    if bad: raise SystemExit("PUSH_BOX är av men push finns i utdata: " + ", ".join(sorted(bad)))
+
+def check_no_newsletter(out):
+    """Flaggan av: inget av nyhetsbrevet får finnas i utdata (ingen ruta, inga skript, inga sidor, ingen Supabase-adress)."""
+    bad = [f for f in ("nyhetsbrev.js", "nyhetsbrev-sida.js") + NEWSLETTER_PAGES if os.path.exists(os.path.join(out, f))]
+    for dirpath, _, files in os.walk(out):
+        for fn in files:
+            if fn.endswith((".html", ".js")):
+                t = open(os.path.join(dirpath, fn), encoding="utf-8").read()
+                if re.search(r'id="nyhetsbrev-fot"|/nyhetsbrev\.js|/nyhetsbrev-sida\.js|newsletter_subscribers|functions/v1/newsletter|site-footer--nl', t): bad.append(os.path.relpath(os.path.join(dirpath, fn), out))
+    if bad: raise SystemExit("NEWSLETTER_BOX är av men nyhetsbrevsrutan finns i utdata: " + ", ".join(sorted(bad)))
+
+def check_no_adsense(out):
+    """Tom ADSENSE_CLIENT: inget annonsrelaterat i utdata (inget skript, ingen ruta, ingen ads.txt)."""
+    if adsense_client_id(): return
+    bad = ["ads.txt"] if os.path.exists(os.path.join(out, "ads.txt")) else []
+    markers = ("adsbygoogle", "pagead2.googlesyndication.com", 'class="adslot"', "data-ad-client", "data-ad-slot", "google-adsense-account")
+    for dirpath, _, files in os.walk(out):
+        for fn in files:
+            if fn.endswith((".html", ".js", ".css", ".txt", ".xml")):
+                t = open(os.path.join(dirpath, fn), encoding="utf-8", errors="ignore").read()
+                if any(m in t for m in markers): bad.append(os.path.relpath(os.path.join(dirpath, fn), out))
+    if bad: raise SystemExit("ADSENSE_CLIENT är tom men annonser finns i utdata: " + ", ".join(sorted(set(bad))))
+
+def check_umami(out):
+    """Umami-scriptet exakt en gång per html-sida, inne i <head>. Cloudflare-beaconen ska finnas oförändrad."""
+    bad, htmls = [], []
+    for dirpath, _, files in os.walk(out):
+        for fn in files:
+            if not fn.endswith(".html"): continue
+            rel = os.path.relpath(os.path.join(dirpath, fn), out)
+            htmls.append(rel)
+            t = open(os.path.join(dirpath, fn), encoding="utf-8").read()
+            head, sep, _rest = t.partition("</head>")
+            if not sep or head.count(UMAMI) != 1 or t.count(UMAMI) != 1:
+                bad.append(f"{rel}: Umami ska ligga exakt en gång, i <head>")
+            if ANALYTICS.strip() not in t or t.count(ANALYTICS.strip()) != 1:
+                bad.append(f"{rel}: Cloudflare Web Analytics ska ligga oförändrad, exakt en gång")
+    if not htmls: bad.append("inga html-filer")
+    if bad: raise SystemExit("Umami-kontroll:\n  " + "\n  ".join(bad))
+
+def check_adsense(out):
+    """Konto satt: ads.txt i utdataroten, och meta plus adsbygoogle.js exakt en gång per html-sida.
+    Tomma slot-id: inga annonsrutor. Tomt konto: check_no_adsense."""
+    if not adsense_client_id():
+        check_no_adsense(out)
+        return
+    expected = f"google.com, {adsense_pub_id()}, DIRECT, {ADSENSE_ADS_TXT_CERT}\n"
+    ads = os.path.join(out, "ads.txt")
+    got = open(ads, encoding="utf-8").read() if os.path.isfile(ads) else ""
+    if got != expected: raise SystemExit(f"ads.txt i utdata ska vara {expected!r}, var {got!r}")
+    client = esc(adsense_client_id())
+    script = f'<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={client}" crossorigin="anonymous"></script>'
+    meta = f'<meta name="google-adsense-account" content="{client}">'
+    slots_on = bool(ADSENSE_SLOT_INCONTENT.strip() or ADSENSE_SLOT_END.strip())
+    bad, htmls = [], []
+    for dirpath, _, files in os.walk(out):
+        for fn in files:
+            if not fn.endswith(".html"): continue
+            rel = os.path.relpath(os.path.join(dirpath, fn), out)
+            htmls.append(rel)
+            t = open(os.path.join(dirpath, fn), encoding="utf-8").read()
+            if t.count(script) != 1 or t.count(meta) != 1: bad.append(f"{rel}: AdSense-taggen saknas eller finns mer än en gång")
+            if "static.cloudflareinsights.com/beacon.min.js" not in t: bad.append(f"{rel}: saknar Cloudflare Web Analytics")
+            if not slots_on and ('class="adslot"' in t or "data-ad-slot" in t): bad.append(f"{rel}: annonsruta trots tomma slot-id")
+    if not htmls: bad.append("inga html-filer")
+    if bad: raise SystemExit("AdSense-kontroll:\n  " + "\n  ".join(bad))
+
+def _rebuild_root_without_previews():
+    global PUSH_BOX, OUT
+    PUSH_BOX, OUT = False, None
+    WRITTEN.clear(); main()
+    print("projektroten byggd om utan förhandsrutorna (förhandsvisningen finns bara i --out)")
+
+def cli():
+    global OUT
+    args = sys.argv[1:]
+    if args[:1] == ["--out"] and len(args) == 2: OUT = out_dir(args[1])
+    elif args: raise SystemExit("användning: build.py [--out _site]")
+    if PUSH_BOX and not OUT: raise SystemExit("MOTORPULS_PUSH=1 är bara för förhandsbygge: använd --out (t.ex. _preview), aldrig utan")
     main()
+    if OUT:
+        out = publish(OUT)
+        if not PUSH_BOX: check_no_push(out)
+        if not NEWSLETTER_BOX: check_no_newsletter(out)
+        check_adsense(out)
+        check_umami(out)
+        n = check_links(out)
+        files = sum(len(f) for _, _, f in os.walk(out))
+        print(f"publicerat till {out}: {files} filer, {n} lokala länkar kontrollerade")
+    if PUSH_BOX:  # bygget skriver även i projektroten: bygg om den utan push-rutan så att inget av förhandsvisningen checkas in
+        _rebuild_root_without_previews()
+
+if __name__ == "__main__":
+    cli()

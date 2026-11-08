@@ -1,6 +1,6 @@
 ---
 title: "Volvos elbil tappade bromsarna mitt i körningen. Pedalen gick i golvet"
-date: 2026-11-06
+date: 2026-11-08T12:00+01:00
 slug: volvo-ex90-akutbil-bromsfel-drammen
 tags: [Volvo, EX90, bromsar, Norge, Drammen, säkerhet]
 sources:
