@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Tesla på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Sun, 08 Nov 2026 15:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Sun, 08 Nov 2026 18:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/tesla.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Strålkastarna fäller Tesla i jättebesiktning. Volvo XC60 klarar sig bäst.</title>
+    <link>https://motorpuls.se/artikel/tesla-model-3-y-sist-goca-besiktning/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/tesla-model-3-y-sist-goca-besiktning/</guid>
+    <pubDate>Sun, 08 Nov 2026 18:00:00 +0100</pubDate>
+    <category>Tesla</category>
+    <description>I Flanderns första stora besiktningsbarometer hamnar Tesla Model 3 och Model Y sist bland bilar som är fyra till fem år gamla, medan Volvo XC60 har minst brister. Strålkastarna är den vanligaste anmärkningen.</description>
+    <enclosure url="https://motorpuls.se/img/og/tesla-model-3-y-sist-goca-besiktning.jpg" length="158224" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/tesla-model-3-y-sist-goca-besiktning.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="158224"/>
+  </item>
   <item>
     <title>Musk: Cybertruck fasas ut i Texas. Cybercab tar platsen</title>
     <link>https://motorpuls.se/artikel/tesla-cybertruck-avvecklas-cybercab/</link>
