@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Elbil på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Sat, 07 Nov 2026 07:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Sun, 08 Nov 2026 07:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/elbil.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Volkswagen förlorade 64 miljarder kronor på tre månader. Porsche blev den dyraste posten</title>
+    <link>https://motorpuls.se/artikel/volkswagen-q3-forlust-porsche-nedskrivning/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/volkswagen-q3-forlust-porsche-nedskrivning/</guid>
+    <pubDate>Sun, 08 Nov 2026 07:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>Volkswagenkoncernen gick 5,82 miljarder euro back efter skatt under tredje kvartalet, och den största engångsposten är en nedskrivning på Porsche.</description>
+    <enclosure url="https://motorpuls.se/img/articles/volkswagen-q3-forlust-porsche-nedskrivning/vw-id-tiguan-press.webp" length="71698" type="image/webp"/>
+    <media:content url="https://motorpuls.se/img/articles/volkswagen-q3-forlust-porsche-nedskrivning/vw-id-tiguan-press.webp" medium="image" type="image/webp" width="1600" height="1067" fileSize="71698"/>
+  </item>
   <item>
     <title>Bilarnas nödbroms missar barn med reflexer. Bara en av sex bilar såg barnet</title>
     <link>https://motorpuls.se/artikel/adac-nodbroms-barn-reflexer/</link>
