@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Elbil på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Sun, 08 Nov 2026 07:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Sun, 08 Nov 2026 12:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/elbil.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Volvos elbil tappade bromsarna mitt i körningen. Pedalen gick i golvet</title>
+    <link>https://motorpuls.se/artikel/volvo-ex90-akutbil-bromsfel-drammen/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/volvo-ex90-akutbil-bromsfel-drammen/</guid>
+    <pubDate>Sun, 08 Nov 2026 12:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>En Volvo EX90 som används av jourmottagningen i norska Drammen fick &quot;kritiskt bromsfel&quot; i cirka 40 km/h. Volvo kallar det ett enskilt fall.</description>
+    <enclosure url="https://motorpuls.se/img/articles/volvo-ex90-akutbil-bromsfel-drammen/volvo-ex90-press.webp" length="114558" type="image/webp"/>
+    <media:content url="https://motorpuls.se/img/articles/volvo-ex90-akutbil-bromsfel-drammen/volvo-ex90-press.webp" medium="image" type="image/webp" width="1600" height="1200" fileSize="114558"/>
+  </item>
   <item>
     <title>Volkswagen förlorade 64 miljarder kronor på tre månader. Porsche blev den dyraste posten</title>
     <link>https://motorpuls.se/artikel/volkswagen-q3-forlust-porsche-nedskrivning/</link>
