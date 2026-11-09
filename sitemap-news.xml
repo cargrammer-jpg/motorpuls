@@ -12,6 +12,17 @@
     </news:news>
   </url>
   <url>
+    <loc>https://motorpuls.se/artikel/fartkameror-119000-boter-21-nya-kameror/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-09T15:00:00+01:00</news:publication_date>
+      <news:title>Fartkamerorna gav 119 000 böter på ett år. Nu kommer 21 nya, här står de</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://motorpuls.se/artikel/eu-dorrhandtag-mekanisk-oppnare-ex60-tesla/</loc>
     <news:news>
       <news:publication>
