@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Elbil på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Mon, 09 Nov 2026 07:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Mon, 09 Nov 2026 12:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/elbil.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>EU-utskott vill kräva mekanisk dörröppning. EX60 kan beröras</title>
+    <link>https://motorpuls.se/artikel/eu-dorrhandtag-mekanisk-oppnare-ex60-tesla/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/eu-dorrhandtag-mekanisk-oppnare-ex60-tesla/</guid>
+    <pubDate>Mon, 09 Nov 2026 12:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>Tre utskott i Europaparlamentet röstade den 4 november för att bildörrar ska kunna öppnas mekaniskt inifrån och utifrån i nödsituationer. Kravet kan drabba modeller som Volvo EX60.</description>
+    <enclosure url="https://motorpuls.se/img/og/eu-dorrhandtag-mekanisk-oppnare-ex60-tesla.jpg" length="161964" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/eu-dorrhandtag-mekanisk-oppnare-ex60-tesla.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="161964"/>
+  </item>
   <item>
     <title>Polestar blir nederländskt bolag. Huvudkontoret stannar i Göteborg</title>
     <link>https://motorpuls.se/artikel/polestar-ombildas-nederlanderna-goteborg/</link>
