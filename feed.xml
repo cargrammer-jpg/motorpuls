@@ -6,17 +6,87 @@
   <link>https://motorpuls.se/</link>
   <description>Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Sun, 15 Nov 2026 07:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Mon, 09 Nov 2026 07:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
     <title>Polestar blir nederländskt bolag. Huvudkontoret stannar i Göteborg</title>
     <link>https://motorpuls.se/artikel/polestar-ombildas-nederlanderna-goteborg/</link>
     <guid isPermaLink="true">https://motorpuls.se/artikel/polestar-ombildas-nederlanderna-goteborg/</guid>
-    <pubDate>Sun, 15 Nov 2026 07:00:00 +0100</pubDate>
+    <pubDate>Mon, 09 Nov 2026 07:00:00 +0100</pubDate>
     <category>Elbil</category>
     <description>Polestar Performance AB lämnade den 5 november in en plan till Bolagsverket om att ombildas till nederländskt B.V. Huvudkontoret och verksamheten ska enligt bolaget stanna i Göteborg.</description>
     <enclosure url="https://motorpuls.se/img/og/polestar-ombildas-nederlanderna-goteborg.jpg" length="55888" type="image/jpeg"/>
     <media:content url="https://motorpuls.se/img/og/polestar-ombildas-nederlanderna-goteborg.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="55888"/>
+  </item>
+  <item>
+    <title>Strålkastarna fäller Tesla i jättebesiktning. Volvo XC60 klarar sig bäst.</title>
+    <link>https://motorpuls.se/artikel/tesla-model-3-y-sist-goca-besiktning/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/tesla-model-3-y-sist-goca-besiktning/</guid>
+    <pubDate>Sun, 08 Nov 2026 18:00:00 +0100</pubDate>
+    <category>Tesla</category>
+    <description>I Flanderns första stora besiktningsbarometer hamnar Tesla Model 3 och Model Y sist bland bilar som är fyra till fem år gamla, medan Volvo XC60 har minst brister. Strålkastarna är den vanligaste anmärkningen.</description>
+    <enclosure url="https://motorpuls.se/img/og/tesla-model-3-y-sist-goca-besiktning.jpg" length="158224" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/tesla-model-3-y-sist-goca-besiktning.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="158224"/>
+  </item>
+  <item>
+    <title>Musk: Cybertruck fasas ut i Texas. Cybercab tar platsen</title>
+    <link>https://motorpuls.se/artikel/tesla-cybertruck-avvecklas-cybercab/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/tesla-cybertruck-avvecklas-cybercab/</guid>
+    <pubDate>Sun, 08 Nov 2026 15:00:00 +0100</pubDate>
+    <category>Tesla</category>
+    <description>Elon Musk meddelade den 6 november att Tesla börjar avveckla Cybertruck-produktionen vid Gigafactory Texas kring mitten av 2027, för att ge plats åt Cybercab.</description>
+    <enclosure url="https://motorpuls.se/img/og/tesla-cybertruck-avvecklas-cybercab.jpg" length="191520" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/tesla-cybertruck-avvecklas-cybercab.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="191520"/>
+  </item>
+  <item>
+    <title>Volvos elbil tappade bromsarna mitt i körningen. Pedalen gick i golvet</title>
+    <link>https://motorpuls.se/artikel/volvo-ex90-akutbil-bromsfel-drammen/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/volvo-ex90-akutbil-bromsfel-drammen/</guid>
+    <pubDate>Sun, 08 Nov 2026 12:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>En Volvo EX90 som används av jourmottagningen i norska Drammen fick &quot;kritiskt bromsfel&quot; i cirka 40 km/h. Volvo kallar det ett enskilt fall.</description>
+    <enclosure url="https://motorpuls.se/img/og/volvo-ex90-akutbil-bromsfel-drammen-hel.jpg" length="51793" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/volvo-ex90-akutbil-bromsfel-drammen-hel.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="51793"/>
+  </item>
+  <item>
+    <title>Volkswagen förlorade 64 miljarder kronor på tre månader. Porsche blev den dyraste posten</title>
+    <link>https://motorpuls.se/artikel/volkswagen-q3-forlust-porsche-nedskrivning/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/volkswagen-q3-forlust-porsche-nedskrivning/</guid>
+    <pubDate>Sun, 08 Nov 2026 07:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>Volkswagenkoncernen gick 5,82 miljarder euro back efter skatt under tredje kvartalet, och den största engångsposten är en nedskrivning på Porsche.</description>
+    <enclosure url="https://motorpuls.se/img/og/volkswagen-q3-forlust-porsche-nedskrivning.jpg" length="66490" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/volkswagen-q3-forlust-porsche-nedskrivning.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="66490"/>
+  </item>
+  <item>
+    <title>Kinesisk elbil kör 503 km/h. FIA erkänner farten över 500 km/h</title>
+    <link>https://motorpuls.se/artikel/yangwang-u9-xtreme-503-kmh/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/yangwang-u9-xtreme-503-kmh/</guid>
+    <pubDate>Sat, 07 Nov 2026 18:00:00 +0100</pubDate>
+    <category>Sportbil</category>
+    <description>Yangwang U9 Xtreme nådde 503,17 km/h på en avstängd motorväg i Abu Dhabi den 1 november. FIA har erkänt farten och Guinness gav två rekord för körning i en riktning.</description>
+    <enclosure url="https://motorpuls.se/img/og/yangwang-u9-xtreme-503-kmh.jpg" length="134807" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/yangwang-u9-xtreme-503-kmh.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="134807"/>
+  </item>
+  <item>
+    <title>Bilarnas nödbroms missar barn med reflexer. Bara en av sex bilar såg barnet</title>
+    <link>https://motorpuls.se/artikel/adac-nodbroms-barn-reflexer/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/adac-nodbroms-barn-reflexer/</guid>
+    <pubDate>Sat, 07 Nov 2026 07:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>ADAC har testat nödbromsen i sex bilar i mörker, och nästan alla missade ett barn i reflexkläder. Bara Mercedes CLA reagerade.</description>
+    <enclosure url="https://motorpuls.se/img/og/adac-nodbroms-barn-reflexer-hel.jpg" length="95824" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/adac-nodbroms-barn-reflexer-hel.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="95824"/>
+  </item>
+  <item>
+    <title>Byggd för gatan, vann Le Mans på första försöket. 100 McLaren F1 finns kvar, ingen i Sverige</title>
+    <link>https://motorpuls.se/artikel/mclaren-f1-mittensits-le-mans/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/mclaren-f1-mittensits-le-mans/</guid>
+    <pubDate>Fri, 06 Nov 2026 18:00:00 +0100</pubDate>
+    <category>Sportbil</category>
+    <description>McLaren F1 var tänkt som världens bästa gatbil och vann Le Mans 1995. Av 106 byggda finns 100 kvar enligt Hagerty, och ingen är registrerad i Sverige.</description>
+    <enclosure url="https://motorpuls.se/img/og/mclaren-f1-mittensits-le-mans.jpg" length="164410" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/mclaren-f1-mittensits-le-mans.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="164410"/>
   </item>
   <item>
     <title>V8:orna kan komma tillbaka i F1. Men inte som du minns dem</title>
