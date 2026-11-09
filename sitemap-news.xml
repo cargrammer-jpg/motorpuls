@@ -11,4 +11,70 @@
       <news:title>EU-utskott vill kräva mekanisk dörröppning. EX60 kan beröras</news:title>
     </news:news>
   </url>
+  <url>
+    <loc>https://motorpuls.se/artikel/polestar-ombildas-nederlanderna-goteborg/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-09T07:00:00+01:00</news:publication_date>
+      <news:title>Polestar blir nederländskt bolag. Huvudkontoret stannar i Göteborg</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://motorpuls.se/artikel/tesla-model-3-y-sist-goca-besiktning/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-08T18:00:00+01:00</news:publication_date>
+      <news:title>Strålkastarna fäller Tesla i jättebesiktning. Volvo XC60 klarar sig bäst.</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://motorpuls.se/artikel/tesla-cybertruck-avvecklas-cybercab/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-08T15:00:00+01:00</news:publication_date>
+      <news:title>Musk: Cybertruck fasas ut i Texas. Cybercab tar platsen</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://motorpuls.se/artikel/volvo-ex90-akutbil-bromsfel-drammen/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-08T12:00:00+01:00</news:publication_date>
+      <news:title>Volvos elbil tappade bromsarna mitt i körningen. Pedalen gick i golvet</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://motorpuls.se/artikel/volkswagen-q3-forlust-porsche-nedskrivning/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-08T07:00:00+01:00</news:publication_date>
+      <news:title>Volkswagen förlorade 64 miljarder kronor på tre månader. Porsche blev den dyraste posten</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://motorpuls.se/artikel/yangwang-u9-xtreme-503-kmh/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-07T18:00:00+01:00</news:publication_date>
+      <news:title>Kinesisk elbil kör 503 km/h. FIA erkänner farten över 500 km/h</news:title>
+    </news:news>
+  </url>
 </urlset>
