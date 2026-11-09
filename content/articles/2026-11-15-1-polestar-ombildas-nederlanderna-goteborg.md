@@ -1,7 +1,7 @@
 ---
 seo_title: "Polestar blir nederländskt bolag. HQ stannar i Göteborg"
 title: "Polestar blir nederländskt bolag. Huvudkontoret stannar i Göteborg"
-date: 2026-11-15T07:00:00+01:00
+date: 2026-11-09T07:00:00+01:00
 slug: polestar-ombildas-nederlanderna-goteborg
 tags: [Polestar, Göteborg, Nederländerna, Bolagsverket, SEC, ombildning, elbil, Geely]
 sources:
