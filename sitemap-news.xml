@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
+    <loc>https://motorpuls.se/artikel/polestar-ombildas-nederlanderna-goteborg/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-09T07:00:00+01:00</news:publication_date>
+      <news:title>Polestar blir nederländskt bolag. Huvudkontoret stannar i Göteborg</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://motorpuls.se/artikel/tesla-model-3-y-sist-goca-besiktning/</loc>
     <news:news>
       <news:publication>
@@ -53,17 +64,6 @@
       </news:publication>
       <news:publication_date>2026-11-07T18:00:00+01:00</news:publication_date>
       <news:title>Kinesisk elbil kör 503 km/h. FIA erkänner farten över 500 km/h</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/adac-nodbroms-barn-reflexer/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-07T07:00:00+01:00</news:publication_date>
-      <news:title>Bilarnas nödbroms missar barn med reflexer. Bara en av sex bilar såg barnet</news:title>
     </news:news>
   </url>
 </urlset>
