@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
+    <loc>https://motorpuls.se/artikel/byd-ti7-land-rover-defender-razzia/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-09T18:00:00+01:00</news:publication_date>
+      <news:title>Land Rover lät beslagta BYD:s dokument. Defender-kopian ska prövas i domstol</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://motorpuls.se/artikel/fartkameror-119000-boter-21-nya-kameror/</loc>
     <news:news>
       <news:publication>
@@ -75,17 +86,6 @@
       </news:publication>
       <news:publication_date>2026-11-08T07:00:00+01:00</news:publication_date>
       <news:title>Volkswagen förlorade 64 miljarder kronor på tre månader. Porsche blev den dyraste posten</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/yangwang-u9-xtreme-503-kmh/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-07T18:00:00+01:00</news:publication_date>
-      <news:title>Kinesisk elbil kör 503 km/h. FIA erkänner farten över 500 km/h</news:title>
     </news:news>
   </url>
 </urlset>
