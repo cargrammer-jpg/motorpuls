@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Mon, 09 Nov 2026 12:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Mon, 09 Nov 2026 18:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Land Rover lät beslagta BYD:s dokument. Defender-kopian ska prövas i domstol</title>
+    <link>https://motorpuls.se/artikel/byd-ti7-land-rover-defender-razzia/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/byd-ti7-land-rover-defender-razzia/</guid>
+    <pubDate>Mon, 09 Nov 2026 18:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>Domstolsutsedda förrättningsmän säkrade digitala dokument på BYD:s kontor i Nederländerna på uppdrag av Jaguar Land Rover. Den 11 november väntas domstolen i Haag besluta om fallet kan gå vidare.</description>
+    <enclosure url="https://motorpuls.se/img/og/byd-ti7-land-rover-defender-razzia.jpg" length="158511" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/byd-ti7-land-rover-defender-razzia.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="158511"/>
+  </item>
   <item>
     <title>EU-utskott vill kräva mekanisk dörröppning. EX60 kan beröras</title>
     <link>https://motorpuls.se/artikel/eu-dorrhandtag-mekanisk-oppnare-ex60-tesla/</link>
