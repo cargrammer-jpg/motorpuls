@@ -1,14 +1,14 @@
 {
-  "updated": "2026-11-08T12:00+01:00",
+  "updated": "2026-11-09T12:09+01:00",
   "source": "cloudflare",
   "articles": [
     {
-      "slug": "antonelli-yngste-varldsmastare-f1",
-      "views": 19
+      "slug": "toyota-celica-rally-vm-oliver-solberg-2027",
+      "views": 15
     },
     {
-      "slug": "toyota-celica-rally-vm-oliver-solberg-2027",
-      "views": 14
+      "slug": "yangwang-u9-xtreme-503-kmh",
+      "views": 11
     },
     {
       "slug": "italien-minimihastighet-100-vanster-korfalt",
@@ -23,11 +23,15 @@
       "views": 10
     },
     {
-      "slug": "yangwang-u9-xtreme-503-kmh",
+      "slug": "eu-dorrhandtag-mekanisk-oppnare-ex60-tesla",
       "views": 9
     },
     {
-      "slug": "eu-dorrhandtag-mekanisk-oppnare-ex60-tesla",
+      "slug": "tesla-model-3-y-sist-goca-besiktning",
+      "views": 9
+    },
+    {
+      "slug": "tesla-cybertruck-avvecklas-cybercab",
       "views": 9
     },
     {
@@ -39,31 +43,15 @@
       "views": 7
     },
     {
-      "slug": "tesla-cybertruck-avvecklas-cybercab",
+      "slug": "volkswagen-golf-hybrid-pris-id-golf-pausas",
       "views": 7
     },
     {
-      "slug": "e4-forbifart-stockholm-oppnar-6-december",
-      "views": 6
+      "slug": "antonelli-yngste-varldsmastare-f1",
+      "views": 7
     },
     {
-      "slug": "tesla-roadster-avtackad-produktion-2028",
-      "views": 6
-    },
-    {
-      "slug": "volkswagen-golf-hybrid-pris-id-golf-pausas",
-      "views": 6
-    },
-    {
-      "slug": "vinterdack-bot-dubbdacksforbud-stockholm",
-      "views": 6
-    },
-    {
-      "slug": "polisens-radarbilar-hela-sverige",
-      "views": 5
-    },
-    {
-      "slug": "fartkameror-119000-boter-21-nya-kameror",
+      "slug": "adac-nodbroms-barn-reflexer",
       "views": 5
     },
     {
@@ -71,23 +59,23 @@
       "views": 5
     },
     {
-      "slug": "adac-nodbroms-barn-reflexer",
-      "views": 5
-    },
-    {
-      "slug": "arets-bil-2027-bara-elbilar-volvo-ex60",
-      "views": 5
+      "slug": "jaguar-type-01-rackvidd-type-00",
+      "views": 4
     },
     {
       "slug": "f1-v8-turbohybrid-forslag-2030",
       "views": 4
     },
     {
-      "slug": "bmw-m3-el-fyra-motorer",
+      "slug": "volkswagen-q3-forlust-porsche-nedskrivning",
       "views": 4
     },
     {
-      "slug": "bmw-ix3-m60-highway-assistant-sverige",
+      "slug": "tesla-roadster-avtackad-produktion-2028",
+      "views": 3
+    },
+    {
+      "slug": "polisens-radarbilar-hela-sverige",
       "views": 3
     },
     {
@@ -95,11 +83,11 @@
       "views": 3
     },
     {
-      "slug": "mclaren-f1-mittensits-le-mans",
+      "slug": "volvo-ex90-akutbil-bromsfel-drammen",
       "views": 3
     },
     {
-      "slug": "jaguar-type-01-rackvidd-type-00",
+      "slug": "mclaren-f1-mittensits-le-mans",
       "views": 3
     },
     {
@@ -107,7 +95,31 @@
       "views": 2
     },
     {
-      "slug": "volkswagen-q3-forlust-porsche-nedskrivning",
+      "slug": "bmw-m3-el-fyra-motorer",
+      "views": 2
+    },
+    {
+      "slug": "arets-bil-2027-bara-elbilar-volvo-ex60",
+      "views": 2
+    },
+    {
+      "slug": "bmw-ix3-m60-highway-assistant-sverige",
+      "views": 1
+    },
+    {
+      "slug": "ferrari-f40-sista-enzo-ferrari",
+      "views": 1
+    },
+    {
+      "slug": "lamborghini-diablo-djavulen-chrysler",
+      "views": 1
+    },
+    {
+      "slug": "e4-forbifart-stockholm-oppnar-6-december",
+      "views": 1
+    },
+    {
+      "slug": "vinterdack-bot-dubbdacksforbud-stockholm",
       "views": 1
     },
     {
@@ -115,7 +127,7 @@
       "views": 1
     },
     {
-      "slug": "tesla-fsd-sverige-eu-omrostning-december",
+      "slug": "bmw-m3-e30-homologering-dtm",
       "views": 1
     }
   ]
