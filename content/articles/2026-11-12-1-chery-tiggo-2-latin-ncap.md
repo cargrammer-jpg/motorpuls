@@ -1,6 +1,6 @@
 ---
 title: "Noll procent i barnskydd och brandrisk. Kinesiska suven sågas i krocktest"
-date: 2026-11-12
+date: 2026-11-10T07:00+01:00
 slug: chery-tiggo-2-noll-stjarnor-latin-ncap
 tags: [Chery, Tiggo 2, Latin NCAP, krocktest, säkerhet, Omoda, Jaecoo]
 sources:
