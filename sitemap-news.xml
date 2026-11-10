@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
+    <loc>https://motorpuls.se/artikel/e4-forbifart-stockholm-oppnar-6-december/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-10T15:00:00+01:00</news:publication_date>
+      <news:title>Stockholms 51-miljardersväg öppnar 6 december. Du får köra 3,5 av 21 kilometer</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://motorpuls.se/artikel/chery-tiggo-2-noll-stjarnor-latin-ncap/</loc>
     <news:news>
       <news:publication>
@@ -64,17 +75,6 @@
       </news:publication>
       <news:publication_date>2026-11-08T18:00:00+01:00</news:publication_date>
       <news:title>Strålkastarna fäller Tesla i jättebesiktning. Volvo XC60 klarar sig bäst.</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/tesla-cybertruck-avvecklas-cybercab/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-08T15:00:00+01:00</news:publication_date>
-      <news:title>Musk: Cybertruck fasas ut i Texas. Cybercab tar platsen</news:title>
     </news:news>
   </url>
 </urlset>
