@@ -12,6 +12,17 @@
     </news:news>
   </url>
   <url>
+    <loc>https://motorpuls.se/artikel/e4-forbifart-stockholm-oppnar-6-december/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-10T15:00:00+01:00</news:publication_date>
+      <news:title>Stockholms 51-miljardersväg öppnar 6 december. Du får köra 3,5 av 21 kilometer</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://motorpuls.se/artikel/chery-tiggo-2-noll-stjarnor-latin-ncap/</loc>
     <news:news>
       <news:publication>

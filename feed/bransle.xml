@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Bränsle på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Tue, 10 Nov 2026 07:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Tue, 10 Nov 2026 15:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/bransle.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Stockholms 51-miljardersväg öppnar 6 december. Du får köra 3,5 av 21 kilometer</title>
+    <link>https://motorpuls.se/artikel/e4-forbifart-stockholm-oppnar-6-december/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/e4-forbifart-stockholm-oppnar-6-december/</guid>
+    <pubDate>Tue, 10 Nov 2026 15:00:00 +0100</pubDate>
+    <category>Bränsle</category>
+    <description>Den 6 december släpps trafiken på i den första delen av E4 Förbifart Stockholm, mellan Häggvik och Hjulsta. Resten av vägen dröjer till 2030.</description>
+    <enclosure url="https://motorpuls.se/img/og/e4-forbifart-stockholm-oppnar-6-december.jpg" length="206079" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/e4-forbifart-stockholm-oppnar-6-december.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="206079"/>
+  </item>
   <item>
     <title>Noll procent i barnskydd och brandrisk. Kinesiska suven sågas i krocktest</title>
     <link>https://motorpuls.se/artikel/chery-tiggo-2-noll-stjarnor-latin-ncap/</link>
