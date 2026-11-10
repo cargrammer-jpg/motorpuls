@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Tue, 10 Nov 2026 15:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Tue, 10 Nov 2026 18:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Polestar visar hur nya Polestar 2 ser ut. Den kända ljusrampen försvinner</title>
+    <link>https://motorpuls.se/artikel/polestar-formula-2030-nya-polestar-2/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/polestar-formula-2030-nya-polestar-2/</guid>
+    <pubDate>Tue, 10 Nov 2026 18:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>Göteborgsmärket visar konceptbilen Formula 2030, och flera detaljer ska hamna på nästa Polestar 2 som enligt planen kommer 2027.</description>
+    <enclosure url="https://motorpuls.se/img/og/polestar-formula-2030-nya-polestar-2.jpg" length="109089" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/polestar-formula-2030-nya-polestar-2.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="109089"/>
+  </item>
   <item>
     <title>Stockholms 51-miljardersväg öppnar 6 december. Du får köra 3,5 av 21 kilometer</title>
     <link>https://motorpuls.se/artikel/e4-forbifart-stockholm-oppnar-6-december/</link>
