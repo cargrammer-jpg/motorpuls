@@ -107,6 +107,7 @@ box-shadow:0 0 0 1px var(--line),0 40px 80px -40px rgb(255 91 31 / .25)}
 .lead--text a{background:radial-gradient(40rem 22rem at 0% 0%,rgb(255 91 31 / .14),transparent 70%),linear-gradient(180deg,var(--raised),var(--surface))}
 .lead__media{margin:0;background:#000;align-self:center}
 .lead__frame{position:relative;overflow:hidden}
+.lead__frame picture{display:block}
 .lead__media img{width:100%;height:auto}
 .lead__media figcaption{font-family:var(--mono);font-size:.7rem;color:var(--muted);padding:.5rem .9rem;background:var(--bg-2)}
 .lead__media figcaption:empty{display:none}
@@ -227,6 +228,8 @@ background:linear-gradient(90deg,rgb(255 91 31 / .13),rgb(255 91 31 / .05));box-
 .article__figure .frame{overflow:hidden;border-radius:var(--radius);background:#000;box-shadow:0 0 0 1px var(--line),0 40px 80px -40px rgb(255 91 31 / .25)}
 .article__figure img{width:100%;height:auto}
 .article__figure figcaption,.gallery figcaption{font-family:var(--mono);font-size:.72rem;line-height:1.45;color:var(--muted);margin-top:.6rem}
+.article__figure--inline figcaption a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.18em}
+.prose>.article__figure--inline{margin-block:1.8em}
 .gallery{position:relative;max-width:62rem;margin:2rem auto 0}
 .gallery__track{display:flex;gap:.75rem;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-color:var(--line-strong) transparent;border-radius:var(--radius);padding-bottom:.5rem}
 .gallery__slide{flex:0 0 88%;scroll-snap-align:start;scroll-snap-stop:always;min-width:0}
@@ -308,16 +311,6 @@ padding:1.25rem var(--gutter) calc(1.25rem + env(safe-area-inset-bottom));box-sh
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:0s!important;animation:none!important}}
 .item__credit{font-family:var(--mono);font-size:.7rem;line-height:1.3;color:var(--credit);padding:.3rem .4rem;background:var(--bg-2)}
 .item__credit:empty{display:none}
-.flag{display:inline-block;line-height:0;flex:none;border-radius:2px;overflow:hidden;box-shadow:0 0 0 1px rgb(0 0 0 / .25),0 2px 6px rgb(0 0 0 / .45)}
-.flag svg{display:block;width:100%;height:auto}
-.flag--hero,.flag--lead,.flag--thumb{position:absolute;z-index:2;pointer-events:none}
-.flag--hero{top:.75rem;left:.75rem;width:28px}
-@media (min-width:48rem){.flag--hero{top:1rem;left:1rem;width:34px}}
-.flag--lead{top:.75rem;left:.75rem;width:28px}
-@media (min-width:60rem){.flag--lead{width:32px}}
-.flag--thumb{top:.35rem;left:.35rem;width:18px}
-.flag--inline{width:20px;vertical-align:middle;box-shadow:0 0 0 1px rgb(0 0 0 / .25)}
-.article__figure .frame,.lead__media,.item__img{position:relative}
 .pop{margin-top:clamp(2rem,5vw,3.25rem)}
 .pop__list{list-style:none;margin:1rem 0 0;padding:1rem 0 0;border-top:1px solid var(--line-strong);
 display:grid;grid-auto-flow:column;grid-auto-columns:min(64%,15rem);gap:.9rem;overflow-x:auto;overscroll-behavior-x:contain;
@@ -395,6 +388,18 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
 .masthead.is-small .topnav{transform:translateY(15.5px)}
 .masthead:has(:focus-visible) .topnav{transform:none}
 @media (max-width:23rem){.topnav a{padding-inline:.4rem;font-size:.85rem}}
+.secnav{border-bottom:1px solid var(--line);background:var(--bg)}
+.secnav__list{list-style:none;margin:0;padding:0;display:flex;gap:.25rem;overflow-x:auto;scrollbar-width:none;
+margin-inline:-.6rem;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 2rem),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 2rem),transparent)}
+.secnav__list::-webkit-scrollbar{display:none}
+.secnav__list li:last-child{padding-right:1.5rem}
+.secnav a{display:inline-flex;align-items:center;min-height:2.75rem;padding-inline:.6rem;font-size:.875rem;font-weight:650;white-space:nowrap;
+color:var(--text-2);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:.45em;text-decoration-color:transparent;
+transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
+.secnav a:hover{color:var(--text);text-decoration-color:var(--line-strong)}
+.secnav a[aria-current="page"]{color:var(--text);text-decoration-color:var(--pulse)}
+.secnav a:focus-visible{outline-offset:-2px}
+@media (min-width:48rem){.secnav__list{-webkit-mask-image:none;mask-image:none}.secnav__list li:last-child{padding-right:0}}
 .catpage{padding-block:clamp(1.5rem,4vw,3.5rem) clamp(3rem,7vw,6rem)}
 .catpage__head{display:grid;gap:1rem;max-width:48rem}
 .catpage__title{font-size:clamp(2rem,1rem + 4vw,3.5rem);line-height:1;font-weight:820;font-stretch:115%;letter-spacing:-.035em;color:#fff}
@@ -495,6 +500,10 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
 <meta property="article:tag" content="trängselskatt">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "NewsArticle", "headline": "Stockholms 51-miljardersväg öppnar 6 december. Du får köra 3,5 av 21 kilometer", "description": "Den 6 december släpps trafiken på i den första delen av E4 Förbifart Stockholm, mellan Häggvik och Hjulsta. Resten av vägen dröjer till 2030.", "datePublished": "2026-11-10T15:00:00+01:00", "dateModified": "2026-11-10T15:00:00+01:00", "inLanguage": "sv-SE", "articleSection": "Bränsle", "keywords": ["Trafikverket", "Förbifart Stockholm", "E4", "Stockholm", "vägar", "tunnel", "trängselskatt"], "mainEntityOfPage": {"@type": "WebPage", "@id": "https://motorpuls.se/artikel/e4-forbifart-stockholm-oppnar-6-december/"}, "url": "https://motorpuls.se/artikel/e4-forbifart-stockholm-oppnar-6-december/", "author": {"@type": "Person", "name": "Lukas", "url": "https://motorpuls.se/om/lukas/"}, "publisher": {"@type": "NewsMediaOrganization", "@id": "https://motorpuls.se/#organization", "name": "Motorpuls", "url": "https://motorpuls.se/", "email": "hello@motorpuls.se", "logo": {"@type": "ImageObject", "url": "https://motorpuls.se/favicon/android-chrome-512.png", "width": 512, "height": 512}, "publishingPrinciples": "https://motorpuls.se/om/"}, "image": [{"@type": "ImageObject", "url": "https://motorpuls.se/img/ld/e4-forbifart-stockholm-oppnar-6-december-16x9.jpg", "width": 1200, "height": 675, "creditText": "Johannes Scherman / Wikimedia Commons (CC BY-SA 4.0)", "copyrightNotice": "CC BY-SA 4.0, fri användning med namngivning och samma licens. Villkor: https://creativecommons.org/licenses/by-sa/4.0/"}, {"@type": "ImageObject", "url": "https://motorpuls.se/img/ld/e4-forbifart-stockholm-oppnar-6-december-4x3.jpg", "width": 1200, "height": 900, "creditText": "Johannes Scherman / Wikimedia Commons (CC BY-SA 4.0)", "copyrightNotice": "CC BY-SA 4.0, fri användning med namngivning och samma licens. Villkor: https://creativecommons.org/licenses/by-sa/4.0/"}, {"@type": "ImageObject", "url": "https://motorpuls.se/img/ld/e4-forbifart-stockholm-oppnar-6-december-1x1.jpg", "width": 1147, "height": 1147, "creditText": "Johannes Scherman / Wikimedia Commons (CC BY-SA 4.0)", "copyrightNotice": "CC BY-SA 4.0, fri användning med namngivning och samma licens. Villkor: https://creativecommons.org/licenses/by-sa/4.0/"}, {"@type": "ImageObject", "url": "https://motorpuls.se/img/articles/e4-forbifart-stockholm-oppnar-6-december/forbifart-akalla-2022.webp", "width": 1600, "height": 1147, "caption": "Förbifart Stockholms nybyggda trafikplats Akalla med ramper, broar och kraftledningsstolpar i mars 2022.", "creditText": "Johannes Scherman / Wikimedia Commons (CC BY-SA 4.0)", "copyrightNotice": "CC BY-SA 4.0, fri användning med namngivning och samma licens. Villkor: https://creativecommons.org/licenses/by-sa/4.0/"}, {"@type": "ImageObject", "url": "https://motorpuls.se/img/articles/e4-forbifart-stockholm-oppnar-6-december/forbifart-hjulstamotet-2019.webp", "width": 1600, "height": 1148, "caption": "En bro under byggnad för Förbifart Stockholm vid Hjulsta i maj 2019, med en personbil i förgrunden.", "creditText": "Holger Ellgaard / Wikimedia Commons (CC BY-SA 4.0)", "copyrightNotice": "CC BY-SA 4.0, fri användning med namngivning och samma licens. Villkor: https://creativecommons.org/licenses/by-sa/4.0/"}], "citation": ["https://www.trafikverket.se/vara-projekt/projekt-i-stockholms-lan/e4-forbifart-stockholm/nyheter-for-e4-forbifart-stockholm/2026-10/6-december-oppnar-forsta-delen-av-e4-forbifart-stockholm/", "https://via.tt.se/pressmeddelande/4582360/forsta-delen-av-e4-forbifart-stockholm-oppnar-den-6-december?lang=sv&publisherId=44450", "https://www.trafikverket.se/vara-projekt/projekt-i-stockholms-lan/e4-forbifart-stockholm/", "https://www.trafikverket.se/vara-projekt/projekt-i-stockholms-lan/e4-forbifart-stockholm/vagen-till-oppnande-av-en-ny-vag/", "https://via.tt.se/pressmeddelande/3540730/e4-forbifart-stockholm-mellan-haggvik-och-hjulsta-oppnar-for-trafik-4-ar-tidigare-an-planerat?lang=sv&publisherId=44450", "https://carup.se/nya-svenska-supervagen-oppnar-6-december/"]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Start", "item": "https://motorpuls.se/"}, {"@type": "ListItem", "position": 2, "name": "Bränsle", "item": "https://motorpuls.se/bransle/"}, {"@type": "ListItem", "position": 3, "name": "Stockholms 51-miljardersväg öppnar 6 december. Du får köra 3,5 av 21 kilometer", "item": "https://motorpuls.se/artikel/e4-forbifart-stockholm-oppnar-6-december/"}]}</script>
+<meta name="google-adsense-account" content="ca-pub-7329870923296365">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7329870923296365" crossorigin="anonymous"></script>
+
+<script defer src="https://82-70-60-43.sslip.io/s.js" data-website-id="ffb8602c-4d57-4164-824c-9823ad5c42bb" data-domains="motorpuls.se,www.motorpuls.se"></script>
 </head>
 <body>
 <a class="skip" href="#innehall">Hoppa till innehållet</a>
@@ -503,6 +512,7 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
     <a class="wordmark" href="/"><img class="logo" src="/img/logo.svg" alt="Motorpuls" width="872" height="88"><svg class="wordmark__flag" viewBox="0 0 16 10" width="16" height="10" aria-hidden="true" focusable="false"><rect width="16" height="10" fill="#0A2260"/><rect x="5" width="2" height="10" fill="#FECC00"/><rect y="4" width="16" height="2" fill="#FECC00"/></svg></a>
   </div>
 </header>
+<nav class="secnav" aria-label="Kategorier"><div class="wrap"><ul class="secnav__list"><li><a href="/elbil/">Elbil</a></li><li><a href="/sportbil/">Sportbil</a></li><li><a href="/motorsport/">Motorsport</a></li><li><a href="/bransle/">Bränsle</a></li><li><a href="/tesla/">Tesla</a></li><li><a href="#nyhetsbrev-fot">Nyhetsbrev</a></li></ul></div></nav>
 
 <main id="innehall" class="article">
   <div class="wrap">
@@ -536,7 +546,7 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
             <li>Hela vägen på 21 kilometer, med en trolig slutkostnad på 51,5 miljarder kronor, öppnar 2030.</li>
         </ul>
       </section>
-      <section class="gallery" aria-roledescription="bildspel" aria-label="Bildspel, 2 bilder" data-gallery><span class="flag flag--hero" role="img" aria-label="Gäller Sverige" title="Gäller Sverige"><svg viewBox="0 0 16 10" width="16" height="10" aria-hidden="true" focusable="false"><rect width="16" height="10" fill="#005293"/><rect x="5" width="2" height="10" fill="#FECB00"/><rect y="4" width="16" height="2" fill="#FECB00"/></svg></span>
+      <section class="gallery" aria-roledescription="bildspel" aria-label="Bildspel, 2 bilder" data-gallery>
         <div class="gallery__track" tabindex="0" role="group" aria-label="Bilder. Bläddra med piltangenterna eller svep.">
           <div class="gallery__slide" role="group" aria-roledescription="bild" aria-label="1 av 2"><figure>
             <div class="gallery__stage"><img src="/img/articles/e4-forbifart-stockholm-oppnar-6-december/forbifart-akalla-2022.webp" srcset="/img/articles/e4-forbifart-stockholm-oppnar-6-december/forbifart-akalla-2022-400.webp 400w, /img/articles/e4-forbifart-stockholm-oppnar-6-december/forbifart-akalla-2022-800.webp 800w, /img/articles/e4-forbifart-stockholm-oppnar-6-december/forbifart-akalla-2022-1200.webp 1200w, /img/articles/e4-forbifart-stockholm-oppnar-6-december/forbifart-akalla-2022.webp 1600w" sizes="(min-width: 66rem) 62rem, calc(100vw - 2.5rem)" width="1600" height="1147" alt="Förbifart Stockholms nybyggda trafikplats Akalla med ramper, broar och kraftledningsstolpar i mars 2022." fetchpriority="high" decoding="async"></div>
@@ -627,29 +637,29 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
           <h2 id="related-h"><span class="pulse-dot" aria-hidden="true"></span>Läs också</h2>
           <ul class="related__list">
             <li class="related__card">
-              <a href="/artikel/hvo100-reduktionsplikten-utredning-2031/">
-                <figure class="related__media"><div class="related__frame"><img src="/img/articles/hvo100-reduktionsplikten-utredning-2031/hvo100-pris-tankstelle-leu-400.webp" srcset="/img/articles/hvo100-reduktionsplikten-utredning-2031/hvo100-pris-tankstelle-leu-400.webp 400w, /img/articles/hvo100-reduktionsplikten-utredning-2031/hvo100-pris-tankstelle-leu-800.webp 800w, /img/articles/hvo100-reduktionsplikten-utredning-2031/hvo100-pris-tankstelle-leu-1200.webp 1200w, /img/articles/hvo100-reduktionsplikten-utredning-2031/hvo100-pris-tankstelle-leu.webp 1600w" sizes="(min-width: 40rem) 12rem, 7rem" width="1600" height="2133" alt="" loading="lazy" decoding="async"></div><figcaption class="item__credit">Foto: PantheraLeo1359531 / Wikimedia Commons (CC BY-SA 4.0)</figcaption></figure>
+              <a href="/artikel/fartkameror-119000-boter-21-nya-kameror/">
+                <figure class="related__media"><div class="related__frame"><img src="/img/articles/fartkameror-119000-boter-21-nya-kameror/fartkamera-ekerovagen-400.webp" srcset="/img/articles/fartkameror-119000-boter-21-nya-kameror/fartkamera-ekerovagen-400.webp 400w, /img/articles/fartkameror-119000-boter-21-nya-kameror/fartkamera-ekerovagen-800.webp 800w, /img/articles/fartkameror-119000-boter-21-nya-kameror/fartkamera-ekerovagen-1200.webp 1200w, /img/articles/fartkameror-119000-boter-21-nya-kameror/fartkamera-ekerovagen.webp 1600w" sizes="(min-width: 40rem) 12rem, 7rem" width="1600" height="1150" alt="" loading="lazy" decoding="async"></div><figcaption class="item__credit">Foto: Holger Ellgaard / Wikimedia Commons (CC BY-SA 3.0)</figcaption></figure>
                 <div class="related__body">
-                  <span class="meta"><span class="tag">Bränsle</span><time datetime="2026-10-30T01:19:00+01:00">30 oktober 2026</time></span>
-                  <h3>Utredning vill föra in HVO100 i reduktionsplikten senast 2031</h3>
+                  <span class="meta"><span class="tag">Bränsle</span><time datetime="2026-11-09T15:00:00+01:00">9 november 2026</time></span>
+                  <h3>Fartkamerorna gav 119 000 böter på ett år. Nu kommer 21 nya, här står de</h3>
                 </div>
               </a>
             </li>
             <li class="related__card">
-              <a href="/artikel/tesla-roadster-avtackad-produktion-2028/">
-                <figure class="related__media"><div class="related__frame"><span class="flag flag--thumb" role="img" aria-label="Gäller Sverige" title="Gäller Sverige"><svg viewBox="0 0 16 10" width="16" height="10" aria-hidden="true" focusable="false"><rect width="16" height="10" fill="#005293"/><rect x="5" width="2" height="10" fill="#FECB00"/><rect y="4" width="16" height="2" fill="#FECB00"/></svg></span><img src="/img/articles/tesla-roadster-avtackad-produktion-2028/tesla-roadster-press-2-400.webp" srcset="/img/articles/tesla-roadster-avtackad-produktion-2028/tesla-roadster-press-2-400.webp 400w, /img/articles/tesla-roadster-avtackad-produktion-2028/tesla-roadster-press-2-800.webp 800w, /img/articles/tesla-roadster-avtackad-produktion-2028/tesla-roadster-press-2-1200.webp 1200w, /img/articles/tesla-roadster-avtackad-produktion-2028/tesla-roadster-press-2.webp 1600w" sizes="(min-width: 40rem) 12rem, 7rem" width="1600" height="933" alt="" loading="lazy" decoding="async"></div><figcaption class="item__credit">Foto: Courtesy of Tesla, Inc.</figcaption></figure>
+              <a href="/artikel/chery-tiggo-2-noll-stjarnor-latin-ncap/">
+                <figure class="related__media"><div class="related__frame"><img src="/img/articles/chery-tiggo-2-noll-stjarnor-latin-ncap/chery-tiggo-2-pro-max-2025-400.webp" srcset="/img/articles/chery-tiggo-2-noll-stjarnor-latin-ncap/chery-tiggo-2-pro-max-2025-400.webp 400w, /img/articles/chery-tiggo-2-noll-stjarnor-latin-ncap/chery-tiggo-2-pro-max-2025-800.webp 800w, /img/articles/chery-tiggo-2-noll-stjarnor-latin-ncap/chery-tiggo-2-pro-max-2025-1200.webp 1200w, /img/articles/chery-tiggo-2-noll-stjarnor-latin-ncap/chery-tiggo-2-pro-max-2025.webp 1600w" sizes="(min-width: 40rem) 12rem, 7rem" width="1600" height="901" alt="" loading="lazy" decoding="async"></div><figcaption class="item__credit">Foto: RL GNZLZ / Wikimedia Commons</figcaption></figure>
                 <div class="related__body">
-                  <span class="meta"><span class="tag">Tesla</span><time datetime="2026-11-01T18:00:00+01:00">1 november 2026</time></span>
-                  <h3>Över en halv miljon kronor för en plats i kön. Tesla lovar inte ens att Roadster levereras</h3>
+                  <span class="meta"><span class="tag">Bränsle</span><time datetime="2026-11-10T07:00:00+01:00">10 november 2026</time></span>
+                  <h3>Noll procent i barnskydd och brandrisk. Kinesiska suven sågas i krocktest</h3>
                 </div>
               </a>
             </li>
             <li class="related__card">
-              <a href="/artikel/bmw-ix3-m60-highway-assistant-sverige/">
-                <figure class="related__media"><div class="related__frame"><img src="/img/articles/bmw-ix3-m60-highway-assistant-sverige/bmw-ix3-m60-press-1-400.webp" srcset="/img/articles/bmw-ix3-m60-highway-assistant-sverige/bmw-ix3-m60-press-1-400.webp 400w, /img/articles/bmw-ix3-m60-highway-assistant-sverige/bmw-ix3-m60-press-1-800.webp 800w, /img/articles/bmw-ix3-m60-highway-assistant-sverige/bmw-ix3-m60-press-1-1200.webp 1200w, /img/articles/bmw-ix3-m60-highway-assistant-sverige/bmw-ix3-m60-press-1.webp 1600w" sizes="(min-width: 40rem) 12rem, 7rem" width="1600" height="1067" alt="" loading="lazy" decoding="async"></div><figcaption class="item__credit">Foto: BMW Group</figcaption></figure>
+              <a href="/artikel/bensinpris-sanks-1589/">
+                <figure class="related__media"><div class="related__frame"><img src="/img/articles/bensinpris-sanks-1589/circle-k-stockholm-commons-400.webp" srcset="/img/articles/bensinpris-sanks-1589/circle-k-stockholm-commons-400.webp 400w, /img/articles/bensinpris-sanks-1589/circle-k-stockholm-commons-800.webp 800w, /img/articles/bensinpris-sanks-1589/circle-k-stockholm-commons-1200.webp 1200w, /img/articles/bensinpris-sanks-1589/circle-k-stockholm-commons.webp 1600w" sizes="(min-width: 40rem) 12rem, 7rem" width="1600" height="1067" alt="" loading="lazy" decoding="async"></div><figcaption class="item__credit">Foto: I99pema / Wikimedia Commons (CC BY-SA 4.0)</figcaption></figure>
                 <div class="related__body">
-                  <span class="meta"><span class="tag">Elbil</span><time datetime="2026-11-01T00:00:00+01:00">1 november 2026</time></span>
-                  <h3>BMW lovar 340 km laddning på tio minuter i nya iX3 M60 med 612 hk</h3>
+                  <span class="meta"><span class="tag">Bränsle</span><time datetime="2026-11-05T16:00:00+01:00">5 november 2026</time></span>
+                  <h3>Bensinen nere på 15,89 kronor. Men glädjen kan bli kort</h3>
                 </div>
               </a>
             </li>
@@ -666,12 +676,12 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
     <div class="site-footer__main">
     <a class="wordmark" href="/"><img class="logo logo--footer" src="/img/logo.svg" alt="Motorpuls" width="872" height="88" loading="lazy"></a>
     <p class="site-footer__desc">Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</p>
-    <nav class="site-footer__nav" aria-label="Om Motorpuls"><ul><li><a href="/om/">Om Motorpuls</a></li><li><a href="/om/lukas/">Om Lukas</a></li></ul></nav>
-    <nav class="site-footer__nav site-footer__topics" aria-label="Ämnen"><ul><li><a href="/bransle/">Bränsle</a></li><li><a href="/tesla/">Tesla</a></li><li><a href="/elbil/">Elbil</a></li><li><a href="/sportbil/">Sportbil</a></li></ul></nav>
+    <nav class="site-footer__nav" aria-label="Om Motorpuls"><ul><li><a href="/om/">Om Motorpuls</a></li><li><a href="/om/lukas/">Om Lukas</a></li><li><a href="/integritet/">Integritetspolicy</a></li></ul></nav>
+    <nav class="site-footer__nav site-footer__topics" aria-label="Ämnen"><ul><li><a href="/elbil/">Elbil</a></li><li><a href="/sportbil/">Sportbil</a></li><li><a href="/motorsport/">Motorsport</a></li><li><a href="/bransle/">Bränsle</a></li><li><a href="/tesla/">Tesla</a></li><li><a href="/sverige/">Sverige</a></li></ul></nav>
     <div class="site-footer__rss">
       <a class="rss-link" href="/feed.xml"><svg class="rss-icon" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><rect width="16" height="16" rx="3" fill="#FF5B1F"/><circle cx="4.6" cy="11.4" r="1.5" fill="#0B0D10"/><path d="M3.2 7.1a5.7 5.7 0 0 1 5.7 5.7M3.2 3.6a9.2 9.2 0 0 1 9.2 9.2" fill="none" stroke="#0B0D10" stroke-width="1.8" stroke-linecap="round"/></svg>RSS</a>
       <span class="site-footer__feeds-label" id="rss-kat">RSS per kategori:</span>
-      <ul class="site-footer__feeds" aria-labelledby="rss-kat"><li><a href="/feed/bransle.xml">Bränsle</a></li><li><a href="/feed/tesla.xml">Tesla</a></li><li><a href="/feed/elbil.xml">Elbil</a></li><li><a href="/feed/sportbil.xml">Sportbil</a></li><li><a href="/feed/sverige.xml">Sverige</a></li></ul>
+      <ul class="site-footer__feeds" aria-labelledby="rss-kat"><li><a href="/feed/bransle.xml">Bränsle</a></li><li><a href="/feed/elbil.xml">Elbil</a></li><li><a href="/feed/tesla.xml">Tesla</a></li><li><a href="/feed/sportbil.xml">Sportbil</a></li><li><a href="/feed/motorsport.xml">Motorsport</a></li><li><a href="/feed/sverige.xml">Sverige</a></li></ul>
     </div>
     <p class="fine">© 2026 Motorpuls<span class="site-footer__contact"> <span aria-hidden="true">·</span> <a href="mailto:hello@motorpuls.se">hello@motorpuls.se</a></span></p>
     </div>

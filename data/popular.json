@@ -1,49 +1,137 @@
 {
-  "updated": "2026-11-01T12:10+01:00",
-  "source": "Cloudflare Web Analytics, sidvisningar 2026-10-26 till 2026-11-01",
+  "updated": "2026-11-10T12:08+01:00",
+  "source": "cloudflare",
   "articles": [
     {
-      "slug": "bmw-m350-drift-moment-juli-2027",
-      "views": 17
-    },
-    {
-      "slug": "tesla-model-y-strukturellt-batteri-betyg-d-volvo-ex60",
+      "slug": "byd-ti7-land-rover-defender-razzia",
       "views": 16
     },
     {
-      "slug": "aston-martin-valhalla-spider",
-      "views": 15
+      "slug": "yangwang-u9-xtreme-503-kmh",
+      "views": 11
     },
     {
-      "slug": "hvo100-reduktionsplikten-utredning-2031",
+      "slug": "italien-minimihastighet-100-vanster-korfalt",
+      "views": 11
+    },
+    {
+      "slug": "bensinpris-sanks-1589",
+      "views": 10
+    },
+    {
+      "slug": "eu-dorrhandtag-mekanisk-oppnare-ex60-tesla",
+      "views": 10
+    },
+    {
+      "slug": "tesla-cybertruck-avvecklas-cybercab",
       "views": 9
     },
     {
-      "slug": "bmw-m3-el-fyra-motorer",
+      "slug": "tesla-model-3-y-sist-goca-besiktning",
+      "views": 9
+    },
+    {
+      "slug": "toyota-celica-rally-vm-oliver-solberg-2027",
       "views": 8
     },
     {
+      "slug": "volvo-forsaljning-ras-oktober-2026",
+      "views": 8
+    },
+    {
+      "slug": "polestar-ombildas-nederlanderna-goteborg",
+      "views": 7
+    },
+    {
       "slug": "polisens-radarbilar-hela-sverige",
-      "views": 6
-    },
-    {
-      "slug": "formansvarde-elbil-2027-per-modell",
-      "views": 6
-    },
-    {
-      "slug": "bmw-ix3-m60-highway-assistant-sverige",
       "views": 5
+    },
+    {
+      "slug": "b-korkort-4-25-ton-b1-korkort-15-aringar",
+      "views": 5
+    },
+    {
+      "slug": "adac-nodbroms-barn-reflexer",
+      "views": 5
+    },
+    {
+      "slug": "f1-v8-turbohybrid-forslag-2030",
+      "views": 4
     },
     {
       "slug": "jaguar-type-01-rackvidd-type-00",
-      "views": 5
+      "views": 4
+    },
+    {
+      "slug": "volkswagen-q3-forlust-porsche-nedskrivning",
+      "views": 4
+    },
+    {
+      "slug": "tesla-roadster-avtackad-produktion-2028",
+      "views": 3
+    },
+    {
+      "slug": "volkswagen-golf-hybrid-pris-id-golf-pausas",
+      "views": 3
+    },
+    {
+      "slug": "porsche-macan-bensin-namn-2028",
+      "views": 3
+    },
+    {
+      "slug": "tesla-semi-brand-i-880-hayward",
+      "views": 3
+    },
+    {
+      "slug": "volvo-ex90-akutbil-bromsfel-drammen",
+      "views": 3
+    },
+    {
+      "slug": "mclaren-f1-mittensits-le-mans",
+      "views": 3
+    },
+    {
+      "slug": "arets-bil-2027-bara-elbilar-volvo-ex60",
+      "views": 3
     },
     {
       "slug": "mest-salda-elbilen-inte-tesla",
       "views": 2
     },
     {
-      "slug": "tesla-fsd-sverige-eu-omrostning-december",
+      "slug": "antonelli-yngste-varldsmastare-f1",
+      "views": 2
+    },
+    {
+      "slug": "bmw-m3-el-fyra-motorer",
+      "views": 2
+    },
+    {
+      "slug": "ferrari-f40-sista-enzo-ferrari",
+      "views": 1
+    },
+    {
+      "slug": "bmw-ix3-m60-highway-assistant-sverige",
+      "views": 1
+    },
+    {
+      "slug": "lamborghini-diablo-djavulen-chrysler",
+      "views": 1
+    },
+    {
+      "slug": "e4-forbifart-stockholm-oppnar-6-december",
+      "views": 1
+    },
+    {
+      "slug": "vinterdack-bot-dubbdacksforbud-stockholm",
+      "views": 1
+    },
+    {
+      "slug": "formansvarde-elbil-2027-per-modell",
+      "views": 1
+    },
+    {
+      "slug": "bmw-m3-e30-homologering-dtm",
       "views": 1
     }
   ]
