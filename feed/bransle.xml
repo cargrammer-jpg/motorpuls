@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Bränsle på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Mon, 09 Nov 2026 15:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Tue, 10 Nov 2026 07:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/bransle.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Noll procent i barnskydd och brandrisk. Kinesiska suven sågas i krocktest</title>
+    <link>https://motorpuls.se/artikel/chery-tiggo-2-noll-stjarnor-latin-ncap/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/chery-tiggo-2-noll-stjarnor-latin-ncap/</guid>
+    <pubDate>Tue, 10 Nov 2026 07:00:00 +0100</pubDate>
+    <category>Bränsle</category>
+    <description>Chery Tiggo 2 fick noll stjärnor i Latin NCAP, med noll procent i både vuxen- och barnskydd och brandrisk i frontalkrocken.</description>
+    <enclosure url="https://motorpuls.se/img/articles/chery-tiggo-2-noll-stjarnor-latin-ncap/chery-tiggo-2-pro-max-2025.webp" length="266290" type="image/webp"/>
+    <media:content url="https://motorpuls.se/img/articles/chery-tiggo-2-noll-stjarnor-latin-ncap/chery-tiggo-2-pro-max-2025.webp" medium="image" type="image/webp" width="1600" height="901" fileSize="266290"/>
+  </item>
   <item>
     <title>Fartkamerorna gav 119 000 böter på ett år. Nu kommer 21 nya, här står de</title>
     <link>https://motorpuls.se/artikel/fartkameror-119000-boter-21-nya-kameror/</link>
