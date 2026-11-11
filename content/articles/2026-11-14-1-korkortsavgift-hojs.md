@@ -1,6 +1,6 @@
 ---
 title: "Körkortet kan bli dyrare i januari. Så mycket mer får du betala"
-date: 2026-11-14
+date: 2026-11-11T07:00+01:00
 slug: korkortsavgift-hojs-2027
 tags: [körkort, Transportstyrelsen, avgifter, vägtrafikregistret, registreringsskylt, körkortsdirektivet]
 sources:
