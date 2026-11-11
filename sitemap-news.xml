@@ -12,6 +12,17 @@
     </news:news>
   </url>
   <url>
+    <loc>https://motorpuls.se/artikel/horse-w40-v8-lotus-type-135-skovde/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-11T07:00:00+01:00</news:publication_date>
+      <news:title>Bolaget med Volvos gamla motorfabrik visar ny V8 med 680 hk. Den hamnar i en Lotus</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://motorpuls.se/artikel/polestar-formula-2030-nya-polestar-2/</loc>
     <news:news>
       <news:publication>

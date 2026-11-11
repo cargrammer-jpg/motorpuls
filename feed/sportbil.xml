@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Sportbil på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Sat, 07 Nov 2026 18:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Wed, 11 Nov 2026 07:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/sportbil.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Bolaget med Volvos gamla motorfabrik visar ny V8 med 680 hk. Den hamnar i en Lotus</title>
+    <link>https://motorpuls.se/artikel/horse-w40-v8-lotus-type-135-skovde/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/horse-w40-v8-lotus-type-135-skovde/</guid>
+    <pubDate>Wed, 11 Nov 2026 07:00:00 +0100</pubDate>
+    <category>Sportbil</category>
+    <description>Horse Powertrain, där Volvos gamla motorverksamhet ingår, visar sin första V8. Fyra liter, över 500 kW och 200 kilo. Den debuterar i Lotus första superbil.</description>
+    <enclosure url="https://motorpuls.se/img/og/horse-w40-v8-lotus-type-135-skovde.jpg" length="98772" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/horse-w40-v8-lotus-type-135-skovde.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="98772"/>
+  </item>
   <item>
     <title>Kinesisk elbil kör 503 km/h. FIA erkänner farten över 500 km/h</title>
     <link>https://motorpuls.se/artikel/yangwang-u9-xtreme-503-kmh/</link>
