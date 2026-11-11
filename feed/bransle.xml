@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Bränsle på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Wed, 11 Nov 2026 15:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Wed, 11 Nov 2026 17:30:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/bransle.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Vinterdäck: vad gäller?</title>
+    <link>https://motorpuls.se/artikel/vinterdack-vad-galler/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/vinterdack-vad-galler/</guid>
+    <pubDate>Wed, 11 Nov 2026 17:30:00 +0100</pubDate>
+    <category>Bränsle</category>
+    <description>Här är reglerna för vinterdäck i Sverige, de datum du behöver ha koll på och vad som är värt att tänka på innan du byter.</description>
+    <enclosure url="https://motorpuls.se/img/og/vinterdack-vad-galler.jpg" length="94290" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/vinterdack-vad-galler.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="94290"/>
+  </item>
   <item>
     <title>Om tre veckor kan sommardäcken kosta 2 000 kronor. Och fyra gator till stängs för dubbdäck</title>
     <link>https://motorpuls.se/artikel/vinterdack-bot-dubbdacksforbud-stockholm/</link>
