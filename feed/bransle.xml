@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="/feed.xsl"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
 <channel>
   <title>Motorpuls: Bränsle</title>
   <link>https://motorpuls.se/</link>
@@ -15,6 +15,78 @@
     <pubDate>Wed, 11 Nov 2026 15:00:00 +0100</pubDate>
     <category>Bränsle</category>
     <description>Den 1 december börjar vinterdäckskravet gälla. Så mycket kostar fel däck, och här blir det förbjudet att köra med dubbar.</description>
+    <enclosure url="https://motorpuls.se/img/og/vinterdack-bot-dubbdacksforbud-stockholm.jpg" length="134752" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/vinterdack-bot-dubbdacksforbud-stockholm.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="134752"/>
+  </item>
+  <item>
+    <title>Körkortet kan bli dyrare i januari. Så mycket mer får du betala</title>
+    <link>https://motorpuls.se/artikel/korkortsavgift-hojs-2027/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/korkortsavgift-hojs-2027/</guid>
+    <pubDate>Wed, 11 Nov 2026 07:00:00 +0100</pubDate>
+    <category>Bränsle</category>
+    <description>Transportstyrelsen föreslår att körkortsavgiften höjs från 375 till 450 kronor och registeravgiften för fordon från 74 till 80 kronor från 1 januari 2027.</description>
+    <enclosure url="https://motorpuls.se/img/og/korkortsavgift-hojs-2027.jpg" length="110706" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/korkortsavgift-hojs-2027.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="110706"/>
+  </item>
+  <item>
+    <title>Stockholms 51-miljardersväg öppnar 6 december. Du får köra 3,5 av 21 kilometer</title>
+    <link>https://motorpuls.se/artikel/e4-forbifart-stockholm-oppnar-6-december/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/e4-forbifart-stockholm-oppnar-6-december/</guid>
+    <pubDate>Tue, 10 Nov 2026 15:00:00 +0100</pubDate>
+    <category>Bränsle</category>
+    <description>Den 6 december släpps trafiken på i den första delen av E4 Förbifart Stockholm, mellan Häggvik och Hjulsta. Resten av vägen dröjer till 2030.</description>
+    <enclosure url="https://motorpuls.se/img/og/e4-forbifart-stockholm-oppnar-6-december.jpg" length="206079" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/e4-forbifart-stockholm-oppnar-6-december.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="206079"/>
+  </item>
+  <item>
+    <title>Noll procent i barnskydd och brandrisk. Kinesiska suven sågas i krocktest</title>
+    <link>https://motorpuls.se/artikel/chery-tiggo-2-noll-stjarnor-latin-ncap/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/chery-tiggo-2-noll-stjarnor-latin-ncap/</guid>
+    <pubDate>Tue, 10 Nov 2026 07:00:00 +0100</pubDate>
+    <category>Bränsle</category>
+    <description>Chery Tiggo 2 fick noll stjärnor i Latin NCAP, med noll procent i både vuxen- och barnskydd och brandrisk i frontalkrocken.</description>
+    <enclosure url="https://motorpuls.se/img/og/chery-tiggo-2-noll-stjarnor-latin-ncap.jpg" length="182282" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/chery-tiggo-2-noll-stjarnor-latin-ncap.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="182282"/>
+  </item>
+  <item>
+    <title>Fartkamerorna gav 119 000 böter på ett år. Nu kommer 21 nya, här står de</title>
+    <link>https://motorpuls.se/artikel/fartkameror-119000-boter-21-nya-kameror/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/fartkameror-119000-boter-21-nya-kameror/</guid>
+    <pubDate>Mon, 09 Nov 2026 15:00:00 +0100</pubDate>
+    <category>Bränsle</category>
+    <description>Trafikverket sätter upp 21 nya fartkameror på fyra vägar i höst. Samtidigt visar myndighetens egen rapport hur många som faktiskt får böter.</description>
+    <enclosure url="https://motorpuls.se/img/og/fartkameror-119000-boter-21-nya-kameror.jpg" length="295357" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/fartkameror-119000-boter-21-nya-kameror.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="295357"/>
+  </item>
+  <item>
+    <title>Bensinen nere på 15,89 kronor. Men glädjen kan bli kort</title>
+    <link>https://motorpuls.se/artikel/bensinpris-sanks-1589/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/bensinpris-sanks-1589/</guid>
+    <pubDate>Thu, 05 Nov 2026 16:00:00 +0100</pubDate>
+    <category>Bränsle</category>
+    <description>Circle K sänker 95-oktan till 15,89 kronor litern den 5 november. Nedgången märks i plånboken, men den tillfälliga skatterabatten tar slut den 1 december.</description>
+    <enclosure url="https://motorpuls.se/img/og/bensinpris-sanks-1589.jpg" length="132737" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/bensinpris-sanks-1589.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="132737"/>
+  </item>
+  <item>
+    <title>Golf blir hybrid för 373 900 kronor. Samtidigt lägger VW eldrivna Golf på is</title>
+    <link>https://motorpuls.se/artikel/volkswagen-golf-hybrid-pris-id-golf-pausas/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/volkswagen-golf-hybrid-pris-id-golf-pausas/</guid>
+    <pubDate>Tue, 03 Nov 2026 12:00:00 +0100</pubDate>
+    <category>Bränsle</category>
+    <description>Golf och T-Roc kommer som fullhybrider i Sverige med lägre fordonsskatt, samtidigt som VW pausar utvecklingen av eldrivna ID. Golf.</description>
+    <enclosure url="https://motorpuls.se/img/og/volkswagen-golf-hybrid-pris-id-golf-pausas-hel.jpg" length="154806" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/volkswagen-golf-hybrid-pris-id-golf-pausas-hel.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="154806"/>
+  </item>
+  <item>
+    <title>Polisens radar mäter 18 gånger i sekunden. Nu finns den i hela Sverige</title>
+    <link>https://motorpuls.se/artikel/polisens-radarbilar-hela-sverige/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/polisens-radarbilar-hela-sverige/</guid>
+    <pubDate>Mon, 02 Nov 2026 07:00:00 +0100</pubDate>
+    <category>Bränsle</category>
+    <description>Polisbilar som mäter hastigheten på bilar framför och i mötande körfält finns nu i alla sju polisregioner. Inga automatiska böter, men fler kan åka fast.</description>
+    <enclosure url="https://motorpuls.se/img/og/polisens-radarbilar-hela-sverige.jpg" length="171587" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/polisens-radarbilar-hela-sverige.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="171587"/>
   </item>
   <item>
     <title>Utredning vill föra in HVO100 i reduktionsplikten senast 2031</title>
@@ -23,6 +95,8 @@
     <pubDate>Fri, 30 Oct 2026 01:19:00 +0100</pubDate>
     <category>Bränsle</category>
     <description>Styrmedelsutredningen föreslår 21, 23 och 25 procents reduktionsplikt 2028 till 2030 och att HVO100 förs in i plikten och beskattas fullt senast 2031.</description>
+    <enclosure url="https://motorpuls.se/img/og/hvo100-reduktionsplikten-utredning-2031.jpg" length="142297" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/hvo100-reduktionsplikten-utredning-2031.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="142297"/>
   </item>
 </channel>
 </rss>
