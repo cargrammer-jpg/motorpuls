@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Wed, 11 Nov 2026 15:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Fri, 13 Nov 2026 07:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Göteborg vänder väjningsplikten på 1 000 platser. Missar du det kan det kosta 3 000 kronor</title>
+    <link>https://motorpuls.se/artikel/goteborg-cykeloverfarter-vajningsplikt/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/goteborg-cykeloverfarter-vajningsplikt/</guid>
+    <pubDate>Fri, 13 Nov 2026 07:00:00 +0100</pubDate>
+    <category>Bränsle</category>
+    <description>Göteborg ska bygga om runt 1 000 cykelpassager till cykelöverfarter. Där är det bilisten som ska väja, och boten är hög.</description>
+    <enclosure url="https://motorpuls.se/img/og/goteborg-cykeloverfarter-vajningsplikt.jpg" length="137675" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/goteborg-cykeloverfarter-vajningsplikt.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="137675"/>
+  </item>
   <item>
     <title>Om tre veckor kan sommardäcken kosta 2 000 kronor. Och fyra gator till stängs för dubbdäck</title>
     <link>https://motorpuls.se/artikel/vinterdack-bot-dubbdacksforbud-stockholm/</link>
