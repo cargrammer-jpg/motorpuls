@@ -6,8 +6,28 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Sverige på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Mon, 09 Nov 2026 15:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Wed, 11 Nov 2026 07:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/sverige.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Körkortet kan bli dyrare i januari. Så mycket mer får du betala</title>
+    <link>https://motorpuls.se/artikel/korkortsavgift-hojs-2027/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/korkortsavgift-hojs-2027/</guid>
+    <pubDate>Wed, 11 Nov 2026 07:00:00 +0100</pubDate>
+    <category>Bränsle</category>
+    <description>Transportstyrelsen föreslår att körkortsavgiften höjs från 375 till 450 kronor och registeravgiften för fordon från 74 till 80 kronor från 1 januari 2027.</description>
+    <enclosure url="https://motorpuls.se/img/og/korkortsavgift-hojs-2027.jpg" length="110706" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/korkortsavgift-hojs-2027.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="110706"/>
+  </item>
+  <item>
+    <title>Stockholms 51-miljardersväg öppnar 6 december. Du får köra 3,5 av 21 kilometer</title>
+    <link>https://motorpuls.se/artikel/e4-forbifart-stockholm-oppnar-6-december/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/e4-forbifart-stockholm-oppnar-6-december/</guid>
+    <pubDate>Tue, 10 Nov 2026 15:00:00 +0100</pubDate>
+    <category>Bränsle</category>
+    <description>Den 6 december släpps trafiken på i den första delen av E4 Förbifart Stockholm, mellan Häggvik och Hjulsta. Resten av vägen dröjer till 2030.</description>
+    <enclosure url="https://motorpuls.se/img/og/e4-forbifart-stockholm-oppnar-6-december.jpg" length="206079" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/e4-forbifart-stockholm-oppnar-6-december.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="206079"/>
+  </item>
   <item>
     <title>Fartkamerorna gav 119 000 böter på ett år. Nu kommer 21 nya, här står de</title>
     <link>https://motorpuls.se/artikel/fartkameror-119000-boter-21-nya-kameror/</link>
