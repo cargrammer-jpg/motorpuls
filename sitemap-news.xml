@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
+    <loc>https://motorpuls.se/artikel/koenigsegg-cc850-aterkallelse-parkeringsbroms/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-12T07:00:00+01:00</news:publication_date>
+      <news:title>En Koenigsegg CC850 rullade iväg utan förare. Nu kallas alla i USA tillbaka</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://motorpuls.se/artikel/vinterdack-vad-galler/</loc>
     <news:news>
       <news:publication>
@@ -64,28 +75,6 @@
       </news:publication>
       <news:publication_date>2026-11-10T15:00:00+01:00</news:publication_date>
       <news:title>Stockholms 51-miljardersväg öppnar 6 december. Du får köra 3,5 av 21 kilometer</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/chery-tiggo-2-noll-stjarnor-latin-ncap/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-10T07:00:00+01:00</news:publication_date>
-      <news:title>Noll procent i barnskydd och brandrisk. Kinesiska suven sågas i krocktest</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/byd-ti7-land-rover-defender-razzia/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-09T18:00:00+01:00</news:publication_date>
-      <news:title>Land Rover lät beslagta BYD:s dokument. Defender-kopian ska prövas i domstol</news:title>
     </news:news>
   </url>
 </urlset>
