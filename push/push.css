@@ -1,0 +1,35 @@
+/* Push-rutan (förhandsvisning, PUSH_BOX i build.py). Samma orange som nyhetsbrevsrutan (PR #15): gradient #FF5B1F till #FF7A3D,
+   mörk text #0B0D10 (6,3:1 och 7,5:1, WCAG AA), mörk knapp med vit text (19:1), 3px mörk fokusring.
+   Artikel: i flödet efter texten, under skärmkanten när den visas (inget layoutskift i bild). Startsida: fast ruta nere (påverkar inte layouten). */
+.pushb{--ink:#0B0D10;position:relative;margin:0;border-radius:8px;color:var(--ink);
+  background:linear-gradient(135deg,#FF5B1F 0%,#FF7A3D 100%);padding:clamp(1.25rem,3.5vw,2rem);
+  box-shadow:0 30px 60px -32px rgb(255 91 31 / .55),inset 0 0 0 1px rgb(255 255 255 / .12)}
+.pushb[hidden]{display:none}
+.pushb__kicker{font-family:var(--mono);font-size:.75rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase}
+.pushb h2{font-size:clamp(1.4rem,3vw,2rem);line-height:1.06;font-weight:820;font-stretch:115%;letter-spacing:-.035em;margin:.35rem 0 .45rem;color:var(--ink);text-wrap:balance}
+.pushb__lede,.pushb__ios{font-family:var(--serif);font-size:1.05rem;line-height:1.42;max-width:34rem}
+.pushb__ios{display:none;margin-top:.6rem;padding:.6rem .8rem;border-radius:var(--radius);background:rgb(11 13 16 / .1);border-left:3px solid var(--ink)}
+.pushb.is-ios .pushb__ios{display:block}
+.pushb.is-ios .pushb__yes{display:none}
+.pushb__row{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.pushb__btn{font:inherit;font-size:1rem;font-weight:720;min-height:3rem;min-width:6.5rem;padding:.7rem 1.25rem;cursor:pointer;
+  border:2px solid var(--ink);border-radius:var(--radius);background:var(--ink);color:#fff;transition:background-color .18s}
+.pushb__btn:hover{background:#252C35}
+.pushb__btn--ghost{background:transparent;color:var(--ink)}
+.pushb__btn--ghost:hover{background:rgb(11 13 16 / .1)}
+.pushb__btn[disabled]{cursor:progress;opacity:.8}
+.pushb__btn:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.pushb__status{font-weight:650;margin-top:.6rem}
+.pushb__status:empty{display:none}
+@media (forced-colors:active){.pushb{border:2px solid CanvasText}.pushb__btn:focus-visible{outline-color:Highlight}}
+/* Startsida: fast ruta, ingen modal, stjäl inte fokus. Mobil: hel bredd nere, dator: nere till höger. */
+.pushb--toast{position:fixed;z-index:60;inset:auto .75rem calc(.75rem + env(safe-area-inset-bottom)) .75rem;margin:0;
+  max-width:26rem;box-shadow:0 24px 60px rgb(0 0 0 / .55),inset 0 0 0 1px rgb(255 255 255 / .12)}
+.pushb--toast h2{font-size:1.35rem}
+.pushb--toast .pushb__lede{font-size:1rem}
+@media (min-width:40rem){.pushb--toast{inset:auto 1.5rem 1.5rem auto;width:24rem}}
+@media (prefers-reduced-motion:no-preference){
+  .pushb--toast:not([hidden]){animation:push-rise .28s cubic-bezier(.2,.8,.2,1)}
+  @keyframes push-rise{from{transform:translateY(16px);opacity:0}}
+}
+/* RSS-raden och sidfoten ligger i css/site.css (alltid på). */

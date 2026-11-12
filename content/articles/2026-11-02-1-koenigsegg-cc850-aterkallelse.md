@@ -1,6 +1,6 @@
 ---
 title: "En Koenigsegg CC850 rullade iväg utan förare. Nu kallas alla i USA tillbaka"
-date: 2026-11-02
+date: 2026-11-12T07:00:00+01:00
 slug: koenigsegg-cc850-aterkallelse-parkeringsbroms
 tags: [Koenigsegg, CC850, återkallelse, NHTSA, parkeringsbroms, mjukvara, OTA]
 sources:
