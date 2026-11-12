@@ -34,15 +34,22 @@ python3 -m venv .venv && .venv/bin/pip install markdown pyyaml pillow
 ### Populärt just nu
 
 Startsidans "Populärt just nu" läser `data/popular.json` (artiklar i ordning efter sidvisningar). Uppdatera den med
-`CLOUDFLARE_ANALYTICS_TOKEN=... .venv/bin/python tools/update_popular.py` (Cloudflare Web Analytics, senaste 7 dygnen;
-token med Account Analytics: Read, skrivs aldrig ut). Saknas filen fylls rutan med de senaste artiklarna.
+`.venv/bin/python tools/update_popular.py` (senaste 7 dygnen, dygnsgränser i Europe/Stockholm).
+
+`--source auto` (standard) frågar självhostad Umami när `UMAMI_URL`, `UMAMI_USERNAME` och `UMAMI_PASSWORD` är satta,
+fönstret börjar 2026-11-07 eller senare och minst två `/artikel/`-sidor kommer tillbaka. Annars används Cloudflare
+Web Analytics (`CLOUDFLARE_ANALYTICS_TOKEN`, Account Analytics: Read). `--source umami` och `--source cloudflare`
+tvingar respektive källa. Lösenord och token skrivs aldrig ut. Saknas filen fylls rutan med de senaste artiklarna.
 
 ### RSS
 
 `feed.xml` har alla artiklar, `feed/<kategori>.xml` bara en kategori (RSS 2.0, samma ordning som startsidan). Alla sidor har
 `<link rel="alternate" type="application/rss+xml">` till `feed.xml`. Startsidan listar även kategoriflödena och varje artikel sitt
 kategoriflöde. Sidfoten har länken RSS (ikon + text) och RSS per kategori. Artiklar slutar med raden "Prenumerera via RSS".
-Det finns inga kategorisidor ännu; när de kommer ska raden "Prenumerera via RSS" även stå där.
+Varje item har delningsbilden (1200×630 JPEG) som `<enclosure>` och `<media:content>` (namnrymden Media RSS).
+Ämnessidorna (`/elbil/`, `/sportbil/`, `/motorsport/`, `/bransle/`, `/tesla/`) och `/sverige/` (artiklar med `sweden: true`)
+har raden "Prenumerera via RSS" med sitt eget flöde. Ämnesraden under sidhuvudet länkar till ämnessidorna och nyhetsbrevsrutan
+(`SECTION_NAV` i build.py).
 
 ### Push-rutan (förhandsvisning, av i produktion)
 
@@ -87,7 +94,10 @@ Filen är fortfarande källan och publiceras som förut.
 betyder att artikeln inte ingår i det flödet. Sidhuvudets flagga bredvid logotypen är oförändrad.
 
 Bilderna kopieras till `img/articles/<slug>/` och får WebP-versioner (1600, 1200, 800 och 400 px bred, kvalitet 76, ingen beskärning).
-Den första blir huvudbild (och beskärs till delningsbilden `img/og/<slug>.jpg`), fler bilder blir ett bildspel. Checka in `img/articles/<slug>/` tillsammans med artikeln.
+Den första blir huvudbild (och beskärs till delningsbilden `img/og/<slug>.jpg`), fler bilder blir ett bildspel. En rad med bara `{{bild 2}}`
+(eller 3, 4 ...) i brödtexten visar den bilden just där i texten i stället för i bildspelet. Fria licenser visas i bildtexten:
+krediten länkar till `credit_url` och `license_name` länkar till `license_url` (t.ex. https://creativecommons.org/licenses/by-sa/4.0/).
+Checka in `img/articles/<slug>/` tillsammans med artikeln.
 Det äldre fältet `image` (en URL, med `image_credit`) laddas ned till `img/articles/<slug>.webp` som förut.
 
 ## Nyhetsbrev i sidfoten (förhandsvisning)

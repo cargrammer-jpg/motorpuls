@@ -108,6 +108,7 @@ box-shadow:0 0 0 1px var(--line),0 40px 80px -40px rgb(255 91 31 / .25)}
 .lead--text a{background:radial-gradient(40rem 22rem at 0% 0%,rgb(255 91 31 / .14),transparent 70%),linear-gradient(180deg,var(--raised),var(--surface))}
 .lead__media{margin:0;background:#000;align-self:center}
 .lead__frame{position:relative;overflow:hidden}
+.lead__frame picture{display:block}
 .lead__media img{width:100%;height:auto}
 .lead__media figcaption{font-family:var(--mono);font-size:.7rem;color:var(--muted);padding:.5rem .9rem;background:var(--bg-2)}
 .lead__media figcaption:empty{display:none}
@@ -228,6 +229,8 @@ background:linear-gradient(90deg,rgb(255 91 31 / .13),rgb(255 91 31 / .05));box-
 .article__figure .frame{overflow:hidden;border-radius:var(--radius);background:#000;box-shadow:0 0 0 1px var(--line),0 40px 80px -40px rgb(255 91 31 / .25)}
 .article__figure img{width:100%;height:auto}
 .article__figure figcaption,.gallery figcaption{font-family:var(--mono);font-size:.72rem;line-height:1.45;color:var(--muted);margin-top:.6rem}
+.article__figure--inline figcaption a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.18em}
+.prose>.article__figure--inline{margin-block:1.8em}
 .gallery{position:relative;max-width:62rem;margin:2rem auto 0}
 .gallery__track{display:flex;gap:.75rem;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-color:var(--line-strong) transparent;border-radius:var(--radius);padding-bottom:.5rem}
 .gallery__slide{flex:0 0 88%;scroll-snap-align:start;scroll-snap-stop:always;min-width:0}
@@ -386,6 +389,18 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
 .masthead.is-small .topnav{transform:translateY(15.5px)}
 .masthead:has(:focus-visible) .topnav{transform:none}
 @media (max-width:23rem){.topnav a{padding-inline:.4rem;font-size:.85rem}}
+.secnav{border-bottom:1px solid var(--line);background:var(--bg)}
+.secnav__list{list-style:none;margin:0;padding:0;display:flex;gap:.25rem;overflow-x:auto;scrollbar-width:none;
+margin-inline:-.6rem;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 2rem),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 2rem),transparent)}
+.secnav__list::-webkit-scrollbar{display:none}
+.secnav__list li:last-child{padding-right:1.5rem}
+.secnav a{display:inline-flex;align-items:center;min-height:2.75rem;padding-inline:.6rem;font-size:.875rem;font-weight:650;white-space:nowrap;
+color:var(--text-2);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:.45em;text-decoration-color:transparent;
+transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
+.secnav a:hover{color:var(--text);text-decoration-color:var(--line-strong)}
+.secnav a[aria-current="page"]{color:var(--text);text-decoration-color:var(--pulse)}
+.secnav a:focus-visible{outline-offset:-2px}
+@media (min-width:48rem){.secnav__list{-webkit-mask-image:none;mask-image:none}.secnav__list li:last-child{padding-right:0}}
 .catpage{padding-block:clamp(1.5rem,4vw,3.5rem) clamp(3rem,7vw,6rem)}
 .catpage__head{display:grid;gap:1rem;max-width:48rem}
 .catpage__title{font-size:clamp(2rem,1rem + 4vw,3.5rem);line-height:1;font-weight:820;font-stretch:115%;letter-spacing:-.035em;color:#fff}
@@ -422,13 +437,15 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
 <link rel="manifest" href="/favicon/site.webmanifest">
 <link rel="alternate" type="application/rss+xml" title="Motorpuls" href="/feed.xml">
 <link rel="alternate" type="application/rss+xml" title="Motorpuls: Bränsle" href="/feed/bransle.xml">
+<link rel="alternate" type="application/rss+xml" title="Motorpuls: Sportbil" href="/feed/sportbil.xml">
 <link rel="alternate" type="application/rss+xml" title="Motorpuls: Elbil" href="/feed/elbil.xml">
 <link rel="alternate" type="application/rss+xml" title="Motorpuls: Tesla" href="/feed/tesla.xml">
-<link rel="alternate" type="application/rss+xml" title="Motorpuls: Sportbil" href="/feed/sportbil.xml">
+<link rel="alternate" type="application/rss+xml" title="Motorpuls: Motorsport" href="/feed/motorsport.xml">
 <link rel="alternate" type="application/rss+xml" title="Motorpuls: Sverige" href="/feed/sverige.xml">
 <link rel="preload" href="/fonts/newsreader-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" as="image" href="/img/articles/bensin-diesel-3-kronor-dyrare-1-december/circle-k-stockholm-commons.webp" imagesrcset="/img/articles/bensin-diesel-3-kronor-dyrare-1-december/circle-k-stockholm-commons.webp 1600w" imagesizes="(min-width: 60rem) 38rem, 100vw" fetchpriority="high">
+<link rel="preload" as="image" href="/img/articles/bensin-diesel-3-kronor-dyrare-1-december/circle-k-stockholm-commons.webp" imagesrcset="/img/articles/bensin-diesel-3-kronor-dyrare-1-december/circle-k-stockholm-commons-400.webp 400w, /img/articles/bensin-diesel-3-kronor-dyrare-1-december/circle-k-stockholm-commons-800.webp 800w" imagesizes="calc(100vw - 2.5rem)" media="(max-width: 40rem)" fetchpriority="high">
+<link rel="preload" as="image" href="/img/articles/bensin-diesel-3-kronor-dyrare-1-december/circle-k-stockholm-commons.webp" imagesrcset="/img/articles/bensin-diesel-3-kronor-dyrare-1-december/circle-k-stockholm-commons-400.webp 400w, /img/articles/bensin-diesel-3-kronor-dyrare-1-december/circle-k-stockholm-commons-800.webp 800w, /img/articles/bensin-diesel-3-kronor-dyrare-1-december/circle-k-stockholm-commons-1200.webp 1200w, /img/articles/bensin-diesel-3-kronor-dyrare-1-december/circle-k-stockholm-commons.webp 1600w" imagesizes="(min-width: 60rem) 38rem, calc(100vw - 2.5rem)" media="not all and (max-width: 40rem)" fetchpriority="high">
 <style>/* Nyhetsbrevsrutan i sidfoten (förhandsvisning, NEWSLETTER_BOX i build.py). Laddas bara när flaggan är på.
    Smälter in: mörk panel var(--surface) med 1px hårlinje var(--line), orange bara som accent (2px topplinje, etikett i
    pulse-text #FF8A5C 6,6:1, orange knapp med mörk text 6,3:1, orange fokusring). Typografi som sidfoten (sans, text-2 #C3CAD1 10:1,
@@ -479,6 +496,10 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
 <noscript><style>.nlf__form{display:none}</style></noscript>
 <script src="/nyhetsbrev.js?v=f5846ee28d" defer></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://motorpuls.se/#website", "name": "Motorpuls", "url": "https://motorpuls.se/", "description": "Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.", "inLanguage": "sv-SE", "publisher": {"@id": "https://motorpuls.se/#organization"}}, {"@type": "NewsMediaOrganization", "@id": "https://motorpuls.se/#organization", "name": "Motorpuls", "url": "https://motorpuls.se/", "email": "hello@motorpuls.se", "logo": {"@type": "ImageObject", "url": "https://motorpuls.se/favicon/android-chrome-512.png", "width": 512, "height": 512}, "publishingPrinciples": "https://motorpuls.se/om/", "description": "Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor."}]}</script>
+<meta name="google-adsense-account" content="ca-pub-7329870923296365">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7329870923296365" crossorigin="anonymous"></script>
+
+<script defer src="https://82-70-60-43.sslip.io/s.js" data-website-id="ffb8602c-4d57-4164-824c-9823ad5c42bb" data-domains="motorpuls.se,www.motorpuls.se"></script>
 </head>
 <body>
 <a class="skip" href="#innehall">Hoppa till innehållet</a>
@@ -487,6 +508,7 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
     <a class="wordmark" href="/"><img class="logo" src="/img/logo.svg" alt="Motorpuls" width="872" height="88"><svg class="wordmark__flag" viewBox="0 0 16 10" width="16" height="10" aria-hidden="true" focusable="false"><rect width="16" height="10" fill="#0A2260"/><rect x="5" width="2" height="10" fill="#FECC00"/><rect y="4" width="16" height="2" fill="#FECC00"/></svg></a>
   </div>
 </header>
+<nav class="secnav" aria-label="Kategorier"><div class="wrap"><ul class="secnav__list"><li><a href="/elbil/">Elbil</a></li><li><a href="/sportbil/">Sportbil</a></li><li><a href="/motorsport/">Motorsport</a></li><li><a href="/bransle/">Bränsle</a></li><li><a href="/tesla/">Tesla</a></li><li><a href="#nyhetsbrev-fot">Nyhetsbrev</a></li></ul></div></nav>
 
 <main id="innehall" class="front">
   <div class="wrap">
@@ -494,7 +516,7 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
     <div class="hero-grid">
     <article class="lead lead--img">
       <a href="/artikel/bensin-diesel-3-kronor-dyrare-1-december/">
-        <figure class="lead__media"><div class="lead__frame"><img src="/img/articles/bensin-diesel-3-kronor-dyrare-1-december/circle-k-stockholm-commons.webp" srcset="/img/articles/bensin-diesel-3-kronor-dyrare-1-december/circle-k-stockholm-commons.webp 1600w" sizes="(min-width: 60rem) 38rem, 100vw" width="1600" height="1067" alt="Circle K-station på Birger Jarlsgatan i Stockholm en snöig vintermorgon." fetchpriority="high" decoding="async"></div><figcaption>Foto: I99pema / Wikimedia Commons (CC BY-SA 4.0)</figcaption></figure>
+        <figure class="lead__media"><div class="lead__frame"><picture><source media="(max-width: 40rem)" srcset="/img/articles/bensin-diesel-3-kronor-dyrare-1-december/circle-k-stockholm-commons-400.webp 400w, /img/articles/bensin-diesel-3-kronor-dyrare-1-december/circle-k-stockholm-commons-800.webp 800w" sizes="calc(100vw - 2.5rem)"><img src="/img/articles/bensin-diesel-3-kronor-dyrare-1-december/circle-k-stockholm-commons.webp" srcset="/img/articles/bensin-diesel-3-kronor-dyrare-1-december/circle-k-stockholm-commons-400.webp 400w, /img/articles/bensin-diesel-3-kronor-dyrare-1-december/circle-k-stockholm-commons-800.webp 800w, /img/articles/bensin-diesel-3-kronor-dyrare-1-december/circle-k-stockholm-commons-1200.webp 1200w, /img/articles/bensin-diesel-3-kronor-dyrare-1-december/circle-k-stockholm-commons.webp 1600w" sizes="(min-width: 60rem) 38rem, calc(100vw - 2.5rem)" width="1600" height="1067" alt="Circle K-station på Birger Jarlsgatan i Stockholm en snöig vintermorgon." fetchpriority="high" decoding="async"></picture></div><figcaption>Foto: I99pema / Wikimedia Commons (CC BY-SA 4.0)</figcaption></figure>
         <div class="lead__body">
           <div class="lead__kicker"><span class="hero__label"><span class="pulse-dot" aria-hidden="true"></span>Senaste nytt</span>
           <span class="meta"><span class="tag">Bränsle</span><time datetime="2026-11-12T15:00:00+01:00">12 november 2026</time></span></div>
@@ -504,44 +526,44 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
         </div>
       </a>
     </article>
-      <aside class="latest" aria-labelledby="latest-h"><h2 id="latest-h"><span class="pulse-dot" aria-hidden="true"></span>Senaste</h2><ol><li><a href="/artikel/arets-bil-2027-bara-elbilar-volvo-ex60/"><span class="meta"><span class="tag">Elbil</span><time datetime="2026-11-02T12:00:00+01:00">2 november 2026</time></span><h3>Inte en enda bensinbil kvar. Svenska Volvo slåss om Europas finaste bilpris</h3></a></li><li><a href="/artikel/polisens-radarbilar-hela-sverige/"><span class="meta"><span class="tag">Bränsle</span><time datetime="2026-11-02T07:00:00+01:00">2 november 2026</time></span><h3>Polisens radar mäter 18 gånger i sekunden. Nu finns den i hela Sverige</h3></a></li><li><a href="/artikel/tesla-roadster-avtackad-produktion-2028/"><span class="meta"><span class="tag">Tesla</span><time datetime="2026-11-01T18:00:00+01:00">1 november 2026</time></span><h3>Över en halv miljon kronor för en plats i kön. Tesla lovar inte ens att Roadster levereras</h3></a></li><li><a href="/artikel/bmw-ix3-m60-highway-assistant-sverige/"><span class="meta"><span class="tag">Elbil</span><time datetime="2026-11-01T00:00:00+01:00">1 november 2026</time></span><h3>BMW lovar 340 km laddning på tio minuter i nya iX3 M60 med 612 hk</h3></a></li><li><a href="/artikel/tesla-fsd-sverige-eu-omrostning-december/"><span class="meta"><span class="tag">Tesla</span><time datetime="2026-10-31T18:00:00+01:00">31 oktober 2026</time></span><h3>Tio EU-länder har sagt ja till Teslas FSD. Därför får Sverige vänta till tidigast 2027</h3></a></li></ol></aside>
+      <aside class="latest" aria-labelledby="latest-h"><h2 id="latest-h"><span class="pulse-dot" aria-hidden="true"></span>Senaste</h2><ol><li><a href="/artikel/road-works-warning-vagarbete-varning-bilen/"><span class="meta"><span class="tag">Bränsle</span><time datetime="2026-11-12T12:00:00+01:00">12 november 2026</time></span><h3>Bilen varnar för vägarbetet innan du ser det. Nu rullar Trafikverket ut tjänsten</h3></a></li><li><a href="/artikel/koenigsegg-cc850-aterkallelse-parkeringsbroms/"><span class="meta"><span class="tag">Sportbil</span><time datetime="2026-11-12T07:00:00+01:00">12 november 2026</time></span><h3>En Koenigsegg CC850 rullade iväg utan förare. Nu kallas alla i USA tillbaka</h3></a></li><li><a href="/artikel/vinterdack-vad-galler/"><span class="meta"><span class="tag">Bränsle</span><time datetime="2026-11-11T17:30:00+01:00">11 november 2026</time></span><h3>Vinterdäck: vad gäller?</h3></a></li><li><a href="/artikel/vinterdack-bot-dubbdacksforbud-stockholm/"><span class="meta"><span class="tag">Bränsle</span><time datetime="2026-11-11T15:00:00+01:00">11 november 2026</time></span><h3>Om tre veckor kan sommardäcken kosta 2 000 kronor. Och fyra gator till stängs för dubbdäck</h3></a></li><li><a href="/artikel/korkortsavgift-hojs-2027/"><span class="meta"><span class="tag">Bränsle</span><time datetime="2026-11-11T07:00:00+01:00">11 november 2026</time></span><h3>Körkortet kan bli dyrare i januari. Så mycket mer får du betala</h3></a></li></ol></aside>
     </div>
     <section class="pop" aria-labelledby="pop-h">
       <h2 id="pop-h"><span class="pulse-dot" aria-hidden="true"></span>Populärt just nu</h2>
       <ol class="pop__list">
         <li class="pop__card">
-          <a href="/artikel/bmw-m350-drift-moment-juli-2027/">
-            <figure class="pop__media"><div class="pop__frame"><img src="/img/articles/bmw-m350-drift-moment-juli-2027/bmw-m350-xdrive-press-1.webp" srcset="/img/articles/bmw-m350-drift-moment-juli-2027/bmw-m350-xdrive-press-1-400.webp 400w, /img/articles/bmw-m350-drift-moment-juli-2027/bmw-m350-xdrive-press-1-800.webp 800w, /img/articles/bmw-m350-drift-moment-juli-2027/bmw-m350-xdrive-press-1-1200.webp 1200w, /img/articles/bmw-m350-drift-moment-juli-2027/bmw-m350-xdrive-press-1.webp 1600w" sizes="(min-width: 60rem) 17rem, (min-width: 40rem) 30vw, 46vw" width="1600" height="1067" alt="" loading="lazy" decoding="async"></div><figcaption class="item__credit">Foto: BMW Group</figcaption></figure>
+          <a href="/artikel/polestar-formula-2030-nya-polestar-2/">
+            <figure class="pop__media"><div class="pop__frame"><img src="/img/articles/polestar-formula-2030-nya-polestar-2/polestar-2-2023.webp" srcset="/img/articles/polestar-formula-2030-nya-polestar-2/polestar-2-2023-400.webp 400w, /img/articles/polestar-formula-2030-nya-polestar-2/polestar-2-2023-800.webp 800w, /img/articles/polestar-formula-2030-nya-polestar-2/polestar-2-2023-1200.webp 1200w, /img/articles/polestar-formula-2030-nya-polestar-2/polestar-2-2023.webp 1600w" sizes="(min-width: 60rem) 17rem, (min-width: 40rem) 30vw, 46vw" width="1600" height="940" alt="" loading="lazy" decoding="async"></div><figcaption class="item__credit">Foto: Calreyn88 / Wikimedia Commons</figcaption></figure>
             <div class="pop__body">
-              <span class="meta"><span class="pop__rank" aria-hidden="true">01</span><span class="tag">Sportbil</span></span>
-              <h3>BMW säljer en 3-serie med driftläge. Haken: det fungerar först i juli 2027</h3>
+              <span class="meta"><span class="pop__rank" aria-hidden="true">01</span><span class="tag">Elbil</span></span>
+              <h3>Polestar visar hur nya Polestar 2 ser ut. Den kända ljusrampen försvinner</h3>
             </div>
           </a>
         </li>
         <li class="pop__card">
-          <a href="/artikel/tesla-model-y-strukturellt-batteri-betyg-d-volvo-ex60/">
-            <figure class="pop__media"><div class="pop__frame"><img src="/img/articles/tesla-model-y-strukturellt-batteri-betyg-d-volvo-ex60/tesla-model-y-press.webp" srcset="/img/articles/tesla-model-y-strukturellt-batteri-betyg-d-volvo-ex60/tesla-model-y-press-400.webp 400w, /img/articles/tesla-model-y-strukturellt-batteri-betyg-d-volvo-ex60/tesla-model-y-press-800.webp 800w, /img/articles/tesla-model-y-strukturellt-batteri-betyg-d-volvo-ex60/tesla-model-y-press-1200.webp 1200w, /img/articles/tesla-model-y-strukturellt-batteri-betyg-d-volvo-ex60/tesla-model-y-press.webp 1600w" sizes="(min-width: 60rem) 17rem, (min-width: 40rem) 30vw, 46vw" width="1600" height="900" alt="" loading="lazy" decoding="async"></div><figcaption class="item__credit">Foto: Courtesy of Tesla, Inc.</figcaption></figure>
+          <a href="/artikel/byd-ti7-land-rover-defender-razzia/">
+            <figure class="pop__media"><div class="pop__frame"><img src="/img/articles/byd-ti7-land-rover-defender-razzia/fangchengbao-ti7-1.webp" srcset="/img/articles/byd-ti7-land-rover-defender-razzia/fangchengbao-ti7-1-400.webp 400w, /img/articles/byd-ti7-land-rover-defender-razzia/fangchengbao-ti7-1-800.webp 800w, /img/articles/byd-ti7-land-rover-defender-razzia/fangchengbao-ti7-1-1200.webp 1200w, /img/articles/byd-ti7-land-rover-defender-razzia/fangchengbao-ti7-1.webp 1600w" sizes="(min-width: 60rem) 17rem, (min-width: 40rem) 30vw, 46vw" width="1600" height="1200" alt="" loading="lazy" decoding="async"></div><figcaption class="item__credit">Foto: JustAnotherCarDesigner / Wikimedia Commons (CC0 1.0).</figcaption></figure>
             <div class="pop__body">
-              <span class="meta"><span class="pop__rank" aria-hidden="true">02</span><span class="tag">Tesla</span></span>
-              <h3>Teslas batteriingenjör ger Model Y:s strukturella batteri betyget D</h3>
+              <span class="meta"><span class="pop__rank" aria-hidden="true">02</span><span class="tag">Elbil</span></span>
+              <h3>Land Rover lät beslagta BYD:s dokument. Defender-kopian ska prövas i domstol</h3>
             </div>
           </a>
         </li>
         <li class="pop__card">
-          <a href="/artikel/aston-martin-valhalla-spider/">
-            <figure class="pop__media"><div class="pop__frame"><img src="/img/articles/aston-martin-valhalla-spider/aston-martin-valhalla-spider-1.webp" srcset="/img/articles/aston-martin-valhalla-spider/aston-martin-valhalla-spider-1-400.webp 400w, /img/articles/aston-martin-valhalla-spider/aston-martin-valhalla-spider-1-800.webp 800w, /img/articles/aston-martin-valhalla-spider/aston-martin-valhalla-spider-1-1200.webp 1200w, /img/articles/aston-martin-valhalla-spider/aston-martin-valhalla-spider-1.webp 1600w" sizes="(min-width: 60rem) 17rem, (min-width: 40rem) 30vw, 46vw" width="1600" height="1067" alt="" loading="lazy" decoding="async"></div><figcaption class="item__credit">Foto: Aston Martin</figcaption></figure>
+          <a href="/artikel/yangwang-u9-xtreme-503-kmh/">
+            <figure class="pop__media"><div class="pop__frame"><img src="/img/articles/yangwang-u9-xtreme-503-kmh/yangwang-u9-shenzhen-cc0.webp" srcset="/img/articles/yangwang-u9-xtreme-503-kmh/yangwang-u9-shenzhen-cc0-400.webp 400w, /img/articles/yangwang-u9-xtreme-503-kmh/yangwang-u9-shenzhen-cc0-800.webp 800w, /img/articles/yangwang-u9-xtreme-503-kmh/yangwang-u9-shenzhen-cc0-1200.webp 1200w, /img/articles/yangwang-u9-xtreme-503-kmh/yangwang-u9-shenzhen-cc0.webp 1600w" sizes="(min-width: 60rem) 17rem, (min-width: 40rem) 30vw, 46vw" width="1600" height="901" alt="" loading="lazy" decoding="async"></div><figcaption class="item__credit">Foto: LKS1990 / Wikimedia Commons (CC0). Bilden visar standardmodellen U9.</figcaption></figure>
             <div class="pop__body">
               <span class="meta"><span class="pop__rank" aria-hidden="true">03</span><span class="tag">Sportbil</span></span>
-              <h3>Aston Martin Valhalla Spider: 1 079 hk och samma toppfart utan tak</h3>
+              <h3>Kinesisk elbil kör 503 km/h. FIA erkänner farten över 500 km/h</h3>
             </div>
           </a>
         </li>
         <li class="pop__card">
-          <a href="/artikel/bmw-m3-el-fyra-motorer/">
-            <figure class="pop__media"><div class="pop__frame"><img src="/img/articles/bmw-m3-el-fyra-motorer/bmw-m3-el-kamouflage-fram.webp" srcset="/img/articles/bmw-m3-el-fyra-motorer/bmw-m3-el-kamouflage-fram-400.webp 400w, /img/articles/bmw-m3-el-fyra-motorer/bmw-m3-el-kamouflage-fram-800.webp 800w, /img/articles/bmw-m3-el-fyra-motorer/bmw-m3-el-kamouflage-fram-1200.webp 1200w, /img/articles/bmw-m3-el-fyra-motorer/bmw-m3-el-kamouflage-fram.webp 1600w" sizes="(min-width: 60rem) 17rem, (min-width: 40rem) 30vw, 46vw" width="1600" height="1067" alt="" loading="lazy" decoding="async"></div><figcaption class="item__credit">Foto: BMW Group</figcaption></figure>
+          <a href="/artikel/vinterdack-vad-galler/">
+            <figure class="pop__media"><div class="pop__frame"><img src="/img/articles/vinterdack-vad-galler/alptopp-snoflinga-markning.webp" srcset="/img/articles/vinterdack-vad-galler/alptopp-snoflinga-markning-400.webp 400w, /img/articles/vinterdack-vad-galler/alptopp-snoflinga-markning-800.webp 800w, /img/articles/vinterdack-vad-galler/alptopp-snoflinga-markning-1200.webp 1200w, /img/articles/vinterdack-vad-galler/alptopp-snoflinga-markning.webp 1400w" sizes="(min-width: 60rem) 17rem, (min-width: 40rem) 30vw, 46vw" width="1400" height="850" alt="" loading="lazy" decoding="async"></div><figcaption class="item__credit">Foto: Arizonaman1 / Wikimedia Commons (CC BY-SA 4.0)</figcaption></figure>
             <div class="pop__body">
-              <span class="meta"><span class="pop__rank" aria-hidden="true">04</span><span class="tag">Sportbil</span></span>
-              <h3>M3 som elbil: fyra motorer, över 100 kWh och noll fejkat ljud</h3>
+              <span class="meta"><span class="pop__rank" aria-hidden="true">04</span><span class="tag">Bränsle</span></span>
+              <h3>Vinterdäck: vad gäller?</h3>
             </div>
           </a>
         </li>
@@ -553,7 +575,7 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
     <div class="wrap">
       <div class="section-head">
         <h2 id="feed-h">Alla artiklar</h2>
-        <nav aria-label="Kategorier"><ul class="chips"><li><button class="chip" type="button" data-filter="alla" aria-pressed="true">Alla</button></li><li><button class="chip" type="button" data-filter="bransle" aria-pressed="false">Bränsle</button></li><li><button class="chip" type="button" data-filter="elbil" aria-pressed="false">Elbil</button></li><li><button class="chip" type="button" data-filter="tesla" aria-pressed="false">Tesla</button></li><li><button class="chip" type="button" data-filter="sportbil" aria-pressed="false">Sportbil</button></li></ul></nav>
+        <nav aria-label="Filtrera artiklar"><ul class="chips"><li><button class="chip" type="button" data-filter="alla" aria-pressed="true">Alla</button></li><li><button class="chip" type="button" data-filter="bransle" aria-pressed="false">Bränsle</button></li><li><button class="chip" type="button" data-filter="sportbil" aria-pressed="false">Sportbil</button></li><li><button class="chip" type="button" data-filter="elbil" aria-pressed="false">Elbil</button></li><li><button class="chip" type="button" data-filter="tesla" aria-pressed="false">Tesla</button></li><li><button class="chip" type="button" data-filter="motorsport" aria-pressed="false">Motorsport</button></li></ul></nav>
       </div>
       <p id="filter-status" class="visually-hidden" role="status" aria-live="polite"></p>
       
@@ -561,13 +583,338 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
         <h3 class="day__label" id="d-2026-11-12"><time datetime="2026-11-12">Torsdag 12 november</time></h3>
         <ol class="feed">
           <li class="item" data-cat="bransle">
-            <a href="/artikel/bensin-diesel-3-kronor-dyrare-1-december/">
+            <a href="/artikel/road-works-warning-vagarbete-varning-bilen/">
               <div class="item__text">
                 <span class="meta"><span class="tag">Bränsle</span></span>
-                <h4>Bensin och diesel kan bli 3 kronor dyrare över en natt. Försöket att stoppa det fick nej</h4>
-                <p>Den 30 november tar den stora skattesänkningen på bensin och diesel slut. Skatten stiger med 2,40 kronor litern, och ett försök att förlänga sänkningen har redan stoppats.</p>
+                <h4>Bilen varnar för vägarbetet innan du ser det. Nu rullar Trafikverket ut tjänsten</h4>
+                <p>Trafikverket går från pilot till storskalig drift med en tjänst där vägarbetsfordon skickar sin position till bilar och kartappar som närmar sig.</p>
               </div>
-              <figure class="item__img"><img src="/img/articles/bensin-diesel-3-kronor-dyrare-1-december/circle-k-stockholm-commons.webp" srcset="/img/articles/bensin-diesel-3-kronor-dyrare-1-december/circle-k-stockholm-commons.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="1067" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: I99pema / Wikimedia Commons (CC BY-SA 4.0)</figcaption></figure>
+              <figure class="item__img"><img src="/img/articles/road-works-warning-vagarbete-varning-bilen/svevia-rww-vagarbetsfordon.webp" srcset="/img/articles/road-works-warning-vagarbete-varning-bilen/svevia-rww-vagarbetsfordon-400.webp 400w, /img/articles/road-works-warning-vagarbete-varning-bilen/svevia-rww-vagarbetsfordon-800.webp 800w, /img/articles/road-works-warning-vagarbete-varning-bilen/svevia-rww-vagarbetsfordon-1200.webp 1200w, /img/articles/road-works-warning-vagarbete-varning-bilen/svevia-rww-vagarbetsfordon.webp 1280w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1280" height="720" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: Svevia</figcaption></figure>
+            </a>
+          </li>
+          <li class="item" data-cat="sportbil">
+            <a href="/artikel/koenigsegg-cc850-aterkallelse-parkeringsbroms/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Sportbil</span></span>
+                <h4>En Koenigsegg CC850 rullade iväg utan förare. Nu kallas alla i USA tillbaka</h4>
+                <p>Koenigsegg återkallar alla sju CC850 som levererats till USA, sedan en bil rullat iväg med backen i och parkeringsbromsen aktiverad.</p>
+              </div>
+              <figure class="item__img"><img src="/img/articles/koenigsegg-cc850-aterkallelse-parkeringsbroms/koenigsegg-cc850-press-1.webp" srcset="/img/articles/koenigsegg-cc850-aterkallelse-parkeringsbroms/koenigsegg-cc850-press-1-400.webp 400w, /img/articles/koenigsegg-cc850-aterkallelse-parkeringsbroms/koenigsegg-cc850-press-1-800.webp 800w, /img/articles/koenigsegg-cc850-aterkallelse-parkeringsbroms/koenigsegg-cc850-press-1-1200.webp 1200w, /img/articles/koenigsegg-cc850-aterkallelse-parkeringsbroms/koenigsegg-cc850-press-1.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="895" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: Koenigsegg Automotive AB</figcaption></figure>
+            </a>
+          </li>
+        </ol>
+      </section>
+      <section class="day" aria-labelledby="d-2026-11-11">
+        <h3 class="day__label" id="d-2026-11-11"><time datetime="2026-11-11">Onsdag 11 november</time></h3>
+        <ol class="feed">
+          <li class="item" data-cat="bransle">
+            <a href="/artikel/vinterdack-vad-galler/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Bränsle</span></span>
+                <h4>Vinterdäck: vad gäller?</h4>
+                <p>Här är reglerna för vinterdäck i Sverige, de datum du behöver ha koll på och vad som är värt att tänka på innan du byter.</p>
+              </div>
+              <figure class="item__img"><img src="/img/articles/vinterdack-vad-galler/alptopp-snoflinga-markning.webp" srcset="/img/articles/vinterdack-vad-galler/alptopp-snoflinga-markning-400.webp 400w, /img/articles/vinterdack-vad-galler/alptopp-snoflinga-markning-800.webp 800w, /img/articles/vinterdack-vad-galler/alptopp-snoflinga-markning-1200.webp 1200w, /img/articles/vinterdack-vad-galler/alptopp-snoflinga-markning.webp 1400w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1400" height="850" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: Arizonaman1 / Wikimedia Commons (CC BY-SA 4.0)</figcaption></figure>
+            </a>
+          </li>
+          <li class="item" data-cat="bransle">
+            <a href="/artikel/vinterdack-bot-dubbdacksforbud-stockholm/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Bränsle</span></span>
+                <h4>Om tre veckor kan sommardäcken kosta 2 000 kronor. Och fyra gator till stängs för dubbdäck</h4>
+                <p>Den 1 december börjar vinterdäckskravet gälla. Så mycket kostar fel däck, och här blir det förbjudet att köra med dubbar.</p>
+              </div>
+              <figure class="item__img"><img src="/img/articles/vinterdack-bot-dubbdacksforbud-stockholm/dubbdacksforbud-hornsgatan.webp" srcset="/img/articles/vinterdack-bot-dubbdacksforbud-stockholm/dubbdacksforbud-hornsgatan-400.webp 400w, /img/articles/vinterdack-bot-dubbdacksforbud-stockholm/dubbdacksforbud-hornsgatan-800.webp 800w, /img/articles/vinterdack-bot-dubbdacksforbud-stockholm/dubbdacksforbud-hornsgatan-1200.webp 1200w, /img/articles/vinterdack-bot-dubbdacksforbud-stockholm/dubbdacksforbud-hornsgatan.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="1200" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: Ypsilonatshared (Wikivoyage) / Wikimedia Commons (public domain)</figcaption></figure>
+            </a>
+          </li>
+          <li class="item" data-cat="bransle">
+            <a href="/artikel/korkortsavgift-hojs-2027/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Bränsle</span></span>
+                <h4>Körkortet kan bli dyrare i januari. Så mycket mer får du betala</h4>
+                <p>Transportstyrelsen föreslår att körkortsavgiften höjs från 375 till 450 kronor och registeravgiften för fordon från 74 till 80 kronor från 1 januari 2027.</p>
+              </div>
+              <figure class="item__img"><img src="/img/articles/korkortsavgift-hojs-2027/svensk-motorvag-e6-e20.webp" srcset="/img/articles/korkortsavgift-hojs-2027/svensk-motorvag-e6-e20-400.webp 400w, /img/articles/korkortsavgift-hojs-2027/svensk-motorvag-e6-e20-800.webp 800w, /img/articles/korkortsavgift-hojs-2027/svensk-motorvag-e6-e20-1200.webp 1200w, /img/articles/korkortsavgift-hojs-2027/svensk-motorvag-e6-e20.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="1067" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: aerev / Wikimedia Commons</figcaption></figure>
+            </a>
+          </li>
+          <li class="item" data-cat="sportbil">
+            <a href="/artikel/horse-w40-v8-lotus-type-135-skovde/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Sportbil</span></span>
+                <h4>Bolaget med Volvos gamla motorfabrik visar ny V8 med 680 hk. Den hamnar i en Lotus</h4>
+                <p>Horse Powertrain, där Volvos gamla motorverksamhet ingår, visar sin första V8. Fyra liter, över 500 kW och 200 kilo. Den debuterar i Lotus första superbil.</p>
+              </div>
+              <figure class="item__img"><img src="/img/articles/horse-w40-v8-lotus-type-135-skovde/horse-w40-v8-press.webp" srcset="/img/articles/horse-w40-v8-lotus-type-135-skovde/horse-w40-v8-press-400.webp 400w, /img/articles/horse-w40-v8-lotus-type-135-skovde/horse-w40-v8-press-800.webp 800w, /img/articles/horse-w40-v8-lotus-type-135-skovde/horse-w40-v8-press-1200.webp 1200w, /img/articles/horse-w40-v8-lotus-type-135-skovde/horse-w40-v8-press.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="1600" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: Horse Powertrain (pressbild)</figcaption></figure>
+            </a>
+          </li>
+        </ol>
+      </section>
+      <section class="day" aria-labelledby="d-2026-11-10">
+        <h3 class="day__label" id="d-2026-11-10"><time datetime="2026-11-10">Tisdag 10 november</time></h3>
+        <ol class="feed">
+          <li class="item" data-cat="elbil">
+            <a href="/artikel/polestar-formula-2030-nya-polestar-2/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Elbil</span></span>
+                <h4>Polestar visar hur nya Polestar 2 ser ut. Den kända ljusrampen försvinner</h4>
+                <p>Göteborgsmärket visar konceptbilen Formula 2030, och flera detaljer ska hamna på nästa Polestar 2 som enligt planen kommer 2027.</p>
+              </div>
+              <figure class="item__img"><img src="/img/articles/polestar-formula-2030-nya-polestar-2/polestar-2-2023.webp" srcset="/img/articles/polestar-formula-2030-nya-polestar-2/polestar-2-2023-400.webp 400w, /img/articles/polestar-formula-2030-nya-polestar-2/polestar-2-2023-800.webp 800w, /img/articles/polestar-formula-2030-nya-polestar-2/polestar-2-2023-1200.webp 1200w, /img/articles/polestar-formula-2030-nya-polestar-2/polestar-2-2023.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="940" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: Calreyn88 / Wikimedia Commons</figcaption></figure>
+            </a>
+          </li>
+          <li class="item" data-cat="bransle">
+            <a href="/artikel/e4-forbifart-stockholm-oppnar-6-december/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Bränsle</span></span>
+                <h4>Stockholms 51-miljardersväg öppnar 6 december. Du får köra 3,5 av 21 kilometer</h4>
+                <p>Den 6 december släpps trafiken på i den första delen av E4 Förbifart Stockholm, mellan Häggvik och Hjulsta. Resten av vägen dröjer till 2030.</p>
+              </div>
+              <figure class="item__img"><img src="/img/articles/e4-forbifart-stockholm-oppnar-6-december/forbifart-akalla-2022.webp" srcset="/img/articles/e4-forbifart-stockholm-oppnar-6-december/forbifart-akalla-2022-400.webp 400w, /img/articles/e4-forbifart-stockholm-oppnar-6-december/forbifart-akalla-2022-800.webp 800w, /img/articles/e4-forbifart-stockholm-oppnar-6-december/forbifart-akalla-2022-1200.webp 1200w, /img/articles/e4-forbifart-stockholm-oppnar-6-december/forbifart-akalla-2022.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="1147" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: Johannes Scherman / Wikimedia Commons (CC BY-SA 4.0)</figcaption></figure>
+            </a>
+          </li>
+          <li class="item" data-cat="bransle">
+            <a href="/artikel/chery-tiggo-2-noll-stjarnor-latin-ncap/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Bränsle</span></span>
+                <h4>Noll procent i barnskydd och brandrisk. Kinesiska suven sågas i krocktest</h4>
+                <p>Chery Tiggo 2 fick noll stjärnor i Latin NCAP, med noll procent i både vuxen- och barnskydd och brandrisk i frontalkrocken.</p>
+              </div>
+              <figure class="item__img"><img src="/img/articles/chery-tiggo-2-noll-stjarnor-latin-ncap/chery-tiggo-2-pro-max-2025.webp" srcset="/img/articles/chery-tiggo-2-noll-stjarnor-latin-ncap/chery-tiggo-2-pro-max-2025-400.webp 400w, /img/articles/chery-tiggo-2-noll-stjarnor-latin-ncap/chery-tiggo-2-pro-max-2025-800.webp 800w, /img/articles/chery-tiggo-2-noll-stjarnor-latin-ncap/chery-tiggo-2-pro-max-2025-1200.webp 1200w, /img/articles/chery-tiggo-2-noll-stjarnor-latin-ncap/chery-tiggo-2-pro-max-2025.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="901" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: RL GNZLZ / Wikimedia Commons</figcaption></figure>
+            </a>
+          </li>
+        </ol>
+      </section>
+      <section class="day" aria-labelledby="d-2026-11-09">
+        <h3 class="day__label" id="d-2026-11-09"><time datetime="2026-11-09">Måndag 9 november</time></h3>
+        <ol class="feed">
+          <li class="item" data-cat="elbil">
+            <a href="/artikel/byd-ti7-land-rover-defender-razzia/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Elbil</span></span>
+                <h4>Land Rover lät beslagta BYD:s dokument. Defender-kopian ska prövas i domstol</h4>
+                <p>Domstolsutsedda förrättningsmän säkrade digitala dokument på BYD:s kontor i Nederländerna på uppdrag av Jaguar Land Rover. Den 11 november väntas domstolen i Haag besluta om fallet kan gå vidare.</p>
+              </div>
+              <figure class="item__img"><img src="/img/articles/byd-ti7-land-rover-defender-razzia/fangchengbao-ti7-1.webp" srcset="/img/articles/byd-ti7-land-rover-defender-razzia/fangchengbao-ti7-1-400.webp 400w, /img/articles/byd-ti7-land-rover-defender-razzia/fangchengbao-ti7-1-800.webp 800w, /img/articles/byd-ti7-land-rover-defender-razzia/fangchengbao-ti7-1-1200.webp 1200w, /img/articles/byd-ti7-land-rover-defender-razzia/fangchengbao-ti7-1.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="1200" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: JustAnotherCarDesigner / Wikimedia Commons (CC0 1.0).</figcaption></figure>
+            </a>
+          </li>
+          <li class="item" data-cat="bransle">
+            <a href="/artikel/fartkameror-119000-boter-21-nya-kameror/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Bränsle</span></span>
+                <h4>Fartkamerorna gav 119 000 böter på ett år. Nu kommer 21 nya, här står de</h4>
+                <p>Trafikverket sätter upp 21 nya fartkameror på fyra vägar i höst. Samtidigt visar myndighetens egen rapport hur många som faktiskt får böter.</p>
+              </div>
+              <figure class="item__img"><img src="/img/articles/fartkameror-119000-boter-21-nya-kameror/fartkamera-ekerovagen.webp" srcset="/img/articles/fartkameror-119000-boter-21-nya-kameror/fartkamera-ekerovagen-400.webp 400w, /img/articles/fartkameror-119000-boter-21-nya-kameror/fartkamera-ekerovagen-800.webp 800w, /img/articles/fartkameror-119000-boter-21-nya-kameror/fartkamera-ekerovagen-1200.webp 1200w, /img/articles/fartkameror-119000-boter-21-nya-kameror/fartkamera-ekerovagen.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="1150" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: Holger Ellgaard / Wikimedia Commons (CC BY-SA 3.0)</figcaption></figure>
+            </a>
+          </li>
+          <li class="item" data-cat="elbil">
+            <a href="/artikel/eu-dorrhandtag-mekanisk-oppnare-ex60-tesla/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Elbil</span></span>
+                <h4>EU-utskott vill kräva mekanisk dörröppning. EX60 kan beröras</h4>
+                <p>Tre utskott i Europaparlamentet röstade den 4 november för att bildörrar ska kunna öppnas mekaniskt inifrån och utifrån i nödsituationer. Kravet kan drabba modeller som Volvo EX60.</p>
+              </div>
+              <figure class="item__img"><img src="/img/articles/eu-dorrhandtag-mekanisk-oppnare-ex60-tesla/polestar-4-handtag-cc0.webp" srcset="/img/articles/eu-dorrhandtag-mekanisk-oppnare-ex60-tesla/polestar-4-handtag-cc0-400.webp 400w, /img/articles/eu-dorrhandtag-mekanisk-oppnare-ex60-tesla/polestar-4-handtag-cc0-800.webp 800w, /img/articles/eu-dorrhandtag-mekanisk-oppnare-ex60-tesla/polestar-4-handtag-cc0-1200.webp 1200w, /img/articles/eu-dorrhandtag-mekanisk-oppnare-ex60-tesla/polestar-4-handtag-cc0.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="1200" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: JustAnotherCarDesigner / Wikimedia Commons (CC0 1.0).</figcaption></figure>
+            </a>
+          </li>
+          <li class="item" data-cat="elbil">
+            <a href="/artikel/polestar-ombildas-nederlanderna-goteborg/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Elbil</span></span>
+                <h4>Polestar blir nederländskt bolag. Huvudkontoret stannar i Göteborg</h4>
+                <p>Polestar Performance AB lämnade den 5 november in en plan till Bolagsverket om att ombildas till nederländskt B.V. Huvudkontoret och verksamheten ska enligt bolaget stanna i Göteborg.</p>
+              </div>
+              <figure class="item__img"><img src="/img/articles/polestar-ombildas-nederlanderna-goteborg/polestar-4.webp" srcset="/img/articles/polestar-ombildas-nederlanderna-goteborg/polestar-4-400.webp 400w, /img/articles/polestar-ombildas-nederlanderna-goteborg/polestar-4-800.webp 800w, /img/articles/polestar-ombildas-nederlanderna-goteborg/polestar-4-1200.webp 1200w, /img/articles/polestar-ombildas-nederlanderna-goteborg/polestar-4.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="1200" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: JustAnotherCarDesigner / Wikimedia Commons</figcaption></figure>
+            </a>
+          </li>
+        </ol>
+      </section>
+      <section class="day" aria-labelledby="d-2026-11-08">
+        <h3 class="day__label" id="d-2026-11-08"><time datetime="2026-11-08">Söndag 8 november</time></h3>
+        <ol class="feed">
+          <li class="item" data-cat="tesla">
+            <a href="/artikel/tesla-model-3-y-sist-goca-besiktning/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Tesla</span></span>
+                <h4>Strålkastarna fäller Tesla i jättebesiktning. Volvo XC60 klarar sig bäst.</h4>
+                <p>I Flanderns första stora besiktningsbarometer hamnar Tesla Model 3 och Model Y sist bland bilar som är fyra till fem år gamla, medan Volvo XC60 har minst brister. Strålkastarna är den vanligaste anmärkningen.</p>
+              </div>
+              <figure class="item__img"><img src="/img/articles/tesla-model-3-y-sist-goca-besiktning/tesla-model-y-stuttgart-2022-ccbysa4.webp" srcset="/img/articles/tesla-model-3-y-sist-goca-besiktning/tesla-model-y-stuttgart-2022-ccbysa4-400.webp 400w, /img/articles/tesla-model-3-y-sist-goca-besiktning/tesla-model-y-stuttgart-2022-ccbysa4-800.webp 800w, /img/articles/tesla-model-3-y-sist-goca-besiktning/tesla-model-y-stuttgart-2022-ccbysa4-1200.webp 1200w, /img/articles/tesla-model-3-y-sist-goca-besiktning/tesla-model-y-stuttgart-2022-ccbysa4.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="866" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: Alexander Migl / Wikimedia Commons</figcaption></figure>
+            </a>
+          </li>
+          <li class="item" data-cat="tesla">
+            <a href="/artikel/tesla-cybertruck-avvecklas-cybercab/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Tesla</span></span>
+                <h4>Musk: Cybertruck fasas ut i Texas. Cybercab tar platsen</h4>
+                <p>Elon Musk meddelade den 6 november att Tesla börjar avveckla Cybertruck-produktionen vid Gigafactory Texas kring mitten av 2027, för att ge plats åt Cybercab.</p>
+              </div>
+              <figure class="item__img"><img src="/img/articles/tesla-cybertruck-avvecklas-cybercab/cybercab-san-francisco-ccby4.webp" srcset="/img/articles/tesla-cybertruck-avvecklas-cybercab/cybercab-san-francisco-ccby4-400.webp 400w, /img/articles/tesla-cybertruck-avvecklas-cybercab/cybercab-san-francisco-ccby4-800.webp 800w, /img/articles/tesla-cybertruck-avvecklas-cybercab/cybercab-san-francisco-ccby4-1200.webp 1200w, /img/articles/tesla-cybertruck-avvecklas-cybercab/cybercab-san-francisco-ccby4.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="1067" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: 9yz / Wikimedia Commons (CC BY 4.0).</figcaption></figure>
+            </a>
+          </li>
+          <li class="item" data-cat="elbil">
+            <a href="/artikel/volvo-ex90-akutbil-bromsfel-drammen/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Elbil</span></span>
+                <h4>Volvos elbil tappade bromsarna mitt i körningen. Pedalen gick i golvet</h4>
+                <p>En Volvo EX90 som används av jourmottagningen i norska Drammen fick &quot;kritiskt bromsfel&quot; i cirka 40 km/h. Volvo kallar det ett enskilt fall.</p>
+              </div>
+              <figure class="item__img"><img src="/img/articles/volvo-ex90-akutbil-bromsfel-drammen/volvo-ex90-press.webp" srcset="/img/articles/volvo-ex90-akutbil-bromsfel-drammen/volvo-ex90-press-400.webp 400w, /img/articles/volvo-ex90-akutbil-bromsfel-drammen/volvo-ex90-press-800.webp 800w, /img/articles/volvo-ex90-akutbil-bromsfel-drammen/volvo-ex90-press-1200.webp 1200w, /img/articles/volvo-ex90-akutbil-bromsfel-drammen/volvo-ex90-press.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="1200" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: Volvo Cars</figcaption></figure>
+            </a>
+          </li>
+          <li class="item" data-cat="elbil">
+            <a href="/artikel/volkswagen-q3-forlust-porsche-nedskrivning/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Elbil</span></span>
+                <h4>Volkswagen förlorade 64 miljarder kronor på tre månader. Porsche blev den dyraste posten</h4>
+                <p>Volkswagenkoncernen gick 5,82 miljarder euro back efter skatt under tredje kvartalet, och den största engångsposten är en nedskrivning på Porsche.</p>
+              </div>
+              <figure class="item__img"><img src="/img/articles/volkswagen-q3-forlust-porsche-nedskrivning/vw-id-tiguan-press.webp" srcset="/img/articles/volkswagen-q3-forlust-porsche-nedskrivning/vw-id-tiguan-press-400.webp 400w, /img/articles/volkswagen-q3-forlust-porsche-nedskrivning/vw-id-tiguan-press-800.webp 800w, /img/articles/volkswagen-q3-forlust-porsche-nedskrivning/vw-id-tiguan-press-1200.webp 1200w, /img/articles/volkswagen-q3-forlust-porsche-nedskrivning/vw-id-tiguan-press.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="1067" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: Volkswagen AG</figcaption></figure>
+            </a>
+          </li>
+        </ol>
+      </section>
+      <section class="day" aria-labelledby="d-2026-11-07">
+        <h3 class="day__label" id="d-2026-11-07"><time datetime="2026-11-07">Lördag 7 november</time></h3>
+        <ol class="feed">
+          <li class="item" data-cat="sportbil">
+            <a href="/artikel/yangwang-u9-xtreme-503-kmh/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Sportbil</span></span>
+                <h4>Kinesisk elbil kör 503 km/h. FIA erkänner farten över 500 km/h</h4>
+                <p>Yangwang U9 Xtreme nådde 503,17 km/h på en avstängd motorväg i Abu Dhabi den 1 november. FIA har erkänt farten och Guinness gav två rekord för körning i en riktning.</p>
+              </div>
+              <figure class="item__img"><img src="/img/articles/yangwang-u9-xtreme-503-kmh/yangwang-u9-shenzhen-cc0.webp" srcset="/img/articles/yangwang-u9-xtreme-503-kmh/yangwang-u9-shenzhen-cc0-400.webp 400w, /img/articles/yangwang-u9-xtreme-503-kmh/yangwang-u9-shenzhen-cc0-800.webp 800w, /img/articles/yangwang-u9-xtreme-503-kmh/yangwang-u9-shenzhen-cc0-1200.webp 1200w, /img/articles/yangwang-u9-xtreme-503-kmh/yangwang-u9-shenzhen-cc0.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="901" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: LKS1990 / Wikimedia Commons (CC0). Bilden visar standardmodellen U9.</figcaption></figure>
+            </a>
+          </li>
+          <li class="item" data-cat="elbil">
+            <a href="/artikel/adac-nodbroms-barn-reflexer/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Elbil</span></span>
+                <h4>Bilarnas nödbroms missar barn med reflexer. Bara en av sex bilar såg barnet</h4>
+                <p>ADAC har testat nödbromsen i sex bilar i mörker, och nästan alla missade ett barn i reflexkläder. Bara Mercedes CLA reagerade.</p>
+              </div>
+              <figure class="item__img"><img src="/img/articles/adac-nodbroms-barn-reflexer/mercedes-cla-250-heddesheim.webp" srcset="/img/articles/adac-nodbroms-barn-reflexer/mercedes-cla-250-heddesheim-400.webp 400w, /img/articles/adac-nodbroms-barn-reflexer/mercedes-cla-250-heddesheim-800.webp 800w, /img/articles/adac-nodbroms-barn-reflexer/mercedes-cla-250-heddesheim-1200.webp 1200w, /img/articles/adac-nodbroms-barn-reflexer/mercedes-cla-250-heddesheim.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="1200" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: Matti Blume, Wikimedia Commons</figcaption></figure>
+            </a>
+          </li>
+        </ol>
+      </section>
+      <section class="day" aria-labelledby="d-2026-11-06">
+        <h3 class="day__label" id="d-2026-11-06"><time datetime="2026-11-06">Fredag 6 november</time></h3>
+        <ol class="feed">
+          <li class="item" data-cat="sportbil">
+            <a href="/artikel/mclaren-f1-mittensits-le-mans/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Sportbil</span></span>
+                <h4>Byggd för gatan, vann Le Mans på första försöket. 100 McLaren F1 finns kvar, ingen i Sverige</h4>
+                <p>McLaren F1 var tänkt som världens bästa gatbil och vann Le Mans 1995. Av 106 byggda finns 100 kvar enligt Hagerty, och ingen är registrerad i Sverige.</p>
+              </div>
+              <figure class="item__img"><img src="/img/articles/mclaren-f1-mittensits-le-mans/mclaren-f1-chassis-063.webp" srcset="/img/articles/mclaren-f1-mittensits-le-mans/mclaren-f1-chassis-063-400.webp 400w, /img/articles/mclaren-f1-mittensits-le-mans/mclaren-f1-chassis-063-800.webp 800w, /img/articles/mclaren-f1-mittensits-le-mans/mclaren-f1-chassis-063-1200.webp 1200w, /img/articles/mclaren-f1-mittensits-le-mans/mclaren-f1-chassis-063.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="870" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: Chelsea Jay, Wikimedia Commons</figcaption></figure>
+            </a>
+          </li>
+          <li class="item" data-cat="motorsport">
+            <a href="/artikel/f1-v8-turbohybrid-forslag-2030/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Motorsport</span></span>
+                <h4>V8:orna kan komma tillbaka i F1. Men inte som du minns dem</h4>
+                <p>FIA har skickat ett förslag till F1:s sex motortillverkare om turboladdade V8-hybrider från 2030 eller 2031.</p>
+              </div>
+              <figure class="item__img"><img src="/img/articles/f1-v8-turbohybrid-forslag-2030/ferrari-056-v8-f2007.webp" srcset="/img/articles/f1-v8-turbohybrid-forslag-2030/ferrari-056-v8-f2007-400.webp 400w, /img/articles/f1-v8-turbohybrid-forslag-2030/ferrari-056-v8-f2007-800.webp 800w, /img/articles/f1-v8-turbohybrid-forslag-2030/ferrari-056-v8-f2007-1200.webp 1200w, /img/articles/f1-v8-turbohybrid-forslag-2030/ferrari-056-v8-f2007.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="1066" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: Morio, Wikimedia Commons</figcaption></figure>
+            </a>
+          </li>
+        </ol>
+      </section>
+      <section class="day" aria-labelledby="d-2026-11-05">
+        <h3 class="day__label" id="d-2026-11-05"><time datetime="2026-11-05">Torsdag 5 november</time></h3>
+        <ol class="feed">
+          <li class="item" data-cat="motorsport">
+            <a href="/artikel/toyota-celica-rally-vm-oliver-solberg-2027/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Motorsport</span></span>
+                <h4>Han missade VM-guldet med fem poäng. Nu får Oliver Solberg ratta Toyotas nya Celica</h4>
+                <p>Toyota tar tillbaka Celica till rally-VM 2027 och delar upp fabrikssatsningen i två stall. Oliver Solberg blir en av tre förare i den nya bilen.</p>
+              </div>
+              <figure class="item__img"><img src="/img/articles/toyota-celica-rally-vm-oliver-solberg-2027/celica-st165-sanremo-1990-commons.webp" srcset="/img/articles/toyota-celica-rally-vm-oliver-solberg-2027/celica-st165-sanremo-1990-commons-400.webp 400w, /img/articles/toyota-celica-rally-vm-oliver-solberg-2027/celica-st165-sanremo-1990-commons-800.webp 800w, /img/articles/toyota-celica-rally-vm-oliver-solberg-2027/celica-st165-sanremo-1990-commons-1200.webp 1200w, /img/articles/toyota-celica-rally-vm-oliver-solberg-2027/celica-st165-sanremo-1990-commons.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="1068" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: Carlomarzetti / Wikimedia Commons (CC BY 4.0)</figcaption></figure>
+            </a>
+          </li>
+          <li class="item" data-cat="bransle">
+            <a href="/artikel/bensinpris-sanks-1589/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Bränsle</span></span>
+                <h4>Bensinen nere på 15,89 kronor. Men glädjen kan bli kort</h4>
+                <p>Circle K sänker 95-oktan till 15,89 kronor litern den 5 november. Nedgången märks i plånboken, men den tillfälliga skatterabatten tar slut den 1 december.</p>
+              </div>
+              <figure class="item__img"><img src="/img/articles/bensinpris-sanks-1589/circle-k-stockholm-commons.webp" srcset="/img/articles/bensinpris-sanks-1589/circle-k-stockholm-commons-400.webp 400w, /img/articles/bensinpris-sanks-1589/circle-k-stockholm-commons-800.webp 800w, /img/articles/bensinpris-sanks-1589/circle-k-stockholm-commons-1200.webp 1200w, /img/articles/bensinpris-sanks-1589/circle-k-stockholm-commons.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="1067" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: I99pema / Wikimedia Commons (CC BY-SA 4.0)</figcaption></figure>
+            </a>
+          </li>
+          <li class="item" data-cat="tesla">
+            <a href="/artikel/tesla-semi-brand-i-880-hayward/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Tesla</span></span>
+                <h4>Tesla Semi började brinna utan krock. Motorvägen var stängd i tio timmar</h4>
+                <p>En Tesla Semi fattade eld på motorväg I-880 i Kalifornien utan att ha krockat, och orsaken är ännu okänd.</p>
+              </div>
+              <figure class="item__img"><img src="/img/articles/tesla-semi-brand-i-880-hayward/tesla-semi-press-1.webp" srcset="/img/articles/tesla-semi-brand-i-880-hayward/tesla-semi-press-1-400.webp 400w, /img/articles/tesla-semi-brand-i-880-hayward/tesla-semi-press-1-800.webp 800w, /img/articles/tesla-semi-brand-i-880-hayward/tesla-semi-press-1-1200.webp 1200w, /img/articles/tesla-semi-brand-i-880-hayward/tesla-semi-press-1.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="900" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: Courtesy of Tesla, Inc.</figcaption></figure>
+            </a>
+          </li>
+        </ol>
+      </section>
+      <section class="day" aria-labelledby="d-2026-11-04">
+        <h3 class="day__label" id="d-2026-11-04"><time datetime="2026-11-04">Onsdag 4 november</time></h3>
+        <ol class="feed">
+          <li class="item" data-cat="elbil">
+            <a href="/artikel/volvo-forsaljning-ras-oktober-2026/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Elbil</span></span>
+                <h4>Volvo tappar nästan var sjätte bil. I Sverige halverades XC60 på ett år</h4>
+                <p>Volvo Cars sålde 16 procent färre bilar under augusti till oktober. I Sverige föll registreringarna med 24 procent i oktober, medan elbilarna EX30 och EX60 växte.</p>
+              </div>
+              <figure class="item__img"><img src="/img/articles/volvo-forsaljning-ras-oktober-2026/volvo-ex60-produktionsstart-press.webp" srcset="/img/articles/volvo-forsaljning-ras-oktober-2026/volvo-ex60-produktionsstart-press-400.webp 400w, /img/articles/volvo-forsaljning-ras-oktober-2026/volvo-ex60-produktionsstart-press-800.webp 800w, /img/articles/volvo-forsaljning-ras-oktober-2026/volvo-ex60-produktionsstart-press-1200.webp 1200w, /img/articles/volvo-forsaljning-ras-oktober-2026/volvo-ex60-produktionsstart-press.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="1067" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: Volvo Cars</figcaption></figure>
+            </a>
+          </li>
+          <li class="item" data-cat="elbil">
+            <a href="/artikel/b-korkort-4-25-ton-b1-korkort-15-aringar/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Elbil</span></span>
+                <h4>Ditt vanliga körkort kan snart räcka till 4,25 ton. Men bara i rätt sorts bil</h4>
+                <p>Ett nytt förslag höjer gränsen för B-körkort till 4,25 ton och för BE till 7,75 ton med släp. Haken är att bilen måste gå på el, vätgas eller gas.</p>
+              </div>
+              <figure class="item__img"><img src="/img/articles/b-korkort-4-25-ton-b1-korkort-15-aringar/elbil-med-slap-commons.webp" srcset="/img/articles/b-korkort-4-25-ton-b1-korkort-15-aringar/elbil-med-slap-commons-400.webp 400w, /img/articles/b-korkort-4-25-ton-b1-korkort-15-aringar/elbil-med-slap-commons-800.webp 800w, /img/articles/b-korkort-4-25-ton-b1-korkort-15-aringar/elbil-med-slap-commons-1200.webp 1200w, /img/articles/b-korkort-4-25-ton-b1-korkort-15-aringar/elbil-med-slap-commons.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="1061" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: Teknikingman / Wikimedia Commons (CC BY-SA 4.0)</figcaption></figure>
+            </a>
+          </li>
+          <li class="item" data-cat="elbil">
+            <a href="/artikel/jaguar-type-01-rackvidd-type-00/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Elbil</span></span>
+                <h4>Jaguars nya elbil har 1 030 hk. Men den når inte räckvidden Jaguar lovade</h4>
+                <p>Jaguar Type 01 är produktionsbilen efter konceptet Type 00. Den har 1 030 hk och laddar snabbare än utlovat, men räckvidden blev 5 mil kortare.</p>
+              </div>
+              <figure class="item__img"><img src="/img/articles/jaguar-type-01-rackvidd-type-00/jaguar-type-01-sida.webp" srcset="/img/articles/jaguar-type-01-rackvidd-type-00/jaguar-type-01-sida-400.webp 400w, /img/articles/jaguar-type-01-rackvidd-type-00/jaguar-type-01-sida-800.webp 800w, /img/articles/jaguar-type-01-rackvidd-type-00/jaguar-type-01-sida-1200.webp 1200w, /img/articles/jaguar-type-01-rackvidd-type-00/jaguar-type-01-sida.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="1067" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: Jaguar Land Rover</figcaption></figure>
+            </a>
+          </li>
+        </ol>
+      </section>
+      <section class="day" aria-labelledby="d-2026-11-03">
+        <h3 class="day__label" id="d-2026-11-03"><time datetime="2026-11-03">Tisdag 3 november</time></h3>
+        <ol class="feed">
+          <li class="item" data-cat="bransle">
+            <a href="/artikel/volkswagen-golf-hybrid-pris-id-golf-pausas/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Bränsle</span></span>
+                <h4>Golf blir hybrid för 373 900 kronor. Samtidigt lägger VW eldrivna Golf på is</h4>
+                <p>Golf och T-Roc kommer som fullhybrider i Sverige med lägre fordonsskatt, samtidigt som VW pausar utvecklingen av eldrivna ID. Golf.</p>
+              </div>
+              <figure class="item__img"><img src="/img/articles/volkswagen-golf-hybrid-pris-id-golf-pausas/vw-golf-t-roc-hybrid-press.webp" srcset="/img/articles/volkswagen-golf-hybrid-pris-id-golf-pausas/vw-golf-t-roc-hybrid-press-400.webp 400w, /img/articles/volkswagen-golf-hybrid-pris-id-golf-pausas/vw-golf-t-roc-hybrid-press-800.webp 800w, /img/articles/volkswagen-golf-hybrid-pris-id-golf-pausas/vw-golf-t-roc-hybrid-press-1200.webp 1200w, /img/articles/volkswagen-golf-hybrid-pris-id-golf-pausas/vw-golf-t-roc-hybrid-press.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="1065" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: Volkswagen AG</figcaption></figure>
+            </a>
+          </li>
+          <li class="item" data-cat="elbil">
+            <a href="/artikel/mest-salda-elbilen-inte-tesla/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Elbil</span></span>
+                <h4>Teslas ras i oktober: Model Y föll från etta till elfte plats på en månad</h4>
+                <p>I september var Tesla Model Y Sveriges mest registrerade elbil. I oktober hamnade den på elfte plats, medan Volvo EX40 drog ifrån i kampen om årets elbilsetta.</p>
+              </div>
+              <figure class="item__img"><img src="/img/articles/mest-salda-elbilen-inte-tesla/volvo-ex40-commons.webp" srcset="/img/articles/mest-salda-elbilen-inte-tesla/volvo-ex40-commons-400.webp 400w, /img/articles/mest-salda-elbilen-inte-tesla/volvo-ex40-commons-800.webp 800w, /img/articles/mest-salda-elbilen-inte-tesla/volvo-ex40-commons-1200.webp 1200w, /img/articles/mest-salda-elbilen-inte-tesla/volvo-ex40-commons.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="1070" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: Alexander-93 / Wikimedia Commons (CC BY-SA 4.0)</figcaption></figure>
             </a>
           </li>
         </ol>
@@ -575,6 +922,16 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
       <section class="day" aria-labelledby="d-2026-11-02">
         <h3 class="day__label" id="d-2026-11-02"><time datetime="2026-11-02">Måndag 2 november</time></h3>
         <ol class="feed">
+          <li class="item" data-cat="motorsport">
+            <a href="/artikel/antonelli-yngste-varldsmastare-f1/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Motorsport</span></span>
+                <h4>20 år gammal och redan världsmästare. Antonelli krossade Vettels rekord med över tre år</h4>
+                <p>En tredjeplats i Mexiko räckte. Kimi Antonelli blev Formel 1:s yngste världsmästare, 20 år och 68 dagar gammal, och första italienska mästaren sedan 1953.</p>
+              </div>
+              <figure class="item__img"><img src="/img/articles/antonelli-yngste-varldsmastare-f1/antonelli-kina-2026-firande-commons.webp" srcset="/img/articles/antonelli-yngste-varldsmastare-f1/antonelli-kina-2026-firande-commons-400.webp 400w, /img/articles/antonelli-yngste-varldsmastare-f1/antonelli-kina-2026-firande-commons-800.webp 800w, /img/articles/antonelli-yngste-varldsmastare-f1/antonelli-kina-2026-firande-commons-1200.webp 1200w, /img/articles/antonelli-yngste-varldsmastare-f1/antonelli-kina-2026-firande-commons.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="1067" alt="" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: Liauzh / Wikimedia Commons (CC BY 4.0)</figcaption></figure>
+            </a>
+          </li>
           <li class="item" data-cat="elbil">
             <a href="/artikel/arets-bil-2027-bara-elbilar-volvo-ex60/">
               <div class="item__text">
@@ -711,12 +1068,12 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
     <div class="site-footer__main">
     <a class="wordmark" href="/"><img class="logo logo--footer" src="/img/logo.svg" alt="Motorpuls" width="872" height="88" loading="lazy"></a>
     <p class="site-footer__desc">Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</p>
-    <nav class="site-footer__nav" aria-label="Om Motorpuls"><ul><li><a href="/om/">Om Motorpuls</a></li><li><a href="/om/lukas/">Om Lukas</a></li></ul></nav>
-    <nav class="site-footer__nav site-footer__topics" aria-label="Ämnen"><ul><li><a href="/bransle/">Bränsle</a></li><li><a href="/elbil/">Elbil</a></li><li><a href="/tesla/">Tesla</a></li><li><a href="/sportbil/">Sportbil</a></li></ul></nav>
+    <nav class="site-footer__nav" aria-label="Om Motorpuls"><ul><li><a href="/om/">Om Motorpuls</a></li><li><a href="/om/lukas/">Om Lukas</a></li><li><a href="/integritet/">Integritetspolicy</a></li></ul></nav>
+    <nav class="site-footer__nav site-footer__topics" aria-label="Ämnen"><ul><li><a href="/elbil/">Elbil</a></li><li><a href="/sportbil/">Sportbil</a></li><li><a href="/motorsport/">Motorsport</a></li><li><a href="/bransle/">Bränsle</a></li><li><a href="/tesla/">Tesla</a></li><li><a href="/sverige/">Sverige</a></li></ul></nav>
     <div class="site-footer__rss">
       <a class="rss-link" href="/feed.xml"><svg class="rss-icon" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><rect width="16" height="16" rx="3" fill="#FF5B1F"/><circle cx="4.6" cy="11.4" r="1.5" fill="#0B0D10"/><path d="M3.2 7.1a5.7 5.7 0 0 1 5.7 5.7M3.2 3.6a9.2 9.2 0 0 1 9.2 9.2" fill="none" stroke="#0B0D10" stroke-width="1.8" stroke-linecap="round"/></svg>RSS</a>
       <span class="site-footer__feeds-label" id="rss-kat">RSS per kategori:</span>
-      <ul class="site-footer__feeds" aria-labelledby="rss-kat"><li><a href="/feed/bransle.xml">Bränsle</a></li><li><a href="/feed/elbil.xml">Elbil</a></li><li><a href="/feed/tesla.xml">Tesla</a></li><li><a href="/feed/sportbil.xml">Sportbil</a></li><li><a href="/feed/sverige.xml">Sverige</a></li></ul>
+      <ul class="site-footer__feeds" aria-labelledby="rss-kat"><li><a href="/feed/bransle.xml">Bränsle</a></li><li><a href="/feed/sportbil.xml">Sportbil</a></li><li><a href="/feed/elbil.xml">Elbil</a></li><li><a href="/feed/tesla.xml">Tesla</a></li><li><a href="/feed/motorsport.xml">Motorsport</a></li><li><a href="/feed/sverige.xml">Sverige</a></li></ul>
     </div>
     <p class="fine">© 2026 Motorpuls<span class="site-footer__contact"> <span aria-hidden="true">·</span> <a href="mailto:hello@motorpuls.se">hello@motorpuls.se</a></span></p>
     </div>

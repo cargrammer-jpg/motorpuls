@@ -107,6 +107,7 @@ box-shadow:0 0 0 1px var(--line),0 40px 80px -40px rgb(255 91 31 / .25)}
 .lead--text a{background:radial-gradient(40rem 22rem at 0% 0%,rgb(255 91 31 / .14),transparent 70%),linear-gradient(180deg,var(--raised),var(--surface))}
 .lead__media{margin:0;background:#000;align-self:center}
 .lead__frame{position:relative;overflow:hidden}
+.lead__frame picture{display:block}
 .lead__media img{width:100%;height:auto}
 .lead__media figcaption{font-family:var(--mono);font-size:.7rem;color:var(--muted);padding:.5rem .9rem;background:var(--bg-2)}
 .lead__media figcaption:empty{display:none}
@@ -227,6 +228,8 @@ background:linear-gradient(90deg,rgb(255 91 31 / .13),rgb(255 91 31 / .05));box-
 .article__figure .frame{overflow:hidden;border-radius:var(--radius);background:#000;box-shadow:0 0 0 1px var(--line),0 40px 80px -40px rgb(255 91 31 / .25)}
 .article__figure img{width:100%;height:auto}
 .article__figure figcaption,.gallery figcaption{font-family:var(--mono);font-size:.72rem;line-height:1.45;color:var(--muted);margin-top:.6rem}
+.article__figure--inline figcaption a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.18em}
+.prose>.article__figure--inline{margin-block:1.8em}
 .gallery{position:relative;max-width:62rem;margin:2rem auto 0}
 .gallery__track{display:flex;gap:.75rem;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-color:var(--line-strong) transparent;border-radius:var(--radius);padding-bottom:.5rem}
 .gallery__slide{flex:0 0 88%;scroll-snap-align:start;scroll-snap-stop:always;min-width:0}
@@ -385,6 +388,18 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
 .masthead.is-small .topnav{transform:translateY(15.5px)}
 .masthead:has(:focus-visible) .topnav{transform:none}
 @media (max-width:23rem){.topnav a{padding-inline:.4rem;font-size:.85rem}}
+.secnav{border-bottom:1px solid var(--line);background:var(--bg)}
+.secnav__list{list-style:none;margin:0;padding:0;display:flex;gap:.25rem;overflow-x:auto;scrollbar-width:none;
+margin-inline:-.6rem;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 2rem),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 2rem),transparent)}
+.secnav__list::-webkit-scrollbar{display:none}
+.secnav__list li:last-child{padding-right:1.5rem}
+.secnav a{display:inline-flex;align-items:center;min-height:2.75rem;padding-inline:.6rem;font-size:.875rem;font-weight:650;white-space:nowrap;
+color:var(--text-2);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:.45em;text-decoration-color:transparent;
+transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
+.secnav a:hover{color:var(--text);text-decoration-color:var(--line-strong)}
+.secnav a[aria-current="page"]{color:var(--text);text-decoration-color:var(--pulse)}
+.secnav a:focus-visible{outline-offset:-2px}
+@media (min-width:48rem){.secnav__list{-webkit-mask-image:none;mask-image:none}.secnav__list li:last-child{padding-right:0}}
 .catpage{padding-block:clamp(1.5rem,4vw,3.5rem) clamp(3rem,7vw,6rem)}
 .catpage__head{display:grid;gap:1rem;max-width:48rem}
 .catpage__title{font-size:clamp(2rem,1rem + 4vw,3.5rem);line-height:1;font-weight:820;font-stretch:115%;letter-spacing:-.035em;color:#fff}
@@ -485,6 +500,10 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
 <meta property="article:tag" content="ordningsbot">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "NewsArticle", "headline": "Polisens radar mäter 18 gånger i sekunden. Nu finns den i hela Sverige", "description": "Polisbilar som mäter hastigheten på bilar framför och i mötande körfält finns nu i alla sju polisregioner. Inga automatiska böter, men fler kan åka fast.", "datePublished": "2026-11-02T07:00:00+01:00", "dateModified": "2026-11-02T07:00:00+01:00", "inLanguage": "sv-SE", "articleSection": "Bränsle", "keywords": ["Polisen", "radar", "hastighet", "fortkörning", "trafiksäkerhet", "Nollvisionen", "ordningsbot"], "mainEntityOfPage": {"@type": "WebPage", "@id": "https://motorpuls.se/artikel/polisens-radarbilar-hela-sverige/"}, "url": "https://motorpuls.se/artikel/polisens-radarbilar-hela-sverige/", "author": {"@type": "Person", "name": "Lukas", "url": "https://motorpuls.se/om/lukas/"}, "publisher": {"@type": "NewsMediaOrganization", "@id": "https://motorpuls.se/#organization", "name": "Motorpuls", "url": "https://motorpuls.se/", "email": "hello@motorpuls.se", "logo": {"@type": "ImageObject", "url": "https://motorpuls.se/favicon/android-chrome-512.png", "width": 512, "height": 512}, "publishingPrinciples": "https://motorpuls.se/om/"}, "image": [{"@type": "ImageObject", "url": "https://motorpuls.se/img/ld/polisens-radarbilar-hela-sverige-16x9.jpg", "width": 1200, "height": 675, "creditText": "Bene Riobó / Wikimedia Commons (CC BY-SA 4.0)", "copyrightNotice": "CC BY-SA 4.0, fri användning med namngivning och samma licens. Villkor: https://creativecommons.org/licenses/by-sa/4.0/"}, {"@type": "ImageObject", "url": "https://motorpuls.se/img/ld/polisens-radarbilar-hela-sverige-4x3.jpg", "width": 1200, "height": 900, "creditText": "Bene Riobó / Wikimedia Commons (CC BY-SA 4.0)", "copyrightNotice": "CC BY-SA 4.0, fri användning med namngivning och samma licens. Villkor: https://creativecommons.org/licenses/by-sa/4.0/"}, {"@type": "ImageObject", "url": "https://motorpuls.se/img/ld/polisens-radarbilar-hela-sverige-1x1.jpg", "width": 1067, "height": 1067, "creditText": "Bene Riobó / Wikimedia Commons (CC BY-SA 4.0)", "copyrightNotice": "CC BY-SA 4.0, fri användning med namngivning och samma licens. Villkor: https://creativecommons.org/licenses/by-sa/4.0/"}, {"@type": "ImageObject", "url": "https://motorpuls.se/img/articles/polisens-radarbilar-hela-sverige/volvo-v90-polis-stockholm.webp", "width": 1600, "height": 1067, "caption": "En Volvo V90 i polisens gul och blå märkning kör på en gata vid Sergels torg i Stockholm.", "creditText": "Bene Riobó / Wikimedia Commons (CC BY-SA 4.0)", "copyrightNotice": "CC BY-SA 4.0, fri användning med namngivning och samma licens. Villkor: https://creativecommons.org/licenses/by-sa/4.0/"}, {"@type": "ImageObject", "url": "https://motorpuls.se/img/articles/polisens-radarbilar-hela-sverige/polisbilar-stockholm-2026.webp", "width": 1600, "height": 1205, "caption": "Två polisbussar parkerade på en snöig gata i Stockholm i februari 2026.", "creditText": "AleWi / Wikimedia Commons (CC BY-SA 4.0)", "copyrightNotice": "CC BY-SA 4.0, fri användning med namngivning och samma licens. Villkor: https://creativecommons.org/licenses/by-sa/4.0/"}], "citation": ["https://polisen.se/aktuellt/nyheter/nationell/2026/mars/polisen-borjar-mata-hastighet-med-radar-i-bilarna/", "https://polisen.se/aktuellt/nyheter/mitt/2026/mars/nu-borjar-hastighet-matas-automatiskt-med-radar-i-polisbilar/", "https://www.vibilagare.se/nyheter/polisens-nya-radarbilar-nu-i-hela-landet-valdigt-effektiva", "https://www.sverigesradio.se/artikel/sa-manga-har-stoppats-av-polisens-nya-radarbilar-effektiva", "https://msverige.se/sa-tycker-vi/m-sverige-granskar/m-sverige-granskar-polisens-nya-vapen-pa-vagarna/", "https://www.svt.se/nyheter/lokalt/vasternorrland/polisens-bilar-far-ny-radar-ska-stoppa-fler-fortkorare", "https://www.tv4.se/artikel/3V1RHgeDO6WPpqWPeL2Pny/haer-aer-polisens-nya-superlaser-ska-fanga-fler-fortkoerare", "https://www.aklagare.se/globalassets/dokument/ordningsbotskatalog/bilaga-1a.pdf"]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Start", "item": "https://motorpuls.se/"}, {"@type": "ListItem", "position": 2, "name": "Bränsle", "item": "https://motorpuls.se/bransle/"}, {"@type": "ListItem", "position": 3, "name": "Polisens radar mäter 18 gånger i sekunden. Nu finns den i hela Sverige", "item": "https://motorpuls.se/artikel/polisens-radarbilar-hela-sverige/"}]}</script>
+<meta name="google-adsense-account" content="ca-pub-7329870923296365">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7329870923296365" crossorigin="anonymous"></script>
+
+<script defer src="https://82-70-60-43.sslip.io/s.js" data-website-id="ffb8602c-4d57-4164-824c-9823ad5c42bb" data-domains="motorpuls.se,www.motorpuls.se"></script>
 </head>
 <body>
 <a class="skip" href="#innehall">Hoppa till innehållet</a>
@@ -493,6 +512,7 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
     <a class="wordmark" href="/"><img class="logo" src="/img/logo.svg" alt="Motorpuls" width="872" height="88"><svg class="wordmark__flag" viewBox="0 0 16 10" width="16" height="10" aria-hidden="true" focusable="false"><rect width="16" height="10" fill="#0A2260"/><rect x="5" width="2" height="10" fill="#FECC00"/><rect y="4" width="16" height="2" fill="#FECC00"/></svg></a>
   </div>
 </header>
+<nav class="secnav" aria-label="Kategorier"><div class="wrap"><ul class="secnav__list"><li><a href="/elbil/">Elbil</a></li><li><a href="/sportbil/">Sportbil</a></li><li><a href="/motorsport/">Motorsport</a></li><li><a href="/bransle/">Bränsle</a></li><li><a href="/tesla/">Tesla</a></li><li><a href="#nyhetsbrev-fot">Nyhetsbrev</a></li></ul></div></nav>
 
 <main id="innehall" class="article">
   <div class="wrap">
@@ -624,29 +644,29 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
           <h2 id="related-h"><span class="pulse-dot" aria-hidden="true"></span>Läs också</h2>
           <ul class="related__list">
             <li class="related__card">
-              <a href="/artikel/bensin-diesel-3-kronor-dyrare-1-december/">
-                <figure class="related__media"><div class="related__frame"><img src="/img/articles/bensin-diesel-3-kronor-dyrare-1-december/circle-k-stockholm-commons.webp" srcset="/img/articles/bensin-diesel-3-kronor-dyrare-1-december/circle-k-stockholm-commons.webp 1600w" sizes="(min-width: 40rem) 12rem, 7rem" width="1600" height="1067" alt="" loading="lazy" decoding="async"></div><figcaption class="item__credit">Foto: I99pema / Wikimedia Commons (CC BY-SA 4.0)</figcaption></figure>
+              <a href="/artikel/fartkameror-119000-boter-21-nya-kameror/">
+                <figure class="related__media"><div class="related__frame"><img src="/img/articles/fartkameror-119000-boter-21-nya-kameror/fartkamera-ekerovagen-400.webp" srcset="/img/articles/fartkameror-119000-boter-21-nya-kameror/fartkamera-ekerovagen-400.webp 400w, /img/articles/fartkameror-119000-boter-21-nya-kameror/fartkamera-ekerovagen-800.webp 800w, /img/articles/fartkameror-119000-boter-21-nya-kameror/fartkamera-ekerovagen-1200.webp 1200w, /img/articles/fartkameror-119000-boter-21-nya-kameror/fartkamera-ekerovagen.webp 1600w" sizes="(min-width: 40rem) 12rem, 7rem" width="1600" height="1150" alt="" loading="lazy" decoding="async"></div><figcaption class="item__credit">Foto: Holger Ellgaard / Wikimedia Commons (CC BY-SA 3.0)</figcaption></figure>
                 <div class="related__body">
-                  <span class="meta"><span class="tag">Bränsle</span><time datetime="2026-11-12T15:00:00+01:00">12 november 2026</time></span>
-                  <h3>Bensin och diesel kan bli 3 kronor dyrare över en natt. Försöket att stoppa det fick nej</h3>
+                  <span class="meta"><span class="tag">Bränsle</span><time datetime="2026-11-09T15:00:00+01:00">9 november 2026</time></span>
+                  <h3>Fartkamerorna gav 119 000 böter på ett år. Nu kommer 21 nya, här står de</h3>
                 </div>
               </a>
             </li>
             <li class="related__card">
-              <a href="/artikel/hvo100-reduktionsplikten-utredning-2031/">
-                <figure class="related__media"><div class="related__frame"><img src="/img/articles/hvo100-reduktionsplikten-utredning-2031/hvo100-pris-tankstelle-leu-400.webp" srcset="/img/articles/hvo100-reduktionsplikten-utredning-2031/hvo100-pris-tankstelle-leu-400.webp 400w, /img/articles/hvo100-reduktionsplikten-utredning-2031/hvo100-pris-tankstelle-leu-800.webp 800w, /img/articles/hvo100-reduktionsplikten-utredning-2031/hvo100-pris-tankstelle-leu-1200.webp 1200w, /img/articles/hvo100-reduktionsplikten-utredning-2031/hvo100-pris-tankstelle-leu.webp 1600w" sizes="(min-width: 40rem) 12rem, 7rem" width="1600" height="2133" alt="" loading="lazy" decoding="async"></div><figcaption class="item__credit">Foto: PantheraLeo1359531 / Wikimedia Commons (CC BY-SA 4.0)</figcaption></figure>
+              <a href="/artikel/vinterdack-bot-dubbdacksforbud-stockholm/">
+                <figure class="related__media"><div class="related__frame"><img src="/img/articles/vinterdack-bot-dubbdacksforbud-stockholm/dubbdacksforbud-hornsgatan-400.webp" srcset="/img/articles/vinterdack-bot-dubbdacksforbud-stockholm/dubbdacksforbud-hornsgatan-400.webp 400w, /img/articles/vinterdack-bot-dubbdacksforbud-stockholm/dubbdacksforbud-hornsgatan-800.webp 800w, /img/articles/vinterdack-bot-dubbdacksforbud-stockholm/dubbdacksforbud-hornsgatan-1200.webp 1200w, /img/articles/vinterdack-bot-dubbdacksforbud-stockholm/dubbdacksforbud-hornsgatan.webp 1600w" sizes="(min-width: 40rem) 12rem, 7rem" width="1600" height="1200" alt="" loading="lazy" decoding="async"></div><figcaption class="item__credit">Foto: Ypsilonatshared (Wikivoyage) / Wikimedia Commons (public domain)</figcaption></figure>
                 <div class="related__body">
-                  <span class="meta"><span class="tag">Bränsle</span><time datetime="2026-10-30T01:19:00+01:00">30 oktober 2026</time></span>
-                  <h3>Utredning vill föra in HVO100 i reduktionsplikten senast 2031</h3>
+                  <span class="meta"><span class="tag">Bränsle</span><time datetime="2026-11-11T15:00:00+01:00">11 november 2026</time></span>
+                  <h3>Om tre veckor kan sommardäcken kosta 2 000 kronor. Och fyra gator till stängs för dubbdäck</h3>
                 </div>
               </a>
             </li>
             <li class="related__card">
-              <a href="/artikel/arets-bil-2027-bara-elbilar-volvo-ex60/">
-                <figure class="related__media"><div class="related__frame"><img src="/img/articles/arets-bil-2027-bara-elbilar-volvo-ex60/volvo-ex60-produktionsstart-press-400.webp" srcset="/img/articles/arets-bil-2027-bara-elbilar-volvo-ex60/volvo-ex60-produktionsstart-press-400.webp 400w, /img/articles/arets-bil-2027-bara-elbilar-volvo-ex60/volvo-ex60-produktionsstart-press-800.webp 800w, /img/articles/arets-bil-2027-bara-elbilar-volvo-ex60/volvo-ex60-produktionsstart-press-1200.webp 1200w, /img/articles/arets-bil-2027-bara-elbilar-volvo-ex60/volvo-ex60-produktionsstart-press.webp 1600w" sizes="(min-width: 40rem) 12rem, 7rem" width="1600" height="1067" alt="" loading="lazy" decoding="async"></div><figcaption class="item__credit">Foto: Volvo Cars</figcaption></figure>
+              <a href="/artikel/road-works-warning-vagarbete-varning-bilen/">
+                <figure class="related__media"><div class="related__frame"><img src="/img/articles/road-works-warning-vagarbete-varning-bilen/svevia-rww-vagarbetsfordon-400.webp" srcset="/img/articles/road-works-warning-vagarbete-varning-bilen/svevia-rww-vagarbetsfordon-400.webp 400w, /img/articles/road-works-warning-vagarbete-varning-bilen/svevia-rww-vagarbetsfordon-800.webp 800w, /img/articles/road-works-warning-vagarbete-varning-bilen/svevia-rww-vagarbetsfordon-1200.webp 1200w, /img/articles/road-works-warning-vagarbete-varning-bilen/svevia-rww-vagarbetsfordon.webp 1280w" sizes="(min-width: 40rem) 12rem, 7rem" width="1280" height="720" alt="" loading="lazy" decoding="async"></div><figcaption class="item__credit">Foto: Svevia</figcaption></figure>
                 <div class="related__body">
-                  <span class="meta"><span class="tag">Elbil</span><time datetime="2026-11-02T12:00:00+01:00">2 november 2026</time></span>
-                  <h3>Inte en enda bensinbil kvar. Svenska Volvo slåss om Europas finaste bilpris</h3>
+                  <span class="meta"><span class="tag">Bränsle</span><time datetime="2026-11-12T12:00:00+01:00">12 november 2026</time></span>
+                  <h3>Bilen varnar för vägarbetet innan du ser det. Nu rullar Trafikverket ut tjänsten</h3>
                 </div>
               </a>
             </li>
@@ -663,12 +683,12 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
     <div class="site-footer__main">
     <a class="wordmark" href="/"><img class="logo logo--footer" src="/img/logo.svg" alt="Motorpuls" width="872" height="88" loading="lazy"></a>
     <p class="site-footer__desc">Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</p>
-    <nav class="site-footer__nav" aria-label="Om Motorpuls"><ul><li><a href="/om/">Om Motorpuls</a></li><li><a href="/om/lukas/">Om Lukas</a></li></ul></nav>
-    <nav class="site-footer__nav site-footer__topics" aria-label="Ämnen"><ul><li><a href="/bransle/">Bränsle</a></li><li><a href="/elbil/">Elbil</a></li><li><a href="/tesla/">Tesla</a></li><li><a href="/sportbil/">Sportbil</a></li></ul></nav>
+    <nav class="site-footer__nav" aria-label="Om Motorpuls"><ul><li><a href="/om/">Om Motorpuls</a></li><li><a href="/om/lukas/">Om Lukas</a></li><li><a href="/integritet/">Integritetspolicy</a></li></ul></nav>
+    <nav class="site-footer__nav site-footer__topics" aria-label="Ämnen"><ul><li><a href="/elbil/">Elbil</a></li><li><a href="/sportbil/">Sportbil</a></li><li><a href="/motorsport/">Motorsport</a></li><li><a href="/bransle/">Bränsle</a></li><li><a href="/tesla/">Tesla</a></li><li><a href="/sverige/">Sverige</a></li></ul></nav>
     <div class="site-footer__rss">
       <a class="rss-link" href="/feed.xml"><svg class="rss-icon" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><rect width="16" height="16" rx="3" fill="#FF5B1F"/><circle cx="4.6" cy="11.4" r="1.5" fill="#0B0D10"/><path d="M3.2 7.1a5.7 5.7 0 0 1 5.7 5.7M3.2 3.6a9.2 9.2 0 0 1 9.2 9.2" fill="none" stroke="#0B0D10" stroke-width="1.8" stroke-linecap="round"/></svg>RSS</a>
       <span class="site-footer__feeds-label" id="rss-kat">RSS per kategori:</span>
-      <ul class="site-footer__feeds" aria-labelledby="rss-kat"><li><a href="/feed/bransle.xml">Bränsle</a></li><li><a href="/feed/elbil.xml">Elbil</a></li><li><a href="/feed/tesla.xml">Tesla</a></li><li><a href="/feed/sportbil.xml">Sportbil</a></li><li><a href="/feed/sverige.xml">Sverige</a></li></ul>
+      <ul class="site-footer__feeds" aria-labelledby="rss-kat"><li><a href="/feed/bransle.xml">Bränsle</a></li><li><a href="/feed/sportbil.xml">Sportbil</a></li><li><a href="/feed/elbil.xml">Elbil</a></li><li><a href="/feed/tesla.xml">Tesla</a></li><li><a href="/feed/motorsport.xml">Motorsport</a></li><li><a href="/feed/sverige.xml">Sverige</a></li></ul>
     </div>
     <p class="fine">© 2026 Motorpuls<span class="site-footer__contact"> <span aria-hidden="true">·</span> <a href="mailto:hello@motorpuls.se">hello@motorpuls.se</a></span></p>
     </div>
