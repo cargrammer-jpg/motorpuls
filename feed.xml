@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Thu, 12 Nov 2026 12:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Thu, 12 Nov 2026 18:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Volkswagen skrotar framtidsfabriken i Wolfsburg. Facket kallar det en kapitulation</title>
+    <link>https://motorpuls.se/artikel/vw-gamechanger-wolfsburg-skrotas/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/vw-gamechanger-wolfsburg-skrotas/</guid>
+    <pubDate>Thu, 12 Nov 2026 18:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>Volkswagen genomför inte Gamechanger, planen som skulle göra huvudfabriken i Wolfsburg redo för nästa generations elbilar.</description>
+    <enclosure url="https://motorpuls.se/img/og/vw-gamechanger-wolfsburg-skrotas.jpg" length="119048" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/vw-gamechanger-wolfsburg-skrotas.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="119048"/>
+  </item>
   <item>
     <title>Bilen varnar för vägarbetet innan du ser det. Nu rullar Trafikverket ut tjänsten</title>
     <link>https://motorpuls.se/artikel/road-works-warning-vagarbete-varning-bilen/</link>
