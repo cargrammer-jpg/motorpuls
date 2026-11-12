@@ -12,6 +12,17 @@
     </news:news>
   </url>
   <url>
+    <loc>https://motorpuls.se/artikel/bensin-diesel-3-kronor-dyrare-1-december/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-12T15:00:00+01:00</news:publication_date>
+      <news:title>Bensin och diesel kan bli 3 kronor dyrare över en natt. Försöket att stoppa det fick nej</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://motorpuls.se/artikel/road-works-warning-vagarbete-varning-bilen/</loc>
     <news:news>
       <news:publication>
@@ -75,17 +86,6 @@
       </news:publication>
       <news:publication_date>2026-11-11T07:00:00+01:00</news:publication_date>
       <news:title>Bolaget med Volvos gamla motorfabrik visar ny V8 med 680 hk. Den hamnar i en Lotus</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/polestar-formula-2030-nya-polestar-2/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-10T18:00:00+01:00</news:publication_date>
-      <news:title>Polestar visar hur nya Polestar 2 ser ut. Den kända ljusrampen försvinner</news:title>
     </news:news>
   </url>
 </urlset>
