@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
+    <loc>https://motorpuls.se/artikel/bensin-diesel-3-kronor-dyrare-1-december/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-12T15:00:00+01:00</news:publication_date>
+      <news:title>Bensin och diesel kan bli 3 kronor dyrare över en natt. Försöket att stoppa det fick nej</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://motorpuls.se/artikel/road-works-warning-vagarbete-varning-bilen/</loc>
     <news:news>
       <news:publication>
@@ -75,17 +86,6 @@
       </news:publication>
       <news:publication_date>2026-11-10T18:00:00+01:00</news:publication_date>
       <news:title>Polestar visar hur nya Polestar 2 ser ut. Den kända ljusrampen försvinner</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/e4-forbifart-stockholm-oppnar-6-december/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-10T15:00:00+01:00</news:publication_date>
-      <news:title>Stockholms 51-miljardersväg öppnar 6 december. Du får köra 3,5 av 21 kilometer</news:title>
     </news:news>
   </url>
 </urlset>
