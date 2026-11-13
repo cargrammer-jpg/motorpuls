@@ -34,8 +34,12 @@ python3 -m venv .venv && .venv/bin/pip install markdown pyyaml pillow
 ### Populärt just nu
 
 Startsidans "Populärt just nu" läser `data/popular.json` (artiklar i ordning efter sidvisningar). Uppdatera den med
-`CLOUDFLARE_ANALYTICS_TOKEN=... .venv/bin/python tools/update_popular.py` (Cloudflare Web Analytics, senaste 7 dygnen;
-token med Account Analytics: Read, skrivs aldrig ut). Saknas filen fylls rutan med de senaste artiklarna.
+`.venv/bin/python tools/update_popular.py` (senaste 7 dygnen, dygnsgränser i Europe/Stockholm).
+
+`--source auto` (standard) frågar självhostad Umami när `UMAMI_URL`, `UMAMI_USERNAME` och `UMAMI_PASSWORD` är satta,
+fönstret börjar 2026-11-07 eller senare och minst två `/artikel/`-sidor kommer tillbaka. Annars används Cloudflare
+Web Analytics (`CLOUDFLARE_ANALYTICS_TOKEN`, Account Analytics: Read). `--source umami` och `--source cloudflare`
+tvingar respektive källa. Lösenord och token skrivs aldrig ut. Saknas filen fylls rutan med de senaste artiklarna.
 
 ### RSS
 
