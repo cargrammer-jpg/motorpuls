@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Sportbil på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Wed, 11 Nov 2026 07:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Thu, 12 Nov 2026 07:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/sportbil.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>En Koenigsegg CC850 rullade iväg utan förare. Nu kallas alla i USA tillbaka</title>
+    <link>https://motorpuls.se/artikel/koenigsegg-cc850-aterkallelse-parkeringsbroms/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/koenigsegg-cc850-aterkallelse-parkeringsbroms/</guid>
+    <pubDate>Thu, 12 Nov 2026 07:00:00 +0100</pubDate>
+    <category>Sportbil</category>
+    <description>Koenigsegg återkallar alla sju CC850 som levererats till USA, sedan en bil rullat iväg med backen i och parkeringsbromsen aktiverad.</description>
+    <enclosure url="https://motorpuls.se/img/og/koenigsegg-cc850-aterkallelse-parkeringsbroms-hel.jpg" length="65455" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/koenigsegg-cc850-aterkallelse-parkeringsbroms-hel.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="65455"/>
+  </item>
   <item>
     <title>Bolaget med Volvos gamla motorfabrik visar ny V8 med 680 hk. Den hamnar i en Lotus</title>
     <link>https://motorpuls.se/artikel/horse-w40-v8-lotus-type-135-skovde/</link>
