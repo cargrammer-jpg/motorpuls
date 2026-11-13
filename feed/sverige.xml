@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Sverige på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Wed, 11 Nov 2026 15:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Thu, 12 Nov 2026 15:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/sverige.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Bensin och diesel kan bli 3 kronor dyrare över en natt. Försöket att stoppa det fick nej</title>
+    <link>https://motorpuls.se/artikel/bensin-diesel-3-kronor-dyrare-1-december/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/bensin-diesel-3-kronor-dyrare-1-december/</guid>
+    <pubDate>Thu, 12 Nov 2026 15:00:00 +0100</pubDate>
+    <category>Bränsle</category>
+    <description>Den 30 november tar den stora skattesänkningen på bensin och diesel slut. Skatten stiger med 2,40 kronor litern, och ett försök att förlänga sänkningen har redan stoppats.</description>
+    <enclosure url="https://motorpuls.se/img/og/bensin-diesel-3-kronor-dyrare-1-december.jpg" length="132737" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/bensin-diesel-3-kronor-dyrare-1-december.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="132737"/>
+  </item>
   <item>
     <title>Om tre veckor kan sommardäcken kosta 2 000 kronor. Och fyra gator till stängs för dubbdäck</title>
     <link>https://motorpuls.se/artikel/vinterdack-bot-dubbdacksforbud-stockholm/</link>
