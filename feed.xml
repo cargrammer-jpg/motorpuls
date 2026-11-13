@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Fri, 13 Nov 2026 07:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Fri, 13 Nov 2026 12:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Pumparna gav för lite bränsle 98 gånger. Så kontrolleras macken i Sverige</title>
+    <link>https://motorpuls.se/artikel/bensinpumpar-for-lite-bransle-sverige/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/bensinpumpar-for-lite-bransle-sverige/</guid>
+    <pubDate>Fri, 13 Nov 2026 12:00:00 +0100</pubDate>
+    <category>Bränsle</category>
+    <description>En brittisk granskning hittade 98 fall där bensinpumpar gav mindre bränsle än tillåtet. Här är hur kontrollen fungerar i Sverige.</description>
+    <enclosure url="https://motorpuls.se/img/og/bensinpumpar-for-lite-bransle-sverige.jpg" length="121692" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/bensinpumpar-for-lite-bransle-sverige.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="121692"/>
+  </item>
   <item>
     <title>Göteborg vänder väjningsplikten på 1 000 platser. Missar du det kan det kosta 3 000 kronor</title>
     <link>https://motorpuls.se/artikel/goteborg-cykeloverfarter-vajningsplikt/</link>
