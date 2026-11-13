@@ -1,41 +1,33 @@
 {
-  "updated": "2026-11-12T11:54+01:00",
-  "source": "cloudflare",
+  "updated": "2026-11-13T11:55+01:00",
+  "source": "umami",
   "articles": [
     {
-      "slug": "polestar-formula-2030-nya-polestar-2",
-      "views": 16
-    },
-    {
       "slug": "byd-ti7-land-rover-defender-razzia",
-      "views": 16
-    },
-    {
-      "slug": "yangwang-u9-xtreme-503-kmh",
       "views": 11
     },
     {
-      "slug": "vinterdack-vad-galler",
-      "views": 10
-    },
-    {
-      "slug": "eu-dorrhandtag-mekanisk-oppnare-ex60-tesla",
-      "views": 10
-    },
-    {
-      "slug": "tesla-model-3-y-sist-goca-besiktning",
-      "views": 9
+      "slug": "polestar-formula-2030-nya-polestar-2",
+      "views": 11
     },
     {
       "slug": "tesla-cybertruck-avvecklas-cybercab",
+      "views": 10
+    },
+    {
+      "slug": "vw-gamechanger-wolfsburg-skrotas",
       "views": 9
     },
     {
-      "slug": "road-works-warning-vagarbete-varning-bilen",
-      "views": 8
+      "slug": "eu-dorrhandtag-mekanisk-oppnare-ex60-tesla",
+      "views": 9
     },
     {
-      "slug": "horse-w40-v8-lotus-type-135-skovde",
+      "slug": "bensinpumpar-for-lite-bransle-sverige",
+      "views": 9
+    },
+    {
+      "slug": "tesla-model-3-y-sist-goca-besiktning",
       "views": 8
     },
     {
@@ -43,23 +35,19 @@
       "views": 8
     },
     {
-      "slug": "polestar-ombildas-nederlanderna-goteborg",
-      "views": 7
+      "slug": "vinterdack-vad-galler",
+      "views": 8
     },
     {
-      "slug": "adac-nodbroms-barn-reflexer",
-      "views": 5
+      "slug": "horse-w40-v8-lotus-type-135-skovde",
+      "views": 7
     },
     {
       "slug": "polisens-radarbilar-hela-sverige",
       "views": 4
     },
     {
-      "slug": "f1-v8-turbohybrid-forslag-2030",
-      "views": 4
-    },
-    {
-      "slug": "toyota-celica-rally-vm-oliver-solberg-2027",
+      "slug": "road-works-warning-vagarbete-varning-bilen",
       "views": 4
     },
     {
@@ -67,35 +55,19 @@
       "views": 4
     },
     {
-      "slug": "mclaren-f1-mittensits-le-mans",
-      "views": 3
+      "slug": "yangwang-u9-xtreme-503-kmh",
+      "views": 4
     },
     {
       "slug": "volvo-ex90-akutbil-bromsfel-drammen",
       "views": 3
     },
     {
-      "slug": "tesla-roadster-avtackad-produktion-2028",
-      "views": 2
+      "slug": "adac-nodbroms-barn-reflexer",
+      "views": 3
     },
     {
-      "slug": "volkswagen-golf-hybrid-pris-id-golf-pausas",
-      "views": 2
-    },
-    {
-      "slug": "jaguar-type-01-rackvidd-type-00",
-      "views": 2
-    },
-    {
-      "slug": "arets-bil-2027-bara-elbilar-volvo-ex60",
-      "views": 2
-    },
-    {
-      "slug": "porsche-macan-bensin-namn-2028",
-      "views": 2
-    },
-    {
-      "slug": "ferrari-f40-sista-enzo-ferrari",
+      "slug": "toyota-celica-rally-vm-oliver-solberg-2027",
       "views": 1
     },
     {
@@ -103,51 +75,19 @@
       "views": 1
     },
     {
-      "slug": "tesla-semi-brand-i-880-hayward",
+      "slug": "f1-v8-turbohybrid-forslag-2030",
       "views": 1
     },
     {
-      "slug": "fartkameror-119000-boter-21-nya-kameror",
+      "slug": "hvo100-reduktionsplikten-utredning-2031",
       "views": 1
     },
     {
-      "slug": "bmw-m3-el-fyra-motorer",
+      "slug": "porsche-macan-bensin-namn-2028",
       "views": 1
     },
     {
-      "slug": "mest-salda-elbilen-inte-tesla",
-      "views": 1
-    },
-    {
-      "slug": "bensinpris-sanks-1589",
-      "views": 1
-    },
-    {
-      "slug": "vinterdack-bot-dubbdacksforbud-stockholm",
-      "views": 1
-    },
-    {
-      "slug": "formansvarde-elbil-2027-per-modell",
-      "views": 1
-    },
-    {
-      "slug": "antonelli-yngste-varldsmastare-f1",
-      "views": 1
-    },
-    {
-      "slug": "b-korkort-4-25-ton-b1-korkort-15-aringar",
-      "views": 1
-    },
-    {
-      "slug": "bmw-m3-e30-homologering-dtm",
-      "views": 1
-    },
-    {
-      "slug": "e4-forbifart-stockholm-oppnar-6-december",
-      "views": 1
-    },
-    {
-      "slug": "lamborghini-diablo-djavulen-chrysler",
+      "slug": "bmw-m350-drift-moment-juli-2027",
       "views": 1
     }
   ]
