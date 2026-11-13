@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Sportbil på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Thu, 12 Nov 2026 07:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Sat, 14 Nov 2026 12:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/sportbil.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Den sista Koenigsegg Jesko har lämnat Ängelholm. Köparen ska vara en rysk tennisstjärna</title>
+    <link>https://motorpuls.se/artikel/sista-koenigsegg-jesko-125-medvedev/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/sista-koenigsegg-jesko-125-medvedev/</guid>
+    <pubDate>Sat, 14 Nov 2026 12:00:00 +0100</pubDate>
+    <category>Sportbil</category>
+    <description>Jesko nummer 125 är levererad och Koenigseggs mest sålda tvåsitsiga hyperbil är historia. Någon direkt efterträdare finns inte bekräftad.</description>
+    <enclosure url="https://motorpuls.se/img/og/sista-koenigsegg-jesko-125-medvedev.jpg" length="136077" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/sista-koenigsegg-jesko-125-medvedev.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="136077"/>
+  </item>
   <item>
     <title>En Koenigsegg CC850 rullade iväg utan förare. Nu kallas alla i USA tillbaka</title>
     <link>https://motorpuls.se/artikel/koenigsegg-cc850-aterkallelse-parkeringsbroms/</link>
