@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
+    <loc>https://motorpuls.se/artikel/goteborg-cykeloverfarter-vajningsplikt/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-13T07:00:00+01:00</news:publication_date>
+      <news:title>Göteborg vänder väjningsplikten på 1 000 platser. Missar du det kan det kosta 3 000 kronor</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://motorpuls.se/artikel/vw-gamechanger-wolfsburg-skrotas/</loc>
     <news:news>
       <news:publication>
@@ -64,28 +75,6 @@
       </news:publication>
       <news:publication_date>2026-11-11T15:00:00+01:00</news:publication_date>
       <news:title>Om tre veckor kan sommardäcken kosta 2 000 kronor. Och fyra gator till stängs för dubbdäck</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/korkortsavgift-hojs-2027/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-11T07:00:00+01:00</news:publication_date>
-      <news:title>Körkortet kan bli dyrare i januari. Så mycket mer får du betala</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/horse-w40-v8-lotus-type-135-skovde/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-11T07:00:00+01:00</news:publication_date>
-      <news:title>Bolaget med Volvos gamla motorfabrik visar ny V8 med 680 hk. Den hamnar i en Lotus</news:title>
     </news:news>
   </url>
 </urlset>
