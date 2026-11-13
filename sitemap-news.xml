@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
+    <loc>https://motorpuls.se/artikel/ferrari-f40-sista-enzo-ferrari/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-13T18:00:00+01:00</news:publication_date>
+      <news:title>Enzo Ferraris sista bil. En F40 som stod i Sverige i 20 år såldes för 51 miljoner kronor</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://motorpuls.se/artikel/bensinpumpar-for-lite-bransle-sverige/</loc>
     <news:news>
       <news:publication>
@@ -75,28 +86,6 @@
       </news:publication>
       <news:publication_date>2026-11-12T07:00:00+01:00</news:publication_date>
       <news:title>En Koenigsegg CC850 rullade iväg utan förare. Nu kallas alla i USA tillbaka</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/vinterdack-vad-galler/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-11T17:30:00+01:00</news:publication_date>
-      <news:title>Vinterdäck: vad gäller?</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/vinterdack-bot-dubbdacksforbud-stockholm/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-11T15:00:00+01:00</news:publication_date>
-      <news:title>Om tre veckor kan sommardäcken kosta 2 000 kronor. Och fyra gator till stängs för dubbdäck</news:title>
     </news:news>
   </url>
 </urlset>
