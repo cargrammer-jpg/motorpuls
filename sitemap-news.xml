@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
+    <loc>https://motorpuls.se/artikel/ecobest-laddforluster-volvo-ex60-tesla-model-y/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-14T18:00:00+01:00</news:publication_date>
+      <news:title>Upp till 18 procent extra el går åt när du laddar. Volvo EX60 slösar minst i nytt test</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://motorpuls.se/artikel/bensinpumpar-for-lite-bransle-sverige/</loc>
     <news:news>
       <news:publication>
@@ -42,61 +53,6 @@
       </news:publication>
       <news:publication_date>2026-11-12T18:00:00+01:00</news:publication_date>
       <news:title>Volkswagen skrotar framtidsfabriken i Wolfsburg. Facket kallar det en kapitulation</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/bensin-diesel-3-kronor-dyrare-1-december/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-12T15:00:00+01:00</news:publication_date>
-      <news:title>Bensin och diesel kan bli 3 kronor dyrare över en natt. Försöket att stoppa det fick nej</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/road-works-warning-vagarbete-varning-bilen/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-12T12:00:00+01:00</news:publication_date>
-      <news:title>Bilen varnar för vägarbetet innan du ser det. Nu rullar Trafikverket ut tjänsten</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/koenigsegg-cc850-aterkallelse-parkeringsbroms/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-12T07:00:00+01:00</news:publication_date>
-      <news:title>En Koenigsegg CC850 rullade iväg utan förare. Nu kallas alla i USA tillbaka</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/vinterdack-vad-galler/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-11T17:30:00+01:00</news:publication_date>
-      <news:title>Vinterdäck: vad gäller?</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/vinterdack-bot-dubbdacksforbud-stockholm/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-11T15:00:00+01:00</news:publication_date>
-      <news:title>Om tre veckor kan sommardäcken kosta 2 000 kronor. Och fyra gator till stängs för dubbdäck</news:title>
     </news:news>
   </url>
 </urlset>

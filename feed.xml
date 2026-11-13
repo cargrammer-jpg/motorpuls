@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Fri, 13 Nov 2026 12:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Sat, 14 Nov 2026 18:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Upp till 18 procent extra el går åt när du laddar. Volvo EX60 slösar minst i nytt test</title>
+    <link>https://motorpuls.se/artikel/ecobest-laddforluster-volvo-ex60-tesla-model-y/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/ecobest-laddforluster-volvo-ex60-tesla-model-y/</guid>
+    <pubDate>Sat, 14 Nov 2026 18:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>Ett europeiskt test av 15 nya elbilar visar stora skillnader i hur mycket el som försvinner vid laddning. Volvo EX60 tappar minst, Tesla Model Y är näst snålast på vägen.</description>
+    <enclosure url="https://motorpuls.se/img/og/ecobest-laddforluster-volvo-ex60-tesla-model-y.jpg" length="170009" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/ecobest-laddforluster-volvo-ex60-tesla-model-y.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="170009"/>
+  </item>
   <item>
     <title>Pumparna gav för lite bränsle 98 gånger. Så kontrolleras macken i Sverige</title>
     <link>https://motorpuls.se/artikel/bensinpumpar-for-lite-bransle-sverige/</link>
