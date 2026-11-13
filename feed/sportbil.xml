@@ -6,8 +6,48 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Sportbil på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Sat, 31 Oct 2026 12:33:00 +0100</lastBuildDate>
+  <lastBuildDate>Thu, 12 Nov 2026 07:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/sportbil.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>En Koenigsegg CC850 rullade iväg utan förare. Nu kallas alla i USA tillbaka</title>
+    <link>https://motorpuls.se/artikel/koenigsegg-cc850-aterkallelse-parkeringsbroms/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/koenigsegg-cc850-aterkallelse-parkeringsbroms/</guid>
+    <pubDate>Thu, 12 Nov 2026 07:00:00 +0100</pubDate>
+    <category>Sportbil</category>
+    <description>Koenigsegg återkallar alla sju CC850 som levererats till USA, sedan en bil rullat iväg med backen i och parkeringsbromsen aktiverad.</description>
+    <enclosure url="https://motorpuls.se/img/og/koenigsegg-cc850-aterkallelse-parkeringsbroms-hel.jpg" length="65455" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/koenigsegg-cc850-aterkallelse-parkeringsbroms-hel.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="65455"/>
+  </item>
+  <item>
+    <title>Bolaget med Volvos gamla motorfabrik visar ny V8 med 680 hk. Den hamnar i en Lotus</title>
+    <link>https://motorpuls.se/artikel/horse-w40-v8-lotus-type-135-skovde/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/horse-w40-v8-lotus-type-135-skovde/</guid>
+    <pubDate>Wed, 11 Nov 2026 07:00:00 +0100</pubDate>
+    <category>Sportbil</category>
+    <description>Horse Powertrain, där Volvos gamla motorverksamhet ingår, visar sin första V8. Fyra liter, över 500 kW och 200 kilo. Den debuterar i Lotus första superbil.</description>
+    <enclosure url="https://motorpuls.se/img/og/horse-w40-v8-lotus-type-135-skovde.jpg" length="98772" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/horse-w40-v8-lotus-type-135-skovde.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="98772"/>
+  </item>
+  <item>
+    <title>Kinesisk elbil kör 503 km/h. FIA erkänner farten över 500 km/h</title>
+    <link>https://motorpuls.se/artikel/yangwang-u9-xtreme-503-kmh/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/yangwang-u9-xtreme-503-kmh/</guid>
+    <pubDate>Sat, 07 Nov 2026 18:00:00 +0100</pubDate>
+    <category>Sportbil</category>
+    <description>Yangwang U9 Xtreme nådde 503,17 km/h på en avstängd motorväg i Abu Dhabi den 1 november. FIA har erkänt farten och Guinness gav två rekord för körning i en riktning.</description>
+    <enclosure url="https://motorpuls.se/img/og/yangwang-u9-xtreme-503-kmh.jpg" length="134807" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/yangwang-u9-xtreme-503-kmh.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="134807"/>
+  </item>
+  <item>
+    <title>Byggd för gatan, vann Le Mans på första försöket. 100 McLaren F1 finns kvar, ingen i Sverige</title>
+    <link>https://motorpuls.se/artikel/mclaren-f1-mittensits-le-mans/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/mclaren-f1-mittensits-le-mans/</guid>
+    <pubDate>Fri, 06 Nov 2026 18:00:00 +0100</pubDate>
+    <category>Sportbil</category>
+    <description>McLaren F1 var tänkt som världens bästa gatbil och vann Le Mans 1995. Av 106 byggda finns 100 kvar enligt Hagerty, och ingen är registrerad i Sverige.</description>
+    <enclosure url="https://motorpuls.se/img/og/mclaren-f1-mittensits-le-mans.jpg" length="164410" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/mclaren-f1-mittensits-le-mans.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="164410"/>
+  </item>
   <item>
     <title>M3 som elbil: fyra motorer, över 100 kWh och noll fejkat ljud</title>
     <link>https://motorpuls.se/artikel/bmw-m3-el-fyra-motorer/</link>

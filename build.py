@@ -17,6 +17,8 @@
 #   guider/index.html             kategorisidan Guider (bara när minst en guide är publicerad, då även länken i sidhuvudet)
 #   sw.js, push.js                bara när PUSH_BOX är på (förhandsvisning av push-rutan, se nedan)
 #   nyhetsbrev.js                 bara när NEWSLETTER_BOX är på (förhandsvisning av nyhetsbrevsrutan i sidfoten, se nedan)
+#   integritet/index.html         integritetspolicy, alltid. Länk i sidfoten och post i sitemap.xml
+#   ads.txt                       bara när ADSENSE_CLIENT är satt (google.com, pub-..., DIRECT, f08c47fec0942fa0)
 #   img/og/<slug>.jpg             delningsbild 1200x630 (JPEG) ur huvudbilden; startsidan använder img/og/motorpuls.jpg
 #                                 (ritad från brand/og/startsida.html). Förbjuder huvudbildens license ändringar eller
 #                                 beskärning (NO_MODIFY) blir den i stället img/og/<slug>-hel.jpg: hela bilden, bara
@@ -56,10 +58,15 @@
 #          Filen kopieras till img/articles/<slug>/ och får WebP-versioner (1600, 1200, 800 och 400 px bred, bara
 #          storleksändring, aldrig beskärning). Finns WebP-filen redan byggs den inte om (källan behövs inte).
 #          Första bilden är huvudbild (og:image), fler bilder blir ett bildspel.
+#          En rad med bara {{bild N}} i brödtexten (N = 2, 3 ... i images-listan) visar bild N just där
+#          i texten i stället för i bildspelet (huvudbilden kan inte flyttas, varje bild högst en gång).
+#          Valfritt för fria licenser (t.ex. Creative Commons): credit_url (länk på krediten, t.ex. filsidan
+#          på Wikimedia Commons), license_name och license_url (licensens namn som länk efter krediten,
+#          t.ex. "CC BY-SA 4.0"). Utan dem ser bildtexten ut som förut.
 # image:   äldre fält (en URL). Laddas ned till img/articles/<slug>.webp om filen saknas, kredit i image_credit.
 #
 # Populärt: startsidans "Populärt just nu" tar artiklarna i data/popular.json i tur och ordning (skrivs av
-# tools/update_popular.py från Cloudflare Web Analytics; okända slugs hoppas över). Saknas filen eller räcker den
+# tools/update_popular.py från Umami, med Cloudflare Web Analytics som reserv; okända slugs hoppas över). Saknas filen eller räcker den
 # inte fylls det på med de senaste artiklarna som inte redan syns högst upp. Rutan visas när det finns minst 2.
 #
 # Publicering: GitHub Actions (.github/workflows/pages.yml) kör `python build.py --out _site`. Då byggs allt som vanligt
@@ -130,16 +137,31 @@ PUSH_SRC = os.path.join(ROOT, "push")  # källor för rutan: push.js, push.css, 
 # NEWSLETTER_CONFIG: adressen till edge-funktionerna newsletter-* i Supabase-projektet motorpuls (eu-north-1). Rutan POSTar
 # till newsletter-subscribe, sidorna /prenumeration/bekrafta/ och /prenumeration/avsluta/ till newsletter-confirm och
 # newsletter-unsubscribe. Ingen nyckel behövs i klienten (funktionerna driftsätts med --no-verify-jwt). Dubbel bekräftelse
-# och utskick via Resend: se supabase/README.md. Integritetssidan /integritet/ och sidorna under /prenumeration/ byggs
-# bara med flaggan på. Den enda kontaktadressen på sajten är CONTACT_EMAIL (hello@motorpuls.se, ALX:s beslut 31 okt 2026).
+# och utskick via Resend: se supabase/README.md. Integritetspolicyn /integritet/ byggs alltid (och ligger i sidfoten
+# och i sitemap.xml). Sidorna under /prenumeration/ byggs bara med flaggan på. Den enda kontaktadressen på sajten är
+# CONTACT_EMAIL (hello@motorpuls.se, ALX:s beslut 31 okt 2026).
 NEWSLETTER_BOX = os.environ.get("MOTORPULS_NYHETSBREV", "1") != "0"  # PÅ i produktion sedan 31 okt 2026 (ALX:s OK). MOTORPULS_NYHETSBREV=0 stänger av
 CONTACT_EMAIL = "hello@motorpuls.se"  # officiell kontakt: sidfoten, /om/, /integritet/ och Organization i JSON-LD
 NEWSLETTER_CONFIG = {"api": "https://yhxnrcykinmuoqbgboda.supabase.co/functions/v1"}
-NEWSLETTER_PAGES = ("integritet", "prenumeration")  # kataloger som bara byggs med flaggan på
+NEWSLETTER_PAGES = ("prenumeration",)  # kataloger som bara byggs med flaggan på. /integritet/ byggs alltid.
 NEWSLETTER_SRC = os.path.join(ROOT, "nyhetsbrev")  # källor: nyhetsbrev.css, nyhetsbrev.js (publiceras inte som katalog)
+
+# Google AdSense. Tom ADSENSE_CLIENT: inget annonsrelaterat ritas (inget skript, inga rutor, ingen ads.txt).
+# När kontot finns: meta google-adsense-account och adsbygoogle.js (async) i <head> på varje sida, även utan
+# slot-id, så att Google kan verifiera sajten och visa EU-samtycket. ads.txt skrivs i roten och följer med till --out.
+# Annonsrutor bara i artiklar, och bara när respektive slot-id är ifyllt. Tomma slot-id: inga rutor och ingen
+# reserverad höjd. Startsidan och kategorisidor får inga annonsrutor. Inga popups, inga klistrade annonser,
+# ingen egen samtyckesdialog: EU-samtycke sköts av Googles certifierade meddelande (AdSense, Privacy & messaging).
+ADSENSE_CLIENT = "ca-pub-7329870923296365"
+ADSENSE_SLOT_INCONTENT = ""     # data-ad-slot, i texten efter ungefär tredje stycket
+ADSENSE_SLOT_END = ""           # data-ad-slot, före Läs också
+ADSENSE_ADS_TXT_CERT = "f08c47fec0942fa0"  # Googles certifierings-id i ads.txt, fast värde
 
 ANALYTICS = """<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "bace28864ae04c6fa5e9f4a98ca70f94"}'></script><!-- End Cloudflare Web Analytics -->
 """
+# Umami (egeninstallerad, utan kakor, inga personuppgifter) i <head> på varje sida.
+# Cloudflare-beaconen ovan lämnas oförändrad och skrivs som förut före </body>.
+UMAMI = '<script defer src="https://82-70-60-43.sslip.io/s.js" data-website-id="ffb8602c-4d57-4164-824c-9823ad5c42bb" data-domains="motorpuls.se,www.motorpuls.se"></script>'
 
 # ---------- content ----------
 TZ = ZoneInfo("Europe/Stockholm")
@@ -211,7 +233,7 @@ def load_articles():
                 elif line.strip(): raise SystemExit(f"{path}: oväntad rad i Källor: {line!r}")
             body = body[:ks.start()]
         check_sources(fm, sources, path)
-        words = len(re.findall(r"\w+", body))
+        words = len(re.findall(r"\w+", INLINE_IMG.sub("", body)))
         arts.append(dict(fm, date=d, published=iso(d, t), modified=iso(ud, ut), mod_date=ud, when=instant(d, t), mod_when=instant(ud, ut), headline=headline, body_html=markdown.markdown(body.strip()),
                          sources=sources, file=os.path.basename(path), minutes=max(1, math.ceil(words/200)),
                          url=f"/artikel/{fm['slug']}/", cat=slugify(fm["category"])))
@@ -339,7 +361,9 @@ def ensure_images(a):
             v = read_variants(out_base)
             res.append(dict(src=v[0][0], w=v[0][1], h=v[0][2], srcset=", ".join(f"{u} {w}w" for u, w, _ in reversed(v)),
                             alt=str(im["alt"]).strip(), credit=str(im["credit"]).strip(),
-                            caption=str(im.get("caption") or "").strip(), license=str(im.get("license") or "").strip()))
+                            caption=str(im.get("caption") or "").strip(), license=str(im.get("license") or "").strip(),
+                            credit_url=str(im.get("credit_url") or "").strip(), license_name=str(im.get("license_name") or "").strip(),
+                            license_url=str(im.get("license_url") or "").strip()))
         return res
     if not a.get("image"): return []
     # äldre fält: en bild-URL
@@ -556,9 +580,9 @@ def newsletter_box():
     </section>'''
 
 
-# ---------- nyhetsbrevets sidor (bara med NEWSLETTER_BOX) ----------
-# Integritetssidan och sidorna för bekräfta/avsluta. Kontakt för frågor om uppgifterna: CONTACT_EMAIL.
-PRIVACY_UPDATED = dt.date(2026, 10, 31)
+# ---------- integritetspolicy (alltid) och nyhetsbrevets åtgärdssidor (bara med NEWSLETTER_BOX) ----------
+# Kontakt för frågor om uppgifterna: CONTACT_EMAIL.
+PRIVACY_UPDATED = dt.date(2026, 11, 7)
 
 def _simple_page(title, desc, path, inner, noindex=True):
     h = head(f"{title} · {SITE}", desc, path, image=DEFAULT_OG, noindex=noindex)
@@ -579,8 +603,20 @@ def _simple_page(title, desc, path, inner, noindex=True):
     return page(h, body)
 
 def privacy_page():
+    desc = "Vilka uppgifter Motorpuls samlar in: besöksstatistik utan kakor, annonser via Google AdSense och nyhetsbrevet."
     inner = f'''        <div class="prose">
-<p>Kort om vilka uppgifter Motorpuls sparar, varför och hur länge.</p>
+<p>Här står vilka uppgifter Motorpuls samlar in, varför vi gör det och hur du kontaktar oss. Vi säljer inte personuppgifter.</p>
+<h2>Besöksstatistik</h2>
+<p>Vi använder Cloudflare Web Analytics för att se hur många som besöker sajten och vilka sidor som läses. Mätningen sker utan kakor (cookies) och sparar inget i din webbläsare. Besöken räknas på ett sätt som inte identifierar dig.</p>
+<p>Vi använder också Umami, besöksstatistik som vi kör själva. Umami sätter inga kakor och samlar inga personuppgifter.</p>
+<h2>Annonser</h2>
+<p>På artikelsidor kan Motorpuls visa annonser via Google AdSense. Tredjepartsleverantörer, däribland Google, använder kakor (cookies) för att visa annonser utifrån dina tidigare besök på den här webbplatsen och på andra webbplatser.</p>
+<p>Googles annonskakor gör att Google och dess partner kan visa annonser utifrån besök på den här webbplatsen och/eller andra webbplatser på internet.</p>
+<p>Annonser som anpassas efter vad du tros vara intresserad av används bara efter ditt samtycke, där lagen kräver det. Startsidan och kategorisidorna har inga annonser.</p>
+<p>Du kan välja bort anpassad annonsering i <a href="https://adssettings.google.com/">Googles annonsinställningar</a>. Mer om hur Google använder annonsteknik finns på <a href="https://policies.google.com/technologies/ads">https://policies.google.com/<wbr>technologies/<wbr>ads</a>. Hur Google använder uppgifter från webbplatser och appar som använder deras tjänster står på <a href="https://policies.google.com/technologies/partner-sites">https://policies.google.com/<wbr>technologies/<wbr>partner-sites</a>.</p>
+<h2>Samtycke i EU och EES</h2>
+<p>Besökare i EU och EES får ett samtyckesmeddelande från Googles certifierade CMP (Integritet och meddelanden). Där kan du godkänna, avvisa eller hantera dina val.</p>
+<p>Du kan ändra valet senare via länken Integritets- och cookieinställningar längst ned på sidan. Det är integritetsinställningarna som Googles CMP lägger dit automatiskt där meddelandet visas, och länken öppnar samma val igen. Syns inte länken kan du radera kakorna för motorpuls.se i webbläsaren och ladda om sidan.</p>
 <h2>Nyhetsbrevet</h2>
 <p>När du anmäler dig sparar vi din e-postadress, när du anmälde dig och bekräftade, vilken sida på Motorpuls du anmälde dig från och texten du godkände. Vi använder uppgifterna bara för att skicka Motorpuls nyhetsbrev. Vi säljer dem inte och lämnar inte ut dem för marknadsföring.</p>
 <p>Rättslig grund är ditt samtycke. Därför skickar vi först ett mejl där du bekräftar att adressen är din. Inga nyhetsbrev skickas förrän du har bekräftat.</p>
@@ -592,17 +628,19 @@ def privacy_page():
 <p>För att stoppa automatiska anmälningar räknar vi antalet försök per IP-adress och per e-postadress. Vi sparar då bara en förvrängd kod (hash) av dem, aldrig själva adresserna, och koden raderas efter ett dygn.</p>
 <h2>Tjänster vi använder</h2>
 <ul>
-<li><strong>Supabase</strong> lagrar adresserna i en databas i Stockholm (EU).</li>
+<li><strong>Cloudflare Web Analytics</strong> räknar besök utan kakor och sparar inget i din webbläsare.</li>
+<li><strong>Umami</strong> är vår egeninstallerade besöksstatistik. Den sätter inga kakor och samlar inga personuppgifter.</li>
+<li><strong>Google AdSense</strong> kan visa annonser på artikelsidor. Google och andra leverantörer kan använda kakor utifrån tidigare besök, efter samtycke där det krävs.</li>
+<li><strong>Supabase</strong> lagrar nyhetsbrevets adresser i en databas i Stockholm (EU).</li>
 <li><strong>Resend</strong> skickar mejlen åt oss och tar emot mejl till {CONTACT_EMAIL}.</li>
-<li><strong>Cloudflare Web Analytics</strong> räknar besök utan kakor (cookies) och sparar inget i din webbläsare.</li>
 </ul>
 <h2>Dina rättigheter</h2>
 <p>Du har rätt att få veta vilka uppgifter vi har om dig, få dem rättade eller raderade och att ta tillbaka ditt samtycke. Mejla <a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a>, så svarar vi så snart vi kan och senast inom en månad. Du kan också lämna klagomål till Integritetsskyddsmyndigheten (IMY).</p>
 <h2>Kontakt</h2>
 <p>Frågor om hur vi hanterar dina uppgifter skickar du till <a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a>.</p>
-<p>Senast uppdaterad {sv_date(PRIVACY_UPDATED)}.</p>
+<p>Senast uppdaterad {PRIVACY_UPDATED.isoformat()}.</p>
         </div>'''
-    return _simple_page("Integritet", "Vilka uppgifter Motorpuls sparar när du anmäler dig till nyhetsbrevet och hur du får dem raderade.", "/integritet/", inner, noindex=False)
+    return _simple_page("Integritetspolicy", desc, "/integritet/", inner, noindex=False)
 
 # Sidorna som länkarna i mejlen går till. Att öppna sidan ändrar inget (länkskannrar i mejl öppnar länkar);
 # först knappen skickar koden till edge-funktionen. Svaret visas i statusraden.
@@ -703,7 +741,9 @@ def head(title, desc, path, og_type="website", image=None, extra="", preload_img
 <link rel="alternate" type="application/rss+xml" title="{SITE}" href="/feed.xml">
 {feed_links(feeds)}<link rel="preload" href="/fonts/newsreader-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
-{pre}{push_head()}{newsletter_head()}{extra}</head>
+{pre}{push_head()}{newsletter_head()}{extra}{adsense_loader()}
+{UMAMI}
+</head>
 <body>
 <a class="skip" href="#innehall">Hoppa till innehållet</a>
 <header class="masthead">
@@ -742,7 +782,7 @@ def footer():
   <div class="wrap">
     {main_open}<a class="wordmark" href="/"><img class="logo logo--footer" src="/img/logo.svg" alt="Motorpuls" width="872" height="88" loading="lazy"></a>
     <p class="site-footer__desc">{SITE_DESC}</p>
-    <nav class="site-footer__nav" aria-label="Om Motorpuls"><ul><li><a href="/om/">Om Motorpuls</a></li><li><a href="/om/lukas/">Om Lukas</a></li></ul></nav>{topics_nav()}
+    <nav class="site-footer__nav" aria-label="Om Motorpuls"><ul><li><a href="/om/">Om Motorpuls</a></li><li><a href="/om/lukas/">Om Lukas</a></li><li><a href="/integritet/">Integritetspolicy</a></li></ul></nav>{topics_nav()}
     <div class="site-footer__rss">
       <a class="rss-link" href="/feed.xml">{RSS_SVG}RSS</a>{per_cat}
     </div>
@@ -949,10 +989,34 @@ def index(arts):
 
 # ---------- article ----------
 HERO_SIZES = "(min-width: 66rem) 62rem, calc(100vw - 2.5rem)"
+INLINE_IMG = re.compile(r"^\{\{bild (\d+)\}\}[ \t]*$", re.M)  # markören i markdown (en egen rad)
+INLINE_IMG_HTML = re.compile(r"<p>\{\{bild(?: |\u00a0)(\d+)\}\}</p>")  # samma rad efter markdown
+INLINE_SIZES = "(min-width: 42.5rem) 40rem, calc(100vw - 2.5rem)"
+
+def link(text, url, rel="noopener"):
+    return f'<a href="{esc(url)}" rel="{rel}" target="_blank">{esc(text)}</a>' if url else esc(text)
 
 def caption(im):
-    parts = [esc(x) for x in (im["caption"], im["credit"]) if x]
+    parts = [esc(x) for x in (im["caption"],) if x]
+    if im["credit"]: parts.append(link(im["credit"], im.get("credit_url")))
+    if im.get("license_name") or im.get("license_url"): parts.append(link(im.get("license_name") or "Licens", im.get("license_url"), "noopener license"))
     return f'<figcaption><span>{" <span aria-hidden=\"true\">·</span> ".join(parts)}</span></figcaption>' if parts else ""
+
+def inline_images(a, imgs, body_html):
+    """Byter rader med {{bild N}} mot bild N (figur i bildens eget format, lazy, samma bildtext som övriga bilder).
+    Returnerar (html, bilderna som blir kvar till huvudbild/bildspel). Huvudbilden (1) kan inte flyttas."""
+    used = []
+    def fig(m):
+        n = int(m.group(1))
+        if not 2 <= n <= len(imgs): raise SystemExit(f"{a['file']}: {{{{bild {n}}}}} finns inte (bild 2 till {len(imgs)} går att placera i texten)")
+        if n in used: raise SystemExit(f"{a['file']}: {{{{bild {n}}}}} står mer än en gång")
+        used.append(n)
+        im = imgs[n - 1]
+        return (f'<figure class="article__figure article__figure--natural article__figure--inline">\n'
+                f'  <div class="frame">{img_tag(im, im["alt"], sizes=INLINE_SIZES)}</div>\n  {caption(im)}\n</figure>')
+    out = INLINE_IMG_HTML.sub(fig, body_html)
+    if "{{bild" in out: raise SystemExit(f"{a['file']}: {{{{bild N}}}} ska stå ensamt på en egen rad")
+    return out, [im for i, im in enumerate(imgs, 1) if i not in used]
 
 def gallery(imgs):
     """En bild: figur i bildens eget format. Flera: bildspel (scroll-snap, utan JS en rad att svepa i).
@@ -1268,6 +1332,67 @@ def author_box(name):
           </div>
         </aside>'''
 
+# Annonsrutor bara i artiklar, och bara när ADSENSE_CLIENT och respektive slot-id är ifyllda.
+# Rutornas stil följer med i <head> på de sidorna (inte i css/site.css). Tomma slot-id ger ingen stil och ingen ruta.
+# Skriptet och meta-taggen ligger i adsense_loader() och följer med på varje sida så fort kontot är satt.
+# min-height sitter på ramen, inte bara på <ins>: Googles skript skriver om ins-elementets style, ramen behåller höjden.
+ADSENSE_CSS = (
+    ".adslot{margin:0;font-family:var(--sans)}"
+    ".prose>.adslot{margin-block:2.25rem}"
+    ".adslot__label{margin:0 0 .45rem;font-family:var(--mono);font-size:.72rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}"
+    ".adslot__frame{min-height:280px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--pulse);border-radius:var(--radius)}"
+    ".adslot .adsbygoogle{display:block;width:100%;min-height:250px}"
+    "@media (max-width:40rem){.adslot__frame{min-height:250px}.adslot .adsbygoogle{min-height:220px}}"
+)
+_P_RE = re.compile(r"<p(?:\s[^>]*)?>.*?</p>", re.S)
+
+def adsense_client_id():
+    """ca-pub-... även om värdet klistrats in som pub-..."""
+    c = ADSENSE_CLIENT.strip()
+    return "ca-" + c if c.startswith("pub-") else c
+
+def adsense_pub_id():
+    """pub-... till ads.txt (utan ca-)."""
+    c = adsense_client_id()
+    return c[3:] if c.startswith("ca-") else c
+
+def ad_slot(slot_id):
+    """En responsiv ruta märkt Annons, eller tom sträng när annonser är av eller slot-id saknas."""
+    slot = str(slot_id or "").strip()
+    client = adsense_client_id()
+    if not client or not slot: return ""
+    return (
+        '\n<aside class="adslot" aria-label="Annons">'
+        '<p class="adslot__label">Annons</p>'
+        '<div class="adslot__frame">'
+        f'<ins class="adsbygoogle" style="display:block" data-ad-client="{esc(client)}" data-ad-slot="{esc(slot)}" '
+        'data-ad-format="auto" data-full-width-responsive="true"></ins>'
+        '</div>'
+        '<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>'
+        '</aside>'
+    )
+
+def adsense_loader():
+    """Meta och adsbygoogle.js (async) i <head> på varje sida när kontot är satt. Inga slot-id krävs:
+    Google ska kunna verifiera sajten och visa EU-samtycket innan rutorna slås på. Tomt konto: ingenting."""
+    client = esc(adsense_client_id())
+    if not client: return ""
+    return (f'<meta name="google-adsense-account" content="{client}">\n'
+            f'<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={client}" crossorigin="anonymous"></script>\n')
+
+def adsense_head():
+    """Rutornas stil, bara på artikelsidor när minst ett slot-id är satt. Själva skriptet ligger i adsense_loader()."""
+    if not adsense_client_id() or not (ADSENSE_SLOT_INCONTENT.strip() or ADSENSE_SLOT_END.strip()): return ""
+    return '<style>' + ADSENSE_CSS + '</style>\n'
+
+def insert_after_paragraph(html, snippet, n=3):
+    """Klistrar in snippet efter det n:te stycket. Färre stycken: efter det sista. Tom snippet: oförändrad html."""
+    if not snippet: return html
+    matches = list(_P_RE.finditer(html))
+    if not matches: return snippet + html
+    m = matches[min(n, len(matches)) - 1]
+    return html[:m.end()] + snippet + html[m.end():]
+
 def article(a, arts=()):
     img, imgs = a["img"], a["images_out"]
     ld = {"@context": "https://schema.org", "@type": "Article" if is_guide(a) else "NewsArticle", "headline": a["title"], "description": a["excerpt"],
@@ -1282,7 +1407,7 @@ def article(a, arts=()):
         ld["image"] = [dict({"@type": "ImageObject", "url": DOMAIN + c["src"], "width": c["w"], "height": c["h"]}, **credit)
                        for c in ld_images(a)] + [{k: v for k, v in {"@type": "ImageObject", "url": DOMAIN + im["src"], "width": im["w"], "height": im["h"],
                                           "caption": im["alt"], "creditText": im["credit"].removeprefix("Foto: ") or None,
-                                          "copyrightNotice": im["license"] or None}.items() if v} for im in imgs]
+                                          "copyrightNotice": im["license"] or None, "license": im.get("license_url") or None}.items() if v} for im in imgs]
     if a.get("sources"): ld["citation"] = [u for _, u in a["sources"]]
     topic = article_topic(a)
     crumbs_html, crumbs_ld = breadcrumbs([("Start", "/")] + ([(topic["name"], topic["path"])] if topic else []) + [(a["headline"], a["url"])])
@@ -1294,7 +1419,7 @@ def article(a, arts=()):
              extra=f'<meta property="article:published_time" content="{a["published"]}">\n'
                    f'<meta property="article:modified_time" content="{a["modified"]}">\n'
                    f'<meta property="article:section" content="{esc(a["category"])}">\n'
-                   + "".join(f'<meta property="article:tag" content="{esc(t)}">\n' for t in a.get("tags") or []) + jsonld,
+                   + "".join(f'<meta property="article:tag" content="{esc(t)}">\n' for t in a.get("tags") or []) + jsonld + adsense_head(),
              preload_img=img, preload_sizes=HERO_SIZES, robots="max-image-preview:large", feeds=feeds_for(a))
     sources = ""
     if a["sources"]:
@@ -1311,6 +1436,8 @@ def article(a, arts=()):
                if a["mod_when"] > a["when"] else "")
     au = find_author(a["author"])
     author = f'<a href="{au["url"]}" rel="author">{esc(au["name"])}</a>' if au else esc(a["author"])
+    prose_html, top_imgs = inline_images(a, imgs, nbnum_html(a["body_html"]))
+    prose = insert_after_paragraph(prose_html, ad_slot(ADSENSE_SLOT_INCONTENT))
     body = f'''
 <main id="innehall" class="article">
   <div class="wrap">
@@ -1320,17 +1447,17 @@ def article(a, arts=()):
         <h1 class="article__title">{nbnum(esc(a["headline"]))}</h1>
         <p class="article__dek">{nbnum(esc(a["excerpt"]))}</p>
         <p class="byline"><span>Publicerad <b><time datetime="{a["published"]}">{sv_date(a["date"])}</time></b></span>{updated}<span>Läsetid <b>{a["minutes"]} min</b></span><span>Av <b>{author}</b></span></p>{share_bar(a, "top")}
-      </header>{summary_box(a)}{gallery(imgs)}
+      </header>{summary_box(a)}{gallery(top_imgs)}
       <div class="article__layout article__col">
         <div class="prose">
-{nbnum_html(a["body_html"])}
+{prose}
         </div>
 {sources}{share_bar(a, "end")}{preferred_source()}
         <aside class="ai-note" aria-label="Om texten">
           <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M8 7v4.5M8 4.6v.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
           <p>Texten är skriven med hjälp av AI och faktagranskad mot källorna ovan. <a href="/om/">Så arbetar Motorpuls</a></p>
         </aside>
-{author_box(a["author"])}{push_box("article")}{rss_row(a)}{related_section(a, arts)}
+{author_box(a["author"])}{push_box("article")}{rss_row(a)}{ad_slot(ADSENSE_SLOT_END)}{related_section(a, arts)}
         <p class="more"><a class="btn" href="/">Fler nyheter på startsidan</a></p>
       </div>
     </article>
@@ -1524,7 +1651,8 @@ def main():
           + "".join(f"  <url><loc>{DOMAIN}{t['path']}</loc><lastmod>{lastmod(t['path'], t['arts'])}</lastmod></url>\n" for t in TOPICS.values())
           + (f"  <url><loc>{DOMAIN}{SWEDEN['path']}</loc><lastmod>{lastmod(SWEDEN['path'], SWEDEN['arts'])}</lastmod></url>\n" if SWEDEN else "")
           + (f"  <url><loc>{DOMAIN}{GUIDE_PATH}</loc><lastmod>{lastmod(GUIDE_PATH, GUIDES)}</lastmod></url>\n" if GUIDES else "")
-          + "".join(f"  <url><loc>{DOMAIN}{p['path']}</loc></url>\n" for p in pages) + "</urlset>\n")
+          + "".join(f"  <url><loc>{DOMAIN}{p['path']}</loc></url>\n" for p in pages)
+          + f"  <url><loc>{DOMAIN}/integritet/</loc></url>\n" + "</urlset>\n")
     write("sitemap-news.xml", news_sitemap(arts))
     write("robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {DOMAIN}/sitemap.xml\nSitemap: {DOMAIN}/sitemap-news.xml\n")
     write("feed.xml", rss(arts))
@@ -1540,8 +1668,9 @@ def main():
     if NEWSLETTER_BOX:
         write("nyhetsbrev.js", nl_src("nyhetsbrev.js"))
         write("nyhetsbrev-sida.js", nl_src("nyhetsbrev-sida.js"))
-        write("integritet/index.html", privacy_page())  # inte i sitemap.xml förrän nyhetsbrevet är live
         for kind in ("bekrafta", "avsluta"): write(f"prenumeration/{kind}/index.html", _action_page(kind))
+    write("integritet/index.html", privacy_page())
+    write_ads_txt()
     if PUSH_BOX:
         write("sw.js", push_src("sw.js"))  # i roten så att service workern gäller hela sajten (scope /)
         write("push.js", push_src("push.js"))
@@ -1594,6 +1723,21 @@ def check_links(out):
     if missing: raise SystemExit("saknade filer i utdata:\n  " + "\n  ".join(sorted(set(missing))))
     return len(refs)
 
+def write_ads_txt():
+    """ads.txt bara när ADSENSE_CLIENT är satt. Tomt konto: filen ska inte ligga kvar."""
+    path = os.path.join(ROOT, "ads.txt")
+    client = adsense_client_id()
+    if not client:
+        if os.path.exists(path): os.remove(path)
+        return
+    pub = adsense_pub_id()
+    if not pub.startswith("pub-"): print(f"varning: ADSENSE_CLIENT {ADSENSE_CLIENT!r} ser inte ut som ca-pub-...")
+    if not ADSENSE_SLOT_INCONTENT.strip() and not ADSENSE_SLOT_END.strip():
+        print("AdSense: konto satt, inga slot-id, inga annonsrutor (ads.txt och skriptet skrivs ändå)")
+    elif not ADSENSE_SLOT_INCONTENT.strip() or not ADSENSE_SLOT_END.strip():
+        print("varning: ADSENSE_CLIENT är satt men bara ett slot-id är ifyllt, den tomma rutan ritas inte")
+    write("ads.txt", f"google.com, {pub}, DIRECT, {ADSENSE_ADS_TXT_CERT}\n")
+
 def check_no_push(out):
     """Flaggan av: inget av push-rutan får finnas i utdata (ingen ruta, ingen push.js, ingen sw.js, ingen registrering)."""
     bad = [f for f in ("sw.js", "push.js") if os.path.exists(os.path.join(out, f))]
@@ -1614,6 +1758,62 @@ def check_no_newsletter(out):
                 if re.search(r'id="nyhetsbrev-fot"|/nyhetsbrev\.js|/nyhetsbrev-sida\.js|newsletter_subscribers|functions/v1/newsletter|site-footer--nl', t): bad.append(os.path.relpath(os.path.join(dirpath, fn), out))
     if bad: raise SystemExit("NEWSLETTER_BOX är av men nyhetsbrevsrutan finns i utdata: " + ", ".join(sorted(bad)))
 
+def check_no_adsense(out):
+    """Tom ADSENSE_CLIENT: inget annonsrelaterat i utdata (inget skript, ingen ruta, ingen ads.txt)."""
+    if adsense_client_id(): return
+    bad = ["ads.txt"] if os.path.exists(os.path.join(out, "ads.txt")) else []
+    markers = ("adsbygoogle", "pagead2.googlesyndication.com", 'class="adslot"', "data-ad-client", "data-ad-slot", "google-adsense-account")
+    for dirpath, _, files in os.walk(out):
+        for fn in files:
+            if fn.endswith((".html", ".js", ".css", ".txt", ".xml")):
+                t = open(os.path.join(dirpath, fn), encoding="utf-8", errors="ignore").read()
+                if any(m in t for m in markers): bad.append(os.path.relpath(os.path.join(dirpath, fn), out))
+    if bad: raise SystemExit("ADSENSE_CLIENT är tom men annonser finns i utdata: " + ", ".join(sorted(set(bad))))
+
+def check_umami(out):
+    """Umami-scriptet exakt en gång per html-sida, inne i <head>. Cloudflare-beaconen ska finnas oförändrad."""
+    bad, htmls = [], []
+    for dirpath, _, files in os.walk(out):
+        for fn in files:
+            if not fn.endswith(".html"): continue
+            rel = os.path.relpath(os.path.join(dirpath, fn), out)
+            htmls.append(rel)
+            t = open(os.path.join(dirpath, fn), encoding="utf-8").read()
+            head, sep, _rest = t.partition("</head>")
+            if not sep or head.count(UMAMI) != 1 or t.count(UMAMI) != 1:
+                bad.append(f"{rel}: Umami ska ligga exakt en gång, i <head>")
+            if ANALYTICS.strip() not in t or t.count(ANALYTICS.strip()) != 1:
+                bad.append(f"{rel}: Cloudflare Web Analytics ska ligga oförändrad, exakt en gång")
+    if not htmls: bad.append("inga html-filer")
+    if bad: raise SystemExit("Umami-kontroll:\n  " + "\n  ".join(bad))
+
+def check_adsense(out):
+    """Konto satt: ads.txt i utdataroten, och meta plus adsbygoogle.js exakt en gång per html-sida.
+    Tomma slot-id: inga annonsrutor. Tomt konto: check_no_adsense."""
+    if not adsense_client_id():
+        check_no_adsense(out)
+        return
+    expected = f"google.com, {adsense_pub_id()}, DIRECT, {ADSENSE_ADS_TXT_CERT}\n"
+    ads = os.path.join(out, "ads.txt")
+    got = open(ads, encoding="utf-8").read() if os.path.isfile(ads) else ""
+    if got != expected: raise SystemExit(f"ads.txt i utdata ska vara {expected!r}, var {got!r}")
+    client = esc(adsense_client_id())
+    script = f'<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={client}" crossorigin="anonymous"></script>'
+    meta = f'<meta name="google-adsense-account" content="{client}">'
+    slots_on = bool(ADSENSE_SLOT_INCONTENT.strip() or ADSENSE_SLOT_END.strip())
+    bad, htmls = [], []
+    for dirpath, _, files in os.walk(out):
+        for fn in files:
+            if not fn.endswith(".html"): continue
+            rel = os.path.relpath(os.path.join(dirpath, fn), out)
+            htmls.append(rel)
+            t = open(os.path.join(dirpath, fn), encoding="utf-8").read()
+            if t.count(script) != 1 or t.count(meta) != 1: bad.append(f"{rel}: AdSense-taggen saknas eller finns mer än en gång")
+            if "static.cloudflareinsights.com/beacon.min.js" not in t: bad.append(f"{rel}: saknar Cloudflare Web Analytics")
+            if not slots_on and ('class="adslot"' in t or "data-ad-slot" in t): bad.append(f"{rel}: annonsruta trots tomma slot-id")
+    if not htmls: bad.append("inga html-filer")
+    if bad: raise SystemExit("AdSense-kontroll:\n  " + "\n  ".join(bad))
+
 def _rebuild_root_without_previews():
     global PUSH_BOX, OUT
     PUSH_BOX, OUT = False, None
@@ -1631,6 +1831,8 @@ def cli():
         out = publish(OUT)
         if not PUSH_BOX: check_no_push(out)
         if not NEWSLETTER_BOX: check_no_newsletter(out)
+        check_adsense(out)
+        check_umami(out)
         n = check_links(out)
         files = sum(len(f) for _, _, f in os.walk(out))
         print(f"publicerat till {out}: {files} filer, {n} lokala länkar kontrollerade")
