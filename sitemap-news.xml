@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
+    <loc>https://motorpuls.se/artikel/bmw-m3-e30-homologering-dtm/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-14T07:00:00+01:00</news:publication_date>
+      <news:title>BMW behövde bara 5 000. Det blev 17 970 E30 M3, och de bästa kostar miljoner</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://motorpuls.se/artikel/ferrari-f40-sista-enzo-ferrari/</loc>
     <news:news>
       <news:publication>
@@ -75,17 +86,6 @@
       </news:publication>
       <news:publication_date>2026-11-12T12:00:00+01:00</news:publication_date>
       <news:title>Bilen varnar för vägarbetet innan du ser det. Nu rullar Trafikverket ut tjänsten</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/koenigsegg-cc850-aterkallelse-parkeringsbroms/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-12T07:00:00+01:00</news:publication_date>
-      <news:title>En Koenigsegg CC850 rullade iväg utan förare. Nu kallas alla i USA tillbaka</news:title>
     </news:news>
   </url>
 </urlset>
