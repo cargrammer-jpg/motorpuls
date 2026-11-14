@@ -1,49 +1,53 @@
 {
-  "updated": "2026-11-13T11:55+01:00",
+  "updated": "2026-11-14T12:00+01:00",
   "source": "umami",
   "articles": [
+    {
+      "slug": "polestar-formula-2030-nya-polestar-2",
+      "views": 12
+    },
     {
       "slug": "byd-ti7-land-rover-defender-razzia",
       "views": 11
     },
     {
-      "slug": "polestar-formula-2030-nya-polestar-2",
+      "slug": "bensinpumpar-for-lite-bransle-sverige",
       "views": 11
     },
     {
-      "slug": "tesla-cybertruck-avvecklas-cybercab",
+      "slug": "sista-koenigsegg-jesko-125-medvedev",
       "views": 10
+    },
+    {
+      "slug": "goteborg-cykeloverfarter-vajningsplikt",
+      "views": 9
     },
     {
       "slug": "vw-gamechanger-wolfsburg-skrotas",
       "views": 9
     },
     {
-      "slug": "eu-dorrhandtag-mekanisk-oppnare-ex60-tesla",
+      "slug": "vinterdack-vad-galler",
       "views": 9
     },
     {
-      "slug": "bensinpumpar-for-lite-bransle-sverige",
-      "views": 9
+      "slug": "horse-w40-v8-lotus-type-135-skovde",
+      "views": 8
     },
     {
       "slug": "tesla-model-3-y-sist-goca-besiktning",
       "views": 8
     },
     {
-      "slug": "goteborg-cykeloverfarter-vajningsplikt",
-      "views": 8
-    },
-    {
-      "slug": "vinterdack-vad-galler",
-      "views": 8
-    },
-    {
-      "slug": "horse-w40-v8-lotus-type-135-skovde",
-      "views": 7
-    },
-    {
       "slug": "polisens-radarbilar-hela-sverige",
+      "views": 5
+    },
+    {
+      "slug": "volkswagen-q3-forlust-porsche-nedskrivning",
+      "views": 4
+    },
+    {
+      "slug": "ecobest-laddforluster-volvo-ex60-tesla-model-y",
       "views": 4
     },
     {
@@ -51,31 +55,47 @@
       "views": 4
     },
     {
-      "slug": "volkswagen-q3-forlust-porsche-nedskrivning",
-      "views": 4
-    },
-    {
-      "slug": "yangwang-u9-xtreme-503-kmh",
-      "views": 4
-    },
-    {
       "slug": "volvo-ex90-akutbil-bromsfel-drammen",
       "views": 3
     },
     {
-      "slug": "adac-nodbroms-barn-reflexer",
+      "slug": "yangwang-u9-xtreme-503-kmh",
       "views": 3
+    },
+    {
+      "slug": "tesla-cybertruck-avvecklas-cybercab",
+      "views": 2
+    },
+    {
+      "slug": "eu-dorrhandtag-mekanisk-oppnare-ex60-tesla",
+      "views": 1
+    },
+    {
+      "slug": "tesla-fsd-sverige-eu-omrostning-december",
+      "views": 1
     },
     {
       "slug": "toyota-celica-rally-vm-oliver-solberg-2027",
       "views": 1
     },
     {
-      "slug": "bmw-ix3-m60-highway-assistant-sverige",
+      "slug": "bmw-m3-el-fyra-motorer",
       "views": 1
     },
     {
-      "slug": "f1-v8-turbohybrid-forslag-2030",
+      "slug": "bensin-diesel-3-kronor-dyrare-1-december",
+      "views": 1
+    },
+    {
+      "slug": "italien-minimihastighet-100-vanster-korfalt",
+      "views": 1
+    },
+    {
+      "slug": "koenigsegg-cc850-aterkallelse-parkeringsbroms",
+      "views": 1
+    },
+    {
+      "slug": "mclaren-f1-mittensits-le-mans",
       "views": 1
     },
     {
@@ -83,11 +103,11 @@
       "views": 1
     },
     {
-      "slug": "porsche-macan-bensin-namn-2028",
+      "slug": "ferrari-f40-sista-enzo-ferrari",
       "views": 1
     },
     {
-      "slug": "bmw-m350-drift-moment-juli-2027",
+      "slug": "porsche-macan-bensin-namn-2028",
       "views": 1
     }
   ]
