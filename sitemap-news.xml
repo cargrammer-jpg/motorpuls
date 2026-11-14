@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
+    <loc>https://motorpuls.se/artikel/ecobest-laddforluster-volvo-ex60-tesla-model-y/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-14T18:00:00+01:00</news:publication_date>
+      <news:title>Upp till 18 procent extra el går åt när du laddar. Volvo EX60 slösar minst i nytt test</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://motorpuls.se/artikel/lamborghini-diablo-djavulen-chrysler/</loc>
     <news:news>
       <news:publication>
