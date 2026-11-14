@@ -1,7 +1,7 @@
 ---
 title: "BMW behövde bara 5 000. Det blev 17 970 E30 M3, och de bästa kostar miljoner"
 seo_title: "BMW M3 E30: design, racing och hur många som finns kvar"
-date: 2026-11-07T18:00:00+01:00
+date: 2026-11-14T07:00:00+01:00
 slug: bmw-m3-e30-homologering-dtm
 tags: [BMW, BMW M, M3, E30, DTM, Grupp A, Sport Evolution, klassiker, sportbil, auktion]
 sources:
