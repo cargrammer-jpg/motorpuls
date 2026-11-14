@@ -7,19 +7,85 @@
         <news:name>Motorpuls</news:name>
         <news:language>sv</news:language>
       </news:publication>
-      <news:publication_date>2026-11-07T18:00:00+01:00</news:publication_date>
+      <news:publication_date>2026-11-14T07:00:00+01:00</news:publication_date>
       <news:title>BMW behövde bara 5 000. Det blev 17 970 E30 M3, och de bästa kostar miljoner</news:title>
     </news:news>
   </url>
   <url>
-    <loc>https://motorpuls.se/artikel/f1-v8-turbohybrid-forslag-2030/</loc>
+    <loc>https://motorpuls.se/artikel/ferrari-f40-sista-enzo-ferrari/</loc>
     <news:news>
       <news:publication>
         <news:name>Motorpuls</news:name>
         <news:language>sv</news:language>
       </news:publication>
-      <news:publication_date>2026-11-06T07:00:00+01:00</news:publication_date>
-      <news:title>V8:orna kan komma tillbaka i F1. Men inte som du minns dem</news:title>
+      <news:publication_date>2026-11-13T18:00:00+01:00</news:publication_date>
+      <news:title>Enzo Ferraris sista bil. En F40 som stod i Sverige i 20 år såldes för 51 miljoner kronor</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://motorpuls.se/artikel/bensinpumpar-for-lite-bransle-sverige/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-13T12:00:00+01:00</news:publication_date>
+      <news:title>Pumparna gav för lite bränsle 98 gånger. Så kontrolleras macken i Sverige</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://motorpuls.se/artikel/goteborg-cykeloverfarter-vajningsplikt/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-13T07:00:00+01:00</news:publication_date>
+      <news:title>Göteborg vänder väjningsplikten på 1 000 platser. Missar du det kan det kosta 3 000 kronor</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://motorpuls.se/artikel/italien-minimihastighet-100-vanster-korfalt/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-13T07:00:00+01:00</news:publication_date>
+      <news:title>Italien vill ge böter till dig som kör under 100 km/h. Men bara i ett körfält</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://motorpuls.se/artikel/vw-gamechanger-wolfsburg-skrotas/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-12T18:00:00+01:00</news:publication_date>
+      <news:title>Volkswagen skrotar framtidsfabriken i Wolfsburg. Facket kallar det en kapitulation</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://motorpuls.se/artikel/bensin-diesel-3-kronor-dyrare-1-december/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-12T15:00:00+01:00</news:publication_date>
+      <news:title>Bensin och diesel kan bli 3 kronor dyrare över en natt. Försöket att stoppa det fick nej</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://motorpuls.se/artikel/road-works-warning-vagarbete-varning-bilen/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-12T12:00:00+01:00</news:publication_date>
+      <news:title>Bilen varnar för vägarbetet innan du ser det. Nu rullar Trafikverket ut tjänsten</news:title>
     </news:news>
   </url>
 </urlset>
