@@ -66,17 +66,17 @@ Med föraren i mitten försvann de problem Murray såg i samtidens superbilar, b
 
 ## Kolfiber, guld och inga vingar
 
-F1 var enligt McLaren den första gatbilen byggd kring ett monocoque i kolfiber. Viktjakten gick långt. Murray har berättat att teamet ritade egen växellåda, egna instrument och egen styrinrättning, och att motorrummet kläddes med guldfolie som värmeskydd till ett värde av omkring 9 000 pund.
+F1 var enligt McLaren den första gatbilen byggd kring ett monocoque i kolfiber. Viktjakten gick långt. Murray har berättat att teamet ritade egen växellåda, egna instrument och egen styrinrättning, och att motorrummet kläddes med guldfolie som värmeskydd. Bara guldet kostade enligt Murray omkring 9 000 pund.
 
 Aerodynamiken byggde på undersidan i stället för stora vingar. En diffusor och två elektriska fläktar skapade marktryck, och luftmotståndet låg på cW 0,32 enligt McLarens tekniska data.
 
-Bilen visades första gången den 28 maj 1992 på The Sporting Club i Monaco, under Monacos Grand Prix helg.
+Bilen visades första gången den 28 maj 1992 på The Sporting Club i Monaco, samma helg som Monacos Grand Prix.
 
 ## Motor och prestanda
 
 Murray ville ha en motor utan turbo för att få bättre kontroll och tillförlitlighet. Det blev en V12 från BMW, kallad S70/2, med Paul Rosche som motorkonstruktör. Enligt McLarens specifikation hade den 6 064 kubik, 627 hk vid 7 500 varv och 651 Nm vid 5 600 varv. Växellådan var sexväxlad och manuell, och bilen vägde 1 140 kg.
 
-McLaren angav 386 km/h i toppfart och 3,2 sekunder från 0 till 60 mph. Den 31 mars 1998 nådde prototypen XP5, med ändrad varvtalsbegränsare, 240,1 mph eller cirka 386 km/h. Det gav världsrekord för produktionsbilar i Guinness rekordbok.
+McLaren angav 386 km/h i toppfart och 3,2 sekunder från 0 till 97 km/h (60 mph). Den 31 mars 1998 nådde prototypen XP5, med ändrad varvtalsbegränsare, 240,1 mph eller cirka 386 km/h. Det gav världsrekord för produktionsbilar i Guinness rekordbok.
 
 ## Produktionen
 
@@ -108,9 +108,9 @@ I Sverige listar car.info inga registrerade McLaren F1 i början av november 202
 
 ## Vad kostar en F1 i dag?
 
-I december 2025 såldes chassi 014 på RM Sotheby's auktion i Abu Dhabi för 25 317 500 dollar. Enligt auktionshuset är det det högsta priset för en McLaren F1 på öppen auktion. Bilen var den fjortonde av 64 gatbilar och levererades ursprungligen till kungafamiljen i Brunei.
+I december 2025 såldes chassi 014 på RM Sotheby's auktion i Abu Dhabi för 25 317 500 dollar, cirka 249 miljoner kronor. Enligt auktionshuset är det högsta pris en McLaren F1 har fått på öppen auktion. Bilen var den fjortonde av 64 gatbilar och levererades ny till kungafamiljen i Brunei.
 
-Priset motsvarar cirka 249 miljoner kronor, räknat med ECB:s referenskurser den 30 oktober 2026, där en dollar motsvarar ungefär 9,83 kronor.
+Kronbeloppet bygger på ECB:s växelkurs den 30 oktober 2026, då en dollar kostade 9,83 kronor.
 
 ## Lukas analys
 
