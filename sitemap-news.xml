@@ -77,15 +77,4 @@
       <news:title>Bensin och diesel kan bli 3 kronor dyrare över en natt. Försöket att stoppa det fick nej</news:title>
     </news:news>
   </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/road-works-warning-vagarbete-varning-bilen/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-12T12:00:00+01:00</news:publication_date>
-      <news:title>Bilen varnar för vägarbetet innan du ser det. Nu rullar Trafikverket ut tjänsten</news:title>
-    </news:news>
-  </url>
 </urlset>
