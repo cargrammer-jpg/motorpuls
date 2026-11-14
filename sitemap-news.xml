@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
+    <loc>https://motorpuls.se/artikel/lamborghini-diablo-djavulen-chrysler/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-14T18:00:00+01:00</news:publication_date>
+      <news:title>Chrysler tyckte att Diablo var för vass. Så många av Lamborghinis djävul finns kvar</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://motorpuls.se/artikel/sista-koenigsegg-jesko-125-medvedev/</loc>
     <news:news>
       <news:publication>
@@ -64,28 +75,6 @@
       </news:publication>
       <news:publication_date>2026-11-13T07:00:00+01:00</news:publication_date>
       <news:title>Italien vill ge böter till dig som kör under 100 km/h. Men bara i ett körfält</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/vw-gamechanger-wolfsburg-skrotas/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-12T18:00:00+01:00</news:publication_date>
-      <news:title>Volkswagen skrotar framtidsfabriken i Wolfsburg. Facket kallar det en kapitulation</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/bensin-diesel-3-kronor-dyrare-1-december/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-12T15:00:00+01:00</news:publication_date>
-      <news:title>Bensin och diesel kan bli 3 kronor dyrare över en natt. Försöket att stoppa det fick nej</news:title>
     </news:news>
   </url>
 </urlset>
