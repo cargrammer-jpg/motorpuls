@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Sun, 15 Nov 2026 12:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Sun, 15 Nov 2026 15:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Nu kan du köpa en Tesla utan ratt. Musk tycker själv att månadsavgiften är för hög</title>
+    <link>https://motorpuls.se/artikel/tesla-cybercab-privat-299-dollar-manad/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/tesla-cybercab-privat-299-dollar-manad/</guid>
+    <pubDate>Sun, 15 Nov 2026 15:00:00 +0100</pubDate>
+    <category>Tesla</category>
+    <description>Tesla bjuder in utvalda kunder att köpa Cybercab för 29 990 dollar, men utan ett abonnemang på 299 dollar i månaden går bilen inte att använda.</description>
+    <enclosure url="https://motorpuls.se/img/og/tesla-cybercab-privat-299-dollar-manad.jpg" length="136966" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/tesla-cybercab-privat-299-dollar-manad.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="136966"/>
+  </item>
   <item>
     <title>Polestar 3 för 974 000 kr kunde inte laddas hemma. Nu får ägaren lämna tillbaka bilen</title>
     <link>https://motorpuls.se/artikel/polestar-3-arn-havning-ombordladdare/</link>
