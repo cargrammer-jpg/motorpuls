@@ -55,15 +55,4 @@
       <news:title>Enzo Ferraris sista bil. En F40 som stod i Sverige i 20 år såldes för 51 miljoner kronor</news:title>
     </news:news>
   </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/bensinpumpar-for-lite-bransle-sverige/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-13T12:00:00+01:00</news:publication_date>
-      <news:title>Pumparna gav för lite bränsle 98 gånger. Så kontrolleras macken i Sverige</news:title>
-    </news:news>
-  </url>
 </urlset>
