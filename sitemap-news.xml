@@ -66,26 +66,4 @@
       <news:title>Pumparna gav för lite bränsle 98 gånger. Så kontrolleras macken i Sverige</news:title>
     </news:news>
   </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/goteborg-cykeloverfarter-vajningsplikt/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-13T07:00:00+01:00</news:publication_date>
-      <news:title>Göteborg vänder väjningsplikten på 1 000 platser. Missar du det kan det kosta 3 000 kronor</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/italien-minimihastighet-100-vanster-korfalt/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-13T07:00:00+01:00</news:publication_date>
-      <news:title>Italien vill ge böter till dig som kör under 100 km/h. Men bara i ett körfält</news:title>
-    </news:news>
-  </url>
 </urlset>
