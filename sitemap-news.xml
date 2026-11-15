@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
+    <loc>https://motorpuls.se/artikel/polestar-3-arn-havning-ombordladdare/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-15T12:00:00+01:00</news:publication_date>
+      <news:title>Polestar 3 för 974 000 kr kunde inte laddas hemma. Nu får ägaren lämna tillbaka bilen</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://motorpuls.se/artikel/ecobest-laddforluster-volvo-ex60-tesla-model-y/</loc>
     <news:news>
       <news:publication>
