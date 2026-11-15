@@ -1,3 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+  <url>
+    <loc>https://motorpuls.se/artikel/ecobest-laddforluster-volvo-ex60-tesla-model-y/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-14T18:00:00+01:00</news:publication_date>
+      <news:title>Upp till 18 procent extra el går åt när du laddar. Volvo EX60 slösar minst i nytt test</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://motorpuls.se/artikel/lamborghini-diablo-djavulen-chrysler/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-14T18:00:00+01:00</news:publication_date>
+      <news:title>Chrysler tyckte att Diablo var för vass. Så många av Lamborghinis djävul finns kvar</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://motorpuls.se/artikel/sista-koenigsegg-jesko-125-medvedev/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-14T12:00:00+01:00</news:publication_date>
+      <news:title>Den sista Koenigsegg Jesko har lämnat Ängelholm. Köparen ska vara en rysk tennisstjärna</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://motorpuls.se/artikel/bmw-m3-e30-homologering-dtm/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-14T07:00:00+01:00</news:publication_date>
+      <news:title>BMW behövde bara 5 000. Det blev 17 970 E30 M3, och de bästa kostar miljoner</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://motorpuls.se/artikel/ferrari-f40-sista-enzo-ferrari/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-13T18:00:00+01:00</news:publication_date>
+      <news:title>Enzo Ferraris sista bil. En F40 som stod i Sverige i 20 år såldes för 51 miljoner kronor</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://motorpuls.se/artikel/bensinpumpar-for-lite-bransle-sverige/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-13T12:00:00+01:00</news:publication_date>
+      <news:title>Pumparna gav för lite bränsle 98 gånger. Så kontrolleras macken i Sverige</news:title>
+    </news:news>
+  </url>
 </urlset>
