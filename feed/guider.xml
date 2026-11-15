@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/feed.xsl"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
+<channel>
+  <title>Motorpuls: Guider</title>
+  <link>https://motorpuls.se/</link>
+  <description>Artiklar i kategorin Guider på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
+  <language>sv-SE</language>
+  <lastBuildDate>Sun, 15 Nov 2026 07:00:00 +0100</lastBuildDate>
+  <atom:link href="https://motorpuls.se/feed/guider.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Ingen ändring beslutad för elbilsrabatten 2027. Men en siffra avgörs 30 november</title>
+    <link>https://motorpuls.se/artikel/formansvarde-elbil-2027-per-modell/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/formansvarde-elbil-2027-per-modell/</guid>
+    <pubDate>Sun, 15 Nov 2026 07:00:00 +0100</pubDate>
+    <category>Guider</category>
+    <description>Elbilsrabatten för förmånsbilar är oförändrad inför 2027, men statslåneräntan som styr en del av förmånsvärdet sätts först 30 november. Här är formeln och sex räknade exempel.</description>
+    <enclosure url="https://motorpuls.se/img/og/formansvarde-elbil-2027-per-modell.jpg" length="35341" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/formansvarde-elbil-2027-per-modell.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="35341"/>
+  </item>
+</channel>
+</rss>
