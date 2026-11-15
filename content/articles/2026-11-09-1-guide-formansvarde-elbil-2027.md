@@ -1,6 +1,7 @@
 ---
+seo_title: "Förmånsvärde för elbil 2027: sex populära modeller"
 title: "Ingen ändring beslutad för elbilsrabatten 2027. Men en siffra avgörs 30 november"
-date: 2026-11-09T07:00:00+01:00
+date: 2026-11-15T07:00:00+01:00
 updated: 2026-10-31
 type: guide
 slug: formansvarde-elbil-2027-per-modell
@@ -44,7 +45,7 @@ images:
     source_url: "https://commons.wikimedia.org/wiki/File:Kia_EV3_DSC_9146.jpg"
 ---
 
-# Förmånsvärde för elbil 2027: Så högt blir det för sex populära modeller
+# Ingen ändring beslutad för elbilsrabatten 2027. Men en siffra avgörs 30 november
 
 Rabatten för eldrivna förmånsbilar gäller fortfarande när 2027 börjar, eftersom ingen ändring är beslutad. Här är formeln, siffrorna som redan är klara och vad förmånsvärdet landar på för sex vanliga elbilar.
 
