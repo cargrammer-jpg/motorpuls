@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
+    <loc>https://motorpuls.se/artikel/vw-12-euro-per-bil-tesla-cam/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-16T12:00:00+01:00</news:publication_date>
+      <news:title>Volkswagen tjänade 12 euro per bil. Tesla tappar, Mercedes drar ifrån</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://motorpuls.se/artikel/stellantis-aterkallelse-dorrar-last-krock/</loc>
     <news:news>
       <news:publication>
@@ -53,17 +64,6 @@
       </news:publication>
       <news:publication_date>2026-11-14T18:00:00+01:00</news:publication_date>
       <news:title>Chrysler tyckte att Diablo var för vass. Så många av Lamborghinis djävul finns kvar</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/sista-koenigsegg-jesko-125-medvedev/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-14T12:00:00+01:00</news:publication_date>
-      <news:title>Den sista Koenigsegg Jesko har lämnat Ängelholm. Köparen ska vara en rysk tennisstjärna</news:title>
     </news:news>
   </url>
 </urlset>
