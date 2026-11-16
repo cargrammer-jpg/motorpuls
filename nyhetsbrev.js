@@ -34,7 +34,10 @@
         body: JSON.stringify({ email, source: location.pathname, webbplats: trap })
       });
       // Samma svar oavsett om adressen redan prenumererar, så att ingen kan se vilka adresser som är anmälda.
-      if (r.ok) return done();
+      if (r.ok) {
+        try { if (window.umami && typeof umami.track === 'function') umami.track('newsletter_signup'); } catch (err) {}
+        return done();
+      }
       say(r.status === 400 ? 'Adressen kunde inte sparas. Kontrollera att den är rätt skriven.'
         : r.status === 429 ? 'För många försök. Vänta en stund och försök igen.'
         : 'Något gick fel. Försök igen om en stund.', true);

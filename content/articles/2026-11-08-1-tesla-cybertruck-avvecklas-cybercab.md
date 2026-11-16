@@ -10,7 +10,7 @@ sources:
   - https://x.com/wmorrill3/status/2118598887258644883
   - https://finance.yahoo.com/news/tesla-wind-down-cybertruck-production-094210977.html
   - https://www.cnbc.com/2026/11/06/tesla-cybertruck-texas-musk.html
-excerpt: "Elon Musk meddelade den 6 november att Tesla börjar avveckla Cybertruck-produktionen vid Gigafactory Texas kring mitten av 2027, för att ge plats åt Cybercab."
+excerpt: "Elon Musk sa den 6 november att Tesla avvecklar Cybertruck vid Gigafactory Texas kring mitten av 2027, för att ge plats åt Cybercab."
 summary:
   - "Musk: Tesla avvecklar Cybertruck-produktionen i Texas omkring mitten av 2027."
   - "Skälet är ökad tillverkning av Cybercab, Teslas robotaxi utan ratt och pedaler."

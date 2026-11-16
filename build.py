@@ -152,8 +152,11 @@ NEWSLETTER_PAGES = ("prenumeration",)  # kataloger som bara byggs med flaggan p�
 NEWSLETTER_SRC = os.path.join(ROOT, "nyhetsbrev")  # källor: nyhetsbrev.css, nyhetsbrev.js (publiceras inte som katalog)
 
 # Google AdSense. Tom ADSENSE_CLIENT: inget annonsrelaterat ritas (inget skript, inga rutor, ingen ads.txt).
-# När kontot finns: meta google-adsense-account och adsbygoogle.js (async) i <head> på varje sida, även utan
-# slot-id, så att Google kan verifiera sajten och visa EU-samtycket. ads.txt skrivs i roten och följer med till --out.
+# När kontot finns: meta google-adsense-account i <head> på varje sida (publisher-id, oförändrat, så att Google
+# kan verifiera sajten). adsbygoogle.js laddas inte i den första HTML:en. Ett litet skript hämtar det efter första
+# klick, tangent, pekning eller skroll, eller i ett ledigt ögonblick en stund efter att sidan laddat, så att
+# mobilladdningen inte väntar på annonsnätet. EU-samtycket kommer med samma skript när det väl laddas.
+# ads.txt skrivs i roten och följer med till --out, med samma publisher-id och certifikat som förut.
 # Annonsrutor bara i artiklar, och bara när respektive slot-id är ifyllt. Tomma slot-id: inga rutor och ingen
 # reserverad höjd. Startsidan och kategorisidor får inga annonsrutor. Inga popups, inga klistrade annonser,
 # ingen egen samtyckesdialog: EU-samtycke sköts av Googles certifierade meddelande (AdSense, Privacy & messaging).
@@ -695,7 +698,7 @@ OG_ALT = f"{SITE}: korta bilnyheter med källor"  # alt-text till delningsbilden
 # Sidor som inte ska indexeras (404, prenumerationssidorna) har noindex som förut.
 ROBOTS_DEFAULT = "max-image-preview:large"
 
-def head(title, desc, path, og_type="website", image=None, extra="", preload_img=None, og_title=None, preload_sizes="100vw", noindex=False, robots=None, feeds=()):
+def head(title, desc, path, og_type="website", image=None, extra="", preload_img=None, og_title=None, preload_sizes="100vw", noindex=False, robots=None, feeds=(), track=True):
     canon = DOMAIN + path if path else None
     og_title = og_title or title
     og_img = ""
@@ -747,8 +750,7 @@ def head(title, desc, path, og_type="website", image=None, extra="", preload_img
 {feed_links(feeds)}<link rel="preload" href="/fonts/newsreader-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
 {pre}{push_head()}{newsletter_head()}{extra}{adsense_loader()}
-{UMAMI}
-</head>
+{UMAMI if track else ""}</head>
 <body>
 <a class="skip" href="#innehall">Hoppa till innehållet</a>
 <header class="masthead">
@@ -768,7 +770,7 @@ def topnav(path):
 # Ämnesraden under sidhuvudet: vanliga länkar till ämnessidorna (crawlbara, fungerar utan JS) och till nyhetsbrevsrutan i
 # sidfoten. Ligger utanför den klistrade .masthead så att krympningen i js/site.js inte påverkas. På smala skärmar en rad
 # att svepa i sidled. Bara ämnen som har en sida visas, i SECTION_NAV-ordning.
-SECTION_NAV = ("elbil", "sportbil", "motorsport", "bransle", "tesla")
+SECTION_NAV = ("elbil", "sportbil", "motorsport", "bransle", "trafik-och-sakerhet", "tesla")
 
 def section_nav(path):
     items = [(TOPICS[k]["path"], TOPICS[k]["name"]) for k in SECTION_NAV if k in TOPICS]
@@ -796,7 +798,7 @@ def footer():
 </footer>
 '''
 
-def page(h, body): return h + body + footer() + ANALYTICS + "</body>\n</html>\n"
+def page(h, body, track=True): return h + body + footer() + (ANALYTICS if track else "") + "</body>\n</html>\n"
 
 def topics_nav():
     """Ämnessidorna (och Guider) i sidfoten, så att de nås från varje sida."""
@@ -812,7 +814,8 @@ def meta_line(a, with_date=True):
     return f'<span class="meta"><span class="tag">{esc(a["category"])}</span>{t}</span>'
 
 def img_tag(img, alt, eager=False, sizes="100vw"):
-    load = 'fetchpriority="high" decoding="async"' if eager else 'loading="lazy" decoding="async"'
+    # LCP-bilden (eager) avkodas i den vanliga vägen. decoding=async kan skjuta upp första målningen.
+    load = 'fetchpriority="high"' if eager else 'loading="lazy" decoding="async"'
     ss = f' srcset="{img["srcset"]}" sizes="{sizes}"' if img.get("srcset") else ""
     return f'<img src="{img["src"]}"{ss} width="{img["w"]}" height="{img["h"]}" alt="{esc(alt)}" {load}>'
 
@@ -1120,11 +1123,16 @@ def ld_whole_16x9(a, img):
 # katalog i sajten får ingen ämnessida (bygget varnar).
 TOPIC_DESC = {
     "elbil": "Nyheter om elbilar: nya modeller, priser, räckvidd, laddning och regler som påverkar dig som kör el i Sverige. Varje text länkar till sina källor.",
-    "tesla": "Nyheter om Tesla: modeller, priser, mjukvara som FSD och vad som gäller för svenska Teslaägare. Varje text länkar till sina källor.",
+    "tesla": "Priser, FSD och besiktning för Tesla i Sverige. Model Y, Cybercab och vad som gäller för svenska ägare, med källa på varje påstående.",
     "sportbil": "Sportbilsnyheter: nya modeller, prestanda, återkallelser och teknik. Varje text länkar till sina källor.",
     "motorsport": "Motorsportnyheter: Formel 1, rally, Le Mans och andra racingserier, med fokus på det som berör svenska fans. Varje text länkar till sina källor.",
-    "bransle": "Nyheter om drivmedel, avgifter och regler för bilister: HVO100, reduktionsplikten, skatter och annat som påverkar bilåkandet i Sverige.",
+    "bransle": "Drivmedel och skatter: HVO100, reduktionsplikten, bensinpris och dieselpris, och vad det kostar att tanka i Sverige.",
+    "trafik-och-sakerhet": "Fartkameror, återkallelser, körkort och regler i trafiken. Så påverkar de dig som kör, med källa på varje påstående.",
     "laddning": "Nyheter om laddning av elbilar: laddnätverk, priser och teknik. Varje text länkar till sina källor.",
+}
+# <title> på ämnessidor när namnet plus "senaste nyheterna" inte räcker som sökresultat. Synlig h1 är kategorinamnet.
+TOPIC_TITLE = {
+    "tesla": "Tesla-nyheter i Sverige: priser, FSD och besiktning",
 }
 TOPIC_RESERVED = {"artikel", "om", "feed", "img", "css", "js", "fonts", "favicon", "brand", "content", "data", "drafts",
                   "tools", "supabase", "push", "nyhetsbrev", "integritet", "prenumeration", GUIDE_KEY, "sverige"}
@@ -1173,7 +1181,8 @@ def ld_script(ld): return '<script type="application/ld+json">' + json.dumps(ld,
 
 def topic_page(t, feed=None, list_label=None):
     """Ämnessida (och /guider/): rubrik, beskrivning, RSS och alla artiklar i ämnet, nyast först."""
-    title = f"{t['name']}: senaste nyheterna · {SITE}" if t["key"] != GUIDE_KEY else f"{t['name']} · {SITE}"
+    plain = f"{t['name']}: senaste nyheterna" if t["key"] != GUIDE_KEY else t["name"]
+    title = page_title(plain, TOPIC_TITLE.get(t["key"]))
     crumbs_html, crumbs_ld = breadcrumbs([("Start", "/"), (t["name"], t["path"])])
     ld = {"@context": "https://schema.org", "@graph": [
         {"@type": "CollectionPage", "@id": DOMAIN + t["path"], "name": f"{t['name']} · {SITE}", "description": t["desc"],
@@ -1378,12 +1387,24 @@ def ad_slot(slot_id):
     )
 
 def adsense_loader():
-    """Meta och adsbygoogle.js (async) i <head> på varje sida när kontot är satt. Inga slot-id krävs:
-    Google ska kunna verifiera sajten och visa EU-samtycket innan rutorna slås på. Tomt konto: ingenting."""
+    """Meta med publisher-id i <head> på varje sida när kontot är satt, plus ett litet skript som hämtar
+    adsbygoogle.js efter första interaktionen eller skroll, eller i ett ledigt ögonblick efter laddning.
+    Själva annonsskriptet ligger inte som script-src i den första HTML:en, så det inte konkurrerar med
+    LCP-bilden. Meta-taggen och ads.txt (oförändrat publisher-id) räcker för att Google ska känna igen kontot.
+    Tomt konto: ingenting."""
     client = esc(adsense_client_id())
     if not client: return ""
+    src = f"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={client}"
     return (f'<meta name="google-adsense-account" content="{client}">\n'
-            f'<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={client}" crossorigin="anonymous"></script>\n')
+            '<script>'
+            '(function(){var loaded=false,src="' + src + '";'
+            'function load(){if(loaded)return;loaded=true;var s=document.createElement("script");'
+            's.async=true;s.src=src;s.crossOrigin="anonymous";document.head.appendChild(s);}'
+            '["pointerdown","keydown","touchstart","scroll"].forEach(function(ev){'
+            'addEventListener(ev,load,{once:true,passive:true,capture:true});});'
+            'function later(){setTimeout(function(){if("requestIdleCallback" in window)requestIdleCallback(load,{timeout:2000});else load();},8000);}'
+            'if(document.readyState==="complete")later();else addEventListener("load",later,{once:true});'
+            '})();</script>\n')
 
 def adsense_head():
     """Rutornas stil, bara på artikelsidor när minst ett slot-id är satt. Själva skriptet ligger i adsense_loader()."""
@@ -1521,7 +1542,8 @@ def guides_page(guides):
     return topic_page(dict(key=GUIDE_KEY, name=GUIDE_NAME, path=GUIDE_PATH, desc=GUIDE_DESC, arts=guides), feed=f, list_label="Alla guider")
 
 def notfound():
-    h = head(f"Sidan finns inte · {SITE}", SITE_DESC, None, noindex=True)
+    # Ingen Umami och ingen Cloudflare-beacon: bottar som träffar 404 ska inte räknas som besök.
+    h = head(f"Sidan finns inte · {SITE}", SITE_DESC, None, noindex=True, track=False)
     body = '''
 <main id="innehall" class="article">
   <div class="wrap">
@@ -1533,7 +1555,7 @@ def notfound():
   </div>
 </main>
 '''
-    return page(h, body)
+    return page(h, body, track=False)
 
 def load_pages():
     pages = []
@@ -1776,7 +1798,8 @@ def check_no_adsense(out):
     if bad: raise SystemExit("ADSENSE_CLIENT är tom men annonser finns i utdata: " + ", ".join(sorted(set(bad))))
 
 def check_umami(out):
-    """Umami-scriptet exakt en gång per html-sida, inne i <head>. Cloudflare-beaconen ska finnas oförändrad."""
+    """Umami-scriptet exakt en gång per html-sida, inne i <head>. Cloudflare-beaconen ska finnas oförändrad.
+    404.html är undantagen: bottar som träffar en saknad sida ska inte räknas som besök."""
     bad, htmls = [], []
     for dirpath, _, files in os.walk(out):
         for fn in files:
@@ -1785,6 +1808,10 @@ def check_umami(out):
             htmls.append(rel)
             t = open(os.path.join(dirpath, fn), encoding="utf-8").read()
             head, sep, _rest = t.partition("</head>")
+            if rel == "404.html":
+                if not sep or UMAMI in t or "static.cloudflareinsights.com" in t or "data-website-id" in t:
+                    bad.append(f"{rel}: 404 ska inte ha Umami eller Cloudflare Web Analytics")
+                continue
             if not sep or head.count(UMAMI) != 1 or t.count(UMAMI) != 1:
                 bad.append(f"{rel}: Umami ska ligga exakt en gång, i <head>")
             if ANALYTICS.strip() not in t or t.count(ANALYTICS.strip()) != 1:
@@ -1793,8 +1820,9 @@ def check_umami(out):
     if bad: raise SystemExit("Umami-kontroll:\n  " + "\n  ".join(bad))
 
 def check_adsense(out):
-    """Konto satt: ads.txt i utdataroten, och meta plus adsbygoogle.js exakt en gång per html-sida.
-    Tomma slot-id: inga annonsrutor. Tomt konto: check_no_adsense."""
+    """Konto satt: ads.txt i utdataroten, meta med publisher-id exakt en gång per html-sida, och adressen till
+    adsbygoogle.js exakt en gång i det fördröjda skriptet (inte som script-src i den första HTML:en).
+    Tomma slot-id: inga annonsrutor. Tomt konto: check_no_adsense. 404 saknar besöksräknare, se check_umami."""
     if not adsense_client_id():
         check_no_adsense(out)
         return
@@ -1803,7 +1831,8 @@ def check_adsense(out):
     got = open(ads, encoding="utf-8").read() if os.path.isfile(ads) else ""
     if got != expected: raise SystemExit(f"ads.txt i utdata ska vara {expected!r}, var {got!r}")
     client = esc(adsense_client_id())
-    script = f'<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={client}" crossorigin="anonymous"></script>'
+    src = f"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={client}"
+    eager = f'<script async src="{src}"'
     meta = f'<meta name="google-adsense-account" content="{client}">'
     slots_on = bool(ADSENSE_SLOT_INCONTENT.strip() or ADSENSE_SLOT_END.strip())
     bad, htmls = [], []
@@ -1813,8 +1842,12 @@ def check_adsense(out):
             rel = os.path.relpath(os.path.join(dirpath, fn), out)
             htmls.append(rel)
             t = open(os.path.join(dirpath, fn), encoding="utf-8").read()
-            if t.count(script) != 1 or t.count(meta) != 1: bad.append(f"{rel}: AdSense-taggen saknas eller finns mer än en gång")
-            if "static.cloudflareinsights.com/beacon.min.js" not in t: bad.append(f"{rel}: saknar Cloudflare Web Analytics")
+            if t.count(meta) != 1 or t.count(src) != 1 or eager in t:
+                bad.append(f"{rel}: AdSense-taggen saknas, finns mer än en gång, eller laddas direkt")
+            if rel != "404.html" and "static.cloudflareinsights.com/beacon.min.js" not in t:
+                bad.append(f"{rel}: saknar Cloudflare Web Analytics")
+            if rel == "404.html" and "static.cloudflareinsights.com/beacon.min.js" in t:
+                bad.append(f"{rel}: 404 ska inte ladda Cloudflare Web Analytics")
             if not slots_on and ('class="adslot"' in t or "data-ad-slot" in t): bad.append(f"{rel}: annonsruta trots tomma slot-id")
     if not htmls: bad.append("inga html-filer")
     if bad: raise SystemExit("AdSense-kontroll:\n  " + "\n  ".join(bad))

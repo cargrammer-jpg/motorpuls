@@ -11,7 +11,7 @@ sources:
   - https://www.riksdagen.se/sv/dokument-och-lagar/dokument/betankande/extra-andringsbudget-for-2026-stod-till-ukraina_hd01fiu47/
   - https://www.vibilagare.se/nyheter/drivmedelsskatt-nej-till-forlangd-rabatt-pa-bensin-och-diesel
   - https://www.bensinstation.nu/historiska-br%C3%A4nslepriser/
-excerpt: "Den 30 november tar den stora skattesänkningen på bensin och diesel slut. Skatten stiger med 2,40 kronor litern, och ett försök att förlänga sänkningen har redan stoppats."
+excerpt: "Den 30 november tar skattesänkningen på bensin och diesel slut. Skatten stiger med 2,40 kronor litern. Försöket att förlänga sänkningen stoppades."
 summary:
   - "Skatten på bensin går från 2,39 till 4,79 kronor litern den 1 december. Diesel stiger lika mycket."
   - "Med moms blir det cirka 3 kronor per liter, eller runt 150 kronor för en tank på 50 liter."

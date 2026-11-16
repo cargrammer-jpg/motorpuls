@@ -17,7 +17,7 @@ summary:
   - "Göteborg räknar med runt 1 000 cykelpassager som ska bli cykelöverfarter."
   - "Takten är 25 till 50 platser per år, så arbetet kan ta 20 till 40 år."
   - "Den som inte väjer för en cyklist på en cykelöverfart riskerar 3 000 kronor i ordningsbot."
-category: Bränsle
+category: Trafik och säkerhet
 author: Lukas
 sweden: false
 images:

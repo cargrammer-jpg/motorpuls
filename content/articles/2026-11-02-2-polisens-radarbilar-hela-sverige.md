@@ -1,5 +1,5 @@
 ---
-seo_title: "Polisens nya radarbilar finns nu i hela Sverige"
+seo_title: "Polisens radarbilar i hela Sverige: så mäter de"
 title: "Polisens radar mäter 18 gånger i sekunden. Nu finns den i hela Sverige"
 date: 2026-11-02T07:00:00+01:00
 slug: polisens-radarbilar-hela-sverige
@@ -13,12 +13,12 @@ sources:
   - https://www.svt.se/nyheter/lokalt/vasternorrland/polisens-bilar-far-ny-radar-ska-stoppa-fler-fortkorare
   - https://www.tv4.se/artikel/3V1RHgeDO6WPpqWPeL2Pny/haer-aer-polisens-nya-superlaser-ska-fanga-fler-fortkoerare
   - https://www.aklagare.se/globalassets/dokument/ordningsbotskatalog/bilaga-1a.pdf
-excerpt: "Polisbilar som mäter hastigheten på bilar framför och i mötande körfält finns nu i alla sju polisregioner. Inga automatiska böter, men fler kan åka fast."
+excerpt: "Radarn mäter 18 gånger i sekunden, framåt och i mötande fil, nu i alla sju polisregioner. Inga automatiska böter, men fler kan åka fast."
 summary:
   - "Radarn gör 18 mätningar per sekund och mäter både framförvarande och mötande trafik."
   - "Den finns nu i alla sju polisregioner, men polisen kallar det fortfarande ett pilotprojekt."
   - "Polisen måste fortfarande stoppa bilen. Boten börjar på 1 500 kronor."
-category: Bränsle
+category: Trafik och säkerhet
 author: Lukas
 sweden: true
 images:

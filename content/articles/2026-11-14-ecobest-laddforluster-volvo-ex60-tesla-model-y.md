@@ -6,7 +6,7 @@ slug: ecobest-laddforluster-volvo-ex60-tesla-model-y
 tags: [elbil, laddning, ECOBEST, AUTOBEST, Volvo EX60, Tesla Model Y, Renault Twingo, energiförbrukning]
 sources:
   - https://autobest.org/real-traffic-tests-put-15-new-evs-to-the-truth-test-and-bring-vehicle-to-load-on-a-rescue-mission-for-the-first-time/
-excerpt: "Ett europeiskt test av 15 nya elbilar visar stora skillnader i hur mycket el som försvinner vid laddning. Volvo EX60 tappar minst, Tesla Model Y är näst snålast på vägen."
+excerpt: "Ett test av 15 nya elbilar visar stora skillnader i el som försvinner vid laddning. Volvo EX60 tappar minst. Tesla Model Y är näst snålast på vägen."
 summary:
   - "AUTOBEST testade 15 nya elbilar i verklig trafik i Italien, med metod certifierad av Bureau Veritas."
   - "Volvo EX60 behövde bara 4,7 procent mer el än batteriets nettokapacitet. Kia EV2 behövde drygt 18 procent."

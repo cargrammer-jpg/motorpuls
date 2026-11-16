@@ -15,7 +15,7 @@ sources:
   - https://rmsothebys.com/auctions/pa26/lots/r0042-1990-bmw-m3-sport-evolution/
   - https://bringatrailer.com/listing/1988-bmw-m3-273-2/
   - https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml
-excerpt: "Första BMW M3 byggdes för att få tävla i Grupp A och blev en av de mest framgångsrika standardvagnarna någonsin. 17 970 byggdes, men ingen vet hur många som finns kvar."
+excerpt: "Första BMW M3 byggdes för Grupp A och blev en av de mest framgångsrika standardvagnarna. 17 970 byggdes, men ingen vet hur många som finns kvar."
 summary:
   - "BMW behövde bygga 5 000 bilar för att få tävla i Grupp A. Det blev 17 970 E30 M3 mellan 1986 och 1991."
   - "M3 vann bland annat VM för standardvagnar 1987, DTM 1987 och 1989 och nationella mästerskap i Sverige 1989 enligt BMW."

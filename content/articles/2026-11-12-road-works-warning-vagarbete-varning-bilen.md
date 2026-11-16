@@ -13,7 +13,7 @@ summary:
   - "Omkring 6 000 till 8 000 vägunderhållsfordon i Sverige och Norge delar sin position i realtid."
   - "Varningen når redan cirka 80 000 Škoda-bilar i månaden, plus Waze och Apple Maps."
   - "70 skyddsfordon av typen TMA blev påkörda i Sverige under 2022."
-category: Bränsle
+category: Trafik och säkerhet
 author: Lukas
 sweden: false
 images:

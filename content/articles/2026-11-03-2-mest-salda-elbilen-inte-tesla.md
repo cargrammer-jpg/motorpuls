@@ -13,7 +13,7 @@ sources:
   - https://skatteverket.se/foretag/arbetsgivare/lonochersattning/formaner/bilforman/listorovernybilspriser.4.d5e04db14b6fef2c8695f6.html
   - https://skatteverket.entryscape.net/rowstore/dataset/fad86bf9-67e3-4d68-829c-7b9a23bc5e42
   - https://www.skatteverket.se/privat/skatter/arbeteochinkomst/formaner/bilforman/miljobilar
-excerpt: "I september var Tesla Model Y Sveriges mest registrerade elbil. I oktober hamnade den på elfte plats, medan Volvo EX40 drog ifrån i kampen om årets elbilsetta."
+excerpt: "I september var Tesla Model Y Sveriges mest registrerade elbil. I oktober föll den till elfte plats, medan Volvo EX40 tog ledningen om årets elbilsetta."
 summary:
   - "Oktober: Volvo EX40 etta med 997 registreringar, Tesla Model Y elva med 328."
   - "Januari till oktober: EX40 9 894, Model Y 7 706. Avståndet har vuxit till 2 188 bilar."

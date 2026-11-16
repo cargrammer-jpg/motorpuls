@@ -1,5 +1,5 @@
 ---
-seo_title: "Kinesisk elbil kör 503 km/h. Farten erkänd av FIA"
+seo_title: "Yangwang U9 Xtreme: 503 km/h, erkänd av FIA"
 title: "Kinesisk elbil kör 503 km/h. FIA erkänner farten över 500 km/h"
 date: 2026-11-07T18:00:00+01:00
 slug: yangwang-u9-xtreme-503-kmh
@@ -8,7 +8,7 @@ sources:
   - https://www.fia.com/news/yangwang-u9-xtreme-surpasses-500-kmh-speed-achievement-recognised-fia
   - https://www.mediaoffice.abudhabi/en/transport/abu-dhabi-marks-global-automotive-milestone-as-yangwang-u9-xtreme-sets-new-global-speed-record-of-50317kph/
   - https://cnevpost.com/2026/11/06/byd-yangwang-u9-xtreme-breaches-500-km-h/
-excerpt: "Yangwang U9 Xtreme nådde 503,17 km/h på en avstängd motorväg i Abu Dhabi den 1 november. FIA har erkänt farten och Guinness gav två rekord för körning i en riktning."
+excerpt: "Yangwang U9 Xtreme nådde 503,17 km/h i Abu Dhabi den 1 november. FIA har erkänt farten och Guinness gav två rekord i en riktning."
 summary:
   - "503,17 km/h den 1 november 2026 på E11 i Abu Dhabi, med Marc Basseng bakom ratten."
   - "FIA erkänner farten. Guinness ger två rekord, för produktionsbil och eldriven produktionsbil, i en riktning."

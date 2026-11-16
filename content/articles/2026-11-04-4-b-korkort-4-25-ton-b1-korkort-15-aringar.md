@@ -17,7 +17,7 @@ summary:
   - "Med B-körkort ska du få köra bilar upp till 4,25 ton, om de helt eller delvis drivs med el, vätgas eller gas."
   - "Med BE blir maxvikten för bil och släp 7,75 ton. Båda kräver att du haft behörigheten i två år."
   - "Ett nytt körkort, B1, ska låta 15-åringar köra bilar som går max 45 km/h."
-category: Elbil
+category: Trafik och säkerhet
 author: Lukas
 sweden: true
 images:

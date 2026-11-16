@@ -1,6 +1,6 @@
 ---
 title: "Bensin-Macan slog elversionen med nästan 5 000 bilar. Nu gör Porsche helt om"
-seo_title: "Porsche Macan med bensinmotor kommer 2028"
+seo_title: "Porsche Macan med bensin 2028, samma namn"
 date: 2026-10-30T11:54:00+01:00
 slug: porsche-macan-bensin-namn-2028
 tags:
@@ -16,7 +16,7 @@ sources:
   - https://www.t-online.de/mobilitaet/aktuelles/id_101503752/porsche-macan-suv-kommt-wieder-mit-benzinern-hybriden-und-altem-namen.html
   - https://newsroom.porsche.com/en/2026/company/porsche-deliveries-third-quarter-2026-43480.html
   - https://newsroom.porsche.com/en/2026/company/porsche-capital-markets-day-strategy-sportwagenschmiede-35-43419.html
-excerpt: "Porsches nya SUV med bensin- och laddhybridmotor kommer 2028 och ska heta Macan, samma namn som elbilen."
+excerpt: "Bensin-Macan sålde nästan 5 000 fler än elbilen. Nya SUV:n med bensin och laddhybrid kommer 2028 och ska heta Macan."
 summary:
   - "Nya bensin- och laddhybrid-SUV:n från 2028 får namnet Macan, enligt Porsches finanschef."
   - "Under årets nio första månader levererades 27 996 bensin-Macan mot 23 029 el-Macan."

@@ -21,7 +21,7 @@ summary:
   - "Personbilar ska ha vinterdäck 1 december till 31 mars när det är vinterväglag. Mönsterdjupet ska vara minst 3 millimeter."
   - "Dubbdäck är tillåtna 1 oktober till 15 april, eller längre om det är eller väntas bli vinterväglag."
   - "Tunga lastbilar och bussar har krav redan från 10 november till 10 april, oavsett väglag."
-category: Bränsle
+category: Trafik och säkerhet
 author: Lukas
 sweden: false
 images:

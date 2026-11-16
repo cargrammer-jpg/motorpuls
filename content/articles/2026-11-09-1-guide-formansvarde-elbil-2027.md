@@ -19,7 +19,7 @@ sources:
   - https://www.transportstyrelsen.se/sv/vagtrafik/fordon/skatter-och-avgifter/fordonsskatt/skattens-storlek/
   - https://www.regeringen.se/contentassets/779961287e264bcaa873040f8da66c2d/vagen-mot-utfasning--styrmedel-for-ett-fossilfritt-samhalle-sou-202633.pdf
   - https://www.regeringen.se/remisser/2026/06/remiss-av-betankandet-vagen-mot-utfasning-sou-202633/
-excerpt: "Elbilsrabatten för förmånsbilar är oförändrad inför 2027, men statslåneräntan som styr en del av förmånsvärdet sätts först 30 november. Här är formeln och sex räknade exempel."
+excerpt: "Elbilsrabatten för förmånsbilar är oförändrad inför 2027. Räntan som styr en del av förmånsvärdet sätts 30 november. Här är formeln och sex exempel."
 summary:
   - "Ingen ändring av nedsättningen för elbilar är beslutad för 2027. Nybilspriset sänks fortfarande med 350 000 kronor, högst hälften."
   - "Prisbasbeloppet 2027 är 59 600 kronor. Statslåneräntan för 2027 blir känd först 30 november 2026."

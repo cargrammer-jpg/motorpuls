@@ -1,6 +1,6 @@
 ---
 title: "Utredning vill föra in HVO100 i reduktionsplikten senast 2031"
-seo_title: "Utredning vill ha HVO100 i reduktionsplikten"
+seo_title: "HVO100 i reduktionsplikten senast 2031"
 date: 2026-10-30T01:19:00+01:00
 slug: hvo100-reduktionsplikten-utredning-2031
 tags:

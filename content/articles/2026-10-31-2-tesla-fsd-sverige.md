@@ -19,7 +19,7 @@ sources:
   - https://trendingtesla.com/latvia-tenth-eu-country-tesla-fsd-supervised-why-december-vote-needs-big-four/
   - https://www.fool.com/earnings/call-transcripts/2026/10/22/tesla-tsla-q3-2026-earnings-call-transcript/
   - https://assets-ir.tesla.com/tesla-contents/IR/TSLA-Q3-2026-Update.pdf
-excerpt: "Lettland blev tionde EU-land att tillåta Teslas förarstöd och Italien stödjer ett snabbt EU-beslut, men i Sverige är funktionen fortfarande inte tillåten för vanliga ägare."
+excerpt: "Lettland blev tionde EU-landet med Teslas förarstöd. Italien vill se ett snabbt EU-beslut, men i Sverige är FSD inte tillåtet för vanliga ägare."
 summary:
   - "Tio EU-länder tillåter Teslas förarstöd, Sverige är inte ett av dem."
   - "Italien stödjer nu ett snabbt EU-gemensamt godkännande."

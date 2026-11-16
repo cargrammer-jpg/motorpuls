@@ -19,7 +19,7 @@ sources:
 - https://www.avdr.nl/legalflix/live-webinars/lf-live-webinarj-aguar-byd-uitspraak-inzake-bewijsbeslag/
 - https://www.bydukmedia.com/en/news-articles/byd-confirms-pricing-and-specifications-of-its-eagerly-anticipated-first-seven-seat-suv-in-uk-%E2%80%93-ti-7.html
 - https://www.landrover.se/defender/defender-110/index.html
-excerpt: "Domstolsutsedda förrättningsmän säkrade digitala dokument på BYD:s kontor i Nederländerna på uppdrag av Jaguar Land Rover. Den 11 november väntas domstolen i Haag besluta om fallet kan gå vidare."
+excerpt: "Dokument säkrades på BYD:s kontor i Nederländerna åt Jaguar Land Rover. Domstolen i Haag väntas den 11 november avgöra om fallet går vidare."
 summary:
 - "JLR misstänker att BYD tagit isär en Defender för att bygga suven Ti7."
 - "Domstolen i Haag väntas ge besked i processfrågorna den 11 november."

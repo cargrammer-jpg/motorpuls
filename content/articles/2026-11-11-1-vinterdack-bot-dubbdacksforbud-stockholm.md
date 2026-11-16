@@ -16,7 +16,7 @@ summary:
   - "Från 1 december till 31 mars krävs vinterdäck när det är vinterväglag. Boten är 2 000 kronor."
   - "För slitna däck kostar 1 200 kronor och dubbdäck på förbjuden gata 1 000 kronor."
   - "Stockholm förbjuder dubbdäck på Sveavägen, Birger Jarlsgatan, Vasagatan och Torsgatan från 1 oktober 2027."
-category: Bränsle
+category: Trafik och säkerhet
 author: Lukas
 sweden: true
 images:

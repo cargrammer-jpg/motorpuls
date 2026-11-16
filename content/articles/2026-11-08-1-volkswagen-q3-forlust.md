@@ -1,5 +1,6 @@
 ---
 title: "Volkswagen förlorade 64 miljarder kronor på tre månader. Porsche blev den dyraste posten"
+seo_title: "VW förlorade 64 miljarder kronor på ett kvartal"
 date: 2026-11-08T07:00+01:00
 slug: volkswagen-q3-forlust-porsche-nedskrivning
 tags: [Volkswagen, Porsche, kvartalsrapport, ekonomi, elbilar]

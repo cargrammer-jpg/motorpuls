@@ -8,7 +8,7 @@ sources:
   - https://www.sec.gov/Archives/edgar/data/1884082/000110465926123060/tm2629058d1_6k.htm
   - https://www.polestar.com/dato-assets/95362/1793879260-conversion-plan-polestar-performance-ab.pdf
   - https://efn.se/polestar-byter-hemvist-flyttar-inte-fran-sverige
-excerpt: "Polestar Performance AB lämnade den 5 november in en plan till Bolagsverket om att ombildas till nederländskt B.V. Huvudkontoret och verksamheten ska enligt bolaget stanna i Göteborg."
+excerpt: "Polestar lämnade den 5 november in en plan till Bolagsverket om att bli nederländskt B.V. Huvudkontoret ska enligt bolaget stanna i Göteborg."
 summary:
   - "Polestar Performance AB ska bli Polestar Performance B.V. med säte i Beesd, Nederländerna."
   - "SEC-handling och ombildningsplan: HQ och verksamhet planeras kvar i Göteborg, svensk filial behålls."
