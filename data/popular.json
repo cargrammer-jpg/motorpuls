@@ -1,33 +1,37 @@
 {
-  "updated": "2026-11-15T12:00+01:00",
+  "updated": "2026-11-16T11:57+01:00",
   "source": "umami",
   "articles": [
-    {
-      "slug": "polestar-3-arn-havning-ombordladdare",
-      "views": 12
-    },
     {
       "slug": "polestar-formula-2030-nya-polestar-2",
       "views": 12
     },
     {
-      "slug": "byd-ti7-land-rover-defender-razzia",
-      "views": 11
+      "slug": "polestar-3-arn-havning-ombordladdare",
+      "views": 12
+    },
+    {
+      "slug": "sista-koenigsegg-jesko-125-medvedev",
+      "views": 12
     },
     {
       "slug": "bensinpumpar-for-lite-bransle-sverige",
       "views": 11
     },
     {
+      "slug": "vw-12-euro-per-bil-tesla-cam",
+      "views": 10
+    },
+    {
       "slug": "tesla-cybercab-privat-299-dollar-manad",
       "views": 10
     },
     {
-      "slug": "sista-koenigsegg-jesko-125-medvedev",
-      "views": 10
+      "slug": "vw-gamechanger-wolfsburg-skrotas",
+      "views": 9
     },
     {
-      "slug": "vw-gamechanger-wolfsburg-skrotas",
+      "slug": "horse-w40-v8-lotus-type-135-skovde",
       "views": 9
     },
     {
@@ -39,11 +43,7 @@
       "views": 9
     },
     {
-      "slug": "horse-w40-v8-lotus-type-135-skovde",
-      "views": 9
-    },
-    {
-      "slug": "polisens-radarbilar-hela-sverige",
+      "slug": "stellantis-aterkallelse-dorrar-last-krock",
       "views": 6
     },
     {
@@ -55,51 +55,11 @@
       "views": 4
     },
     {
-      "slug": "mclaren-f1-mittensits-le-mans",
-      "views": 1
-    },
-    {
-      "slug": "italien-minimihastighet-100-vanster-korfalt",
-      "views": 1
-    },
-    {
-      "slug": "hvo100-reduktionsplikten-utredning-2031",
-      "views": 1
-    },
-    {
-      "slug": "ferrari-f40-sista-enzo-ferrari",
-      "views": 1
-    },
-    {
-      "slug": "porsche-macan-bensin-namn-2028",
-      "views": 1
-    },
-    {
-      "slug": "eu-dorrhandtag-mekanisk-oppnare-ex60-tesla",
-      "views": 1
+      "slug": "polisens-radarbilar-hela-sverige",
+      "views": 4
     },
     {
       "slug": "tesla-fsd-sverige-eu-omrostning-december",
-      "views": 1
-    },
-    {
-      "slug": "tesla-model-3-y-sist-goca-besiktning",
-      "views": 1
-    },
-    {
-      "slug": "toyota-celica-rally-vm-oliver-solberg-2027",
-      "views": 1
-    },
-    {
-      "slug": "bmw-m3-el-fyra-motorer",
-      "views": 1
-    },
-    {
-      "slug": "volkswagen-q3-forlust-porsche-nedskrivning",
-      "views": 1
-    },
-    {
-      "slug": "volvo-ex90-akutbil-bromsfel-drammen",
       "views": 1
     },
     {
@@ -107,7 +67,27 @@
       "views": 1
     },
     {
-      "slug": "bensin-diesel-3-kronor-dyrare-1-december",
+      "slug": "byd-ti7-land-rover-defender-razzia",
+      "views": 1
+    },
+    {
+      "slug": "bmw-m3-el-fyra-motorer",
+      "views": 1
+    },
+    {
+      "slug": "e4-forbifart-stockholm-oppnar-6-december",
+      "views": 1
+    },
+    {
+      "slug": "ferrari-f40-sista-enzo-ferrari",
+      "views": 1
+    },
+    {
+      "slug": "hvo100-reduktionsplikten-utredning-2031",
+      "views": 1
+    },
+    {
+      "slug": "italien-minimihastighet-100-vanster-korfalt",
       "views": 1
     },
     {
@@ -116,6 +96,14 @@
     },
     {
       "slug": "lamborghini-diablo-djavulen-chrysler",
+      "views": 1
+    },
+    {
+      "slug": "mclaren-f1-mittensits-le-mans",
+      "views": 1
+    },
+    {
+      "slug": "bensin-diesel-3-kronor-dyrare-1-december",
       "views": 1
     }
   ]
