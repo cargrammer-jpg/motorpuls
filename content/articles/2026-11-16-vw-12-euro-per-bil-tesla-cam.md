@@ -10,7 +10,7 @@ slug: vw-12-euro-per-bil-tesla-cam
 tags: [Volkswagen, Tesla, Mercedes-Benz, BMW, BYD, Stellantis, lönsamhet, bilindustrin]
 sources:
   - https://auto-institut.de/automotiveperformance/finanzielle-performance-im-vergleich-von-21-automobilherstellern-q1-q3-2026/
-excerpt: "En ny jämförelse av 21 biltillverkare visar att Volkswagen bara fick 12 euro i rörelseresultat per bil under årets första nio månader. Tesla tappar 39 procent per bil."
+excerpt: "Volkswagen fick 12 euro i rörelseresultat per bil under årets första nio månader, i en jämförelse av 21 tillverkare. Tesla tappar 39 procent per bil."
 summary:
   - "Volkswagens rörelsemarginal föll från 2,3 till 0,03 procent, vilket motsvarar 12 euro per bil."
   - "Mercedes-Benz tjänar mest per bil, 4 198 euro, medan Tesla har sjunkit till 1 335 euro."

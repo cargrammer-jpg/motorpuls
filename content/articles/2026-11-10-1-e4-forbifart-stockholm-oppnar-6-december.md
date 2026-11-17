@@ -16,7 +16,7 @@ summary:
   - "Sträckan Häggvik till Hjulsta öppnar 6 december 2026, fyra år tidigare än planerat."
   - "Den är cirka 3,5 kilometer lång och cirka 1,8 kilometer går i tunnel."
   - "Hela vägen på 21 kilometer, med en trolig slutkostnad på 51,5 miljarder kronor, öppnar 2030."
-category: Bränsle
+category: Trafik och säkerhet
 author: Lukas
 sweden: true
 images:

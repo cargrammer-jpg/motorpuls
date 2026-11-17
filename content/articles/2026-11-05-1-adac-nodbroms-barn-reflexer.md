@@ -11,7 +11,7 @@ summary:
   - "ADAC testade sex bilar i mörker mot dockor med och utan reflexkläder."
   - "Barnet i reflexkläder missades av nästan alla, bara Mercedes CLA upptäckte det."
   - "ADAC tror att felet kan rättas med en mjukvaruuppdatering."
-category: Elbil
+category: Trafik och säkerhet
 author: Lukas
 images:
   - src: "img/adac-nodbroms-barn-reflexer/mercedes-cla-250-heddesheim.jpg"

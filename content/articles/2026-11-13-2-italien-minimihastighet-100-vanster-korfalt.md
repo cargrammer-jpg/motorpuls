@@ -19,7 +19,7 @@ summary:
   - "Förslaget kräver minst 100 km/h i vänstra körfältet på vägar med minst tre körfält per riktning."
   - "Boten är 40 euro enligt italienska källor. Undantag gäller vid regn, dimma, köer och skyltning."
   - "Hela nya trafiklagen ska gälla från 1 januari 2028, och böterna höjs för bilar över 150 kW."
-category: Bränsle
+category: Trafik och säkerhet
 author: Lukas
 images:
   - src: "img/italien-minimihastighet-100-vanster-korfalt/a1-commons.jpg"

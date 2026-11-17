@@ -10,7 +10,7 @@ summary:
   - "Föraren säger att bromsen var i botten utan att något hände, i cirka 40 km/h."
   - "Volvo hittade ett fel i bromssystemets styrenhet och bytte den."
   - "Volvo Norge kallar händelsen ett enskilt fall."
-category: Elbil
+category: Trafik och säkerhet
 author: Lukas
 images:
   - src: "img/volvo-ex90-akutbil-bromsfel-drammen/volvo-ex90-press.jpg"

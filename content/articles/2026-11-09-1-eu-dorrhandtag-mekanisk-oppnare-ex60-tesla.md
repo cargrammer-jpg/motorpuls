@@ -8,12 +8,12 @@ sources:
   - https://www.europarl.europa.eu/news/en/press-room/20261103IPR48611/automotive-sector-boost-electric-vehicles-simplify-measures
   - https://www.completecar.ie/car-news/article/15445/EU-flush-door-handle-ban-moves-closer-after-safety-vote
   - https://www.autoweek.nl/autonieuws/artikel/polestar-laat-de-verzonken-portieren-los-normale-deurgrepen-komen-weer-terug/
-excerpt: "Tre utskott i Europaparlamentet röstade den 4 november för att bildörrar ska kunna öppnas mekaniskt inifrån och utifrån i nödsituationer. Kravet kan drabba modeller som Volvo EX60."
+excerpt: "Tre EU-utskott röstade den 4 november för mekanisk dörröppning inifrån och utifrån i en nödsituation. Kravet kan gälla Volvo EX60."
 summary:
   - "105 ja, 39 nej och 21 nedlagda röster i tre EP-utskott den 4 november 2026."
   - "Personbilar och lätta skåpbilar upp till 3,5 ton ska kunna öppnas mekaniskt från båda sidor vid nöd."
   - "Hela parlamentet tar ställning till förhandlingsmandatet i december 2026. Det är ännu inte lag."
-category: Elbil
+category: Trafik och säkerhet
 author: Lukas
 sweden: false
 images:

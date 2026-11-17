@@ -18,7 +18,7 @@ summary:
   - "21 nya kameror kommer på väg 42, 83, 84 och 164 under oktober och november."
   - "Under 2025 ledde kamerorna till cirka 119 000 förelägganden om böter."
   - "Boten börjar på 1 500 kronor och når 4 000 kronor vid grov fortkörning."
-category: Bränsle
+category: Trafik och säkerhet
 author: Lukas
 sweden: true
 images:

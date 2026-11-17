@@ -18,7 +18,7 @@ summary:
   - "Stellantis kallar in 51 141 bilar av modellerna Citroën C3, C3 Aircross, Fiat Grande Panda och Opel Frontera."
   - "Vid en frontalkrock kan ett batterifäste bryta 12 voltsströmmen, så att dörrarna inte går att låsa upp utifrån."
   - "Verkstaden byter till ett nytt fäste. Hur många bilar som finns i Sverige är inte känt."
-category: Elbil
+category: Trafik och säkerhet
 author: Lukas
 images:
   - src: "img/stellantis-aterkallelse-dorrar-last-krock/fiat-grande-panda.jpg"

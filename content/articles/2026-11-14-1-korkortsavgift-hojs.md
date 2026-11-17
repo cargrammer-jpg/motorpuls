@@ -13,7 +13,7 @@ summary:
   - "Körkortsavgiften föreslås höjas från 375 till 450 kronor."
   - "Den årliga registeravgiften per fordon går från 74 till 80 kronor."
   - "Generaldirektören beslutar i slutet av november."
-category: Bränsle
+category: Trafik och säkerhet
 author: Lukas
 sweden: true
 images:

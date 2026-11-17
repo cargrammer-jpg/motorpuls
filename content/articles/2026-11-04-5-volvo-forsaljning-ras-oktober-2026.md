@@ -13,7 +13,7 @@ sources:
   - https://news.cision.com/volvo-car-ab--publ-/r/volvo-cars-reports-rolling-three-month-sales-for-the-period-ending-october-2026,c4419774
   - https://mobilitysweden.se/statistik/Nyregistreringar_per_manad_1/nyregistreringar-2026/tydligt-skifte-fran-laddhybrider-till-elbilar-i-oktober
   - https://mobilitysweden.se/storage/7F74570C4C61BEEEE06275646A852419323F77478AF198119E0CBBAF30A0A566/fd0832463d834757a568dc0f5a132daf/xlsx/media/cb12796565d84cb9abeedfe6d78e7b7e/M%C3%A5nadsrapport%20Nyregistreringar%20okt%202026.xlsx
-excerpt: "Volvo Cars sålde 16 procent färre bilar under augusti till oktober. I Sverige föll registreringarna med 24 procent i oktober, medan elbilarna EX30 och EX60 växte."
+excerpt: "Volvo Cars sålde 16 procent färre bilar i augusti till oktober. I Sverige föll registreringarna 24 procent i oktober. EX30 och EX60 växte."
 summary:
   - "Volvo sålde 141 656 bilar i augusti till oktober, 16 procent färre än året innan."
   - "Elbilarna ökade med 27 procent, men laddhybrider och bensinbilar föll med runt 30 procent."

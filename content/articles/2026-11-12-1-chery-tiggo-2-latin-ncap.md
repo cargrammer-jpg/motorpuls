@@ -13,7 +13,7 @@ summary:
   - "Noll procent i vuxenskydd och noll procent i barnskydd i Latin NCAP."
   - "Brandrisk upptäcktes i frontalkrocken och karossen bedömdes som instabil."
   - "Modellen säljs i Latinamerika, inte i Sverige."
-category: Bränsle
+category: Trafik och säkerhet
 author: Lukas
 images:
   - src: "img/chery-tiggo-2-noll-stjarnor-latin-ncap/chery-tiggo-2-pro-max-2025.jpg"

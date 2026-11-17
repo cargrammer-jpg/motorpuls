@@ -14,7 +14,7 @@ summary:
   - "The Telegraph hittade 98 fall i Storbritannien där pumpar levererade mer än 0,5 procent för lite."
   - "Flera brittiska kommuner har inte gjort några kontroller alls på flera år."
   - "I Sverige har Swedac tillsynen, och pumpen ska regelbundet kontrolleras av ett ackrediterat organ."
-category: Bränsle
+category: Trafik och säkerhet
 author: Lukas
 sweden: false
 images:
