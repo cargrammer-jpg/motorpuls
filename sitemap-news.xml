@@ -33,26 +33,4 @@
       <news:title>Dörrarna kan förbli låsta efter krocken. 51 141 Fiat, Opel och Citroën kallas in</news:title>
     </news:news>
   </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/tesla-cybercab-privat-299-dollar-manad/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-15T15:00:00+01:00</news:publication_date>
-      <news:title>Nu kan du köpa en Tesla utan ratt. Musk tycker själv att månadsavgiften är för hög</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/polestar-3-arn-havning-ombordladdare/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-15T12:00:00+01:00</news:publication_date>
-      <news:title>Polestar 3 för 974 000 kr kunde inte laddas hemma. Nu får ägaren lämna tillbaka bilen</news:title>
-    </news:news>
-  </url>
 </urlset>
