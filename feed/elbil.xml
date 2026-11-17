@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Elbil på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Mon, 16 Nov 2026 18:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Tue, 17 Nov 2026 18:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/elbil.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Nu leasar svenskarna hellre än de köper. Över hälften av alla nya privatbilar är privatleasade</title>
+    <link>https://motorpuls.se/artikel/privatleasing-passerar-kop-52-procent/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/privatleasing-passerar-kop-52-procent/</guid>
+    <pubDate>Tue, 17 Nov 2026 18:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>52 procent av alla nya bilar som privatpersoner skaffar i Sverige är nu privatleasade. Bland elbilarna är andelen 59 procent.</description>
+    <enclosure url="https://motorpuls.se/img/og/privatleasing-passerar-kop-52-procent.jpg" length="178082" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/privatleasing-passerar-kop-52-procent.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="178082"/>
+  </item>
   <item>
     <title>Elbil från BYD för 3 890 kronor i månaden. Så står sig Tesla Model Y</title>
     <link>https://motorpuls.se/artikel/byd-privatleasing-black-week/</link>
