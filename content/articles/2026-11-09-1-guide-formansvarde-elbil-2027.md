@@ -2,7 +2,7 @@
 seo_title: "Förmånsvärde för elbil 2027: sex populära modeller"
 title: "Ingen ändring beslutad för elbilsrabatten 2027. Men en siffra avgörs 30 november"
 date: 2026-11-15T07:00:00+01:00
-updated: 2026-10-31
+updated: 2026-11-18T09:05:57+01:00
 type: guide
 slug: formansvarde-elbil-2027-per-modell
 tags: [förmånsbil, tjänstebil, förmånsvärde, elbil, skatt, prisbasbelopp, statslåneränta, Tesla Model Y, Volvo EX30, Volvo EX40, Kia EV3, VW ID.4, BMW iX1]
@@ -24,6 +24,19 @@ summary:
   - "Ingen ändring av nedsättningen för elbilar är beslutad för 2027. Nybilspriset sänks fortfarande med 350 000 kronor, högst hälften."
   - "Prisbasbeloppet 2027 är 59 600 kronor. Statslåneräntan för 2027 blir känd först 30 november 2026."
   - "Med dagens ränta landar sex populära elbilar på cirka 4 350 till 5 230 kronor i förmånsvärde per månad."
+faq:
+  - question: "Är elbilsrabatten för förmånsbilar ändrad 2027?"
+    answer: "Nej. Ingen ändring av nedsättningen för elbilar är beslutad för 2027. Nybilspriset sänks fortfarande med 350 000 kronor, högst hälften."
+  - question: "Vad är prisbasbeloppet 2027?"
+    answer: "Prisbasbeloppet för 2027 är 59 600 kronor, 400 kronor mer än 2026. Den fasta delen av förmånsvärdet blir då 17 284 kronor."
+  - question: "När sätts statslåneräntan för förmånsvärdet 2027?"
+    answer: "Statslåneräntan som ska användas är den som gäller 30 november 2026. Den är inte känd än. Exemplen använder Riksgäldens notering 3,03 procent från 30 oktober 2026."
+  - question: "Vad blir förmånsvärdet för Tesla Model Y?"
+    answer: "Tesla Model Y med bakhjulsdrift landar på 4 828 kronor i månaden 2027 i exemplet. Räkningen använder statslåneräntan 3,03 procent och är utan extrautrustning."
+  - question: "Hur hög är fordonsskatten för en elbil?"
+    answer: "Fordonsskatten för en elbil är grundbeloppet 360 kronor per år, eftersom bilen saknar koldioxidutsläpp."
+  - question: "Vad föreslår utredningen för elbilsavdraget 2028?"
+    answer: "Utredningen Vägen mot utfasning (SOU 2026:33) föreslår att avdraget för elbilar blir 200 000 kronor för bilar som nyregistreras från 1 januari 2028. Förslaget är inte beslutat. Remisstiden gick ut 30 oktober 2026."
 category: Guider
 author: Lukas
 sweden: true
@@ -49,9 +62,9 @@ images:
 
 Rabatten för eldrivna förmånsbilar gäller fortfarande när 2027 börjar, eftersom ingen ändring är beslutad. Här är formeln, siffrorna som redan är klara och vad förmånsvärdet landar på för sex vanliga elbilar.
 
-## Så räknas förmånsvärdet
+## Hur räknas förmånsvärdet för en bil?
 
-Förmånsvärdet är det belopp som läggs på din lön och beskattas när du får köra arbetsgivarens bil privat. Enligt inkomstskattelagen är det summan av fyra delar per år:
+Enligt inkomstskattelagen är förmånsvärdet summan av fyra delar per år. Det är det belopp som läggs på din lön och beskattas när du får köra arbetsgivarens bil privat.
 
 - 0,29 prisbasbelopp
 - nybilspriset gånger 70 procent av statslåneräntan plus 1 procentenhet
@@ -60,7 +73,7 @@ Förmånsvärdet är det belopp som läggs på din lön och beskattas när du f�
 
 Nybilspriset är det pris Skatteverket har fastställt för modellen. Extrautrustning som vinterdäck och dragkrok läggs till. Statslåneräntan är den som gällde i slutet av november året före, dock lägst 0,5 procent.
 
-## Nedsättningen för elbilar
+## Hur stor är nedsättningen för en elbil?
 
 För elbilar sänks nybilspriset med 350 000 kronor innan förmånsvärdet räknas. Sänkningen får vara högst hälften av nybilspriset. Laddhybrider får 140 000 kronor och gasbilar 100 000 kronor. Det gäller bilar som tagits i trafik 1 juli 2022 eller senare.
 
@@ -70,11 +83,11 @@ Lagtexten anger ingen sista dag för nedsättningen, och ingen ändring för 202
 
 Utredningen Vägen mot utfasning (SOU 2026:33) föreslår att avdraget för elbilar blir 200 000 kronor för bilar som nyregistreras från 1 januari 2028. Därefter 150 000 kronor från 2029 och 100 000 kronor från 2030. Från 2031 försvinner det helt, och taket sänks till 40 procent. Remisstiden gick ut 30 oktober 2026. Förslaget är inte beslutat.
 
-## Budgeten är inte klar
+## Är budgeten för 2027 klar?
 
-Budgetpropositionen för 2027 har ännu inte lämnats. Den ska till riksdagen senast 12 november 2026. Om ingen ny regering har tillträtt då blir det en övergångsbudget. Vi uppdaterar guiden om budgeten ändrar reglerna för förmånsbilar.
+Nej. Budgetpropositionen för 2027 har ännu inte lämnats. Den ska till riksdagen senast 12 november 2026. Om ingen ny regering har tillträtt då blir det en övergångsbudget. Vi uppdaterar guiden om budgeten ändrar reglerna för förmånsbilar.
 
-## Siffrorna för 2027
+## Vilka siffror gäller för 2027?
 
 Prisbasbeloppet för 2027 är fastställt till 59 600 kronor, 400 kronor mer än 2026. Den fasta delen blir då 17 284 kronor.
 
@@ -84,7 +97,9 @@ Fordonsskatten för en elbil är grundbeloppet 360 kronor per år, eftersom bile
 
 Skatteverkets nybilslista för tillverkningsår 2027 är inte publicerad. Exemplen bygger därför på listan för tillverkningsår 2026.
 
-## Räkneexempel per modell
+## Vad blir förmånsvärdet per månad?
+
+De sex modellerna i tabellen landar på 4 352 till 5 225 kronor i månaden 2027, med statslåneräntan 3,03 procent och utan extrautrustning.
 
 För en elbil under 700 000 kronor blir formeln:
 
@@ -107,13 +122,13 @@ Varje tiondels procentenhet i statslåneräntan ändrar förmånsvärdet med cir
 
 En dyrare bil får hela avdraget. Tesla Model Y Performance har nybilspriset 719 900 kronor och räknas på 369 900 kronor. Det ger cirka 6 440 kronor i månaden 2027 med samma ränta.
 
-## Vad det betyder för dig
+## Är förmånsvärdet samma sak som din kostnad?
 
 Förmånsvärdet är inte din kostnad. Det läggs på lönen och beskattas med din marginalskatt. Kontrollera alltid din exakta version och utrustning i Skatteverkets beräknare.
 
-## Lukas analys
+## Hur mycket stiger förmånsvärdet 2027?
 
-För 2027 är förändringen liten. Förmånsvärdet för de här bilarna stiger med 70 till 90 kronor i månaden, främst för att statslåneräntan har gått upp.
+Förmånsvärdet för de här bilarna stiger med 70 till 90 kronor i månaden, främst för att statslåneräntan har gått upp. För 2027 är förändringen liten.
 
 Den stora frågan gäller 2028. Blir utredningens förslag verklighet är det registreringsdatumet som avgör nivån. Den som väljer förmånsbil under 2027 bör hålla ögonen på budgeten och på vad regeringen gör med remissen.
 

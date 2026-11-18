@@ -1,6 +1,7 @@
 ---
 title: "Vad kostar det att ladda elbilen hemma och längs vägen"
 date: 2026-11-18T07:00:00+01:00
+updated: 2026-11-18T09:05:57+01:00
 type: guide
 slug: laddkostnad-elbil-hemma-supercharger
 tags: [elbil, laddning, laddkostnad, hemmaladdning, Supercharger, elpris, Tesla Model Y, Mer, OKQ8, Circle K, Ionity, Recharge]
@@ -28,6 +29,19 @@ summary:
   - "Hemmaladdning i exemplen landar på cirka 1,28 till 4,40 kr/kWh i november, beroende på elområde, innan elhandlarens påslag."
   - "Publik snabbladdning kostar från 3,40 kr/kWh på Mers nattpris till 6,69 kr/kWh hos Circle K, enligt operatörernas listpriser den 17 november 2026."
   - "Tesla publicerar inget fast svenskt Supercharger-pris. Det aktuella priset visas per station och tid i appen och i bilen."
+faq:
+  - question: "Vad kostar det att ladda elbilen hemma?"
+    answer: "Hemmaladdning i exemplen landar på cirka 1,28 till 4,40 kr/kWh i november, beroende på elområde, innan elhandlarens påslag."
+  - question: "Hur hög är energiskatten på el 2026?"
+    answer: "Energiskatten på el är 36,0 öre per kilowattimme exklusive moms under 2026. Med 25 procent moms blir det 45,0 öre. I vissa kommuner i norra Sverige är avdraget 9,6 öre exklusive moms, vilket sänker skatten till 33,0 öre inklusive moms."
+  - question: "Vad kostar publik snabbladdning?"
+    answer: "Publik snabbladdning kostar från 3,40 kr/kWh på Mers nattpris till 6,69 kr/kWh hos Circle K, enligt operatörernas listpriser den 17 november 2026."
+  - question: "Vad kostar en Tesla Supercharger i Sverige?"
+    answer: "Tesla publicerar inget fast svenskt Supercharger-pris. Det aktuella priset visas per station och tid i appen och i bilen."
+  - question: "Vad kostar en mil med elbil hemma i SE3?"
+    answer: "Med 1,42 kWh per mil blir hemmaladdningen cirka 4,47 kronor per mil i SE3, utan elhandlarens påslag. Räkneexemplet använder 10 procent laddförlust."
+  - question: "Vad kostar bensin per mil i jämförelsen?"
+    answer: "Jämförelsen använder 0,7 liter per mil och 17,20 kronor litern, den nivå som återgavs i mitten av november. Det blir cirka 12 kronor per mil."
 category: Elbil
 author: Lukas
 sweden: true
@@ -50,7 +64,9 @@ images:
 
 Hemmaladdning är oftast billigast, men skillnaden mellan norra och södra Sverige är stor just nu. Här är posterna på elräkningen, aktuella listpriser längs vägen och ett räkneexempel per mil. Priserna är kontrollerade den 17 november 2026.
 
-## Tre poster när du laddar hemma
+## Vad kostar det att ladda elbilen hemma?
+
+Hemmaladdning i exemplen landar på cirka 1,28 till 4,40 kr/kWh i november, beroende på elområde, innan elhandlarens påslag.
 
 Kostnaden per kilowattimme vid laddboxen är summan av tre rörliga delar: elhandeln, elnätets överföringsavgift och energiskatten. Den fasta nätavgiften för säkringen ingår inte i räkneexemplen. Elhandelsavtalet jämför du på [Elpriskollen](https://elpriskollen.se/), som drivs av Energimarknadsinspektionen. Där jämför du elhandeln, inte elnätet och inte skatten.
 
@@ -58,7 +74,9 @@ Energiskatten på el är 36,0 öre per kilowattimme exklusive moms under 2026, e
 
 Överföringsavgiften skiljer sig mellan nätägarna. Exemplen använder Vattenfall Eldistributions enkeltariff, 44,5 öre per kilowattimme inklusive moms, enligt prislistan från 1 januari 2026.
 
-## Räkneexempel med novemberpriserna
+## Vad kostar en kilowattimme hemma i november?
+
+Räkneexemplet för SE3, medel 1 till 17 november, ger 3,15 kronor per kWh från väggen utan elhandlarens påslag.
 
 Energimarknadsinspektionen anger veckomedlet för vecka 45 till 157,6 euro per MWh i SE3 och 276,1 euro i SE4, mot 14,5 euro i SE1 och 9,6 euro i SE2. Med ECB:s växelkurs 11,095 kronor per euro den 16 november motsvarar det cirka 175 öre per kWh i SE3 och 306 öre i SE4, exklusive moms.
 
@@ -68,7 +86,9 @@ Räkneexempel för SE3, medel 1 till 17 november, utan elhandlarens påslag: 180
 
 Den 17 november var dygnsmedlet i SE3 2,28 kronor per kWh exklusive moms, enligt elprisetjustnu.se som hämtar Nord Pools priser via ENTSO-E. Lägsta kvartspriset var 1,01 kronor sent på kvällen, högsta 3,12 kronor på förmiddagen. Med samma skatt och nätavgift blir vägpriset cirka 2,16 kronor per kWh på den billigaste kvarten och cirka 4,80 kronor på den dyraste.
 
-## Längs vägen: listpriser den 17 november
+## Vad kostar det att ladda längs vägen?
+
+Publik snabbladdning kostar från 3,40 kr/kWh på Mers nattpris till 6,69 kr/kWh hos Circle K, enligt operatörernas listpriser den 17 november 2026.
 
 Siffrorna kommer från operatörernas egna sidor den 17 november 2026 och gäller deras egna stationer.
 
@@ -84,17 +104,17 @@ Siffrorna kommer från operatörernas egna sidor den 17 november 2026 och gälle
 
 Roaming är ofta dyrare än operatörens egen app. Circle K anger 7,49 kr/kWh för roaming på Mers laddare över 150 kW och 6,96 kr/kWh på Ionity. En del Superchargers är öppna för andra märken, vilket appen visar.
 
-## Så räknar du per mil
+## Vad kostar elbilen per mil?
+
+Med 1,42 kWh per mil blir hemmaladdningen cirka 4,47 kronor per mil i SE3, 1,82 kronor i SE1, 1,65 kronor i SE1 med norrlandsavdrag och 6,25 kronor i SE4, utan elhandlarens påslag. På den billigaste kvarten den 17 november i SE3 blir det cirka 3,07 kronor per mil. Samma schablon ger cirka 4,83 kronor på Mers lägsta nattpris, 8,08 kronor på OKQ8:s 150 till 200 kW-laddare, 8,22 kronor på Ionitys apppris, 9,22 kronor på Recharge snabbladdare och 9,50 kronor på Circle K.
 
 Milkostnaden är priset per kWh gånger den el du köper från väggen. I AUTOBEST:s ECOBEST-test gick Tesla Model Y 7,77 km per kWh ur batteriet, vilket motsvarar 1,29 kWh per mil (10 delat med 7,77, avrundat). Laddförlusterna låg på 4,7 procent för Volvo EX60 och på drygt 18 procent för Kia EV2. Övriga bilar, där Model Y ingick, hamnade mellan 10 och 18 procent. Mer om testet finns i [vår artikel om laddförlusterna](/artikel/ecobest-laddforluster-volvo-ex60-tesla-model-y/).
 
 Räkneexemplet använder 10 procent förlust, den lägsta nivån i det spannet: 1,29 gånger 1,10 blir 1,42 kWh från väggen per mil. Den som vet sin egen förbrukning och förlust bör räkna med dem.
 
-Med 1,42 kWh per mil blir hemmaladdningen cirka 4,47 kronor per mil i SE3, 1,82 kronor i SE1, 1,65 kronor i SE1 med norrlandsavdrag och 6,25 kronor i SE4, utan elhandlarens påslag. På den billigaste kvarten den 17 november i SE3 blir det cirka 3,07 kronor per mil. Samma schablon ger cirka 4,83 kronor på Mers lägsta nattpris, 8,08 kronor på OKQ8:s 150 till 200 kW-laddare, 8,22 kronor på Ionitys apppris, 9,22 kronor på Recharge snabbladdare och 9,50 kronor på Circle K.
-
 Som jämförelse använde vi 0,7 liter per mil i [artikeln om skattehöjningen på bensin och diesel den 1 december](/artikel/bensin-diesel-3-kronor-dyrare-1-december/). Med 17,20 kronor litern, den nivå artikeln återgav i mitten av november, blir det cirka 12 kronor per mil. För den som har förmånsbil är elkostnaden bara en post. Förmånsvärdet för 2027 räknar vi i en separat [guide om förmånsvärde](/artikel/formansvarde-elbil-2027-per-modell/). En felande ombordladdare kan tvinga dig ut på dyrare publik laddning, som i [ärendet om vissa Polestar 3](/artikel/polestar-3-arn-havning-ombordladdare/).
 
-## Lukas analys
+## Är hemmaladdning billigare än bensin?
 
 Hemmaladdning är fortfarande billigare än att tanka bensin i exemplen, men skillnaden mellan elområdena är stor i november 2026. I SE4 närmar sig en dyr hemmakilowattimme redan publik snabbladdning, särskilt på dagen. Att styra laddningen till billiga kvartar, jämföra elavtal på Elpriskollen och använda operatörens egen app i stället för roaming sänker kostnaden mer än en enskild siffra i broschyren. Superchargern är praktisk på långresa, men priset finns bara i appen och ska jämföras med de andra listpriserna före avfärd.
 

@@ -44,6 +44,9 @@
 #          framtiden, precis som för date.
 # type:    valfritt, "guide" gör artikeln till en guide (som category: Guider). Guider samlas på /guider/ och i
 #          feed/guider.xml, får Article i stället för NewsArticle i JSON-LD och hamnar inte i sitemap-news.xml.
+# faq:     valfritt, lista med {question, answer} (vanlig text). Ger sektionen "Vanliga frågor" efter brödtexten
+#          och före Källor, plus FAQPage i ett eget JSON-LD-script. Fråga och svar är samma text på sidan och i
+#          schemat. Saknas fältet blir det varken sektion eller FAQPage. Article och NewsArticle lämnas som de är.
 #
 # Läs också: under varje artikel tre andra artiklar. Samma kategori (guider räknas som en kategori) och gemensamma
 #          taggar först, sedan de nyaste. Aldrig artikeln själv. Miniatyrerna använder 400 px-varianterna.
@@ -119,6 +122,10 @@ def md_body(t):
 # feed/guider.xml finns bara när minst en guide är publicerad (som de andra kategoriflödena: inga tomma sidor).
 GUIDE_KEY, GUIDE_NAME, GUIDE_PATH = "guider", "Guider", "/guider/"
 GUIDE_DESC = "Guider från Motorpuls: regler, kostnader och uträkningar förklarade steg för steg, med länkar till källorna."
+# Synlig ingress på /guider/, ovanför listan. Meta-beskrivning och CollectionPage behåller GUIDE_DESC.
+GUIDE_INTRO = ("Guider från Motorpuls förklarar regler, kostnader och uträkningar för dig som kör bil. "
+               "Varje guide svarar rakt på frågan, med datum och siffror från källorna. "
+               "De är skrivna för att kunna läsas igenom på några minuter.")
 GUIDES = []  # publicerade guider, nyast först, sätts i main()
 def is_guide(a): return str(a.get("type") or "").strip().lower() == "guide" or a["cat"] == GUIDE_KEY
 
@@ -216,6 +223,7 @@ def load_articles():
         for k in ("title","date","slug","excerpt","category","author"):
             if not fm.get(k): raise SystemExit(f"{path}: saknar {k}")
         check_summary_images(fm, path)
+        check_faq(fm, path)
         if "sweden" in fm and not isinstance(fm["sweden"], bool): raise SystemExit(f"{path}: sweden ska vara true eller false")
         if fm.get("type") is not None and str(fm["type"]).strip().lower() not in ("guide", "nyhet"):
             raise SystemExit(f"{path}: type ska vara guide (eller utelämnas)")
@@ -260,6 +268,18 @@ def check_sources(fm, sources, path):
     if set(fs) != set(shown):
         raise SystemExit(f"{path}: sources i front matter stämmer inte med ## Källor "
                          f"(saknas i Källor: {sorted(set(fs) - set(shown))}, saknas i sources: {sorted(set(shown) - set(fs))})")
+
+def check_faq(fm, path):
+    """faq är valfritt. Finns det ska varje post ha question och answer som text."""
+    faq = fm.get("faq")
+    if faq is None: return
+    if not isinstance(faq, list) or not faq:
+        raise SystemExit(f"{path}: faq ska vara en lista med frågor")
+    for i, item in enumerate(faq, 1):
+        if not isinstance(item, dict): raise SystemExit(f"{path}: faq[{i}] ska ha question och answer")
+        q, a = item.get("question"), item.get("answer")
+        if not isinstance(q, str) or not q.strip() or not isinstance(a, str) or not a.strip():
+            raise SystemExit(f"{path}: faq[{i}] ska ha question och answer som text")
 
 def check_summary_images(fm, path):
     sm = fm.get("summary")
@@ -1180,7 +1200,8 @@ def breadcrumbs(items):
 def ld_script(ld): return '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace("</", "<\\/") + "</script>\n"
 
 def topic_page(t, feed=None, list_label=None):
-    """Ämnessida (och /guider/): rubrik, beskrivning, RSS och alla artiklar i ämnet, nyast först."""
+    """Ämnessida (och /guider/): rubrik, beskrivning, RSS och alla artiklar i ämnet, nyast först.
+    intro, om den finns, är den synliga ingressen. desc används i meta och JSON-LD."""
     plain = f"{t['name']}: senaste nyheterna" if t["key"] != GUIDE_KEY else t["name"]
     title = page_title(plain, TOPIC_TITLE.get(t["key"]))
     crumbs_html, crumbs_ld = breadcrumbs([("Start", "/"), (t["name"], t["path"])])
@@ -1195,13 +1216,14 @@ def topic_page(t, feed=None, list_label=None):
     rss = (f'\n      <p class="rss-row">{RSS_SVG}<span>Prenumerera via RSS:</span> <a href="{feed["path"]}">{esc(t["name"])}</a>'
            f'<span aria-hidden="true">·</span><a href="/feed.xml">Alla nyheter</a></p>') if feed else ""
     h = head(title, t["desc"], t["path"], image=DEFAULT_OG, feeds=[feed] if feed else (), extra=ld_script(ld))
+    dek = t.get("intro") or t["desc"]
     body = f'''
 <main id="innehall" class="catpage">
   <div class="wrap">
     <header class="catpage__head">
       {crumbs_html}
       <h1 class="catpage__title">{esc(t["name"])}</h1>
-      <p class="catpage__dek">{esc(t["desc"])}</p>{rss}
+      <p class="catpage__dek">{esc(dek)}</p>{rss}
     </header>
     <section class="feed-section catpage__list" aria-label="{esc(list_label or "Alla artiklar i " + t["name"])}">
       <ol class="feed">{"".join(feed_item(a, "h2") for a in t["arts"])}
@@ -1419,6 +1441,32 @@ def insert_after_paragraph(html, snippet, n=3):
     m = matches[min(n, len(matches)) - 1]
     return html[:m.end()] + snippet + html[m.end():]
 
+def faq_text(s):
+    """En rad, så att synlig text och JSON-LD blir samma sträng."""
+    return re.sub(r"\s+", " ", str(s)).strip()
+
+def faq_pairs(a):
+    """[(fråga, svar)] från front matter, eller tom lista."""
+    raw = a.get("faq")
+    if not raw: return []
+    return [(faq_text(item["question"]), faq_text(item["answer"])) for item in raw]
+
+def faq_ld(pairs):
+    """FAQPage. None när listan är tom, så att scriptet bara skrivs när faq finns."""
+    if not pairs: return None
+    return {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+        {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": ans}}
+        for q, ans in pairs]}
+
+def faq_section(pairs):
+    """Synlig FAQ. Fråga och svar är exakt de strängar som faq_ld lägger i schemat."""
+    if not pairs: return ""
+    items = "".join(f'\n          <div class="faq__item"><h3>{esc(q)}</h3><p>{esc(ans)}</p></div>' for q, ans in pairs)
+    return f'''
+        <section class="faq" aria-labelledby="faq-h">
+          <h2 id="faq-h">Vanliga frågor</h2>{items}
+        </section>'''
+
 def article(a, arts=()):
     img, imgs = a["img"], a["images_out"]
     ld = {"@context": "https://schema.org", "@type": "Article" if is_guide(a) else "NewsArticle", "headline": a["title"], "description": a["excerpt"],
@@ -1439,6 +1487,8 @@ def article(a, arts=()):
     crumbs_html, crumbs_ld = breadcrumbs([("Start", "/")] + ([(topic["name"], topic["path"])] if topic else []) + [(a["headline"], a["url"])])
     jsonld = ('<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace("</", "<\\/") + "</script>\n"
               + ld_script(crumbs_ld))
+    faq = faq_pairs(a)
+    if faq: jsonld += ld_script(faq_ld(faq))
     og = og_image(a)
     if og: og = dict(og, alt=img["alt"])  # og:image:alt och twitter:image:alt: huvudbildens alt-text
     h = head(page_title(a["title"], a.get("seo_title")), a["excerpt"], a["url"], og_type="article", image=og, og_title=a["title"],
@@ -1478,7 +1528,7 @@ def article(a, arts=()):
         <div class="prose">
 {prose}
         </div>
-{sources}{share_bar(a, "end")}{preferred_source()}
+{faq_section(faq)}{sources}{share_bar(a, "end")}{preferred_source()}
         <aside class="ai-note" aria-label="Om texten">
           <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M8 7v4.5M8 4.6v.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
           <p>Texten är skriven med hjälp av AI och faktagranskad mot källorna ovan. <a href="/om/">Så arbetar Motorpuls</a></p>
@@ -1539,7 +1589,7 @@ def related_section(a, arts):
 # ---------- kategorisidan Guider ----------
 def guides_page(guides):
     f = next(x for x in FEEDS if x["key"] == GUIDE_KEY)
-    return topic_page(dict(key=GUIDE_KEY, name=GUIDE_NAME, path=GUIDE_PATH, desc=GUIDE_DESC, arts=guides), feed=f, list_label="Alla guider")
+    return topic_page(dict(key=GUIDE_KEY, name=GUIDE_NAME, path=GUIDE_PATH, desc=GUIDE_DESC, intro=GUIDE_INTRO, arts=guides), feed=f, list_label="Alla guider")
 
 def notfound():
     # Ingen Umami och ingen Cloudflare-beacon: bottar som träffar 404 ska inte räknas som besök.
