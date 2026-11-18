@@ -8,7 +8,18 @@
         <news:language>sv</news:language>
       </news:publication>
       <news:publication_date>2026-11-18T12:00:00+01:00</news:publication_date>
-      <news:title>Tesla satsar 3 miljarder euro på robotaxin i Europa. Fabriken ska klara en miljon Cybercab om året</news:title>
+      <news:title>Tesla ska bygga robotaxin Cybercab utanför Berlin för 3 miljarder euro</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://motorpuls.se/artikel/privatleasing-passerar-kop-52-procent/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-17T18:00:00+01:00</news:publication_date>
+      <news:title>Nu leasar svenskarna hellre än de köper. Över hälften av alla nya privatbilar är privatleasade</news:title>
     </news:news>
   </url>
   <url>

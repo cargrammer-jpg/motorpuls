@@ -1,10 +1,6 @@
 ---
-title: "Tesla satsar 3 miljarder euro på robotaxin i Europa. Fabriken ska klara en miljon Cybercab om året"
+title: "Tesla ska bygga robotaxin Cybercab utanför Berlin för 3 miljarder euro"
 seo_title: "Tesla bygger Cybercab i Berlin för 3 miljarder euro"
-# Rubrikförslag (det starkaste används ovan):
-# 1. Tesla satsar 3 miljarder euro på robotaxin i Europa. Fabriken ska klara en miljon Cybercab om året
-# 2. Tesla bygger en hall stor som 70 fotbollsplaner för bilen utan ratt
-# 3. Medan VW krymper bygger Tesla ut. Grünheide kan bli Tysklands största bilfabrik
 date: 2026-11-18T12:00:00+01:00
 slug: tesla-cybercab-giga-berlin-3-miljarder
 tags: [Tesla, Cybercab, robotaxi, Gigafactory Berlin, Grünheide, självkörande, Tyskland]
@@ -36,7 +32,7 @@ images:
     source_url: "https://commons.wikimedia.org/wiki/File:Gigafactory_Berlin,_Oct_2021_(01).jpg"
 ---
 
-# Tesla satsar 3 miljarder euro på robotaxin i Europa. Fabriken ska klara en miljon Cybercab om året
+# Tesla ska bygga robotaxin Cybercab utanför Berlin för 3 miljarder euro
 
 Tesla bygger ut sin fabrik i Grünheide utanför Berlin för tre miljarder euro. Den nya hallen ska på sikt kunna bygga upp till en miljon robotaxibilar av typen Cybercab om året.
 
