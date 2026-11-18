@@ -1,6 +1,6 @@
 ---
-title: "Golf blir hybrid för 373 900 kronor. Samtidigt lägger VW eldrivna Golf på is"
-seo_title: "VW Golf Hybrid: svenska priser, och ID. Golf pausas"
+title: "Volkswagen Golf Hybrid kostar från 373 900 kronor i Sverige"
+seo_title: "VW Golf Hybrid från 373 900 kronor i Sverige"
 date: 2026-11-03T12:00:00+01:00
 slug: volkswagen-golf-hybrid-pris-id-golf-pausas
 tags: [Volkswagen, Golf, T-Roc, hybrid, ID. Golf, fordonsskatt, priser]
@@ -9,7 +9,7 @@ sources:
   - https://www.ndr.de/nachrichten/niedersachsen/braunschweig_harz_goettingen/vw-kommt-es-zu-verzoegerungen-beim-elektrischen-golf,vw-1676.html
   - https://www.nachrichten.at/wirtschaft/vw-stoppt-vorerst-entwicklung-des-idgolf-koennen-uns-das-nicht-leisten;art15,4227401
   - https://www.vibilagare.se/nyheter/priserna-klara-volkswagen-golf-och-t-roc-som-hybrider
-excerpt: "Golf och T-Roc kommer som fullhybrider i Sverige med lägre fordonsskatt, samtidigt som VW pausar utvecklingen av eldrivna ID. Golf."
+excerpt: "De första bilarna väntas under första kvartalet 2027, med nästan 1 500 kronor lägre fordonsskatt per år. Samma dag sa VW att utvecklingen av eldrivna Golf pausas."
 summary:
   - "Golf Hybrid kostar från 373 900 kr och T-Roc Hybrid från 452 900 kr. Första bilarna kommer under första kvartalet 2027."
   - "Fordonsskatten blir knappt 1 500 kr lägre per år än för mildhybriden, enligt Volkswagen."
@@ -25,7 +25,7 @@ images:
     source_url: "https://www.volkswagen-newsroom.com/en/images/detail/volkswagen-golf-and-t-roc-87949"
 ---
 
-# Golf blir hybrid för 373 900 kronor. Samtidigt lägger VW eldrivna Golf på is
+# Volkswagen Golf Hybrid kostar från 373 900 kronor i Sverige
 
 Volkswagen har öppnat orderböckerna för Golf och T-Roc som fullhybrider i Sverige. Samma dag kom beskedet att den eldrivna Golfen får vänta, för att VW inte har råd.
 

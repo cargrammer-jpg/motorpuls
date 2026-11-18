@@ -1,10 +1,6 @@
 ---
-title: "Italien vill ge böter till dig som kör under 100 km/h. Men bara i ett körfält"
-seo_title: "Italien vill bötfälla den som kör under 100 i vänsterfilen"
-# Rubrikförslag (det starkaste är title):
-#   1. Italien vill ge böter till dig som kör under 100 km/h. Men bara i ett körfält
-#   2. För långsam i vänsterfilen? I Italien kan det snart kosta böter
-#   3. Italiens nya trafikregel straffar sniglarna, och starka bilar får dyrare böter
+title: "Italien föreslår minst 100 km/h i vänsterfilen från 2028"
+seo_title: "Italien föreslår minst 100 km/h i vänsterfilen 2028"
 date: 2026-11-13T07:00:00+01:00
 slug: italien-minimihastighet-100-vanster-korfalt
 tags: [Italien, trafikregler, böter, motorväg, vänsterfilen, minimihastighet, bilsemester]
@@ -14,7 +10,7 @@ sources:
   - https://www.assolombarda.it/servizi/mobilita-e-trasporti/informazioni/schema-di-decreto-del-nuovo-codice-della-strada
   - https://www.focus.de/auto/italien-plant-mindesttempo-von-100-km-h-auf-autobahnen_e9c30cbc-0e79-43f7-88f8-36095ead4c23.html
   - https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/trafikforordning-19981276_sfs-1998-1276/
-excerpt: "Italiens förslag till ny trafiklag kräver minst 100 km/h i vänstra körfältet på motorvägar med tre eller fler körfält. Reglerna ska gälla från 2028."
+excerpt: "Regeln gäller motorvägar med tre eller fler körfält, och det är fortfarande ett förslag. Boten uppges till 40 euro, en annan källa anger upp till 160 euro."
 summary:
   - "Förslaget kräver minst 100 km/h i vänstra körfältet på vägar med minst tre körfält per riktning."
   - "Boten är 40 euro enligt italienska källor. Undantag gäller vid regn, dimma, köer och skyltning."
@@ -29,7 +25,7 @@ images:
     source_url: "https://commons.wikimedia.org/wiki/File:Autostrada_A1.JPG"
 ---
 
-# Italien vill ge böter till dig som kör under 100 km/h. Men bara i ett körfält
+# Italien föreslår minst 100 km/h i vänsterfilen från 2028
 
 Den som ligger och glider i vänsterfilen på en italiensk motorväg kan snart få betala för det. Italiens regering vill införa en lägsta hastighet på 100 km/h, men bara i ett bestämt körfält.
 

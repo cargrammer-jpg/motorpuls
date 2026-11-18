@@ -1,5 +1,6 @@
 ---
-title: "Tio EU-länder har sagt ja till Teslas FSD. Därför får Sverige vänta till tidigast 2027"
+title: "Tio EU-länder tillåter Teslas förarstöd, Sverige gör det inte"
+seo_title: "Teslas förarstöd i tio EU-länder, inte i Sverige"
 date: 2026-10-31T18:00:00+01:00
 slug: tesla-fsd-sverige-eu-omrostning-december
 tags:
@@ -19,7 +20,7 @@ sources:
   - https://trendingtesla.com/latvia-tenth-eu-country-tesla-fsd-supervised-why-december-vote-needs-big-four/
   - https://www.fool.com/earnings/call-transcripts/2026/10/22/tesla-tsla-q3-2026-earnings-call-transcript/
   - https://assets-ir.tesla.com/tesla-contents/IR/TSLA-Q3-2026-Update.pdf
-excerpt: "Lettland blev tionde EU-landet med Teslas förarstöd. Italien vill se ett snabbt EU-beslut, men i Sverige är FSD inte tillåtet för vanliga ägare."
+excerpt: "Lettland blev det tionde landet den 26 oktober. Vanliga ägare i Sverige får inte slå på systemet, och Transportstyrelsen pekar på tidigast 2027."
 summary:
   - "Tio EU-länder tillåter Teslas förarstöd, Sverige är inte ett av dem."
   - "Italien stödjer nu ett snabbt EU-gemensamt godkännande."
@@ -35,7 +36,7 @@ images:
     source_url: "https://digitalassets.tesla.com/tesla-contents/raw/upload/tesla-gallery-model-y-standard.zip"
 ---
 
-# Tio EU-länder har sagt ja till Teslas FSD. Därför får Sverige vänta till tidigast 2027
+# Tio EU-länder tillåter Teslas förarstöd, Sverige gör det inte
 
 Teslas förarstöd FSD (Supervised), som i Europa nu heter Tesla Assisted Driving, har fått två nya framgångar på en vecka. För svenska Teslaägare ändrar det ingenting ännu.
 

@@ -19,7 +19,7 @@
         <news:language>sv</news:language>
       </news:publication>
       <news:publication_date>2026-11-17T18:00:00+01:00</news:publication_date>
-      <news:title>Nu leasar svenskarna hellre än de köper. Över hälften av alla nya privatbilar är privatleasade</news:title>
+      <news:title>52 procent av nya privatbilar i Sverige är privatleasade</news:title>
     </news:news>
   </url>
   <url>
@@ -30,18 +30,7 @@
         <news:language>sv</news:language>
       </news:publication>
       <news:publication_date>2026-11-16T18:00:00+01:00</news:publication_date>
-      <news:title>Elbil från BYD för 3 890 kronor i månaden. Så står sig Tesla Model Y</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/vw-12-euro-per-bil-tesla-cam/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-16T12:00:00+01:00</news:publication_date>
-      <news:title>Volkswagen tjänade 12 euro per bil. Tesla tappar, Mercedes drar ifrån</news:title>
+      <news:title>BYD: privatleasing från 2 990 kronor i månaden i Sverige</news:title>
     </news:news>
   </url>
 </urlset>

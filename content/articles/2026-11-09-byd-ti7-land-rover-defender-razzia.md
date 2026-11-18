@@ -1,6 +1,6 @@
 ---
-title: "Land Rover lät beslagta BYD:s dokument. Defender-kopian ska prövas i domstol"
-seo_title: "Land Rover mot BYD: Defender-kopian prövas i domstol"
+title: "Jaguar Land Rover säkrade dokument hos BYD om suven Ti7"
+seo_title: "Land Rover säkrade BYD-dokument om suven Ti7"
 publication_ready: true
 date: 2026-11-09T18:00:00+01:00
 slug: byd-ti7-land-rover-defender-razzia
@@ -19,7 +19,7 @@ sources:
 - https://www.avdr.nl/legalflix/live-webinars/lf-live-webinarj-aguar-byd-uitspraak-inzake-bewijsbeslag/
 - https://www.bydukmedia.com/en/news-articles/byd-confirms-pricing-and-specifications-of-its-eagerly-anticipated-first-seven-seat-suv-in-uk-%E2%80%93-ti-7.html
 - https://www.landrover.se/defender/defender-110/index.html
-excerpt: "Dokument säkrades på BYD:s kontor i Nederländerna åt Jaguar Land Rover. Domstolen i Haag väntas den 11 november avgöra om fallet går vidare."
+excerpt: "Bolaget misstänker att BYD tagit isär en Defender. Domstolen i Haag skulle ge besked den 11 november om målet kan gå vidare."
 summary:
 - "JLR misstänker att BYD tagit isär en Defender för att bygga suven Ti7."
 - "Domstolen i Haag väntas ge besked i processfrågorna den 11 november."
@@ -54,7 +54,7 @@ images:
   rights_status: verified
 ---
 
-# Land Rover lät beslagta BYD:s dokument. Defender-kopian ska prövas i domstol
+# Jaguar Land Rover säkrade dokument hos BYD om suven Ti7
 
 Jaguar Land Rover skickade domstolsutsedda förrättningsmän till BYD:s kontor i Nederländerna. Nu ska en domstol i Haag avgöra om fallet om den kinesiska "Defender-klonen" Ti7 får gå vidare.
 

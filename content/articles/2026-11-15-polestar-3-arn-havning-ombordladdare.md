@@ -1,10 +1,6 @@
 ---
-title: "Polestar 3 för 974 000 kr kunde inte laddas hemma. Nu får ägaren lämna tillbaka bilen"
-seo_title: "Polestar 3 med laddfel får hävas, ARN: 35 kr per mil"
-# Rubrikförslag (det starkaste används ovan):
-# 1. Polestar 3 för 974 000 kr kunde inte laddas hemma. Nu får ägaren lämna tillbaka bilen
-# 2. Laddaren gick sönder gång på gång. Så mycket får ägaren betala för varje mil
-# 3. ARN sätter prislapp på körningen: 35 kronor milen när elbilen lämnas tillbaka
+title: "Polestar 3 för 974 000 kronor får lämnas tillbaka efter laddfel"
+seo_title: "Polestar 3 för 974 000 kronor lämnas tillbaka"
 date: 2026-11-15T12:00:00+01:00
 slug: polestar-3-arn-havning-ombordladdare
 tags: [Polestar, Polestar 3, ARN, hävning, konsumentköplagen, ombordladdare, elbil]
@@ -12,7 +8,7 @@ sources:
   - https://tvistguiden.se/arn-beslut/tvist-om-havning-och-nyttoavdrag-efter-upprepat-fel-pa-ac-laddning-i-ny-polestar-3
   - https://www.vibilagare.se/nyheter/ombordladdare-pa-volvo-och-polestar-agaren-far-hava-kopet
   - https://www.arn.se/om-arn/
-excerpt: "AC-laddningen i en ny Polestar 3 slutade fungera fyra gånger. ARN rekommenderar att ägaren får tillbaka 996 149 kronor, minus 35 kronor för varje körd mil."
+excerpt: "Växelströmsladdningen slutade fungera fyra gånger på ett halvår. ARN rekommenderar 996 149 kronor tillbaka, minus 35 kronor per körd mil."
 summary:
   - "En ny Polestar 3 för 974 000 kronor fick samma fel på AC-laddningen fyra gånger under det första halvåret."
   - "Säljaren gick med på hävning, men parterna var oense om hur mycket körningen skulle kosta ägaren."
@@ -35,7 +31,7 @@ images:
     source_url: "https://commons.wikimedia.org/wiki/File:Polestar_3_Auto_Zuerich_2024_DSC_6366.jpg"
 ---
 
-# Polestar 3 för 974 000 kr kunde inte laddas hemma. Nu får ägaren lämna tillbaka bilen
+# Polestar 3 för 974 000 kronor får lämnas tillbaka efter laddfel
 
 En fabriksny Polestar 3 fick samma laddfel fyra gånger på ett halvår. Allmänna reklamationsnämnden rekommenderar nu att köpet hävs, och sätter samtidigt ett pris på varje mil ägaren hann köra.
 

@@ -1,6 +1,6 @@
 ---
-seo_title: "Jaguar Type 01: 1 030 hk men kortare räckvidd än utlovat"
-title: "Jaguars nya elbil har 1 030 hk. Men den når inte räckvidden Jaguar lovade"
+seo_title: "Jaguar Type 01: 1 030 hk, räckvidden blev 720 km"
+title: "Jaguar Type 01 har 1 030 hk, räckvidden blev 720 km"
 date: 2026-11-04T07:00:00+01:00
 slug: jaguar-type-01-rackvidd-type-00
 tags: [Jaguar, Type 01, Type 00, JLR, elbil, GT, Formula E, Jaguar TCS Racing]
@@ -14,7 +14,7 @@ sources:
   - https://omni.se/jaguar-tillbaka-med-ny-elbil-kostar-1-3-miljoner/a/zlOwl5
   - https://www.skatteverket.se/privat/skatter/arbeteochinkomst/formaner/bilforman/miljobilar
   - https://media.jlr.com/archive-jaguar/en-gb/user-licence
-excerpt: "Jaguar Type 01 är produktionsbilen efter konceptet Type 00. Den har 1 030 hk och laddar snabbare än utlovat, men räckvidden blev 5 mil kortare."
+excerpt: "När konceptet visades 2024 lovade Jaguar upp till 770 km. Något svenskt pris finns inte, i Storbritannien börjar bilen på 130 000 pund."
 summary:
   - "Fyrdörrars GT med tre elmotorer, 1 030 hk och 0 till 100 km/h på 3,2 sekunder."
   - "Upp till 720 km enligt WLTP. 2024 lovade Jaguar upp till 770 km."
@@ -39,7 +39,7 @@ images:
     source_url: "https://media.jlr.com/archive-jaguar/en-gb/news/2026/10/jaguar-type-01-new-era-begins"
 ---
 
-# Jaguars nya elbil har 1 030 hk. Men den når inte räckvidden Jaguar lovade
+# Jaguar Type 01 har 1 030 hk, räckvidden blev 720 km
 
 Jaguar Type 01 är produktionsbilen efter det omdiskuterade konceptet Type 00. Den är märkets starkaste vägbil någonsin, men räckvidden blev kortare än vad Jaguar utlovade för två år sedan.
 

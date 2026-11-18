@@ -1,6 +1,6 @@
 ---
-title: "Aston Martin Valhalla Spider: 1 079 hk och samma toppfart utan tak"
-seo_title: "Aston Martin Valhalla Spider: 1 079 hk utan tak"
+title: "Aston Martin visar Valhalla Spider: 1 079 hk och 350 km/h"
+seo_title: "Aston Martin Valhalla Spider: 1 079 hk, 350 km/h"
 date: 2026-10-30T03:15:00+01:00
 slug: aston-martin-valhalla-spider
 tags:
@@ -12,7 +12,7 @@ tags:
 sources:
   - https://www.astonmartin.com/en/our-world/news/2026/10/28/aston-martin-valhalla-spider-the-ultimate-open-top-supercar
   - https://www.astonmartin.com/en/our-world/news/2017/4/4/aston-martin-media-site-terms-amp-conditions
-excerpt: "Aston Martin visar Valhalla Spider, en öppen laddhybrid med 1 079 hk, över 600 kilo downforce och leveranser från tredje kvartalet 2027."
+excerpt: "Den öppna laddhybriden har samma drivlina som kupén, och 350 km/h gäller även utan tak. Leveranserna börjar tredje kvartalet 2027."
 summary:
   - "Öppen Valhalla med samma drivlina: 1 079 hk och 1 100 Nm."
   - "Toppfart 350 km/h, även helt utan tak."
@@ -42,7 +42,7 @@ images:
     source_url: "https://media.astonmartin.com/aston-martin-valhalla-spider-the-ultimate-open-top-supercar/"
 ---
 
-# Aston Martin Valhalla Spider: 1 079 hk och samma toppfart utan tak
+# Aston Martin visar Valhalla Spider: 1 079 hk och 350 km/h
 
 Aston Martin har visat Valhalla Spider, den öppna versionen av laddhybriden Valhalla. Drivlinan är oförändrad med 1 079 hk.
 

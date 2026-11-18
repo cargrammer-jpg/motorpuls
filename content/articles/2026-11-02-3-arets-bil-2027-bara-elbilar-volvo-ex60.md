@@ -1,6 +1,6 @@
 ---
-title: "Inte en enda bensinbil kvar. Svenska Volvo slåss om Europas finaste bilpris"
-seo_title: "Årets bil 2027: bara elbilar i finalen, Volvo EX60 är med"
+title: "Bara elbilar i Car of the Year 2027, Volvo EX60 är med"
+seo_title: "Car of the Year 2027: bara elbilar, Volvo EX60 är med"
 date: 2026-11-02T12:00:00+01:00
 slug: arets-bil-2027-bara-elbilar-volvo-ex60
 tags: [Volvo, EX60, Car of the Year, Årets bil, elbil, BMW iX3, Volkswagen ID. Polo]
@@ -10,7 +10,7 @@ sources:
   - https://www.volvocars.com/se/choose/ex60-electric/
   - https://www.volvocars.com/se/cars/ex60-electric/specifications/
   - https://caroftheyear.org/
-excerpt: "För första gången på 63 år är alla finalister i Car of the Year elbilar, och Volvo EX60 är en av sju som kan vinna."
+excerpt: "Det är första gången på 63 år som alla sju finalister saknar förbränningsmotor. Vinnaren utses 8 januari i Bryssel."
 summary:
   - "Alla sju finalister i Car of the Year 2027 är elbilar, första gången i prisets 63 år."
   - "Volvo EX60 möter BMW iX3, Cupra Raval, Hyundai Ioniq 3, Kia EV2, Renault Twingo och VW ID. Polo."
@@ -26,7 +26,7 @@ images:
     source_url: "https://www.volvocars.com/intl/media/images/533145fb437a4bb3a65ab43400b32a80/?carModelSlug=ex60&carModelYearSlug=2027"
 ---
 
-# Inte en enda bensinbil kvar. Svenska Volvo slåss om Europas finaste bilpris
+# Bara elbilar i Car of the Year 2027, Volvo EX60 är med
 
 Finalen i Car of the Year 2027 är klar, och den är historisk. Alla sju bilar som kan vinna är elbilar. En av dem är svensk.
 

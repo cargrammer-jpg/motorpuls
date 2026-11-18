@@ -1,10 +1,6 @@
 ---
-title: "Han missade VM-guldet med fem poäng. Nu får Oliver Solberg ratta Toyotas nya Celica"
-seo_title: "Toyota Celica i rally-VM 2027: Oliver Solberg"
-# Rubrikförslag (det starkaste är title):
-#   1. Han missade VM-guldet med fem poäng. Nu får Oliver Solberg ratta Toyotas nya Celica
-#   2. Celica är tillbaka i rally-VM, och svensken som nästan blev världsmästare sitter bakom ratten
-#   3. Toyota väcker liv i en legend. Oliver Solberg får köra den 2027
+title: "Oliver Solberg kör nya Toyota Celica i rally-VM 2027"
+seo_title: "Oliver Solberg kör Toyota Celica i rally-VM 2027"
 date: 2026-11-05T18:00:00+01:00
 slug: toyota-celica-rally-vm-oliver-solberg-2027
 tags: [rally-VM, WRC, Oliver Solberg, Toyota, GR Celica Rally1, GR Yaris Rally1, Kalle Rovanperä, Ott Tänak, Elfyn Evans]
@@ -12,7 +8,7 @@ sources:
   - https://toyotagazooracing.com/pressrelease/2026/1103-01/
   - https://www.motorsport.com/wrc/news/toyota-explains-call-to-run-celica-and-yaris-models-in-wrc-2027/10871232/
   - https://www.automotorsport.se/nyheter/oliver-solberg-toyota-celica-wrc-2027/
-excerpt: "Toyota tar tillbaka Celica till rally-VM 2027. Oliver Solberg, som missade VM-guldet med fem poäng, blir en av tre förare."
+excerpt: "Han delar Celica-stallet med världsmästaren Elfyn Evans. Solberg missade VM-guldet med fem poäng på säsongens sista sträcka."
 summary:
   - "Toyota kör 2027 med två stall och två bilar, GR Celica Rally1 och GR Yaris Rally1."
   - "Oliver Solberg delar Celica-stallet med världsmästaren Elfyn Evans och Sami Pajari."
@@ -32,7 +28,7 @@ images:
     source_url: "https://commons.wikimedia.org/wiki/File:2025_Rally_Japan_Oliver_Solberg.jpg"
 ---
 
-# Han missade VM-guldet med fem poäng. Nu får Oliver Solberg ratta Toyotas nya Celica
+# Oliver Solberg kör nya Toyota Celica i rally-VM 2027
 
 Ett av rallyhistoriens mest kända namn är på väg tillbaka. Toyota kör Celica i rally-VM 2027, och svensken Oliver Solberg blir en av förarna.
 

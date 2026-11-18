@@ -1,10 +1,6 @@
 ---
-title: "Volvo tappar nästan var sjätte bil. I Sverige halverades XC60 på ett år"
-seo_title: "Volvo faller 16 procent och XC60 halveras i Sverige"
-# Rubrikförslag (det starkaste är title):
-#   1. Volvo tappar nästan var sjätte bil. I Sverige halverades XC60 på ett år
-#   2. Volvos ras fortsätter. Även på hemmaplan föll försäljningen med en fjärdedel
-#   3. Elbilarna växer, men Volvo säljer 27 000 bilar färre. Här är förklaringen
+title: "Volvo sålde 16 procent färre bilar i augusti till oktober"
+seo_title: "Volvo sålde 16 procent färre bilar på tre månader"
 date: 2026-11-04T21:00:00+01:00
 slug: volvo-forsaljning-ras-oktober-2026
 tags: [Volvo, försäljning, XC60, EX30, EX60, Kina, USA, Mobility Sweden, nyregistreringar]
@@ -13,7 +9,7 @@ sources:
   - https://news.cision.com/volvo-car-ab--publ-/r/volvo-cars-reports-rolling-three-month-sales-for-the-period-ending-october-2026,c4419774
   - https://mobilitysweden.se/statistik/Nyregistreringar_per_manad_1/nyregistreringar-2026/tydligt-skifte-fran-laddhybrider-till-elbilar-i-oktober
   - https://mobilitysweden.se/storage/7F74570C4C61BEEEE06275646A852419323F77478AF198119E0CBBAF30A0A566/fd0832463d834757a568dc0f5a132daf/xlsx/media/cb12796565d84cb9abeedfe6d78e7b7e/M%C3%A5nadsrapport%20Nyregistreringar%20okt%202026.xlsx
-excerpt: "Volvo Cars sålde 16 procent färre bilar i augusti till oktober. I Sverige föll registreringarna 24 procent i oktober. EX30 och EX60 växte."
+excerpt: "Det blev 141 656 bilar, drygt 27 000 färre än i fjol. I Sverige föll oktober med 24 procent, och XC60 gick från 2 011 till 1 026."
 summary:
   - "Volvo sålde 141 656 bilar i augusti till oktober, 16 procent färre än året innan."
   - "Elbilarna ökade med 27 procent, men laddhybrider och bensinbilar föll med runt 30 procent."
@@ -29,7 +25,7 @@ images:
     source_url: "https://www.volvocars.com/intl/media/images/533145fb437a4bb3a65ab43400b32a80/?carModelSlug=ex60&carModelYearSlug=2027"
 ---
 
-# Volvo tappar nästan var sjätte bil. I Sverige halverades XC60 på ett år
+# Volvo sålde 16 procent färre bilar i augusti till oktober
 
 Volvo Cars fortsätter att tappa. Elbilarna går bra i Europa, men det räcker inte för att väga upp raset i Kina och USA, och även i Sverige går det åt fel håll.
 

@@ -1,6 +1,6 @@
 ---
-title: "Chrysler tyckte att Diablo var för vass. Så många av Lamborghinis djävul finns kvar"
-seo_title: "Lamborghini Diablo: design, fakta och hur många som är kvar"
+title: "Chrysler ritade om Lamborghini Diablo, 2 903 bilar byggdes"
+seo_title: "Chrysler ritade om Lamborghini Diablo, 2 903 byggdes"
 date: 2026-11-14T18:00:00+01:00
 slug: lamborghini-diablo-djavulen-chrysler
 tags: [Lamborghini, Diablo, Marcello Gandini, Chrysler, V12, klassiker, sportbil, auktion]
@@ -12,7 +12,7 @@ sources:
   - https://www.car.info/sv-se/lamborghini/diablo
   - https://www.howrareismycar.co.uk/lamborghini/diablo/how-many-lamborghini-diablo-are-left.aspx
   - https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml
-excerpt: "Lamborghini Diablo började som Gandinis skarpa skiss och slipades till av Chrysler. 2 903 byggdes på elva år, och 29 finns registrerade i Sverige."
+excerpt: "Gandini ritade den skarpa skissen, och Chrysler rundade av kanterna efter köpet 1987. I Sverige listar car.info 29 registrerade Diablo."
 summary:
   - "Diablo byggdes i 2 903 exemplar i Sant'Agata Bolognese mellan 1990 och 2001, Lamborghinis mest tillverkade bil vid den tiden."
   - "Originalet hade en 5,7 liters V12 på 485 hk och gick 325 km/h, snabbast av alla produktionsbilar vid lanseringen enligt Lamborghini."
@@ -47,7 +47,7 @@ images:
     credit_url: "https://commons.wikimedia.org/wiki/File:1995_Lamborghini_Diablo_SE_30.jpg"
 ---
 
-# Chrysler tyckte att Diablo var för vass. Så många av Lamborghinis djävul finns kvar
+# Chrysler ritade om Lamborghini Diablo, 2 903 bilar byggdes
 
 Lamborghini Diablo skulle ersätta Countach och blev den första Lamborghini som klarade över 200 miles i timmen. Vägen dit gick via flera ägarbyten, en omritad kaross och ett namn lånat från en tjur.
 

@@ -1,6 +1,6 @@
 ---
-title: "Volkswagen skrotar framtidsfabriken i Wolfsburg. Facket kallar det en kapitulation"
-seo_title: "VW skrotar Gamechanger i Wolfsburg, facket rasar"
+title: "Volkswagen bygger inte den planerade gjutanläggningen i Wolfsburg"
+seo_title: "VW bygger inte planerad gjutanläggning i Wolfsburg"
 date: 2026-11-12T18:00:00+01:00
 slug: vw-gamechanger-wolfsburg-skrotas
 tags: [Volkswagen, Wolfsburg, Gamechanger, SSP, elbil, IG Metall, Golf]
@@ -8,7 +8,7 @@ sources:
   - https://live.euronext.com/en/financial-news/vw-drops-gamechanger-production-main-plant-risking-escalation-workers
   - https://www.dw.com/en/volkswagen-vw-gamechanger-plan-scrapped/a-79923597
   - https://www.igm-bei-vw.de/meldung/konzernvorstand-beerdigt-gamechanger
-excerpt: "Volkswagen genomför inte Gamechanger, planen som skulle göra huvudfabriken i Wolfsburg redo för nästa generations elbilar."
+excerpt: "Koncernen säger att projektet Gamechanger inte genomförs som det var tänkt. Bilarna på den nya elbilsplattformen ska ändå komma, och facket kallar beslutet ett avtalsbrott."
 summary:
   - "Volkswagen bekräftar att tillverkningskonceptet Gamechanger inte genomförs som planerat."
   - "Den planerade anläggningen för storskalig gjutning av karossdelar i Wolfsburg blir inte av."
@@ -23,7 +23,7 @@ images:
     source_url: "https://commons.wikimedia.org/wiki/File:Wolfsburg-VW-Werk-04-2022-gje.jpg"
 ---
 
-# Volkswagen skrotar framtidsfabriken i Wolfsburg. Facket kallar det en kapitulation
+# Volkswagen bygger inte den planerade gjutanläggningen i Wolfsburg
 
 Volkswagen lägger ner Gamechanger, projektet som skulle ge huvudfabriken i Wolfsburg den modernaste produktionstekniken i branschen. Beskedet kom i onsdags och har redan startat ett nytt bråk med de anställda.
 

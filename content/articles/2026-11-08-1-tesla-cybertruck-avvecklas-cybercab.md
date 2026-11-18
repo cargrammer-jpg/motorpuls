@@ -1,6 +1,6 @@
 ---
-title: "Musk: Cybertruck fasas ut i Texas. Cybercab tar platsen"
-seo_title: "Musk: Cybertruck fasas ut i Texas. Cybercab tar platsen"
+title: "Musk: Tesla avvecklar Cybertruck i Texas kring mitten av 2027"
+seo_title: "Tesla avvecklar Cybertruck i Texas kring mitten av 2027"
 date: 2026-11-08T15:00:00+01:00
 slug: tesla-cybertruck-avvecklas-cybercab
 tags: [Tesla, Cybertruck, Cybercab, Elon Musk, robotaxi, Gigafactory Texas, elbil]
@@ -10,7 +10,7 @@ sources:
   - https://x.com/wmorrill3/status/2118598887258644883
   - https://finance.yahoo.com/news/tesla-wind-down-cybertruck-production-094210977.html
   - https://www.cnbc.com/2026/11/06/tesla-cybertruck-texas-musk.html
-excerpt: "Elon Musk sa den 6 november att Tesla avvecklar Cybertruck vid Gigafactory Texas kring mitten av 2027, för att ge plats åt Cybercab."
+excerpt: "Platsen i Austin ska gå till robotaxin Cybercab. Musk har inte sagt om pickupen flyttas till en annan fabrik eller försvinner."
 summary:
   - "Musk: Tesla avvecklar Cybertruck-produktionen i Texas omkring mitten av 2027."
   - "Skälet är ökad tillverkning av Cybercab, Teslas robotaxi utan ratt och pedaler."
@@ -39,7 +39,7 @@ images:
     source_url: "https://commons.wikimedia.org/wiki/File:Tesla_Cybercab_001.jpg"
 ---
 
-# Musk: Cybertruck fasas ut i Texas. Cybercab tar platsen
+# Musk: Tesla avvecklar Cybertruck i Texas kring mitten av 2027
 
 Elon Musk säger att Tesla börjar avveckla tillverkningen av Cybertruck vid Gigafactory Texas omkring mitten av 2027. Platsen ska gå till Cybercab, företagets robotaxi. Beskedet gäller Texasfabriken, inte ett uttryckligt beslut om att lägga ned modellen överallt.
 

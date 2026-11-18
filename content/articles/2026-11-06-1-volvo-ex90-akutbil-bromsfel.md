@@ -1,11 +1,12 @@
 ---
-title: "Volvos elbil tappade bromsarna mitt i körningen. Pedalen gick i golvet"
+title: "Bromsarna slutade svara i en Volvo EX90 i norska Drammen"
+seo_title: "Volvo EX90 i Drammen: bromsarna slutade svara"
 date: 2026-11-08T12:00+01:00
 slug: volvo-ex90-akutbil-bromsfel-drammen
 tags: [Volvo, EX90, bromsar, Norge, Drammen, säkerhet]
 sources:
   - https://www.vg.no/nyheter/i/4OwKxe/legevaktbil-fikk-kritisk-bremsefeil-kunne-gaatt-skikkelig-galt
-excerpt: "En Volvo EX90 som används av jourmottagningen i norska Drammen fick \"kritiskt bromsfel\" i cirka 40 km/h. Volvo kallar det ett enskilt fall."
+excerpt: "Föraren säger att pedalen var i golvet i cirka 40 km/h utan att något hände. Volvo hittade ett fel i styrenheten och kallar det ett enskilt fall."
 summary:
   - "Föraren säger att bromsen var i botten utan att något hände, i cirka 40 km/h."
   - "Volvo hittade ett fel i bromssystemets styrenhet och bytte den."
@@ -20,7 +21,7 @@ images:
     source_url: "https://www.volvocars.com/intl/media/models/ex90/2025/images/"
 ---
 
-# Volvos elbil tappade bromsarna mitt i körningen. Pedalen gick i golvet
+# Bromsarna slutade svara i en Volvo EX90 i norska Drammen
 
 En Volvo EX90 som används av jourmottagningen i Drammen i Norge visade plötsligt "kritiskt bromsfel" och bromsarna slutade svara. Volvo hittade ett fel i bromsarnas styrenhet men kallar händelsen ett enskilt fall.
 

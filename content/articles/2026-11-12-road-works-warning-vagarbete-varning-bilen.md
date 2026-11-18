@@ -1,14 +1,13 @@
 ---
-# Rubrikförslag: 1) Bilen varnar för vägarbetet innan du ser det. Nu rullar Trafikverket ut tjänsten (vald) 2) 70 skyddsbilar påkörda på ett år. Nu ska din bil få varningen i förväg 3) Vägarbetsfordonen skickar sin position till din bil. Men bara vissa märken får varningen
-seo_title: "Bilen varnar för vägarbetet: Trafikverkets nya tjänst"
-title: "Bilen varnar för vägarbetet innan du ser det. Nu rullar Trafikverket ut tjänsten"
+seo_title: "Trafikverket: varning för vägarbete direkt i bilen"
+title: "Trafikverket tar varning för vägarbete i bilen i vanlig drift"
 date: 2026-11-12T12:00:00+01:00
 slug: road-works-warning-vagarbete-varning-bilen
 tags: [Trafikverket, vägarbete, Road Works Warning, TMA, trafiksäkerhet, uppkopplad bil, Svevia, Škoda, Waze, Apple Maps]
 sources:
   - https://via.tt.se/pressmeddelande/4635142/ny-digital-varningstjanst-okar-sakerheten-och-minskar-olyckor-vid-vagarbeten?publisherId=44450&lang=sv
   - https://www.svevia.se/nyhetsrum/nyheter/2026-11-02-varnar-for-vagarbetet-innan-det-syns---nu-vill-svevia-na-fler-forare
-excerpt: "Trafikverket går från pilot till storskalig drift med en tjänst där vägarbetsfordon skickar sin position till bilar och kartappar som närmar sig."
+excerpt: "Omkring 6 000 till 8 000 fordon i Sverige och Norge delar sin position. Varningen når bland annat cirka 80 000 Škoda-bilar i månaden, plus Waze och Apple Maps, inte alla märken."
 summary:
   - "Omkring 6 000 till 8 000 vägunderhållsfordon i Sverige och Norge delar sin position i realtid."
   - "Varningen når redan cirka 80 000 Škoda-bilar i månaden, plus Waze och Apple Maps."
@@ -29,7 +28,7 @@ images:
     source_url: "https://via.tt.se/pressmeddelande/4635142/ny-digital-varningstjanst-okar-sakerheten-och-minskar-olyckor-vid-vagarbeten?publisherId=44450&lang=sv"
 ---
 
-# Bilen varnar för vägarbetet innan du ser det. Nu rullar Trafikverket ut tjänsten
+# Trafikverket tar varning för vägarbete i bilen i vanlig drift
 
 Vägarbetsfordonen ska själva tala om för din bil var de är. Trafikverket och norska Statens vegvesen tar nu tjänsten Road Works Warning från försök till drift i stor skala.
 

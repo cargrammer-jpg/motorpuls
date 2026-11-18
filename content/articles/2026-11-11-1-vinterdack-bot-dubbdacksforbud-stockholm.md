@@ -1,6 +1,6 @@
 ---
-seo_title: "Vinterdäck 2026: böterna och Stockholms nya dubbdäcksförbud"
-title: "Om tre veckor kan sommardäcken kosta 2 000 kronor. Och fyra gator till stängs för dubbdäck"
+seo_title: "Vinterdäck från 1 december: fel däck kostar 2 000 kr"
+title: "Vinterdäck krävs från 1 december: fel däck kostar 2 000 kronor"
 date: 2026-11-11T15:00:00+01:00
 slug: vinterdack-bot-dubbdacksforbud-stockholm
 tags: [vinterdäck, dubbdäck, Transportstyrelsen, Polisen, ordningsbot, Stockholm, trafiksäkerhet]
@@ -11,7 +11,7 @@ sources:
   - https://www.aklagare.se/globalassets/dokument/ordningsbotskatalog/bilaga-1b.pdf
   - https://trafik.stockholm/trafikregler/dubbdack/
   - https://carup.se/vinterdacksmiss-ger-110-000-kr-i-boter-fran-sondag/
-excerpt: "Den 1 december börjar vinterdäckskravet gälla. Så mycket kostar fel däck, och här blir det förbjudet att köra med dubbar."
+excerpt: "Från den 1 december till den 31 mars måste personbilar ha vinterdäck när det är vinterväglag. Kör du med sommardäck på snö, is eller frost kan polisen ge dig 2 000 kronor i böter."
 summary:
   - "Från 1 december till 31 mars krävs vinterdäck när det är vinterväglag. Boten är 2 000 kronor."
   - "För slitna däck kostar 1 200 kronor och dubbdäck på förbjuden gata 1 000 kronor."
@@ -32,7 +32,7 @@ images:
     source_url: "https://commons.wikimedia.org/wiki/File:Studded_winter_tyre.jpg"
 ---
 
-# Om tre veckor kan sommardäcken kosta 2 000 kronor. Och fyra gator till stängs för dubbdäck
+# Vinterdäck krävs från 1 december: fel däck kostar 2 000 kronor
 
 Den 1 december börjar vinterdäckskravet gälla för personbilar. Här är reglerna, vad det kostar att göra fel och var dubbarna snart inte får rulla alls.
 

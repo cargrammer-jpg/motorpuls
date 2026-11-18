@@ -1,5 +1,6 @@
 ---
-title: "Tesla Semi började brinna utan krock. Motorvägen var stängd i tio timmar"
+title: "Tesla Semi brann utan krock och stängde motorväg i tio timmar"
+seo_title: "Tesla Semi brann utan krock, vägen stängd i tio timmar"
 date: 2026-11-05T07:00:00+01:00
 slug: tesla-semi-brand-i-880-hayward
 tags: [Tesla, Semi, lastbil, batteri, brand, elbil]
@@ -11,7 +12,7 @@ sources:
   - https://x.com/CHPHayward/status/2115391056061542714
   - https://data.ntsb.gov/Docket/Document/docBLOB?FileExtension=pdf&FileName=%21001+Preliminary+Report+-+Emigrant+Gap%2C+CA+%28HWY24FH015%29+-+Final-Rel.pdf&ID=19139566
   - https://x.com/Tesla/status/2112998455383847332
-excerpt: "En Tesla Semi fattade eld på motorväg I-880 i Kalifornien utan att ha krockat, och orsaken är ännu okänd."
+excerpt: "Branden inträffade den 27 oktober på I-880 i Hayward i Kalifornien. Föraren klarade sig, och orsaken är fortfarande okänd."
 summary:
   - "Branden började i södergående körfält på I-880 i Hayward på tisdagskvällen lokal tid."
   - "Föraren klarade sig oskadd men vet inte varför lastbilen började brinna."
@@ -36,7 +37,7 @@ images:
     source_url: "https://digitalassets.tesla.com/tesla-contents/raw/upload/tesla-gallery-semi.zip"
 ---
 
-# Tesla Semi började brinna utan krock. Motorvägen var stängd i tio timmar
+# Tesla Semi brann utan krock och stängde motorväg i tio timmar
 
 En Tesla Semi fattade eld på motorväg I-880 i Hayward, Kalifornien, utan att ha varit inblandad i någon krock. Föraren klarade sig, men orsaken är fortfarande okänd.
 

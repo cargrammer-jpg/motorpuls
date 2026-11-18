@@ -1,6 +1,6 @@
 ---
-seo_title: "Polestar visar nya Polestar 2. Ljusrampen försvinner"
-title: "Polestar visar hur nya Polestar 2 ser ut. Den kända ljusrampen försvinner"
+seo_title: "Polestar visar koncept till nya Polestar 2"
+title: "Polestar visar koncept till nya Polestar 2 utan ljusramp"
 date: 2026-11-10T18:00:00+01:00
 slug: polestar-formula-2030-nya-polestar-2
 tags: [Polestar, Polestar 2, Polestar 7, Formula 2030, konceptbil, elbil, Göteborg, design]
@@ -9,7 +9,7 @@ sources:
   - https://www.polestar.com/global/concept-cars/formula-2030/
   - https://www.webwire.com/ViewPressRel.asp?aId=360164
   - https://autotrader.co.nz/news/formula-2030-concept-next-polestar-2-nz-late-2027
-excerpt: "Göteborgsmärket visar konceptbilen Formula 2030, och flera detaljer ska hamna på nästa Polestar 2 som enligt planen kommer 2027."
+excerpt: "Konceptet Formula 2030 visades officiellt den 10 november. Dubbla strålkastare och baklyktorna Single Blade ska enligt Polestar till nästa Polestar 2, planerad till 2027."
 summary:
   - "Polestar visade konceptbilen Formula 2030 officiellt den 10 november."
   - "Strålkastarna och de nya baklyktorna Single Blade ska till nya Polestar 2 och Polestar 7."
@@ -28,7 +28,7 @@ images:
     credit_url: "https://commons.wikimedia.org/wiki/File:2023_Polestar_2.jpg"
 ---
 
-# Polestar visar hur nya Polestar 2 ser ut. Den kända ljusrampen försvinner
+# Polestar visar koncept till nya Polestar 2 utan ljusramp
 
 Polestar har visat konceptbilen Formula 2030 för första gången officiellt. Bilen är inte bara en drömbild, flera detaljer ska enligt märket sitta på nästa Polestar 2 och den kommande suven Polestar 7.
 
