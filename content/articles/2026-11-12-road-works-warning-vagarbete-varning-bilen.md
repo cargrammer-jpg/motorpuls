@@ -1,6 +1,6 @@
 ---
-seo_title: "Vägarbetsfordon varnar bilister via Škoda, Waze och Apple Maps"
-title: "Vägarbetsfordon skickar varningar till Škoda, Waze och Apple Maps"
+seo_title: "Vägarbete går snart ut automatiskt till bilens GPS"
+title: "Vägarbete går snart ut automatiskt till bilens GPS"
 date: 2026-11-12T12:00:00+01:00
 slug: road-works-warning-vagarbete-varning-bilen
 tags: [Trafikverket, vägarbete, Road Works Warning, TMA, trafiksäkerhet, uppkopplad bil, Svevia, Škoda, Waze, Apple Maps]
@@ -28,7 +28,7 @@ images:
     source_url: "https://via.tt.se/pressmeddelande/4635142/ny-digital-varningstjanst-okar-sakerheten-och-minskar-olyckor-vid-vagarbeten?publisherId=44450&lang=sv"
 ---
 
-# Vägarbetsfordon skickar varningar till Škoda, Waze och Apple Maps
+# Vägarbete går snart ut automatiskt till bilens GPS
 
 Vägarbetsfordonen ska själva tala om för din bil var de är. Trafikverket och norska Statens vegvesen tar nu tjänsten Road Works Warning från försök till drift i stor skala.
 
