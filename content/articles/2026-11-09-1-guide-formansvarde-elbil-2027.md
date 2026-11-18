@@ -1,5 +1,5 @@
 ---
-seo_title: "Tesla Model Y: 4 828 kronor i exemplet"
+seo_title: "Förmånsvärde för elbil 2027: sex populära modeller"
 title: "Ingen ändring beslutad för elbilsrabatten 2027. Men en siffra avgörs 30 november"
 date: 2026-11-15T07:00:00+01:00
 updated: 2026-11-18T09:05:57+01:00
@@ -19,7 +19,7 @@ sources:
   - https://www.transportstyrelsen.se/sv/vagtrafik/fordon/skatter-och-avgifter/fordonsskatt/skattens-storlek/
   - https://www.regeringen.se/contentassets/779961287e264bcaa873040f8da66c2d/vagen-mot-utfasning--styrmedel-for-ett-fossilfritt-samhalle-sou-202633.pdf
   - https://www.regeringen.se/remisser/2026/06/remiss-av-betankandet-vagen-mot-utfasning-sou-202633/
-excerpt: "Elbilsrabatten är oförändrad 2027. Tesla Model Y blir 4 828 kronor i månaden i exemplet. Statslåneräntan sätts 30 november."
+excerpt: "Elbilsrabatten för förmånsbilar är oförändrad inför 2027. Räntan som styr en del av förmånsvärdet sätts 30 november. Här är formeln och sex exempel."
 summary:
   - "Ingen ändring av nedsättningen för elbilar är beslutad för 2027. Nybilspriset sänks fortfarande med 350 000 kronor, högst hälften."
   - "Prisbasbeloppet 2027 är 59 600 kronor. Statslåneräntan för 2027 blir känd först 30 november 2026."

@@ -1,12 +1,12 @@
 ---
 title: "Engångskostnader pressar Volkswagens vinst till 12 euro per bil"
-seo_title: "Tesla 1 335 euro per bil, VW på 12 euro"
+seo_title: "Engångskostnader pressar VW:s vinst till 12 euro per bil"
 date: 2026-11-16T12:00:00+01:00
 slug: vw-12-euro-per-bil-tesla-cam
 tags: [Volkswagen, Tesla, Mercedes-Benz, BMW, BYD, Stellantis, lönsamhet, bilindustrin]
 sources:
   - https://auto-institut.de/automotiveperformance/finanzielle-performance-im-vergleich-von-21-automobilherstellern-q1-q3-2026/
-excerpt: "Tesla tjänade 1 335 euro per bil januari till september, ned 39 procent. Volkswagen landade på 12 euro efter engångskostnader."
+excerpt: "Siffran gäller januari till september, efter engångskostnader på omkring 8,7 miljarder euro. Utan dem hade marginalen legat runt 3,8 procent."
 summary:
   - "Volkswagens rörelsemarginal föll från 2,3 till 0,03 procent, vilket motsvarar 12 euro per bil."
   - "Mercedes-Benz tjänar mest per bil, 4 198 euro, medan Tesla har sjunkit till 1 335 euro."

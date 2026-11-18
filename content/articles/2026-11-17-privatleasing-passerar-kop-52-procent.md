@@ -1,6 +1,6 @@
 ---
 title: "52 procent av nya privatbilar i Sverige är privatleasade"
-seo_title: "Tesla utanför toppen, 52 procent leasar ny bil"
+seo_title: "52 procent av nya privatbilar i Sverige är leasade"
 date: 2026-11-17T18:00:00+01:00
 slug: privatleasing-passerar-kop-52-procent
 tags: [privatleasing, Sverige, Volvo, Volkswagen, Kia, Tesla, elbil, begagnat, statistik]
@@ -9,7 +9,7 @@ sources:
   - https://bilweb.se/nyheter/privatleasing-har-tagit-over-halva-privatmarknaden
   - https://alltomelbil.se/sex-av-tio-privata-elbilskopare-valjer-privatleasing/
   - https://www.vwfs.se/content/dam/bluelabel/valid/www-vwfs-se/documents/magazine/pressmeddelanden/bilfinans_okt_2026_v2.pdf
-excerpt: "För första gången leasar fler privatpersoner en ny bil än de köper den, 52 procent. Tesla finns inte bland de fem största märkena."
+excerpt: "Det är första gången leasing är det vanligaste sättet för privatpersoner att skaffa en ny bil. Bland nya elbilar var andelen 59 procent, januari till oktober."
 summary:
   - "51 852 nya bilar privatleasades januari till oktober, 23 procent fler än i fjol."
   - "Privatleasing är nu 52 procent av privatmarknaden, upp från 47 procent."

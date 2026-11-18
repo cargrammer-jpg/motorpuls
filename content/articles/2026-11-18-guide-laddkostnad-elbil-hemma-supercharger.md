@@ -1,6 +1,6 @@
 ---
 title: "Vad kostar det att ladda elbilen hemma och längs vägen"
-seo_title: "Ladda hemma eller på Tesla Supercharger"
+seo_title: "Vad kostar det att ladda elbilen hemma och på vägen?"
 date: 2026-11-18T07:00:00+01:00
 updated: 2026-11-18T09:05:57+01:00
 type: guide
@@ -24,8 +24,8 @@ sources:
   - https://incharge.vattenfall.se/ladda-pa-vagen/laddpriser
   - https://motorpuls.se/artikel/ecobest-laddforluster-volvo-ex60-tesla-model-y/
   - https://motorpuls.se/artikel/bensin-diesel-3-kronor-dyrare-1-december/
-excerpt: "Tesla har inget fast Supercharger-pris i Sverige. Hemma landar exemplen på 1,28 till 4,40 kronor per kWh den 17 november, före påslag."
-description: "Tesla har inget fast Supercharger-pris i Sverige. Hemma landar exemplen på 1,28 till 4,40 kronor per kWh den 17 november, före påslag."
+excerpt: "Så räknar du ut kostnaden per mil: hemma med elpris, skatt och nätavgift, och längs vägen hos Mer, OKQ8, Ionity, Recharge, Circle K och Tesla Supercharger. Priserna är kontrollerade den 17 november 2026."
+description: "Så räknar du ut kostnaden per mil: hemma med elpris, skatt och nätavgift, och längs vägen hos Mer, OKQ8, Ionity, Recharge, Circle K och Tesla Supercharger. Priserna är kontrollerade den 17 november 2026."
 summary:
   - "Hemmaladdning i exemplen landar på cirka 1,28 till 4,40 kr/kWh i november, beroende på elområde, innan elhandlarens påslag."
   - "Publik snabbladdning kostar från 3,40 kr/kWh på Mers nattpris till 6,69 kr/kWh hos Circle K, enligt operatörernas listpriser den 17 november 2026."
