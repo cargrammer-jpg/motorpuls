@@ -147,6 +147,11 @@ Sidhuvudets lilla flagga bredvid logotypen (`.wordmark__flag`) hör till logotyp
 startsidan, rubrik i artikelmallens stil), i `feed/guider.xml` och i sitemap.xml. Sidhuvudet får länkarna "Nyheter" och "Guider"
 (aktuell sida: 2px orange understreck) först när minst en guide är publicerad, så inga tomma sidor syns. Guider får `Article` i JSON-LD,
 brödsmulan "Start / Guider / <kategori>" och tas inte med i Google News-sitemapen.
+Ingressen på `/guider/` är två till tre meningar i `catpage__dek` (Newsreader, `text-2`) ovanför listan.
+
+**Vanliga frågor.** Valfritt `faq` i front matter, en lista med `question` och `answer`. Sektionen står efter brödtexten och före källorna.
+Rubriken "Vanliga frågor" är en h2 med samma orange prick som övriga h2. Frågorna är h3, svaren är brödtext. Samma strängar går in i
+FAQPage (JSON-LD) i ett eget script. Article och NewsArticle lämnas orörda. Saknas `faq` ritas inget.
 
 **Läs också.** Under artikeln (efter RSS-raden): tre andra artiklar. Samma kategori väger tyngst, sedan gemensamma taggar, sedan
 de nyaste. Mobil: liten bild till vänster och rubrik till höger; från 40rem tre kolumner. Miniatyrerna är 400 px-varianterna i en

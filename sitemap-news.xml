@@ -33,15 +33,4 @@
       <news:title>Volkswagen tjänade 12 euro per bil. Tesla tappar, Mercedes drar ifrån</news:title>
     </news:news>
   </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/stellantis-aterkallelse-dorrar-last-krock/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-16T07:10:00+01:00</news:publication_date>
-      <news:title>Dörrarna kan förbli låsta efter krocken. 51 141 Fiat, Opel och Citroën kallas in</news:title>
-    </news:news>
-  </url>
 </urlset>
