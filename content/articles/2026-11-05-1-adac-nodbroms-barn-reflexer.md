@@ -1,13 +1,13 @@
 ---
 title: "ADAC-test: bara en av sex bilar såg barnet med reflexer"
-seo_title: "ADAC: bara en av sex bilar såg barnet med reflexer"
+seo_title: "ADAC: Tesla Model Y missade barnet med reflexer"
 date: 2026-11-07T07:00+01:00
 slug: adac-nodbroms-barn-reflexer
 tags: [ADAC, nödbromsassistent, aktiv säkerhet, reflexer, Mercedes CLA, Tesla Model Y, BYD Seal, Hyundai Tucson, Dacia Duster, Opel Astra]
 sources:
   - https://presse.adac.de/meldungen/adac-ev/technik/adac-studie-zeigt-gefaehrliche-sicherheitsluecke-bei-notbremsassistenten.html
   - https://www.adac.de/rund-ums-fahrzeug/ausstattung-technik-zubehoer/assistenzsysteme/test-notbremsassistenten-bei-reflektierender-kleidung/
-excerpt: "Tyska ADAC testade sex bilar i mörker, bland dem Tesla Model Y. Bara Mercedes CLA upptäckte barnet med reflexkläder."
+excerpt: "ADAC testade sex bilar i mörker, bland dem Tesla Model Y. Bara Mercedes CLA upptäckte barnet med reflexkläder. Varje bil kördes i sin egen fart."
 summary:
   - "ADAC testade sex bilar i mörker mot dockor med och utan reflexkläder."
   - "Barnet i reflexkläder missades av nästan alla, bara Mercedes CLA upptäckte det."

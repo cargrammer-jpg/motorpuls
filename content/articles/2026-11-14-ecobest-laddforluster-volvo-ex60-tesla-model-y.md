@@ -1,12 +1,12 @@
 ---
 title: "Laddtest: Volvo EX60 bäst, sämsta bilen tappade 18 procent"
-seo_title: "Laddtest: Volvo EX60 bäst, sämst tappade 18 procent"
+seo_title: "Tesla Model Y: 7,77 km per kWh i testet"
 date: 2026-11-14T18:00:00+01:00
 slug: ecobest-laddforluster-volvo-ex60-tesla-model-y
 tags: [elbil, laddning, ECOBEST, AUTOBEST, Volvo EX60, Tesla Model Y, Renault Twingo, energiförbrukning]
 sources:
   - https://autobest.org/real-traffic-tests-put-15-new-evs-to-the-truth-test-and-bring-vehicle-to-load-on-a-rescue-mission-for-the-first-time/
-excerpt: "AUTOBEST körde 15 nya elbilar i Italien. EX60 behövde 4,7 procent mer el än batteriets nettokapacitet, Kia EV2 drygt 18 procent."
+excerpt: "AUTOBEST testade 15 elbilar. Tesla Model Y gick 7,77 km per kWh, näst bäst. Volvo EX60 hade lägst laddförlust, 4,7 procent."
 summary:
   - "AUTOBEST testade 15 nya elbilar i verklig trafik i Italien, med metod certifierad av Bureau Veritas."
   - "Volvo EX60 behövde bara 4,7 procent mer el än batteriets nettokapacitet. Kia EV2 behövde drygt 18 procent."

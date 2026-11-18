@@ -89,7 +89,7 @@ Bilen blev ett spekulationsobjekt redan från början. Enligt uppskattningar fr�
 
 Tävlingsversionerna F40 LM, Competizione och GTE byggdes fram till 1996. Av F40 LM byggdes 19 exemplar, och sju bilar byggdes om till GTE hos Michelotto. Här finns en svensk tråd. Teamet Strandell körde F40 i BPR Global GT Series och vann fyratimmarsloppet på Vallelunga 1994 och på Anderstorp 1995. År 1996 vann svensken Anders Olofsson och Luciano Della Noce på Anderstorp med en F40 GTE.
 
-På Le Mans 1995 kom F40 LM nummer 34 på tolfte plats totalt och F40 GTE nummer 41 på artonde. Loppet vanns av McLaren F1 GTR. Mot den nya McLarenbilen var F40 inte längre konkurrenskraftig, och efter 1996 försvann den från GT-racingen.
+På Le Mans 1995 kom F40 LM nummer 34 på tolfte plats totalt och F40 GTE nummer 41 på artonde. Loppet vanns av [McLaren F1 GTR](/artikel/mclaren-f1-mittensits-le-mans/). Mot den nya McLarenbilen var F40 inte längre konkurrenskraftig, och efter 1996 försvann den från GT-racingen.
 
 {{bild 3}}
 
@@ -100,6 +100,8 @@ Det finns ingen officiell siffra. Ferrari publicerar inget register över chassi
 Sajten SupercarTribe, som bygger ett eget register, bedömer att långt över 1 000 bilar fortfarande finns. Sajten skriver samtidigt att det saknas en central databas. Det offentliga chassiregistret Fully Sorted har bara 124 bilar dokumenterade och markerar själva tillverkningssiffran som omstridd.
 
 I Sverige listar car.info 8 registrerade Ferrari F40 i början av november 2026.
+
+Läs också: [BMW byggde 17 970 E30 M3, reglerna krävde bara 5 000](/artikel/bmw-m3-e30-homologering-dtm/)
 
 ## F40 med svensk historia
 

@@ -53,6 +53,8 @@ Swedacs egen tillsyn handlar främst om att granska den märkningen, inte om att
 
 Bensin kostar i dag 15,74 kronor per liter i listpris hos de stora kedjorna, enligt Bensinstation.nu. Om en pump ger 0,5 procent för lite blir det 2,5 deciliter på en tank om 50 liter, eller knappt 4 kronor. Vid 0,85 procent blir det drygt 6 kronor per tankning.
 
+**Läs också:** [Bensin och diesel väntas bli 3 kronor dyrare litern den 1 december](/artikel/bensin-diesel-3-kronor-dyrare-1-december/)
+
 ## Lukas analys
 
 Det handlar om små summor per tankning men stora summor totalt, och just därför är det svårt för en enskild förare att märka. Kontrollen bygger på att någon faktiskt mäter.

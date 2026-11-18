@@ -76,6 +76,8 @@ Bilen visades första gången den 28 maj 1992 på The Sporting Club i Monaco, sa
 
 Murray ville ha en motor utan turbo för att få bättre kontroll och tillförlitlighet. Det blev en V12 från BMW, kallad S70/2, med Paul Rosche som motorkonstruktör. Enligt McLarens specifikation hade den 6 064 kubik, 627 hk vid 7 500 varv och 651 Nm vid 5 600 varv. Växellådan var sexväxlad och manuell, och bilen vägde 1 140 kg.
 
+Läs också: [BMW byggde 17 970 E30 M3, reglerna krävde bara 5 000](/artikel/bmw-m3-e30-homologering-dtm/)
+
 McLaren angav 386 km/h i toppfart och 3,2 sekunder från 0 till 97 km/h (60 mph). Den 31 mars 1998 nådde prototypen XP5, med ändrad varvtalsbegränsare, 240,1 mph eller cirka 386 km/h. Det gav världsrekord för produktionsbilar i Guinness rekordbok.
 
 ## Produktionen
@@ -96,6 +98,8 @@ På Le Mans 1995 vann bil nummer 59 från Kokusai Kaihatsu Racing med Yannick Da
 
 För att hedra de fem bilar som gick i mål byggdes senare fem gatbilar i specialversionen F1 LM.
 
+Läs också: [En Ferrari F40 från Sverige såldes för cirka 51 miljoner kronor](/artikel/ferrari-f40-sista-enzo-ferrari/)
+
 {{bild 3}}
 
 ## Hur många finns kvar?
@@ -105,6 +109,8 @@ Här finns ett ovanligt säkert svar. Försäkringsbolaget Hagerty har gått ige
 Flest finns i Storbritannien med 40 bilar och USA med 30. Sultanen av Brunei har sju. De förstörda bilarna inkluderar prototypen XP1, som förstördes vid en krasch under tester i Namibia, och XP2, som byggdes för krocktester.
 
 I Sverige listar car.info inga registrerade McLaren F1 i början av november 2026.
+
+Läs också: [Koenigsegg har levererat sista Jesko, nummer 125, i Ängelholm](/artikel/sista-koenigsegg-jesko-125-medvedev/)
 
 ## Vad kostar en F1 i dag?
 

@@ -110,6 +110,8 @@ Det som går att mäta är enskilda länder. I Storbritannien hade 16 Diablo gil
 
 I Sverige listar car.info 29 registrerade Lamborghini Diablo i början av november 2026, och två av dem är till salu.
 
+Läs också: [En Ferrari F40 från Sverige såldes för cirka 51 miljoner kronor](/artikel/ferrari-f40-sista-enzo-ferrari/)
+
 ## Vad kostar en Diablo i dag?
 
 På RM Sotheby's auktion i Monterey 2026 såldes en Diablo från 1991 med 1 349 km på mätaren för 802 500 dollar. Det motsvarar cirka 7,9 miljoner kronor. Vid auktionen i Miami samma år gick en SE30 från 1994 för 1 627 500 dollar, cirka 16 miljoner kronor.

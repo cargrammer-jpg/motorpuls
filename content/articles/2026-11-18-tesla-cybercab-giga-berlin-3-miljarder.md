@@ -11,7 +11,7 @@ sources:
   - https://www.tagesspiegel.de/potsdam/brandenburg/nachste-milliardeninvestition-im-tesla-werk-tesla-will-in-grunheide-bei-berlin-das-robotaxi-cybercab-bauen-16289742.html
   - https://techcrunch.com/2026/11/16/tesla-goes-all-in-on-the-cybercab-with-upcoming-e3b-berlin-gigafactory-expansion/
   - https://alltomelbil.se/tesla-ska-bygga-forarlos-elbil-i-europa-storsatsning-pa-cybercab-i-berlin/
-excerpt: "Tesla bygger ut fabriken i Grünheide utanför Berlin för tre miljarder euro. Från 2029 ska robotaxin Cybercab tillverkas där, men i EU är bilen ännu inte godkänd."
+excerpt: "Tesla lägger tre miljarder euro på fabriken i Grünheide. Cybercab ska byggas där från 2029, men är inte godkänd i EU."
 summary:
   - "Tesla investerar tre miljarder euro i en ny produktionshall i Grünheide utanför Berlin."
   - "Hallen ska på sikt kunna bygga upp till en miljon Cybercab om året, med start 2029."

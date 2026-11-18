@@ -17,7 +17,7 @@ sources:
   - https://carup.se/teslas-ingenjor-domer-ut-batteritekniken-volvo-gar-all-in/
   - https://www.volvocars.com/uk/media/press-releases/3FFAD569830ED5B8/
   - https://www.volvocars.com/intl/media/press-releases/4291EEEC7003CDC6/
-excerpt: "Robert Sumpf säger att det inbyggda paketet var bra för kunden men dyrt att bygga och serva. Volvo bygger samtidigt in cellerna i karossen på EX60."
+excerpt: "Teslas ingenjör Robert Sumpf ger Model Y:s inbyggda batteri betyget D. Det var bra för kunden, men dyrt att bygga och serva."
 summary:
   - "Teslas Robert Sumpf ger Model Y:s strukturella batteri betyget D."
   - "Cybercab får fyra moduler, så hela paketet behöver inte bytas."

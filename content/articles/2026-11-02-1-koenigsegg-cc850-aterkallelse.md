@@ -58,6 +58,8 @@ NHTSA:s ärende har nummer 26V694 och omfattar årsmodellerna 2025 och 2026. Pro
 
 CC850 byggs i 70 exemplar. Sju av dem finns i USA, alltså en tiondel av hela serien. Varken NHTSA:s uppgifter eller Road & Track säger något om bilar i Europa eller Sverige.
 
+Läs också: [Koenigsegg har levererat sista Jesko, nummer 125, i Ängelholm](/artikel/sista-koenigsegg-jesko-125-medvedev/)
+
 ## Lukas analys
 
 En hyperbil med 1 385 hk på E85 stoppas av något så vardagligt som en parkeringsbroms. Men det är logiskt. Ju mer som styrs av programvara, desto fler kombinationer av lägen måste testas, och ett ovanligt läge slank igenom här.

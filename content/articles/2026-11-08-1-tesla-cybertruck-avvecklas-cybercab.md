@@ -10,7 +10,7 @@ sources:
   - https://x.com/wmorrill3/status/2118598887258644883
   - https://finance.yahoo.com/news/tesla-wind-down-cybertruck-production-094210977.html
   - https://www.cnbc.com/2026/11/06/tesla-cybertruck-texas-musk.html
-excerpt: "Platsen i Austin ska gå till robotaxin Cybercab. Musk har inte sagt om pickupen flyttas till en annan fabrik eller försvinner."
+excerpt: "Tesla lämnar Cybertruck-linan i Austin till Cybercab kring mitten av 2027. Musk har inte sagt om pickupen flyttas eller försvinner."
 summary:
   - "Musk: Tesla avvecklar Cybertruck-produktionen i Texas omkring mitten av 2027."
   - "Skälet är ökad tillverkning av Cybercab, Teslas robotaxi utan ratt och pedaler."

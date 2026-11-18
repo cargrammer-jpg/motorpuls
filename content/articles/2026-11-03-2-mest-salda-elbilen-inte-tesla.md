@@ -1,6 +1,6 @@
 ---
 title: "Tesla Model Y föll till elfte plats i Sverige i oktober"
-seo_title: "Tesla Model Y föll till elfte plats i Sverige"
+seo_title: "Tesla Model Y: 328 bilar i oktober, från 2 330"
 date: 2026-11-03T07:00:00+01:00
 slug: mest-salda-elbilen-inte-tesla
 tags: [elbil, nyregistreringar, Mobility Sweden, Volvo EX40, Tesla Model Y, Volvo EX30, Kia EV2, BMW iX3, förmånsvärde]
@@ -13,7 +13,7 @@ sources:
   - https://skatteverket.se/foretag/arbetsgivare/lonochersattning/formaner/bilforman/listorovernybilspriser.4.d5e04db14b6fef2c8695f6.html
   - https://skatteverket.entryscape.net/rowstore/dataset/fad86bf9-67e3-4d68-829c-7b9a23bc5e42
   - https://www.skatteverket.se/privat/skatter/arbeteochinkomst/formaner/bilforman/miljobilar
-excerpt: "I oktober registrerades 328 Model Y, mot 2 330 i september. Volvo EX40 ledde månaden med 997 bilar."
+excerpt: "Tesla Model Y registrerades i 328 exemplar i Sverige i oktober, mot 2 330 i september. Volvo EX40 ledde med 997 bilar."
 summary:
   - "Oktober: Volvo EX40 etta med 997 registreringar, Tesla Model Y elva med 328."
   - "Januari till oktober: EX40 9 894, Model Y 7 706. Avståndet har vuxit till 2 188 bilar."

@@ -55,6 +55,8 @@ Läs också: [Fartkamerorna gav 119 000 böter på ett år. Nu kommer 21 nya, h�
 
 Här finns ingen sådan siffra. Trafikförordningen säger att en förare som märker att någon vill köra om ska hålla så långt till höger som möjligt och inte öka farten.
 
+Läs också: [Polisens radar mäter farten 18 gånger per sekund i Sverige](/artikel/polisens-radarbilar-hela-sverige/)
+
 ## Lukas analys
 
 Vänsterfilen är till för omkörning, både på tyska Autobahn och italienska autostrada. En fast siffra gör regeln lättare att kontrollera, men den ändrar inte grunden: håll till höger när du inte kör om.
