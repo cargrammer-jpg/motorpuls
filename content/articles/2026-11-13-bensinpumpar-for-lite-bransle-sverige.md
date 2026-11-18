@@ -1,6 +1,6 @@
 ---
-title: "Pumparna gav för lite bränsle 98 gånger. Så kontrolleras macken i Sverige"
-seo_title: "Bensinpumpar gav för lite bränsle, så är det i Sverige"
+title: "Brittisk granskning: pumpar gav för lite bränsle 98 gånger"
+seo_title: "Brittiska pumpar gav för lite bränsle 98 gånger"
 date: 2026-11-13T12:00:00+01:00
 slug: bensinpumpar-for-lite-bransle-sverige
 tags: [bensinpris, tankning, Swedac, konsument, Storbritannien, bränslemätare]
@@ -9,7 +9,7 @@ sources:
   - https://www.swedac.se/amnesomraden/krav-pa-branslematare/
   - https://www.swedac.se/wp-content/uploads/2021/02/rep-20-8-rapport-over-2020-ars-tillsyn-av-branslematare.pdf
   - https://www.bensinstation.nu/bensinpris-idag/
-excerpt: "En brittisk granskning hittade 98 fall där bensinpumpar gav mindre bränsle än tillåtet. Här är hur kontrollen fungerar i Sverige."
+excerpt: "The Telegraph hittade 98 fall där pumpen gav mer än 0,5 procent för lite. I Sverige har Swedac tillsynen, och pumpen ska kontrolleras av ett ackrediterat organ."
 summary:
   - "The Telegraph hittade 98 fall i Storbritannien där pumpar levererade mer än 0,5 procent för lite."
   - "Flera brittiska kommuner har inte gjort några kontroller alls på flera år."
@@ -25,7 +25,7 @@ images:
     source_url: "https://commons.wikimedia.org/wiki/File:PetrolStation_20220423_065742.jpg"
 ---
 
-# Pumparna gav för lite bränsle 98 gånger. Så kontrolleras macken i Sverige
+# Brittisk granskning: pumpar gav för lite bränsle 98 gånger
 
 Du betalar för det som står på displayen. En brittisk granskning visar att pumpen inte alltid levererar det. Frågan är hur det ser ut vid svenska mackar.
 

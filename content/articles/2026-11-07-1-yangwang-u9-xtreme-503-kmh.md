@@ -1,6 +1,6 @@
 ---
-seo_title: "Yangwang U9 Xtreme: 503 km/h, erkänd av FIA"
-title: "Kinesisk elbil kör 503 km/h. FIA erkänner farten över 500 km/h"
+seo_title: "Yangwang U9 körde 503 km/h, FIA har erkänt farten"
+title: "BYD:s Yangwang U9 körde 503 km/h, FIA har erkänt farten"
 date: 2026-11-07T18:00:00+01:00
 slug: yangwang-u9-xtreme-503-kmh
 tags: [Yangwang, BYD, U9 Xtreme, världsrekord, FIA, Guinness, elbil, sportbil, Abu Dhabi, Marc Basseng]
@@ -8,7 +8,7 @@ sources:
   - https://www.fia.com/news/yangwang-u9-xtreme-surpasses-500-kmh-speed-achievement-recognised-fia
   - https://www.mediaoffice.abudhabi/en/transport/abu-dhabi-marks-global-automotive-milestone-as-yangwang-u9-xtreme-sets-new-global-speed-record-of-50317kph/
   - https://cnevpost.com/2026/11/06/byd-yangwang-u9-xtreme-breaches-500-km-h/
-excerpt: "Yangwang U9 Xtreme nådde 503,17 km/h i Abu Dhabi den 1 november. FIA har erkänt farten och Guinness gav två rekord i en riktning."
+excerpt: "Farten 503,17 km/h sattes den 1 november på en avstängd motorväg i Abu Dhabi. Guinness noterar rekordet i en riktning, inte åt båda håll."
 summary:
   - "503,17 km/h den 1 november 2026 på E11 i Abu Dhabi, med Marc Basseng bakom ratten."
   - "FIA erkänner farten. Guinness ger två rekord, för produktionsbil och eldriven produktionsbil, i en riktning."
@@ -31,7 +31,7 @@ images:
     license_url: "https://creativecommons.org/licenses/by/2.0/"
 ---
 
-# Kinesisk elbil kör 503 km/h. FIA erkänner farten över 500 km/h
+# BYD:s Yangwang U9 körde 503 km/h, FIA har erkänt farten
 
 En produktionsbil har för första gången passerat 500 km/h i en officiellt erkänd körning. Yangwang U9 Xtreme, lyxmärket under kinesiska BYD, klockades för 503,17 km/h i Abu Dhabi den 1 november. Resultatet offentliggjordes den 6 november.
 

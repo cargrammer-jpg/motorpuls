@@ -1,6 +1,6 @@
 ---
-title: "Volkswagen förlorade 64 miljarder kronor på tre månader. Porsche blev den dyraste posten"
-seo_title: "VW förlorade 64 miljarder kronor på ett kvartal"
+title: "Volkswagen gick back 64 miljarder kronor i tredje kvartalet"
+seo_title: "VW gick back 64 miljarder kronor i tredje kvartalet"
 date: 2026-11-08T07:00+01:00
 slug: volkswagen-q3-forlust-porsche-nedskrivning
 tags: [Volkswagen, Porsche, kvartalsrapport, ekonomi, elbilar]
@@ -8,7 +8,7 @@ sources:
   - https://www.volkswagen-group.com/en/press-releases/volkswagen-group-nine-month-results-underline-urgent-need-for-action-20799
   - https://newsroom.porsche.com/en/2026/company/porsche-financial-figures-q3-2026-43487.html
   - https://api.riksbank.se/swea/v1/Observations/SEKEURPMI/2026-10-20/2026-10-30
-excerpt: "Volkswagenkoncernen gick 5,82 miljarder euro back efter skatt under tredje kvartalet, och den största engångsposten är en nedskrivning på Porsche."
+excerpt: "Resultatet efter skatt var minus 5,82 miljarder euro. Den största posten är en nedskrivning av Porsche på 6,4 miljarder euro, som inte påverkar kassan."
 summary:
   - "Förlust efter skatt på 5,82 miljarder euro under tredje kvartalet."
   - "Nedskrivning av goodwill på Porsche: 6,4 miljarder euro."
@@ -28,7 +28,7 @@ images:
     source_url: "https://www.volkswagen-group.com/en/press-releases/volkswagen-group-nine-month-results-underline-urgent-need-for-action-20799"
 ---
 
-# Volkswagen förlorade 64 miljarder kronor på tre månader. Porsche blev den dyraste posten
+# Volkswagen gick back 64 miljarder kronor i tredje kvartalet
 
 Volkswagenkoncernen gick 5,82 miljarder euro back efter skatt under tredje kvartalet. Omräknat med Riksbankens kurs är det runt 64 miljarder kronor, och den största enskilda smällen är en nedskrivning av värdet på Porsche.
 

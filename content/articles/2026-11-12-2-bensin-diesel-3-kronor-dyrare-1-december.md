@@ -1,6 +1,6 @@
 ---
-title: "Bensin och diesel kan bli 3 kronor dyrare över en natt. Försöket att stoppa det fick nej"
-seo_title: "Bensin och diesel 3 kronor dyrare 1 december"
+title: "Bensin och diesel väntas bli 3 kronor dyrare litern den 1 december"
+seo_title: "Bensin och diesel väntas bli 3 kronor dyrare 1 december"
 date: 2026-11-12T15:00:00+01:00
 slug: bensin-diesel-3-kronor-dyrare-1-december
 tags: [bensinpris, dieselpris, drivmedelsskatt, koldioxidskatt, Skatteverket, finansutskottet, Sverige]
@@ -11,7 +11,7 @@ sources:
   - https://www.riksdagen.se/sv/dokument-och-lagar/dokument/betankande/extra-andringsbudget-for-2026-stod-till-ukraina_hd01fiu47/
   - https://www.vibilagare.se/nyheter/drivmedelsskatt-nej-till-forlangd-rabatt-pa-bensin-och-diesel
   - https://www.bensinstation.nu/historiska-br%C3%A4nslepriser/
-excerpt: "Den 30 november tar skattesänkningen på bensin och diesel slut. Skatten stiger med 2,40 kronor litern. Försöket att förlänga sänkningen stoppades."
+excerpt: "Skatten stiger med 2,40 kronor litern, och med moms blir det cirka 3 kronor om hela höjningen syns vid pumpen. För en tank på 50 liter är det runt 150 kronor."
 summary:
   - "Skatten på bensin går från 2,39 till 4,79 kronor litern den 1 december. Diesel stiger lika mycket."
   - "Med moms blir det cirka 3 kronor per liter, eller runt 150 kronor för en tank på 50 liter."
@@ -32,7 +32,7 @@ images:
     source_url: "https://commons.wikimedia.org/wiki/File:Dieselpump_Preem_Avesta.jpg"
 ---
 
-# Bensin och diesel kan bli 3 kronor dyrare över en natt. Försöket att stoppa det fick nej
+# Bensin och diesel väntas bli 3 kronor dyrare litern den 1 december
 
 Om fyra veckor är årets största skatterabatt på drivmedel slut. För den som tankar en vanlig bil handlar det om ungefär 150 kronor mer per tank.
 

@@ -1,6 +1,6 @@
 ---
-title: "Byggd för gatan, vann Le Mans på första försöket. 100 McLaren F1 finns kvar, ingen i Sverige"
-seo_title: "McLaren F1: design, Le Mans och hur många som finns kvar"
+title: "McLaren F1 vann Le Mans 1995, 100 av 106 bilar finns kvar"
+seo_title: "McLaren F1 vann Le Mans 1995, 100 bilar finns kvar"
 date: 2026-11-06T18:00:00+01:00
 slug: mclaren-f1-mittensits-le-mans
 tags: [McLaren, McLaren F1, Gordon Murray, BMW, V12, Le Mans, klassiker, sportbil, auktion]
@@ -16,7 +16,7 @@ sources:
   - https://rmsothebys.com/media-center/press-releases/rm-sotheby-s-inaugural-abu-dhabi-collectors-week-auction-grosses-85-million-becoming-the-region-s-most-successful-collector-car-auction-ever/
   - https://www.car.info/sv-se/mclaren/f1
   - https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml
-excerpt: "McLaren F1 var tänkt som världens bästa gatbil och vann Le Mans 1995. Av 106 byggda finns 100 kvar enligt Hagerty, och ingen är registrerad i Sverige."
+excerpt: "Bilen var byggd som gatbil och vann på första försöket. Enligt car.info är ingen McLaren F1 registrerad i Sverige."
 summary:
   - "McLaren byggde 106 F1 i Woking mellan 1992 och 1998, varav 64 vanliga gatbilar och 28 tävlingsbilar av typen GTR."
   - "En F1 GTR vann Le Mans 1995 och McLarenbilar tog fyra av de fem första platserna."
@@ -50,7 +50,7 @@ images:
     credit_url: "https://commons.wikimedia.org/wiki/File:The_winning_Mclaren_F1_GTR_-59_of_Yannick_Dalmas,_Masanori_Sekiya_%26_J.J.Lehto_at_Ford_Chicane_at_Le_Mans_1995_(49627439822).jpg"
 ---
 
-# Byggd för gatan, vann Le Mans på första försöket. 100 McLaren F1 finns kvar, ingen i Sverige
+# McLaren F1 vann Le Mans 1995, 100 av 106 bilar finns kvar
 
 McLaren F1 var aldrig tänkt som racerbil. Ändå vann den Le Mans 24 timmar 1995, och den är fortfarande den snabbaste gatbilen med sugmotor. Av 106 byggda bilar finns 100 kvar.
 

@@ -1,5 +1,6 @@
 ---
-title: "Noll procent i barnskydd och brandrisk. Kinesiska suven sågas i krocktest"
+title: "Kinesiska Chery Tiggo 2 får noll stjärnor i Latin NCAP:s krocktest"
+seo_title: "Chery Tiggo 2 får noll stjärnor i Latin NCAP:s krocktest"
 date: 2026-11-10T07:00+01:00
 slug: chery-tiggo-2-noll-stjarnor-latin-ncap
 tags: [Chery, Tiggo 2, Latin NCAP, krocktest, säkerhet, Omoda, Jaecoo]
@@ -8,7 +9,7 @@ sources:
   - https://www.latinncap.com/en/result/211/chery-chirey-tiggo-2-tiggo-2-pro-tiggo-2-pro-max-+-4-airbags
   - https://www.chery.uy/modelos/tiggo-2-pro-1.5
   - https://omodajaecoo.se/nyheter/3469512_omoda--jaecoo-etablerar-sig-i-gteborg--moberg-bil-blir-aterfrsljare
-excerpt: "Chery Tiggo 2 fick noll stjärnor i Latin NCAP, med noll procent i både vuxen- och barnskydd och brandrisk i frontalkrocken."
+excerpt: "Testet gäller Latinamerika, inte Sverige. Bilen fick noll procent i både vuxen- och barnskydd, och i frontalkrocken upptäcktes en brandrisk."
 summary:
   - "Noll procent i vuxenskydd och noll procent i barnskydd i Latin NCAP."
   - "Brandrisk upptäcktes i frontalkrocken och karossen bedömdes som instabil."
@@ -34,7 +35,7 @@ images:
     source_url: "https://commons.wikimedia.org/wiki/File:2022_Chery_Tiggo2_Pro_1.5_GLS.jpg"
 ---
 
-# Noll procent i barnskydd och brandrisk. Kinesiska suven sågas i krocktest
+# Kinesiska Chery Tiggo 2 får noll stjärnor i Latin NCAP:s krocktest
 
 Chery Tiggo 2 fick noll stjärnor när Latin NCAP krocktestade den. Bilen fick noll procent i skydd för både vuxna och barn, och i frontalkrocken upptäcktes en brandrisk.
 

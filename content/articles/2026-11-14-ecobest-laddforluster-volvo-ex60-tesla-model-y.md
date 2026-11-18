@@ -1,12 +1,12 @@
 ---
-title: "Upp till 18 procent extra el går åt när du laddar. Volvo EX60 slösar minst i nytt test"
-seo_title: "Laddförluster i test: Volvo EX60 bäst, Tesla snål på vägen"
+title: "Laddtest: Volvo EX60 bäst, sämsta bilen tappade 18 procent"
+seo_title: "Laddtest: Volvo EX60 bäst, sämst tappade 18 procent"
 date: 2026-11-14T18:00:00+01:00
 slug: ecobest-laddforluster-volvo-ex60-tesla-model-y
 tags: [elbil, laddning, ECOBEST, AUTOBEST, Volvo EX60, Tesla Model Y, Renault Twingo, energiförbrukning]
 sources:
   - https://autobest.org/real-traffic-tests-put-15-new-evs-to-the-truth-test-and-bring-vehicle-to-load-on-a-rescue-mission-for-the-first-time/
-excerpt: "Ett test av 15 nya elbilar visar stora skillnader i el som försvinner vid laddning. Volvo EX60 tappar minst. Tesla Model Y är näst snålast på vägen."
+excerpt: "AUTOBEST körde 15 nya elbilar i Italien. EX60 behövde 4,7 procent mer el än batteriets nettokapacitet, Kia EV2 drygt 18 procent."
 summary:
   - "AUTOBEST testade 15 nya elbilar i verklig trafik i Italien, med metod certifierad av Bureau Veritas."
   - "Volvo EX60 behövde bara 4,7 procent mer el än batteriets nettokapacitet. Kia EV2 behövde drygt 18 procent."
@@ -28,7 +28,7 @@ images:
     source_url: "https://commons.wikimedia.org/wiki/File:Tesla_Model_Y_(2025)_DSC_8297.jpg"
 ---
 
-# Upp till 18 procent extra el går åt när du laddar. Volvo EX60 slösar minst i nytt test
+# Laddtest: Volvo EX60 bäst, sämsta bilen tappade 18 procent
 
 All el du betalar för hamnar inte i batteriet. Ett nytt europeiskt test av 15 elbilar visar att skillnaden mellan bästa och sämsta bil är nästan fyra gånger.
 

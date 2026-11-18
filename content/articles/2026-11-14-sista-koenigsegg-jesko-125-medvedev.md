@@ -1,6 +1,6 @@
 ---
-title: "Den sista Koenigsegg Jesko har lämnat Ängelholm. Köparen ska vara en rysk tennisstjärna"
-seo_title: "Sista Koenigsegg Jesko levererad, köparen ska vara Medvedev"
+title: "Koenigsegg har levererat sista Jesko, nummer 125, i Ängelholm"
+seo_title: "Sista Koenigsegg Jesko, nummer 125, levererad i Ängelholm"
 date: 2026-11-14T12:00:00+01:00
 slug: sista-koenigsegg-jesko-125-medvedev
 tags: [Koenigsegg, Jesko, Jesko Absolut, Ängelholm, hyperbil, E85, Daniil Medvedev]
@@ -9,7 +9,7 @@ sources:
   - https://www.thesupercarblog.com/final-koenigsegg-jesko-delivered-to-russian-tennis-star-daniil-medvedev/
   - https://www.carscoops.com/2315688/koenigsegg-bids-farewell-jesko-no-direct-successor/
   - https://www.gazzetta.it/motori/la-mia-auto/12-11-2026/daniil-medvedev-si-regala-una-koenigsegg-jesko-absolut-prezzo-velocita-massima-cosa-e.shtml
-excerpt: "Jesko nummer 125 är levererad och Koenigseggs mest sålda tvåsitsiga hyperbil är historia. Någon direkt efterträdare finns inte bekräftad."
+excerpt: "Personalen applåderade när bilen lämnade fabriken den 11 november. Flera medier uppger att köparen är Daniil Medvedev, men Koenigsegg har inte namngett ägaren."
 summary:
   - "Koenigsegg har levererat Jesko 125, den sista av 125 bilar, från fabriken i Ängelholm."
   - "Flera utländska medier uppger att köparen är tennisspelaren Daniil Medvedev. Koenigsegg har inte namngett ägaren."
@@ -32,7 +32,7 @@ images:
     source_url: "https://commons.wikimedia.org/wiki/File:Koenigsegg_Jesko_Auto_Zuerich_2023_1X7A0924.jpg"
 ---
 
-# Den sista Koenigsegg Jesko har lämnat Ängelholm. Köparen ska vara en rysk tennisstjärna
+# Koenigsegg har levererat sista Jesko, nummer 125, i Ängelholm
 
 Jesko nummer 125 är levererad. Därmed är det slut på Koenigseggs hittills mest tillverkade tvåsitsiga hyperbil, sju år efter premiären.
 

@@ -1,6 +1,6 @@
 ---
-title: "Utredning vill föra in HVO100 i reduktionsplikten senast 2031"
-seo_title: "HVO100 i reduktionsplikten senast 2031"
+title: "Utredning vill att HVO100 beskattas fullt senast 2031"
+seo_title: "Utredning: HVO100 beskattas fullt senast 2031"
 date: 2026-10-30T01:19:00+01:00
 slug: hvo100-reduktionsplikten-utredning-2031
 tags:
@@ -17,7 +17,7 @@ sources:
   - https://www.tidningenproffs.se/nyhet/2026/10/drivkraft-sverige-vill-se-hojd-reduktionsplikt-och-slopad-pumplag/
   - https://drivkraftsverige.se/nyheter/press-drivkraft-sverige-valkomnar-styrmedelsutredningens-forslag-nu-dags-for-politisk-kraftsamling/
   - https://2030-sekretariatet.se/reduktionsplikt/
-excerpt: "Styrmedelsutredningen föreslår 21, 23 och 25 procents reduktionsplikt 2028 till 2030 och att HVO100 förs in i plikten och beskattas fullt senast 2031."
+excerpt: "Styrmedelsutredningen föreslår också att reduktionsplikten höjs till 25 procent 2030. Inget är beslutat, remisstiden gick ut den 30 oktober."
 summary:
   - "Reduktionsplikten föreslås höjas till 25 procent 2030."
   - "HVO100 förs in i plikten och beskattas fullt senast 2031."
@@ -37,7 +37,7 @@ images:
     source_url: "https://commons.wikimedia.org/wiki/File:Dep%C3%B3sito_de_HVO_en_Visby.jpg"
 ---
 
-# Utredning vill föra in HVO100 i reduktionsplikten senast 2031
+# Utredning vill att HVO100 beskattas fullt senast 2031
 
 Styrmedelsutredningen vill höja reduktionsplikten till 25 procent 2030. Den vill också ta bort HVO100:s särställning.
 

@@ -74,7 +74,7 @@
 #
 # Publicering: GitHub Actions (.github/workflows/pages.yml) kör `python build.py --out _site`. Då byggs allt som vanligt
 # i projektroten och sedan kopieras bara den publika delen till _site (genererade sidor, css, js, fonts, img, favicon,
-# CNAME). Källor som build.py, content/, DESIGN.md, brand/ och drafts/ publiceras alltså inte. I --out-läget används
+# CNAME). Källor som build.py, content/, docs/, DESIGN.md, brand/ och drafts/ publiceras alltså inte. I --out-läget används
 # även genererade bilder som inte är incheckade (WebP-varianter, img/og/<slug>.jpg), eftersom de följer med till _site.
 # Till sist kontrolleras att varje lokal länk i sidorna, css:en och manifestet finns i _site (annars avbryts bygget).
 # Utan --out fungerar allt som förut (resultatet skrivs i projektroten och checkas in).
@@ -1154,7 +1154,7 @@ TOPIC_DESC = {
 TOPIC_TITLE = {
     "tesla": "Tesla-nyheter i Sverige: priser, FSD och besiktning",
 }
-TOPIC_RESERVED = {"artikel", "om", "feed", "img", "css", "js", "fonts", "favicon", "brand", "content", "data", "drafts",
+TOPIC_RESERVED = {"artikel", "om", "feed", "img", "css", "js", "fonts", "favicon", "brand", "content", "docs", "data", "drafts",
                   "tools", "supabase", "push", "nyhetsbrev", "integritet", "prenumeration", GUIDE_KEY, "sverige"}
 TOPICS = {}  # kategori-nyckel -> dict(key, name, path, desc, arts), sätts i main()
 # /sverige/: samlingssida för artiklar med sweden: true (samma mall som ämnessidorna, flödet feed/sverige.xml). Ingen
@@ -1756,19 +1756,22 @@ def main():
 def out_dir(o):
     out = os.path.abspath(o)
     top = os.path.relpath(out, ROOT).split(os.sep)[0]
-    if out == ROOT or ROOT.startswith(out + os.sep) or top in PUBLIC_DIRS + ("artikel", "content", "drafts", "brand", ".git"):
+    if out == ROOT or ROOT.startswith(out + os.sep) or top in PUBLIC_DIRS + ("artikel", "content", "docs", "drafts", "brand", ".git"):
         raise SystemExit(f"--out {out}: välj en egen katalog som rensas vid varje bygge (t.ex. _site)")
     return out
 
 def publish(out):
-    """Kopiera den publika delen av sajten till out (tom katalog först)."""
+    """Kopiera den publika delen av sajten till out (tom katalog först). docs/ är redaktionellt underlag och ingår inte."""
     shutil.rmtree(out, ignore_errors=True); os.makedirs(out)
     skip = shutil.ignore_patterns("__pycache__", ".DS_Store", "*-original.*")
     for d in PUBLIC_DIRS:
+        if d == "docs": raise SystemExit("docs/ är redaktionellt underlag och får inte publiceras")
         if os.path.isdir(os.path.join(ROOT, d)): shutil.copytree(os.path.join(ROOT, d), os.path.join(out, d), ignore=skip)
     for rel in [f for f in PUBLIC_FILES if os.path.exists(os.path.join(ROOT, f))] + sorted(set(WRITTEN)):
+        if rel == "docs" or rel.startswith("docs/"): raise SystemExit("docs/ är redaktionellt underlag och får inte publiceras")
         os.makedirs(os.path.dirname(os.path.join(out, rel)), exist_ok=True)
         shutil.copyfile(os.path.join(ROOT, rel), os.path.join(out, rel))
+    if os.path.isdir(os.path.join(out, "docs")): raise SystemExit("docs/ är redaktionellt underlag och får inte publiceras")
     return out
 
 def check_links(out):

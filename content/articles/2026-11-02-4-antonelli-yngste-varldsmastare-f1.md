@@ -1,6 +1,6 @@
 ---
-title: "20 år gammal och redan världsmästare. Antonelli krossade Vettels rekord med över tre år"
-seo_title: "Antonelli är F1:s yngste världsmästare någonsin, 20 år"
+title: "Kimi Antonelli, 20 år, blev Formel 1:s yngste världsmästare"
+seo_title: "Antonelli, 20 år, är Formel 1:s yngste världsmästare"
 date: 2026-11-02T18:00:00+01:00
 slug: antonelli-yngste-varldsmastare-f1
 tags: [Formel 1, Kimi Antonelli, Mercedes, Max Verstappen, Lewis Hamilton, Mexikos GP, rekord]
@@ -9,7 +9,7 @@ sources:
   - https://www.formula1.com/en/latest/article/in-numbers-the-records-antonelli-has-broken-on-his-way-to-his-maiden-f1-title.2FB9yQ5qD7XzQ418HNlrfN
   - https://www.aljazeera.com/sports/2026/11/2/kimi-antonelli-becomes-formula-ones-youngest-world-champion-in-mexico-city
   - https://apnews.com/article/antonelli-formula-1-mexico-city-grand-prix-370087f112c6c26db286b98d6f23c96a
-excerpt: "En tredjeplats i Mexiko räckte. Kimi Antonelli blev Formel 1:s yngste världsmästare, 20 år och 68 dagar gammal, och första italienska mästaren sedan 1953."
+excerpt: "En tredjeplats i Mexiko räckte för titeln. Det förra rekordet hade Sebastian Vettel, som var 23 år och 134 dagar."
 summary:
   - "Antonelli säkrade VM-titeln med en tredjeplats i Mexikos GP. Han behövde bara bli nia."
   - "Han är 20 år och 68 dagar. Vettels gamla rekord från 2010 var 23 år och 134 dagar."
@@ -29,7 +29,7 @@ images:
     source_url: "https://commons.wikimedia.org/wiki/File:2026_Chinese_GP_-_Mercedes_-_Kimi_Antonelli_-_Qualifying.jpg"
 ---
 
-# 20 år gammal och redan världsmästare. Antonelli krossade Vettels rekord med över tre år
+# Kimi Antonelli, 20 år, blev Formel 1:s yngste världsmästare
 
 Kimi Antonelli behövde bara bli nia i Mexiko. Han blev trea, och nu är han den yngste världsmästaren Formel 1 har haft.
 

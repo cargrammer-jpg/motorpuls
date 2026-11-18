@@ -1,10 +1,6 @@
 ---
-title: "Dörrarna kan förbli låsta efter krocken. 51 141 Fiat, Opel och Citroën kallas in"
-seo_title: "51 141 bilar återkallas, dörrar kan låsas efter krock"
-# Rubrikförslag (det starkaste används ovan):
-# 1. Dörrarna kan förbli låsta efter krocken. 51 141 Fiat, Opel och Citroën kallas in
-# 2. Räddningstjänsten kan stängas ute. Fel på 12 voltsbatteriet i fyra populära småbilar
-# 3. Grande Panda, Frontera och nya C3 kallas in. Ett fäste kan bryta strömmen vid krock
+title: "Stellantis återkallar 51 141 bilar: dörrar kan låsas efter krock"
+seo_title: "51 141 bilar återkallas: dörrar kan låsas efter krock"
 date: 2026-11-16T07:10:00+01:00
 slug: stellantis-aterkallelse-dorrar-last-krock
 tags: [Stellantis, Fiat, Grande Panda, Opel, Frontera, Citroën, C3, C3 Aircross, återkallelse, säkerhet]
@@ -13,7 +9,7 @@ sources:
   - https://opendata.rdw.nl/resource/mu2x-mu5e.json?referentiecode_rdw=MGP260439
   - https://opendata.rdw.nl/resource/9ihi-jgpf.json?referentiecode_rdw=MGP260439
   - https://www.transportstyrelsen.se/sv/vagtrafik/e-tjanster-och-blanketter/e-tjanster-inom-vagtrafik/?eservice=fordonsuppgifter+-+sokmedregistreringsnummer&tab=fordon
-excerpt: "Ett fäste vid 12 voltsbatteriet kan bryta strömmen för tidigt vid en frontalkrock. Då kan dörrarna bli omöjliga att låsa upp utifrån."
+excerpt: "Det gäller vissa Citroën C3, C3 Aircross, Fiat Grande Panda och Opel Frontera. Hur många som finns i Sverige är inte känt."
 summary:
   - "Stellantis kallar in 51 141 bilar av modellerna Citroën C3, C3 Aircross, Fiat Grande Panda och Opel Frontera."
   - "Vid en frontalkrock kan ett batterifäste bryta 12 voltsströmmen, så att dörrarna inte går att låsa upp utifrån."
@@ -35,7 +31,7 @@ images:
     source_url: "https://commons.wikimedia.org/wiki/File:Citro%C3%ABn_C3_Aircross_Opel_Frontera_DSC_0599.jpg"
 ---
 
-# Dörrarna kan förbli låsta efter krocken. 51 141 Fiat, Opel och Citroën kallas in
+# Stellantis återkallar 51 141 bilar: dörrar kan låsas efter krock
 
 Ett litet fäste vid 12 voltsbatteriet kan göra det svårare för räddningstjänsten att nå dig efter en olycka. Stellantis kallar nu in drygt 51 000 småbilar från tre märken.
 

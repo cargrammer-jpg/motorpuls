@@ -1,6 +1,6 @@
 ---
-title: "Enzo Ferraris sista bil. En F40 som stod i Sverige i 20 år såldes för 51 miljoner kronor"
-seo_title: "Ferrari F40: design, fakta och hur många som finns kvar"
+title: "En Ferrari F40 från Sverige såldes för cirka 51 miljoner kronor"
+seo_title: "Ferrari F40 från Sverige såldes för cirka 51 miljoner"
 date: 2026-11-13T18:00:00+01:00
 slug: ferrari-f40-sista-enzo-ferrari
 tags: [Ferrari, F40, Enzo Ferrari, Pininfarina, klassiker, sportbil, Le Mans, BPR, auktion]
@@ -14,7 +14,7 @@ sources:
   - https://www.24h-lemans.com/en/track-record/years/1995
   - https://en.wikipedia.org/wiki/Anders_Olofsson
   - https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml
-excerpt: "Ferrari F40 togs fram på 13 månader och blev den sista bilen Enzo Ferrari själv presenterade. 1 311 byggdes, och ingen vet exakt hur många som finns kvar."
+excerpt: "Bilen stannade i Sverige i två decennier och såldes 2026 för 5,23 miljoner dollar. Den var den sista bilen Enzo Ferrari själv presenterade, och 1 311 byggdes."
 summary:
   - "Ferrari byggde 1 311 F40 i Maranello. Bilen hade 478 hk, vägde 1 100 kg torr och gick 324 km/h enligt Ferrari."
   - "Det finns ingen officiell siffra på hur många som finns kvar. car.info listar 8 registrerade F40 i Sverige."
@@ -49,7 +49,7 @@ images:
     credit_url: "https://commons.wikimedia.org/wiki/File:Ferrari_F40_GTE_-41_-_Gary_Ayles,_Massimo_Monti_%26_Fabio_Mancini_on_the_pit_straight_at_Le_Mans_1995_(49626657073).jpg"
 ---
 
-# Enzo Ferraris sista bil. En F40 som stod i Sverige i 20 år såldes för 51 miljoner kronor
+# En Ferrari F40 från Sverige såldes för cirka 51 miljoner kronor
 
 Ferrari F40 byggdes för att fira märkets 40 år och blev den sista bilen som presenterades med Enzo Ferrari själv på plats. I dag är den en av de mest eftertraktade bilarna från 1980-talet. Hur många som finns kvar vet ingen säkert.
 

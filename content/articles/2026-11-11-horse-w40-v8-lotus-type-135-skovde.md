@@ -1,6 +1,6 @@
 ---
-seo_title: "Ny lätt V8 med 680 hk ska sitta i Lotus superbil"
-title: "Bolaget med Volvos gamla motorfabrik visar ny V8 med 680 hk. Den hamnar i en Lotus"
+seo_title: "Horse visar V8 med 680 hk för Lotus, fabrik i Skövde"
+title: "Horse, med Volvos gamla motorfabrik, visar V8 med 680 hk för Lotus"
 date: 2026-11-11T07:00:00+01:00
 slug: horse-w40-v8-lotus-type-135-skovde
 tags: [Horse Powertrain, V8, Lotus, Lotus Type 135, Aurobay, Skövde, Volvo, hybrid, sportbil]
@@ -10,7 +10,7 @@ sources:
   - https://www.volvocars.com/intl/media/press-releases/E31194DCF0E1BC87/
   - https://ir.group-lotus.com/node/8651/pdf
   - https://www.autocar.co.uk/car-news/new-cars/new-2028-lotus-esprit-offer-v6-addition-hybrid-v8
-excerpt: "Horse Powertrain, där Volvos gamla motorverksamhet ingår, visar sin första V8. Fyra liter, över 500 kW och 200 kilo. Den debuterar i Lotus första superbil."
+excerpt: "Motorn heter HORSE W40, väger 200 kilo och är en fyraliters V8. Den debuterar i Lotus Type 135, som ska ha över 1 000 hk totalt."
 summary:
   - "HORSE W40 är en fyraliters V8 med två turbo, över 500 kW och 800 Nm."
   - "Motorn väger 200 kilo och debuterar i Lotus Type 135, med över 1 000 hk totalt."
@@ -30,7 +30,7 @@ images:
     source_url: "https://news.cision.com/horse-powertrain"
 ---
 
-# Bolaget med Volvos gamla motorfabrik visar ny V8 med 680 hk. Den hamnar i en Lotus
+# Horse, med Volvos gamla motorfabrik, visar V8 med 680 hk för Lotus
 
 Motorbolaget Horse Powertrain har visat sin första V8. Den ger över 500 kW, väger 200 kilo och ska sitta i Lotus första superbil. Bakom bolaget finns bland annat Volvos tidigare motorverksamhet i Skövde.
 

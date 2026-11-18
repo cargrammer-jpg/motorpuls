@@ -1,6 +1,6 @@
 ---
-title: "EU-utskott vill kräva mekanisk dörröppning. EX60 kan beröras"
-seo_title: "EU-utskott vill kräva mekanisk dörröppning. EX60 kan beröras"
+title: "EU-utskott vill kräva mekanisk dörröppning i nödsituation"
+seo_title: "EU-utskott: mekanisk dörröppning i nödsituation"
 date: 2026-11-09T12:00:00+01:00
 slug: eu-dorrhandtag-mekanisk-oppnare-ex60-tesla
 tags: [EU, Europaparlamentet, dörrhandtag, Volvo EX60, Tesla, säkerhet, elbil]
@@ -8,7 +8,7 @@ sources:
   - https://www.europarl.europa.eu/news/en/press-room/20261103IPR48611/automotive-sector-boost-electric-vehicles-simplify-measures
   - https://www.completecar.ie/car-news/article/15445/EU-flush-door-handle-ban-moves-closer-after-safety-vote
   - https://www.autoweek.nl/autonieuws/artikel/polestar-laat-de-verzonken-portieren-los-normale-deurgrepen-komen-weer-terug/
-excerpt: "Tre EU-utskott röstade den 4 november för mekanisk dörröppning inifrån och utifrån i en nödsituation. Kravet kan gälla Volvo EX60."
+excerpt: "Tre utskott röstade ja den 4 november, men det är inte en färdig lag. Förslaget kan beröra Volvo EX60, som öppnas elektriskt från utsidan."
 summary:
   - "105 ja, 39 nej och 21 nedlagda röster i tre EP-utskott den 4 november 2026."
   - "Personbilar och lätta skåpbilar upp till 3,5 ton ska kunna öppnas mekaniskt från båda sidor vid nöd."
@@ -37,7 +37,7 @@ images:
     source_url: "https://commons.wikimedia.org/wiki/File:2023_Polestar_2.jpg"
 ---
 
-# EU-utskott vill kräva mekanisk dörröppning. EX60 kan beröras
+# EU-utskott vill kräva mekanisk dörröppning i nödsituation
 
 Tre utskott i Europaparlamentet vill att bildörrar ska kunna öppnas mekaniskt både inifrån och utifrån i nödsituationer. Förslaget kan påverka modeller som Volvo EX60. Det är däremot inte en färdig EU-lag eller ett generellt förbud mot infällda handtag.
 

@@ -1,10 +1,6 @@
 ---
-title: "Ditt vanliga körkort kan snart räcka till 4,25 ton. Men bara i rätt sorts bil"
-seo_title: "B-körkort räcker till 4,25 ton i nytt förslag"
-# Rubrikförslag (det starkaste är title):
-#   1. Ditt vanliga körkort kan snart räcka till 4,25 ton. Men bara i rätt sorts bil
-#   2. 7,75 ton med släp på vanligt BE-körkort. Nya förslaget har en tydlig hake
-#   3. 15-åringar ska få köra riktig bil i 45 km/h. Och ditt B-körkort blir tyngre
+title: "Förslag: B-körkort upp till 4,25 ton för el, gas eller vätgas"
+seo_title: "Förslag: B-körkort till 4,25 ton för el eller gas"
 date: 2026-11-04T18:00:00+01:00
 slug: b-korkort-4-25-ton-b1-korkort-15-aringar
 tags: [körkort, B-körkort, BE-körkort, B1, A-traktor, släp, elbil, körkortsdirektivet, Sverige]
@@ -12,7 +8,7 @@ sources:
   - https://www.regeringen.se/rattsliga-dokument/departementsserien-och-promemorior/2026/11/ds-202620/
   - https://www.regeringen.se/contentassets/5d725721e41a431ebab72ff11b1233d0/ny-korkortsbehorighet-b1-och-andra-andringar-av-forarbehorigheter%2D%2D%2Ddelredovisning-av-uppdrag-om-genomforande-av-fjarde-korkortsdirektivet-ds-202620.pdf
   - https://www.vibilagare.se/nyheter/nya-regler-pa-gang-775-ton-med-slap-pa-be-korkort
-excerpt: "Ett nytt förslag höjer gränsen för B-körkort till 4,25 ton och för BE till 7,75 ton med släp. Haken är att bilen måste gå på el, vätgas eller gas."
+excerpt: "En vanlig dieselbil omfattas inte, och du måste ha haft körkortet i två år. Promemorian föreslår också körkort B1 från 15 år, för bilar som går högst 45 km/h."
 summary:
   - "Med B-körkort ska du få köra bilar upp till 4,25 ton, om de helt eller delvis drivs med el, vätgas eller gas."
   - "Med BE blir maxvikten för bil och släp 7,75 ton. Båda kräver att du haft behörigheten i två år."
@@ -33,7 +29,7 @@ images:
     source_url: "https://commons.wikimedia.org/wiki/File:A-traktor_Red_Brick.jpg"
 ---
 
-# Ditt vanliga körkort kan snart räcka till 4,25 ton. Men bara i rätt sorts bil
+# Förslag: B-körkort upp till 4,25 ton för el, gas eller vätgas
 
 Med ett vanligt B-körkort ska du få köra betydligt tyngre bilar än i dag. Det föreslår en ny promemoria från Regeringskansliet, som också vill skapa ett helt nytt körkort för 15-åringar.
 

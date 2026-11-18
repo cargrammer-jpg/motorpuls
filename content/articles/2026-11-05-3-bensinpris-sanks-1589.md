@@ -1,9 +1,6 @@
 ---
-# Rubrikförslag (det starkaste är title):
-#   1. Bensinen nere på 15,89 kronor. Men glädjen kan bli kort
-#   2. Circle K sänker bensinen till 15,89. En tank på 50 liter ger 67,50 kronor tillbaka
-#   3. Bränslepriset rasar igen. Så billig har bensinen inte varit sedan augusti
-title: "Bensinen nere på 15,89 kronor. Men glädjen kan bli kort"
+title: "Circle K sänkte bensin 95 till 15,89 kronor den 5 november"
+seo_title: "Circle K: bensin 95 för 15,89 kronor den 5 november"
 date: 2026-11-05T16:00:00+01:00
 slug: bensinpris-sanks-1589
 tags: [bensinpris, dieselpris, Circle K, Brent, oljepris, Skatteverket, drivmedel]
@@ -15,7 +12,7 @@ sources:
   - https://www.cnbc.com/2026/11/05/oil-falls-for-a-fourth-day-on-expectations-for-lower-risk-of-iran-war-escalation.html
   - https://www.washingtonexaminer.com/policy/energy/4497083/brent-crude-oil-prices-surge-again-nearing-120/
   - https://www.skatteverket.se/foretag/skatterochavdrag/punktskatter/energiskatter/skattpabransle.4.15532c7b1442f256bae5e56.html
-excerpt: "Circle K sänker 95-oktan till 15,89 kronor litern den 5 november. Nedgången märks i plånboken, men den tillfälliga skatterabatten tar slut den 1 december."
+excerpt: "Diesel sänktes samma dag till 21,69 kronor litern. Den tillfälliga skattesänkningen gäller till 30 november, sedan kan litern bli runt 3 kronor dyrare."
 summary:
   - "Circle K sänker bensin 95 till 15,89 kronor och diesel till 21,69 kronor litern den 5 november."
   - "Priserna har sjunkit cirka 1,35 kronor litern sedan måndag, cirka 67,50 kronor för 50 liter."
@@ -36,7 +33,7 @@ images:
     source_url: "https://commons.wikimedia.org/wiki/File:Dieselpump_Preem_Avesta.jpg"
 ---
 
-# Bensinen nere på 15,89 kronor. Men glädjen kan bli kort
+# Circle K sänkte bensin 95 till 15,89 kronor den 5 november
 
 Efter veckor med höga pumppriser sänks både bensin och diesel igen. Circle K landar på nivåer som inte setts sedan augusti, enligt Nyheter24. Samtidigt tickar kalendern mot en skattehöjning den 1 december.
 

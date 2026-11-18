@@ -1,5 +1,6 @@
 ---
-title: "Körkortet kan bli dyrare i januari. Så mycket mer får du betala"
+title: "Transportstyrelsen föreslår 450 kronor för körkort från 2027"
+seo_title: "Förslag: 450 kronor för körkort från 1 januari 2027"
 date: 2026-11-11T07:00+01:00
 slug: korkortsavgift-hojs-2027
 tags: [körkort, Transportstyrelsen, avgifter, vägtrafikregistret, registreringsskylt, körkortsdirektivet]
@@ -8,7 +9,7 @@ sources:
   - https://www.transportstyrelsen.se/globalassets/global/om-oss/avgifter/2027-information-om-forslag-till-avgiftsforandringar.pdf
   - https://www.transportstyrelsen.se/kommande-korkortsregler
   - https://www.transportstyrelsen.se/sv/om-oss/dina-rattigheter-lagar-och-regler/lagar-och-regler/pagaende-regelarbete/nya-och-andrade-foreskrifter-med-anledning-av-fjarde-korkortsdirektivet/
-excerpt: "Transportstyrelsen föreslår att körkortsavgiften höjs från 375 till 450 kronor och registeravgiften för fordon från 74 till 80 kronor från 1 januari 2027."
+excerpt: "Avgiften för att utfärda eller förnya körkort är 375 kronor. Registeravgiften per fordon föreslås gå från 74 till 80 kronor från 1 januari 2027."
 summary:
   - "Körkortsavgiften föreslås höjas från 375 till 450 kronor."
   - "Den årliga registeravgiften per fordon går från 74 till 80 kronor."
@@ -27,7 +28,7 @@ images:
     source_url: "https://commons.wikimedia.org/wiki/File:Swedish_motorway.JPG"
 ---
 
-# Körkortet kan bli dyrare i januari. Så mycket mer får du betala
+# Transportstyrelsen föreslår 450 kronor för körkort från 2027
 
 Att få ett nytt eller förnyat körkort kan kosta 75 kronor mer från årsskiftet. Även den årliga avgiften för varje registrerat fordon föreslås höjas.
 

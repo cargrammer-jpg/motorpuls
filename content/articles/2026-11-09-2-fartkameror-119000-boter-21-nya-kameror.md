@@ -1,6 +1,6 @@
 ---
-seo_title: "21 nya fartkameror i höst: här står de och vad boten kostar"
-title: "Fartkamerorna gav 119 000 böter på ett år. Nu kommer 21 nya, här står de"
+seo_title: "21 nya fartkameror på fyra vägar, boten från 1 500 kr"
+title: "Trafikverket sätter upp 21 nya fartkameror på fyra vägar"
 date: 2026-11-09T15:00:00+01:00
 slug: fartkameror-119000-boter-21-nya-kameror
 tags: [Trafikverket, fartkameror, trafiksäkerhetskameror, ATK, hastighet, fortkörning, ordningsbot, Polisen]
@@ -13,7 +13,7 @@ sources:
   - https://trafikverket.diva-portal.org/smash/get/diva2:2091019/FULLTEXT01.pdf
   - https://carup.se/listan-avslojad-46-nya-superkameror-i-sverige-i-ar/
   - https://www.aklagare.se/globalassets/dokument/ordningsbotskatalog/bilaga-1a.pdf
-excerpt: "Trafikverket sätter upp 21 nya fartkameror på fyra vägar i höst. Samtidigt visar myndighetens egen rapport hur många som faktiskt får böter."
+excerpt: "Under 2025 ledde kamerorna till cirka 119 000 förelägganden om böter. Boten börjar på 1 500 kronor och är 4 000 kronor vid grov fortkörning."
 summary:
   - "21 nya kameror kommer på väg 42, 83, 84 och 164 under oktober och november."
   - "Under 2025 ledde kamerorna till cirka 119 000 förelägganden om böter."
@@ -34,7 +34,7 @@ images:
     source_url: "https://commons.wikimedia.org/wiki/File:FartkameraE420110803.JPG"
 ---
 
-# Fartkamerorna gav 119 000 böter på ett år. Nu kommer 21 nya, här står de
+# Trafikverket sätter upp 21 nya fartkameror på fyra vägar
 
 Trafikverket sätter upp 21 nya fartkameror på fyra vägar under oktober och november. Samtidigt visar myndighetens egen årsrapport hur många som faktiskt får böter.
 

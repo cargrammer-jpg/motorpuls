@@ -1,6 +1,6 @@
 ---
-title: "BMW behövde bara 5 000. Det blev 17 970 E30 M3, och de bästa kostar miljoner"
-seo_title: "BMW M3 E30: design, racing och hur många som finns kvar"
+title: "BMW byggde 17 970 E30 M3, reglerna krävde bara 5 000"
+seo_title: "BMW byggde 17 970 E30 M3, kravet var 5 000"
 date: 2026-11-14T07:00:00+01:00
 slug: bmw-m3-e30-homologering-dtm
 tags: [BMW, BMW M, M3, E30, DTM, Grupp A, Sport Evolution, klassiker, sportbil, auktion]
@@ -15,7 +15,7 @@ sources:
   - https://rmsothebys.com/auctions/pa26/lots/r0042-1990-bmw-m3-sport-evolution/
   - https://bringatrailer.com/listing/1988-bmw-m3-273-2/
   - https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml
-excerpt: "Första BMW M3 byggdes för Grupp A och blev en av de mest framgångsrika standardvagnarna. 17 970 byggdes, men ingen vet hur många som finns kvar."
+excerpt: "Bilen homologerades för Grupp A och vann bland annat DTM 1987 och 1989. En Sport Evolution såldes 2026 för cirka 5,3 miljoner kronor."
 summary:
   - "BMW behövde bygga 5 000 bilar för att få tävla i Grupp A. Det blev 17 970 E30 M3 mellan 1986 och 1991."
   - "M3 vann bland annat VM för standardvagnar 1987, DTM 1987 och 1989 och nationella mästerskap i Sverige 1989 enligt BMW."
@@ -50,7 +50,7 @@ images:
     credit_url: "https://commons.wikimedia.org/wiki/File:BMW_M3_Sport_Evolution_(4897569189)_(cropped).jpg"
 ---
 
-# BMW behövde bara 5 000. Det blev 17 970 E30 M3, och de bästa kostar miljoner
+# BMW byggde 17 970 E30 M3, reglerna krävde bara 5 000
 
 Den första BMW M3 byggdes för att få tävla. Reglerna krävde 5 000 bilar på ett år. BMW byggde nästan fyra gånger så många, och bilen blev enligt BMW den mest framgångsrika standardvagnen i märkets historia.
 

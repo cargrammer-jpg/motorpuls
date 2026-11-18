@@ -1,7 +1,6 @@
 ---
-# Rubrikförslag: 1) Göteborg vänder väjningsplikten på 1 000 platser. Missar du det kan det kosta 3 000 kronor (vald) 2) Här ska bilisten plötsligt väja för cyklisten. Göteborg bygger om 1 000 korsningar 3) Cykelpassage eller cykelöverfart? Fel svar kan kosta dig 3 000 kronor
-seo_title: "Göteborg gör om 1 000 cykelpassager: nu ska bilisten väja"
-title: "Göteborg vänder väjningsplikten på 1 000 platser. Missar du det kan det kosta 3 000 kronor"
+seo_title: "Göteborg: bilister ska väja vid omgjorda cykelpassager"
+title: "Göteborg gör om cykelpassager: bilister ska väja för cyklister"
 date: 2026-11-13T07:00:00+01:00
 slug: goteborg-cykeloverfarter-vajningsplikt
 tags: [Göteborg, cykelöverfart, cykelpassage, väjningsplikt, trafikregler, ordningsbot, böter, Transportstyrelsen]
@@ -12,7 +11,7 @@ sources:
   - https://www.transportstyrelsen.se/sv/vagtrafik/trafikregler-och-vagmarken/trafikregler/generella-trafikregler/cykeloverfart/
   - https://www.transportstyrelsen.se/sv/vagtrafik/trafikregler-och-vagmarken/vagmarken/vagmarkeringar/cykelpassage-eller-cykeloverfart/
   - https://www.aklagare.se/globalassets/dokument/ordningsbotskatalog/bilaga-1a.pdf
-excerpt: "Göteborg ska bygga om runt 1 000 cykelpassager till cykelöverfarter. Där är det bilisten som ska väja, och boten är hög."
+excerpt: "Göteborgs stad ska göra om runt 1 000 cykelpassager till cykelöverfarter. Där är det du som kör bil som ska släppa fram cyklisten, annars kan boten bli 3 000 kronor."
 summary:
   - "Göteborg räknar med runt 1 000 cykelpassager som ska bli cykelöverfarter."
   - "Takten är 25 till 50 platser per år, så arbetet kan ta 20 till 40 år."
@@ -33,7 +32,7 @@ images:
     source_url: "https://commons.wikimedia.org/wiki/File:Sweden_road_sign_B8.svg"
 ---
 
-# Göteborg vänder väjningsplikten på 1 000 platser. Missar du det kan det kosta 3 000 kronor
+# Göteborg gör om cykelpassager: bilister ska väja för cyklister
 
 Göteborg ska bygga om runt 1 000 cykelpassager till cykelöverfarter. På de platserna är det inte längre cyklisten som ska väja, utan du som kör bil.
 

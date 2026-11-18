@@ -1,5 +1,5 @@
 ---
-title: "Teslas batteriingenjör ger Model Y:s strukturella batteri betyget D"
+title: "Teslas batteriingenjör ger Model Y:s batteri betyget D"
 seo_title: "Teslas ingenjör ger Model Y:s batteri betyget D"
 date: 2026-10-30T03:25:00+01:00
 slug: tesla-model-y-strukturellt-batteri-betyg-d-volvo-ex60
@@ -17,7 +17,7 @@ sources:
   - https://carup.se/teslas-ingenjor-domer-ut-batteritekniken-volvo-gar-all-in/
   - https://www.volvocars.com/uk/media/press-releases/3FFAD569830ED5B8/
   - https://www.volvocars.com/intl/media/press-releases/4291EEEC7003CDC6/
-excerpt: "Teslas Robert Sumpf sätter betyget D på det strukturella batteripaketet i Model Y, samtidigt som Volvo bygger in cellerna direkt i karossen på EX60."
+excerpt: "Robert Sumpf säger att det inbyggda paketet var bra för kunden men dyrt att bygga och serva. Volvo bygger samtidigt in cellerna i karossen på EX60."
 summary:
   - "Teslas Robert Sumpf ger Model Y:s strukturella batteri betyget D."
   - "Cybercab får fyra moduler, så hela paketet behöver inte bytas."
@@ -42,7 +42,7 @@ images:
     source_url: "https://www.volvocars.com/intl/media/images/533145fb437a4bb3a65ab43400b32a80/?carModelSlug=ex60&carModelYearSlug=2027"
 ---
 
-# Teslas batteriingenjör ger Model Y:s strukturella batteri betyget D
+# Teslas batteriingenjör ger Model Y:s batteri betyget D
 
 Tesla har gått tillbaka till utbytbara moduler i Cybercab. Den egna batteriingenjören Robert Sumpf sätter betyget D på det strukturella paketet i Model Y.
 

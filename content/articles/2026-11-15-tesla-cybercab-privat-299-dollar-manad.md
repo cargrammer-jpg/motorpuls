@@ -1,10 +1,6 @@
 ---
-title: "Nu kan du köpa en Tesla utan ratt. Musk tycker själv att månadsavgiften är för hög"
-seo_title: "Cybercab säljs privat: 29 990 dollar plus 299 i månaden"
-# Rubrikförslag (det starkaste används ovan):
-# 1. Nu kan du köpa en Tesla utan ratt. Musk tycker själv att månadsavgiften är för hög
-# 2. Teslas Cybercab kostar runt 300 000 kr. Utan abonnemang rullar den inte
-# 3. Cybercab säljs till privatpersoner, men bilen kräver 3 000 kr i månaden
+title: "Tesla säljer Cybercab till inbjudna kunder i USA, med abonnemang"
+seo_title: "Cybercab till inbjudna kunder i USA, med abonnemang"
 date: 2026-11-15T15:00:00+01:00
 slug: tesla-cybercab-privat-299-dollar-manad
 tags: [Tesla, Cybercab, Robotaxi, självkörande, FSD, abonnemang, Elon Musk]
@@ -15,7 +11,7 @@ sources:
   - https://electrek.co/2026/11/13/tesla-cybercab-personal-use-orders-299-subscription-geofence/
   - https://teslanorth.com/2026/11/13/tesla-cybercab-autonomy-subscription-terms/
   - https://www.riksbank.se/sv/statistik/rantor-och-valutakurser/
-excerpt: "Tesla bjuder in utvalda kunder att köpa Cybercab för 29 990 dollar, men utan ett abonnemang på 299 dollar i månaden går bilen inte att använda."
+excerpt: "Utvalda kunder kan beställa bilen för 29 990 dollar, omkring 301 000 kronor. Utan abonnemanget på 299 dollar i månaden går den inte att köra."
 summary:
   - "Utvalda kunder i USA kan nu beställa Cybercab för privat bruk. Priset är 29 990 dollar före skatt, runt 301 000 kronor."
   - "Bilen saknar ratt och pedaler och kräver ett abonnemang på 299 dollar i månaden, cirka 3 000 kronor."
@@ -35,7 +31,7 @@ images:
     source_url: "https://www.tesla.com/tesla-gallery"
 ---
 
-# Nu kan du köpa en Tesla utan ratt. Musk tycker själv att månadsavgiften är för hög
+# Tesla säljer Cybercab till inbjudna kunder i USA, med abonnemang
 
 Tesla har börjat sälja Cybercab till privatpersoner i USA. Priset landar under de 30 000 dollar som Elon Musk lovade 2024, men bilen går inte att köra utan ett månadsabonnemang.
 

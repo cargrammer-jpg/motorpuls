@@ -1,5 +1,6 @@
 ---
-title: "En Koenigsegg CC850 rullade iväg utan förare. Nu kallas alla i USA tillbaka"
+title: "Koenigsegg återkallar alla sju CC850 i USA för parkeringsbromsen"
+seo_title: "Koenigsegg återkallar sju CC850 i USA, parkeringsbroms"
 date: 2026-11-12T07:00:00+01:00
 slug: koenigsegg-cc850-aterkallelse-parkeringsbroms
 tags: [Koenigsegg, CC850, återkallelse, NHTSA, parkeringsbroms, mjukvara, OTA]
@@ -8,7 +9,7 @@ sources:
   - https://www.roadandtrack.com/news/a74260047/koenigsegg-recall-cc850-faulty-parking-brake/
   - https://www.koenigsegg.com/model/cc850
   - https://news.cision.com/koenigsegg/r/koenigsegg-announces-next-generation-instant-firmware-over-the-air-system,c3364624
-excerpt: "Koenigsegg återkallar alla sju CC850 som levererats till USA, sedan en bil rullat iväg med backen i och parkeringsbromsen aktiverad."
+excerpt: "En bil rullade iväg med backen i och bromsen aktiverad. Felet sitter i mjukvaran och åtgärdas med en gratis uppdatering."
 summary:
   - "Alla sju CC850 i USA omfattas av återkallelsen hos NHTSA."
   - "Felet sitter i mjukvaran för den elektriska parkeringsbromsen när backen ligger i."
@@ -33,7 +34,7 @@ images:
     source_url: "https://news.cision.com/koenigsegg/r/the-new-koenigsegg-cc850--all-press-material,c3620204"
 ---
 
-# En Koenigsegg CC850 rullade iväg utan förare. Nu kallas alla i USA tillbaka
+# Koenigsegg återkallar alla sju CC850 i USA för parkeringsbromsen
 
 Koenigsegg återkallar samtliga sju CC850 som levererats till USA. Orsaken är ett mjukvarufel som gör att den elektriska parkeringsbromsen inte håller när backen ligger i.
 

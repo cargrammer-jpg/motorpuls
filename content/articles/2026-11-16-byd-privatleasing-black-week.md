@@ -1,10 +1,6 @@
 ---
-title: "Elbil från BYD för 3 890 kronor i månaden. Så står sig Tesla Model Y"
-seo_title: "BYD privatleasing från 2 990 kr, så står sig Model Y"
-# Rubrikförslag (det starkaste används ovan):
-# 1. Elbil från BYD för 3 890 kronor i månaden. Så står sig Tesla Model Y
-# 2. BYD öppnar privatleasing på hela modellprogrammet inför Black Week. Billigast 2 990 kronor
-# 3. Kinesiska BYD går till attack i Sverige. Här är alla nya månadspriser
+title: "BYD: privatleasing från 2 990 kronor i månaden i Sverige"
+seo_title: "BYD privatleasing från 2 990 kronor i månaden"
 date: 2026-11-16T18:00:00+01:00
 slug: byd-privatleasing-black-week
 tags: [BYD, Tesla, Model Y, privatleasing, elbil, laddhybrid, Black Week, priser]
@@ -14,7 +10,7 @@ sources:
   - https://www.automotorsport.se/nyheter/byd-privatleasing-sverige-priser-black-friday/
   - https://www.byd.com/se/leasing
   - https://kostnader.se/bil/tesla-model-y-kostnad
-excerpt: "BYD erbjuder privatleasing på alla sju modeller i Sverige, från 2 990 kronor i månaden utan kontantinsats. Vi jämför avgifterna med Tesla Model Y."
+excerpt: "Alla sju modeller ingår, utan kontantinsats. Billigaste elbilen Atto 2 kostar 3 890 kronor, Tesla Model Y från 4 595 kronor med 30 000 kronor i handpenning."
 summary:
   - "BYD privatleasar nu hela sitt svenska modellprogram, sju bilar, från 2 990 kronor i månaden."
   - "Billigaste rena elbilen är Atto 2 för 3 890 kronor, men uppläggnings- och adminavgift tillkommer."
@@ -43,7 +39,7 @@ images:
     source_url: "https://www.tesla.com/tesla-gallery"
 ---
 
-# Elbil från BYD för 3 890 kronor i månaden. Så står sig Tesla Model Y
+# BYD: privatleasing från 2 990 kronor i månaden i Sverige
 
 BYD erbjuder nu privatleasing på alla sju modeller i Sverige, lagom till Black Week. Billigast är en laddhybrid för 2 990 kronor i månaden, och den billigaste rena elbilen kostar 3 890 kronor.
 
