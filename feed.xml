@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Tue, 17 Nov 2026 18:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Wed, 18 Nov 2026 07:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Vad kostar det att ladda elbilen hemma och längs vägen</title>
+    <link>https://motorpuls.se/artikel/laddkostnad-elbil-hemma-supercharger/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/laddkostnad-elbil-hemma-supercharger/</guid>
+    <pubDate>Wed, 18 Nov 2026 07:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>Så räknar du ut kostnaden per mil: hemma med elpris, skatt och nätavgift, och längs vägen hos Mer, OKQ8, Ionity, Recharge, Circle K och Tesla Supercharger. Priserna är kontrollerade den 17 november 2026.</description>
+    <enclosure url="https://motorpuls.se/img/og/laddkostnad-elbil-hemma-supercharger.jpg" length="163963" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/laddkostnad-elbil-hemma-supercharger.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="163963"/>
+  </item>
   <item>
     <title>Nu leasar svenskarna hellre än de köper. Över hälften av alla nya privatbilar är privatleasade</title>
     <link>https://motorpuls.se/artikel/privatleasing-passerar-kop-52-procent/</link>
