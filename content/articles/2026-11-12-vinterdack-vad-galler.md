@@ -2,7 +2,7 @@
 seo_title: "Vinterdäck: datum, regler och vad du ska tänka på"
 title: "Vinterdäck: vad gäller?"
 date: 2026-11-11T17:30:00+01:00
-updated: 2026-11-17T15:55:27+01:00
+updated: 2026-11-18T09:05:57+01:00
 type: guide
 slug: vinterdack-vad-galler
 tags: [vinterdäck, dubbdäck, Transportstyrelsen, Trafikverket, Polisen, trafikregler, Stockholm, Göteborg, Uppsala]
@@ -23,6 +23,19 @@ summary:
   - "Personbilar ska ha vinterdäck 1 december till 31 mars när det är vinterväglag. Mönsterdjupet ska vara minst 3 millimeter."
   - "Dubbdäck är tillåtna 1 oktober till 15 april, eller längre om det är eller väntas bli vinterväglag."
   - "Tunga lastbilar och bussar har krav redan från 10 november till 10 april, oavsett väglag."
+faq:
+  - question: "När måste jag ha vinterdäck på bilen?"
+    answer: "Personbilar ska ha vinterdäck 1 december till 31 mars när det är vinterväglag. Mönsterdjupet ska vara minst 3 millimeter."
+  - question: "När får jag använda dubbdäck?"
+    answer: "Dubbdäck är tillåtna 1 oktober till 15 april, eller längre om det är eller väntas bli vinterväglag."
+  - question: "Vad är vinterväglag?"
+    answer: "Vinterväglag är när det finns snö, is, snömodd eller frost på någon del av vägen. Polisen avgör på plats. Kravet står i trafikförordningen."
+  - question: "Får jag blanda dubbdäck och odubbade däck?"
+    answer: "Du får inte blanda dubbade och odubbade däck på samma personbil eller lätta lastbil. Odubbade friktionsdäck får användas året runt."
+  - question: "Vad kostar boten för dubbdäck på en förbjuden gata?"
+    answer: "Polisen anger att boten är 1 000 kronor. Förbudet gäller på vissa gator i Stockholm, Göteborg och Uppsala."
+  - question: "Vilket mönsterdjup rekommenderar NTF?"
+    answer: "Lagens 3 millimeter är golvet, inte en säkerhetsnivå. NTF och Däckbranschen rekommenderar minst 5 millimeter på lätta fordon vid vinterväglag."
 category: Trafik och säkerhet
 author: Lukas
 sweden: false
@@ -43,32 +56,34 @@ images:
 
 Här är reglerna, de viktiga datumen och vad du bör tänka på innan du byter.
 
-## Viktiga datum
+## När måste jag byta till vinterdäck?
+
+Personbilar ska ha vinterdäck 1 december till 31 mars när det är vinterväglag.
 
 - 1 oktober: dubbdäck får användas, även utan vinterväglag.
 - 10 november till 10 april: tunga lastbilar, tunga bussar och släp till dem ska ha vinterdäck oavsett väglag.
 - 1 december till 31 mars: personbilar, lätta lastbilar, lätta bussar, A-traktorer och släp till dem ska ha vinterdäck när det är vinterväglag.
 - 15 april: sista dagen då dubbdäck är tillåtna, om det inte är eller väntas bli vinterväglag.
 
-## Vad lagen säger
+## Vad säger lagen om vinterdäck?
 
-Kravet står i trafikförordningen. Vinterväglag är när det finns snö, is, snömodd eller frost på någon del av vägen. Polisen avgör på plats.
+Kravet står i trafikförordningen: vinterväglag är när det finns snö, is, snömodd eller frost på någon del av vägen. Polisen avgör på plats.
 
 Mönsterdjupet ska vara minst 3 millimeter för personbil och andra lätta fordon upp till 3 500 kilo. För personbil klass II över 3 500 kilo är kravet 5 millimeter. Dubbfria vinterdäck ska vara märkta med symbolen alptopp och snöflinga. Du får inte blanda dubbade och odubbade däck på samma personbil eller lätta lastbil. Odubbade friktionsdäck får användas året runt. Bilar som är 30 år eller äldre enligt vägtrafikregistret är undantagna. Samma regler gäller utländska fordon.
 
-## Släp och tunga fordon
+## Måste släpet ha vinterdäck?
 
 Har dragbilen dubbdäck ska släpet också ha det när det är vinterväglag. Har bilen odubbade vinterdäck får släpet ha antingen dubbade eller odubbade. På tunga lastbilar och bussar ska mönsterdjupet vara minst 5 millimeter från 10 november till 10 april. Ett släp kopplat till ett sådant fordon ska ha minst 1,6 millimeter.
 
 Läs också: [Vinterdäck 2026: böterna och Stockholms nya dubbdäcksförbud](/artikel/vinterdack-bot-dubbdacksforbud-stockholm/)
 
-## Där dubbarna inte får rulla
+## Var är dubbdäck förbjudna?
 
-I Stockholm är dubbdäck förbjudna på Hornsgatan, Fleminggatan och Kungsgatan mellan Sveavägen och Birger Jarlsgatan. Du får korsa gatorna, men inte köra längs dem. I Göteborg gäller förbudet på Friggagatan och Odinsgatan. I Uppsala är det förbjudet på Kungsgatan mellan Strandbodgatan och S:t Olofsgatan, och på Vaksalagatan mellan Storgatan och Kungsgatan. Polisen anger att boten är 1 000 kronor.
+Dubbdäck är förbjudna på vissa gator i Stockholm, Göteborg och Uppsala. I Stockholm är dubbdäck förbjudna på Hornsgatan, Fleminggatan och Kungsgatan mellan Sveavägen och Birger Jarlsgatan. Du får korsa gatorna, men inte köra längs dem. I Göteborg gäller förbudet på Friggagatan och Odinsgatan. I Uppsala är det förbjudet på Kungsgatan mellan Strandbodgatan och S:t Olofsgatan, och på Vaksalagatan mellan Storgatan och Kungsgatan. Polisen anger att boten är 1 000 kronor.
 
 Läs också: [21 nya fartkameror i höst: här står de och vad boten kostar](/artikel/fartkameror-119000-boter-21-nya-kameror/)
 
-## Vad du ska tänka på
+## Vilka däck ska sitta bak?
 
 Transportstyrelsen, Polisen och Trafikverket är överens: däcken med bäst grepp eller störst mönsterdjup ska sitta bak.
 
@@ -76,7 +91,7 @@ Lagens 3 millimeter är golvet, inte en säkerhetsnivå. NTF och Däckbranschen 
 
 Trafikverket skriver att en modern bil med antisladdsystem och bra dubbfria nordiska vinterdäck, med 4 till 5 millimeters mönsterdjup, har goda förutsättningar. En äldre bil utan antisladdsystem bör enligt verket ha dubbdäck om du ofta kör på is. Dubbfria däck kan sättas på tidigare. Förvara däcken svalt, torrt och mörkt, och kolla lufttrycket.
 
-## Lukas analys
+## Ska jag vänta till 1 december med att byta?
 
 Vänta inte till den 1 december om halkan kommer tidigare. Kravet följer väglaget, inte bara kalendern, och friktionsdäck får sitta på redan i oktober.
 
