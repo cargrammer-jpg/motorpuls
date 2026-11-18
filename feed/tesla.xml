@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Tesla på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Sun, 15 Nov 2026 15:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Wed, 18 Nov 2026 12:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/tesla.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Tesla ska bygga robotaxin Cybercab utanför Berlin för 3 miljarder euro</title>
+    <link>https://motorpuls.se/artikel/tesla-cybercab-giga-berlin-3-miljarder/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/tesla-cybercab-giga-berlin-3-miljarder/</guid>
+    <pubDate>Wed, 18 Nov 2026 12:00:00 +0100</pubDate>
+    <category>Tesla</category>
+    <description>Tesla bygger ut fabriken i Grünheide utanför Berlin för tre miljarder euro. Från 2029 ska robotaxin Cybercab tillverkas där, men i EU är bilen ännu inte godkänd.</description>
+    <enclosure url="https://motorpuls.se/img/og/tesla-cybercab-giga-berlin-3-miljarder.jpg" length="172268" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/tesla-cybercab-giga-berlin-3-miljarder.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="172268"/>
+  </item>
   <item>
     <title>Tesla säljer Cybercab till inbjudna kunder i USA, med abonnemang</title>
     <link>https://motorpuls.se/artikel/tesla-cybercab-privat-299-dollar-manad/</link>
