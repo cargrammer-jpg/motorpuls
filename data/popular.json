@@ -1,17 +1,13 @@
 {
-  "updated": "2026-11-16T11:57+01:00",
+  "updated": "2026-11-17T11:51+01:00",
   "source": "umami",
   "articles": [
     {
-      "slug": "polestar-formula-2030-nya-polestar-2",
-      "views": 12
+      "slug": "sista-koenigsegg-jesko-125-medvedev",
+      "views": 14
     },
     {
       "slug": "polestar-3-arn-havning-ombordladdare",
-      "views": 12
-    },
-    {
-      "slug": "sista-koenigsegg-jesko-125-medvedev",
       "views": 12
     },
     {
@@ -20,7 +16,7 @@
     },
     {
       "slug": "vw-12-euro-per-bil-tesla-cam",
-      "views": 10
+      "views": 11
     },
     {
       "slug": "tesla-cybercab-privat-299-dollar-manad",
@@ -31,16 +27,20 @@
       "views": 9
     },
     {
-      "slug": "horse-w40-v8-lotus-type-135-skovde",
-      "views": 9
-    },
-    {
       "slug": "vinterdack-vad-galler",
       "views": 9
     },
     {
       "slug": "goteborg-cykeloverfarter-vajningsplikt",
       "views": 9
+    },
+    {
+      "slug": "byd-privatleasing-black-week",
+      "views": 8
+    },
+    {
+      "slug": "polisens-radarbilar-hela-sverige",
+      "views": 6
     },
     {
       "slug": "stellantis-aterkallelse-dorrar-last-krock",
@@ -55,27 +55,23 @@
       "views": 4
     },
     {
-      "slug": "polisens-radarbilar-hela-sverige",
-      "views": 4
+      "slug": "e4-forbifart-stockholm-oppnar-6-december",
+      "views": 2
     },
     {
-      "slug": "tesla-fsd-sverige-eu-omrostning-december",
+      "slug": "horse-w40-v8-lotus-type-135-skovde",
+      "views": 2
+    },
+    {
+      "slug": "adac-nodbroms-barn-reflexer",
       "views": 1
     },
     {
-      "slug": "volvo-forsaljning-ras-oktober-2026",
-      "views": 1
-    },
-    {
-      "slug": "byd-ti7-land-rover-defender-razzia",
+      "slug": "bensin-diesel-3-kronor-dyrare-1-december",
       "views": 1
     },
     {
       "slug": "bmw-m3-el-fyra-motorer",
-      "views": 1
-    },
-    {
-      "slug": "e4-forbifart-stockholm-oppnar-6-december",
       "views": 1
     },
     {
@@ -103,7 +99,19 @@
       "views": 1
     },
     {
-      "slug": "bensin-diesel-3-kronor-dyrare-1-december",
+      "slug": "polestar-formula-2030-nya-polestar-2",
+      "views": 1
+    },
+    {
+      "slug": "tesla-cybertruck-avvecklas-cybercab",
+      "views": 1
+    },
+    {
+      "slug": "tesla-fsd-sverige-eu-omrostning-december",
+      "views": 1
+    },
+    {
+      "slug": "volvo-forsaljning-ras-oktober-2026",
       "views": 1
     }
   ]
