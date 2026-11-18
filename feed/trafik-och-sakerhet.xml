@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Trafik och säkerhet på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Wed, 18 Nov 2026 09:05:57 +0100</lastBuildDate>
+  <lastBuildDate>Wed, 18 Nov 2026 22:10:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/trafik-och-sakerhet.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Kalifornien förbjuder Waymos förarlösa taxibilar på motorvägarna</title>
+    <link>https://motorpuls.se/artikel/waymo-forbjuds-motorvagar-kalifornien/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/waymo-forbjuds-motorvagar-kalifornien/</guid>
+    <pubDate>Wed, 18 Nov 2026 22:10:00 +0100</pubDate>
+    <category>Trafik och säkerhet</category>
+    <description>Kaliforniens fordonsmyndighet stängde av Waymos förarlösa taxibilar från alla motorvägar i delstaten från 11 november 2026, efter att bilarna kört in i avstängda vägarbeten.</description>
+    <enclosure url="https://motorpuls.se/img/og/waymo-forbjuds-motorvagar-kalifornien.jpg" length="142467" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/waymo-forbjuds-motorvagar-kalifornien.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="142467"/>
+  </item>
   <item>
     <title>Stellantis återkallar 51 141 bilar: dörrar kan låsas efter krock</title>
     <link>https://motorpuls.se/artikel/stellantis-aterkallelse-dorrar-last-krock/</link>
