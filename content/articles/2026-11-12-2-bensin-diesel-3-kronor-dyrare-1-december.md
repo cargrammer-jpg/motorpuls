@@ -56,6 +56,8 @@ En första sänkning, av energiskatten, tog slut redan den 1 oktober. Då steg s
 
 Enligt sajten bensinstation.nu ligger 95 oktan på runt 17,20 kronor och diesel på drygt 23 kronor i november. Slår hela höjningen igenom hamnar bensinen kring 20 kronor och dieseln kring 26 kronor.
 
+Läs också: [Brittisk granskning: pumpar gav för lite bränsle 98 gånger](/artikel/bensinpumpar-for-lite-bransle-sverige/)
+
 Ett räkneexempel: kör du 1 500 mil om året i en bil som drar 0,7 liter milen tankar du cirka 1 050 liter. Med 3 kronor mer per liter blir det runt 3 150 kronor extra på ett år.
 
 Det faktiska pumppriset i december beror också på oljepriset och kronkursen.

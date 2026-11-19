@@ -67,6 +67,8 @@ Enligt Åklagarmyndighetens ordningsbotskatalog:
 
 De flesta kameror står på vägar med 70 till 90 km/h, enligt Trafikverket.
 
+Läs också: [Italien föreslår minst 100 km/h i vänsterfilen från 2028](/artikel/italien-minimihastighet-100-vanster-korfalt/)
+
 ## Målet ligger efter
 
 Trafikverket planerade att bygga cirka 200 nya kameror under 2026 och byta ut cirka 900 gamla mot en ny generation. Under 2025 tillkom 151. Enligt Carups egen genomgång hade bara 46 nya kameror kommit igång den 1 september i år. Uppgiften är Carups.
