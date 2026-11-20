@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Wed, 18 Nov 2026 22:10:00 +0100</lastBuildDate>
+  <lastBuildDate>Fri, 20 Nov 2026 04:40:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Nya Nissan Leaf missar fem stjärnor i Euro NCAP:s säkerhetstest</title>
+    <link>https://motorpuls.se/artikel/euro-ncap-nissan-leaf-fyra-stjarnor-skoda-peaq/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/euro-ncap-nissan-leaf-fyra-stjarnor-skoda-peaq/</guid>
+    <pubDate>Fri, 20 Nov 2026 04:40:00 +0100</pubDate>
+    <category>Trafik och säkerhet</category>
+    <description>Euro NCAP gav nio av tio nya bilar fem stjärnor den 18 november 2026. Nya Nissan Leaf fick fyra, bland annat för att radar i hörnen och mittkrockkudde inte är standard.</description>
+    <enclosure url="https://motorpuls.se/img/og/euro-ncap-nissan-leaf-fyra-stjarnor-skoda-peaq.jpg" length="138633" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/euro-ncap-nissan-leaf-fyra-stjarnor-skoda-peaq.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="138633"/>
+  </item>
   <item>
     <title>Kalifornien förbjuder Waymos förarlösa taxibilar på motorvägarna</title>
     <link>https://motorpuls.se/artikel/waymo-forbjuds-motorvagar-kalifornien/</link>
