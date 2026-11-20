@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Tesla på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Fri, 20 Nov 2026 07:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Fri, 20 Nov 2026 15:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/tesla.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Tesla planerar en Model Y utan ratt och pedaler för familjer</title>
+    <link>https://motorpuls.se/artikel/tesla-model-y-utan-ratt-pedaler/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/tesla-model-y-utan-ratt-pedaler/</guid>
+    <pubDate>Fri, 20 Nov 2026 15:00:00 +0100</pubDate>
+    <category>Tesla</category>
+    <description>Elon Musk sade den 18 november att Tesla planerar en autonom Model Y utan ratt och pedaler för sex eller sju personer. Han gav inget datum, pris eller besked om var den ska byggas.</description>
+    <enclosure url="https://motorpuls.se/img/og/tesla-model-y-utan-ratt-pedaler.jpg" length="193945" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/tesla-model-y-utan-ratt-pedaler.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="193945"/>
+  </item>
   <item>
     <title>Teslas förarstöd ska kräva händerna på ratten över 130 km/h</title>
     <link>https://motorpuls.se/artikel/tesla-assisted-driving-finland-rdw-uppdatering/</link>
