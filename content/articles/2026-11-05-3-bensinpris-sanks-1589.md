@@ -43,6 +43,8 @@ Enligt Nyheter24 sänkte Circle K torsdagen den 5 november bensin 95 till 15,89 
 
 Hos de andra stora kedjorna ligger listpriset högre. Enligt bensinstation.nu kostar 95-oktan 16,29 kronor litern hos OKQ8, Preem och St1 den 5 november, medan Circle K ligger på 15,89 även där. Nedgången mot förra veckan är omkring 1,15 till 1,55 kronor beroende på kedja.
 
+Läs också: [Brittisk granskning: pumpar gav för lite bränsle 98 gånger](/artikel/bensinpumpar-for-lite-bransle-sverige/)
+
 Läs också: [Teslas ras i oktober: Model Y föll från etta till elfte plats på en månad](/artikel/mest-salda-elbilen-inte-tesla/)
 
 ## Oljan backar

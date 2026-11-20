@@ -1,5 +1,6 @@
 ---
 title: "Vad kostar det att ladda elbilen hemma och längs vägen"
+seo_title: "Vad kostar det att ladda elbilen hemma och på vägen?"
 date: 2026-11-18T07:00:00+01:00
 updated: 2026-11-18T09:05:57+01:00
 type: guide

@@ -54,6 +54,8 @@ images:
 
 Den första BMW M3 byggdes för att få tävla. Reglerna krävde 5 000 bilar på ett år. BMW byggde nästan fyra gånger så många, och bilen blev enligt BMW den mest framgångsrika standardvagnen i märkets historia.
 
+Läs också: [BMW:s eldrivna M3 får fyra motorer och över 100 kWh](/artikel/bmw-m3-el-fyra-motorer/)
+
 ## Två veckor till en motor
 
 Enligt BMW började det med en kommentar från dåvarande vd:n Eberhard von Kuenheim till Paul Rosche på BMW Motorsport: 3 serien behövde en sportig motor. Rosche hade tidigare tagit fram turbomotorn som tog Nelson Piquet till VM titeln i Formel 1 1983.
@@ -102,6 +104,8 @@ Priserna skiljer sig mycket mellan versionerna. En Sport Evolution med 4 503 km 
 En vanlig amerikansk M3 från 1988 med 44 000 miles såldes på Bring a Trailer i april 2026 för 106 010 dollar, cirka 1 miljon kronor.
 
 Omräkningen bygger på ECB:s referenskurser den 30 oktober 2026: 1 euro är 10,98 kronor, 1 pund ungefär 13,17 kronor och 1 dollar ungefär 9,83 kronor.
+
+Läs också: [En Ferrari F40 från Sverige såldes för cirka 51 miljoner kronor](/artikel/ferrari-f40-sista-enzo-ferrari/)
 
 {{bild 3}}
 

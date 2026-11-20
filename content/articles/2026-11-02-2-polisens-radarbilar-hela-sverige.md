@@ -66,6 +66,8 @@ Enligt Åklagarmyndighetens ordningsbotskatalog kostar 1 till 10 km/h för fort 
 
 Under 2025 fick 266 748 bilister bot för fortkörning, varav 105 235 efter fartkamera, enligt Motor.
 
+Läs också: [Italien föreslår minst 100 km/h i vänsterfilen från 2028](/artikel/italien-minimihastighet-100-vanster-korfalt/)
+
 ## Lukas analys
 
 En fartkamera står still och syns i varje navigationsapp. En radar i en vanlig, eller civil, polisbil gör inte det. Det är just den osäkerheten som Franklin tror ska sänka medelhastigheten.

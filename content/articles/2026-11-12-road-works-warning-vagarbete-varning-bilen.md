@@ -1,6 +1,6 @@
 ---
-seo_title: "Trafikverket: varning för vägarbete direkt i bilen"
-title: "Trafikverket tar varning för vägarbete i bilen i vanlig drift"
+seo_title: "Vägarbete går snart ut automatiskt till bilens GPS"
+title: "Vägarbete går snart ut automatiskt till bilens GPS"
 date: 2026-11-12T12:00:00+01:00
 slug: road-works-warning-vagarbete-varning-bilen
 tags: [Trafikverket, vägarbete, Road Works Warning, TMA, trafiksäkerhet, uppkopplad bil, Svevia, Škoda, Waze, Apple Maps]
@@ -28,7 +28,7 @@ images:
     source_url: "https://via.tt.se/pressmeddelande/4635142/ny-digital-varningstjanst-okar-sakerheten-och-minskar-olyckor-vid-vagarbeten?publisherId=44450&lang=sv"
 ---
 
-# Trafikverket tar varning för vägarbete i bilen i vanlig drift
+# Vägarbete går snart ut automatiskt till bilens GPS
 
 Vägarbetsfordonen ska själva tala om för din bil var de är. Trafikverket och norska Statens vegvesen tar nu tjänsten Road Works Warning från försök till drift i stor skala.
 

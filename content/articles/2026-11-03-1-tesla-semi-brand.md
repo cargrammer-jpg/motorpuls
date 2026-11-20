@@ -12,7 +12,7 @@ sources:
   - https://x.com/CHPHayward/status/2115391056061542714
   - https://data.ntsb.gov/Docket/Document/docBLOB?FileExtension=pdf&FileName=%21001+Preliminary+Report+-+Emigrant+Gap%2C+CA+%28HWY24FH015%29+-+Final-Rel.pdf&ID=19139566
   - https://x.com/Tesla/status/2112998455383847332
-excerpt: "Branden inträffade den 27 oktober på I-880 i Hayward i Kalifornien. Föraren klarade sig, och orsaken är fortfarande okänd."
+excerpt: "En Tesla Semi brann den 27 oktober på I-880 i Hayward, utan krock. Föraren klarade sig. Vägen var stängd i tio timmar."
 summary:
   - "Branden började i södergående körfält på I-880 i Hayward på tisdagskvällen lokal tid."
   - "Föraren klarade sig oskadd men vet inte varför lastbilen började brinna."

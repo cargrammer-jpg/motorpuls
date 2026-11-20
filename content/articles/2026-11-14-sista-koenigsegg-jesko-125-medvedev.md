@@ -60,6 +60,8 @@ Jesko har satt rekord från stillastående till 400 km/h och tillbaka till still
 
 Alla 125 bilar såldes kort efter premiären i Genève 2019. Leveranserna började först 2023. Enligt Carscoops har Koenigsegg inte bekräftat någon direkt efterträdare. Gemera har gått i produktion och CC850, CCGT1 och banbilen Sadair's Spear bygger vidare på Jeskos kolfiberchassi och V8.
 
+**Läs också:** [En Ferrari F40 från Sverige såldes för cirka 51 miljoner kronor](/artikel/ferrari-f40-sista-enzo-ferrari/)
+
 ## Lukas analys
 
 Jesko är ett ovanligt svenskt industriprojekt. 125 bilar låter lite, men det är fler än Regera (80) och Agera (65) enligt Carscoops. Det visar att Ängelholm kan bygga en hyperbil i serie och inte bara som enstaka exemplar.

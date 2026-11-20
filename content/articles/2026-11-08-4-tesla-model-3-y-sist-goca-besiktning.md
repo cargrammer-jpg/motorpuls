@@ -1,6 +1,6 @@
 ---
 title: "Tesla Model 3 och Y hade flest brister i Flanderns besiktning"
-seo_title: "Tesla Model 3 och Y sist i Flanderns besiktning"
+seo_title: "Tesla Model 3 och Y: brister hos 21 procent"
 date: 2026-11-08T18:00:00+01:00
 slug: tesla-model-3-y-sist-goca-besiktning
 tags: [Tesla, Model 3, Model Y, Volvo, XC60, XC40, besiktning, GOCA, Belgien, elbil]
@@ -8,7 +8,7 @@ sources:
   - https://www.gocavlaanderen.be/news-item/persbericht-goca-barometer
   - https://cdn.prod.website-files.com/604a00a4df74a7000318621d/6aeca2730b03602762592bd2_MASTER_20261104_GOCA_Barometer_2025-07_2026-06.pdf
   - https://cdn.prod.website-files.com/604a00a4df74a7000318621d/6aed9ab41207686b2f06e46d_MASTER_20261104_GOCA_Barometer_per_leeftijdsklasse_2025-07_2026-06.pdf
-excerpt: "Bland bilar som är fyra till fem år hade 21 procent brister, mot 4,3 procent för Volvo XC60. Strålkastarna var den vanligaste anmärkningen."
+excerpt: "I Flandern hade 21 procent av fyra till fem år gamla Tesla Model 3 och Y brister. Volvo XC60 låg på 4,3 procent."
 summary:
   - "GOCA Vlaanderen har granskat 2 072 410 periodiska besiktningar i Flandern mellan 1 juli 2025 och 30 juni 2026."
   - "Bland bilar som är fyra till fem år gamla har Volvo XC60 brister i 4,3 procent av fallen. Tesla Model 3 och Model Y ligger på 21,0 procent, sist av 123 modeller."

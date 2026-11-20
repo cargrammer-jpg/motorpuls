@@ -6,13 +6,13 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Trafik och säkerhet på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Thu, 19 Nov 2026 07:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Fri, 20 Nov 2026 04:40:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/trafik-och-sakerhet.xml" rel="self" type="application/rss+xml"/>
   <item>
     <title>Nya Nissan Leaf missar fem stjärnor i Euro NCAP:s säkerhetstest</title>
     <link>https://motorpuls.se/artikel/euro-ncap-nissan-leaf-fyra-stjarnor-skoda-peaq/</link>
     <guid isPermaLink="true">https://motorpuls.se/artikel/euro-ncap-nissan-leaf-fyra-stjarnor-skoda-peaq/</guid>
-    <pubDate>Thu, 19 Nov 2026 07:00:00 +0100</pubDate>
+    <pubDate>Fri, 20 Nov 2026 04:40:00 +0100</pubDate>
     <category>Trafik och säkerhet</category>
     <description>Euro NCAP gav nio av tio nya bilar fem stjärnor den 18 november 2026. Nya Nissan Leaf fick fyra, bland annat för att radar i hörnen och mittkrockkudde inte är standard.</description>
     <enclosure url="https://motorpuls.se/img/og/euro-ncap-nissan-leaf-fyra-stjarnor-skoda-peaq.jpg" length="138633" type="image/jpeg"/>
@@ -69,7 +69,7 @@
     <media:content url="https://motorpuls.se/img/og/italien-minimihastighet-100-vanster-korfalt.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="121720"/>
   </item>
   <item>
-    <title>Trafikverket tar varning för vägarbete i bilen i vanlig drift</title>
+    <title>Vägarbete går snart ut automatiskt till bilens GPS</title>
     <link>https://motorpuls.se/artikel/road-works-warning-vagarbete-varning-bilen/</link>
     <guid isPermaLink="true">https://motorpuls.se/artikel/road-works-warning-vagarbete-varning-bilen/</guid>
     <pubDate>Thu, 12 Nov 2026 12:00:00 +0100</pubDate>

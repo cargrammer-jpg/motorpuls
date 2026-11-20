@@ -1,6 +1,6 @@
 ---
 title: "Tesla säljer Cybercab till inbjudna kunder i USA, med abonnemang"
-seo_title: "Cybercab till inbjudna kunder i USA, med abonnemang"
+seo_title: "Tesla Cybercab: 29 990 dollar plus abonnemang"
 date: 2026-11-15T15:00:00+01:00
 slug: tesla-cybercab-privat-299-dollar-manad
 tags: [Tesla, Cybercab, Robotaxi, självkörande, FSD, abonnemang, Elon Musk]
@@ -11,7 +11,7 @@ sources:
   - https://electrek.co/2026/11/13/tesla-cybercab-personal-use-orders-299-subscription-geofence/
   - https://teslanorth.com/2026/11/13/tesla-cybercab-autonomy-subscription-terms/
   - https://www.riksbank.se/sv/statistik/rantor-och-valutakurser/
-excerpt: "Utvalda kunder kan beställa bilen för 29 990 dollar, omkring 301 000 kronor. Utan abonnemanget på 299 dollar i månaden går den inte att köra."
+excerpt: "Tesla säljer Cybercab till utvalda kunder för 29 990 dollar, omkring 301 000 kronor. Utan 299 dollar i månaden går den inte att köra."
 summary:
   - "Utvalda kunder i USA kan nu beställa Cybercab för privat bruk. Priset är 29 990 dollar före skatt, runt 301 000 kronor."
   - "Bilen saknar ratt och pedaler och kräver ett abonnemang på 299 dollar i månaden, cirka 3 000 kronor."

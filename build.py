@@ -1143,7 +1143,7 @@ def ld_whole_16x9(a, img):
 # katalog i sajten får ingen ämnessida (bygget varnar).
 TOPIC_DESC = {
     "elbil": "Nyheter om elbilar: nya modeller, priser, räckvidd, laddning och regler som påverkar dig som kör el i Sverige. Varje text länkar till sina källor.",
-    "tesla": "Priser, FSD och besiktning för Tesla i Sverige. Model Y, Cybercab och vad som gäller för svenska ägare, med källa på varje påstående.",
+    "tesla": "Tesla-nyheter om Model Y, Cybercab och förarstödet FSD. Priser, besiktning och vad som gäller om du kör Tesla, med källa på varje påstående.",
     "sportbil": "Sportbilsnyheter: nya modeller, prestanda, återkallelser och teknik. Varje text länkar till sina källor.",
     "motorsport": "Motorsportnyheter: Formel 1, rally, Le Mans och andra racingserier, med fokus på det som berör svenska fans. Varje text länkar till sina källor.",
     "bransle": "Drivmedel och skatter: HVO100, reduktionsplikten, bensinpris och dieselpris, och vad det kostar att tanka i Sverige.",
@@ -1152,7 +1152,11 @@ TOPIC_DESC = {
 }
 # <title> på ämnessidor när namnet plus "senaste nyheterna" inte räcker som sökresultat. Synlig h1 är kategorinamnet.
 TOPIC_TITLE = {
-    "tesla": "Tesla-nyheter i Sverige: priser, FSD och besiktning",
+    "tesla": "Tesla-nyheter: Model Y, förarstöd och Cybercab",
+}
+# Synlig ingress på ämnessidan, en mening. Saknas den används desc även som synlig text.
+TOPIC_INTRO = {
+    "tesla": "Nyheter om Tesla: Model Y, förarstöd, Cybercab och besiktning, med källa på varje påstående.",
 }
 TOPIC_RESERVED = {"artikel", "om", "feed", "img", "css", "js", "fonts", "favicon", "brand", "content", "docs", "data", "drafts",
                   "tools", "supabase", "push", "nyhetsbrev", "integritet", "prenumeration", GUIDE_KEY, "sverige"}
@@ -1174,7 +1178,8 @@ def build_topics(arts):
         if k in TOPIC_RESERVED or not re.fullmatch(r"[a-z0-9-]+", k):
             print(f"varning: kategorin {n!r} får ingen ämnessida (/{k}/ krockar med en katalog i sajten)"); continue
         topics[k] = dict(key=k, name=n, path=topic_path(k), arts=g,
-                         desc=TOPIC_DESC.get(k) or f"Alla artiklar i kategorin {n} på {SITE}. {SITE_DESC}")
+                         desc=TOPIC_DESC.get(k) or f"Alla artiklar i kategorin {n} på {SITE}. {SITE_DESC}",
+                         intro=TOPIC_INTRO.get(k))
     return topics
 
 def article_topic(a):
@@ -1591,6 +1596,25 @@ def guides_page(guides):
     f = next(x for x in FEEDS if x["key"] == GUIDE_KEY)
     return topic_page(dict(key=GUIDE_KEY, name=GUIDE_NAME, path=GUIDE_PATH, desc=GUIDE_DESC, intro=GUIDE_INTRO, arts=guides), feed=f, list_label="Alla guider")
 
+def legacy_artikel_redirect():
+    """/artikel.html är en gammal malladress som Google har crawlat och som svarade 404. En minimal sida pekar om
+    till startsidan med meta refresh, canonical och noindex. Ingen analys och inga annonser, av samma skäl som 404."""
+    return f'''<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Motorpuls</title>
+<meta name="robots" content="noindex">
+<link rel="canonical" href="{DOMAIN}/">
+<meta http-equiv="refresh" content="0;url={DOMAIN}/">
+</head>
+<body>
+<p><a href="{DOMAIN}/">Till startsidan</a></p>
+</body>
+</html>
+'''
+
 def notfound():
     # Ingen Umami och ingen Cloudflare-beacon: bottar som träffar 404 ska inte räknas som besök.
     h = head(f"Sidan finns inte · {SITE}", SITE_DESC, None, noindex=True, track=False)
@@ -1709,7 +1733,6 @@ def main():
     if sv: SWEDEN.update(key="sverige", name="Sverige", path="/sverige/", desc=SWEDEN_DESC, arts=sv)
     # clean old article output so removed articles disappear
     shutil.rmtree(os.path.join(ROOT, "artikel"), ignore_errors=True)
-    if os.path.exists(os.path.join(ROOT, "artikel.html")): os.remove(os.path.join(ROOT, "artikel.html"))
     write("index.html", index(arts))
     for a in arts: write(f"artikel/{a['slug']}/index.html", article(a, arts))
     shutil.rmtree(os.path.join(ROOT, GUIDE_PATH.strip("/")), ignore_errors=True)  # inga guider: ingen sida
@@ -1722,6 +1745,7 @@ def main():
     shutil.rmtree(os.path.join(ROOT, "om"), ignore_errors=True)
     for p in pages: write(p["path"].lstrip("/") + "index.html", info_page(p, arts))
     write("404.html", notfound())
+    write("artikel.html", legacy_artikel_redirect())
     urls = [("/", arts[0]["date"])] + [(a["url"], a["date"]) for a in arts]
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
           + "".join(f"  <url><loc>{DOMAIN}{u}</loc><lastmod>{lastmod(u, arts)}</lastmod></url>\n" for u, d in urls)
@@ -1861,9 +1885,9 @@ def check_umami(out):
             htmls.append(rel)
             t = open(os.path.join(dirpath, fn), encoding="utf-8").read()
             head, sep, _rest = t.partition("</head>")
-            if rel == "404.html":
+            if rel in ("404.html", "artikel.html"):
                 if not sep or UMAMI in t or "static.cloudflareinsights.com" in t or "data-website-id" in t:
-                    bad.append(f"{rel}: 404 ska inte ha Umami eller Cloudflare Web Analytics")
+                    bad.append(f"{rel}: ska inte ha Umami eller Cloudflare Web Analytics")
                 continue
             if not sep or head.count(UMAMI) != 1 or t.count(UMAMI) != 1:
                 bad.append(f"{rel}: Umami ska ligga exakt en gång, i <head>")
@@ -1895,6 +1919,12 @@ def check_adsense(out):
             rel = os.path.relpath(os.path.join(dirpath, fn), out)
             htmls.append(rel)
             t = open(os.path.join(dirpath, fn), encoding="utf-8").read()
+            if rel == "artikel.html":
+                if 'name="robots" content="noindex"' not in t or f'href="{DOMAIN}/"' not in t or 'http-equiv="refresh"' not in t:
+                    bad.append(f"{rel}: ska vara noindex med canonical och meta refresh till startsidan")
+                if UMAMI in t or "static.cloudflareinsights.com" in t or "adsbygoogle" in t or "google-adsense-account" in t:
+                    bad.append(f"{rel}: omdirigeringen ska inte ladda analys eller annonser")
+                continue
             if t.count(meta) != 1 or t.count(src) != 1 or eager in t:
                 bad.append(f"{rel}: AdSense-taggen saknas, finns mer än en gång, eller laddas direkt")
             if rel != "404.html" and "static.cloudflareinsights.com/beacon.min.js" not in t:
