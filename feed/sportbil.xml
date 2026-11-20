@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Sportbil på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Sat, 14 Nov 2026 18:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Fri, 20 Nov 2026 18:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/sportbil.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Koenigsegg får ny delägare och värderas till över 14 miljarder kronor</title>
+    <link>https://motorpuls.se/artikel/koenigsegg-65-equity-partners-14-miljarder/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/koenigsegg-65-equity-partners-14-miljarder/</guid>
+    <pubDate>Fri, 20 Nov 2026 18:00:00 +0100</pubDate>
+    <category>Sportbil</category>
+    <description>Investmentbolaget 65 Equity Partners, som ägs av Singapores statliga Temasek, blir delägare i Koenigsegg. Affären värderar hyperbilstillverkaren i Ängelholm till cirka 14,4 miljarder kronor, enligt Bloomberg.</description>
+    <enclosure url="https://motorpuls.se/img/og/koenigsegg-65-equity-partners-14-miljarder.jpg" length="198104" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/koenigsegg-65-equity-partners-14-miljarder.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="198104"/>
+  </item>
   <item>
     <title>Chrysler ritade om Lamborghini Diablo, 2 903 bilar byggdes</title>
     <link>https://motorpuls.se/artikel/lamborghini-diablo-djavulen-chrysler/</link>
