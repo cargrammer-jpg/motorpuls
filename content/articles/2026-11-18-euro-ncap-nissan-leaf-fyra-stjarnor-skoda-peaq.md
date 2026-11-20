@@ -1,7 +1,7 @@
 ---
 title: "Nya Nissan Leaf missar fem stjärnor i Euro NCAP:s säkerhetstest"
 seo_title: "Nissan Leaf missar fem stjärnor i Euro NCAP:s test"
-date: 2026-11-19T07:00:00+01:00
+date: 2026-11-20T04:40:00+01:00
 slug: euro-ncap-nissan-leaf-fyra-stjarnor-skoda-peaq
 tags: [Euro NCAP, krocktest, säkerhet, Nissan Leaf, Skoda Peaq, BMW X5, Mercedes GLE, Kia Seltos, GWM, Lepas, elbil]
 sources:
