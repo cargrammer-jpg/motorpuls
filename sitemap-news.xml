@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
+    <loc>https://motorpuls.se/artikel/sms-vem-ager-fordonet-49-ore-2027/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Motorpuls</news:name>
+        <news:language>sv</news:language>
+      </news:publication>
+      <news:publication_date>2026-11-21T12:00:00+01:00</news:publication_date>
+      <news:title>Sms om vem som äger en bil kostar 49 öre från 1 januari 2027</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://motorpuls.se/artikel/tesla-model-y-utan-ratt-pedaler/</loc>
     <news:news>
       <news:publication>
@@ -42,17 +53,6 @@
       </news:publication>
       <news:publication_date>2026-11-20T04:40:00+01:00</news:publication_date>
       <news:title>Nya Nissan Leaf missar fem stjärnor i Euro NCAP:s säkerhetstest</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/waymo-forbjuds-motorvagar-kalifornien/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-18T22:10:00+01:00</news:publication_date>
-      <news:title>Kalifornien förbjuder Waymos förarlösa taxibilar på motorvägarna</news:title>
     </news:news>
   </url>
 </urlset>

@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Sverige på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Fri, 20 Nov 2026 12:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Sat, 21 Nov 2026 12:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/sverige.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Sms om vem som äger en bil kostar 49 öre från 1 januari 2027</title>
+    <link>https://motorpuls.se/artikel/sms-vem-ager-fordonet-49-ore-2027/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/sms-vem-ager-fordonet-49-ore-2027/</guid>
+    <pubDate>Sat, 21 Nov 2026 12:00:00 +0100</pubDate>
+    <category>Trafik och säkerhet</category>
+    <description>Transportstyrelsens sms-tjänst Vem äger fordonet? byter nummer till 72 123 den 1 januari 2027 och börjar då kosta 0,49 kronor per sms. Fram till nyår är det gamla numret gratis.</description>
+    <enclosure url="https://motorpuls.se/img/og/sms-vem-ager-fordonet-49-ore-2027.jpg" length="97291" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/sms-vem-ager-fordonet-49-ore-2027.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="97291"/>
+  </item>
   <item>
     <title>Ny lag skärper kraven på billån från den 20 november</title>
     <link>https://motorpuls.se/artikel/konsumentkreditlag-billan-20-november/</link>
