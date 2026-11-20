@@ -1,36 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
-    <loc>https://motorpuls.se/artikel/euro-ncap-nissan-leaf-fyra-stjarnor-skoda-peaq/</loc>
+    <loc>https://motorpuls.se/artikel/tesla-supercharger-sverige-symbioen/</loc>
     <news:news>
       <news:publication>
         <news:name>Motorpuls</news:name>
         <news:language>sv</news:language>
       </news:publication>
-      <news:publication_date>2026-11-20T04:40:00+01:00</news:publication_date>
-      <news:title>Nya Nissan Leaf missar fem stjärnor i Euro NCAP:s säkerhetstest</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/waymo-forbjuds-motorvagar-kalifornien/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-18T22:10:00+01:00</news:publication_date>
-      <news:title>Kalifornien förbjuder Waymos förarlösa taxibilar på motorvägarna</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/tesla-cybercab-giga-berlin-3-miljarder/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-18T12:00:00+01:00</news:publication_date>
-      <news:title>Tesla ska bygga robotaxin Cybercab utanför Berlin för 3 miljarder euro</news:title>
+      <news:publication_date>2026-11-22T07:00:00+01:00</news:publication_date>
+      <news:title>Teslas snabbladdare i Sverige lyckas i 92,6 procent av laddningarna</news:title>
     </news:news>
   </url>
 </urlset>
