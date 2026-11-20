@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Tesla på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Wed, 18 Nov 2026 12:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Sat, 21 Nov 2026 07:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/tesla.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Tesla visar fler snabbladdare från andra bolag i bilens karta i Europa</title>
+    <link>https://motorpuls.se/artikel/tesla-laddkarta-2026-44-1-europa/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/tesla-laddkarta-2026-44-1-europa/</guid>
+    <pubDate>Sat, 21 Nov 2026 07:00:00 +0100</pubDate>
+    <category>Tesla</category>
+    <description>Teslas programuppdatering 2026.44.1 samlar laddplatserna i grupper på kartan och lägger till fler snabbladdare från andra bolag i Europa. De flesta av de första bilarna som fick den finns i Europa.</description>
+    <enclosure url="https://motorpuls.se/img/og/tesla-laddkarta-2026-44-1-europa.jpg" length="106303" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/tesla-laddkarta-2026-44-1-europa.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="106303"/>
+  </item>
   <item>
     <title>Tesla ska bygga robotaxin Cybercab utanför Berlin för 3 miljarder euro</title>
     <link>https://motorpuls.se/artikel/tesla-cybercab-giga-berlin-3-miljarder/</link>

@@ -1,36 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
-    <loc>https://motorpuls.se/artikel/waymo-forbjuds-motorvagar-kalifornien/</loc>
+    <loc>https://motorpuls.se/artikel/tesla-laddkarta-2026-44-1-europa/</loc>
     <news:news>
       <news:publication>
         <news:name>Motorpuls</news:name>
         <news:language>sv</news:language>
       </news:publication>
-      <news:publication_date>2026-11-18T22:10:00+01:00</news:publication_date>
-      <news:title>Kalifornien förbjuder Waymos förarlösa taxibilar på motorvägarna</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/tesla-cybercab-giga-berlin-3-miljarder/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-18T12:00:00+01:00</news:publication_date>
-      <news:title>Tesla ska bygga robotaxin Cybercab utanför Berlin för 3 miljarder euro</news:title>
-    </news:news>
-  </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/privatleasing-passerar-kop-52-procent/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-17T18:00:00+01:00</news:publication_date>
-      <news:title>52 procent av nya privatbilar i Sverige är privatleasade</news:title>
+      <news:publication_date>2026-11-21T07:00:00+01:00</news:publication_date>
+      <news:title>Tesla visar fler snabbladdare från andra bolag i bilens karta i Europa</news:title>
     </news:news>
   </url>
 </urlset>
