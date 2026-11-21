@@ -1,30 +1,22 @@
 {
-  "updated": "2026-11-20T11:57+01:00",
+  "updated": "2026-11-21T11:59+01:00",
   "source": "umami",
   "articles": [
     {
-      "slug": "polestar-3-arn-havning-ombordladdare",
-      "views": 12
+      "slug": "byd-privatleasing-black-week",
+      "views": 11
     },
     {
       "slug": "vw-12-euro-per-bil-tesla-cam",
       "views": 11
     },
     {
-      "slug": "tesla-cybercab-privat-299-dollar-manad",
-      "views": 10
-    },
-    {
       "slug": "vinterdack-vad-galler",
-      "views": 10
-    },
-    {
-      "slug": "byd-privatleasing-black-week",
-      "views": 10
+      "views": 9
     },
     {
       "slug": "stellantis-aterkallelse-dorrar-last-krock",
-      "views": 6
+      "views": 7
     },
     {
       "slug": "sista-koenigsegg-jesko-125-medvedev",
@@ -32,6 +24,10 @@
     },
     {
       "slug": "polisens-radarbilar-hela-sverige",
+      "views": 4
+    },
+    {
+      "slug": "volkswagen-golf-hybrid-pris-id-golf-pausas",
       "views": 3
     },
     {
@@ -39,11 +35,7 @@
       "views": 2
     },
     {
-      "slug": "bmw-m3-el-fyra-motorer",
-      "views": 2
-    },
-    {
-      "slug": "horse-w40-v8-lotus-type-135-skovde",
+      "slug": "laddkostnad-elbil-hemma-supercharger",
       "views": 2
     },
     {
@@ -51,7 +43,31 @@
       "views": 2
     },
     {
-      "slug": "tesla-fsd-sverige-eu-omrostning-december",
+      "slug": "tesla-model-y-utan-ratt-pedaler",
+      "views": 2
+    },
+    {
+      "slug": "bmw-m3-el-fyra-motorer",
+      "views": 2
+    },
+    {
+      "slug": "porsche-macan-bensin-namn-2028",
+      "views": 1
+    },
+    {
+      "slug": "road-works-warning-vagarbete-varning-bilen",
+      "views": 1
+    },
+    {
+      "slug": "bensinpris-sanks-1589",
+      "views": 1
+    },
+    {
+      "slug": "arets-bil-2027-bara-elbilar-volvo-ex60",
+      "views": 1
+    },
+    {
+      "slug": "tesla-model-3-y-sist-goca-besiktning",
       "views": 1
     },
     {
@@ -63,19 +79,15 @@
       "views": 1
     },
     {
-      "slug": "volkswagen-golf-hybrid-pris-id-golf-pausas",
+      "slug": "antonelli-yngste-varldsmastare-f1",
       "views": 1
     },
     {
-      "slug": "volvo-forsaljning-ras-oktober-2026",
+      "slug": "f1-v8-turbohybrid-forslag-2030",
       "views": 1
     },
     {
-      "slug": "waymo-forbjuds-motorvagar-kalifornien",
-      "views": 1
-    },
-    {
-      "slug": "yangwang-u9-xtreme-503-kmh",
+      "slug": "volkswagen-q3-forlust-porsche-nedskrivning",
       "views": 1
     },
     {
@@ -83,31 +95,7 @@
       "views": 1
     },
     {
-      "slug": "antonelli-yngste-varldsmastare-f1",
-      "views": 1
-    },
-    {
-      "slug": "arets-bil-2027-bara-elbilar-volvo-ex60",
-      "views": 1
-    },
-    {
-      "slug": "bensin-diesel-3-kronor-dyrare-1-december",
-      "views": 1
-    },
-    {
-      "slug": "bensinpumpar-for-lite-bransle-sverige",
-      "views": 1
-    },
-    {
-      "slug": "bmw-m3-e30-homologering-dtm",
-      "views": 1
-    },
-    {
-      "slug": "ecobest-laddforluster-volvo-ex60-tesla-model-y",
-      "views": 1
-    },
-    {
-      "slug": "ferrari-f40-sista-enzo-ferrari",
+      "slug": "waymo-forbjuds-motorvagar-kalifornien",
       "views": 1
     },
     {
@@ -115,15 +103,15 @@
       "views": 1
     },
     {
-      "slug": "goteborg-cykeloverfarter-vajningsplikt",
+      "slug": "koenigsegg-65-equity-partners-14-miljarder",
       "views": 1
     },
     {
-      "slug": "koenigsegg-cc850-aterkallelse-parkeringsbroms",
+      "slug": "korkortsavgift-hojs-2027",
       "views": 1
     },
     {
-      "slug": "lamborghini-diablo-djavulen-chrysler",
+      "slug": "yangwang-u9-xtreme-503-kmh",
       "views": 1
     },
     {
@@ -131,7 +119,7 @@
       "views": 1
     },
     {
-      "slug": "polestar-formula-2030-nya-polestar-2",
+      "slug": "bmw-m3-e30-homologering-dtm",
       "views": 1
     }
   ]

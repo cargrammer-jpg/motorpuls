@@ -1,7 +1,8 @@
 # Bygger sajten med build.py och publicerar bara _site på GitHub Pages (källor som build.py, content/,
 # DESIGN.md, brand/ och drafts/ publiceras inte). Push till main: bygg + publicera. Pull request: bara bygg
-# och länkkontroll (ingen publicering). Bygget avbryts om build.py stoppar (t.ex. datum i framtiden) eller
-# om någon lokal länk pekar på en fil som saknas.
+# och länkkontroll (ingen publicering). Schema var sjätte timme (UTC): sitemap-news.xml räknas om
+# (NEWS_DAYS=2) och artiklar vars publiceringstid har passerat tas med. Bygget avbryts om build.py stoppar
+# eller om någon lokal länk pekar på en fil som saknas. En artikel med framtida datum hoppas över.
 name: Pages
 
 on:
@@ -9,6 +10,9 @@ on:
     branches: [main]
   pull_request:
   workflow_dispatch:
+  schedule:
+    # 00:17, 06:17, 12:17 och 18:17 UTC. I svensk vintertid är 06:17 UTC kl. 07:17, strax efter morgonpubliceringen.
+    - cron: "17 */6 * * *"
 
 permissions:
   contents: read
@@ -33,7 +37,7 @@ jobs:
       - name: Bygg till _site
         run: |
           # Schemalagda artiklar har ett framtida datum i sina PR:er; i PR-kontrollen byggs de som om det vore
-          # publiceringsdagen. På main gäller riktig tid, så en artikel med framtida datum stoppar publiceringen.
+          # publiceringsdagen. På main och i schemat gäller riktig tid: en artikel tas med först när tiden har passerat.
           if [ "${{ github.event_name }}" = "pull_request" ]; then export MOTORPULS_NOW=2100-01-01T00:00+01:00; fi
           python build.py --out _site
       - uses: actions/upload-pages-artifact@v5
