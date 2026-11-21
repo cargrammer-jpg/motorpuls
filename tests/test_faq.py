@@ -146,6 +146,17 @@ class FaqBuildTest(unittest.TestCase):
                 continue
             fm, body = front_matter(os.path.join(ARTICLES, name))
             if name not in GUIDE_FILES:
+                if name == "2026-11-26-guide-billan-konsumentkredit.md":
+                    faq = fm["faq"]
+                    self.assertGreaterEqual(len(faq), 4, name)
+                    prose = body.split("\n## Källor", 1)[0]
+                    blob = prose + json.dumps(faq, ensure_ascii=False)
+                    self.assertNotIn("\u2013", blob)
+                    self.assertNotIn("\u2014", blob)
+                    for item in faq:
+                        self.assertTrue(item["question"].endswith("?"))
+                        self.assertTrue(item["answer"].strip())
+                    continue
                 self.assertNotIn("faq", fm, name)
                 continue
             faq = fm["faq"]

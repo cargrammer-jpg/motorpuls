@@ -87,6 +87,34 @@ class ImageRightsTest(unittest.TestCase):
         rights = build.image_rights(image(credit="", license="", source_url="", alt="Bara alt"))
         self.assertEqual(rights, {})
 
+    def test_markdown_credit_links_the_photographer_and_keeps_commons(self):
+        im = image(
+            credit="Foto: [Blogtrepreneur](https://howtostartablogonline.net/legal) / Wikimedia Commons (CC BY 2.0)",
+            credit_url="https://commons.wikimedia.org/wiki/File:Legal_Contract_%26_Signature_-_Warm_Tones.jpg",
+            license_name="CC BY 2.0",
+            license_url="https://creativecommons.org/licenses/by/2.0/")
+        html = build.caption(im)
+        self.assertIn('href="https://howtostartablogonline.net/legal"', html)
+        self.assertIn(">Blogtrepreneur</a>", html)
+        self.assertIn('href="https://commons.wikimedia.org/wiki/File:Legal_Contract_%26_Signature_-_Warm_Tones.jpg"', html)
+        self.assertIn(">Wikimedia Commons</a>", html)
+        self.assertNotIn("[Blogtrepreneur]", html)
+        rights = build.image_rights(im)
+        self.assertEqual(rights["creator"], {"@type": "Person", "name": "Blogtrepreneur"})
+        self.assertEqual(rights["creditText"], "Blogtrepreneur / Wikimedia Commons (CC BY 2.0)")
+        a = article("avtal")
+        a["img"] = im
+        card = build.feed_item(a)
+        self.assertIn("Foto: Blogtrepreneur / Wikimedia Commons (CC BY 2.0)", card)
+        self.assertNotIn("howtostartablogonline", card)
+
+    def test_plain_credit_stays_one_link(self):
+        im = image(credit="Foto: Alexander-93, Wikimedia Commons",
+                   credit_url="https://commons.wikimedia.org/wiki/File:X.jpg")
+        html = build.caption(im)
+        self.assertIn('href="https://commons.wikimedia.org/wiki/File:X.jpg" rel="noopener" target="_blank">Foto: Alexander-93, Wikimedia Commons</a>', html)
+        self.assertEqual(html.count("<a "), 1)
+
     def test_organization_credits(self):
         self.assertEqual(build.creator_from_credit("Foto: Volvo Cars")["@type"], "Organization")
         self.assertEqual(build.creator_from_credit("Foto: Koenigsegg Automotive AB")["name"], "Koenigsegg Automotive AB")
