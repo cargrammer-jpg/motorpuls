@@ -1,5 +1,5 @@
 ---
-seo_title: "Förbifart Stockholm: 3,5 km öppnar den 6 december"
+seo_title: "Förbifart Stockholm öppnar 6 december: 3,5 av 21 kilometer"
 title: "Förbifart Stockholm öppnar 6 december: 3,5 av 21 kilometer"
 date: 2026-11-10T15:00:00+01:00
 slug: e4-forbifart-stockholm-oppnar-6-december
@@ -11,7 +11,7 @@ sources:
   - https://www.trafikverket.se/vara-projekt/projekt-i-stockholms-lan/e4-forbifart-stockholm/vagen-till-oppnande-av-en-ny-vag/
   - https://via.tt.se/pressmeddelande/3540730/e4-forbifart-stockholm-mellan-haggvik-och-hjulsta-oppnar-for-trafik-4-ar-tidigare-an-planerat?lang=sv&publisherId=44450
   - https://carup.se/nya-svenska-supervagen-oppnar-6-december/
-excerpt: "Sträckan Häggvik till Hjulsta kan korta resan i norra Stockholm. Hela vägen, bedömd till 51 till 53,5 miljarder kronor, öppnar 2030."
+excerpt: "Förbifart Stockholm öppnar 6 december mellan Häggvik och Hjulsta, cirka 3,5 kilometer, varav 1,8 i tunnel. Hela vägen på 21 kilometer öppnar 2030."
 summary:
   - "Sträckan Häggvik till Hjulsta öppnar 6 december 2026, fyra år tidigare än planerat."
   - "Den är cirka 3,5 kilometer lång och cirka 1,8 kilometer går i tunnel."
