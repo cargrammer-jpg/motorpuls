@@ -1,6 +1,6 @@
 ---
 seo_title: "Förmånsvärde för elbil 2027: sex populära modeller"
-title: "Ingen ändring beslutad för elbilsrabatten 2027. Men en siffra avgörs 30 november"
+title: "Förmånsvärde elbil 2027: rabatten oförändrad, räntan sätts 30 november"
 date: 2026-11-15T07:00:00+01:00
 updated: 2026-11-18T09:05:57+01:00
 type: guide
@@ -19,7 +19,7 @@ sources:
   - https://www.transportstyrelsen.se/sv/vagtrafik/fordon/skatter-och-avgifter/fordonsskatt/skattens-storlek/
   - https://www.regeringen.se/contentassets/779961287e264bcaa873040f8da66c2d/vagen-mot-utfasning--styrmedel-for-ett-fossilfritt-samhalle-sou-202633.pdf
   - https://www.regeringen.se/remisser/2026/06/remiss-av-betankandet-vagen-mot-utfasning-sou-202633/
-excerpt: "Elbilsrabatten för förmånsbilar är oförändrad inför 2027. Räntan som styr en del av förmånsvärdet sätts 30 november. Här är formeln och sex exempel."
+excerpt: "Förmånsvärde elbil 2027: rabatten är oförändrad, räntan sätts 30 november. Sex exempel med dagens ränta ger cirka 4 350 till 5 230 kronor i månaden."
 summary:
   - "Ingen ändring av nedsättningen för elbilar är beslutad för 2027. Nybilspriset sänks fortfarande med 350 000 kronor, högst hälften."
   - "Prisbasbeloppet 2027 är 59 600 kronor. Statslåneräntan för 2027 blir känd först 30 november 2026."
@@ -58,7 +58,7 @@ images:
     source_url: "https://commons.wikimedia.org/wiki/File:Kia_EV3_DSC_9146.jpg"
 ---
 
-# Ingen ändring beslutad för elbilsrabatten 2027. Men en siffra avgörs 30 november
+# Förmånsvärde elbil 2027: rabatten oförändrad, räntan sätts 30 november
 
 Rabatten för eldrivna förmånsbilar gäller fortfarande när 2027 börjar, eftersom ingen ändring är beslutad. Här är formeln, siffrorna som redan är klara och vad förmånsvärdet landar på för sex vanliga elbilar.
 

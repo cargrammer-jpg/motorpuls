@@ -1,18 +1,10 @@
 {
-  "updated": "2026-11-18T11:57+01:00",
+  "updated": "2026-11-20T11:57+01:00",
   "source": "umami",
   "articles": [
     {
-      "slug": "sista-koenigsegg-jesko-125-medvedev",
-      "views": 14
-    },
-    {
       "slug": "polestar-3-arn-havning-ombordladdare",
       "views": 12
-    },
-    {
-      "slug": "bensinpumpar-for-lite-bransle-sverige",
-      "views": 11
     },
     {
       "slug": "vw-12-euro-per-bil-tesla-cam",
@@ -27,24 +19,20 @@
       "views": 10
     },
     {
-      "slug": "vw-gamechanger-wolfsburg-skrotas",
-      "views": 9
-    },
-    {
       "slug": "byd-privatleasing-black-week",
-      "views": 9
-    },
-    {
-      "slug": "polisens-radarbilar-hela-sverige",
-      "views": 6
+      "views": 10
     },
     {
       "slug": "stellantis-aterkallelse-dorrar-last-krock",
       "views": 6
     },
     {
-      "slug": "ecobest-laddforluster-volvo-ex60-tesla-model-y",
-      "views": 5
+      "slug": "sista-koenigsegg-jesko-125-medvedev",
+      "views": 4
+    },
+    {
+      "slug": "polisens-radarbilar-hela-sverige",
+      "views": 3
     },
     {
       "slug": "e4-forbifart-stockholm-oppnar-6-december",
@@ -59,7 +47,47 @@
       "views": 2
     },
     {
+      "slug": "tesla-cybertruck-avvecklas-cybercab",
+      "views": 2
+    },
+    {
+      "slug": "tesla-fsd-sverige-eu-omrostning-december",
+      "views": 1
+    },
+    {
+      "slug": "tesla-semi-brand-i-880-hayward",
+      "views": 1
+    },
+    {
+      "slug": "vinterdack-bot-dubbdacksforbud-stockholm",
+      "views": 1
+    },
+    {
+      "slug": "volkswagen-golf-hybrid-pris-id-golf-pausas",
+      "views": 1
+    },
+    {
+      "slug": "volvo-forsaljning-ras-oktober-2026",
+      "views": 1
+    },
+    {
+      "slug": "waymo-forbjuds-motorvagar-kalifornien",
+      "views": 1
+    },
+    {
+      "slug": "yangwang-u9-xtreme-503-kmh",
+      "views": 1
+    },
+    {
       "slug": "adac-nodbroms-barn-reflexer",
+      "views": 1
+    },
+    {
+      "slug": "antonelli-yngste-varldsmastare-f1",
+      "views": 1
+    },
+    {
+      "slug": "arets-bil-2027-bara-elbilar-volvo-ex60",
       "views": 1
     },
     {
@@ -67,19 +95,27 @@
       "views": 1
     },
     {
+      "slug": "bensinpumpar-for-lite-bransle-sverige",
+      "views": 1
+    },
+    {
+      "slug": "bmw-m3-e30-homologering-dtm",
+      "views": 1
+    },
+    {
+      "slug": "ecobest-laddforluster-volvo-ex60-tesla-model-y",
+      "views": 1
+    },
+    {
       "slug": "ferrari-f40-sista-enzo-ferrari",
       "views": 1
     },
     {
+      "slug": "formansvarde-elbil-2027-per-modell",
+      "views": 1
+    },
+    {
       "slug": "goteborg-cykeloverfarter-vajningsplikt",
-      "views": 1
-    },
-    {
-      "slug": "hvo100-reduktionsplikten-utredning-2031",
-      "views": 1
-    },
-    {
-      "slug": "italien-minimihastighet-100-vanster-korfalt",
       "views": 1
     },
     {
@@ -96,22 +132,6 @@
     },
     {
       "slug": "polestar-formula-2030-nya-polestar-2",
-      "views": 1
-    },
-    {
-      "slug": "tesla-cybertruck-avvecklas-cybercab",
-      "views": 1
-    },
-    {
-      "slug": "tesla-fsd-sverige-eu-omrostning-december",
-      "views": 1
-    },
-    {
-      "slug": "vinterdack-bot-dubbdacksforbud-stockholm",
-      "views": 1
-    },
-    {
-      "slug": "volvo-forsaljning-ras-oktober-2026",
       "views": 1
     }
   ]

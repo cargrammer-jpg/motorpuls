@@ -1,6 +1,6 @@
 ---
-seo_title: "Polisens radar: 18 mätningar per sekund i Sverige"
-title: "Polisens radar mäter farten 18 gånger per sekund i Sverige"
+seo_title: "Polisens radarbilar mäter farten i båda riktningarna"
+title: "Polisens radarbilar mäter farten framför dig och i mötande körfält"
 date: 2026-11-02T07:00:00+01:00
 slug: polisens-radarbilar-hela-sverige
 tags: [Polisen, radar, hastighet, fortkörning, trafiksäkerhet, Nollvisionen, ordningsbot]
@@ -13,7 +13,7 @@ sources:
   - https://www.svt.se/nyheter/lokalt/vasternorrland/polisens-bilar-far-ny-radar-ska-stoppa-fler-fortkorare
   - https://www.tv4.se/artikel/3V1RHgeDO6WPpqWPeL2Pny/haer-aer-polisens-nya-superlaser-ska-fanga-fler-fortkoerare
   - https://www.aklagare.se/globalassets/dokument/ordningsbotskatalog/bilaga-1a.pdf
-excerpt: "Utrustningen finns i alla sju polisregioner men kallas fortfarande ett pilotprojekt. Polisen måste stoppa bilen, och boten börjar på 1 500 kronor."
+excerpt: "Polisens radarbilar mäter farten framför dig och i mötande körfält, även i farten. Polisen måste stoppa dig, och boten börjar på 1 500 kronor."
 summary:
   - "Radarn gör 18 mätningar per sekund och mäter både framförvarande och mötande trafik."
   - "Den finns nu i alla sju polisregioner, men polisen kallar det fortfarande ett pilotprojekt."
@@ -34,7 +34,7 @@ images:
     source_url: "https://commons.wikimedia.org/wiki/File:Polisbilar_Stockholm_-_20260222_-_24.jpg"
 ---
 
-# Polisens radar mäter farten 18 gånger per sekund i Sverige
+# Polisens radarbilar mäter farten framför dig och i mötande körfält
 
 Polisbilar som läser av hastigheten på bilar framför och i mötande körfält rullar nu i alla sju polisregioner. Den som kör för fort får inga automatiska böter, men risken att åka fast ökar.
 

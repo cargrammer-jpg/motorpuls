@@ -5,8 +5,8 @@
 #   artikel/<slug>/index.html     en sida per artikel (rena URL:er: /artikel/<slug>/)
 #   404.html, sitemap.xml, robots.txt, feed.xml (RSS, samma artiklar som sitemap)
 #   sitemap-news.xml              Google News-sitemap: bara artiklar publicerade de senaste 2 dygnen (Googles regel),
-#                                 kan vara tom. Räknas vid bygget, så sajten behöver byggas om minst en gång per dygn (föreslaget schema i pages.yml, se PR:en).
-#   om/, om/<författare>/         sidor ur content/pages/*.md (front matter: title, path, description, valfritt author).
+#                                 kan vara tom. Räknas vid bygget. pages.yml bygger om sajten var sjätte timme.
+#   om/, om/<författare>/, /kontakt/  sidor ur content/pages/*.md (front matter: title, path, description, valfritt author).
 #                                 En sida med author (id i data/authors.json) blir författarsida med ProfilePage-JSON-LD.
 #   skribentruta                  längst ner i varje artikel, en mall (author_box) med data ur data/authors.json
 #                                 Ord som TODO i texten ger en varning i bygget.
@@ -31,8 +31,9 @@
 # dagens början), sedan filnamn, nyast först. Samma ordning gäller startsidan, feed.xml och sitemap.xml.
 #
 # date:    publiceringsdag (2026-10-30) eller tidpunkt med zon (2026-10-30T03:25:00+01:00). Tid utan zon räknas
-#          som Europe/Stockholm. Bygget stoppas om datumet ligger i framtiden (svensk tid; ett datum utan tid
-#          räknas som hela den dagen, så en artikel som mergas på sin egen dag går igenom). För förhandsbygge av
+#          som Europe/Stockholm. En artikel vars publiceringstid inte har infallit hoppas över (svensk tid; ett datum
+#          utan tid räknas som hela den dagen, så en artikel som mergas på sin egen dag går igenom). Nästa bygge,
+#          till exempel schemat i pages.yml, tar med den när tiden har passerat. För förhandsbygge av
 #          schemalagda artiklar: MOTORPULS_NOW=2026-11-05T07:10+01:00 .venv/bin/python build.py
 #          Skriv helst tidpunkten: i JSON-LD, article:published_time, sitemaps och <time> blir det alltid full tid med
 #          zon, och ett datum utan tid blir där 00:00 svensk tid (bygget varnar).
@@ -40,16 +41,17 @@
 #          rubriken är för lång: <title> kapas aldrig med "…" (se page_title). h1, og:title och RSS behåller title.
 # updated: valfritt, samma format som date. Blir dateModified (annars samma som date) och sitemaps lastmod, och
 #          artikeln visar "Uppdaterad <datum>" i bylinen när tidpunkten är senare än date. Ett updated före date
-#          räknas som date (dateModified blir aldrig tidigare än datePublished). Bygget stoppas om updated ligger i
-#          framtiden, precis som för date.
+#          räknas som date (dateModified blir aldrig tidigare än datePublished). Ett updated i framtiden används
+#          inte än: artikeln publiceras med date som dateModified tills den tidpunkten har infallit.
 # type:    valfritt, "guide" gör artikeln till en guide (som category: Guider). Guider samlas på /guider/ och i
 #          feed/guider.xml, får Article i stället för NewsArticle i JSON-LD och hamnar inte i sitemap-news.xml.
 # faq:     valfritt, lista med {question, answer} (vanlig text). Ger sektionen "Vanliga frågor" efter brödtexten
 #          och före Källor, plus FAQPage i ett eget JSON-LD-script. Fråga och svar är samma text på sidan och i
 #          schemat. Saknas fältet blir det varken sektion eller FAQPage. Article och NewsArticle lämnas som de är.
 #
-# Läs också: under varje artikel tre andra artiklar. Samma kategori (guider räknas som en kategori) och gemensamma
-#          taggar först, sedan de nyaste. Aldrig artikeln själv. Miniatyrerna använder 400 px-varianterna.
+# Läs också: under varje artikel tre andra artiklar. En publicerad guide som delar kategori eller taggar med
+#          artikeln läggs först. Sedan samma kategori (guider räknas som en kategori) och gemensamma taggar, och
+#          till sist de nyaste. Aldrig artikeln själv. Miniatyrerna använder 400 px-varianterna.
 #
 # sweden:  valfritt, true när nyheten gäller Sverige. Artikeln tas då med i feed/sverige.xml.
 #          Ingen flagga ritas på bilder (varken i HTML eller i bildfilerna). Sidhuvudets flagga
@@ -57,7 +59,8 @@
 # summary: lista med 2 till 4 korta punkter (vanlig text), visas i rutan "Kort om nyheten".
 # images:  lista med {src, alt, credit, license, valfritt caption}. src är en lokal fil: ett filnamn som
 #          letas upp i drafts/img/<slug>/, utkastens form img/<slug>/fil (relativ till drafts/), en sökväg
-#          relativ till projektroten eller en absolut sökväg. Okända fält (t.ex. source_url) ignoreras.
+#          relativ till projektroten eller en absolut sökväg. source_url används i JSON-LD (acquireLicensePage)
+#          och visas inte i bildtexten. Övriga okända fält ignoreras.
 #          Filen kopieras till img/articles/<slug>/ och får WebP-versioner (1600, 1200, 800 och 400 px bred, bara
 #          storleksändring, aldrig beskärning). Finns WebP-filen redan byggs den inte om (källan behövs inte).
 #          Första bilden är huvudbild (og:image), fler bilder blir ett bildspel.
@@ -93,6 +96,7 @@ NEWS_DAYS = 2         # Google: bara artiklar från de senaste två dygnen i new
 # taggen). Tom sträng ger ingen tagg. Taggen hamnar bara på startsidan.
 GOOGLE_SITE_VERIFICATION = "1G9pdcpgySoszmWhSPBgBxrvZxkyl6kbvszF7FSnVl4"
 SITE_DESC = "Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor."
+META_DESC_MAX = 155  # meta description, og:description och twitter:description. Synlig text kapas inte.
 MAX_W = 1600
 VARIANTS = ((MAX_W, ""), (1200, "-1200"), (800, "-800"), (400, "-400"))  # bredd, filändelse; minsta används av miniatyrerna (104 px)
 # WebP-kvalitet för artikelbilderna. 76 ger ungefär en tredjedel mindre filer än 86 utan synlig skillnad i bildspelet
@@ -213,6 +217,12 @@ def now():
     t = dt.datetime.fromisoformat(n) if n else dt.datetime.now(TZ)
     return t.replace(tzinfo=TZ) if t.tzinfo is None else t
 
+def is_future(d, t, n=None):
+    """Sant om tidpunkten inte har infallit. Ett datum utan klockslag räknas som hela den dagen, så det är
+    inte framtida när dagen har börjat i svensk tid."""
+    n = (n or now()).astimezone(TZ)
+    return bool((t and t > n) or d > n.date())
+
 def load_articles():
     arts = []
     for path in sorted(glob.glob(os.path.join(ROOT, "content/articles/*.md"))):
@@ -230,11 +240,13 @@ def load_articles():
         d, t = parse_when(fm["date"], path, "date")
         if not t: print(f"varning: {os.path.basename(path)}: date saknar klockslag, skriv publiceringstiden (t.ex. {d}T07:30:00+01:00)")
         n = now()
-        if (t and t > n) or d > n.astimezone(TZ).date():
-            raise SystemExit(f"{path}: date {iso(d, t)} ligger i framtiden (nu {n.astimezone(TZ):%Y-%m-%d %H:%M} svensk tid)")
+        if is_future(d, t, n):
+            print(f"hoppar över {os.path.basename(path)}: publiceras {iso(d, t)} (nu {n.astimezone(TZ):%Y-%m-%d %H:%M} svensk tid)")
+            continue
         ud, ut = parse_when(fm["updated"], path, "updated") if fm.get("updated") else (d, t)
-        if (ut and ut > n) or ud > n.astimezone(TZ).date():
-            raise SystemExit(f"{path}: updated {iso(ud, ut)} ligger i framtiden (nu {n.astimezone(TZ):%Y-%m-%d %H:%M} svensk tid)")
+        if is_future(ud, ut, n):
+            print(f"varning: {os.path.basename(path)}: updated {iso(ud, ut)} ligger i framtiden och används först då")
+            ud, ut = d, t
         if instant(ud, ut) < instant(d, t): ud, ut = d, t  # uppdaterad före publicering: räknas som date
         # h1 in the body is the page headline; "## Källor" becomes the source list
         h1 = re.search(r"^# (.+)$", body, re.M)
@@ -391,7 +403,8 @@ def ensure_images(a):
                             alt=str(im["alt"]).strip(), credit=str(im["credit"]).strip(),
                             caption=str(im.get("caption") or "").strip(), license=str(im.get("license") or "").strip(),
                             credit_url=str(im.get("credit_url") or "").strip(), license_name=str(im.get("license_name") or "").strip(),
-                            license_url=str(im.get("license_url") or "").strip()))
+                            license_url=str(im.get("license_url") or "").strip(),
+                            source_url=str(im.get("source_url") or "").strip()))
         return res
     if not a.get("image"): return []
     # äldre fält: en bild-URL
@@ -413,7 +426,8 @@ def ensure_images(a):
     from PIL import Image
     with Image.open(out) as im: w, h = im.size
     return [dict(src="/" + rel, w=w, h=h, srcset="", alt=a["headline"], credit=str(a.get("image_credit") or "").strip(),
-                 caption="", license=str(a.get("image_license") or "").strip())]
+                 caption="", license=str(a.get("image_license") or "").strip(),
+                 license_url=str(a.get("license_url") or "").strip(), source_url=str(a.get("source_url") or "").strip())]
 
 OG_W, OG_H = 1200, 630
 OG_BG = (0x0B, 0x0D, 0x10)  # sajtens bakgrund (bg), botten runt hela bilden när den inte får beskäras
@@ -718,9 +732,23 @@ OG_ALT = f"{SITE}: korta bilnyheter med källor"  # alt-text till delningsbilden
 # Sidor som inte ska indexeras (404, prenumerationssidorna) har noindex som förut.
 ROBOTS_DEFAULT = "max-image-preview:large"
 
+def meta_desc(desc, limit=META_DESC_MAX):
+    """Beskrivning för <meta name=description>, og:description och twitter:description. Längre text kapas vid
+    ett ordgräns och får utelämningstecken, så att fältet är högst ungefär 155 tecken. Synlig ingress, h1 och
+    brödtext använder den okapade texten."""
+    s = re.sub(r"\s+", " ", str(desc or "")).strip()
+    if len(s) <= limit: return s
+    room = limit - 1  # plats för …
+    head_part = s[:room]
+    cut = head_part.rsplit(" ", 1)[0] if " " in head_part else head_part
+    cut = cut.rstrip(" \t,;:.")
+    if len(cut) < max(20, limit // 3): cut = head_part.rstrip()
+    return cut + "…"
+
 def head(title, desc, path, og_type="website", image=None, extra="", preload_img=None, og_title=None, preload_sizes="100vw", noindex=False, robots=None, feeds=(), track=True):
     canon = DOMAIN + path if path else None
     og_title = og_title or title
+    desc = meta_desc(desc)
     og_img = ""
     if image:
         typ = {".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp", ".png": "image/png"}.get(os.path.splitext(image["src"])[1].lower())
@@ -809,7 +837,7 @@ def footer():
   <div class="wrap">
     {main_open}<a class="wordmark" href="/"><img class="logo logo--footer" src="/img/logo.svg" alt="Motorpuls" width="872" height="88" loading="lazy"></a>
     <p class="site-footer__desc">{SITE_DESC}</p>
-    <nav class="site-footer__nav" aria-label="Om Motorpuls"><ul><li><a href="/om/">Om Motorpuls</a></li><li><a href="/om/lukas/">Om Lukas</a></li><li><a href="/integritet/">Integritetspolicy</a></li></ul></nav>{topics_nav()}
+    <nav class="site-footer__nav" aria-label="Om Motorpuls"><ul><li><a href="/om/">Om Motorpuls</a></li><li><a href="/kontakt/">Kontakt</a></li><li><a href="/om/lukas/">Om Lukas</a></li><li><a href="/integritet/">Integritetspolicy</a></li></ul></nav>{topics_nav()}
     <div class="site-footer__rss">
       <a class="rss-link" href="/feed.xml">{RSS_SVG}RSS</a>{per_cat}
     </div>
@@ -832,6 +860,10 @@ def topics_nav():
 def meta_line(a, with_date=True):
     t = f'<time datetime="{a["published"]}">{sv_date(a["date"])}</time>' if with_date else ""
     return f'<span class="meta"><span class="tag">{esc(a["category"])}</span>{t}</span>'
+
+def img_alt(img, title):
+    """Alt-text från bildens front matter. Saknas den används artikelns rubrik."""
+    return (img.get("alt") or "").strip() or str(title or "").strip()
 
 def img_tag(img, alt, eager=False, sizes="100vw"):
     # LCP-bilden (eager) avkodas i den vanliga vägen. decoding=async kan skjuta upp första målningen.
@@ -883,7 +915,7 @@ def lead(a):
 
 def feed_item(a, h="h4"):
     # krediten visas vid varje bild, även miniatyrer (villkor för pressbilder och CC-licenser)
-    thumb = (f'<figure class="item__img">{img_tag(a["img"], "", sizes="(min-width: 48rem) 15rem, 6.5rem")}'
+    thumb = (f'<figure class="item__img">{img_tag(a["img"], img_alt(a["img"], a["title"]), sizes="(min-width: 48rem) 15rem, 6.5rem")}'
              f'<figcaption class="item__credit">{esc(a["img"]["credit"])}</figcaption></figure>') if a["img"] else ""
     return f'''
           <li class="item{"" if a["img"] else " item--noimg"}" data-cat="{a["cat"]}">
@@ -918,7 +950,7 @@ def pick_popular(arts, shown):
 
 def popular_card(a, rank):
     img = a["img"]
-    media = (f'<figure class="pop__media"><div class="pop__frame">{img_tag(img, "", sizes=POP_SIZES)}</div>'
+    media = (f'<figure class="pop__media"><div class="pop__frame">{img_tag(img, img_alt(img, a["title"]), sizes=POP_SIZES)}</div>'
              f'<figcaption class="item__credit">{esc(img["credit"])}</figcaption></figure>') if img else ""
     return f'''
         <li class="pop__card{"" if img else " pop__card--noimg"}">
@@ -1158,7 +1190,7 @@ TOPIC_TITLE = {
 TOPIC_INTRO = {
     "tesla": "Nyheter om Tesla: Model Y, förarstöd, Cybercab och besiktning, med källa på varje påstående.",
 }
-TOPIC_RESERVED = {"artikel", "om", "feed", "img", "css", "js", "fonts", "favicon", "brand", "content", "docs", "data", "drafts",
+TOPIC_RESERVED = {"artikel", "om", "kontakt", "feed", "img", "css", "js", "fonts", "favicon", "brand", "content", "docs", "data", "drafts",
                   "tools", "supabase", "push", "nyhetsbrev", "integritet", "prenumeration", GUIDE_KEY, "sverige"}
 TOPICS = {}  # kategori-nyckel -> dict(key, name, path, desc, arts), sätts i main()
 # /sverige/: samlingssida för artiklar med sweden: true (samma mall som ämnessidorna, flödet feed/sverige.xml). Ingen
@@ -1472,6 +1504,80 @@ def faq_section(pairs):
           <h2 id="faq-h">Vanliga frågor</h2>{items}
         </section>'''
 
+_URLS = re.compile(r"https?://[^\s\"'<>]+")
+_CC_BY = re.compile(r"\bCC\s*BY(?:\s*-\s*)?(NC-ND|NC-SA|NC|ND|SA)?\s*(\d(?:\.\d)?)\b", re.I)
+_ORG_HINT = re.compile(r"\b(AB|AG|Inc\.?|GmbH|Ltd\.?|Group|Corporation|Corp\.?|Powertrain|Land Rover)\b"
+                       r"|^(Aston Martin|Volvo Cars|Svevia|Trafikverket|Jaguar Land Rover)$", re.I)
+
+def _http_urls(text):
+    return [u.rstrip(".,;)]") for u in _URLS.findall(text or "")]
+
+def cc_license_url(text):
+    """Känd licensadress: en creativecommons.org-länk i texten, annars CC/CC0 översatt till den adressen."""
+    if not text: return ""
+    for u in _http_urls(text):
+        if "creativecommons.org" in u.lower(): return u
+    m = _CC_BY.search(text)
+    if m and m.group(2):
+        kind = (m.group(1) or "").lower()
+        ver = m.group(2) if "." in m.group(2) else m.group(2) + ".0"
+        return "https://creativecommons.org/licenses/by" + (("-" + kind) if kind else "") + f"/{ver}/"
+    if re.search(r"\bCC0\b", text, re.I): return "https://creativecommons.org/publicdomain/zero/1.0/"
+    return ""
+
+def _file_page(url):
+    """Wikimedia Commons filsida är källan, inte en licens."""
+    parts = urllib.parse.urlsplit(url)
+    host = parts.netloc.lower().removeprefix("www.")
+    return host == "commons.wikimedia.org" and "/wiki/File:" in parts.path
+
+def license_url_of(im):
+    """Licensens URL om den finns: license_url, en känd CC-adress, eller villkorslänken i license.
+    En Commons-filsida räknas inte som licens (den hamnar i acquireLicensePage via source_url)."""
+    explicit = str(im.get("license_url") or "").strip()
+    if explicit.startswith(("http://", "https://")): return explicit
+    blob = " ".join(x for x in (str(im.get("license_name") or ""), str(im.get("license") or "")) if x.strip())
+    known = cc_license_url(blob)
+    if known: return known
+    for u in _http_urls(im.get("license") or ""):
+        if not _file_page(u): return u
+    return ""
+
+def creator_from_credit(credit):
+    """Person eller Organization ur kreditraden. Tom kredit eller bara 'Wikimedia Commons' ger inget."""
+    if not str(credit or "").strip(): return None
+    name = re.sub(r"^(?:Foto|Bild)\s*:\s*", "", str(credit).strip(), flags=re.I)
+    wikimedia = re.search(r"\s*[/,]\s*Wikimedia Commons\b", name, re.I)
+    kind = "Person" if wikimedia else None
+    if wikimedia: name = name[:wikimedia.start()]
+    name = re.sub(r"\s*\((?:CC\d?|CC0|public domain|pressbild|allmän egendom)[^)]*\)", "", name, flags=re.I)
+    name = re.sub(r"\s*\.\s*Bilden visar\b.*$", "", name, flags=re.I)
+    name = re.sub(r"\s+", " ", name).strip()
+    courtesy = re.match(r"(?i)courtesy of\s+(.+)$", name)
+    if courtesy:
+        name, kind = courtesy.group(1).strip(), "Organization"
+    if name.endswith(".") and not re.search(r"\bInc\.$", name): name = name[:-1].strip()
+    if not name or re.fullmatch(r"(?i)wikimedia commons", name): return None
+    if kind is None: kind = "Organization" if _ORG_HINT.search(name) else "Person"
+    return {"@type": kind, "name": name}
+
+def image_rights(im):
+    """Licensfält till ImageObject. Bara fält som har data: creator, license, acquireLicensePage,
+    och de kreditfält som redan skrivs (creditText, copyrightNotice)."""
+    if not im: return {}
+    out = {}
+    credit_text = (im.get("credit") or "").removeprefix("Foto: ").strip()
+    if credit_text: out["creditText"] = credit_text
+    notice = (im.get("license") or "").strip()
+    if notice: out["copyrightNotice"] = notice
+    lic = license_url_of(im)
+    if lic: out["license"] = lic
+    source = str(im.get("source_url") or "").strip()
+    if source.startswith(("http://", "https://")): out["acquireLicensePage"] = source
+    creator = creator_from_credit(im.get("credit"))
+    if creator: out["creator"] = creator
+    return out
+
 def article(a, arts=()):
     img, imgs = a["img"], a["images_out"]
     ld = {"@context": "https://schema.org", "@type": "Article" if is_guide(a) else "NewsArticle", "headline": a["title"], "description": a["excerpt"],
@@ -1481,12 +1587,9 @@ def article(a, arts=()):
           "author": author_ld(a["author"]),
           "publisher": organization_ld()}
     if imgs:
-        credit = {k: v for k, v in {"creditText": img["credit"].removeprefix("Foto: ") or None,
-                                    "copyrightNotice": img["license"] or None}.items() if v}
-        ld["image"] = [dict({"@type": "ImageObject", "url": DOMAIN + c["src"], "width": c["w"], "height": c["h"]}, **credit)
-                       for c in ld_images(a)] + [{k: v for k, v in {"@type": "ImageObject", "url": DOMAIN + im["src"], "width": im["w"], "height": im["h"],
-                                          "caption": im["alt"], "creditText": im["credit"].removeprefix("Foto: ") or None,
-                                          "copyrightNotice": im["license"] or None, "license": im.get("license_url") or None}.items() if v} for im in imgs]
+        ld["image"] = [dict({"@type": "ImageObject", "url": DOMAIN + c["src"], "width": c["w"], "height": c["h"]}, **image_rights(img))
+                       for c in ld_images(a)] + [{k: v for k, v in dict(image_rights(im), **{"@type": "ImageObject", "url": DOMAIN + im["src"],
+                                          "width": im["w"], "height": im["h"], "caption": im["alt"] or None}).items() if v} for im in imgs]
     if a.get("sources"): ld["citation"] = [u for _, u in a["sources"]]
     topic = article_topic(a)
     crumbs_html, crumbs_ld = breadcrumbs([("Start", "/")] + ([(topic["name"], topic["path"])] if topic else []) + [(a["headline"], a["url"])])
@@ -1552,12 +1655,14 @@ RELATED_N = 3
 RELATED_SIZES = "(min-width: 40rem) 12rem, 7rem"
 
 def related(a, arts, n=RELATED_N):
-    """Tre andra artiklar: samma kategori (guider räknas som en kategori) och gemensamma taggar först, sedan de nyaste."""
+    """Tre andra artiklar. En guide som delar kategori eller taggar läggs först, sedan samma kategori
+    (guider räknas som en kategori) och gemensamma taggar, och till sist de nyaste."""
     tags = {str(t).lower() for t in a.get("tags") or []}
     def rank(b):
         same = b["cat"] == a["cat"] or (is_guide(a) and is_guide(b))
         shared = len(tags & {str(t).lower() for t in b.get("tags") or []})
-        return (2 if same else 0) + (1 if shared else 0), shared, b["when"]  # kategori väger tyngst, sedan taggar
+        guide_first = 1 if is_guide(b) and (b["cat"] == a["cat"] or shared or (is_guide(a) and is_guide(b))) else 0
+        return guide_first, (2 if same else 0) + (1 if shared else 0), shared, b["when"]
     return sorted((b for b in arts if b["slug"] != a["slug"]), key=rank, reverse=True)[:n]
 
 def thumb(img):
@@ -1568,7 +1673,7 @@ def thumb(img):
 
 def related_card(b):
     img = b["img"]
-    media = (f'<figure class="related__media"><div class="related__frame">{img_tag(thumb(img), "", sizes=RELATED_SIZES)}</div>'
+    media = (f'<figure class="related__media"><div class="related__frame">{img_tag(thumb(img), img_alt(img, b["title"]), sizes=RELATED_SIZES)}</div>'
              f'<figcaption class="item__credit">{esc(img["credit"])}</figcaption></figure>') if img else ""
     return f'''
             <li class="related__card{"" if img else " related__card--noimg"}">
