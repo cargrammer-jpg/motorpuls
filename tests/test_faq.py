@@ -146,6 +146,20 @@ class FaqBuildTest(unittest.TestCase):
                 continue
             fm, body = front_matter(os.path.join(ARTICLES, name))
             if name not in GUIDE_FILES:
+                if name == "2026-11-30-guide-trangselskatt.md":
+                    # Schemalagd guide. Publiceras 2026-11-30 kl 07.00 och ingår inte
+                    # i de tre redan publicerade guiderna, men ska ha en egen FAQ.
+                    faq = fm["faq"]
+                    self.assertEqual(len(faq), 8, name)
+                    prose = body.split("\n## Källor", 1)[0]
+                    blob = prose + json.dumps(faq, ensure_ascii=False)
+                    self.assertNotIn("\u2013", blob)
+                    self.assertNotIn("\u2014", blob)
+                    self.assertEqual(prose.count("{{bild"), 3)
+                    for item in faq:
+                        self.assertTrue(item["question"].endswith("?"))
+                        self.assertTrue(item["answer"].strip())
+                    continue
                 self.assertNotIn("faq", fm, name)
                 continue
             faq = fm["faq"]
