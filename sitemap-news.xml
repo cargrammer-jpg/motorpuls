@@ -77,15 +77,4 @@
       <news:title>Tesla planerar en Model Y utan ratt och pedaler för familjer</news:title>
     </news:news>
   </url>
-  <url>
-    <loc>https://motorpuls.se/artikel/konsumentkreditlag-billan-20-november/</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Motorpuls</news:name>
-        <news:language>sv</news:language>
-      </news:publication>
-      <news:publication_date>2026-11-20T12:00:00+01:00</news:publication_date>
-      <news:title>Ny lag skärper kraven på billån från den 20 november</news:title>
-    </news:news>
-  </url>
 </urlset>
