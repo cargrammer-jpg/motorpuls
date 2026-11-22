@@ -169,6 +169,13 @@ html.mh-js{scroll-padding-top:3rem}
 .site-footer .fine{font-family:var(--mono);font-size:.72rem;color:var(--muted);margin-top:2.5rem;border-top:1px solid var(--line);padding-top:1rem}
 .site-footer .site-footer__contact a{color:var(--muted);text-underline-offset:.2em;text-decoration-color:var(--line-strong)}
 .site-footer .site-footer__contact a:hover{color:var(--text)}
+/* Sociala profiler (social_links i build.py): liten ikon, 44 px träffyta, orange fokusring (pulse-text, 2 px, 2 px avstånd). */
+.site-footer__social{margin-top:1.25rem}
+.site-footer__social ul{display:flex;flex-wrap:wrap;gap:.5rem}
+.site-footer__social a{display:inline-flex;align-items:center;justify-content:center;width:2.75rem;height:2.75rem;border:1px solid var(--line-strong);border-radius:999px;color:var(--text);text-decoration:none;background:transparent;transition:color .18s var(--ease),border-color .18s var(--ease),background-color .18s var(--ease)}
+.site-footer__social a:hover{color:#fff;border-color:var(--pulse);background:var(--raised)}
+.site-footer__social a:focus-visible{outline:2px solid var(--pulse-text);outline-offset:2px}
+.site-footer__social svg{width:1.05rem;height:1.05rem;flex:none}
 
 /* Article (v2): one calm reading column (40rem, about 65 characters per line at 17px), a wider image stage. */
 .article{padding-block:clamp(1.5rem,4vw,3.5rem) clamp(3rem,7vw,6rem)}

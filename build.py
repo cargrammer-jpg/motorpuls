@@ -836,7 +836,7 @@ def footer():
 <footer class="site-footer{" site-footer--nl" if NEWSLETTER_BOX else ""}">
   <div class="wrap">
     {main_open}<a class="wordmark" href="/"><img class="logo logo--footer" src="/img/logo.svg" alt="Motorpuls" width="872" height="88" loading="lazy"></a>
-    <p class="site-footer__desc">{SITE_DESC}</p>
+    <p class="site-footer__desc">{SITE_DESC}</p>{social_links()}
     <nav class="site-footer__nav" aria-label="Om Motorpuls"><ul><li><a href="/om/">Om Motorpuls</a></li><li><a href="/kontakt/">Kontakt</a></li><li><a href="/om/lukas/">Om Lukas</a></li><li><a href="/integritet/">Integritetspolicy</a></li></ul></nav>{topics_nav()}
     <div class="site-footer__rss">
       <a class="rss-link" href="/feed.xml">{RSS_SVG}RSS</a>{per_cat}
@@ -845,6 +845,15 @@ def footer():
   </div>
 </footer>
 '''
+
+def social_links():
+    """Ikonlänkar till SOCIAL. Samma adresser används i sameAs."""
+    if not SOCIAL: return ""
+    items = "".join(
+        f'<li><a href="{esc(s["url"])}" target="_blank" rel="noopener me" aria-label="Motorpuls på {esc(s["name"])} (öppnas i ny flik)">'
+        f'<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="{s["path"]}"/></svg></a></li>'
+        for s in SOCIAL)
+    return f'\n    <nav class="site-footer__social" aria-label="Sociala medier"><ul>{items}</ul></nav>'
 
 def page(h, body, track=True): return h + body + footer() + (ANALYTICS if track else "") + "</body>\n</html>\n"
 
@@ -975,7 +984,13 @@ def popular_section(arts, shown):
 
 ORG_ID = DOMAIN + "/#organization"
 
-SAME_AS = []  # sajtens officiella profiler (t.ex. X, Instagram) när de finns; tom lista ger inget sameAs
+# Officiella profiler. En lista för sidfotens ikoner och sameAs. Bara konton som svarar och hör till Motorpuls.
+# Ikon: Simple Icons (CC0), samma källa som delningsknapparna.
+SOCIAL = (
+    {"name": "TikTok", "url": "https://www.tiktok.com/@motorpuls.se",
+     "path": "M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"},
+)
+SAME_AS = [s["url"] for s in SOCIAL]  # tom SOCIAL ger inget sameAs
 
 def organization_ld():
     """Utgivaren: samma uppgifter på startsidan och i artiklarnas publisher. NewsMediaOrganization (en sorts
