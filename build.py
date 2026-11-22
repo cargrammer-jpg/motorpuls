@@ -69,6 +69,9 @@
 #          Valfritt för fria licenser (t.ex. Creative Commons): credit_url (länk på krediten, t.ex. filsidan
 #          på Wikimedia Commons), license_name och license_url (licensens namn som länk efter krediten,
 #          t.ex. "CC BY-SA 4.0"). Utan dem ser bildtexten ut som förut.
+#          En markdown-länk i krediten, [namn](https://...), blir en egen länk (fotografens sida).
+#          credit_url länkar då ordet "Wikimedia Commons" om det står kvar som text. Kort och JSON-LD
+#          visar krediten utan markdown.
 # image:   äldre fält (en URL). Laddas ned till img/articles/<slug>.webp om filen saknas, kredit i image_credit.
 #
 # Populärt: startsidans "Populärt just nu" tar artiklarna i data/popular.json i tur och ordning (skrivs av
@@ -898,7 +901,7 @@ def lead(a):
         pic = (f'<picture><source media="{LEAD_MOBILE_MQ}" srcset="{lead_mobile_srcset(img)}" sizes="{LEAD_MOBILE_SIZES}">'
                f'{pic}</picture>')
     media = (f'<figure class="lead__media"><div class="lead__frame">{pic}</div>'
-             f'<figcaption>{esc(img["credit"])}</figcaption></figure>') if img else ""
+             f'<figcaption>{esc(credit_label(img["credit"]))}</figcaption></figure>') if img else ""
     return f'''
     <article class="lead{" lead--img" if img else " lead--text"}">
       <a href="{a["url"]}">
@@ -916,7 +919,7 @@ def lead(a):
 def feed_item(a, h="h4"):
     # krediten visas vid varje bild, även miniatyrer (villkor för pressbilder och CC-licenser)
     thumb = (f'<figure class="item__img">{img_tag(a["img"], img_alt(a["img"], a["title"]), sizes="(min-width: 48rem) 15rem, 6.5rem")}'
-             f'<figcaption class="item__credit">{esc(a["img"]["credit"])}</figcaption></figure>') if a["img"] else ""
+             f'<figcaption class="item__credit">{esc(credit_label(a["img"]["credit"]))}</figcaption></figure>') if a["img"] else ""
     return f'''
           <li class="item{"" if a["img"] else " item--noimg"}" data-cat="{a["cat"]}">
             <a href="{a["url"]}">
@@ -951,7 +954,7 @@ def pick_popular(arts, shown):
 def popular_card(a, rank):
     img = a["img"]
     media = (f'<figure class="pop__media"><div class="pop__frame">{img_tag(img, img_alt(img, a["title"]), sizes=POP_SIZES)}</div>'
-             f'<figcaption class="item__credit">{esc(img["credit"])}</figcaption></figure>') if img else ""
+             f'<figcaption class="item__credit">{esc(credit_label(img["credit"]))}</figcaption></figure>') if img else ""
     return f'''
         <li class="pop__card{"" if img else " pop__card--noimg"}">
           <a href="{a["url"]}">
@@ -1056,9 +1059,40 @@ INLINE_SIZES = "(min-width: 42.5rem) 40rem, calc(100vw - 2.5rem)"
 def link(text, url, rel="noopener"):
     return f'<a href="{esc(url)}" rel="{rel}" target="_blank">{esc(text)}</a>' if url else esc(text)
 
+_MD_LINK = re.compile(r"\[([^\]\n]+)\]\((https?://[^)\s]+)\)")
+
+def credit_label(text):
+    """Kredit utan markdown-länkar. Kort och JSON-LD visar den som text (hela kortet är redan en länk)."""
+    return _MD_LINK.sub(r"\1", str(text or ""))
+
+def _credit_plain_html(piece, credit_url):
+    token = "Wikimedia Commons"
+    if piece and credit_url and token in piece:
+        i = piece.find(token)
+        return esc(piece[:i]) + link(token, credit_url) + esc(piece[i + len(token):])
+    return esc(piece)
+
+def credit_html(credit, credit_url=""):
+    """Krediten som HTML. Utan markdown-länk är hela raden en länk till credit_url, som förut.
+    [namn](https://...) blir en egen länk. credit_url länkar då ordet Wikimedia Commons om det
+    står kvar som text, så filsideslänken finns kvar bredvid fotografens länk."""
+    text = str(credit or "")
+    if not _MD_LINK.search(text):
+        return link(text, credit_url)
+    parts, pos, commons_linked = [], 0, False
+    for m in _MD_LINK.finditer(text):
+        chunk = text[pos:m.start()]
+        parts.append(_credit_plain_html(chunk, "" if commons_linked else credit_url))
+        if credit_url and "Wikimedia Commons" in chunk:
+            commons_linked = True
+        parts.append(link(m.group(1), m.group(2)))
+        pos = m.end()
+    parts.append(_credit_plain_html(text[pos:], "" if commons_linked else credit_url))
+    return "".join(parts)
+
 def caption(im):
     parts = [esc(x) for x in (im["caption"],) if x]
-    if im["credit"]: parts.append(link(im["credit"], im.get("credit_url")))
+    if im["credit"]: parts.append(credit_html(im["credit"], im.get("credit_url") or ""))
     if im.get("license_name") or im.get("license_url"): parts.append(link(im.get("license_name") or "Licens", im.get("license_url"), "noopener license"))
     return f'<figcaption><span>{" <span aria-hidden=\"true\">·</span> ".join(parts)}</span></figcaption>' if parts else ""
 
@@ -1545,6 +1579,7 @@ def license_url_of(im):
 
 def creator_from_credit(credit):
     """Person eller Organization ur kreditraden. Tom kredit eller bara 'Wikimedia Commons' ger inget."""
+    credit = credit_label(credit)
     if not str(credit or "").strip(): return None
     name = re.sub(r"^(?:Foto|Bild)\s*:\s*", "", str(credit).strip(), flags=re.I)
     wikimedia = re.search(r"\s*[/,]\s*Wikimedia Commons\b", name, re.I)
@@ -1566,7 +1601,7 @@ def image_rights(im):
     och de kreditfält som redan skrivs (creditText, copyrightNotice)."""
     if not im: return {}
     out = {}
-    credit_text = (im.get("credit") or "").removeprefix("Foto: ").strip()
+    credit_text = credit_label(im.get("credit") or "").removeprefix("Foto: ").strip()
     if credit_text: out["creditText"] = credit_text
     notice = (im.get("license") or "").strip()
     if notice: out["copyrightNotice"] = notice
@@ -1674,7 +1709,7 @@ def thumb(img):
 def related_card(b):
     img = b["img"]
     media = (f'<figure class="related__media"><div class="related__frame">{img_tag(thumb(img), img_alt(img, b["title"]), sizes=RELATED_SIZES)}</div>'
-             f'<figcaption class="item__credit">{esc(img["credit"])}</figcaption></figure>') if img else ""
+             f'<figcaption class="item__credit">{esc(credit_label(img["credit"]))}</figcaption></figure>') if img else ""
     return f'''
             <li class="related__card{"" if img else " related__card--noimg"}">
               <a href="{b["url"]}">
