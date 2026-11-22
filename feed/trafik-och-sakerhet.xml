@@ -6,8 +6,28 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Trafik och säkerhet på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Fri, 20 Nov 2026 04:40:00 +0100</lastBuildDate>
+  <lastBuildDate>Sat, 21 Nov 2026 12:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/trafik-och-sakerhet.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Sms om vem som äger en bil kostar 49 öre från 1 januari 2027</title>
+    <link>https://motorpuls.se/artikel/sms-vem-ager-fordonet-49-ore-2027/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/sms-vem-ager-fordonet-49-ore-2027/</guid>
+    <pubDate>Sat, 21 Nov 2026 12:00:00 +0100</pubDate>
+    <category>Trafik och säkerhet</category>
+    <description>Transportstyrelsens sms-tjänst Vem äger fordonet? byter nummer till 72 123 den 1 januari 2027 och börjar då kosta 0,49 kronor per sms. Fram till nyår är det gamla numret gratis.</description>
+    <enclosure url="https://motorpuls.se/img/og/sms-vem-ager-fordonet-49-ore-2027.jpg" length="97291" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/sms-vem-ager-fordonet-49-ore-2027.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="97291"/>
+  </item>
+  <item>
+    <title>Ny lag skärper kraven på billån från den 20 november</title>
+    <link>https://motorpuls.se/artikel/konsumentkreditlag-billan-20-november/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/konsumentkreditlag-billan-20-november/</guid>
+    <pubDate>Fri, 20 Nov 2026 12:00:00 +0100</pubDate>
+    <category>Trafik och säkerhet</category>
+    <description>En ny konsumentkreditlag gäller från den 20 november. Den skärper kreditprövningen när du lånar till en bil, och långivaren ska i vissa fall erbjuda alternativ om du kommer efter med betalningarna.</description>
+    <enclosure url="https://motorpuls.se/img/og/konsumentkreditlag-billan-20-november.jpg" length="117711" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/konsumentkreditlag-billan-20-november.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="117711"/>
+  </item>
   <item>
     <title>Nya Nissan Leaf missar fem stjärnor i Euro NCAP:s säkerhetstest</title>
     <link>https://motorpuls.se/artikel/euro-ncap-nissan-leaf-fyra-stjarnor-skoda-peaq/</link>
@@ -114,7 +134,7 @@
     <guid isPermaLink="true">https://motorpuls.se/artikel/e4-forbifart-stockholm-oppnar-6-december/</guid>
     <pubDate>Tue, 10 Nov 2026 15:00:00 +0100</pubDate>
     <category>Trafik och säkerhet</category>
-    <description>Sträckan Häggvik till Hjulsta kan korta resan i norra Stockholm. Hela vägen, bedömd till 51 till 53,5 miljarder kronor, öppnar 2030.</description>
+    <description>Förbifart Stockholm öppnar 6 december mellan Häggvik och Hjulsta, cirka 3,5 kilometer, varav 1,8 i tunnel. Hela vägen på 21 kilometer öppnar 2030.</description>
     <enclosure url="https://motorpuls.se/img/og/e4-forbifart-stockholm-oppnar-6-december.jpg" length="206079" type="image/jpeg"/>
     <media:content url="https://motorpuls.se/img/og/e4-forbifart-stockholm-oppnar-6-december.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="206079"/>
   </item>
@@ -179,12 +199,12 @@
     <media:content url="https://motorpuls.se/img/og/b-korkort-4-25-ton-b1-korkort-15-aringar.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="130689"/>
   </item>
   <item>
-    <title>Polisens radar mäter farten 18 gånger per sekund i Sverige</title>
+    <title>Polisens radarbilar mäter farten framför dig och i mötande körfält</title>
     <link>https://motorpuls.se/artikel/polisens-radarbilar-hela-sverige/</link>
     <guid isPermaLink="true">https://motorpuls.se/artikel/polisens-radarbilar-hela-sverige/</guid>
     <pubDate>Mon, 02 Nov 2026 07:00:00 +0100</pubDate>
     <category>Trafik och säkerhet</category>
-    <description>Utrustningen finns i alla sju polisregioner men kallas fortfarande ett pilotprojekt. Polisen måste stoppa bilen, och boten börjar på 1 500 kronor.</description>
+    <description>Polisens radarbilar mäter farten framför dig och i mötande körfält, även i farten. Polisen måste stoppa dig, och boten börjar på 1 500 kronor.</description>
     <enclosure url="https://motorpuls.se/img/og/polisens-radarbilar-hela-sverige.jpg" length="171587" type="image/jpeg"/>
     <media:content url="https://motorpuls.se/img/og/polisens-radarbilar-hela-sverige.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="171587"/>
   </item>
