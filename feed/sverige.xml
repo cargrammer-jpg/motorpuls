@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Sverige på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Sat, 21 Nov 2026 12:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Sat, 21 Nov 2026 15:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/sverige.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Italien blir tolfte EU-landet som tillåter Teslas förarstöd</title>
+    <link>https://motorpuls.se/artikel/tesla-assisted-driving-italien-tolfte-eu-landet/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/tesla-assisted-driving-italien-tolfte-eu-landet/</guid>
+    <pubDate>Sat, 21 Nov 2026 15:00:00 +0100</pubDate>
+    <category>Tesla</category>
+    <description>Italiens transportministerium har godkänt Teslas förarstöd Tesla Assisted Driving. Italien blir det tolfte EU-landet och det första av de fyra folkrikaste. I Sverige får vanliga ägare fortfarande inte använda systemet.</description>
+    <enclosure url="https://motorpuls.se/img/og/tesla-assisted-driving-italien-tolfte-eu-landet.jpg" length="121717" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/tesla-assisted-driving-italien-tolfte-eu-landet.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="121717"/>
+  </item>
   <item>
     <title>Sms om vem som äger en bil kostar 49 öre från 1 januari 2027</title>
     <link>https://motorpuls.se/artikel/sms-vem-ager-fordonet-49-ore-2027/</link>
