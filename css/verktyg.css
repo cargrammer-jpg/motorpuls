@@ -1,0 +1,57 @@
+/* Verktyg. Inbäddas bara på /verktyg/ (tools/verktyg_pages.py), inte i css/site.css. */
+.tool{padding-block:clamp(1.5rem,4vw,3.25rem) clamp(3rem,7vw,6rem)}
+.tool__head{display:grid;gap:.85rem;max-width:40rem;margin-bottom:1.5rem}
+.tool__title{font-size:clamp(1.85rem,1rem + 3.2vw,3rem);line-height:1.02;font-weight:820;font-stretch:115%;letter-spacing:-.035em;color:#fff}
+.tool__dek{font-family:var(--serif);font-size:clamp(1.05rem,.95rem + .4vw,1.2rem);line-height:1.5;color:var(--text-2);text-wrap:pretty}
+.tool__banner{display:flex;flex-wrap:wrap;align-items:baseline;gap:.45rem .7rem;margin:0;padding:.75rem .9rem;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--pulse);border-radius:var(--radius);color:var(--text);font-size:.95rem;line-height:1.45}
+.tool__stage{max-width:68rem;margin-inline:auto}
+.tool__grid{display:grid;gap:1.25rem}
+.tool__panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1.1rem 1.1rem 1.25rem}
+.tool__result{border-top:3px solid var(--pulse)}
+.tool h2{font-size:clamp(1.15rem,1rem + .4vw,1.35rem);line-height:1.25;font-weight:760;font-stretch:108%;letter-spacing:-.02em;color:#fff}
+.tool__status,.tool__kwh{margin-top:.65rem;color:var(--text-2);font-size:.95rem;line-height:1.45}
+.tool__kwh{font-family:var(--mono);font-size:.82rem;color:var(--text-2)}
+.tool__figs{display:grid;gap:.75rem;margin-top:1rem}
+.tool__hero,.tool__pair li{display:grid;gap:.15rem}
+.tool__hero strong{font-size:clamp(2rem,1.2rem + 3vw,2.75rem);font-weight:800;font-stretch:112%;letter-spacing:-.03em;line-height:1.05;font-variant-numeric:tabular-nums}
+.tool__pair{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.tool__pair strong{font-size:clamp(1.25rem,1rem + 1vw,1.6rem);font-weight:760;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.tool__figlabel{font-family:var(--mono);font-size:.75rem;letter-spacing:.04em;text-transform:uppercase;color:var(--text-2)}
+.tool__split{display:grid;gap:.75rem;margin-top:1.1rem}
+.tool__split h3{font-size:1rem;font-weight:700;color:#fff}
+.tool__split p,.tool__note{margin-top:.2rem;color:var(--text-2);line-height:1.45}
+.tool__card{padding-top:.85rem;border-top:1px solid var(--line)}
+.tool__err{margin-top:.8rem;padding:.75rem .9rem;border:1px solid var(--pulse-text);border-radius:var(--radius);background:#2a1210;color:#fff;line-height:1.45}
+.tool__form h2{margin-bottom:.35rem}
+.tool__fields,.tool__set{display:grid;gap:1rem}
+.tool__set{margin:1.15rem 0 0;padding:1rem 0 0;border:0;border-top:1px solid var(--line)}
+.tool__set legend{padding:0;font-size:1.05rem;font-weight:760;color:#fff}
+.tool__field{display:grid;gap:.35rem;min-width:0}
+.tool label{font-weight:650;line-height:1.35}
+.tool__hint{margin:0;color:var(--text-2);font-size:.875rem;font-weight:450;line-height:1.45}
+.tool input,.tool select{width:100%;min-height:2.75rem;padding:.5rem .75rem;font:inherit;font-size:1rem;color:var(--text);background:var(--bg);border:1px solid #6B7682;border-radius:var(--radius)}
+.tool select{cursor:pointer}
+.tool__rest{margin:0;font-family:var(--mono);font-size:.82rem;color:var(--text-2)}
+.tool__actions{margin-top:1rem}
+.tool__reset{font:inherit;font-weight:700;min-height:2.75rem;padding:.55rem 1rem;color:var(--text);background:transparent;border:1px solid #6B7682;border-radius:var(--radius);cursor:pointer}
+.tool__reset:hover{border-color:var(--text)}
+.tool input[aria-invalid="true"],.tool select[aria-invalid="true"]{border-color:var(--pulse-text);border-width:2px}
+.tool__read{max-width:40rem;margin:clamp(2rem,5vw,3.5rem) auto 0}
+.tool__read .prose h2{font-family:var(--sans)}
+.tool-index{list-style:none;margin:1.5rem 0 0;padding:0;display:grid;gap:1rem;max-width:40rem}
+.tool-card{display:grid;gap:.45rem;padding:1.15rem 1.2rem;text-decoration:none;color:inherit;background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--pulse);border-radius:var(--radius);min-height:2.75rem}
+.tool-card h2{font-size:clamp(1.2rem,1rem + .6vw,1.45rem);font-weight:760;font-stretch:108%;letter-spacing:-.02em;line-height:1.25;color:#fff}
+.tool-card p{font-family:var(--serif);color:var(--text-2);line-height:1.45}
+.tool-card:hover{border-color:var(--line-strong)}
+@media (min-width:40rem){
+  .tool__fields{grid-template-columns:1fr 1fr}
+  .tool__span{grid-column:1 / -1}
+}
+@media (min-width:56rem){
+  .tool__grid{grid-template-columns:minmax(0,1.15fr) minmax(17rem,.85fr);align-items:start}
+  .tool__form{order:-1}
+  .tool__result{position:sticky;top:4.75rem}
+}
+@media (max-width:22rem){
+  .tool__pair{grid-template-columns:1fr}
+}
