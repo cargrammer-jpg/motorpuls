@@ -4,6 +4,7 @@ title: "Vinterdäck: vad gäller?"
 date: 2026-11-11T17:30:00+01:00
 updated: 2026-11-18T09:05:57+01:00
 type: guide
+guide_tema: Lagar och regler
 slug: vinterdack-vad-galler
 tags: [vinterdäck, dubbdäck, Transportstyrelsen, Trafikverket, Polisen, trafikregler, Stockholm, Göteborg, Uppsala]
 sources:

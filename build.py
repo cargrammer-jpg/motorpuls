@@ -14,7 +14,9 @@
 #                                 1200 px bred, aldrig uppskalad (checka in dem tillsammans med artikeln, som img/og/)
 #   feed/<kategori>.xml           RSS per kategori (och feed/sverige.xml när någon artikel har sweden: true,
 #                                 feed/guider.xml när någon guide är publicerad)
-#   guider/index.html             kategorisidan Guider (bara när minst en guide är publicerad, då även länken i sidhuvudet)
+#   guider/index.html             kunskapsbanken Guider (bara när minst en guide är publicerad, då även länken i sidhuvudet)
+#   marke/<slug>/, modell/<slug>/ hubbsidor för märken och modeller ur content/modeller.yml. Bara taggar med minst
+#                                 tre publicerade artiklar. Ingår i sitemap.xml, inte i sitemap-news.xml.
 #   sw.js, push.js                bara när PUSH_BOX är på (förhandsvisning av push-rutan, se nedan)
 #   nyhetsbrev.js                 bara när NEWSLETTER_BOX är på (förhandsvisning av nyhetsbrevsrutan i sidfoten, se nedan)
 #   integritet/index.html         integritetspolicy, alltid. Länk i sidfoten och post i sitemap.xml
@@ -45,6 +47,8 @@
 #          inte än: artikeln publiceras med date som dateModified tills den tidpunkten har infallit.
 # type:    valfritt, "guide" gör artikeln till en guide (som category: Guider). Guider samlas på /guider/ och i
 #          feed/guider.xml, får Article i stället för NewsArticle i JSON-LD och hamnar inte i sitemap-news.xml.
+# guide_tema: valfritt på guider. Grupperar /guider/ (till exempel "Elbil och laddning"). Saknas fältet gissar
+#          bygget ett tema från taggar och kategori. På en nyhet ger fältet avbrott.
 # faq:     valfritt, lista med {question, answer} (vanlig text). Ger sektionen "Vanliga frågor" efter brödtexten
 #          och före Källor, plus FAQPage i ett eget JSON-LD-script. Fråga och svar är samma text på sidan och i
 #          schemat. Saknas fältet blir det varken sektion eller FAQPage. Article och NewsArticle lämnas som de är.
@@ -131,6 +135,9 @@ GUIDE_INTRO = ("Guider från Motorpuls förklarar regler, kostnader och uträkni
                "Varje guide svarar rakt på frågan, med datum och siffror från källorna. "
                "De är skrivna för att kunna läsas igenom på några minuter.")
 GUIDES = []  # publicerade guider, nyast först, sätts i main()
+# Ordning på /guider/. Teman utan guider ritas inte. Ett okänt guide_tema hamnar efter de här, i bokstavsordning.
+GUIDE_THEME_ORDER = ("Elbil och laddning", "Skatt och kostnader", "Lagar och regler", "Köpa och äga")
+HUBS = []  # hubbsidor som faktiskt byggs (minst tre artiklar), sätts i main()
 def is_guide(a): return str(a.get("type") or "").strip().lower() == "guide" or a["cat"] == GUIDE_KEY
 
 # ---------- feature-flaggor ----------
@@ -237,6 +244,14 @@ def load_articles():
         if "sweden" in fm and not isinstance(fm["sweden"], bool): raise SystemExit(f"{path}: sweden ska vara true eller false")
         if fm.get("type") is not None and str(fm["type"]).strip().lower() not in ("guide", "nyhet"):
             raise SystemExit(f"{path}: type ska vara guide (eller utelämnas)")
+        guide_flag = str(fm.get("type") or "").strip().lower() == "guide" or slugify(str(fm.get("category") or "")) == GUIDE_KEY
+        gt = fm.get("guide_tema")
+        if gt is not None:
+            if not isinstance(gt, str) or not gt.strip():
+                raise SystemExit(f"{path}: guide_tema ska vara en text")
+            if not guide_flag:
+                raise SystemExit(f"{path}: guide_tema används bara på guider")
+            fm["guide_tema"] = gt.strip()
         d, t = parse_when(fm["date"], path, "date")
         if not t: print(f"varning: {os.path.basename(path)}: date saknar klockslag, skriv publiceringstiden (t.ex. {d}T07:30:00+01:00)")
         n = now()
@@ -857,9 +872,12 @@ def topics_nav():
     return ('\n    <nav class="site-footer__nav site-footer__topics" aria-label="Ämnen"><ul>'
             + "".join(f'<li><a href="{u}">{esc(n)}</a></li>' for u, n in items) + "</ul></nav>")
 
-def meta_line(a, with_date=True):
+def meta_line(a, with_date=True, show_updated=False):
     t = f'<time datetime="{a["published"]}">{sv_date(a["date"])}</time>' if with_date else ""
-    return f'<span class="meta"><span class="tag">{esc(a["category"])}</span>{t}</span>'
+    u = ""
+    if show_updated and a.get("mod_when") and a["mod_when"] > a["when"]:
+        u = f'<span>Uppdaterad <time datetime="{a["modified"]}">{sv_date(a["mod_date"])}</time></span>'
+    return f'<span class="meta"><span class="tag">{esc(a["category"])}</span>{t}{u}</span>'
 
 def img_alt(img, title):
     """Alt-text från bildens front matter. Saknas den används artikelns rubrik."""
@@ -913,15 +931,15 @@ def lead(a):
       </a>
     </article>'''
 
-def feed_item(a, h="h4"):
+def feed_item(a, h="h4", with_date=False, show_updated=False, eager=False):
     # krediten visas vid varje bild, även miniatyrer (villkor för pressbilder och CC-licenser)
-    thumb = (f'<figure class="item__img">{img_tag(a["img"], img_alt(a["img"], a["title"]), sizes="(min-width: 48rem) 15rem, 6.5rem")}'
+    thumb = (f'<figure class="item__img">{img_tag(a["img"], img_alt(a["img"], a["title"]), eager=eager, sizes="(min-width: 48rem) 15rem, 6.5rem")}'
              f'<figcaption class="item__credit">{esc(a["img"]["credit"])}</figcaption></figure>') if a["img"] else ""
     return f'''
           <li class="item{"" if a["img"] else " item--noimg"}" data-cat="{a["cat"]}">
             <a href="{a["url"]}">
               <div class="item__text">
-                {meta_line(a, with_date=False)}
+                {meta_line(a, with_date=with_date, show_updated=show_updated)}
                 <{h}>{esc(a["title"])}</{h}>
                 <p>{esc(a["excerpt"])}</p>
               </div>
@@ -1191,7 +1209,7 @@ TOPIC_INTRO = {
     "tesla": "Nyheter om Tesla: Model Y, förarstöd, Cybercab och besiktning, med källa på varje påstående.",
 }
 TOPIC_RESERVED = {"artikel", "om", "kontakt", "feed", "img", "css", "js", "fonts", "favicon", "brand", "content", "docs", "data", "drafts",
-                  "tools", "supabase", "push", "nyhetsbrev", "integritet", "prenumeration", GUIDE_KEY, "sverige"}
+                  "tools", "supabase", "push", "nyhetsbrev", "integritet", "prenumeration", GUIDE_KEY, "sverige", "marke", "modell"}
 TOPICS = {}  # kategori-nyckel -> dict(key, name, path, desc, arts), sätts i main()
 # /sverige/: samlingssida för artiklar med sweden: true (samma mall som ämnessidorna, flödet feed/sverige.xml). Ingen
 # kategori, så nyckeln står kvar i TOPIC_RESERVED. Byggs bara när minst en sådan artikel finns.
@@ -1622,6 +1640,7 @@ def article(a, arts=()):
     author = f'<a href="{au["url"]}" rel="author">{esc(au["name"])}</a>' if au else esc(a["author"])
     prose_html, top_imgs = inline_images(a, imgs, nbnum_html(a["body_html"]))
     prose = insert_after_paragraph(prose_html, ad_slot(ADSENSE_SLOT_INCONTENT))
+    gmatch = matching_guide(a)
     body = f'''
 <main id="innehall" class="article">
   <div class="wrap">
@@ -1636,12 +1655,12 @@ def article(a, arts=()):
         <div class="prose">
 {prose}
         </div>
-{faq_section(faq)}{sources}{share_bar(a, "end")}{preferred_source()}
+{guide_box(gmatch)}{faq_section(faq)}{sources}{share_bar(a, "end")}{preferred_source()}
         <aside class="ai-note" aria-label="Om texten">
           <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M8 7v4.5M8 4.6v.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
           <p>Texten är skriven med hjälp av AI och faktagranskad mot källorna ovan. <a href="/om/">Så arbetar Motorpuls</a></p>
         </aside>
-{author_box(a["author"])}{push_box("article")}{rss_row(a)}{ad_slot(ADSENSE_SLOT_END)}{related_section(a, arts)}
+{author_box(a["author"])}{push_box("article")}{tag_chips(a)}{rss_row(a)}{ad_slot(ADSENSE_SLOT_END)}{related_section(a, arts, skip=gmatch["slug"] if gmatch else None)}
         <p class="more"><a class="btn" href="/">Fler nyheter på startsidan</a></p>
       </div>
     </article>
@@ -1686,8 +1705,9 @@ def related_card(b):
               </a>
             </li>'''
 
-def related_section(a, arts):
-    rel = related(a, arts)
+def related_section(a, arts, skip=None):
+    extra = 1 if skip else 0
+    rel = [b for b in related(a, arts, n=RELATED_N + extra) if b["slug"] != skip][:RELATED_N]
     if not rel: return ""
     return f'''
         <section class="related" aria-labelledby="related-h">
@@ -1696,10 +1716,247 @@ def related_section(a, arts):
           </ul>
         </section>'''
 
+# ---------- märken och modeller ----------
+# content/modeller.yml talar om vilka taggar som är märken respektive modeller. En sida byggs bara när taggen
+# (eller ett alias, eller modellerna under ett märke) finns på minst min_articles publicerade artiklar.
+# Tomma intro, specs och price lämnas tomma: sidan visar då bara en neutral mening, inga specifikationer eller priser.
+def _filled(v): return str(v or "").strip()
+
+def load_model_index(path=None):
+    path = path or os.path.join(ROOT, "content/modeller.yml")
+    if not os.path.exists(path): raise SystemExit("saknar content/modeller.yml")
+    data = yaml.safe_load(open(path, encoding="utf-8").read()) or {}
+    if not isinstance(data, dict): raise SystemExit("content/modeller.yml: filen ska vara en katalog")
+    min_n = data.get("min_articles", 3)
+    if not isinstance(min_n, int) or min_n < 1: raise SystemExit("content/modeller.yml: min_articles ska vara ett positivt heltal")
+    brands = _hub_entities(data.get("brands") or [], "brand")
+    models = _hub_entities(data.get("models") or [], "model")
+    seen_slug, seen_key = {}, {}
+    for e in brands + models:
+        if e["slug"] in seen_slug: raise SystemExit(f"content/modeller.yml: slug {e['slug']} används två gånger")
+        seen_slug[e["slug"]] = e
+        for k in e["keys"]:
+            if k in seen_key: raise SystemExit(f"content/modeller.yml: taggen {k!r} pekar på både {seen_key[k]['name']} och {e['name']}")
+            seen_key[k] = e
+    known = {b["slug"] for b in brands}
+    for m in models:
+        if m["brand"] not in known: raise SystemExit(f"content/modeller.yml: modellen {m['name']} har okänt märke {m['brand']!r}")
+    return dict(min_articles=min_n, brands=brands, models=models)
+
+def _hub_entities(items, kind):
+    label = "brands" if kind == "brand" else "models"
+    if not isinstance(items, list): raise SystemExit(f"content/modeller.yml: {label} ska vara en lista")
+    out = []
+    for i, item in enumerate(items, 1):
+        if not isinstance(item, dict): raise SystemExit(f"content/modeller.yml: {label}[{i}] ska vara en post")
+        tag, name, slug = _filled(item.get("tag")), _filled(item.get("name")), _filled(item.get("slug"))
+        if not tag or not name or not re.fullmatch(r"[a-z0-9-]+", slug):
+            raise SystemExit(f"content/modeller.yml: {label}[{i}] behöver tag, name och slug (små bokstäver, siffror, bindestreck)")
+        aliases = item.get("aliases") or []
+        if not isinstance(aliases, list) or not all(isinstance(x, str) and x.strip() for x in aliases):
+            raise SystemExit(f"content/modeller.yml: {name}: aliases ska vara en lista med taggar")
+        brand = _filled(item.get("brand"))
+        if kind == "model" and not re.fullmatch(r"[a-z0-9-]+", brand):
+            raise SystemExit(f"content/modeller.yml: modellen {name} saknar brand")
+        keys = {tag.casefold()} | {a.strip().casefold() for a in aliases}
+        out.append(dict(kind=kind, tag=tag, name=name, slug=slug, brand=brand, keys=keys,
+                        aliases=[a.strip() for a in aliases], intro=_filled(item.get("intro")),
+                        specs=_filled(item.get("specs")), price=_filled(item.get("price"))))
+    return out
+
+def article_tag_keys(a):
+    return {str(t).strip().casefold() for t in (a.get("tags") or []) if str(t).strip()}
+
+def _matches_entity(a, e):
+    if article_tag_keys(a) & e["keys"]: return True
+    # Kategorin Tesla hör till märket Tesla. Bara när sluggen är densamma, så Elbil inte blir ett märke.
+    return e["kind"] == "brand" and a.get("cat") == e["slug"]
+
+def _newest(found):
+    return sorted(found, key=lambda a: (a["when"], a.get("file") or a["slug"]), reverse=True)
+
+def build_hubs(arts, index=None):
+    """Hubbsidor med minst min_articles publicerade artiklar, nyast först. arts ska redan ha filtrerats på datum."""
+    index = index if index is not None else load_model_index()
+    hubs, by_slug = [], {}
+    for b in index["brands"]:
+        owned = [m for m in index["models"] if m["brand"] == b["slug"]]
+        found = [a for a in arts if _matches_entity(a, b) or any(article_tag_keys(a) & m["keys"] for m in owned)]
+        if len(found) < index["min_articles"]: continue
+        hub = dict(b, path=f"/marke/{b['slug']}/", arts=_newest(found), brand_hub=None)
+        hubs.append(hub); by_slug[b["slug"]] = hub
+    for m in index["models"]:
+        found = [a for a in arts if article_tag_keys(a) & m["keys"]]
+        if len(found) < index["min_articles"]: continue
+        hubs.append(dict(m, path=f"/modell/{m['slug']}/", arts=_newest(found), brand_hub=by_slug.get(m["brand"])))
+    return hubs
+
+def hub_intro(h):
+    return h["intro"] or f"Alla {SITE} artiklar om {h['name']}."
+
+def hub_facts(h):
+    rows = [(k, h[k]) for k in ("specs", "price") if h.get(k)]
+    if not rows: return ""
+    labels = {"specs": "Specifikationer", "price": "Pris"}
+    body = "".join(f"<div><dt>{labels[k]}</dt><dd>{nbnum(esc(v))}</dd></div>" for k, v in rows)
+    return f'\n      <dl class="hub-facts">{body}</dl>'
+
+def hub_page(h):
+    intro = hub_intro(h)
+    if h["kind"] == "model" and h.get("brand_hub"):
+        trail = [("Start", "/"), (h["brand_hub"]["name"], h["brand_hub"]["path"]), (h["name"], h["path"])]
+    else:
+        trail = [("Start", "/"), (h["name"], h["path"])]
+    crumbs_html, crumbs_ld = breadcrumbs(trail)
+    bid = DOMAIN + h["path"] + "#breadcrumb"
+    crumb_ld = {k: v for k, v in crumbs_ld.items() if k != "@context"}
+    crumb_ld["@id"] = bid
+    ld = {"@context": "https://schema.org", "@graph": [
+        {"@type": "CollectionPage", "@id": DOMAIN + h["path"], "name": f"{h['name']} · {SITE}", "description": intro,
+         "url": DOMAIN + h["path"], "inLanguage": "sv-SE", "isPartOf": {"@id": DOMAIN + "/#website"},
+         "breadcrumb": {"@id": bid},
+         "mainEntity": {"@type": "ItemList", "numberOfItems": len(h["arts"]),
+                        "itemListElement": [{"@type": "ListItem", "position": i, "url": DOMAIN + a["url"], "name": a["title"]}
+                                            for i, a in enumerate(h["arts"], 1)]}},
+        crumb_ld]}
+    plain = f"{h['name']}: alla artiklar"
+    head_html = head(page_title(plain), intro, h["path"], image=DEFAULT_OG, og_title=plain, extra=ld_script(ld))
+    items = "".join(feed_item(a, "h2", with_date=True, eager=(i == 0)) for i, a in enumerate(h["arts"]))
+    body = f'''
+<main id="innehall" class="catpage catpage--hub">
+  <div class="wrap">
+    <header class="catpage__head">
+      {crumbs_html}
+      <h1 class="catpage__title">{esc(h["name"])}</h1>
+      <p class="catpage__dek">{esc(intro)}</p>{hub_facts(h)}
+    </header>
+    <section class="feed-section catpage__list" aria-label="Alla artiklar om {esc(h["name"])}">
+      <ol class="feed">{items}
+      </ol>
+    </section>
+  </div>
+</main>
+'''
+    return page(head_html, body)
+
+def article_hub_links(a):
+    """Hubbsidor som artikelns taggar pekar på. Märket följer med när en modell-tagg har en märkessida."""
+    tags = article_tag_keys(a)
+    hits, seen = [], set()
+    for h in HUBS:
+        if not (tags & h["keys"]): continue
+        if h["path"] not in seen:
+            hits.append(h); seen.add(h["path"])
+        parent = h.get("brand_hub")
+        if parent and parent["path"] not in seen:
+            hits.append(parent); seen.add(parent["path"])
+    hits.sort(key=lambda h: (0 if h["kind"] == "brand" else 1, h["name"].casefold()))
+    return hits
+
+def tag_chips(a):
+    links = article_hub_links(a)
+    if not links: return ""
+    items = "".join(f'<li><a class="chip" href="{h["path"]}">{esc(h["name"])}</a></li>' for h in links)
+    return f'''
+        <nav class="article-tags" aria-label="Märken och modeller"><ul class="article-tags__list">{items}</ul></nav>'''
+
+def matching_guide(a):
+    """Mest relevanta publicerade guiden för en nyhet: gemensamma taggar, sedan samma kategori. Högst en."""
+    if is_guide(a) or not GUIDES: return None
+    tags = article_tag_keys(a)
+    best = best_key = None
+    for g in GUIDES:
+        if g["slug"] == a["slug"]: continue
+        shared = len(tags & article_tag_keys(g))
+        same = g["cat"] == a["cat"]
+        if shared == 0 and not same: continue
+        key = (shared, 1 if same else 0, g["when"])
+        if best_key is None or key > best_key:
+            best, best_key = g, key
+    return best
+
+def guide_box(g):
+    if not g: return ""
+    return f'''
+        <aside class="guide-box">
+          <h2 class="guide-box__kicker" id="guide-box-h">Guide</h2>
+          <p class="guide-box__title"><a href="{g["url"]}">{nbnum(esc(g["title"]))}</a></p>
+          <p class="guide-box__dek">{nbnum(esc(g["excerpt"]))}</p>
+        </aside>'''
+
+def guide_theme(a):
+    tema = _filled(a.get("guide_tema"))
+    if tema: return tema
+    tags = article_tag_keys(a)
+    rules = (
+        ("Skatt och kostnader", {"skatt", "förmånsvärde", "förmånsbil", "tjänstebil", "prisbasbelopp", "billån"}),
+        ("Elbil och laddning", {"laddning", "laddkostnad", "hemmaladdning", "supercharger", "elpris"}),
+        ("Lagar och regler", {"vinterdäck", "dubbdäck", "trafikregler", "körkort", "konsumentkreditlagen"}),
+        ("Köpa och äga", {"privatleasing", "begagnat"}),
+    )
+    for name, keys in rules:
+        if tags & keys: return name
+    if a.get("cat") == "elbil": return "Elbil och laddning"
+    if a.get("cat") == "trafik-och-sakerhet": return "Lagar och regler"
+    if a.get("cat") == "bransle": return "Skatt och kostnader"
+    return "Övrigt"
+
+def group_guides(guides):
+    groups = {}
+    for g in guides: groups.setdefault(guide_theme(g), []).append(g)
+    for items in groups.values():
+        items.sort(key=lambda a: (a["when"], a.get("file") or a["slug"]), reverse=True)
+    order = [t for t in GUIDE_THEME_ORDER if t in groups]
+    order += sorted((t for t in groups if t not in GUIDE_THEME_ORDER), key=str.casefold)
+    return [(t, groups[t]) for t in order]
+
 # ---------- kategorisidan Guider ----------
 def guides_page(guides):
-    f = next(x for x in FEEDS if x["key"] == GUIDE_KEY)
-    return topic_page(dict(key=GUIDE_KEY, name=GUIDE_NAME, path=GUIDE_PATH, desc=GUIDE_DESC, intro=GUIDE_INTRO, arts=guides), feed=f, list_label="Alla guider")
+    """Kunskapsbank: ingress, guider grupperade på tema, Uppdaterad när fältet är satt, ItemList."""
+    f = next((x for x in FEEDS if x["key"] == GUIDE_KEY), None)
+    groups = group_guides(guides)
+    flat = [a for _, gs in groups for a in gs]
+    crumbs_html, crumbs_ld = breadcrumbs([("Start", "/"), (GUIDE_NAME, GUIDE_PATH)])
+    bid = DOMAIN + GUIDE_PATH + "#breadcrumb"
+    crumb_ld = {k: v for k, v in crumbs_ld.items() if k != "@context"}
+    crumb_ld["@id"] = bid
+    ld = {"@context": "https://schema.org", "@graph": [
+        {"@type": "CollectionPage", "@id": DOMAIN + GUIDE_PATH, "name": f"{GUIDE_NAME} · {SITE}", "description": GUIDE_DESC,
+         "url": DOMAIN + GUIDE_PATH, "inLanguage": "sv-SE", "isPartOf": {"@id": DOMAIN + "/#website"},
+         "breadcrumb": {"@id": bid},
+         "mainEntity": {"@type": "ItemList", "numberOfItems": len(flat),
+                        "itemListElement": [{"@type": "ListItem", "position": i, "url": DOMAIN + a["url"], "name": a["title"]}
+                                            for i, a in enumerate(flat, 1)]}},
+        crumb_ld]}
+    rss = (f'\n      <p class="rss-row">{RSS_SVG}<span>Prenumerera via RSS:</span> <a href="{f["path"]}">{esc(GUIDE_NAME)}</a>'
+           f'<span aria-hidden="true">·</span><a href="/feed.xml">Alla nyheter</a></p>') if f else ""
+    sections = []
+    for theme, gs in groups:
+        hid = "tema-" + slugify(theme)
+        items = "".join(feed_item(a, "h3", with_date=True, show_updated=True, eager=(theme == groups[0][0] and i == 0))
+                        for i, a in enumerate(gs))
+        sections.append(f'''
+      <section class="guide-theme" aria-labelledby="{hid}">
+        <h2 id="{hid}">{esc(theme)}</h2>
+        <ol class="feed">{items}
+        </ol>
+      </section>''')
+    head_html = head(page_title(GUIDE_NAME), GUIDE_DESC, GUIDE_PATH, image=DEFAULT_OG, feeds=[f] if f else (), extra=ld_script(ld))
+    body = f'''
+<main id="innehall" class="catpage catpage--hub">
+  <div class="wrap">
+    <header class="catpage__head">
+      {crumbs_html}
+      <h1 class="catpage__title">{esc(GUIDE_NAME)}</h1>
+      <p class="catpage__dek">{esc(GUIDE_INTRO)}</p>{rss}
+    </header>
+    <div class="guide-themes catpage__list">
+      {"".join(sections)}
+    </div>
+  </div>
+</main>
+'''
+    return page(head_html, body)
 
 def legacy_artikel_redirect():
     """/artikel.html är en gammal malladress som Google har crawlat och som svarade 404. En minimal sida pekar om
@@ -1832,6 +2089,7 @@ def main():
         a["img"] = a["images_out"][0] if a["images_out"] else None
     FEEDS = category_feeds(arts)
     GUIDES[:] = [a for a in arts if is_guide(a)]
+    HUBS[:] = build_hubs(arts)
     TOPICS.clear(); TOPICS.update(build_topics(arts))
     sv = [a for a in arts if a.get("sweden")]
     SWEDEN.clear()
@@ -1845,6 +2103,8 @@ def main():
     for k in set(TOPIC_DESC) | set(TOPICS):  # ämnen utan artiklar: ingen sida
         if k not in TOPIC_RESERVED and re.fullmatch(r"[a-z0-9-]+", k): shutil.rmtree(os.path.join(ROOT, k), ignore_errors=True)
     for t in TOPICS.values(): write(t["path"].lstrip("/") + "index.html", topic_page(t))
+    for d in ("marke", "modell"): shutil.rmtree(os.path.join(ROOT, d), ignore_errors=True)
+    for h in HUBS: write(h["path"].lstrip("/") + "index.html", hub_page(h))
     shutil.rmtree(os.path.join(ROOT, "sverige"), ignore_errors=True)
     if SWEDEN: write("sverige/index.html", topic_page(SWEDEN, list_label="Alla artiklar som gäller Sverige"))
     shutil.rmtree(os.path.join(ROOT, "om"), ignore_errors=True)
@@ -1857,6 +2117,7 @@ def main():
           + "".join(f"  <url><loc>{DOMAIN}{t['path']}</loc><lastmod>{lastmod(t['path'], t['arts'])}</lastmod></url>\n" for t in TOPICS.values())
           + (f"  <url><loc>{DOMAIN}{SWEDEN['path']}</loc><lastmod>{lastmod(SWEDEN['path'], SWEDEN['arts'])}</lastmod></url>\n" if SWEDEN else "")
           + (f"  <url><loc>{DOMAIN}{GUIDE_PATH}</loc><lastmod>{lastmod(GUIDE_PATH, GUIDES)}</lastmod></url>\n" if GUIDES else "")
+          + "".join(f"  <url><loc>{DOMAIN}{h['path']}</loc><lastmod>{lastmod(h['path'], h['arts'])}</lastmod></url>\n" for h in HUBS)
           + "".join(f"  <url><loc>{DOMAIN}{p['path']}</loc></url>\n" for p in pages)
           + f"  <url><loc>{DOMAIN}/integritet/</loc></url>\n" + "</urlset>\n")
     write("sitemap-news.xml", news_sitemap(arts))
@@ -1881,6 +2142,7 @@ def main():
         write("sw.js", push_src("sw.js"))  # i roten så att service workern gäller hela sajten (scope /)
         write("push.js", push_src("push.js"))
     print(f"built {len(arts)} artiklar: " + ", ".join(a["slug"] for a in arts))
+    print("hubbar: " + (", ".join(h["path"] for h in HUBS) if HUBS else "inga"))
 
 def out_dir(o):
     out = os.path.abspath(o)
