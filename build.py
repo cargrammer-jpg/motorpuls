@@ -17,6 +17,7 @@
 #   guider/index.html             kunskapsbanken Guider (bara när minst en guide är publicerad, då även länken i sidhuvudet)
 #   listor/<slug>/index.html      evergreensidor ur listor/*.yaml (datan kopieras oförändrad). Index på /listor/,
 #                                 länk i sidfoten och på /guider/. Ingår i sitemap.xml med lastmod, inte i sitemap-news.xml.
+#   verktyg/                      /verktyg/ och /verktyg/laddkostnad/ (tools/verktyg_pages.py). Länk i sidfoten och på /guider/.
 #   marke/<slug>/, modell/<slug>/ hubbsidor för märken och modeller ur content/modeller.yml. Bara taggar med minst
 #                                 tre publicerade artiklar. Ingår i sitemap.xml, inte i sitemap-news.xml.
 #   sw.js, push.js                bara när PUSH_BOX är på (förhandsvisning av push-rutan, se nedan)
@@ -87,7 +88,7 @@
 # även genererade bilder som inte är incheckade (WebP-varianter, img/og/<slug>.jpg), eftersom de följer med till _site.
 # Till sist kontrolleras att varje lokal länk i sidorna, css:en och manifestet finns i _site (annars avbryts bygget).
 # Utan --out fungerar allt som förut (resultatet skrivs i projektroten och checkas in).
-import datetime as dt, glob, hashlib, html, json, math, os, re, shutil, sys, urllib.parse, urllib.request
+import datetime as dt, glob, hashlib, html, importlib.util, json, math, os, re, shutil, sys, urllib.parse, urllib.request
 import markdown, yaml
 from zoneinfo import ZoneInfo
 
@@ -883,7 +884,8 @@ def topics_nav():
     order = [k for k in SECTION_NAV if k in TOPICS] + [k for k in TOPICS if k not in SECTION_NAV]  # samma ordning som ämnesraden
     items = ([(TOPICS[k]["path"], TOPICS[k]["name"]) for k in order] + ([(SWEDEN["path"], SWEDEN["name"])] if SWEDEN else [])
              + ([(GUIDE_PATH, GUIDE_NAME)] if GUIDES else [])
-             + ([(LISTS_PATH, LISTS_NAME)] if LISTS else []))
+             + ([(LISTS_PATH, LISTS_NAME)] if LISTS else [])
+             + [("/verktyg/", "Verktyg")])
     if not items: return ""
     return ('\n    <nav class="site-footer__nav site-footer__topics" aria-label="Ämnen"><ul>'
             + "".join(f'<li><a href="{u}">{esc(n)}</a></li>' for u, n in items) + "</ul></nav>")
@@ -1231,7 +1233,7 @@ TOPIC_INTRO = {
     "tesla": "Nyheter om Tesla: Model Y, förarstöd, Cybercab och besiktning, med källa på varje påstående.",
 }
 TOPIC_RESERVED = {"artikel", "om", "kontakt", "feed", "img", "css", "js", "fonts", "favicon", "brand", "content", "docs", "data", "drafts",
-                  "tools", "supabase", "push", "nyhetsbrev", "integritet", "prenumeration", GUIDE_KEY, "sverige", "marke", "modell", "listor"}
+                  "tools", "supabase", "push", "nyhetsbrev", "integritet", "prenumeration", GUIDE_KEY, "sverige", "verktyg", "marke", "modell", "listor"}
 TOPICS = {}  # kategori-nyckel -> dict(key, name, path, desc, arts), sätts i main()
 # /sverige/: samlingssida för artiklar med sweden: true (samma mall som ämnessidorna, flödet feed/sverige.xml). Ingen
 # kategori, så nyckeln står kvar i TOPIC_RESERVED. Byggs bara när minst en sådan artikel finns.
@@ -1276,7 +1278,7 @@ def breadcrumbs(items):
 
 def ld_script(ld): return '<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace("</", "<\\/") + "</script>\n"
 
-def topic_page(t, feed=None, list_label=None):
+def topic_page(t, feed=None, list_label=None, below_dek=""):
     """Ämnessida (och /guider/): rubrik, beskrivning, RSS och alla artiklar i ämnet, nyast först.
     intro, om den finns, är den synliga ingressen. desc används i meta och JSON-LD."""
     plain = f"{t['name']}: senaste nyheterna" if t["key"] != GUIDE_KEY else t["name"]
@@ -1300,7 +1302,7 @@ def topic_page(t, feed=None, list_label=None):
     <header class="catpage__head">
       {crumbs_html}
       <h1 class="catpage__title">{esc(t["name"])}</h1>
-      <p class="catpage__dek">{esc(dek)}</p>{rss}
+      <p class="catpage__dek">{esc(dek)}</p>{below_dek}{rss}
     </header>
     <section class="feed-section catpage__list" aria-label="{esc(list_label or "Alla artiklar i " + t["name"])}">
       <ol class="feed">{"".join(feed_item(a, "h2") for a in t["arts"])}
@@ -1970,7 +1972,8 @@ def guides_page(guides):
     <header class="catpage__head">
       {crumbs_html}
       <h1 class="catpage__title">{esc(GUIDE_NAME)}</h1>
-      <p class="catpage__dek">{esc(GUIDE_INTRO)}</p>{lists_guides_note()}{rss}
+      <p class="catpage__dek">{esc(GUIDE_INTRO)}</p>
+      <div class="prose"><p><a href="/verktyg/laddkostnad/">Räkna laddkostnad med egna siffror</a>. Verktyget visar kostnad per mil, månad och år.</p></div>{lists_guides_note()}{rss}
     </header>
     <div class="guide-themes catpage__list">
       {"".join(sections)}
@@ -2343,6 +2346,14 @@ def news_sitemap(arts):
     return ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
             'xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">\n' + items + "</urlset>\n")
 
+def load_verktyg():
+    """/verktyg/ byggs av tools/verktyg_pages.py så att den här filen bara anropar den."""
+    path = os.path.join(ROOT, "tools", "verktyg_pages.py")
+    spec = importlib.util.spec_from_file_location("motorpuls_verktyg", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
 def write(rel, text):
     WRITTEN.append(rel)
     p = os.path.join(ROOT, rel); os.makedirs(os.path.dirname(p), exist_ok=True)
@@ -2383,6 +2394,9 @@ def main():
     if SWEDEN: write("sverige/index.html", topic_page(SWEDEN, list_label="Alla artiklar som gäller Sverige"))
     shutil.rmtree(os.path.join(ROOT, "om"), ignore_errors=True)
     for p in pages: write(p["path"].lstrip("/") + "index.html", info_page(p, arts))
+    verktyg = load_verktyg()
+    shutil.rmtree(os.path.join(ROOT, "verktyg"), ignore_errors=True)
+    for rel, html_ in verktyg.render(sys.modules[__name__]): write(rel, html_)
     write("404.html", notfound())
     write("artikel.html", legacy_artikel_redirect())
     urls = [("/", arts[0]["date"])] + [(a["url"], a["date"]) for a in arts]
@@ -2392,6 +2406,7 @@ def main():
           + (f"  <url><loc>{DOMAIN}{SWEDEN['path']}</loc><lastmod>{lastmod(SWEDEN['path'], SWEDEN['arts'])}</lastmod></url>\n" if SWEDEN else "")
           + (f"  <url><loc>{DOMAIN}{GUIDE_PATH}</loc><lastmod>{lastmod(GUIDE_PATH, GUIDES)}</lastmod></url>\n" if GUIDES else "")
           + lists_sitemap(LISTS)
+          + "".join(f"  <url><loc>{DOMAIN}{u}</loc><lastmod>{d}</lastmod></url>\n" for u, d in verktyg.paths())
           + "".join(f"  <url><loc>{DOMAIN}{h['path']}</loc><lastmod>{lastmod(h['path'], h['arts'])}</lastmod></url>\n" for h in HUBS)
           + "".join(f"  <url><loc>{DOMAIN}{p['path']}</loc></url>\n" for p in pages)
           + f"  <url><loc>{DOMAIN}/integritet/</loc></url>\n" + "</urlset>\n")
@@ -2423,7 +2438,7 @@ def main():
 def out_dir(o):
     out = os.path.abspath(o)
     top = os.path.relpath(out, ROOT).split(os.sep)[0]
-    if out == ROOT or ROOT.startswith(out + os.sep) or top in PUBLIC_DIRS + ("artikel", "content", "docs", "drafts", "brand", ".git", "listor"):
+    if out == ROOT or ROOT.startswith(out + os.sep) or top in PUBLIC_DIRS + ("artikel", "content", "docs", "drafts", "brand", ".git", "listor", "verktyg"):
         raise SystemExit(f"--out {out}: välj en egen katalog som rensas vid varje bygge (t.ex. _site)")
     return out
 

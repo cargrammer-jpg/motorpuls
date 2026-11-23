@@ -86,8 +86,10 @@ class ListPagesTest(unittest.TestCase):
         index = build.lists_index(self.lists)
         for lst in self.lists:
             self.assertIn(f'href="{lst["path"]}"', index)
-        self.assertIn('href="/listor/"', build.topics_nav())
-        self.assertIn(">Listor</a>", build.topics_nav())
+        nav = build.topics_nav()
+        self.assertIn('href="/listor/"', nav)
+        self.assertIn(">Listor</a>", nav)
+        self.assertIn('href="/verktyg/">Verktyg</a>', nav)
         guide = {
             "slug": "g", "title": "Guide", "url": "/artikel/g/", "excerpt": "x", "cat": "guider",
             "category": "Guider", "tags": [], "when": 1, "file": "g.md", "img": None,
@@ -95,6 +97,7 @@ class ListPagesTest(unittest.TestCase):
         }
         guides = build.guides_page([guide])
         self.assertIn('href="/listor/">Listor</a>', guides)
+        self.assertIn('href="/verktyg/laddkostnad/"', guides)
         xml = build.lists_sitemap(self.lists)
         self.assertIn("<loc>https://motorpuls.se/listor/</loc>", xml)
         for lst in self.lists:
