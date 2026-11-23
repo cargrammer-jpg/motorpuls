@@ -481,6 +481,9 @@ html.mh-js{scroll-padding-top:3rem}
 .catpage__head{display:grid;gap:1rem;max-width:48rem}
 .catpage__title{font-size:clamp(2rem,1rem + 4vw,3.5rem);line-height:1;font-weight:820;font-stretch:115%;letter-spacing:-.035em;color:#fff}
 .catpage__dek{font-family:var(--serif);font-size:clamp(1.05rem,.95rem + .45vw,1.2rem);line-height:1.5;color:var(--text-2);text-wrap:pretty;max-width:40rem}
+.catpage__links{font-size:.95rem;line-height:1.45;color:var(--text-2);max-width:40rem}
+.catpage__links a{color:var(--text);font-weight:700;text-decoration:underline;text-decoration-color:var(--pulse);text-underline-offset:.18em}
+.catpage__links a:hover{color:#fff}
 .catpage__list{padding-block:1.5rem 0;margin-top:1rem;border-top:1px solid var(--line-strong)}
 /* Hubbsidor (märke, modell, guider): ingressen syns även på mobil. Datumet ligger i .meta. */
 .catpage--hub .item p{display:block}
@@ -528,4 +531,49 @@ html.mh-js{scroll-padding-top:3rem}
 @media (hover:hover){
   .related__card a:hover .related__frame{transform:translateY(-3px);box-shadow:0 0 0 1px var(--line-strong),0 22px 40px -22px rgb(255 91 31 / .45)}
   .related__card a:hover .related__frame img{transform:scale(1.05)}
+}
+
+/* Listor: tabell på bred skärm, staplade kort på smal, utan sidscroll. Ingen sortering. */
+.listpage{padding-block:clamp(1.5rem,4vw,3.5rem) clamp(3rem,7vw,6rem)}
+.listpage__head{display:grid;gap:1rem;max-width:48rem}
+.listpage__title{font-size:clamp(1.85rem,1rem + 3.2vw,3.15rem);line-height:1.02;font-weight:820;font-stretch:115%;letter-spacing:-.035em;color:#fff}
+.listpage__dek{font-family:var(--serif);font-size:clamp(1.05rem,.95rem + .45vw,1.2rem);line-height:1.5;color:var(--text-2);text-wrap:pretty;max-width:42rem}
+.listpage__dek a,.listpage__after a.listsrc{overflow-wrap:anywhere}
+.listpage__checked{font-family:var(--mono);font-size:.85rem;color:var(--text-2)}
+.listlegend{margin-top:1.75rem;max-width:48rem}
+.listlegend h2{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff}
+.listlegend ul{list-style:none;margin:.75rem 0 0;padding:0;display:grid;gap:.65rem}
+.listlegend li{display:flex;flex-wrap:wrap;align-items:baseline;gap:.35rem .7rem;color:var(--text);line-height:1.45}
+.listpage__table{margin-top:1.5rem;min-width:0}
+.listtable{width:100%;border-collapse:collapse;font-size:.9375rem;line-height:1.45}
+.listtable caption{display:block;width:100%;caption-side:top;text-align:left;padding:0 0 .75rem;font-family:var(--mono);font-size:.8rem;line-height:1.4;color:var(--text-2);text-wrap:pretty}
+.listtable th,.listtable td{text-align:left;vertical-align:top;padding:.85rem .75rem;border-bottom:1px solid var(--line);overflow-wrap:anywhere}
+.listtable thead th{color:#fff;font-weight:700;background:var(--surface)}
+.listtable tbody th{color:#fff;font-weight:700}
+.listmodel{display:block}
+.listmarks{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.45rem}
+.listmark{display:inline-block;padding:.12rem .45rem;border:1px solid var(--line-strong);border-radius:var(--radius);background:var(--raised);color:var(--text);font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1.4}
+.listmark--prelim{border-style:dashed}
+.listmark--kampanj{border-style:solid;border-color:var(--pulse-text)}
+.listrow__note{margin-top:.45rem;font-size:.85rem;line-height:1.45;color:var(--text-2)}
+.listsrc{color:var(--pulse-text);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.18em}
+.listsrc::after{content:" ↗";color:var(--muted);text-decoration:none}
+.listpage__after{max-width:42rem;margin-top:2.5rem}
+.listpage__after .faq{margin-top:2rem}
+@media (min-width:64rem){
+  .listtable{table-layout:fixed}
+  .listtable th:nth-child(1){width:22%}
+  .listtable th:nth-child(2){width:48%}
+  .listtable th:nth-child(3){width:15%}
+  .listtable th:nth-child(4){width:15%}
+}
+@media (max-width:63.99rem){
+  .listtable,.listtable tbody,.listtable tr,.listtable th,.listtable td{display:block;width:auto}
+  .listtable{border-collapse:separate;border-spacing:0}
+  .listtable thead{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+  .listtable tr{margin-bottom:.75rem;padding:.9rem 1rem;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius)}
+  .listtable th,.listtable td{border:0;padding:.4rem 0}
+  .listtable tbody th{font-size:1.05rem;padding-bottom:.15rem}
+  .listtable tbody th::before,.listtable td::before{content:attr(data-label);display:block;margin-bottom:.15rem;font-family:var(--mono);font-size:.72rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--text-2)}
+  .listtable tbody th::before{content:"Modell"}
 }
