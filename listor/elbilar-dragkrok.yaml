@@ -1,0 +1,270 @@
+# Motorpuls listsida, utkast till Dr. Webb. Publiceras inte.
+# Kontrollerad 2026-11-23. Inga tankstreck i filen.
+# Fält: title, ingress, faq, rows (modell, värde, värden, källa, kontrollerad).
+slug: elbilar-dragkrok
+granskning: 'Granskad 2026-11-23, Godkänd efter ändringar'
+title: Så tungt släp får populära elbilar dra, från 500 till 2 500 kilo
+ingress: Dragvikten skiljer sig stort mellan modeller, och ofta även mellan versioner av samma bil. I tabellen är den högsta bromsade släpvagnsvikten 2 500 kilo. Siffrorna är hämtade ur tillverkarnas tekniska data den 23 november 2026.
+faq:
+- fraga: Vad är skillnaden mellan bromsad och obromsad släpvagnsvikt?
+  svar: Bromsad vikt är den högsta tillåtna vikten på ett släp som har egna bromsar. Obromsad vikt gäller släp utan egna bromsar och är lägre. I tabellen är den högst 750 kilo där tillverkaren anger den. Enligt Škoda Sverige är det släpets vikt inklusive last som räknas.
+- fraga: Räcker ett vanligt B-körkort för de tyngsta elbilarna?
+  svar: Inte alltid. Bilen kan ha teknisk rätt att dra 2 000 kilo eller mer, men körkortet sätter egna tak. Enligt Škoda Sveriges genomgång får släpet med B-körkort väga högst 750 kilo, eller mer om bilens och släpets sammanlagda totalvikt är högst 3 500 kilo. Med utökad B-behörighet (B96) får ekipaget väga högst 4 250 kilo. Med BE får släpet väga högst 3 500 kilo, om bilen tekniskt klarar det. Kontrollera alltid registreringsbeviset och Transportstyrelsens släpvagnskalkylator.
+- fraga: Varför har samma modell olika dragvikt?
+  svar: Batteristorlek, motor och drivning kan ändra den godkända släpvagnsvikten. Kia EV9 med standardbatteri får dra 900 kilo bromsat släp, medan AWD Long Range får dra 2 500 kilo. Ange därför alltid version, inte bara modellnamn.
+- fraga: Ingår dragkroken när jag köper bilen?
+  svar: Ofta inte. Flera tillverkare säljer kroken som tillval. Škoda uppger att Epiq Essence inte kan få dragkrok alls, medan Selection och Sportline har krok som standard. Fråga återförsäljaren vad som gäller för just den version du tittar på.
+- fraga: Hur påverkar ett släp räckvidden?
+  svar: Enligt Škoda Sverige ökar energiförbrukningen med släp, så räckvidden blir kortare. Det beror bland annat på släpets vikt och att luftmotståndet kan öka. Hur mycket beror på släpets storlek och form, hastighet, väder och körförhållanden. Planera laddstoppen i förväg.
+metod: Varje rad bygger på tekniska data eller faktablad som öppnats den 23 november 2026. Svenska tillverkarsidor och svenska faktablad har använts i första hand. Teslas ägarmanualer kunde inte öppnas direkt på tesla.com (åtkomsten blockerades) och är därför hämtade från Internet Archives kopior av Teslas officiella europeiska manualer. Obromsad vikt är utelämnad när källan inte anger den. Den exakta vikten för en enskild bil står i registreringsbeviset. FAQ-svaren om körkort och räckvidd med släp bygger på Škoda Sveriges sida https://www.skoda.se/elbilar/elbil-med-slap, öppnad 23 november 2026.
+osakerheter:
+- Teslas svenska modelsidor listar inte släpvagnsvikt. Siffrorna kommer från Teslas europeiska ägarmanualer, arkiverade den 13 maj 2026 (Model 3) och den 14 juli 2026 (Model Y).
+- Volvo EX40:s supportsida anger 1 500 kilo bromsad släpvagn som en siffra, medan specifikationssidan ger P8 Performance AWD 1 800 kilo. Tabellen följer specifikationssidan per version. Obromsad 750 kilo från supportsidan anges bara för de versioner som supportsidan täcker.
+- Volvo EX90:s supportsida gick inte att läsa i sin helhet. Obromsad vikt saknas därför för EX90.
+- Volkswagen ID.4 är stängd för nybeställning i Sverige. Den aktuella modelsidan anger upp till 1 200 kilo bromsad last. Den mer detaljerade uppdelningen 1 000 kilo för bakhjulsdrivna Pure och Pro och 1 200 kilo för fyrhjulsdrivna Pro 4MOTION och GTX 4MOTION kommer från Volkswagens svenska modellbroschyr från januari 2024.
+- Hyundai Ioniq 5, Ioniq 9 och BYD saknas. Svenska aktuella faktablad med släpvagnsvikt för nuvarande batteristorlekar har inte kunnat verifieras i dag.
+- Škodas siffror avser bromsade släp enligt Škoda Sveriges egen FAQ.
+rows:
+- modell: Tesla Model 3
+  värde: 1 000 kg bromsad, 750 kg obromsad
+  värden:
+    bromsad_kg: 1000
+    obromsad_kg: 750
+  källa: https://web.archive.org/web/20260513164712/https://www.tesla.com/ownersmanual/model3/en_eu/GUID-BD9A38D5-4410-45A3-8337-BDF7342750F3.html
+  kontrollerad: '2026-11-23'
+  anmärkning: Teslas europeiska ägarmanual, arkiverad 13 maj 2026. tesla.com blockerade direkt åtkomst den 23 november 2026.
+- modell: Tesla Model Y
+  värde: 1 600 kg bromsad, 750 kg obromsad
+  värden:
+    bromsad_kg: 1600
+    obromsad_kg: 750
+  källa: https://web.archive.org/web/20260714004101/https://www.tesla.com/ownersmanual/modely/en_gb/GUID-A6D6CF75-C9CA-4140-97FA-341E27E3B4D8.html
+  kontrollerad: '2026-11-23'
+  anmärkning: Teslas europeiska ägarmanual, arkiverad 14 juli 2026. tesla.com blockerade direkt åtkomst den 23 november 2026.
+- modell: Volvo EX30 P5
+  värde: 1 400 kg maximal släpvagnsvikt, 750 kg obromsad
+  värden:
+    bromsad_kg: 1400
+    obromsad_kg: 750
+  källa: https://www.volvocars.com/se/cars/ex30-electric/specifications/
+  kontrollerad: '2026-11-23'
+  anmärkning: 'Maximal släpvagnsvikt från Volvos svenska specifikationssida. Obromsad 750 kg från Volvo Support, uppdaterad 8 september 2026: https://www.volvocars.com/se/support/car/ex30/article/0ed816eed33d98cac0a8cc377bc12bc7-70bede2dc073ca71c0a8b0975b1e6fa3-8664b2fa77a7e089c0a8296870d1a409/'
+- modell: Volvo EX30 P5 Long Range
+  värde: 1 600 kg maximal släpvagnsvikt, 750 kg obromsad
+  värden:
+    bromsad_kg: 1600
+    obromsad_kg: 750
+  källa: https://www.volvocars.com/se/cars/ex30-electric/specifications/
+  kontrollerad: '2026-11-23'
+  anmärkning: Maximal släpvagnsvikt från Volvos svenska specifikationssida. Obromsad 750 kg från samma supportsida som för EX30 P5.
+- modell: Volvo EX30 P8 AWD
+  värde: 1 600 kg maximal släpvagnsvikt, 750 kg obromsad
+  värden:
+    bromsad_kg: 1600
+    obromsad_kg: 750
+  källa: https://www.volvocars.com/se/cars/ex30-electric/specifications/
+  kontrollerad: '2026-11-23'
+  anmärkning: Maximal släpvagnsvikt från Volvos svenska specifikationssida. Obromsad 750 kg från samma supportsida som för EX30 P5.
+- modell: Volvo EX40 P5 och P5 Long Range
+  värde: 1 500 kg maximal släpvagnsvikt, 750 kg obromsad
+  värden:
+    bromsad_kg: 1500
+    obromsad_kg: 750
+  källa: https://www.volvocars.com/se/cars/ex40-electric/specifications/
+  kontrollerad: '2026-11-23'
+  anmärkning: 'Maximal släpvagnsvikt från Volvos svenska specifikationssida. Obromsad 750 kg och bromsad 1 500 kg finns också på Volvo Support, uppdaterad 12 oktober 2026: https://www.volvocars.com/se/support/car/ex40/article/0ed816eed33d98cac0a8cc377bc12bc7-70bede2dc073ca71c0a8b0975b1e6fa3-8664b2fa77a7e089c0a8296870d1a409/'
+- modell: Volvo EX40 P8 Performance AWD
+  värde: 1 800 kg maximal släpvagnsvikt
+  värden:
+    bromsad_kg: 1800
+  källa: https://www.volvocars.com/se/cars/ex40-electric/specifications/
+  kontrollerad: '2026-11-23'
+  anmärkning: Obromsad vikt anges inte separat för denna version i den öppnade källan. Supportsidan nämner 1 500 kg bromsad som en siffra och täcker därför inte tydligt P8.
+- modell: Volvo EX90 Single Motor
+  värde: 1 500 kg maximal släpvagnsvikt
+  värden:
+    bromsad_kg: 1500
+  källa: https://www.volvocars.com/se/cars/ex90-electric/specifications/
+  kontrollerad: '2026-11-23'
+  anmärkning: Obromsad vikt saknas i den öppnade källan.
+- modell: Volvo EX90 Twin Motor och Twin Motor Performance
+  värde: 2 200 kg maximal släpvagnsvikt
+  värden:
+    bromsad_kg: 2200
+  källa: https://www.volvocars.com/se/cars/ex90-electric/specifications/
+  kontrollerad: '2026-11-23'
+  anmärkning: Obromsad vikt saknas i den öppnade källan.
+- modell: Kia EV3 Standard Range
+  värde: 500 kg bromsad, 500 kg obromsad
+  värden:
+    bromsad_kg: 500
+    obromsad_kg: 500
+  källa: https://www.kia.com/content/dam/kwcms/kme/se/sv/assets/contents/utility/specifications/ev3/Faktablad-Kia-EV3.pdf
+  kontrollerad: '2026-11-23'
+  anmärkning: Kia Sveriges produktfakta, gäller från 16 september 2026. Kolumnen Standard Range 58,3 kWh.
+- modell: Kia EV3 Long Range FWD
+  värde: 1 000 kg bromsad, 750 kg obromsad
+  värden:
+    bromsad_kg: 1000
+    obromsad_kg: 750
+  källa: https://www.kia.com/content/dam/kwcms/kme/se/sv/assets/contents/utility/specifications/ev3/Faktablad-Kia-EV3.pdf
+  kontrollerad: '2026-11-23'
+  anmärkning: Kia Sveriges produktfakta, gäller från 16 september 2026. Long Range 81,4 kWh FWD.
+- modell: Kia EV3 Long Range AWD
+  värde: 1 500 kg bromsad, 750 kg obromsad
+  värden:
+    bromsad_kg: 1500
+    obromsad_kg: 750
+  källa: https://www.kia.com/content/dam/kwcms/kme/se/sv/assets/contents/utility/specifications/ev3/Faktablad-Kia-EV3.pdf
+  kontrollerad: '2026-11-23'
+  anmärkning: Kia Sveriges produktfakta, gäller från 16 september 2026. Long Range 81,4 kWh AWD. AWD-uppgifterna är i faktabladet märkta som preliminära i väntan på homologering.
+- modell: Kia EV6 Long Range RWD och AWD
+  värde: 1 800 kg bromsad, 750 kg obromsad
+  värden:
+    bromsad_kg: 1800
+    obromsad_kg: 750
+  källa: https://www.kia.com/content/dam/kwcms/kme/se/sv/assets/contents/utility/specifications/ev6/kia-sweden-ev6-specification.pdf
+  kontrollerad: '2026-11-23'
+  anmärkning: Kia Sveriges produktfakta, gäller från 20 augusti 2026. Samma släpvagnsvikt för RWD och AWD.
+- modell: Kia EV9 RWD Standard Range, 76,1 kWh
+  värde: 900 kg bromsad
+  värden:
+    bromsad_kg: 900
+  källa: https://www.kia.com/se/nya-bilar/ev9/upptack/
+  kontrollerad: '2026-11-23'
+  anmärkning: Obromsad vikt anges inte på den öppnade modelsidan.
+- modell: Kia EV9 AWD Long Range, Plus och GT Line, 99,8 kWh
+  värde: 2 500 kg bromsad, 750 kg obromsad enligt GT Line-faktabladet
+  värden:
+    bromsad_kg: 2500
+    obromsad_kg: 750
+  källa: https://www.kia.com/se/nya-bilar/ev9/upptack/
+  kontrollerad: '2026-11-23'
+  anmärkning: 'Bromsad 2 500 kg från Kia Sveriges modelsida. Obromsad 750 kg från officiellt GT Line-faktablad: https://www.kia.com/content/dam/kwcms/kme/se/sv/assets/contents/utility/specifications/ev9/kia-sweden-ev9-gtline-specification.pdf'
+- modell: Škoda Enyaq
+  värde: Upp till 2 000 kg bromsad, 2 200 kg för Enyaq 85x och Enyaq RS
+  värden:
+    bromsad_kg_enyaq: 2000
+    bromsad_kg_enyaq_85x_och_rs: 2200
+  källa: https://www.skoda.se/elbilar/elbil-med-slap
+  kontrollerad: '2026-11-23'
+  anmärkning: Škoda Sverige anger att siffrorna avser bromsade släp. Obromsad vikt anges inte. Enyaq Coupé RS får också dra upp till 2 200 kg enligt samma sida.
+- modell: Škoda Elroq 60
+  värde: 1 800 kg bromsad
+  värden:
+    bromsad_kg: 1800
+  källa: https://www.skoda.se/elbilar/elbil-med-slap
+  kontrollerad: '2026-11-23'
+  anmärkning: Siffran avser bromsat släp. Obromsad vikt anges inte.
+- modell: Škoda Elroq 85 och 85x
+  värde: 2 000 kg bromsad
+  värden:
+    bromsad_kg: 2000
+  källa: https://www.skoda.se/elbilar/elbil-med-slap
+  kontrollerad: '2026-11-23'
+  anmärkning: Siffran avser bromsat släp. Obromsad vikt anges inte.
+- modell: Škoda Elroq RS
+  värde: 2 200 kg bromsad
+  värden:
+    bromsad_kg: 2200
+  källa: https://www.skoda.se/elbilar/elbil-med-slap
+  kontrollerad: '2026-11-23'
+  anmärkning: Siffran avser bromsat släp. Obromsad vikt anges inte.
+- modell: Škoda Epiq 40 Selection och Sportline
+  värde: 750 kg bromsad
+  värden:
+    bromsad_kg: 750
+  källa: https://www.skoda.se/elbilar/elbil-med-slap
+  kontrollerad: '2026-11-23'
+  anmärkning: Samma uppgift finns i FAQ på https://www.skoda.se/modeller/epiq/epiq. Dragkrok ingår i Selection och Sportline. Epiq Essence kan enligt Škoda inte utrustas med dragkrok.
+- modell: Škoda Epiq 55 Selection och Sportline
+  värde: 1 200 kg bromsad
+  värden:
+    bromsad_kg: 1200
+  källa: https://www.skoda.se/elbilar/elbil-med-slap
+  kontrollerad: '2026-11-23'
+  anmärkning: Samma uppgift finns i FAQ på https://www.skoda.se/modeller/epiq/epiq. Siffran avser bromsat släp.
+- modell: Škoda Peaq 90
+  värde: 1 800 kg bromsad
+  värden:
+    bromsad_kg: 1800
+  källa: https://www.skoda.se/elbilar/elbil-med-slap
+  kontrollerad: '2026-11-23'
+  anmärkning: Siffran avser bromsat släp. Obromsad vikt anges inte.
+- modell: Škoda Peaq 90x
+  värde: 2 000 kg bromsad
+  värden:
+    bromsad_kg: 2000
+  källa: https://www.skoda.se/elbilar/elbil-med-slap
+  kontrollerad: '2026-11-23'
+  anmärkning: Siffran avser bromsat släp. Obromsad vikt anges inte.
+- modell: BMW i4, samtliga versioner i de öppnade tabellerna
+  värde: 1 600 kg bromsad, kultryck 75 kg
+  värden:
+    bromsad_kg: 1600
+    kultryck_kg: 75
+  källa: https://www.bmw.se/sv/alla-modeller/i-series/i4/bmw-i4-gran-coupe-technical-data.html
+  kontrollerad: '2026-11-23'
+  anmärkning: Max. släpvagnsvikt (tillval), bromsad 12 procent. Obromsad vikt anges inte.
+- modell: BMW iX, samtliga versioner i de öppnade tabellerna
+  värde: 2 500 kg bromsad, kultryck 100 kg
+  värden:
+    bromsad_kg: 2500
+    kultryck_kg: 100
+  källa: https://www.bmw.se/sv/alla-modeller/i-series/ix/bmw-ix-technische-daten.html
+  kontrollerad: '2026-11-23'
+  anmärkning: Max. släpvagnsvikt (tillval), bromsad 12 procent. Obromsad vikt anges inte.
+- modell: Polestar 2 Long range Dual motor, Long range Single motor och Standard range Single motor
+  värde: 1 500 kg bromsad, kultryck 90 kg
+  värden:
+    bromsad_kg: 1500
+    kultryck_kg: 90
+  källa: https://www.polestar.com/se/manual/polestar-2/2026/article/70803363999aeee6c0a801517e138813/
+  kontrollerad: '2026-11-23'
+  anmärkning: Obromsad vikt anges inte i den öppnade tabellen.
+- modell: Polestar 3 Dual motor och Performance
+  värde: 2 200 kg bromsad, kultryck 100 kg
+  värden:
+    bromsad_kg: 2200
+    kultryck_kg: 100
+  källa: https://www.polestar.com/se/polestar-3/specifications/
+  kontrollerad: '2026-11-23'
+  anmärkning: 'Specifikationssidan anger dragkraft upp till 2 200 kg. Manualen bekräftar 2 200 kg bromsad och 100 kg kultryck: https://www.polestar.com/se/manual/polestar-3/2026/article/0ed816eed33d98cac0a8cc377bc12bc7-70bede2dc073ca71c0a8b0975b1e6fa3-8664b2fa77a7e089c0a8296870d1a409/'
+- modell: Polestar 4 SUV Rear motor
+  värde: 1 500 kg bromsad
+  värden:
+    bromsad_kg: 1500
+  källa: https://www.polestar.com/se/polestar-4-models/polestar-4-suv/specifications/
+  kontrollerad: '2026-11-23'
+  anmärkning: 'Specifikationssidan anger dragvikt upp till 1 500 kg. Manualen anger 1 500 kg bromsad och 100 kg kultryck för Long range Single motor: https://www.polestar.com/se/manual/polestar-4/2026/article/0ed816eed33d98cac0a8cc377bc12bc7-70bede2dc073ca71c0a8b0975b1e6fa3-8664b2fa77a7e089c0a8296870d1a409/'
+- modell: Polestar 4 SUV Dual motor
+  värde: 2 000 kg bromsad
+  värden:
+    bromsad_kg: 2000
+  källa: https://www.polestar.com/se/polestar-4-models/polestar-4-suv/specifications/
+  kontrollerad: '2026-11-23'
+  anmärkning: Specifikationssidan anger dragvikt upp till 2 000 kg. Obromsad vikt anges inte i den öppnade källan.
+- modell: Volkswagen ID.7, bakhjulsdrift
+  värde: 1 000 kg bromsad
+  värden:
+    bromsad_kg: 1000
+  källa: https://www.volkswagen.se/sv/modeller/id7.html
+  kontrollerad: '2026-11-23'
+  anmärkning: Från FAQ på Volkswagen Sveriges modelsida. Obromsad vikt anges inte där.
+- modell: Volkswagen ID.7 GTX
+  värde: 1 800 kg bromsad
+  värden:
+    bromsad_kg: 1800
+  källa: https://www.volkswagen.se/sv/modeller/id7.html
+  kontrollerad: '2026-11-23'
+  anmärkning: Från FAQ på Volkswagen Sveriges modelsida. Obromsad vikt anges inte där.
+- modell: Volkswagen ID.4
+  värde: Upp till 1 200 kg bromsad enligt aktuell modelsida
+  värden:
+    bromsad_kg_upp_till: 1200
+    bromsad_kg_bakhjulsdrift_broschyr_2024: 1000
+    bromsad_kg_4motion_och_gtx_broschyr_2024: 1200
+    obromsad_kg_broschyr_2024: 750
+  källa: https://www.volkswagen.se/sv/modeller/id4.html
+  kontrollerad: '2026-11-23'
+  anmärkning: 'ID.4 är stängd för nybeställning i Sverige. FAQ på den aktuella modelsidan anger dragkrok för last upp till 1 200 kg, bromsad last. Modellbroschyren från januari 2024 preciserar 1 000 kg för bakhjulsdrivna Pure och Pro, 1 200 kg för Pro 4MOTION och GTX 4MOTION och 750 kg obromsad: https://www.volkswagen.se/idhub/content/dam/onehub_pkw/importers/se/hjalp-och-support/broschyrer/id-4/ID4_modellbroschyr-korr-26jan.pdf'

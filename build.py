@@ -15,6 +15,8 @@
 #   feed/<kategori>.xml           RSS per kategori (och feed/sverige.xml när någon artikel har sweden: true,
 #                                 feed/guider.xml när någon guide är publicerad)
 #   guider/index.html             kunskapsbanken Guider (bara när minst en guide är publicerad, då även länken i sidhuvudet)
+#   listor/<slug>/index.html      evergreensidor ur listor/*.yaml (datan kopieras oförändrad). Index på /listor/,
+#                                 länk i sidfoten och på /guider/. Ingår i sitemap.xml med lastmod, inte i sitemap-news.xml.
 #   marke/<slug>/, modell/<slug>/ hubbsidor för märken och modeller ur content/modeller.yml. Bara taggar med minst
 #                                 tre publicerade artiklar. Ingår i sitemap.xml, inte i sitemap-news.xml.
 #   sw.js, push.js                bara när PUSH_BOX är på (förhandsvisning av push-rutan, se nedan)
@@ -135,6 +137,10 @@ GUIDE_INTRO = ("Guider från Motorpuls förklarar regler, kostnader och uträkni
                "Varje guide svarar rakt på frågan, med datum och siffror från källorna. "
                "De är skrivna för att kunna läsas igenom på några minuter.")
 GUIDES = []  # publicerade guider, nyast först, sätts i main()
+# Listor: en YAML-fil per sida i listor/. Sluggen är filnamnet. Datan renderas, den skrivs inte om.
+LISTS_PATH, LISTS_NAME = "/listor/", "Listor"
+LISTS_DESC = "Siffror som Motorpuls har kontrollerat mot källorna. Varje rad har en källa och ett datum."
+LISTS = []  # laddade listor, sätts i main()
 # Ordning på /guider/. Teman utan guider ritas inte. Ett okänt guide_tema hamnar efter de här, i bokstavsordning.
 GUIDE_THEME_ORDER = ("Elbil och laddning", "Skatt och kostnader", "Lagar och regler", "Köpa och äga")
 HUBS = []  # hubbsidor som faktiskt byggs (minst tre artiklar), sätts i main()
@@ -876,7 +882,8 @@ def topics_nav():
     """Ämnessidorna (och Guider) i sidfoten, så att de nås från varje sida."""
     order = [k for k in SECTION_NAV if k in TOPICS] + [k for k in TOPICS if k not in SECTION_NAV]  # samma ordning som ämnesraden
     items = ([(TOPICS[k]["path"], TOPICS[k]["name"]) for k in order] + ([(SWEDEN["path"], SWEDEN["name"])] if SWEDEN else [])
-             + ([(GUIDE_PATH, GUIDE_NAME)] if GUIDES else []))
+             + ([(GUIDE_PATH, GUIDE_NAME)] if GUIDES else [])
+             + ([(LISTS_PATH, LISTS_NAME)] if LISTS else []))
     if not items: return ""
     return ('\n    <nav class="site-footer__nav site-footer__topics" aria-label="Ämnen"><ul>'
             + "".join(f'<li><a href="{u}">{esc(n)}</a></li>' for u, n in items) + "</ul></nav>")
@@ -1224,7 +1231,7 @@ TOPIC_INTRO = {
     "tesla": "Nyheter om Tesla: Model Y, förarstöd, Cybercab och besiktning, med källa på varje påstående.",
 }
 TOPIC_RESERVED = {"artikel", "om", "kontakt", "feed", "img", "css", "js", "fonts", "favicon", "brand", "content", "docs", "data", "drafts",
-                  "tools", "supabase", "push", "nyhetsbrev", "integritet", "prenumeration", GUIDE_KEY, "sverige", "marke", "modell"}
+                  "tools", "supabase", "push", "nyhetsbrev", "integritet", "prenumeration", GUIDE_KEY, "sverige", "marke", "modell", "listor"}
 TOPICS = {}  # kategori-nyckel -> dict(key, name, path, desc, arts), sätts i main()
 # /sverige/: samlingssida för artiklar med sweden: true (samma mall som ämnessidorna, flödet feed/sverige.xml). Ingen
 # kategori, så nyckeln står kvar i TOPIC_RESERVED. Byggs bara när minst en sådan artikel finns.
@@ -1963,7 +1970,7 @@ def guides_page(guides):
     <header class="catpage__head">
       {crumbs_html}
       <h1 class="catpage__title">{esc(GUIDE_NAME)}</h1>
-      <p class="catpage__dek">{esc(GUIDE_INTRO)}</p>{rss}
+      <p class="catpage__dek">{esc(GUIDE_INTRO)}</p>{lists_guides_note()}{rss}
     </header>
     <div class="guide-themes catpage__list">
       {"".join(sections)}
@@ -1972,6 +1979,256 @@ def guides_page(guides):
 </main>
 '''
     return page(head_html, body)
+
+def lists_guides_note():
+    """Länk till listorna på /guider/. Tom sträng när inga listor är laddade."""
+    if not LISTS: return ""
+    return ('\n      <p class="catpage__links"><a href="/listor/">Listor</a> samlar siffror vi har kontrollerat, '
+            "med källa och datum på varje rad.</p>")
+
+# ---------- listor (listor/*.yaml) ----------
+def _list_day(v, path, field):
+    if isinstance(v, dt.datetime): return v.date()
+    if isinstance(v, dt.date): return v
+    s = str(v).strip()
+    if re.fullmatch(r"\d{4}-\d{2}-\d{2}", s): return dt.date.fromisoformat(s)
+    raise SystemExit(f"{path}: ogiltigt {field}: {v!r}")
+
+def linkify(s):
+    """Synlig text med URL:er som länkar. Orden lämnas. Tusental får hårt mellanslag, inte URL:erna."""
+    s = str(s)
+    out, pos = [], 0
+    for m in _URLS.finditer(s):
+        out.append(esc(nbnum(s[pos:m.start()])))
+        raw = m.group(0)
+        url = raw.rstrip(".,;)]")
+        tail = raw[len(url):]
+        out.append(f'<a class="listsrc" href="{esc(url)}" rel="noopener" target="_blank">{esc(url)}'
+                   f'<span class="visually-hidden"> (öppnas i ny flik)</span></a>{esc(tail)}')
+        pos = m.end()
+    out.append(esc(nbnum(s[pos:])))
+    return "".join(out)
+
+def row_flags(row):
+    """(preliminär WLTP, kampanjpris). Bara fältet wltp_preliminar och prisets egna kampanjfält, inte källans URL."""
+    vals = row.get("värden") if isinstance(row.get("värden"), dict) else {}
+    prelim = vals.get("wltp_preliminar") is True
+    kampanj = any("kampanj" in str(k).lower() for k in vals) or "kampanjpris" in str(row.get("värde") or "").lower()
+    return prelim, kampanj
+
+def marks_html(prelim, kampanj):
+    bits = []
+    if prelim: bits.append('<span class="listmark listmark--prelim">Preliminär WLTP</span>')
+    if kampanj: bits.append('<span class="listmark listmark--kampanj">Kampanjpris</span>')
+    return f'<span class="listmarks">{"".join(bits)}</span>' if bits else ""
+
+def legend_html(prelim, kampanj):
+    if not prelim and not kampanj: return ""
+    items = []
+    if prelim:
+        items.append("<li><span class=\"listmark listmark--prelim\">Preliminär WLTP</span> Räckvidden är märkt som preliminär i källan.</li>")
+    if kampanj:
+        items.append("<li><span class=\"listmark listmark--kampanj\">Kampanjpris</span> Priset är ett erbjudande under en begränsad tid.</li>")
+    return f'''
+    <aside class="listlegend" aria-labelledby="markeringar-h">
+      <h2 id="markeringar-h">Markeringar</h2>
+      <ul>{"".join(items)}</ul>
+    </aside>'''
+
+def source_link(url, modell):
+    return (f'<a class="listsrc" href="{esc(url)}" rel="noopener" target="_blank">{esc(host(url))}'
+            f'<span class="visually-hidden">, källa för {esc(modell)} (öppnas i ny flik)</span></a>')
+
+def list_faq_html(pairs):
+    if not pairs: return ""
+    items = "".join(f'\n          <div class="faq__item"><h3>{linkify(q)}</h3><p>{linkify(ans)}</p></div>' for q, ans in pairs)
+    return f'''
+        <section class="faq" aria-labelledby="faq-h">
+          <h2 id="faq-h">Vanliga frågor</h2>{items}
+        </section>'''
+
+def load_lists():
+    """listor/*.yaml i filnamnsordning. Sluggen är filnamnet. Inget i texten skrivs om."""
+    folder = os.path.join(ROOT, "listor")
+    if not os.path.isdir(folder): return []
+    found = []
+    for path in sorted(glob.glob(os.path.join(folder, "*.yaml"))):
+        rel = os.path.relpath(path, ROOT)
+        slug = os.path.splitext(os.path.basename(path))[0]
+        if not re.fullmatch(r"[a-z0-9-]+", slug): raise SystemExit(f"{rel}: filnamnet ska vara en slug")
+        data = yaml.safe_load(open(path, encoding="utf-8"))
+        if not isinstance(data, dict): raise SystemExit(f"{rel}: YAML-filen ska vara en avbildning")
+        stated = str(data.get("slug") or "").strip()
+        if stated and stated != slug: raise SystemExit(f"{rel}: slug {stated!r} skiljer sig från filnamnet")
+        def need(key):
+            v = data.get(key)
+            if not str(v or "").strip(): raise SystemExit(f"{rel}: saknar {key}")
+            return str(v).strip()
+        title, ingress, metod = need("title"), need("ingress"), need("metod")
+        unsure = data.get("osakerheter")
+        if not isinstance(unsure, list) or not all(str(x).strip() for x in unsure):
+            raise SystemExit(f"{rel}: osakerheter ska vara en lista med text")
+        faq = data.get("faq")
+        if not isinstance(faq, list) or not faq: raise SystemExit(f"{rel}: faq ska vara en lista")
+        pairs = []
+        for item in faq:
+            if not isinstance(item, dict) or not str(item.get("fraga") or "").strip() or not str(item.get("svar") or "").strip():
+                raise SystemExit(f"{rel}: varje fråga behöver fraga och svar")
+            pairs.append((faq_text(item["fraga"]), faq_text(item["svar"])))
+        rows_in = data.get("rows")
+        if not isinstance(rows_in, list) or not rows_in: raise SystemExit(f"{rel}: rows ska vara en lista")
+        rows = []
+        for n, row in enumerate(rows_in, 1):
+            if not isinstance(row, dict): raise SystemExit(f"{rel}: rad {n} är inte en avbildning")
+            for key in ("modell", "värde", "källa", "kontrollerad"):
+                if row.get(key) in (None, ""): raise SystemExit(f"{rel}: rad {n} saknar {key}")
+            src = str(row["källa"]).strip()
+            if not src.startswith(("http://", "https://")): raise SystemExit(f"{rel}: rad {n} har en ogiltig källa")
+            day = _list_day(row["kontrollerad"], rel, f"rad {n} kontrollerad")
+            rows.append(dict(row, modell=str(row["modell"]).strip(), värde=str(row["värde"]).strip(), källa=src, checked=day))
+        found.append(dict(slug=slug, path=f"/listor/{slug}/", title=title, ingress=ingress, metod=metod,
+                          osakerheter=[str(x).strip() for x in unsure], faq=pairs, rows=rows,
+                          checked=max(r["checked"] for r in rows), file=rel))
+    return found
+
+def lists_sitemap(lists):
+    if not lists: return ""
+    latest = max(lst["checked"] for lst in lists)
+    parts = [f"  <url><loc>{DOMAIN}{LISTS_PATH}</loc><lastmod>{iso(latest, None)}</lastmod></url>\n"]
+    parts += [f"  <url><loc>{DOMAIN}{lst['path']}</loc><lastmod>{iso(lst['checked'], None)}</lastmod></url>\n" for lst in lists]
+    return "".join(parts)
+
+def lists_index(lists):
+    crumbs_html, crumbs_ld = breadcrumbs([("Start", "/"), (LISTS_NAME, LISTS_PATH)])
+    ld = {"@context": "https://schema.org", "@graph": [
+        {"@type": "CollectionPage", "@id": DOMAIN + LISTS_PATH, "name": f"{LISTS_NAME} · {SITE}",
+         "description": LISTS_DESC, "url": DOMAIN + LISTS_PATH, "inLanguage": "sv-SE",
+         "isPartOf": {"@id": DOMAIN + "/#website"},
+         "breadcrumb": {k: v for k, v in crumbs_ld.items() if k != "@context"},
+         "mainEntity": {"@type": "ItemList", "numberOfItems": len(lists),
+                        "itemListElement": [{"@type": "ListItem", "position": i, "url": DOMAIN + lst["path"], "name": lst["title"]}
+                                            for i, lst in enumerate(lists, 1)]}}]}
+    h = head(page_title(LISTS_NAME), LISTS_DESC, LISTS_PATH, image=DEFAULT_OG, extra=ld_script(ld))
+    cards = []
+    for lst in lists:
+        d = lst["checked"]
+        cards.append(f'''
+          <li class="item item--noimg">
+            <a href="{lst["path"]}">
+              <div class="item__text">
+                <h2>{nbnum(esc(lst["title"]))}</h2>
+                <p>{nbnum(esc(lst["ingress"]))}</p>
+                <span class="meta">Senast kontrollerad <time datetime="{d.isoformat()}">{sv_date(d)}</time></span>
+              </div>
+            </a>
+          </li>''')
+    body = f'''
+<main id="innehall" class="catpage catpage--hub">
+  <div class="wrap">
+    <header class="catpage__head">
+      {crumbs_html}
+      <h1 class="catpage__title">{LISTS_NAME}</h1>
+      <p class="catpage__dek">{esc(LISTS_DESC)}</p>
+    </header>
+    <section class="catpage__list" aria-labelledby="listindex-h">
+      <h2 id="listindex-h" class="visually-hidden">Alla listor</h2>
+      <ol class="feed">{"".join(cards)}
+      </ol>
+    </section>
+  </div>
+</main>
+'''
+    return page(h, body)
+
+def list_row_html(i, row):
+    prelim, kampanj = row_flags(row)
+    note = str(row.get("anmärkning") or "").strip()
+    note_html = f'<p class="listrow__note"><span class="visually-hidden">Anmärkning: </span>{linkify(note)}</p>' if note else ""
+    d = row["checked"]
+    return f'''
+        <tr id="rad-{i}">
+          <th scope="row"><span class="listmodel">{linkify(row["modell"])}</span>{marks_html(prelim, kampanj)}</th>
+          <td data-label="Värde">{linkify(row["värde"])}{note_html}</td>
+          <td data-label="Källa">{source_link(row["källa"], row["modell"])}</td>
+          <td data-label="Kontrollerad"><time datetime="{d.isoformat()}">{sv_date(d)}</time></td>
+        </tr>'''
+
+def list_page(lst):
+    flags = [row_flags(r) for r in lst["rows"]]
+    crumbs_html, crumbs_ld = breadcrumbs([("Start", "/"), (LISTS_NAME, LISTS_PATH), (lst["title"], lst["path"])])
+    items = []
+    for i, row in enumerate(lst["rows"], 1):
+        desc = row["värde"]
+        note = str(row.get("anmärkning") or "").strip()
+        if note: desc = f"{desc} {note}"
+        items.append({"@type": "ListItem", "position": i, "name": row["modell"], "description": desc,
+                      "url": DOMAIN + lst["path"] + f"#rad-{i}"})
+    extra = ld_script(crumbs_ld) + ld_script({
+        "@context": "https://schema.org", "@type": "ItemList", "name": lst["title"],
+        "numberOfItems": len(items), "itemListElement": items})
+    faq = faq_ld(lst["faq"])
+    if faq: extra += ld_script(faq)
+    h = head(page_title(lst["title"], lst["title"]), lst["ingress"], lst["path"], image=DEFAULT_OG, og_title=lst["title"], extra=extra)
+    rows = "".join(list_row_html(i, row) for i, row in enumerate(lst["rows"], 1))
+    unsure = "".join(f"\n          <li>{linkify(x)}</li>" for x in lst["osakerheter"])
+    d = lst["checked"]
+    body = f'''
+<main id="innehall" class="listpage">
+  <div class="wrap">
+    <header class="listpage__head">
+      {crumbs_html}
+      <h1 class="listpage__title">{nbnum(esc(lst["title"]))}</h1>
+      <p class="listpage__dek">{linkify(lst["ingress"])}</p>
+      <p class="listpage__checked">Senast kontrollerad <time datetime="{d.isoformat()}">{sv_date(d)}</time></p>
+    </header>
+    {legend_html(any(p for p, _k in flags), any(k for _p, k in flags))}
+    <div class="listpage__table">
+      <table class="listtable">
+        <caption>Modell, värde, källa och datum för kontroll.</caption>
+        <thead>
+          <tr>
+            <th scope="col">Modell</th>
+            <th scope="col">Värde</th>
+            <th scope="col">Källa</th>
+            <th scope="col">Kontrollerad</th>
+          </tr>
+        </thead>
+        <tbody>{rows}
+        </tbody>
+      </table>
+    </div>
+    <div class="listpage__after prose">
+      <section aria-labelledby="metod-h">
+        <h2 id="metod-h">Så gjorde vi</h2>
+        <p>{linkify(lst["metod"])}</p>
+      </section>
+      <section aria-labelledby="osaker-h">
+        <h2 id="osaker-h">Osäkerheter</h2>
+        <ul>{unsure}
+        </ul>
+      </section>
+      {list_faq_html(lst["faq"])}
+    </div>
+  </div>
+</main>
+'''
+    return page(h, body)
+
+def write_lists(lists):
+    """Skriv HTML bredvid YAML-filerna. Ta bort gamla listsidor, aldrig själva datan."""
+    root = os.path.join(ROOT, "listor")
+    os.makedirs(root, exist_ok=True)
+    keep = {lst["slug"] for lst in lists}
+    for name in os.listdir(root):
+        path = os.path.join(root, name)
+        if os.path.isdir(path) and name not in keep and re.fullmatch(r"[a-z0-9-]+", name):
+            shutil.rmtree(path)
+    if not lists:
+        idx = os.path.join(root, "index.html")
+        if os.path.isfile(idx): os.remove(idx)
+        return
+    write("listor/index.html", lists_index(lists))
+    for lst in lists: write(f"listor/{lst['slug']}/index.html", list_page(lst))
 
 def legacy_artikel_redirect():
     """/artikel.html är en gammal malladress som Google har crawlat och som svarade 404. En minimal sida pekar om
@@ -2095,6 +2352,7 @@ def main():
     global FEEDS
     arts = load_articles()
     if not arts: raise SystemExit("inga artiklar i content/articles/")
+    LISTS[:] = load_lists()
     pages = load_pages()
     AUTHORS.update(load_authors())
     for a in arts:
@@ -2115,6 +2373,7 @@ def main():
     for a in arts: write(f"artikel/{a['slug']}/index.html", article(a, arts))
     shutil.rmtree(os.path.join(ROOT, GUIDE_PATH.strip("/")), ignore_errors=True)  # inga guider: ingen sida
     if GUIDES: write(GUIDE_PATH.lstrip("/") + "index.html", guides_page(GUIDES))
+    write_lists(LISTS)
     for k in set(TOPIC_DESC) | set(TOPICS):  # ämnen utan artiklar: ingen sida
         if k not in TOPIC_RESERVED and re.fullmatch(r"[a-z0-9-]+", k): shutil.rmtree(os.path.join(ROOT, k), ignore_errors=True)
     for t in TOPICS.values(): write(t["path"].lstrip("/") + "index.html", topic_page(t))
@@ -2132,6 +2391,7 @@ def main():
           + "".join(f"  <url><loc>{DOMAIN}{t['path']}</loc><lastmod>{lastmod(t['path'], t['arts'])}</lastmod></url>\n" for t in TOPICS.values())
           + (f"  <url><loc>{DOMAIN}{SWEDEN['path']}</loc><lastmod>{lastmod(SWEDEN['path'], SWEDEN['arts'])}</lastmod></url>\n" if SWEDEN else "")
           + (f"  <url><loc>{DOMAIN}{GUIDE_PATH}</loc><lastmod>{lastmod(GUIDE_PATH, GUIDES)}</lastmod></url>\n" if GUIDES else "")
+          + lists_sitemap(LISTS)
           + "".join(f"  <url><loc>{DOMAIN}{h['path']}</loc><lastmod>{lastmod(h['path'], h['arts'])}</lastmod></url>\n" for h in HUBS)
           + "".join(f"  <url><loc>{DOMAIN}{p['path']}</loc></url>\n" for p in pages)
           + f"  <url><loc>{DOMAIN}/integritet/</loc></url>\n" + "</urlset>\n")
@@ -2158,11 +2418,12 @@ def main():
         write("push.js", push_src("push.js"))
     print(f"built {len(arts)} artiklar: " + ", ".join(a["slug"] for a in arts))
     print("hubbar: " + (", ".join(h["path"] for h in HUBS) if HUBS else "inga"))
+    print("listor: " + (", ".join(lst["path"] for lst in LISTS) if LISTS else "inga"))
 
 def out_dir(o):
     out = os.path.abspath(o)
     top = os.path.relpath(out, ROOT).split(os.sep)[0]
-    if out == ROOT or ROOT.startswith(out + os.sep) or top in PUBLIC_DIRS + ("artikel", "content", "docs", "drafts", "brand", ".git"):
+    if out == ROOT or ROOT.startswith(out + os.sep) or top in PUBLIC_DIRS + ("artikel", "content", "docs", "drafts", "brand", ".git", "listor"):
         raise SystemExit(f"--out {out}: välj en egen katalog som rensas vid varje bygge (t.ex. _site)")
     return out
 

@@ -1,0 +1,116 @@
+# Motorpuls listsida, utkast till Dr. Webb. Publiceras inte.
+# Kontrollerad 2026-11-23. Inga tankstreck i filen.
+# Fält: title, ingress, faq, rows (modell, värde, värden, källa, kontrollerad).
+slug: elbilar-under-400000
+granskning: 'Granskad 2026-11-23, Godkänd efter ändringar'
+title: Elbilar du kan köpa nya i Sverige under 400 000 kronor
+ingress: Tabellen visar rekommenderade listpriser för instegsversioner, hämtade från tillverkarnas svenska prislistor och modelsidor den 23 november 2026. Alla bilar i listan kostar under 400 000 kronor inklusive moms. Räckvidden anges enligt WLTP, och preliminära värden är märkta.
+faq:
+- fraga: Är listpriset vad jag faktiskt betalar?
+  svar: Inte nödvändigtvis. Siffrorna är tillverkarnas rekommenderade cirkapriser inklusive moms för instegsversionen, om inget annat sägs. Återförsäljaren sätter det slutliga priset. Rabatter, färg, tillval och inbyte räknas inte in här.
+- fraga: Varför anges WLTP och inte vinterräckvidd?
+  svar: WLTP är den officiella räckvidd som tillverkaren redovisar och som går att jämföra mellan modeller. För Citroën ë-C3, Kia EV2 och Hyundai Ioniq 3 är värdet ännu preliminärt enligt tillverkaren, och det står i tabellen. Den är mätt i laboratorium och blir oftast kortare i kyla och på landsväg. Vintervärden finns i en separat lista, men bara för bilar som ingått i publicerade tester.
+- fraga: Vad gäller för kampanjpriser?
+  svar: Škoda Epiq 35 Essence har ett tidsbegränsat erbjudande på 315 900 kronor till och med 15 december 2026. Ordinarie rekommenderat cirkapris är 334 500 kronor enligt Škodas prislista den 30 oktober 2026. I tabellen står båda beloppen.
+- fraga: Finns det fler elbilar under 400 000 kronor?
+  svar: Troligen ja. Rader är utelämnade när ett aktuellt svenskt listpris eller en officiell WLTP-räckvidd inte har kunnat öppnas och verifieras i dag. Det gäller bland annat flera modeller där bara månadspriser eller ofullständiga uppgifter fanns på tillverkarens sida.
+- fraga: Ingår vinterdäck, hemleverans eller premie i priset?
+  svar: Nej. Tabellen visar bara det rekommenderade listpriset för angiven version. Eventuell elbilspremie, extrautrustning, hemleverans och vinterhjul tillkommer eller villkoras separat.
+metod: Varje rad har ett svenskt listpris för instegsversionen och en WLTP-räckvidd från tillverkaren, från en källa som öppnats den 23 november 2026. Preliminära WLTP-värden är märkta i raden. Citroëns pris kommer från sidan Rätt pris direkt och är inte uttryckligen märkt som rekommenderat cirkapris. Primärkällor är tillverkarnas svenska prislistor och modelsidor. Modeller där pris eller räckvidd inte kunde verifieras är utelämnade.
+osakerheter:
+- 'Citroën ë-C3: modelsidan anger räckvidd upp till 320 km enligt WLTP, men märker uppgiften som föremål för godkännande.'
+- 'Kia EV2: modelsidans fotnot säger att all teknisk data är förväntade måltal i väntan på vidareutveckling och homologering. WLTP 317 och 453 km är därför märkta som preliminära. Priserna kommer från Kia Sveriges prislista publicerad 1 november 2026, gällande till 30 november 2026.'
+- 'Škoda Epiq 35 Essence: 315 900 kronor är ett tidsbegränsat erbjudande till och med 15 december 2026. Ordinarie rekommenderat cirkapris är 334 500 kronor.'
+- Flera troliga modeller under 400 000 kronor saknas, bland annat MG4, Fiat Grande Panda, Volkswagen ID. Polo, Nissan Micra, Opel, Peugeot, Mini, Suzuki, Ford Puma Gen-E och Leapmotor B10, eftersom officiellt svenskt listpris och WLTP inte kunde verifieras samtidigt i dag.
+- 'Hyundai Ioniq 3: modelsidan kallar WLTP-räckvidden uppskattad. 344 och 497 km är därför märkta som preliminära.'
+- 'Hyundai Inster: WLTP 327 km kommer från en svensk modellbroschyr daterad december 2024. Prislistan från november 2026 anger inte räckvidd.'
+- Prislistor kan ändras utan förvarning. Datumet för kontroll är 23 november 2026.
+rows:
+- modell: Leapmotor T03
+  värde: 229900 kr. Version Design, el 95 hk. WLTP 265 km.
+  värden:
+    listpris_kr: 229900
+    version: Design, el 95 hk
+    wltp_km: 265
+  källa: https://dokument.leapmotor.se/prislistor/T03.pdf
+  kontrollerad: '2026-11-23'
+  anmärkning: Officiell svensk prislista från Wismo Automotive AB. PDF:n är skapad 12 november 2026. Rekommenderat cirkapris.
+- modell: Citroën ë-C3
+  värde: 299500 kr. Version YOU, 44 kWh, 83 kW. WLTP 320 km, preliminärt (föremål för godkännande).
+  värden:
+    listpris_kr: 299500
+    version: YOU, 44 kWh, 83 kW
+    wltp_km: 320
+    wltp_preliminar: true
+  källa: https://www.citroen.se/kopa/kampanjer/ratt-pris-direkt.html
+  kontrollerad: '2026-11-23'
+  anmärkning: Pris 299 500 kronor från Citroën Sveriges sida Rätt pris direkt, som ligger under kampanjer men beskriver Citroëns ordinarie prissättning. Sidan anger inte version. Enligt modelsidan finns ë-C3 i en utrustningsnivå, YOU. WLTP upp till 320 km och versionen YOU från https://www.citroen.se/modeller/e-c3.html, där räckvidden är märkt som föremål för godkännande.
+- modell: Hyundai Inster
+  värde: 299900 kr. Version 42 kWh Pure. WLTP 327 km.
+  värden:
+    listpris_kr: 299900
+    version: 42 kWh Pure
+    wltp_km: 327
+  källa: https://dmassets.hyundai.com/is/content/hyundaiautoever/Hyundai_Sverige_Prislista_20261102pdf
+  kontrollerad: '2026-11-23'
+  anmärkning: 'Rek. pris 299 900 kronor i Hyundai Sveriges prislista, PDF skapad 3 november 2026. WLTP 327 km för 42 kWh med 15 tums fälgar i den svenska modellbroschyren från december 2024: https://dmassets.hyundai.com/is/content/hyundaiautoever/DIGITAL_INSTER_16122024_1280x720_32p_se_LowRespdf-AFpdf. 49 kWh-versionen har upp till 370 km och högre pris.'
+- modell: Škoda Epiq
+  värde: 315900 kr kampanjpris t.o.m. 15 december 2026, ordinarie 334500 kr. Version Epiq 35 Essence. WLTP 323 km.
+  värden:
+    listpris_kampanj_kr: 315900
+    listpris_ordinarie_kr: 334500
+    kampanj_till: 15 december 2026
+    version: Epiq 35 Essence
+    wltp_km: 323
+  källa: https://www.skoda.se/_doc/27a0bc63-3739-4a33-8621-717265ec48dd
+  kontrollerad: '2026-11-23'
+  anmärkning: Škoda Sveriges prislista den 30 oktober 2026. Kampanjpris 315 900 kronor, ordinarie rekommenderat cirkapris 334 500 kronor, erbjudandet gäller till och med 15 december 2026. WLTP 323 km från https://www.skoda.se/modeller/epiq/epiq, senast uppdaterad 29 oktober 2026.
+- modell: Kia EV2
+  värde: 331900 kr. Version EV2, standardbatteri 42,2 kWh. WLTP 317 km, preliminärt (måltal i väntan på homologering).
+  värden:
+    listpris_kr: 331900
+    version: EV2, standardbatteri 42,2 kWh
+    wltp_km: 317
+    wltp_preliminar: true
+  källa: https://www.kia.com/se/kopa/prislista/
+  kontrollerad: '2026-11-23'
+  anmärkning: Rek. cirkapris 331 900 kronor i Kia Sveriges prislista, publicerad 1 november 2026 och gällande till 30 november 2026. WLTP upp till 317 km för 42,2 kWh från https://www.kia.com/se/nya-bilar/ev2/upptack/. Long Range 61,0 kWh anges till upp till 453 km och kostar från 381 000 kronor, också under 400 000 kronor.
+- modell: Hyundai Ioniq 3
+  värde: 344900 kr. Version Standard Range Select, 42,2 kWh. WLTP 344 km, preliminärt (uppskattat av Hyundai).
+  värden:
+    listpris_kr: 344900
+    version: Standard Range Select, 42,2 kWh
+    wltp_km: 344
+    wltp_preliminar: true
+  källa: https://dmassets.hyundai.com/is/content/hyundaiautoever/Hyundai_Sverige_Prislista_20261102pdf
+  kontrollerad: '2026-11-23'
+  anmärkning: Rek. pris 344 900 kronor i Hyundai Sveriges prislista, PDF skapad 3 november 2026. WLTP upp till 344 km för Standard Range 42,2 kWh från https://www.hyundai.com/se/sv/bilar/ioniq3/rackvidd-laddning.html och modelsidan https://www.hyundai.com/se/sv/bilar/ioniq3.html.
+- modell: Renault 5 E-Tech electric
+  värde: 364900 kr. Version Evolution, 40 kWh, 120 hk. WLTP 320 km.
+  värden:
+    listpris_kr: 364900
+    version: Evolution, 40 kWh, 120 hk
+    wltp_km: 320
+  källa: https://edge.sitecorecloud.io/hedinitaban27a1-hedin8837-prod5c4b-4604/media/project/hedin/distribution-cars/renaultsesite/cardocuments/prislista-renault-5-e-tech-electric.pdf
+  kontrollerad: '2026-11-23'
+  anmärkning: Rek. cirkaprislista gällande från 10 november 2026, avser bilar från oktober 2026-produktion. Homologerad WLTP blandad körning 320 km för Evolution.
+- modell: Kia EV2 Long Range
+  värde: 381000 kr. Version EV2 Long Range, 61,0 kWh. WLTP 453 km, preliminärt (måltal i väntan på homologering).
+  värden:
+    listpris_kr: 381000
+    version: EV2 Long Range, 61,0 kWh
+    wltp_km: 453
+    wltp_preliminar: true
+  källa: https://www.kia.com/se/kopa/prislista/
+  kontrollerad: '2026-11-23'
+  anmärkning: Rek. cirkapris 381 000 kronor i Kia Sveriges prislista, publicerad 1 november 2026 och gällande till 30 november 2026. WLTP upp till 453 km för 61,0 kWh från https://www.kia.com/se/nya-bilar/ev2/upptack/.
+- modell: Hyundai Ioniq 3 Long Range Select
+  värde: 394900 kr. Version Long Range Select, 61 kWh. WLTP 497 km, preliminärt (uppskattat av Hyundai).
+  värden:
+    listpris_kr: 394900
+    version: Long Range Select, 61 kWh
+    wltp_km: 497
+    wltp_preliminar: true
+  källa: https://dmassets.hyundai.com/is/content/hyundaiautoever/Hyundai_Sverige_Prislista_20261102pdf
+  kontrollerad: '2026-11-23'
+  anmärkning: Rek. pris 394 900 kronor i Hyundai Sveriges prislista, PDF skapad 3 november 2026. WLTP upp till 497 km för Long Range 61 kWh från https://www.hyundai.com/se/sv/bilar/ioniq3/rackvidd-laddning.html. Dyrare Long Range-utföranden ligger över 400 000 kronor.
