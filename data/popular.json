@@ -1,11 +1,7 @@
 {
-  "updated": "2026-11-22T12:01+01:00",
+  "updated": "2026-11-23T13:01+01:00",
   "source": "umami",
   "articles": [
-    {
-      "slug": "byd-privatleasing-black-week",
-      "views": 11
-    },
     {
       "slug": "vinterdack-vad-galler",
       "views": 9
@@ -15,24 +11,12 @@
       "views": 3
     },
     {
-      "slug": "polisens-radarbilar-hela-sverige",
+      "slug": "volkswagen-q3-forlust-porsche-nedskrivning",
       "views": 3
     },
     {
-      "slug": "tesla-cybertruck-avvecklas-cybercab",
-      "views": 2
-    },
-    {
-      "slug": "laddkostnad-elbil-hemma-supercharger",
-      "views": 2
-    },
-    {
-      "slug": "sista-koenigsegg-jesko-125-medvedev",
-      "views": 2
-    },
-    {
-      "slug": "porsche-macan-bensin-namn-2028",
-      "views": 2
+      "slug": "byd-privatleasing-black-week",
+      "views": 3
     },
     {
       "slug": "bmw-m3-el-fyra-motorer",
@@ -43,28 +27,28 @@
       "views": 2
     },
     {
-      "slug": "stellantis-aterkallelse-dorrar-last-krock",
+      "slug": "tesla-supercharger-sverige-symbioen",
       "views": 2
     },
     {
-      "slug": "tesla-model-3-y-sist-goca-besiktning",
-      "views": 1
+      "slug": "polisens-radarbilar-hela-sverige",
+      "views": 2
     },
     {
-      "slug": "tesla-semi-brand-i-880-hayward",
-      "views": 1
-    },
-    {
-      "slug": "vinterdack-bot-dubbdacksforbud-stockholm",
-      "views": 1
-    },
-    {
-      "slug": "volkswagen-q3-forlust-porsche-nedskrivning",
-      "views": 1
+      "slug": "porsche-macan-bensin-namn-2028",
+      "views": 2
     },
     {
       "slug": "vw-12-euro-per-bil-tesla-cam",
-      "views": 1
+      "views": 2
+    },
+    {
+      "slug": "laddkostnad-elbil-hemma-supercharger",
+      "views": 2
+    },
+    {
+      "slug": "tesla-cybertruck-avvecklas-cybercab",
+      "views": 2
     },
     {
       "slug": "waymo-forbjuds-motorvagar-kalifornien",
@@ -75,15 +59,11 @@
       "views": 1
     },
     {
-      "slug": "adac-nodbroms-barn-reflexer",
-      "views": 1
-    },
-    {
-      "slug": "antonelli-yngste-varldsmastare-f1",
-      "views": 1
-    },
-    {
       "slug": "arets-bil-2027-bara-elbilar-volvo-ex60",
+      "views": 1
+    },
+    {
+      "slug": "adac-nodbroms-barn-reflexer",
       "views": 1
     },
     {
@@ -96,10 +76,6 @@
     },
     {
       "slug": "bmw-m350-drift-moment-juli-2027",
-      "views": 1
-    },
-    {
-      "slug": "e4-forbifart-stockholm-oppnar-6-december",
       "views": 1
     },
     {
@@ -124,6 +100,26 @@
     },
     {
       "slug": "road-works-warning-vagarbete-varning-bilen",
+      "views": 1
+    },
+    {
+      "slug": "stellantis-aterkallelse-dorrar-last-krock",
+      "views": 1
+    },
+    {
+      "slug": "tesla-model-3-y-sist-goca-besiktning",
+      "views": 1
+    },
+    {
+      "slug": "tesla-semi-brand-i-880-hayward",
+      "views": 1
+    },
+    {
+      "slug": "vinterdack-bot-dubbdacksforbud-stockholm",
+      "views": 1
+    },
+    {
+      "slug": "antonelli-yngste-varldsmastare-f1",
       "views": 1
     }
   ]

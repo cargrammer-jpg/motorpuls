@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Sverige på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Sat, 21 Nov 2026 15:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Mon, 23 Nov 2026 12:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/sverige.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Nästan varannan ansökan om elbilspremien får nej av Naturvårdsverket</title>
+    <link>https://motorpuls.se/artikel/elbilspremien-avslag-naturvardsverket/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/elbilspremien-avslag-naturvardsverket/</guid>
+    <pubDate>Mon, 23 Nov 2026 12:00:00 +0100</pubDate>
+    <category>Elbil</category>
+    <description>Naturvårdsverket har sagt nej till 13 028 av 28 262 ansökningar om elbilspremien. Hushåll med en person får sällan ja, och de flesta som får stödet köper en begagnad elbil.</description>
+    <enclosure url="https://motorpuls.se/img/og/elbilspremien-avslag-naturvardsverket.jpg" length="173074" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/elbilspremien-avslag-naturvardsverket.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="173074"/>
+  </item>
   <item>
     <title>Italien blir tolfte EU-landet som tillåter Teslas förarstöd</title>
     <link>https://motorpuls.se/artikel/tesla-assisted-driving-italien-tolfte-eu-landet/</link>
