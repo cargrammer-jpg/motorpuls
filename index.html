@@ -159,6 +159,12 @@ box-shadow:0 0 0 1px var(--line),0 40px 80px -40px rgb(255 91 31 / .25)}
 .site-footer .fine{font-family:var(--mono);font-size:.72rem;color:var(--muted);margin-top:2.5rem;border-top:1px solid var(--line);padding-top:1rem}
 .site-footer .site-footer__contact a{color:var(--muted);text-underline-offset:.2em;text-decoration-color:var(--line-strong)}
 .site-footer .site-footer__contact a:hover{color:var(--text)}
+.site-footer__social{margin-top:1.25rem}
+.site-footer__social ul{display:flex;flex-wrap:wrap;gap:.5rem}
+.site-footer__social a{display:inline-flex;align-items:center;justify-content:center;width:2.75rem;height:2.75rem;border:1px solid var(--line-strong);border-radius:999px;color:var(--text);text-decoration:none;background:transparent;transition:color .18s var(--ease),border-color .18s var(--ease),background-color .18s var(--ease)}
+.site-footer__social a:hover{color:#fff;border-color:var(--pulse);background:var(--raised)}
+.site-footer__social a:focus-visible{outline:2px solid var(--pulse-text);outline-offset:2px}
+.site-footer__social svg{width:1.05rem;height:1.05rem;flex:none}
 .article{padding-block:clamp(1.5rem,4vw,3.5rem) clamp(3rem,7vw,6rem)}
 .article__col{max-width:40rem;margin-inline:auto}
 .article__head{display:grid;gap:1rem}
@@ -419,7 +425,27 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
 .catpage__head{display:grid;gap:1rem;max-width:48rem}
 .catpage__title{font-size:clamp(2rem,1rem + 4vw,3.5rem);line-height:1;font-weight:820;font-stretch:115%;letter-spacing:-.035em;color:#fff}
 .catpage__dek{font-family:var(--serif);font-size:clamp(1.05rem,.95rem + .45vw,1.2rem);line-height:1.5;color:var(--text-2);text-wrap:pretty;max-width:40rem}
+.catpage__links{font-size:.95rem;line-height:1.45;color:var(--text-2);max-width:40rem}
+.catpage__links a{color:var(--text);font-weight:700;text-decoration:underline;text-decoration-color:var(--pulse);text-underline-offset:.18em}
+.catpage__links a:hover{color:#fff}
 .catpage__list{padding-block:1.5rem 0;margin-top:1rem;border-top:1px solid var(--line-strong)}
+.catpage--hub .item p{display:block}
+.hub-facts{display:grid;gap:.85rem;margin:0;max-width:40rem}
+.hub-facts div{display:grid;gap:.2rem}
+.hub-facts dt{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.hub-facts dd{margin:0;font-family:var(--serif);font-size:1.02rem;line-height:1.45;color:var(--text-2);text-wrap:pretty}
+.guide-themes{display:grid;gap:2.25rem}
+.guide-theme>h2{font-size:clamp(1.25rem,1rem + 1vw,1.6rem);line-height:1.15;font-weight:760;font-stretch:112%;letter-spacing:-.02em;color:#fff;padding-bottom:.55rem;border-bottom:1px solid var(--line)}
+.guide-theme .feed{margin-top:.25rem}
+.article-tags{margin-top:1.75rem}
+.article-tags__list{display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;list-style:none}
+.article-tags a.chip{text-decoration:none}
+.guide-box{margin-top:1.75rem;padding:1rem 1.15rem;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--pulse);border-radius:0 var(--radius) var(--radius) 0;display:grid;gap:.35rem}
+.guide-box__kicker{font-family:var(--mono);font-size:.74rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--pulse-text)}
+.guide-box__title{font-size:1.05rem;line-height:1.3;font-weight:720;font-stretch:108%;letter-spacing:-.015em}
+.guide-box__title a{color:var(--text);text-decoration:underline;text-decoration-color:var(--line-strong);text-underline-offset:.14em}
+.guide-box__title a:hover{text-decoration-color:var(--pulse)}
+.guide-box__dek{font-family:var(--serif);font-size:.95rem;line-height:1.45;color:var(--text-2);text-wrap:pretty}
 .related{border-top:1px solid var(--line-strong);padding-top:1rem;margin-top:.5rem}
 .related h2{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:.5rem;color:var(--text)}
 .related__list{list-style:none;margin:1rem 0 0;padding:0;display:grid;gap:1rem}
@@ -441,6 +467,49 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
 @media (hover:hover){
 .related__card a:hover .related__frame{transform:translateY(-3px);box-shadow:0 0 0 1px var(--line-strong),0 22px 40px -22px rgb(255 91 31 / .45)}
 .related__card a:hover .related__frame img{transform:scale(1.05)}
+}
+.listpage{padding-block:clamp(1.5rem,4vw,3.5rem) clamp(3rem,7vw,6rem)}
+.listpage__head{display:grid;gap:1rem;max-width:48rem}
+.listpage__title{font-size:clamp(1.85rem,1rem + 3.2vw,3.15rem);line-height:1.02;font-weight:820;font-stretch:115%;letter-spacing:-.035em;color:#fff}
+.listpage__dek{font-family:var(--serif);font-size:clamp(1.05rem,.95rem + .45vw,1.2rem);line-height:1.5;color:var(--text-2);text-wrap:pretty;max-width:42rem}
+.listpage__dek a,.listpage__after a.listsrc{overflow-wrap:anywhere}
+.listpage__checked{font-family:var(--mono);font-size:.85rem;color:var(--text-2)}
+.listlegend{margin-top:1.75rem;max-width:48rem}
+.listlegend h2{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff}
+.listlegend ul{list-style:none;margin:.75rem 0 0;padding:0;display:grid;gap:.65rem}
+.listlegend li{display:flex;flex-wrap:wrap;align-items:baseline;gap:.35rem .7rem;color:var(--text);line-height:1.45}
+.listpage__table{margin-top:1.5rem;min-width:0}
+.listtable{width:100%;border-collapse:collapse;font-size:.9375rem;line-height:1.45}
+.listtable caption{display:block;width:100%;caption-side:top;text-align:left;padding:0 0 .75rem;font-family:var(--mono);font-size:.8rem;line-height:1.4;color:var(--text-2);text-wrap:pretty}
+.listtable th,.listtable td{text-align:left;vertical-align:top;padding:.85rem .75rem;border-bottom:1px solid var(--line);overflow-wrap:anywhere}
+.listtable thead th{color:#fff;font-weight:700;background:var(--surface)}
+.listtable tbody th{color:#fff;font-weight:700}
+.listmodel{display:block}
+.listmarks{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.45rem}
+.listmark{display:inline-block;padding:.12rem .45rem;border:1px solid var(--line-strong);border-radius:var(--radius);background:var(--raised);color:var(--text);font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1.4}
+.listmark--prelim{border-style:dashed}
+.listmark--kampanj{border-style:solid;border-color:var(--pulse-text)}
+.listrow__note{margin-top:.45rem;font-size:.85rem;line-height:1.45;color:var(--text-2)}
+.listsrc{color:var(--pulse-text);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.18em}
+.listsrc::after{content:" ↗";color:var(--muted);text-decoration:none}
+.listpage__after{max-width:42rem;margin-top:2.5rem}
+.listpage__after .faq{margin-top:2rem}
+@media (min-width:64rem){
+.listtable{table-layout:fixed}
+.listtable th:nth-child(1){width:22%}
+.listtable th:nth-child(2){width:48%}
+.listtable th:nth-child(3){width:15%}
+.listtable th:nth-child(4){width:15%}
+}
+@media (max-width:63.99rem){
+.listtable,.listtable tbody,.listtable tr,.listtable th,.listtable td{display:block;width:auto}
+.listtable{border-collapse:separate;border-spacing:0}
+.listtable thead{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+.listtable tr{margin-bottom:.75rem;padding:.9rem 1rem;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius)}
+.listtable th,.listtable td{border:0;padding:.4rem 0}
+.listtable tbody th{font-size:1.05rem;padding-bottom:.15rem}
+.listtable tbody th::before,.listtable td::before{content:attr(data-label);display:block;margin-bottom:.15rem;font-family:var(--mono);font-size:.72rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--text-2)}
+.listtable tbody th::before{content:"Modell"}
 }</style>
 <script src="/js/site.js?v=9b04458239" defer></script>
 <link rel="icon" href="/favicon/favicon.ico" sizes="48x48">
@@ -450,18 +519,18 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
 <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png">
 <link rel="manifest" href="/favicon/site.webmanifest">
 <link rel="alternate" type="application/rss+xml" title="Motorpuls" href="/feed.xml">
-<link rel="alternate" type="application/rss+xml" title="Motorpuls: Sportbil" href="/feed/sportbil.xml">
-<link rel="alternate" type="application/rss+xml" title="Motorpuls: Tesla" href="/feed/tesla.xml">
-<link rel="alternate" type="application/rss+xml" title="Motorpuls: Trafik och säkerhet" href="/feed/trafik-och-sakerhet.xml">
 <link rel="alternate" type="application/rss+xml" title="Motorpuls: Elbil" href="/feed/elbil.xml">
+<link rel="alternate" type="application/rss+xml" title="Motorpuls: Tesla" href="/feed/tesla.xml">
+<link rel="alternate" type="application/rss+xml" title="Motorpuls: Motorsport" href="/feed/motorsport.xml">
+<link rel="alternate" type="application/rss+xml" title="Motorpuls: Trafik och säkerhet" href="/feed/trafik-och-sakerhet.xml">
+<link rel="alternate" type="application/rss+xml" title="Motorpuls: Sportbil" href="/feed/sportbil.xml">
 <link rel="alternate" type="application/rss+xml" title="Motorpuls: Guider" href="/feed/guider.xml">
 <link rel="alternate" type="application/rss+xml" title="Motorpuls: Bränsle" href="/feed/bransle.xml">
-<link rel="alternate" type="application/rss+xml" title="Motorpuls: Motorsport" href="/feed/motorsport.xml">
 <link rel="alternate" type="application/rss+xml" title="Motorpuls: Sverige" href="/feed/sverige.xml">
 <link rel="preload" href="/fonts/newsreader-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" as="image" href="/img/articles/koenigsegg-65-equity-partners-14-miljarder/koenigsegg-gemera-auto-zurich-2023.webp" imagesrcset="/img/articles/koenigsegg-65-equity-partners-14-miljarder/koenigsegg-gemera-auto-zurich-2023-400.webp 400w, /img/articles/koenigsegg-65-equity-partners-14-miljarder/koenigsegg-gemera-auto-zurich-2023-800.webp 800w" imagesizes="calc(100vw - 2.5rem)" media="(max-width: 40rem)" fetchpriority="high">
-<link rel="preload" as="image" href="/img/articles/koenigsegg-65-equity-partners-14-miljarder/koenigsegg-gemera-auto-zurich-2023.webp" imagesrcset="/img/articles/koenigsegg-65-equity-partners-14-miljarder/koenigsegg-gemera-auto-zurich-2023-400.webp 400w, /img/articles/koenigsegg-65-equity-partners-14-miljarder/koenigsegg-gemera-auto-zurich-2023-800.webp 800w, /img/articles/koenigsegg-65-equity-partners-14-miljarder/koenigsegg-gemera-auto-zurich-2023-1200.webp 1200w, /img/articles/koenigsegg-65-equity-partners-14-miljarder/koenigsegg-gemera-auto-zurich-2023.webp 1600w" imagesizes="(min-width: 60rem) 38rem, calc(100vw - 2.5rem)" media="not all and (max-width: 40rem)" fetchpriority="high">
+<link rel="preload" as="image" href="/img/articles/elbilspremien-avslag-naturvardsverket/laddstation-lysekil.webp" imagesrcset="/img/articles/elbilspremien-avslag-naturvardsverket/laddstation-lysekil-400.webp 400w, /img/articles/elbilspremien-avslag-naturvardsverket/laddstation-lysekil-800.webp 800w" imagesizes="calc(100vw - 2.5rem)" media="(max-width: 40rem)" fetchpriority="high">
+<link rel="preload" as="image" href="/img/articles/elbilspremien-avslag-naturvardsverket/laddstation-lysekil.webp" imagesrcset="/img/articles/elbilspremien-avslag-naturvardsverket/laddstation-lysekil-400.webp 400w, /img/articles/elbilspremien-avslag-naturvardsverket/laddstation-lysekil-800.webp 800w, /img/articles/elbilspremien-avslag-naturvardsverket/laddstation-lysekil-1200.webp 1200w, /img/articles/elbilspremien-avslag-naturvardsverket/laddstation-lysekil.webp 1600w" imagesizes="(min-width: 60rem) 38rem, calc(100vw - 2.5rem)" media="not all and (max-width: 40rem)" fetchpriority="high">
 <style>/* Nyhetsbrevsrutan i sidfoten (förhandsvisning, NEWSLETTER_BOX i build.py). Laddas bara när flaggan är på.
    Smälter in: mörk panel var(--surface) med 1px hårlinje var(--line), orange bara som accent (2px topplinje, etikett i
    pulse-text #FF8A5C 6,6:1, orange knapp med mörk text 6,3:1, orange fokusring). Typografi som sidfoten (sans, text-2 #C3CAD1 10:1,
@@ -511,7 +580,7 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
 </style>
 <noscript><style>.nlf__form{display:none}</style></noscript>
 <script src="/nyhetsbrev.js?v=c6b7ceb958" defer></script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://motorpuls.se/#website", "name": "Motorpuls", "url": "https://motorpuls.se/", "description": "Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.", "inLanguage": "sv-SE", "publisher": {"@id": "https://motorpuls.se/#organization"}}, {"@type": "NewsMediaOrganization", "@id": "https://motorpuls.se/#organization", "name": "Motorpuls", "url": "https://motorpuls.se/", "email": "hello@motorpuls.se", "logo": {"@type": "ImageObject", "url": "https://motorpuls.se/favicon/android-chrome-512.png", "width": 512, "height": 512}, "publishingPrinciples": "https://motorpuls.se/om/", "description": "Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor."}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://motorpuls.se/#website", "name": "Motorpuls", "url": "https://motorpuls.se/", "description": "Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.", "inLanguage": "sv-SE", "publisher": {"@id": "https://motorpuls.se/#organization"}}, {"@type": "NewsMediaOrganization", "@id": "https://motorpuls.se/#organization", "name": "Motorpuls", "url": "https://motorpuls.se/", "email": "hello@motorpuls.se", "logo": {"@type": "ImageObject", "url": "https://motorpuls.se/favicon/android-chrome-512.png", "width": 512, "height": 512}, "publishingPrinciples": "https://motorpuls.se/om/", "sameAs": ["https://www.tiktok.com/@motorpuls.se"], "description": "Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor."}]}</script>
 <meta name="google-adsense-account" content="ca-pub-7329870923296365">
 <script>(function(){var loaded=false,src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7329870923296365";function load(){if(loaded)return;loaded=true;var s=document.createElement("script");s.async=true;s.src=src;s.crossOrigin="anonymous";document.head.appendChild(s);}["pointerdown","keydown","touchstart","scroll"].forEach(function(ev){addEventListener(ev,load,{once:true,passive:true,capture:true});});function later(){setTimeout(function(){if("requestIdleCallback" in window)requestIdleCallback(load,{timeout:2000});else load();},8000);}if(document.readyState==="complete")later();else addEventListener("load",later,{once:true});})();</script>
 
@@ -531,55 +600,55 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
     <h1 class="visually-hidden">Motorpuls, senaste bilnyheterna</h1>
     <div class="hero-grid">
     <article class="lead lead--img">
-      <a href="/artikel/koenigsegg-65-equity-partners-14-miljarder/">
-        <figure class="lead__media"><div class="lead__frame"><picture><source media="(max-width: 40rem)" srcset="/img/articles/koenigsegg-65-equity-partners-14-miljarder/koenigsegg-gemera-auto-zurich-2023-400.webp 400w, /img/articles/koenigsegg-65-equity-partners-14-miljarder/koenigsegg-gemera-auto-zurich-2023-800.webp 800w" sizes="calc(100vw - 2.5rem)"><img src="/img/articles/koenigsegg-65-equity-partners-14-miljarder/koenigsegg-gemera-auto-zurich-2023.webp" srcset="/img/articles/koenigsegg-65-equity-partners-14-miljarder/koenigsegg-gemera-auto-zurich-2023-400.webp 400w, /img/articles/koenigsegg-65-equity-partners-14-miljarder/koenigsegg-gemera-auto-zurich-2023-800.webp 800w, /img/articles/koenigsegg-65-equity-partners-14-miljarder/koenigsegg-gemera-auto-zurich-2023-1200.webp 1200w, /img/articles/koenigsegg-65-equity-partners-14-miljarder/koenigsegg-gemera-auto-zurich-2023.webp 1600w" sizes="(min-width: 60rem) 38rem, calc(100vw - 2.5rem)" width="1600" height="1067" alt="Bakpartiet på en grön Koenigsegg Gemera på bilmässan Auto Zürich 2023" fetchpriority="high"></picture></div><figcaption>Foto: Alexander-93, Wikimedia Commons</figcaption></figure>
+      <a href="/artikel/elbilspremien-avslag-naturvardsverket/">
+        <figure class="lead__media"><div class="lead__frame"><picture><source media="(max-width: 40rem)" srcset="/img/articles/elbilspremien-avslag-naturvardsverket/laddstation-lysekil-400.webp 400w, /img/articles/elbilspremien-avslag-naturvardsverket/laddstation-lysekil-800.webp 800w" sizes="calc(100vw - 2.5rem)"><img src="/img/articles/elbilspremien-avslag-naturvardsverket/laddstation-lysekil.webp" srcset="/img/articles/elbilspremien-avslag-naturvardsverket/laddstation-lysekil-400.webp 400w, /img/articles/elbilspremien-avslag-naturvardsverket/laddstation-lysekil-800.webp 800w, /img/articles/elbilspremien-avslag-naturvardsverket/laddstation-lysekil-1200.webp 1200w, /img/articles/elbilspremien-avslag-naturvardsverket/laddstation-lysekil.webp 1600w" sizes="(min-width: 60rem) 38rem, calc(100vw - 2.5rem)" width="1600" height="1067" alt="Svart elbil kopplad till en laddstolpe på en parkering i hamnen i Lysekil" fetchpriority="high"></picture></div><figcaption>Foto: W.carter, Wikimedia Commons</figcaption></figure>
         <div class="lead__body">
           <div class="lead__kicker"><span class="hero__label"><span class="pulse-dot" aria-hidden="true"></span>Senaste nytt</span>
-          <span class="meta"><span class="tag">Sportbil</span><time datetime="2026-11-20T18:00:00+01:00">20 november 2026</time></span></div>
-          <h2 class="lead__title">Koenigsegg får ny delägare och värderas till över 14 miljarder kronor</h2>
-          <p class="lead__dek">Investmentbolaget 65 Equity Partners, som ägs av Singapores statliga Temasek, blir delägare i Koenigsegg. Affären värderar hyperbilstillverkaren i Ängelholm till cirka 14,4 miljarder kronor, enligt Bloomberg.</p>
+          <span class="meta"><span class="tag">Elbil</span><time datetime="2026-11-23T12:00:00+01:00">23 november 2026</time></span></div>
+          <h2 class="lead__title">Nästan varannan ansökan om elbilspremien får nej av Naturvårdsverket</h2>
+          <p class="lead__dek">Naturvårdsverket har sagt nej till 13 028 av 28 262 ansökningar om elbilspremien. Hushåll med en person får sällan ja, och de flesta som får stödet köper en begagnad elbil.</p>
           <span class="lead__more">Läs artikeln <span aria-hidden="true">→</span></span>
         </div>
       </a>
     </article>
-      <aside class="latest" aria-labelledby="latest-h"><h2 id="latest-h"><span class="pulse-dot" aria-hidden="true"></span>Senaste</h2><ol><li><a href="/artikel/tesla-model-y-utan-ratt-pedaler/"><span class="meta"><span class="tag">Tesla</span><time datetime="2026-11-20T15:00:00+01:00">20 november 2026</time></span><h3>Tesla planerar en Model Y utan ratt och pedaler för familjer</h3></a></li><li><a href="/artikel/konsumentkreditlag-billan-20-november/"><span class="meta"><span class="tag">Trafik och säkerhet</span><time datetime="2026-11-20T12:00:00+01:00">20 november 2026</time></span><h3>Ny lag skärper kraven på billån från den 20 november</h3></a></li><li><a href="/artikel/tesla-assisted-driving-finland-rdw-uppdatering/"><span class="meta"><span class="tag">Tesla</span><time datetime="2026-11-20T07:00:00+01:00">20 november 2026</time></span><h3>Teslas förarstöd ska kräva händerna på ratten över 130 km/h</h3></a></li><li><a href="/artikel/euro-ncap-nissan-leaf-fyra-stjarnor-skoda-peaq/"><span class="meta"><span class="tag">Trafik och säkerhet</span><time datetime="2026-11-20T04:40:00+01:00">20 november 2026</time></span><h3>Nya Nissan Leaf missar fem stjärnor i Euro NCAP:s säkerhetstest</h3></a></li><li><a href="/artikel/waymo-forbjuds-motorvagar-kalifornien/"><span class="meta"><span class="tag">Trafik och säkerhet</span><time datetime="2026-11-18T22:10:00+01:00">18 november 2026</time></span><h3>Kalifornien förbjuder Waymos förarlösa taxibilar på motorvägarna</h3></a></li></ol></aside>
+      <aside class="latest" aria-labelledby="latest-h"><h2 id="latest-h"><span class="pulse-dot" aria-hidden="true"></span>Senaste</h2><ol><li><a href="/artikel/tesla-supercharger-sverige-symbioen/"><span class="meta"><span class="tag">Tesla</span><time datetime="2026-11-22T07:00:00+01:00">22 november 2026</time></span><h3>Teslas snabbladdare i Sverige lyckas i 92,6 procent av laddningarna</h3></a></li><li><a href="/artikel/f1-v8-2030-overens-fia/"><span class="meta"><span class="tag">Motorsport</span><time datetime="2026-11-21T18:00:00+01:00">21 november 2026</time></span><h3>Alla i Formel 1 är överens om V8-motorer med turbo från 2030</h3></a></li><li><a href="/artikel/tesla-assisted-driving-italien-tolfte-eu-landet/"><span class="meta"><span class="tag">Tesla</span><time datetime="2026-11-21T15:00:00+01:00">21 november 2026</time></span><h3>Italien blir tolfte EU-landet som tillåter Teslas förarstöd</h3></a></li><li><a href="/artikel/sms-vem-ager-fordonet-49-ore-2027/"><span class="meta"><span class="tag">Trafik och säkerhet</span><time datetime="2026-11-21T12:00:00+01:00">21 november 2026</time></span><h3>Sms om vem som äger en bil kostar 49 öre från 1 januari 2027</h3></a></li><li><a href="/artikel/tesla-laddkarta-2026-44-1-europa/"><span class="meta"><span class="tag">Tesla</span><time datetime="2026-11-21T07:00:00+01:00">21 november 2026</time></span><h3>Tesla visar fler snabbladdare från andra bolag i bilens karta i Europa</h3></a></li></ol></aside>
     </div>
     <section class="pop" aria-labelledby="pop-h">
       <h2 id="pop-h"><span class="pulse-dot" aria-hidden="true"></span>Populärt just nu</h2>
       <ol class="pop__list">
         <li class="pop__card">
-          <a href="/artikel/polestar-3-arn-havning-ombordladdare/">
-            <figure class="pop__media"><div class="pop__frame"><img src="/img/articles/polestar-3-arn-havning-ombordladdare/polestar-3-iaa-2023.webp" srcset="/img/articles/polestar-3-arn-havning-ombordladdare/polestar-3-iaa-2023-400.webp 400w, /img/articles/polestar-3-arn-havning-ombordladdare/polestar-3-iaa-2023-800.webp 800w, /img/articles/polestar-3-arn-havning-ombordladdare/polestar-3-iaa-2023-1200.webp 1200w, /img/articles/polestar-3-arn-havning-ombordladdare/polestar-3-iaa-2023.webp 1600w" sizes="(min-width: 60rem) 17rem, (min-width: 40rem) 30vw, 46vw" width="1600" height="1067" alt="Svart Polestar 3 utställd på bilmässan IAA i München 2023." loading="lazy" decoding="async"></div><figcaption class="item__credit">Foto: Alexander-93, Wikimedia Commons</figcaption></figure>
-            <div class="pop__body">
-              <span class="meta"><span class="pop__rank" aria-hidden="true">01</span><span class="tag">Elbil</span></span>
-              <h3>Polestar 3 för 974 000 kronor får lämnas tillbaka efter laddfel</h3>
-            </div>
-          </a>
-        </li>
-        <li class="pop__card">
-          <a href="/artikel/vw-12-euro-per-bil-tesla-cam/">
-            <figure class="pop__media"><div class="pop__frame"><img src="/img/articles/vw-12-euro-per-bil-tesla-cam/wolfsburg-vw-werk.webp" srcset="/img/articles/vw-12-euro-per-bil-tesla-cam/wolfsburg-vw-werk-400.webp 400w, /img/articles/vw-12-euro-per-bil-tesla-cam/wolfsburg-vw-werk-800.webp 800w, /img/articles/vw-12-euro-per-bil-tesla-cam/wolfsburg-vw-werk-1200.webp 1200w, /img/articles/vw-12-euro-per-bil-tesla-cam/wolfsburg-vw-werk.webp 1600w" sizes="(min-width: 60rem) 17rem, (min-width: 40rem) 30vw, 46vw" width="1600" height="1200" alt="Volkswagens fabrik i Wolfsburg med de karaktäristiska skorstenarna" loading="lazy" decoding="async"></div><figcaption class="item__credit">Foto: Gerd Eichmann, Wikimedia Commons</figcaption></figure>
-            <div class="pop__body">
-              <span class="meta"><span class="pop__rank" aria-hidden="true">02</span><span class="tag">Elbil</span></span>
-              <h3>Engångskostnader pressar Volkswagens vinst till 12 euro per bil</h3>
-            </div>
-          </a>
-        </li>
-        <li class="pop__card">
-          <a href="/artikel/tesla-cybercab-privat-299-dollar-manad/">
-            <figure class="pop__media"><div class="pop__frame"><img src="/img/articles/tesla-cybercab-privat-299-dollar-manad/cybercab-76.webp" srcset="/img/articles/tesla-cybercab-privat-299-dollar-manad/cybercab-76-400.webp 400w, /img/articles/tesla-cybercab-privat-299-dollar-manad/cybercab-76-800.webp 800w, /img/articles/tesla-cybercab-privat-299-dollar-manad/cybercab-76-1200.webp 1200w, /img/articles/tesla-cybercab-privat-299-dollar-manad/cybercab-76.webp 1600w" sizes="(min-width: 60rem) 17rem, (min-width: 40rem) 30vw, 46vw" width="1600" height="900" alt="Guldfärgad Tesla Cybercab med båda fjärilsdörrarna öppna, parkerad på en gata." loading="lazy" decoding="async"></div><figcaption class="item__credit">Foto: Courtesy of Tesla, Inc.</figcaption></figure>
-            <div class="pop__body">
-              <span class="meta"><span class="pop__rank" aria-hidden="true">03</span><span class="tag">Tesla</span></span>
-              <h3>Tesla säljer Cybercab till inbjudna kunder i USA, med abonnemang</h3>
-            </div>
-          </a>
-        </li>
-        <li class="pop__card">
           <a href="/artikel/vinterdack-vad-galler/">
             <figure class="pop__media"><div class="pop__frame"><img src="/img/articles/vinterdack-vad-galler/alptopp-snoflinga-markning.webp" srcset="/img/articles/vinterdack-vad-galler/alptopp-snoflinga-markning-400.webp 400w, /img/articles/vinterdack-vad-galler/alptopp-snoflinga-markning-800.webp 800w, /img/articles/vinterdack-vad-galler/alptopp-snoflinga-markning-1200.webp 1200w, /img/articles/vinterdack-vad-galler/alptopp-snoflinga-markning.webp 1400w" sizes="(min-width: 60rem) 17rem, (min-width: 40rem) 30vw, 46vw" width="1400" height="850" alt="Närbild på ett vinterdäck där symbolen alptopp och snöflinga syns i sidoväggen, ett berg med tre toppar och en snöflinga." loading="lazy" decoding="async"></div><figcaption class="item__credit">Foto: Arizonaman1 / Wikimedia Commons (CC BY-SA 4.0)</figcaption></figure>
             <div class="pop__body">
-              <span class="meta"><span class="pop__rank" aria-hidden="true">04</span><span class="tag">Trafik och säkerhet</span></span>
+              <span class="meta"><span class="pop__rank" aria-hidden="true">01</span><span class="tag">Trafik och säkerhet</span></span>
               <h3>Lagen kräver vinterdäck från 1 december till 31 mars vid vinterväglag</h3>
+            </div>
+          </a>
+        </li>
+        <li class="pop__card">
+          <a href="/artikel/volkswagen-golf-hybrid-pris-id-golf-pausas/">
+            <figure class="pop__media"><div class="pop__frame"><img src="/img/articles/volkswagen-golf-hybrid-pris-id-golf-pausas/vw-golf-t-roc-hybrid-press.webp" srcset="/img/articles/volkswagen-golf-hybrid-pris-id-golf-pausas/vw-golf-t-roc-hybrid-press-400.webp 400w, /img/articles/volkswagen-golf-hybrid-pris-id-golf-pausas/vw-golf-t-roc-hybrid-press-800.webp 800w, /img/articles/volkswagen-golf-hybrid-pris-id-golf-pausas/vw-golf-t-roc-hybrid-press-1200.webp 1200w, /img/articles/volkswagen-golf-hybrid-pris-id-golf-pausas/vw-golf-t-roc-hybrid-press.webp 1600w" sizes="(min-width: 60rem) 17rem, (min-width: 40rem) 30vw, 46vw" width="1600" height="1065" alt="Volkswagen Golf Hybrid och T-Roc Hybrid, pressbild från Volkswagen." loading="lazy" decoding="async"></div><figcaption class="item__credit">Foto: Volkswagen AG</figcaption></figure>
+            <div class="pop__body">
+              <span class="meta"><span class="pop__rank" aria-hidden="true">02</span><span class="tag">Bränsle</span></span>
+              <h3>Volkswagen Golf Hybrid kostar från 373 900 kronor i Sverige</h3>
+            </div>
+          </a>
+        </li>
+        <li class="pop__card">
+          <a href="/artikel/volkswagen-q3-forlust-porsche-nedskrivning/">
+            <figure class="pop__media"><div class="pop__frame"><img src="/img/articles/volkswagen-q3-forlust-porsche-nedskrivning/vw-id-tiguan-press.webp" srcset="/img/articles/volkswagen-q3-forlust-porsche-nedskrivning/vw-id-tiguan-press-400.webp 400w, /img/articles/volkswagen-q3-forlust-porsche-nedskrivning/vw-id-tiguan-press-800.webp 800w, /img/articles/volkswagen-q3-forlust-porsche-nedskrivning/vw-id-tiguan-press-1200.webp 1200w, /img/articles/volkswagen-q3-forlust-porsche-nedskrivning/vw-id-tiguan-press.webp 1600w" sizes="(min-width: 60rem) 17rem, (min-width: 40rem) 30vw, 46vw" width="1600" height="1067" alt="Guldfärgad Volkswagen ID. Tiguan från sidan i en studio." loading="lazy" decoding="async"></div><figcaption class="item__credit">Foto: Volkswagen AG</figcaption></figure>
+            <div class="pop__body">
+              <span class="meta"><span class="pop__rank" aria-hidden="true">03</span><span class="tag">Elbil</span></span>
+              <h3>Volkswagen gick back 64 miljarder kronor i tredje kvartalet</h3>
+            </div>
+          </a>
+        </li>
+        <li class="pop__card">
+          <a href="/artikel/byd-privatleasing-black-week/">
+            <figure class="pop__media"><div class="pop__frame"><img src="/img/articles/byd-privatleasing-black-week/byd-sealion-7.webp" srcset="/img/articles/byd-privatleasing-black-week/byd-sealion-7-400.webp 400w, /img/articles/byd-privatleasing-black-week/byd-sealion-7-800.webp 800w, /img/articles/byd-privatleasing-black-week/byd-sealion-7-1200.webp 1200w, /img/articles/byd-privatleasing-black-week/byd-sealion-7.webp 1600w" sizes="(min-width: 60rem) 17rem, (min-width: 40rem) 30vw, 46vw" width="1600" height="962" alt="BYD Sealion 7 utställd på Classic-Gala 2025" loading="lazy" decoding="async"></div><figcaption class="item__credit">Foto: Alexander-93, Wikimedia Commons</figcaption></figure>
+            <div class="pop__body">
+              <span class="meta"><span class="pop__rank" aria-hidden="true">04</span><span class="tag">Elbil</span></span>
+              <h3>BYD: privatleasing från 2 990 kronor i månaden i Sverige</h3>
             </div>
           </a>
         </li>
@@ -591,13 +660,83 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
     <div class="wrap">
       <div class="section-head">
         <h2 id="feed-h">Alla artiklar</h2>
-        <nav aria-label="Filtrera artiklar"><ul class="chips"><li><button class="chip" type="button" data-filter="alla" aria-pressed="true">Alla</button></li><li><button class="chip" type="button" data-filter="tesla" aria-pressed="false">Tesla</button></li><li><button class="chip" type="button" data-filter="trafik-och-sakerhet" aria-pressed="false">Trafik och säkerhet</button></li><li><button class="chip" type="button" data-filter="elbil" aria-pressed="false">Elbil</button></li><li><button class="chip" type="button" data-filter="guider" aria-pressed="false">Guider</button></li><li><button class="chip" type="button" data-filter="sportbil" aria-pressed="false">Sportbil</button></li><li><button class="chip" type="button" data-filter="bransle" aria-pressed="false">Bränsle</button></li><li><button class="chip" type="button" data-filter="motorsport" aria-pressed="false">Motorsport</button></li></ul></nav>
+        <nav aria-label="Filtrera artiklar"><ul class="chips"><li><button class="chip" type="button" data-filter="alla" aria-pressed="true">Alla</button></li><li><button class="chip" type="button" data-filter="tesla" aria-pressed="false">Tesla</button></li><li><button class="chip" type="button" data-filter="motorsport" aria-pressed="false">Motorsport</button></li><li><button class="chip" type="button" data-filter="trafik-och-sakerhet" aria-pressed="false">Trafik och säkerhet</button></li><li><button class="chip" type="button" data-filter="sportbil" aria-pressed="false">Sportbil</button></li><li><button class="chip" type="button" data-filter="elbil" aria-pressed="false">Elbil</button></li><li><button class="chip" type="button" data-filter="guider" aria-pressed="false">Guider</button></li><li><button class="chip" type="button" data-filter="bransle" aria-pressed="false">Bränsle</button></li></ul></nav>
       </div>
       <p id="filter-status" class="visually-hidden" role="status" aria-live="polite"></p>
       
+      <section class="day" aria-labelledby="d-2026-11-22">
+        <h3 class="day__label" id="d-2026-11-22"><time datetime="2026-11-22">Söndag 22 november</time></h3>
+        <ol class="feed">
+          <li class="item" data-cat="tesla">
+            <a href="/artikel/tesla-supercharger-sverige-symbioen/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Tesla</span></span>
+                <h4>Teslas snabbladdare i Sverige lyckas i 92,6 procent av laddningarna</h4>
+                <p>Hos Teslas snabbladdare i Sverige lyckades 92,6 procent av laddningarna under tredje kvartalet 2026, visar mätföretaget Symbioen. Snittet för alla publika laddare var 84,7 procent.</p>
+              </div>
+              <figure class="item__img"><img src="/img/articles/tesla-supercharger-sverige-symbioen/supercharger-loddekopinge.webp" srcset="/img/articles/tesla-supercharger-sverige-symbioen/supercharger-loddekopinge-400.webp 400w, /img/articles/tesla-supercharger-sverige-symbioen/supercharger-loddekopinge-800.webp 800w, /img/articles/tesla-supercharger-sverige-symbioen/supercharger-loddekopinge-1200.webp 1200w, /img/articles/tesla-supercharger-sverige-symbioen/supercharger-loddekopinge.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="953" alt="Teslas snabbladdare vid Center Syd i Löddeköpinge med en vit Tesla Model X som laddar" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: Jeuwre, Wikimedia Commons (beskuren)</figcaption></figure>
+            </a>
+          </li>
+        </ol>
+      </section>
+      <section class="day" aria-labelledby="d-2026-11-21">
+        <h3 class="day__label" id="d-2026-11-21"><time datetime="2026-11-21">Lördag 21 november</time></h3>
+        <ol class="feed">
+          <li class="item" data-cat="motorsport">
+            <a href="/artikel/f1-v8-2030-overens-fia/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Motorsport</span></span>
+                <h4>Alla i Formel 1 är överens om V8-motorer med turbo från 2030</h4>
+                <p>FIA, Formel 1, alla stall och motortillverkare har enats om en turboladdad V8 på 2,1 liter från 2030. Bilarna blir lättare, men enligt BBC väntas de låta ungefär som i dag.</p>
+              </div>
+              <figure class="item__img"><img src="/img/articles/f1-v8-2030-overens-fia/ferrari-056-v8-f2007.webp" srcset="/img/articles/f1-v8-2030-overens-fia/ferrari-056-v8-f2007-400.webp 400w, /img/articles/f1-v8-2030-overens-fia/ferrari-056-v8-f2007-800.webp 800w, /img/articles/f1-v8-2030-overens-fia/ferrari-056-v8-f2007-1200.webp 1200w, /img/articles/f1-v8-2030-overens-fia/ferrari-056-v8-f2007.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="1066" alt="F1-motorn Ferrari Tipo 056, en V8 från Ferrari F2007, utställd på Museo Ferrari" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: Morio, Wikimedia Commons</figcaption></figure>
+            </a>
+          </li>
+          <li class="item" data-cat="tesla">
+            <a href="/artikel/tesla-assisted-driving-italien-tolfte-eu-landet/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Tesla</span></span>
+                <h4>Italien blir tolfte EU-landet som tillåter Teslas förarstöd</h4>
+                <p>Italiens transportministerium har godkänt Teslas förarstöd Tesla Assisted Driving. Italien blir det tolfte EU-landet och det första av de fyra folkrikaste. I Sverige får vanliga ägare fortfarande inte använda systemet.</p>
+              </div>
+              <figure class="item__img"><img src="/img/articles/tesla-assisted-driving-italien-tolfte-eu-landet/tesla-model-y-vintervag.webp" srcset="/img/articles/tesla-assisted-driving-italien-tolfte-eu-landet/tesla-model-y-vintervag-400.webp 400w, /img/articles/tesla-assisted-driving-italien-tolfte-eu-landet/tesla-model-y-vintervag-800.webp 800w, /img/articles/tesla-assisted-driving-italien-tolfte-eu-landet/tesla-model-y-vintervag-1200.webp 1200w, /img/articles/tesla-assisted-driving-italien-tolfte-eu-landet/tesla-model-y-vintervag.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="900" alt="En vit Tesla Model Y kör på en landsväg med snöklädda berg i bakgrunden" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: Courtesy of Tesla, Inc.</figcaption></figure>
+            </a>
+          </li>
+          <li class="item" data-cat="trafik-och-sakerhet">
+            <a href="/artikel/sms-vem-ager-fordonet-49-ore-2027/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Trafik och säkerhet</span></span>
+                <h4>Sms om vem som äger en bil kostar 49 öre från 1 januari 2027</h4>
+                <p>Transportstyrelsens sms-tjänst Vem äger fordonet? byter nummer till 72 123 den 1 januari 2027 och börjar då kosta 0,49 kronor per sms. Fram till nyår är det gamla numret gratis.</p>
+              </div>
+              <figure class="item__img"><img src="/img/articles/sms-vem-ager-fordonet-49-ore-2027/parkering-torp-uddevalla-maskad.webp" srcset="/img/articles/sms-vem-ager-fordonet-49-ore-2027/parkering-torp-uddevalla-maskad-400.webp 400w, /img/articles/sms-vem-ager-fordonet-49-ore-2027/parkering-torp-uddevalla-maskad-800.webp 800w, /img/articles/sms-vem-ager-fordonet-49-ore-2027/parkering-torp-uddevalla-maskad-1200.webp 1200w, /img/articles/sms-vem-ager-fordonet-49-ore-2027/parkering-torp-uddevalla-maskad.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="1154" alt="Parkerade bilar på parkeringen vid köpcentret Torp utanför Uddevalla" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: W.carter, Wikimedia Commons, bearbetad av Motorpuls (registreringsskyltar maskade)</figcaption></figure>
+            </a>
+          </li>
+          <li class="item" data-cat="tesla">
+            <a href="/artikel/tesla-laddkarta-2026-44-1-europa/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Tesla</span></span>
+                <h4>Tesla visar fler snabbladdare från andra bolag i bilens karta i Europa</h4>
+                <p>Teslas programuppdatering 2026.44.1 samlar laddplatserna i grupper på kartan och lägger till fler snabbladdare från andra bolag i Europa. De flesta av de första bilarna som fick den finns i Europa.</p>
+              </div>
+              <figure class="item__img"><img src="/img/articles/tesla-laddkarta-2026-44-1-europa/tesla-model-y-2025-skarm.webp" srcset="/img/articles/tesla-laddkarta-2026-44-1-europa/tesla-model-y-2025-skarm-400.webp 400w, /img/articles/tesla-laddkarta-2026-44-1-europa/tesla-model-y-2025-skarm-800.webp 800w, /img/articles/tesla-laddkarta-2026-44-1-europa/tesla-model-y-2025-skarm-1200.webp 1200w, /img/articles/tesla-laddkarta-2026-44-1-europa/tesla-model-y-2025-skarm.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="1067" alt="Ratt och mittskärm i en ny Tesla Model Y med ljus inredning" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: Ethan Llamas, Wikimedia Commons</figcaption></figure>
+            </a>
+          </li>
+        </ol>
+      </section>
       <section class="day" aria-labelledby="d-2026-11-20">
         <h3 class="day__label" id="d-2026-11-20"><time datetime="2026-11-20">Fredag 20 november</time></h3>
         <ol class="feed">
+          <li class="item" data-cat="sportbil">
+            <a href="/artikel/koenigsegg-65-equity-partners-14-miljarder/">
+              <div class="item__text">
+                <span class="meta"><span class="tag">Sportbil</span></span>
+                <h4>Koenigsegg får ny delägare och värderas till över 14 miljarder kronor</h4>
+                <p>Investmentbolaget 65 Equity Partners, som ägs av Singapores statliga Temasek, blir delägare i Koenigsegg. Affären värderar hyperbilstillverkaren i Ängelholm till cirka 14,4 miljarder kronor, enligt Bloomberg.</p>
+              </div>
+              <figure class="item__img"><img src="/img/articles/koenigsegg-65-equity-partners-14-miljarder/koenigsegg-gemera-auto-zurich-2023.webp" srcset="/img/articles/koenigsegg-65-equity-partners-14-miljarder/koenigsegg-gemera-auto-zurich-2023-400.webp 400w, /img/articles/koenigsegg-65-equity-partners-14-miljarder/koenigsegg-gemera-auto-zurich-2023-800.webp 800w, /img/articles/koenigsegg-65-equity-partners-14-miljarder/koenigsegg-gemera-auto-zurich-2023-1200.webp 1200w, /img/articles/koenigsegg-65-equity-partners-14-miljarder/koenigsegg-gemera-auto-zurich-2023.webp 1600w" sizes="(min-width: 48rem) 15rem, 6.5rem" width="1600" height="1067" alt="Bakpartiet på en grön Koenigsegg Gemera på bilmässan Auto Zürich 2023" loading="lazy" decoding="async"><figcaption class="item__credit">Foto: Alexander-93, Wikimedia Commons</figcaption></figure>
+            </a>
+          </li>
           <li class="item" data-cat="tesla">
             <a href="/artikel/tesla-model-y-utan-ratt-pedaler/">
               <div class="item__text">
@@ -1359,12 +1498,13 @@ transition:color .18s var(--ease),text-decoration-color .18s var(--ease)}
     <div class="site-footer__main">
     <a class="wordmark" href="/"><img class="logo logo--footer" src="/img/logo.svg" alt="Motorpuls" width="872" height="88" loading="lazy"></a>
     <p class="site-footer__desc">Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</p>
+    <nav class="site-footer__social" aria-label="Sociala medier"><ul><li><a href="https://www.tiktok.com/@motorpuls.se" target="_blank" rel="noopener me" aria-label="Motorpuls på TikTok (öppnas i ny flik)"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a></li></ul></nav>
     <nav class="site-footer__nav" aria-label="Om Motorpuls"><ul><li><a href="/om/">Om Motorpuls</a></li><li><a href="/kontakt/">Kontakt</a></li><li><a href="/om/lukas/">Om Lukas</a></li><li><a href="/integritet/">Integritetspolicy</a></li></ul></nav>
-    <nav class="site-footer__nav site-footer__topics" aria-label="Ämnen"><ul><li><a href="/elbil/">Elbil</a></li><li><a href="/sportbil/">Sportbil</a></li><li><a href="/motorsport/">Motorsport</a></li><li><a href="/bransle/">Bränsle</a></li><li><a href="/trafik-och-sakerhet/">Trafik och säkerhet</a></li><li><a href="/tesla/">Tesla</a></li><li><a href="/sverige/">Sverige</a></li><li><a href="/guider/">Guider</a></li></ul></nav>
+    <nav class="site-footer__nav site-footer__topics" aria-label="Ämnen"><ul><li><a href="/elbil/">Elbil</a></li><li><a href="/sportbil/">Sportbil</a></li><li><a href="/motorsport/">Motorsport</a></li><li><a href="/bransle/">Bränsle</a></li><li><a href="/trafik-och-sakerhet/">Trafik och säkerhet</a></li><li><a href="/tesla/">Tesla</a></li><li><a href="/sverige/">Sverige</a></li><li><a href="/guider/">Guider</a></li><li><a href="/listor/">Listor</a></li><li><a href="/verktyg/">Verktyg</a></li></ul></nav>
     <div class="site-footer__rss">
       <a class="rss-link" href="/feed.xml"><svg class="rss-icon" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><rect width="16" height="16" rx="3" fill="#FF5B1F"/><circle cx="4.6" cy="11.4" r="1.5" fill="#0B0D10"/><path d="M3.2 7.1a5.7 5.7 0 0 1 5.7 5.7M3.2 3.6a9.2 9.2 0 0 1 9.2 9.2" fill="none" stroke="#0B0D10" stroke-width="1.8" stroke-linecap="round"/></svg>RSS</a>
       <span class="site-footer__feeds-label" id="rss-kat">RSS per kategori:</span>
-      <ul class="site-footer__feeds" aria-labelledby="rss-kat"><li><a href="/feed/sportbil.xml">Sportbil</a></li><li><a href="/feed/tesla.xml">Tesla</a></li><li><a href="/feed/trafik-och-sakerhet.xml">Trafik och säkerhet</a></li><li><a href="/feed/elbil.xml">Elbil</a></li><li><a href="/feed/guider.xml">Guider</a></li><li><a href="/feed/bransle.xml">Bränsle</a></li><li><a href="/feed/motorsport.xml">Motorsport</a></li><li><a href="/feed/sverige.xml">Sverige</a></li></ul>
+      <ul class="site-footer__feeds" aria-labelledby="rss-kat"><li><a href="/feed/elbil.xml">Elbil</a></li><li><a href="/feed/tesla.xml">Tesla</a></li><li><a href="/feed/motorsport.xml">Motorsport</a></li><li><a href="/feed/trafik-och-sakerhet.xml">Trafik och säkerhet</a></li><li><a href="/feed/sportbil.xml">Sportbil</a></li><li><a href="/feed/guider.xml">Guider</a></li><li><a href="/feed/bransle.xml">Bränsle</a></li><li><a href="/feed/sverige.xml">Sverige</a></li></ul>
     </div>
     <p class="fine">© 2026 Motorpuls<span class="site-footer__contact"> <span aria-hidden="true">·</span> <a href="mailto:hello@motorpuls.se">hello@motorpuls.se</a></span></p>
     </div>

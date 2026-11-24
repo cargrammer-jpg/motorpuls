@@ -6,8 +6,18 @@
   <link>https://motorpuls.se/</link>
   <description>Artiklar i kategorin Motorsport på Motorpuls. Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Fri, 06 Nov 2026 07:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Sat, 21 Nov 2026 18:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed/motorsport.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Alla i Formel 1 är överens om V8-motorer med turbo från 2030</title>
+    <link>https://motorpuls.se/artikel/f1-v8-2030-overens-fia/</link>
+    <guid isPermaLink="true">https://motorpuls.se/artikel/f1-v8-2030-overens-fia/</guid>
+    <pubDate>Sat, 21 Nov 2026 18:00:00 +0100</pubDate>
+    <category>Motorsport</category>
+    <description>FIA, Formel 1, alla stall och motortillverkare har enats om en turboladdad V8 på 2,1 liter från 2030. Bilarna blir lättare, men enligt BBC väntas de låta ungefär som i dag.</description>
+    <enclosure url="https://motorpuls.se/img/og/f1-v8-2030-overens-fia.jpg" length="122485" type="image/jpeg"/>
+    <media:content url="https://motorpuls.se/img/og/f1-v8-2030-overens-fia.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="122485"/>
+  </item>
   <item>
     <title>FIA föreslår V8 med turbo och elmotor i Formel 1 från 2030</title>
     <link>https://motorpuls.se/artikel/f1-v8-turbohybrid-forslag-2030/</link>

@@ -4,6 +4,7 @@ seo_title: "Vinterdäck 2026/2027: lagen, datum och när de ska på"
 date: 2026-11-11T17:30:00+01:00
 updated: 2026-11-24T07:00:00+01:00
 type: guide
+guide_tema: Lagar och regler
 slug: vinterdack-vad-galler
 tags: [vinterdäck, dubbdäck, vinterdäck lag, vinterdäck datum, mönsterdjup, Transportstyrelsen, Trafikverket, Polisen, Stockholm, Göteborg, Uppsala, elbil, Tesla]
 sources:
