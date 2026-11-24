@@ -6,7 +6,7 @@
   <link>https://motorpuls.se/</link>
   <description>Korta, sakliga nyheter om elbilar, sportbilar, laddning och förnybara bränslen. Varje text länkar till sina källor.</description>
   <language>sv-SE</language>
-  <lastBuildDate>Mon, 23 Nov 2026 12:00:00 +0100</lastBuildDate>
+  <lastBuildDate>Tue, 24 Nov 2026 07:00:00 +0100</lastBuildDate>
   <atom:link href="https://motorpuls.se/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
     <title>Nästan varannan ansökan om elbilspremien får nej av Naturvårdsverket</title>
@@ -339,12 +339,12 @@
     <media:content url="https://motorpuls.se/img/og/koenigsegg-cc850-aterkallelse-parkeringsbroms-hel.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="65455"/>
   </item>
   <item>
-    <title>Vinterdäck: vad gäller?</title>
+    <title>Lagen kräver vinterdäck från 1 december till 31 mars vid vinterväglag</title>
     <link>https://motorpuls.se/artikel/vinterdack-vad-galler/</link>
     <guid isPermaLink="true">https://motorpuls.se/artikel/vinterdack-vad-galler/</guid>
     <pubDate>Wed, 11 Nov 2026 17:30:00 +0100</pubDate>
     <category>Trafik och säkerhet</category>
-    <description>Här är reglerna för vinterdäck i Sverige, de datum du behöver ha koll på och vad som är värt att tänka på innan du byter.</description>
+    <description>Vintern 2026/2027 gäller vinterdäck 1 december till 31 mars när det är vinterväglag, dubbdäck 1 oktober till 15 april. Här är datumen, mönsterdjupet, böterna och gatorna där dubbar är förbjudna.</description>
     <enclosure url="https://motorpuls.se/img/og/vinterdack-vad-galler.jpg" length="94290" type="image/jpeg"/>
     <media:content url="https://motorpuls.se/img/og/vinterdack-vad-galler.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="94290"/>
   </item>
@@ -354,7 +354,7 @@
     <guid isPermaLink="true">https://motorpuls.se/artikel/vinterdack-bot-dubbdacksforbud-stockholm/</guid>
     <pubDate>Wed, 11 Nov 2026 15:00:00 +0100</pubDate>
     <category>Trafik och säkerhet</category>
-    <description>Från den 1 december till den 31 mars måste personbilar ha vinterdäck när det är vinterväglag. Kör du med sommardäck på snö, is eller frost kan polisen ge dig 2 000 kronor i böter.</description>
+    <description>Sommardäck på vinterväglag kostar 2 000 kronor, för litet mönsterdjup 1 200 kronor. Från 1 oktober 2027 förbjuder Stockholm dubbdäck på Sveavägen, Birger Jarlsgatan, Vasagatan och Torsgatan.</description>
     <enclosure url="https://motorpuls.se/img/og/vinterdack-bot-dubbdacksforbud-stockholm.jpg" length="134752" type="image/jpeg"/>
     <media:content url="https://motorpuls.se/img/og/vinterdack-bot-dubbdacksforbud-stockholm.jpg" medium="image" type="image/jpeg" width="1200" height="630" fileSize="134752"/>
   </item>
