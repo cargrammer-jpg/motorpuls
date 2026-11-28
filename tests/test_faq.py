@@ -162,18 +162,23 @@ class FaqBuildTest(unittest.TestCase):
                 self.assertNotIn("faq", fm, name)
                 continue
             faq = fm["faq"]
+            # Guiden vinterdack-vad-galler uppdaterades 24 november 2026 till en
+            # sammanhängande text (8 frågor, påståenderubriker, datumlista).
+            # De andra guiderna är kvar i frågeformen från 18 november.
+            winter = name == "2026-11-12-vinterdack-vad-galler.md"
             self.assertGreaterEqual(len(faq), 4, name)
-            self.assertLessEqual(len(faq), 6, name)
+            self.assertLessEqual(len(faq), 8 if winter else 6, name)
             prose = body.split("\n## Källor", 1)[0]
             self.assertNotIn("\u2013", prose + json.dumps(faq, ensure_ascii=False))
             self.assertNotIn("\u2014", prose + json.dumps(faq, ensure_ascii=False))
             h2s = re.findall(r"^## (.+)$", prose, re.M)
             self.assertTrue(h2s, name)
-            for h2 in h2s:
-                self.assertTrue(h2.endswith("?"), h2)
-            for block in re.split(r"^## .+$", prose, flags=re.M)[1:]:
-                first = next(line for line in block.splitlines() if line.strip())
-                self.assertFalse(first.startswith(("-", "|")), first)
+            if not winter:
+                for h2 in h2s:
+                    self.assertTrue(h2.endswith("?"), h2)
+                for block in re.split(r"^## .+$", prose, flags=re.M)[1:]:
+                    first = next(line for line in block.splitlines() if line.strip())
+                    self.assertFalse(first.startswith(("-", "|")), first)
             for item in faq:
                 self.assertTrue(item["question"].endswith("?"))
                 self.assertTrue(1 <= len(sentences(item["answer"])) <= 3, item["answer"])
@@ -182,7 +187,7 @@ class FaqBuildTest(unittest.TestCase):
                 stamp = updated.isoformat()
             else:
                 stamp = str(updated)
-            self.assertTrue(stamp.startswith("2026-11-18"), stamp)
+            self.assertTrue(stamp.startswith("2026-11-24" if winter else "2026-11-18"), stamp)
             self.assertIn("+01:00", stamp)
 
 

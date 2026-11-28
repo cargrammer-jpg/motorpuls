@@ -4,6 +4,7 @@ title: "Förmånsvärde elbil 2027: rabatten oförändrad, räntan sätts 30 nov
 date: 2026-11-15T07:00:00+01:00
 updated: 2026-11-18T09:05:57+01:00
 type: guide
+guide_tema: Skatt och kostnader
 slug: formansvarde-elbil-2027-per-modell
 tags: [förmånsbil, tjänstebil, förmånsvärde, elbil, skatt, prisbasbelopp, statslåneränta, Tesla Model Y, Volvo EX30, Volvo EX40, Kia EV3, VW ID.4, BMW iX1]
 sources:

@@ -1,0 +1,371 @@
+# Motorpuls listsida, utkast till Dr. Webb. Publiceras inte.
+# Kontrollerad 2026-11-23. Inga tankstreck i filen.
+# Fält: title, ingress, faq, rows (modell, värde, värden, källa, kontrollerad).
+slug: rackvidd-kyla
+granskning: 'Granskad 2026-11-23, Godkänd efter ändringar'
+title: Så långt kom elbilarna i NAF och Motors vintertest 2025 och 2026
+ingress: NAF och Motor har mätt vinterräckvidd i två skilda tester. 2025 kördes i milt väder, 2026 i kyla ner till minus 32 grader. Siffrorna går därför inte att jämföra rakt av. Tabellen anger test, temperatur, WLTP och uppmätt sträcka.
+faq:
+- fraga: Varför ska jag inte jämföra 2025 och 2026 rakt av?
+  svar: Testerna kördes i helt olika temperaturer. 2025 låg temperaturen mellan minus 6 och plus 8 grader, och bilarna tappade i snitt omkring 18 till 19 procent mot WLTP. 2026 låg temperaturen mellan minus 7 och minus 32 grader, och snittet blev minus 38 procent. En bra siffra i milt väder säger inte hur samma bil beter sig i sträng kyla.
+- fraga: Vad är WLTP-räckvidd?
+  svar: WLTP är den officiella laboratoriemätningen av räckvidd, Worldwide Harmonised Light Vehicle Test Procedure. Den används för att jämföra bilar under likadana villkor, men den återger inte vinterkörning på väg. I tabellen står därför både bilens WLTP i testet och den sträcka NAF och Motor faktiskt körde.
+- fraga: När avbröts mätningen?
+  svar: Bilarna kördes tills föraren märkte effektförlust, och från 2025 tills bilen inte längre kunde hålla hastighetsgränsen på platsen. Det är alltså inte alltid tomt batteri. Enligt NAF märkte flera förare 2026 ett ovanligt kraftbortfall redan vid omkring 10 procent kvar på batteriet.
+- fraga: Varför är avvikelsen också olika inom samma test 2026?
+  svar: Temperaturen sjönk längs sträckan, från minus 7 grader i Oslo till ner mot minus 32 grader. Där Hyundai Inster stannade var det minus 16 grader, enligt NAF. Bilar som rullade längre hann alltså möta hårdare kyla. Därför är procentavvikelsen inte en helt rättvis rangordning av teknik, utan ett resultat under de förhållanden varje bil hann möta.
+- fraga: Gäller siffrorna för precis den version jag kan köpa i Sverige i dag?
+  svar: Nej, inte automatiskt. NAF anger WLTP för den aktuella testbilen. Fälgar, utrustning och senare uppdateringar kan ge en annan officiell räckvidd än den som stod i testet. Använd tabellen som en uppmätt referens, inte som en garanti för din bil.
+metod: Bara publicerade mätningar med tydlig metod är med. Alla rader kommer från NAF och Motors El Prix. Vinter 2026 och vinter 2025 är märkta var för sig och får inte läsas som ett enda test. Primärkälla för tabellsiffror är NAF:s officiella pressmeddelanden. Testsidorna på naf.no är öppnade för metod, temperatur och kompletterande detaljer. Modeller som inte tydligt säljs i Sverige är utelämnade.
+osakerheter:
+- I NAF:s pressmeddelande för vinter 2026 står Lucid Air för 520 km i tabellen, medan brödtexten på naf.no anger 519 km. Lucid Air är ändå utelämnad eftersom svensk försäljning inte har verifierats här.
+- NAF:s pressmeddelande för vinter 2025 anger temperaturer mellan minus 6 och plus 5 grader. Testsida för samma test nämner upp till plus 8 grader på fjället. Tabellen beskriver intervallet som minus 6 till plus 8 grader, med den skillnaden noterad.
+- Tesla Model 3 har minus 24 procent i 2025 års pressmeddelandetabell. NAF:s testsida preciserar avvikelsen till minus 23,6 procent. Tabellen följer pressmeddelandets avrundning, som för övriga rader.
+- Audi Q6 e-tron har minus 23 procent i 2025 års pressmeddelandetabell. Egen uträkning av 477 km mot 616 km ger minus 22,6 procent. Tabellen följer pressmeddelandet.
+- Mini Countryman anges till 358 km i pressmeddelandet och 357,6 km på testsidan. Tabellen följer pressmeddelandets 358 km.
+- I 2026 års test startade Opel Grandland med 94 procent batteri efter att laddningen stannat över natten. Det är markerat på raden.
+- NAF:s 2026-tabell skriver MG6S, medan löptext ibland säger MG S6. Radens modellnamn följer tabellen, med förklaring i anmärkningen. MG IM6, KGM Musso, Voyah Courage, Changan Deepal S05, Xpeng X9, Zeekr 7X och Lucid Air är utelämnade eftersom svensk försäljning inte har verifierats här.
+rows:
+- modell: Mercedes-Benz CLA
+  värde: WLTP 709 km, uppmätt 421 km (minus 41 procent). NAF och Motor El Prix vinter 2026, temperatur minus 7 till minus 32 grader.
+  värden:
+    wltp_km: 709
+    vinter_km: 421
+    avvikelse: minus 41 procent
+    test: NAF och Motor El Prix vinter 2026
+    temperatur: temperatur minus 7 till minus 32 grader
+  källa: https://kommunikasjon.ntb.no/pressemelding/18787821/verdens-storste-elbiltest-rekordavvik-i-sprengkulda?lang=no&publisherId=2126680
+  kontrollerad: '2026-11-23'
+- modell: Audi A6
+  värde: WLTP 653 km, uppmätt 402 km (minus 38 procent). NAF och Motor El Prix vinter 2026, temperatur minus 7 till minus 32 grader.
+  värden:
+    wltp_km: 653
+    vinter_km: 402
+    avvikelse: minus 38 procent
+    test: NAF och Motor El Prix vinter 2026
+    temperatur: temperatur minus 7 till minus 32 grader
+  källa: https://kommunikasjon.ntb.no/pressemelding/18787821/verdens-storste-elbiltest-rekordavvik-i-sprengkulda?lang=no&publisherId=2126680
+  kontrollerad: '2026-11-23'
+  anmärkning: NAF:s tabell skriver Audi A6, utan tillnamnet e-tron.
+- modell: Kia EV4
+  värde: WLTP 594 km, uppmätt 390 km (minus 34 procent). NAF och Motor El Prix vinter 2026, temperatur minus 7 till minus 32 grader.
+  värden:
+    wltp_km: 594
+    vinter_km: 390
+    avvikelse: minus 34 procent
+    test: NAF och Motor El Prix vinter 2026
+    temperatur: temperatur minus 7 till minus 32 grader
+  källa: https://kommunikasjon.ntb.no/pressemelding/18787821/verdens-storste-elbiltest-rekordavvik-i-sprengkulda?lang=no&publisherId=2126680
+  kontrollerad: '2026-11-23'
+- modell: BMW iX xDrive 60
+  värde: WLTP 641 km, uppmätt 388 km (minus 39 procent). NAF och Motor El Prix vinter 2026, temperatur minus 7 till minus 32 grader.
+  värden:
+    wltp_km: 641
+    vinter_km: 388
+    avvikelse: minus 39 procent
+    test: NAF och Motor El Prix vinter 2026
+    temperatur: temperatur minus 7 till minus 32 grader
+  källa: https://kommunikasjon.ntb.no/pressemelding/18787821/verdens-storste-elbiltest-rekordavvik-i-sprengkulda?lang=no&publisherId=2126680
+  kontrollerad: '2026-11-23'
+- modell: Volvo ES90
+  värde: WLTP 624 km, uppmätt 373 km (minus 40 procent). NAF och Motor El Prix vinter 2026, temperatur minus 7 till minus 32 grader.
+  värden:
+    wltp_km: 624
+    vinter_km: 373
+    avvikelse: minus 40 procent
+    test: NAF och Motor El Prix vinter 2026
+    temperatur: temperatur minus 7 till minus 32 grader
+  källa: https://kommunikasjon.ntb.no/pressemelding/18787821/verdens-storste-elbiltest-rekordavvik-i-sprengkulda?lang=no&publisherId=2126680
+  kontrollerad: '2026-11-23'
+- modell: Hyundai Ioniq 9
+  värde: WLTP 600 km, uppmätt 370 km (minus 38 procent). NAF och Motor El Prix vinter 2026, temperatur minus 7 till minus 32 grader.
+  värden:
+    wltp_km: 600
+    vinter_km: 370
+    avvikelse: minus 38 procent
+    test: NAF och Motor El Prix vinter 2026
+    temperatur: temperatur minus 7 till minus 32 grader
+  källa: https://kommunikasjon.ntb.no/pressemelding/18787821/verdens-storste-elbiltest-rekordavvik-i-sprengkulda?lang=no&publisherId=2126680
+  kontrollerad: '2026-11-23'
+- modell: Tesla Model Y facelift
+  värde: WLTP 629 km, uppmätt 359 km (minus 43 procent). NAF och Motor El Prix vinter 2026, temperatur minus 7 till minus 32 grader.
+  värden:
+    wltp_km: 629
+    vinter_km: 359
+    avvikelse: minus 43 procent
+    test: NAF och Motor El Prix vinter 2026
+    temperatur: temperatur minus 7 till minus 32 grader
+  källa: https://kommunikasjon.ntb.no/pressemelding/18787821/verdens-storste-elbiltest-rekordavvik-i-sprengkulda?lang=no&publisherId=2126680
+  kontrollerad: '2026-11-23'
+  anmärkning: WLTP avser NAF:s testbil, inte nödvändigtvis aktuell svensk konfigurator.
+- modell: Mazda 6e
+  värde: WLTP 552 km, uppmätt 348 km (minus 37 procent). NAF och Motor El Prix vinter 2026, temperatur minus 7 till minus 32 grader.
+  värden:
+    wltp_km: 552
+    vinter_km: 348
+    avvikelse: minus 37 procent
+    test: NAF och Motor El Prix vinter 2026
+    temperatur: temperatur minus 7 till minus 32 grader
+  källa: https://kommunikasjon.ntb.no/pressemelding/18787821/verdens-storste-elbiltest-rekordavvik-i-sprengkulda?lang=no&publisherId=2126680
+  kontrollerad: '2026-11-23'
+- modell: MG6S
+  värde: WLTP 485 km, uppmätt 345 km (minus 29 procent). NAF och Motor El Prix vinter 2026, temperatur minus 7 till minus 32 grader.
+  värden:
+    wltp_km: 485
+    vinter_km: 345
+    avvikelse: minus 29 procent
+    test: NAF och Motor El Prix vinter 2026
+    temperatur: temperatur minus 7 till minus 32 grader
+  källa: https://kommunikasjon.ntb.no/pressemelding/18787821/verdens-storste-elbiltest-rekordavvik-i-sprengkulda?lang=no&publisherId=2126680
+  kontrollerad: '2026-11-23'
+  anmärkning: Så skrivs modellen i NAF:s resultattabell. I löptext kallas den också MG S6. MG Sverige säljer MGS6 EV.
+- modell: Smart 5
+  värde: WLTP 540 km, uppmätt 342 km (minus 37 procent). NAF och Motor El Prix vinter 2026, temperatur minus 7 till minus 32 grader.
+  värden:
+    wltp_km: 540
+    vinter_km: 342
+    avvikelse: minus 37 procent
+    test: NAF och Motor El Prix vinter 2026
+    temperatur: temperatur minus 7 till minus 32 grader
+  källa: https://kommunikasjon.ntb.no/pressemelding/18787821/verdens-storste-elbiltest-rekordavvik-i-sprengkulda?lang=no&publisherId=2126680
+  kontrollerad: '2026-11-23'
+  anmärkning: 'NAF skriver Smart #5. Nummertecknet är utbytt här för att undvika förväxling i löptext.'
+- modell: Volvo EX90
+  värde: WLTP 611 km, uppmätt 339 km (minus 45 procent). NAF och Motor El Prix vinter 2026, temperatur minus 7 till minus 32 grader.
+  värden:
+    wltp_km: 611
+    vinter_km: 339
+    avvikelse: minus 45 procent
+    test: NAF och Motor El Prix vinter 2026
+    temperatur: temperatur minus 7 till minus 32 grader
+  källa: https://kommunikasjon.ntb.no/pressemelding/18787821/verdens-storste-elbiltest-rekordavvik-i-sprengkulda?lang=no&publisherId=2126680
+  kontrollerad: '2026-11-23'
+- modell: Ford Capri
+  värde: WLTP 560 km, uppmätt 339 km (minus 40 procent). NAF och Motor El Prix vinter 2026, temperatur minus 7 till minus 32 grader.
+  värden:
+    wltp_km: 560
+    vinter_km: 339
+    avvikelse: minus 40 procent
+    test: NAF och Motor El Prix vinter 2026
+    temperatur: temperatur minus 7 till minus 32 grader
+  källa: https://kommunikasjon.ntb.no/pressemelding/18787821/verdens-storste-elbiltest-rekordavvik-i-sprengkulda?lang=no&publisherId=2126680
+  kontrollerad: '2026-11-23'
+- modell: Škoda Elroq RS
+  värde: WLTP 524 km, uppmätt 309 km (minus 41 procent). NAF och Motor El Prix vinter 2026, temperatur minus 7 till minus 32 grader.
+  värden:
+    wltp_km: 524
+    vinter_km: 309
+    avvikelse: minus 41 procent
+    test: NAF och Motor El Prix vinter 2026
+    temperatur: temperatur minus 7 till minus 32 grader
+  källa: https://kommunikasjon.ntb.no/pressemelding/18787821/verdens-storste-elbiltest-rekordavvik-i-sprengkulda?lang=no&publisherId=2126680
+  kontrollerad: '2026-11-23'
+- modell: Volkswagen ID.Buzz GTX
+  värde: WLTP 449 km, uppmätt 277 km (minus 38 procent). NAF och Motor El Prix vinter 2026, temperatur minus 7 till minus 32 grader.
+  värden:
+    wltp_km: 449
+    vinter_km: 277
+    avvikelse: minus 38 procent
+    test: NAF och Motor El Prix vinter 2026
+    temperatur: temperatur minus 7 till minus 32 grader
+  källa: https://kommunikasjon.ntb.no/pressemelding/18787821/verdens-storste-elbiltest-rekordavvik-i-sprengkulda?lang=no&publisherId=2126680
+  kontrollerad: '2026-11-23'
+- modell: Opel Grandland
+  värde: WLTP 484 km, uppmätt 262 km (minus 46 procent). NAF och Motor El Prix vinter 2026, temperatur minus 7 till minus 32 grader.
+  värden:
+    wltp_km: 484
+    vinter_km: 262
+    avvikelse: minus 46 procent
+    test: NAF och Motor El Prix vinter 2026
+    temperatur: temperatur minus 7 till minus 32 grader
+  källa: https://kommunikasjon.ntb.no/pressemelding/18787821/verdens-storste-elbiltest-rekordavvik-i-sprengkulda?lang=no&publisherId=2126680
+  kontrollerad: '2026-11-23'
+  anmärkning: NAF anger att laddningen stannade över natten. Bilen startade därför med 94 procent batteri.
+- modell: Hyundai Inster
+  värde: WLTP 360 km, uppmätt 256 km (minus 29 procent). NAF och Motor El Prix vinter 2026, temperatur minus 7 till minus 32 grader.
+  värden:
+    wltp_km: 360
+    vinter_km: 256
+    avvikelse: minus 29 procent
+    test: NAF och Motor El Prix vinter 2026
+    temperatur: temperatur minus 7 till minus 32 grader
+  källa: https://kommunikasjon.ntb.no/pressemelding/18787821/verdens-storste-elbiltest-rekordavvik-i-sprengkulda?lang=no&publisherId=2126680
+  kontrollerad: '2026-11-23'
+  anmärkning: Inster stannade vid minus 16 grader, alltså i mildare kyla än bilarna som nådde fjället.
+- modell: Suzuki eVitara
+  värde: WLTP 395 km, uppmätt 224 km (minus 43 procent). NAF och Motor El Prix vinter 2026, temperatur minus 7 till minus 32 grader.
+  värden:
+    wltp_km: 395
+    vinter_km: 224
+    avvikelse: minus 43 procent
+    test: NAF och Motor El Prix vinter 2026
+    temperatur: temperatur minus 7 till minus 32 grader
+  källa: https://kommunikasjon.ntb.no/pressemelding/18787821/verdens-storste-elbiltest-rekordavvik-i-sprengkulda?lang=no&publisherId=2126680
+  kontrollerad: '2026-11-23'
+- modell: Polestar 3
+  värde: WLTP 560 km, uppmätt 537 km (minus 4 procent). NAF och Motor El Prix vinter 2025, temperatur minus 6 till plus 8 grader.
+  värden:
+    wltp_km: 560
+    vinter_km: 537
+    avvikelse: minus 4 procent
+    test: NAF och Motor El Prix vinter 2025
+    temperatur: temperatur minus 6 till plus 8 grader
+  källa: https://kommunikasjon.ntb.no/pressemelding/18393087/store-sprik-i-elbilers-vinterytelse-tapte-fra-4-til-29-prosent-rekkevidde?lang=no&publisherId=2126680
+  kontrollerad: '2026-11-23'
+  anmärkning: NAF:s testsida preciserar avvikelsen till minus 4,1 procent och anger 537 km. Pressmeddelandet avrundar till minus 4 procent. Temperaturen på fjället var enligt NAF plus 8 grader för denna rekordnotering.
+- modell: Tesla Model 3
+  värde: WLTP 702 km, uppmätt 536 km (minus 24 procent). NAF och Motor El Prix vinter 2025, temperatur minus 6 till plus 8 grader.
+  värden:
+    wltp_km: 702
+    vinter_km: 536
+    avvikelse: minus 24 procent
+    test: NAF och Motor El Prix vinter 2025
+    temperatur: temperatur minus 6 till plus 8 grader
+  källa: https://kommunikasjon.ntb.no/pressemelding/18393087/store-sprik-i-elbilers-vinterytelse-tapte-fra-4-til-29-prosent-rekkevidde?lang=no&publisherId=2126680
+  kontrollerad: '2026-11-23'
+  anmärkning: 'Pressmeddelandet anger 702 km, 536 km och minus 24 procent. NAF:s testsida https://www.naf.no/elbil/elprix-nytt/elprix-vinter-2025-rekkevidde preciserar minus 23,6 procent och förklarar att bilen själv rapporterade 548 km men att den GPS-baserade sträckan blev 536 km.'
+- modell: Porsche Taycan
+  värde: WLTP 592 km, uppmätt 504 km (minus 15 procent). NAF och Motor El Prix vinter 2025, temperatur minus 6 till plus 8 grader.
+  värden:
+    wltp_km: 592
+    vinter_km: 504
+    avvikelse: minus 15 procent
+    test: NAF och Motor El Prix vinter 2025
+    temperatur: temperatur minus 6 till plus 8 grader
+  källa: https://kommunikasjon.ntb.no/pressemelding/18393087/store-sprik-i-elbilers-vinterytelse-tapte-fra-4-til-29-prosent-rekkevidde?lang=no&publisherId=2126680
+  kontrollerad: '2026-11-23'
+- modell: Kia EV3
+  värde: WLTP 590 km, uppmätt 504 km (minus 15 procent). NAF och Motor El Prix vinter 2025, temperatur minus 6 till plus 8 grader.
+  värden:
+    wltp_km: 590
+    vinter_km: 504
+    avvikelse: minus 15 procent
+    test: NAF och Motor El Prix vinter 2025
+    temperatur: temperatur minus 6 till plus 8 grader
+  källa: https://kommunikasjon.ntb.no/pressemelding/18393087/store-sprik-i-elbilers-vinterytelse-tapte-fra-4-til-29-prosent-rekkevidde?lang=no&publisherId=2126680
+  kontrollerad: '2026-11-23'
+- modell: BYD Tang
+  värde: WLTP 530 km, uppmätt 479 km (minus 10 procent). NAF och Motor El Prix vinter 2025, temperatur minus 6 till plus 8 grader.
+  värden:
+    wltp_km: 530
+    vinter_km: 479
+    avvikelse: minus 10 procent
+    test: NAF och Motor El Prix vinter 2025
+    temperatur: temperatur minus 6 till plus 8 grader
+  källa: https://kommunikasjon.ntb.no/pressemelding/18393087/store-sprik-i-elbilers-vinterytelse-tapte-fra-4-til-29-prosent-rekkevidde?lang=no&publisherId=2126680
+  kontrollerad: '2026-11-23'
+  anmärkning: NAF:s testsida preciserar avvikelsen till minus 9,6 procent. Tabellen följer pressmeddelandets avrundade minus 10 procent.
+- modell: Audi Q6 e-tron
+  värde: WLTP 616 km, uppmätt 477 km (minus 23 procent). NAF och Motor El Prix vinter 2025, temperatur minus 6 till plus 8 grader.
+  värden:
+    wltp_km: 616
+    vinter_km: 477
+    avvikelse: minus 23 procent
+    test: NAF och Motor El Prix vinter 2025
+    temperatur: temperatur minus 6 till plus 8 grader
+  källa: https://kommunikasjon.ntb.no/pressemelding/18393087/store-sprik-i-elbilers-vinterytelse-tapte-fra-4-til-29-prosent-rekkevidde?lang=no&publisherId=2126680
+  kontrollerad: '2026-11-23'
+  anmärkning: Pressmeddelandet anger minus 23 procent. Egen uträkning av 477 km mot 616 km ger minus 22,6 procent.
+- modell: Volkswagen ID.7 GTX Tourer
+  värde: WLTP 571 km, uppmätt 434 km (minus 24 procent). NAF och Motor El Prix vinter 2025, temperatur minus 6 till plus 8 grader.
+  värden:
+    wltp_km: 571
+    vinter_km: 434
+    avvikelse: minus 24 procent
+    test: NAF och Motor El Prix vinter 2025
+    temperatur: temperatur minus 6 till plus 8 grader
+  källa: https://kommunikasjon.ntb.no/pressemelding/18393087/store-sprik-i-elbilers-vinterytelse-tapte-fra-4-til-29-prosent-rekkevidde?lang=no&publisherId=2126680
+  kontrollerad: '2026-11-23'
+- modell: Ford Explorer
+  värde: WLTP 525 km, uppmätt 430 km (minus 18 procent). NAF och Motor El Prix vinter 2025, temperatur minus 6 till plus 8 grader.
+  värden:
+    wltp_km: 525
+    vinter_km: 430
+    avvikelse: minus 18 procent
+    test: NAF och Motor El Prix vinter 2025
+    temperatur: temperatur minus 6 till plus 8 grader
+  källa: https://kommunikasjon.ntb.no/pressemelding/18393087/store-sprik-i-elbilers-vinterytelse-tapte-fra-4-til-29-prosent-rekkevidde?lang=no&publisherId=2126680
+  kontrollerad: '2026-11-23'
+- modell: Porsche Macan
+  värde: WLTP 552 km, uppmätt 429 km (minus 22 procent). NAF och Motor El Prix vinter 2025, temperatur minus 6 till plus 8 grader.
+  värden:
+    wltp_km: 552
+    vinter_km: 429
+    avvikelse: minus 22 procent
+    test: NAF och Motor El Prix vinter 2025
+    temperatur: temperatur minus 6 till plus 8 grader
+  källa: https://kommunikasjon.ntb.no/pressemelding/18393087/store-sprik-i-elbilers-vinterytelse-tapte-fra-4-til-29-prosent-rekkevidde?lang=no&publisherId=2126680
+  kontrollerad: '2026-11-23'
+- modell: BYD Sealion 7
+  värde: WLTP 502 km, uppmätt 429 km (minus 15 procent). NAF och Motor El Prix vinter 2025, temperatur minus 6 till plus 8 grader.
+  värden:
+    wltp_km: 502
+    vinter_km: 429
+    avvikelse: minus 15 procent
+    test: NAF och Motor El Prix vinter 2025
+    temperatur: temperatur minus 6 till plus 8 grader
+  källa: https://kommunikasjon.ntb.no/pressemelding/18393087/store-sprik-i-elbilers-vinterytelse-tapte-fra-4-til-29-prosent-rekkevidde?lang=no&publisherId=2126680
+  kontrollerad: '2026-11-23'
+- modell: BYD Seal U
+  värde: WLTP 500 km, uppmätt 421 km (minus 16 procent). NAF och Motor El Prix vinter 2025, temperatur minus 6 till plus 8 grader.
+  värden:
+    wltp_km: 500
+    vinter_km: 421
+    avvikelse: minus 16 procent
+    test: NAF och Motor El Prix vinter 2025
+    temperatur: temperatur minus 6 till plus 8 grader
+  källa: https://kommunikasjon.ntb.no/pressemelding/18393087/store-sprik-i-elbilers-vinterytelse-tapte-fra-4-til-29-prosent-rekkevidde?lang=no&publisherId=2126680
+  kontrollerad: '2026-11-23'
+- modell: Hyundai Ioniq 5
+  värde: WLTP 546 km, uppmätt 440 km (minus 19 procent). NAF och Motor El Prix vinter 2025, temperatur minus 6 till plus 8 grader.
+  värden:
+    wltp_km: 546
+    vinter_km: 440
+    avvikelse: minus 19 procent
+    test: NAF och Motor El Prix vinter 2025
+    temperatur: temperatur minus 6 till plus 8 grader
+  källa: https://kommunikasjon.ntb.no/pressemelding/18393087/store-sprik-i-elbilers-vinterytelse-tapte-fra-4-til-29-prosent-rekkevidde?lang=no&publisherId=2126680
+  kontrollerad: '2026-11-23'
+- modell: Volvo EX30
+  värde: WLTP 472 km, uppmätt 368 km (minus 22 procent). NAF och Motor El Prix vinter 2025, temperatur minus 6 till plus 8 grader.
+  värden:
+    wltp_km: 472
+    vinter_km: 368
+    avvikelse: minus 22 procent
+    test: NAF och Motor El Prix vinter 2025
+    temperatur: temperatur minus 6 till plus 8 grader
+  källa: https://kommunikasjon.ntb.no/pressemelding/18393087/store-sprik-i-elbilers-vinterytelse-tapte-fra-4-til-29-prosent-rekkevidde?lang=no&publisherId=2126680
+  kontrollerad: '2026-11-23'
+- modell: Mini Countryman
+  värde: WLTP 399 km, uppmätt 358 km (minus 10 procent). NAF och Motor El Prix vinter 2025, temperatur minus 6 till plus 8 grader.
+  värden:
+    wltp_km: 399
+    vinter_km: 358
+    avvikelse: minus 10 procent
+    test: NAF och Motor El Prix vinter 2025
+    temperatur: temperatur minus 6 till plus 8 grader
+  källa: https://kommunikasjon.ntb.no/pressemelding/18393087/store-sprik-i-elbilers-vinterytelse-tapte-fra-4-til-29-prosent-rekkevidde?lang=no&publisherId=2126680
+  kontrollerad: '2026-11-23'
+  anmärkning: Pressmeddelandet anger 358 km. Testsida anger 357,6 km och minus 10,4 procent.
+- modell: Peugeot E-3008
+  värde: WLTP 510 km, uppmätt 364 km (minus 29 procent). NAF och Motor El Prix vinter 2025, temperatur minus 6 till plus 8 grader.
+  värden:
+    wltp_km: 510
+    vinter_km: 364
+    avvikelse: minus 29 procent
+    test: NAF och Motor El Prix vinter 2025
+    temperatur: temperatur minus 6 till plus 8 grader
+  källa: https://kommunikasjon.ntb.no/pressemelding/18393087/store-sprik-i-elbilers-vinterytelse-tapte-fra-4-til-29-prosent-rekkevidde?lang=no&publisherId=2126680
+  kontrollerad: '2026-11-23'
+  anmärkning: NAF:s testsida preciserar avvikelsen till minus 28,6 procent efter GPS-korrigering av sträckan.
+- modell: Peugeot E-5008
+  värde: WLTP 488 km, uppmätt 353 km (minus 28 procent). NAF och Motor El Prix vinter 2025, temperatur minus 6 till plus 8 grader.
+  värden:
+    wltp_km: 488
+    vinter_km: 353
+    avvikelse: minus 28 procent
+    test: NAF och Motor El Prix vinter 2025
+    temperatur: temperatur minus 6 till plus 8 grader
+  källa: https://kommunikasjon.ntb.no/pressemelding/18393087/store-sprik-i-elbilers-vinterytelse-tapte-fra-4-til-29-prosent-rekkevidde?lang=no&publisherId=2126680
+  kontrollerad: '2026-11-23'
+  anmärkning: NAF:s testsida preciserar avvikelsen till minus 27,7 procent.

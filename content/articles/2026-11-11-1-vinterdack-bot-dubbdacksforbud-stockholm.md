@@ -1,7 +1,8 @@
 ---
-seo_title: "Vinterdäck från 1 december: fel däck kostar 2 000 kr"
+seo_title: "Böter för fel vinterdäck och Stockholms nya dubbdäcksförbud"
 title: "Vinterdäck krävs från 1 december: fel däck kostar 2 000 kronor"
 date: 2026-11-11T15:00:00+01:00
+updated: 2026-11-24T07:00:00+01:00
 slug: vinterdack-bot-dubbdacksforbud-stockholm
 tags: [vinterdäck, dubbdäck, Transportstyrelsen, Polisen, ordningsbot, Stockholm, trafiksäkerhet]
 sources:
@@ -11,7 +12,7 @@ sources:
   - https://www.aklagare.se/globalassets/dokument/ordningsbotskatalog/bilaga-1b.pdf
   - https://trafik.stockholm/trafikregler/dubbdack/
   - https://carup.se/vinterdacksmiss-ger-110-000-kr-i-boter-fran-sondag/
-excerpt: "Från den 1 december till den 31 mars måste personbilar ha vinterdäck när det är vinterväglag. Kör du med sommardäck på snö, is eller frost kan polisen ge dig 2 000 kronor i böter."
+excerpt: "Sommardäck på vinterväglag kostar 2 000 kronor, för litet mönsterdjup 1 200 kronor. Från 1 oktober 2027 förbjuder Stockholm dubbdäck på Sveavägen, Birger Jarlsgatan, Vasagatan och Torsgatan."
 summary:
   - "Från 1 december till 31 mars krävs vinterdäck när det är vinterväglag. Boten är 2 000 kronor."
   - "För slitna däck kostar 1 200 kronor och dubbdäck på förbjuden gata 1 000 kronor."
@@ -35,6 +36,8 @@ images:
 # Vinterdäck krävs från 1 december: fel däck kostar 2 000 kronor
 
 Den 1 december börjar vinterdäckskravet gälla för personbilar. Här är reglerna, vad det kostar att göra fel och var dubbarna snart inte får rulla alls.
+
+Läs också: [Lagen kräver vinterdäck från 1 december till 31 mars vid vinterväglag](/artikel/vinterdack-vad-galler/), vår guide med alla datum, mönsterdjup och regler för dubbdäck.
 
 ## Kravet: 1 december till 31 mars
 
@@ -60,7 +63,7 @@ Polisen anger att den som kör med dubbdäck på en gata med dubbdäcksförbud r
 
 ## Stockholm stänger fler gator
 
-I dag är dubbdäck förbjudna på Hornsgatan, Fleminggatan och Kungsgatan mellan Sveavägen och Birger Jarlsgatan. Du får korsa gatorna, men inte köra längs dem.
+I dag är dubbdäck förbjudna på delar av Hornsgatan, Fleminggatan och Kungsgatan mellan Sveavägen och Birger Jarlsgatan. Du får korsa gatorna, men inte köra längs dem.
 
 Från 1 oktober 2027 utökar Stockholms stad förbudet till Sveavägen, Birger Jarlsgatan, Vasagatan och Torsgatan. Skälet är luften. Dubbarna river upp partiklar ur asfalten, och alla kommuner ska nå de nationella målen för ren luft till 2030.
 

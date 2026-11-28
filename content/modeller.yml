@@ -1,0 +1,204 @@
+# Märken och modeller som redan finns som taggar i content/articles.
+# build.py skapar /marke/<slug>/ eller /modell/<slug>/ först när minst min_articles
+# publicerade artiklar matchar taggen eller ett alias. En modell räknas också
+# in på sitt märke. Artiklar med framtida datum tas inte med.
+#
+# Lämna intro, specs och price tomma. Då visas bara meningen
+# "Alla Motorpuls artiklar om <namn>." Inga specifikationer eller priser skrivs ut.
+# Fyll bara i ett fält när uppgiften ska stå på sidan.
+
+min_articles: 3
+
+brands:
+  - tag: Tesla
+    name: Tesla
+    slug: tesla
+    intro: ""
+    specs: ""
+    price: ""
+  - tag: Volvo
+    name: Volvo
+    slug: volvo
+    intro: ""
+    specs: ""
+    price: ""
+  - tag: BMW
+    name: BMW
+    slug: bmw
+    intro: ""
+    specs: ""
+    price: ""
+  - tag: BMW M
+    name: BMW M
+    slug: bmw-m
+    intro: ""
+    specs: ""
+    price: ""
+  - tag: Volkswagen
+    name: Volkswagen
+    slug: volkswagen
+    intro: ""
+    specs: ""
+    price: ""
+  - tag: BYD
+    name: BYD
+    slug: byd
+    intro: ""
+    specs: ""
+    price: ""
+  - tag: Koenigsegg
+    name: Koenigsegg
+    slug: koenigsegg
+    intro: ""
+    specs: ""
+    price: ""
+  - tag: Polestar
+    name: Polestar
+    slug: polestar
+    intro: ""
+    specs: ""
+    price: ""
+  - tag: Porsche
+    name: Porsche
+    slug: porsche
+    intro: ""
+    specs: ""
+    price: ""
+  - tag: Stellantis
+    name: Stellantis
+    slug: stellantis
+    intro: ""
+    specs: ""
+    price: ""
+  - tag: Mercedes-Benz
+    name: Mercedes-Benz
+    slug: mercedes-benz
+    aliases: [Mercedes]
+    intro: ""
+    specs: ""
+    price: ""
+
+models:
+  - tag: Tesla Model Y
+    name: Tesla Model Y
+    slug: tesla-model-y
+    brand: tesla
+    aliases: [Model Y]
+    intro: ""
+    specs: ""
+    price: ""
+  - tag: Model 3
+    name: Tesla Model 3
+    slug: tesla-model-3
+    brand: tesla
+    intro: ""
+    specs: ""
+    price: ""
+  - tag: Cybercab
+    name: Cybercab
+    slug: tesla-cybercab
+    brand: tesla
+    intro: ""
+    specs: ""
+    price: ""
+  - tag: Volvo EX60
+    name: Volvo EX60
+    slug: volvo-ex60
+    brand: volvo
+    aliases: [EX60]
+    intro: ""
+    specs: ""
+    price: ""
+  - tag: Volvo EX30
+    name: Volvo EX30
+    slug: volvo-ex30
+    brand: volvo
+    aliases: [EX30]
+    intro: ""
+    specs: ""
+    price: ""
+  - tag: Volvo EX40
+    name: Volvo EX40
+    slug: volvo-ex40
+    brand: volvo
+    intro: ""
+    specs: ""
+    price: ""
+  - tag: XC60
+    name: Volvo XC60
+    slug: volvo-xc60
+    brand: volvo
+    intro: ""
+    specs: ""
+    price: ""
+  - tag: BMW iX3
+    name: BMW iX3
+    slug: bmw-ix3
+    brand: bmw
+    aliases: [iX3]
+    intro: ""
+    specs: ""
+    price: ""
+  - tag: M3
+    name: BMW M3
+    slug: bmw-m3
+    brand: bmw
+    intro: ""
+    specs: ""
+    price: ""
+  - tag: Golf
+    name: Volkswagen Golf
+    slug: volkswagen-golf
+    brand: volkswagen
+    intro: ""
+    specs: ""
+    price: ""
+  - tag: BYD Seal
+    name: BYD Seal
+    slug: byd-seal
+    brand: byd
+    intro: ""
+    specs: ""
+    price: ""
+  - tag: BYD Ti7
+    name: BYD Ti7
+    slug: byd-ti7
+    brand: byd
+    intro: ""
+    specs: ""
+    price: ""
+  - tag: Polestar 2
+    name: Polestar 2
+    slug: polestar-2
+    brand: polestar
+    intro: ""
+    specs: ""
+    price: ""
+  - tag: Polestar 3
+    name: Polestar 3
+    slug: polestar-3
+    brand: polestar
+    intro: ""
+    specs: ""
+    price: ""
+  - tag: Polestar 7
+    name: Polestar 7
+    slug: polestar-7
+    brand: polestar
+    intro: ""
+    specs: ""
+    price: ""
+  - tag: Mercedes CLA
+    name: Mercedes CLA
+    slug: mercedes-cla
+    brand: mercedes-benz
+    intro: ""
+    specs: ""
+    price: ""
+  - tag: Mercedes GLE
+    name: Mercedes GLE
+    slug: mercedes-gle
+    brand: mercedes-benz
+    intro: ""
+    specs: ""
+    price: ""

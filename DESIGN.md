@@ -158,4 +158,14 @@ de nyaste. Mobil: liten bild till vänster och rubrik till höger; från 40rem t
 3:2-scen med svart kant (ingen beskärning) och kredit under, som Populärt.
 
 **Uppdaterad.** `updated:` i front matter ger "Uppdaterad <datum>" i bylinen, `dateModified` och sitemaps `lastmod`. Ett updated före
-date räknas som date, ett i framtiden stoppar bygget.
+date räknas som date, ett i framtiden stoppar bygget. På `/guider/` visas samma "Uppdaterad" på kortet när fältet är satt och tiden har infallit.
+
+## Kunskapsbank och hubbsidor
+**Guider** (`/guider/`) är en kunskapsbank: samma mörka kategorisida, ingressen i `catpage__dek`, sedan ett avsnitt per tema
+(h2, till exempel Elbil och laddning, Skatt och kostnader, Lagar och regler, Köpa och äga). Temat kommer från `guide_tema`.
+Korten är det vanliga flödet (bild, rubrik, ingress, datum). Tomma teman ritas inte.
+
+**Märke och modell** (`/marke/tesla/`, `/modell/volvo-ex60/`). Samma kategorisida. Rubriken är namnet, ingressen en mening:
+"Alla Motorpuls artiklar om Volvo EX60." Specifikationer och pris ritas bara när fältet är ifyllt i `content/modeller.yml`.
+Listan är nyast först. Under en artikel: små chip-länkar (samma `.chip` som filtren, som länk, radbryts) till de hubbar
+artikelns taggar har. I en nyhet: en ruta "Guide" med en länk till den närmaste publicerade guiden, utan bild.
